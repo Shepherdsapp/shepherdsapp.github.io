@@ -1,0 +1,676 @@
+const fs = require('fs');
+const { JSDOM, VirtualConsole } = require('jsdom');
+const nodeCrypto = require('crypto');
+const { TextEncoder } = require('util');
+
+const SRC = fs.readFileSync(require('path').join(__dirname, '..', 'hosted', 'shepherd.html'), 'utf8');
+const results = []; let current = '';
+function ok(cond, msg) { results.push({ group: current, ok: !!cond, msg }); if (!cond) console.log('  FAIL:', current, '-', msg); }
+const wait = (ms = 20) => new Promise(r => setTimeout(r, ms));
+
+/* ---------- fake artifact store (same contract as the real db capability) ---------- */
+function makeStore() {
+  const docs = new Map(); const ls = []; const store = { docs, fail: null, writes: 0 };
+  const clone = o => JSON.parse(JSON.stringify(o));
+  const parentOf = p => p.split('/').slice(0, -1).join('/');
+  const docSnap = p => ({ id: p.split('/').pop(), exists: docs.has(p), data: () => docs.has(p) ? clone(docs.get(p)) : undefined, metadata: { fromCache: false, hasPendingWrites: false } });
+  const colSnap = c => { const d = [...docs.keys()].filter(k => parentOf(k) === c).sort().map(docSnap); return { docs: d, size: d.length, empty: !d.length, docChanges: () => [], metadata: { fromCache: false, hasPendingWrites: false } }; };
+  const safe = f => () => { try { f(); } catch (e) { if (!/querySelector|closed/.test(String(e))) throw e; } };
+  const notify = p => ls.forEach(l => { if (l.kind === 'doc' && l.path === p) setTimeout(safe(() => l.fn(docSnap(p))), 0); if (l.kind === 'col' && l.path === parentOf(p)) setTimeout(safe(() => l.fn(colSnap(l.path))), 0); });
+  const check = p => { const n = p.split('/').length; if (n % 2) throw new TypeError('doc path needs even segments: ' + p); };
+  function doc(p) {
+    check(p);
+    return {
+      id: p.split('/').pop(), path: p,
+      get: async () => docSnap(p),
+      set: async d => { if (store.fail) throw { code: store.fail, message: 'fail' }; if (JSON.stringify(d).length > 256 * 1024) throw { code: 'invalid_argument' }; docs.set(p, clone(d)); store.writes++; notify(p); },
+      update: async d => { if (!docs.has(p)) throw { code: 'invalid_argument' }; docs.set(p, Object.assign(docs.get(p), clone(d))); notify(p); },
+      delete: async () => { if (store.fail) throw { code: store.fail, message: 'fail' }; docs.delete(p); notify(p); },
+      onSnapshot: (fn) => { const l = { kind: 'doc', path: p, fn }; ls.push(l); setTimeout(() => fn(docSnap(p)), 0); return () => ls.splice(ls.indexOf(l), 1); },
+      collection: sub => col(p + '/' + sub)
+    };
+  }
+  function col(c) {
+    if (c.split('/').length % 2 === 0) throw new TypeError('collection path needs odd segments: ' + c);
+    return { path: c, doc: id => doc(c + '/' + (id || Math.random().toString(36).slice(2))), get: async () => colSnap(c), onSnapshot: (fn) => { const l = { kind: 'col', path: c, fn }; ls.push(l); setTimeout(() => fn(colSnap(c)), 0); return () => ls.splice(ls.indexOf(l), 1); } };
+  }
+  store.db = { doc, collection: col };
+  return store;
+}
+
+async function open(store, opts = {}) {
+  const errors = []; const copied = []; const saves = [];
+  const vc = new VirtualConsole();
+  vc.on('jsdomError', e => { if (!/Not implemented: (navigation|window\.scrollTo)/.test(String(e.message))) errors.push(String(e.message)); });
+  vc.on('error', e => errors.push(String(e && e.message || e)));
+  const html = '<!doctype html><html><head><meta charset="utf8"></head><body>' + SRC.replace(/<script src="https:\/\/cdnjs[^>]*><\/script>/, '') + '</body></html>';
+  const dom = new JSDOM(html, {
+    runScripts: 'dangerously', pretendToBeVisual: true, url: 'https://artifact.test/', virtualConsole: vc,
+    storageQuota: 10000000,
+    beforeParse(w) {
+      if (opts.localStorage) for (const [k, v] of Object.entries(opts.localStorage)) w.localStorage.setItem(k, v);
+      Object.defineProperty(w, 'crypto', { value: nodeCrypto.webcrypto });
+      w.TextEncoder = TextEncoder;
+      Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: t => { copied.push(t); return Promise.resolve(); } } });
+      w.addEventListener('error', e => errors.push(String(e.message)));
+      if (store) {
+        const user = { id: async () => 'u_test', isOwner: async () => true };
+        const downloads = { save: async r => { saves.push(r); return { status: 'saved' }; } };
+        w.claude = { use: async n => n === 'db' ? store.db : n === 'user' ? user : n === 'downloads' ? downloads : null };
+      }
+    }
+  });
+  await wait(80);
+  const w = dom.window, d = w.document;
+  const $ = s => d.querySelector(s), $$ = s => [...d.querySelectorAll(s)];
+  const click = el => { if (typeof el === 'string') el = $(el); if (!el) throw new Error('missing element'); el.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true })); };
+  const setVal = (sel, v) => { const el = typeof sel === 'string' ? $(sel) : sel; el.value = v; el.dispatchEvent(new w.Event('input', { bubbles: true })); el.dispatchEvent(new w.Event('change', { bubbles: true })); };
+  const submit = sel => $(sel).dispatchEvent(new w.Event('submit', { bubbles: true, cancelable: true }));
+  const byText = (sel, text) => $$(sel).find(e => e.textContent.trim().includes(text));
+  const S = () => w.__shepherd.S;
+  return { dom, w, d, $, $$, click, setVal, submit, byText, S, errors, copied, saves };
+}
+const TOURTEXT_OK = A => true;
+const dayDiffNow = t => { const a = new Date(t); a.setHours(0, 0, 0, 0); const b = new Date(); b.setHours(0, 0, 0, 0); return Math.round((b - a) / 864e5); };
+const ymd = t => { const d = new Date(t); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+const addDays = n => { const d = new Date(); d.setDate(d.getDate() + n); return ymd(d); };
+const contactDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('data/users/u_test/profile/contacts/')).map(([, v]) => v);
+const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('data/users/u_test/profile/events/')).map(([, v]) => v);
+
+(async () => {
+  const store = makeStore();
+  let A = await open(store);
+  const { $, $$, click, setVal, submit, byText, S, w } = A;
+
+  current = 'Tour for new users';
+  await wait(400);
+  ok(!$('#tour').hidden, 'tour starts by itself the first time someone opens Shepherd');
+  ok($('#tourStep').textContent === '1 of 10' && /Welcome/.test($('#tourTitle').textContent), 'starts at step 1 of 10');
+  ok(/no one you're checking up on slips through/.test($('#tourText').textContent), 'welcome uses the new wording');
+  const titles = [$('#tourTitle').textContent];
+  click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+  ok(S().view === 'settings' && $('#tourText').textContent === 'First, open Settings and add your WhatsApp number and the first message that will be sent automatically when they scan your QR code.', 'opens Settings by itself, with the new wording');
+  ok($('#tourMore').textContent === 'Add my number now' && $('#tourNext').textContent === 'Skip this step', 'offers to do it now, or skip');
+  click('#tourMore'); await wait(30);
+  ok($('#tour').hidden && !$('#tourPill').hidden && /tap Save/.test($('#tourPill').textContent), 'steps aside while you add your number, with a Continue tour bar');
+  setVal('#pPhone', '07700 900111'); submit('#profForm'); await wait(1200);
+  ok(!$('#tour').hidden && $('#tourPill').hidden, 'carries on by itself once you save');
+  titles.push($('#tourTitle').textContent);
+  ok(/Most people use Shepherd on their phone, so turn on notifications/.test($('#tourText').textContent) && S().view === 'settings', 'next step: turn on phone alerts');
+  click('#tourMore'); await wait(60);
+  ok($('#tour').hidden && $('#sheetTitle').textContent === 'Turn on notifications', 'opens the notifications guide');
+  const ng = $('#sheetBody').textContent;
+  ok(/Shepherd app/.test(ng) && ng.includes('sitbackco.github.io/shepherd') && /Add to Home Screen/.test(ng) && /Install app/.test(ng), 'inside Claude, the guide points to the Shepherd app and how to install it');
+  ok(!/Claude/.test(ng) && !/Google/.test(ng) && !/TimeTree/.test(ng), 'notifications guide has nothing to do with Claude, Google or TimeTree');
+  ok($$('#sheetBody .osb[data-os="ios"]').length === 1 && $$('#sheetBody .osb[data-os="android"]').length === 1, 'install steps for iPhone and Android');
+  click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
+  ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Turn on notifications', 'returns to the tour after the guide');
+  for (let i = 0; i < 4; i++) { click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent); if (i === 0) ok(S().view === 'today', 'goes to Today by itself'); }
+  click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+  ok(S().view === 'disciples' && /already disciples/.test($('#tourText').textContent) && /1 Thessalonians 5:11/.test($('#tourText').textContent) && $('#tourMore').textContent === 'Add a disciple', 'opens Disciples by itself with the verse');
+  click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+  ok(S().view === 'events' && $('#tourText').textContent === 'Invite people and tick who came. Link TimeTree to your phone calendar, then connect Shepherd to it, so your studies and events show in TimeTree too.', 'opens Calendar by itself, with the new wording');
+  ok(/link my calendar/.test($('#tourMore').textContent), 'Calendar step offers the step-by-step guide');
+  click('#tourMore'); await wait(60);
+  ok($('#tour').hidden && $('#sheetTitle').textContent === 'Link your calendar', 'calendar guide opens');
+  const guide = $('#sheetBody').textContent;
+  ok(/1\. Link TimeTree to your phone calendar/.test(guide) && /2\. Connect Shepherd to your phone calendar/.test(guide) && /Settings › TimeTree › Calendars/.test(guide) && /Settings › Apps › TimeTree › Permissions › Calendar/.test(guide) && /Select Display Filters/.test(guide), 'step 1 links TimeTree to the phone calendar, step 2 connects Shepherd');
+  ok(!/Google/.test(guide) && !/Save it in TimeTree first/.test(guide) && !/Let TimeTree alert you/.test(guide) && $$('#sheetBody section h3').length === 2, 'no Google, no TimeTree-first step, no TimeTree alerts step');
+  ok($$('#sheetBody .osb[data-os="ios"]').length === 1 && $$('#sheetBody .osb[data-os="android"]').length === 1 && /works in the Shepherd app/.test(guide), 'iPhone and Android steps; connecting points to the Shepherd app inside Claude');
+  click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
+  ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Calendar and TimeTree', 'closing the guide returns to the tour');
+  click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+  ok(titles.join('|') === "Welcome to Shepherd|Start in Settings|Turn on notifications|Add someone|Start each day here|Message in one tap|When they reply|Disciples|Calendar and TimeTree|You're all set", 'all 10 steps in order: ' + titles.join(' / '));
+  ok($('#tourNext').textContent === 'Done', 'last step says Done');
+  click('#tourNext'); await wait(60);
+  ok($('#tour').hidden && S().view === 'today', 'finishing goes back to Today');
+  ok(store.docs.get('data/users/u_test/profile').tourDone === true && store.docs.get('data/users/u_test/profile').phone === '07700 900111', 'tour marked done, and the number you added is saved');
+
+  current = 'Boot';
+  ok($('.empty'), 'empty state shows for a new user');
+  ok($('#sync').textContent.trim() === 'Saved', 'sync status reads Saved (got ' + $('#sync').textContent.trim() + ')');
+  ok($('.brand').textContent.includes('Shepherd'), 'app name is Shepherd');
+  ok($('.mark path').getAttribute('d') === 'M45 79 V37 a12 12 0 1 1 24 0 v6', 'header uses the chosen crook icon');
+
+  current = 'Add contact: groups and where-met removed';
+  click('#fab'); await wait();
+  ok($('#sheet').hidden === false, 'add sheet opens');
+  ok(!$('#cGroup') && !/Group/.test($('#sheetBody').textContent), 'no group field');
+  ok(!$('#cMet'), 'no "where you met" field when adding');
+  ok($('#cSp') && $('#cSh'), 'social media field present');
+  ok($('#cSp').options[0].value === 'Instagram' && $('#cSp').value === 'Instagram', 'Instagram is the first and default social option');
+  ok(!$('#cChan') && !/usually message/i.test($('#sheetBody').textContent), '"They usually message on" removed');
+
+  current = 'Add contact: validation';
+  submit('#cForm'); await wait();
+  ok(!$('#cErr').hidden && /name/i.test($('#cErr').textContent), 'empty name shows an error');
+  ok(contactDocs(store).length === 0, 'nothing saved without a name');
+  setVal('#cName', 'Sam Test'); setVal('#cPhone', '123'); submit('#cForm'); await wait();
+  ok(/phone number/i.test($('#cErr').textContent), 'bad phone shows an error');
+  ok(contactDocs(store).length === 0, 'nothing saved with a bad number');
+
+  current = 'Add contact: save';
+  setVal('#cPhone', '07700 900123'); setVal('#cSh', 'https://instagram.com/sam.t/'); setVal('#cNotes', 'Met outside the station');
+  submit('#cForm'); await wait(60);
+  let cs = contactDocs(store);
+  ok(cs.length === 1, 'contact saved to the store');
+  const sam = cs[0];
+  ok(sam && sam.instagram === 'sam.t', 'Instagram link cleaned to a handle (' + (sam && sam.instagram) + ')');
+  ok(sam && !('group' in sam) && !sam.met, 'no group or where-met saved');
+  ok(sam && sam.everyDays === 3, 'default check-in every 3 days');
+  ok($('#sheet').classList.contains('on') === false, 'sheet closes after saving');
+  ok(!$('#toastAct').hidden && $('#toastAct').textContent === 'Copy details', 'toast offers to copy details for phone contacts');
+  click('#toastAct'); await wait();
+  ok(A.copied.pop() === 'Sam Test\n07700 900123\nInstagram: @sam.t', 'copied text is ready to paste into Contacts');
+
+  current = 'Save and add another';
+  click('#fab'); await wait();
+  setVal('#cName', 'Second Person'); click('#cAnother'); await wait(60);
+  ok(contactDocs(store).length === 2 && $('#sheet').classList.contains('on') && $('#cName').value === '', 'second contact saved and a fresh form opens');
+  click(byText('#sheet [data-act="closesheet"]', '') || '#sheet [data-act="closesheet"]'); await wait(400);
+
+  current = 'Today list and WhatsApp';
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  const samId = sam.id;
+  let row = $$('.prow').find(r => r.textContent.includes('Sam Test'));
+  ok(row && byText('.sec h2', 'Message today'), 'new contact appears under Message today');
+  const wa = row && row.querySelector('a.ch');
+  ok(wa && wa.getAttribute('href') === 'https://wa.me/447700900123', 'chat button opens WhatsApp with UK number (' + (wa && wa.getAttribute('href')) + ')');
+  click(wa); await wait(60);
+  let c = S().contacts[samId];
+  ok(c.lastContact && c.log.some(l => l.text === 'Messaged on WhatsApp'), 'tapping WhatsApp logs the contact');
+  ok(w.__shepherd.state(c) === 'ok', 'status turns green after contact');
+  ok(c.replyState === 'them' && c.waitingSince, 'messaging marks them Waiting on them');
+  ok(/Waiting on Sam to reply/.test($('#toastMsg').textContent), 'toast confirms Shepherd is waiting');
+  row = $$('.prow').find(r => r.textContent.includes('Sam Test'));
+  ok(row && row.querySelector('.rep') && row.querySelector('.rep').textContent === 'Replied', 'row shows a Replied button');
+  ok(/waiting on them/.test(row.textContent), 'row says waiting on them');
+  click('#toastAct'); await wait(60);
+  c = S().contacts[samId];
+  ok(!c.lastContact && !c.log.some(l => l.text === 'Messaged on WhatsApp') && c.replyState !== 'them', 'Undo reverses it');
+  ok(contactDocs(store).find(x => x.id === samId).lastContact == null, 'Undo is saved too');
+
+  current = 'Contact page: channels and reply state';
+  click($$('.prow-main').find(b => b.textContent.includes('Sam Test'))); await wait();
+  ok($('.h1').textContent.includes('Sam Test'), 'contact page opens');
+  const ig = $$('a.btn').find(a => a.textContent.includes('Message on Instagram'));
+  ok(ig && ig.getAttribute('href') === 'https://ig.me/m/sam.t', 'Instagram button opens a DM');
+  click(ig); await wait(60);
+  ok(S().contacts[samId].log.some(l => l.text === 'Messaged on Instagram'), 'Instagram message logged');
+  click('[data-act="reply"][data-r="me"]'); await wait(40);
+  ok(S().contacts[samId].replyState === 'me', 'I need to reply saved');
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(byText('.sec h2', 'Reply to') && $$('.prow').some(r => r.textContent.includes('Sam Test') && r.textContent.includes('You need to reply')), 'Today shows Reply to');
+  ok(!$('#badge').hidden, 'Today tab shows a badge');
+  click($$('.prow-main').find(b => b.textContent.includes('Sam Test'))); await wait();
+  click('[data-act="contacted"]'); await wait(60);
+  ok(S().contacts[samId].replyState === 'none', 'logging a contact clears "I need to reply"');
+
+  current = 'One-tap replies';
+  click('[data-act="tab"][data-v="people"]'); await wait();
+  click($$('.prow').find(r => r.textContent.includes('Sam Test')).querySelector('a.ch')); await wait(60);
+  ok(S().contacts[samId].replyState === 'them', 'waiting after messaging');
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(byText('.sec h2', 'Waiting to hear back') && $$('.prow').some(r => r.textContent.includes('Sam Test') && r.querySelector('.rep')), 'Today lists people you\'re waiting on, with Replied');
+  click($$('.prow').find(r => r.textContent.includes('Sam Test')).querySelector('.rep')); await wait(60);
+  c = S().contacts[samId];
+  ok(c.replyState === 'me' && c.meSince && c.log.some(l => l.text === 'Sam replied'), 'Replied moves them to Reply to');
+  row = $$('.prow').find(r => r.textContent.includes('Sam Test'));
+  ok(byText('.sec h2', 'Reply to') && row.querySelector('.rep.me').textContent === 'I replied', 'row now offers I replied');
+  click(row.querySelector('.rep.me')); await wait(60);
+  c = S().contacts[samId];
+  ok(c.replyState === 'them' && c.log.some(l => l.text === 'You replied'), 'I replied puts them back to waiting');
+
+  current = 'Daily catch-up';
+  const twoDaysAgo = Date.now() - 2 * 86400e3;
+  Object.assign(w.__shepherd.S.contacts[samId], { waitingSince: twoDaysAgo, catchAskedOn: '' });
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok($('#catchCard') && /Did Sam reply\?/.test($('#catchCard').textContent) && /2 days ago/.test($('#catchCard').textContent), 'asks whether someone you messaged 2 days ago replied');
+  ok(/Did they reply\? Sam \(2d\)/.test(w.__shepherd.digest()), 'morning alert asks too');
+  click('#catchCard [data-act="catchwait"]'); await wait(60);
+  ok(!$('#catchCard') && S().contacts[samId].catchAskedOn === ymd(Date.now()) && S().contacts[samId].replyState === 'them', 'Still waiting hides it until tomorrow');
+  Object.assign(w.__shepherd.S.contacts[samId], { catchAskedOn: '' }); click('[data-act="tab"][data-v="today"]'); await wait();
+  const chase = $$('#catchCard a').find(a => /Chase Sam/.test(a.textContent));
+  ok(chase && /wa\.me/.test(chase.href), 'Chase opens their chat');
+  click(chase); await wait(60);
+  c = S().contacts[samId];
+  ok(c.log.some(l => l.text === 'Chased up on WhatsApp') && c.catchAskedOn === ymd(Date.now()) && dayDiffNow(c.waitingSince) === 0, 'chasing is logged and the wait restarts');
+  Object.assign(w.__shepherd.S.contacts[samId], { waitingSince: twoDaysAgo, catchAskedOn: '' }); click('[data-act="tab"][data-v="today"]'); await wait();
+  click('#catchCard [data-act="theyreplied"]'); await wait(60);
+  ok(S().contacts[samId].replyState === 'me', 'answering Sam replied moves them to Reply to');
+  Object.assign(w.__shepherd.S.contacts[samId], { meSince: Date.now() - 3 * 3600e3, catchAskedOn: '' }); click('[data-act="tab"][data-v="today"]'); await wait();
+  ok($('#catchCard') && /Have you replied to Sam yet\?/.test($('#catchCard').textContent), 'asks whether you replied');
+  click('#catchCard [data-act="ireplied"]'); await wait(60);
+  ok(S().contacts[samId].replyState === 'them' && !$('#catchCard'), 'Yes, I replied puts them back to waiting');
+  Object.assign(w.__shepherd.S.contacts[samId], { waitingSince: twoDaysAgo, catchAskedOn: '' }); click('[data-act="tab"][data-v="today"]'); await wait();
+  click('#catchCard [data-act="catchskip"]'); await wait(60);
+  ok(!$('#catchCard'), 'Ask me tomorrow clears the card');
+  click('[data-act="tab"][data-v="people"]'); await wait();
+  click('[data-act="filter"][data-f="waiting"]'); await wait();
+  ok($$('#plist .prow').length === 1 && /gone quiet|waiting/.test($('#plist').textContent), 'Waiting on them filter');
+  click('[data-act="filter"][data-f="all"]'); await wait();
+  click($$('.prow-main').find(b => b.textContent.includes('Sam Test'))); await wait();
+  click('[data-act="reply"][data-r="none"]'); await wait(40);
+
+  current = 'Edit: switch social app';
+  click('[data-act="edit"]'); await wait();
+  ok($('#cMet'), 'edit form keeps optional where-you-met');
+  ok($('#cSp').value === 'Instagram' && $('#cSh').value === '@sam.t', 'edit form shows their Instagram');
+  setVal('#cSp', 'Snapchat'); setVal('#cSh', '@samsnap');
+  click('#cStage button[data-v="Interested"]');
+  submit('#cForm'); await wait(60);
+  c = S().contacts[samId];
+  ok(c.social2 === 'samsnap' && c.social2Platform === 'Snapchat' && c.instagram === '' && c.stage === 'Interested', 'switching to Snapchat replaces the Instagram handle');
+  ok($$('a.btn')[0] && $$('a.btn')[0].textContent.includes('WhatsApp'), 'WhatsApp shows first when they have a number');
+  ok($$('a.btn').some(a => a.getAttribute('href') === 'https://www.snapchat.com/add/samsnap'), 'Snapchat button links to their profile');
+  click('[data-act="tophone"]'); await wait();
+  ok(A.copied.pop().includes('Snapchat: samsnap'), 'Add to phone contacts copies all details');
+
+  current = 'Check-in rhythm';
+  setVal('#every', '7'); await wait(40);
+  ok(S().contacts[samId].everyDays === 7, 'rhythm changed to weekly');
+
+  current = 'Log a study';
+  click('[data-act="logstudy"]'); await wait();
+  setVal('#sTopic', 'Intro'); setVal('#nDate', addDays(-1)); submit('#sForm'); await wait();
+  ok(!$('#sErr').hidden, 'next study before this one is rejected');
+  setVal('#nDate', addDays(3)); setVal('#nTime', '19:30'); setVal('#nTopic', 'Prayer');
+  submit('#sForm'); await wait(60);
+  c = S().contacts[samId];
+  ok(c.studies.length === 1 && c.nextStudy.date === addDays(3) && c.stage === 'Studying', 'study saved, next study set, stage moved to Studying');
+  ok($('#sheetTitle').textContent === 'Study saved' && !$$('#sheetBody a').some(a => /google/i.test(a.href)) && $$('#sheetBody .osb').length === 2, 'study saved: copy for TimeTree with iPhone and Android steps, no Google');
+  click('#ttCopy'); await wait();
+  ok(/Bible study – Sam[\s\S]*7:30pm[\s\S]*Prayer/.test(A.copied.pop()), 'TimeTree copy text is complete');
+  click('#sheet [data-act="closesheet"]'); await wait(400);
+
+  current = 'Leave for now';
+  click('[data-act="pause"]'); await wait();
+  click('#pWhen button[data-d="7"]'); click('#pWhy button[data-v="Busy right now"]');
+  click('#pGo'); await wait(60);
+  c = S().contacts[samId];
+  ok(c.status === 'paused' && c.pauseUntil === addDays(7), 'paused for a week');
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(!$$('.prow').some(r => r.textContent.includes('Sam Test')), 'paused contact is off Today');
+  c.pauseUntil = addDays(-1); w.__shepherd.S.contacts[samId] = c; click('[data-act="tab"][data-v="today"]'); await wait();
+  ok($$('.prow').some(r => r.textContent.includes('Sam Test') && r.textContent.includes('Overdue')), 'comes back to Today after the pause date');
+  click($$('.prow-main').find(b => b.textContent.includes('Sam Test'))); await wait();
+  click('[data-act="contacted"]'); await wait(60);
+  ok(S().contacts[samId].status === 'active' && w.__shepherd.state(S().contacts[samId]) === 'ok', 'contacting after a pause makes them active again');
+
+  current = 'No longer contact, undo, restore';
+  click('[data-act="archive"]'); await wait();
+  click('#aGo'); await wait();
+  ok(!$('#aErr').hidden, 'reason required');
+  click('#aWhy button[data-v="Asked us not to contact them"]'); await wait();
+  ok(!$('#aAsk').hidden, 'shows the full-delete hint when they asked not to be contacted');
+  click('#aGo'); await wait(60);
+  ok(S().contacts[samId].status === 'archived', 'archived');
+  ok(!$$('.prow').some(r => r.textContent.includes('Sam Test')), 'gone from People');
+  click('#toastAct'); await wait(60);
+  ok(S().contacts[samId].status === 'active', 'Undo restores');
+  click($$('.prow-main').find(b => b.textContent.includes('Sam Test'))); await wait();
+  click('[data-act="archive"]'); await wait(); click('#aWhy button[data-v="Moved away"]'); click('#aGo'); await wait(60);
+  click('[data-act="archive-list"]'); await wait();
+  ok($$('.prow').some(r => r.textContent.includes('Sam Test') && r.textContent.includes('Moved away')), 'listed under No longer contacting with reason');
+  click($$('.prow-main').find(b => b.textContent.includes('Sam Test'))); await wait();
+  click('[data-act="restore"]'); await wait(60);
+  ok(S().contacts[samId].status === 'active' && contactDocs(store).find(x => x.id === samId).status === 'active', 'restore saved');
+
+  current = 'Events';
+  click('[data-act="tab"][data-v="events"]'); await wait();
+  click('[data-act="newevent"]'); await wait();
+  setVal('#eName', ''); submit('#eForm'); await wait();
+  ok(!$('#eErr').hidden, 'event needs a name');
+  setVal('#eName', 'Sunday service'); setVal('#eDate', addDays(1)); setVal('#eTime', '10:30'); setVal('#ePlace', 'Main hall');
+  submit('#eForm'); await wait(60);
+  let ev = eventDocs(store).find(e => e.name === 'Sunday service');
+  ok(ev, 'event saved');
+  ok($('#sheetTitle').textContent === 'Sunday service', 'event sheet opens');
+  const inv = $('#inv-' + samId), came = $('#came-' + samId);
+  inv.checked = true; inv.dispatchEvent(new w.Event('change', { bubbles: true })); await wait(40);
+  ev = S().events[ev.id];
+  ok(ev.invited.length === 1 && ev.invited[0] === samId, 'invite saved once (no double toggle)');
+  const invBtn = $$('#sheetBody .checklist a.ch')[0];
+  ok(invBtn && decodeURIComponent(invBtn.getAttribute('href')) === 'https://wa.me/447700900123?text=Hi Sam! Would you like to come to Sunday service tomorrow at 10:30am (Main hall)? It would be great to see you there.', 'WhatsApp invite is pre-written');
+  const logsBefore = S().contacts[samId].log.length;
+  click(invBtn); await wait(40);
+  ok(S().contacts[samId].log.length === logsBefore, 'sending an invite does not count as a check-in');
+  came.checked = true; came.dispatchEvent(new w.Event('change', { bubbles: true })); await wait(40);
+  ok(S().events[ev.id].came.length === 1, 'came saved');
+  inv.checked = false; inv.dispatchEvent(new w.Event('change', { bubbles: true })); await wait(40);
+  ok(S().events[ev.id].invited.length === 0 && S().events[ev.id].came.length === 0 && !came.checked, 'uninviting also clears came');
+  // reopen the sheet a second time and make sure listeners don't stack
+  click('#sheet [data-act="closesheet"]'); await wait(400);
+  click($$('.ev').find(b => b.textContent.includes('Sunday service'))); await wait();
+  click('#sheet [data-act="closesheet"]'); await wait(400);
+  click($$('.ev').find(b => b.textContent.includes('Sunday service'))); await wait();
+  const inv2 = $('#inv-' + samId); inv2.checked = true; inv2.dispatchEvent(new w.Event('change', { bubbles: true })); await wait(40);
+  ok(S().events[ev.id].invited.length === 1, 'after reopening, one tick = one invite');
+  ok(S().contacts[samId].log.filter(l => /Invited to Sunday service/.test(l.text)).length === 2, 'invites recorded in their activity');
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(byText('.sec h2', 'Events today and tomorrow') && $$('.ev').some(b => b.textContent.includes('Sunday service')), 'tomorrow\'s event shows on Today');
+
+  current = 'Invite an Instagram-only contact';
+  w.__shepherd.S.contacts.igonly = { id: 'igonly', name: 'Ivy Gram', instagram: 'ivy.g', status: 'active', createdAt: Date.now(), log: [] };
+  click('[data-act="tab"][data-v="events"]'); await wait();
+  click($$('.ev').find(b => b.textContent.includes('Sunday service'))); await wait();
+  const ivyLi = $$('#sheetBody .checklist li').find(li => li.querySelector('#inv-igonly'));
+  const ivyBtn = ivyLi && ivyLi.querySelector('a.ch');
+  ok(ivyBtn && ivyBtn.getAttribute('href') === 'https://ig.me/m/ivy.g', 'invited through Instagram');
+  click(ivyBtn); await wait(40);
+  ok(A.copied.pop() === 'Hi Ivy! Would you like to come to Sunday service tomorrow at 10:30am (Main hall)? It would be great to see you there.', 'invite text copied, ready to paste into Instagram');
+  delete w.__shepherd.S.contacts.igonly;
+  click('#sheet [data-act="closesheet"]'); await wait(400);
+
+  current = 'Calendar import (.ics)';
+  const dt = (n, h) => addDays(n).replace(/-/g, '') + (h ? 'T' + h : '');
+  const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0',
+    'BEGIN:VTIMEZONE', 'TZID:Europe/London', 'BEGIN:STANDARD', 'DTSTART:19701025T020000', 'END:STANDARD', 'END:VTIMEZONE',
+    'BEGIN:VEVENT', 'UID:one@test', 'SUMMARY:Bible talk\\, evening', 'DTSTART;TZID=Europe/London:' + dt(3, '190000'), 'LOCATION:Room 2', 'END:VEVENT',
+    'BEGIN:VEVENT', 'UID:two@test', 'SUMMARY:Church picnic', 'DTSTART;VALUE=DATE:' + dt(5), 'END:VEVENT',
+    'BEGIN:VEVENT', 'UID:three@test', 'SUMMARY:Midweek service', 'DTSTART;TZID=Europe/London:' + dt(-70, '193000'), 'RRULE:FREQ=WEEKLY', 'EXDATE;TZID=Europe/London:' + dt(-70 + 77, '193000'), 'END:VEVENT',
+    'BEGIN:VEVENT', 'UID:four@test', 'SUMMARY:Cancelled thing', 'DTSTART:' + dt(2, '120000') + 'Z', 'STATUS:CANCELLED', 'END:VEVENT',
+    'BEGIN:VEVENT', 'UID:five@test', 'SUMMARY:Too far away', 'DTSTART:' + dt(200, '120000'), 'END:VEVENT',
+    'BEGIN:VEVENT', 'UID:six@test', 'SUMMARY:Long title that is folded across', ' two lines', 'DTSTART:' + dt(4, '090000'), 'BEGIN:VALARM', 'TRIGGER:-PT15M', 'DESCRIPTION:Reminder', 'END:VALARM', 'END:VEVENT',
+    'END:VCALENDAR'].join('\r\n');
+  const before = Object.keys(S().events).length;
+  w.__shepherd.importICS(ics); await wait(60);
+  const calEvs = Object.values(S().events).filter(e => e.source === 'calendar');
+  const mids = calEvs.filter(e => e.name === 'Midweek service').map(e => e.date).sort();
+  ok(calEvs.some(e => e.name === 'Bible talk, evening' && e.time === '19:00' && e.place === 'Room 2'), 'timed event imported with escaped comma, time and place');
+  ok(calEvs.some(e => e.name === 'Church picnic' && e.time === '' && e.date === addDays(5)), 'all-day event imported');
+  ok(!calEvs.some(e => e.name === 'Cancelled thing') && !calEvs.some(e => e.name === 'Too far away'), 'cancelled and far-future events skipped');
+  ok(calEvs.some(e => e.name === 'Long title that is folded acrosstwo lines' || e.name === 'Long title that is folded across two lines'), 'folded lines joined, alarm ignored');
+  ok(mids.length >= 13 && mids.length <= 15 && !mids.includes(addDays(7)), 'weekly repeat expanded for the window, skipped date honoured (' + mids.length + ')');
+  ok(mids.every(m => m >= addDays(-14) && m <= addDays(90)), 'only last 2 weeks to next 3 months');
+  const afterFirst = Object.keys(S().events).length;
+  w.__shepherd.importICS(ics); await wait(60);
+  ok(Object.keys(S().events).length === afterFirst, 'importing again adds no duplicates');
+  ok(/already here/.test($('#toastMsg').textContent), 'tells you nothing new was found');
+  ok(eventDocs(store).filter(e => e.source === 'calendar').length === afterFirst - before, 'calendar events saved to the store');
+  click('[data-act="tab"][data-v="events"]'); await wait();
+  ok($$('.ev.fromcal').length > 0 && $$('.ev.fromcal')[0].textContent.includes('From your calendar'), 'calendar events marked as from your calendar');
+  click($$('.ev.fromcal').find(b => b.textContent.includes('Church picnic'))); await wait();
+  click('#evDel'); click('#evDel'); await wait(450);
+  ok(!Object.values(S().events).some(e => e.name === 'Church picnic'), 'calendar event deleted');
+  w.__shepherd.importICS(ics); await wait(60);
+  ok(!Object.values(S().events).some(e => e.name === 'Church picnic'), 'deleted calendar event stays deleted on re-import');
+  click('[data-act="calimport"]'); await wait();
+  ok($('#icsFile') && !/Google/.test($('#sheetBody').textContent) && $$('#sheetBody .osb').length === 2, 'calendar file sheet has iPhone and Android steps, no Google');
+  click('#sheet [data-act="closesheet"]'); await wait(400);
+
+  current = 'Disciples';
+  click('[data-act="tab"][data-v="disciples"]'); await wait();
+  ok($('.tab[data-v="disciples"]').getAttribute('aria-current') === 'page', 'Disciples tab opens');
+  ok($('.tab[data-v="events"]').textContent.trim() === 'Calendar', 'Events tab is now called Calendar');
+  ok(/Therefore encourage one another and build each other up, just as in fact you are doing/.test($('.verse').textContent) && /1 Thessalonians 5:11 \(NIV\)/.test($('.verse').textContent), 'shows 1 Thessalonians 5:11');
+  submit('#dForm'); await wait();
+  ok(!$('#dErr').hidden, 'name is required');
+  setVal('#dName', 'Ama Mensah'); setVal('#dPhone', '07700 900777'); submit('#dForm'); await wait(60);
+  setVal('#dName', 'Ben'); submit('#dForm'); await wait(60);
+  const dDocs = () => [...store.docs.entries()].filter(([k]) => k.startsWith('data/users/u_test/profile/disciples/')).map(([, v]) => v);
+  ok(dDocs().length === 2 && dDocs().some(d => d.name === 'Ben' && !d.phone), 'disciples saved with just a name (number optional)');
+  ok(/0 of 2 this week/.test($('.meter').textContent) && byText('.sec h2', 'To check this week'), 'shows who to check this week');
+  const amaRow = () => $$('.prow').find(r => r.textContent.includes('Ama Mensah'));
+  ok(amaRow().querySelector('a.ch').getAttribute('href') === 'https://wa.me/447700900777', 'message button opens WhatsApp');
+  ok(/Disciples to check on this week: Ama, Ben/.test(w.__shepherd.digest()), 'morning alert lists who to check on');
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(/Still to check in with: Ama, Ben/.test($('#main').textContent), 'Today reminds you too');
+  click('[data-act="tab"][data-v="disciples"]'); await wait();
+  click(amaRow().querySelector('[data-act="dcheck"]')); await wait(60);
+  ok(byText('.sec h2', 'Done this week') && /Checked in today/.test(amaRow().textContent) && /1 of 2 this week/.test($('.meter').textContent), 'Checked in moves them to Done this week');
+  ok(!/Ama/.test(w.__shepherd.digest().split('\n').find(l => /Disciples/.test(l)) || ''), 'checked-in disciples drop off the alert');
+  click('#toastAct'); await wait(60);
+  ok(!/Checked in today/.test(amaRow().textContent), 'Undo works');
+  click(amaRow().querySelector('a.ch')); await wait(60);
+  ok(/Checked in today/.test(amaRow().textContent) && dDocs().find(d => d.name === 'Ama Mensah').log.some(l => l.text === 'Messaged on WhatsApp'), 'messaging counts as this week\'s check-in');
+  click(amaRow().querySelector('.prow-main')); await wait();
+  setVal('#deNotes', 'New job, pray for her'); submit('#deForm'); await wait(60);
+  ok(S().disciples[Object.keys(S().disciples).find(k => S().disciples[k].name === 'Ama Mensah')].notes === 'New job, pray for her', 'notes saved');
+  click($$('.prow').find(r => r.textContent.includes('Ben')).querySelector('.prow-main')); await wait();
+  click('#deDel'); click('#deDel'); await wait(450);
+  ok(dDocs().length === 1 && !$$('.prow').some(r => r.textContent.includes('Ben')), 'remove takes two taps and deletes');
+  w.__shepherd.S.view = 'today';
+
+  current = 'Replay the tour';
+  click('[data-act="settings"]'); await wait();
+  click('[data-act="tour"]'); await wait(40);
+  ok(!$('#tour').hidden && $('#tourStep').textContent === '1 of 10', 'Show me around replays the tour');
+  for (let i = 0; i < 5; i++) { click('#tourNext'); await wait(20); }
+  ok($('#tourTitle').textContent === 'Message in one tap' && S().view === 'today' && $('#main .prow .ch'), 'Message step shows Today with a real message button to point at');
+  click('#tourSkip'); await wait(40);
+  ok($('#tour').hidden, 'Skip closes it');
+
+  current = 'Notification settings';
+  click('[data-act="settings"]'); await wait();
+  ok(!/Groups/.test($('#main').textContent), 'no groups in settings');
+  ok($$('#notifCard input[type="checkbox"]').length === 7, 'seven alert tickboxes, including Catch-up and Disciples');
+  ok($('#pAlert').value === '08:00', 'reminder time starts at 8am');
+  setVal('#pAlert', '07:15'); $('#pAlert').dispatchEvent(new w.Event('change', { bubbles: true })); await wait(60);
+  ok(S().profile.alertTime === '07:15' && store.docs.get('data/users/u_test/profile').alertTime === '07:15', 'changing the reminder time is saved');
+  ok(S().profile.alertTime === '07:15' && $('#pAlert').value === '07:15', 'settings show the new time');
+  setVal('#pAlert', '08:00'); $('#pAlert').dispatchEvent(new w.Event('change', { bubbles: true })); await wait(60);
+  click('#nPreset button[data-preset="Events only"]'); await wait(60);
+  let N = S().profile.notify;
+  ok(N.events && !N.chase && !N.replies && !N.studies && !N.weekly, 'Events only preset');
+  ok(store.docs.get('data/users/u_test/profile').notify.events === true && store.docs.get('data/users/u_test/profile').notify.chase === false, 'choices saved to the store');
+  ok($('#nPreset button[data-preset="Events only"]').getAttribute('aria-pressed') === 'true', 'preset shows as selected');
+  ok(/^Events:/.test($('#nPreview').textContent) && !/Message/.test($('#nPreview').textContent), 'preview only mentions events');
+  const cb = $('#n-chase'); cb.checked = true; cb.dispatchEvent(new w.Event('change', { bubbles: true })); await wait(60);
+  ok(S().profile.notify.chase === true && !$$('#nPreset button').some(b => b.getAttribute('aria-pressed') === 'true'), 'custom tick saved, no preset highlighted');
+  click('#nPreset button[data-preset="Off"]'); await wait(60);
+  ok($('#nPreview').textContent === 'Alerts are off.', 'Off preset');
+  click('#nPreset button[data-preset="All"]'); await wait(60);
+  ok(Object.values(S().profile.notify).every(Boolean), 'All preset');
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok($('#sumCard') && $$('#sumCard li').length >= 1 && /Message|Reply to|Did they reply/.test($('#sumCard').textContent), 'Today shows the morning summary at the top');
+  click('[data-act="settings"]'); await wait();
+
+  current = 'Profile settings';
+  setVal('#pName', 'Pavi'); setVal('#pPhone', '07700 900999'); submit('#profForm'); await wait(60);
+  ok(S().profile.name === 'Pavi' && store.docs.get('data/users/u_test/profile').phone === '07700 900999', 'name and number saved');
+
+  current = 'QR code';
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(/Pavi/.test($('.h1').textContent), 'greeting uses your name');
+  click('#fab'); await wait(); click('#sheet [data-act="qr"]'); await wait();
+  ok(/wa\.me\/447700900999\?text=/.test($('#sheetBody').textContent) || $('#qrBox'), 'QR sheet built for your number');
+  click('#sheet [data-act="closesheet"]'); await wait(400);
+
+  current = 'PIN lock';
+  click('[data-act="settings"]'); await wait();
+  click('[data-act="setpin"]'); await wait();
+  setVal('#pinNew', '12'); setVal('#pinNew2', '12'); submit('#pinForm'); await wait(40);
+  ok(/4 to 8/.test($('#pinErr').textContent), 'short PIN rejected');
+  setVal('#pinNew', '1234'); setVal('#pinNew2', '1235'); submit('#pinForm'); await wait(40);
+  ok(/match/.test($('#pinErr').textContent), 'mismatch rejected');
+  setVal('#pinNew2', '1234'); submit('#pinForm'); await wait(60);
+  ok(S().profile.pinHash && S().profile.pinHash.length === 64, 'PIN saved as a hash');
+  click('[data-act="locknow"]'); await wait();
+  ok(!$('#lock').hidden, 'Lock now shows the lock screen');
+  setVal('#lockPin', '9999'); submit('#lockForm'); await wait(40);
+  ok(!$('#lock').hidden && /isn't right/.test($('#lockMsg').textContent), 'wrong PIN refused');
+  setVal('#lockPin', '1234'); submit('#lockForm'); await wait(40);
+  ok($('#lock').hidden, 'right PIN unlocks');
+
+  current = 'Backup';
+  click('[data-act="export"]'); await wait(40);
+  ok(A.saves.length === 1 && /^shepherd-backup-\d{4}-\d{2}-\d{2}\.json$/.test(A.saves[0].filename), 'backup offered as a .json download');
+  const bk = JSON.parse(A.saves[0].data);
+  ok(bk.contacts.length === 2 && bk.profile.pinHash === '', 'backup has contacts and no PIN');
+  bk.contacts.push({ id: 'restored1', name: 'From Backup', createdAt: Date.now(), updatedAt: Date.now(), status: 'active' });
+  bk.contacts.push({ id: '../bad', name: 'Bad Id' });
+  w.__shepherd.importBackup(JSON.stringify(bk)); await wait(60);
+  ok(S().contacts.restored1 && !Object.values(S().contacts).some(x => x.name === 'Bad Id'), 'restore adds new contacts and skips unsafe ones');
+  w.__shepherd.importBackup('not json'); await wait();
+  ok(/isn't a Shepherd backup/.test($('#toastMsg').textContent), 'bad file rejected');
+
+  current = 'Search and filters';
+  click('[data-act="tab"][data-v="people"]'); await wait();
+  ok($$('.filters').length === 1, 'only one filter row (groups removed)');
+  setVal('#q', 'samsnap'); await wait();
+  ok($$('#plist .prow').length === 1 && $('#plist').textContent.includes('Sam Test'), 'search finds by social handle');
+  setVal('#q', 'zzz'); await wait();
+  ok(/No one matches/.test($('#plist').textContent), 'no-match message');
+  setVal('#q', ''); click('[data-act="filter"][data-f="ok"]'); await wait();
+  ok($$('#plist .prow').every(r => r.classList.contains('st-ok')), 'On track filter');
+  click('[data-act="filter"][data-f="all"]'); await wait();
+
+  current = 'Week summary';
+  click('[data-act="tab"][data-v="week"]'); await wait();
+  ok(/You followed up with 1 of 3/.test($('.bigline').textContent), 'weekly line counts follow-ups (' + $('.bigline').textContent + ')');
+  ok($$('.bar').length === 4 && $$('.bar .fill').every(f => /^\d+%$/.test(f.style.height)), 'four weekly bars drawn to scale');
+
+  current = 'Examples (older accounts)';
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  w.__shepherd.S.contacts = {};
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(!$('[data-act="examples"]') && !/example contacts/.test($('#main').textContent), 'no "try it with examples" button');
+  const D = 864e5, now0 = Date.now(), td0 = new Date().toISOString().slice(0, 10);
+  const loc = new Date(); const tdLocal = loc.getFullYear() + '-' + String(loc.getMonth() + 1).padStart(2, '0') + '-' + String(loc.getDate()).padStart(2, '0');
+  Object.assign(w.__shepherd.S.contacts, {
+    ex1: { id: 'ex1', name: 'Daniel (example)', example: true, status: 'active', everyDays: 3, createdAt: now0 - 12 * D, lastContact: now0 - 4 * D, replyState: 'none', log: [] },
+    ex2: { id: 'ex2', name: 'Grace (example)', example: true, status: 'active', everyDays: 2, createdAt: now0 - 12 * D, lastContact: now0 - 2 * D, replyState: 'me', log: [] },
+    ex3: { id: 'ex3', name: 'Joel (example)', example: true, status: 'active', everyDays: 3, createdAt: now0 - 12 * D, lastContact: now0 - 1 * D, replyState: 'none', nextStudy: { date: tdLocal, time: '19:00', topic: 'First study' }, log: [] }
+  });
+  click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(Object.values(S().contacts).filter(x => x.example).length === 3, 'older example contacts still show');
+  ok(/example contacts/.test($('#main').textContent), 'example banner shows');
+  ok(/Studies today/.test($('#main').textContent) && /Reply to/.test($('#main').textContent), 'examples fill Today');
+  const dg = w.__shepherd.digest();
+  ok(/Reply to Grace/.test(dg) && /Studies today: Joel at 7pm/.test(dg) && /Message \d+ (person|people): Daniel \(1d overdue\)/.test(dg) && /Events: .*Sunday service tomorrow at 10:30am/.test(dg),'alert summary reads correctly: ' + dg.replace(/\n/g, ' | '));
+  click('[data-act="settings"]'); await wait();
+  click('[data-act="clearexamples"]'); await wait(60);
+  ok(!Object.values(S().contacts).some(x => x.example), 'examples removed');
+
+  current = 'Tour jobs carry on by themselves';
+  click('[data-act="settings"]'); await wait();
+  click('[data-act="tour"]'); await wait(40);
+  for (let i = 0; i < 3; i++) { click('#tourNext'); await wait(30); }
+  ok($('#tourTitle').textContent === 'Add someone' && $('#tourMore').textContent === 'Add my first person', 'Add someone step');
+  click('#tourMore'); await wait(60);
+  ok($('#sheetTitle').textContent === 'Add a contact' && $('#tour').hidden, 'opens Add a contact for you');
+  setVal('#cName', 'Tour Tess'); submit('#cForm'); await wait(1300);
+  ok(Object.values(S().contacts).some(x => x.name === 'Tour Tess') && !$('#tour').hidden && $('#tourTitle').textContent === 'Start each day here', 'after saving, the tour carries on');
+  for (let i = 0; i < 3; i++) { click('#tourNext'); await wait(30); }
+  click('#tourMore'); await wait(40);
+  ok(!$('#tourPill').hidden, 'Continue tour bar while adding a disciple');
+  setVal('#dName', 'Tour Dee'); submit('#dForm'); await wait(1300);
+  ok(Object.values(S().disciples).some(x => x.name === 'Tour Dee') && $('#tourTitle').textContent === 'Calendar and TimeTree', 'after adding a disciple, the tour carries on');
+  click('#tourBack'); await wait(30); click('#tourMore'); await wait(40);
+  click('#tourPillGo'); await wait(40);
+  ok($('#tourTitle').textContent === 'Calendar and TimeTree', 'Continue tour moves on even without finishing the job');
+  click('#tourSkip'); await wait(40);
+  ok($('#tour').hidden && $('#tourPill').hidden, 'Skip ends the tour');
+
+  current = 'Safety';
+  // restore real contacts into view from store
+  A.dom.window.close();
+  A = await open(store); await wait(80);
+  ok(Object.values(A.S().contacts).some(x => x.name === 'Sam Test'), 'data still there after reopening the app');
+  ok(Object.values(A.S().events).some(x => x.name === 'Sunday service'), 'events still there after reopening');
+  ok(A.$('#lock').hidden === false, 'PIN asked for on reopen');
+  await wait(400);
+  ok(A.$('#tour').hidden, 'tour does not show again once done');
+  A.setVal('#lockPin', '1234'); A.submit('#lockForm'); await wait(40);
+  A.click('#fab'); await wait();
+  A.setVal('#cName', '<img src=x onerror="window.__x=1">'); A.submit('#cForm'); await wait(60);
+  A.click('[data-act="tab"][data-v="people"]'); await wait();
+  ok(!A.$('#main img') && !A.w.__x && A.$('#main').textContent.includes('<img src=x'), 'names are shown as text, never run as code');
+
+  current = 'Offline and saving';
+  store.fail = 'unavailable';
+  A.click('#fab'); await wait();
+  A.setVal('#cName', 'Offline Olive'); A.submit('#cForm'); await wait(80);
+  ok(Object.keys(A.w.__shepherd.pending()).length >= 1, 'change queued while offline');
+  ok(/Offline/.test(A.$('#sync').textContent), 'status shows Offline · will sync');
+  ok(!contactDocs(store).some(x => x.name === 'Offline Olive'), 'not in the store yet');
+  ok(Object.values(JSON.parse(A.w.localStorage.getItem('shepherd:v1:u_test')).contacts).some(x => x.name === 'Offline Olive'), 'kept on the phone meanwhile');
+  store.fail = null; A.w.dispatchEvent(new A.w.Event('online')); await wait(150);
+  ok(contactDocs(store).some(x => x.name === 'Offline Olive') && Object.keys(A.w.__shepherd.pending()).length === 0, 'syncs when back online');
+  ok(A.$('#sync').textContent.trim() === 'Saved', 'status back to Saved');
+
+  current = 'Delete all data';
+  const olive = Object.values(A.S().contacts).find(x => x.name === 'Offline Olive');
+  A.w.__shepherd.S.view = 'contact'; A.w.__shepherd.S.contactId = olive.id; A.click('[data-act="tab"][data-v="people"]'); await wait();
+  A.click(A.$$('.prow-main').find(b => b.textContent.includes('Offline Olive'))); await wait(150);
+  A.click('[data-act="archive"]'); await wait(); A.click('#aWhy button[data-v="Asked us not to contact them"]'); A.click('#aGo'); await wait(60);
+  A.click('[data-act="archive-list"]'); await wait();
+  A.click(A.$$('.prow-main').find(b => b.textContent.includes('Offline Olive'))); await wait();
+  A.click('[data-act="delete"]'); await wait();
+  ok(A.$('#dGo').disabled, 'delete button locked until DELETE typed');
+  A.setVal('#dConfirm', 'delete'); await wait();
+  ok(!A.$('#dGo').disabled, 'unlocks after typing DELETE');
+  A.click('#dGo'); await wait(80);
+  ok(!contactDocs(store).some(x => x.name === 'Offline Olive') && !A.S().contacts[olive.id], 'contact deleted everywhere');
+  ok(/Deleted a contact at their request/.test(JSON.stringify(store.docs.get('data/users/u_test/profile').log)), 'deletion noted in activity log without their name');
+
+  current = 'Read-only access';
+  store.fail = 'invalid_argument';
+  A.click('#fab'); await wait(); A.setVal('#cName', 'Viewer Vic'); A.submit('#cForm'); await wait(80);
+  A.click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(/Contributor/.test(A.$('#main').textContent) && /Saved on this device/.test(A.$('#sync').textContent), 'explains how to get save access');
+  store.fail = null;
+
+  current = 'No capabilities (preview mode)';
+  const B = await open(null); await wait(60);
+  ok(B.$('.empty') && /On this device/.test(B.$('#sync').textContent), 'works on the phone alone when saving online is unavailable');
+  B.click('#fab'); await wait(); B.setVal('#cName', 'Local Lou'); B.submit('#cForm'); await wait(60);
+  ok(Object.values(B.S().contacts).some(x => x.name === 'Local Lou'), 'can still add contacts');
+  B.click('[data-act="settings"]'); await wait(); B.click('[data-act="notifguide"]'); await wait(60);
+  ok(/Get the Shepherd app/.test(B.$('#sheetBody').textContent) && !/Claude/.test(B.$('#sheetBody').textContent), 'church members are pointed to the Shepherd app for notifications');
+
+  current = 'Notification schedule';
+  {
+    const W = A.w.__shepherd, S0 = W.S;
+    const saved = { c: S0.contacts, d: S0.disciples, e: S0.events, p: S0.profile };
+    const day = 864e5, t0 = new Date(); t0.setHours(0, 0, 0, 0); const T = t0.getTime();
+    const at = (k, h) => { const d = new Date(T); d.setDate(d.getDate() + k); d.setHours(h || 0, 0, 0, 0); return d.getTime(); };
+    const ymdF = t => { const d = new Date(t); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+    S0.contacts = {
+      a: { id: 'a', name: 'Daniel Mensah', lastContact: at(-5, 12), everyDays: 3, createdAt: at(-10) },
+      b: { id: 'b', name: 'Grace Owusu', replyState: 'me', meSince: at(-1, 12), lastContact: at(-1, 12), everyDays: 3, createdAt: at(-10) },
+      c: { id: 'c', name: 'Sam Lee', replyState: 'them', waitingSince: at(-2, 12), lastContact: at(-2, 12), everyDays: 7, createdAt: at(-10) },
+      d: { id: 'd', name: 'Pete Paused', status: 'paused', pauseUntil: ymdF(at(3)), pausedAt: at(-1), lastContact: at(-20), createdAt: at(-30) },
+      e: { id: 'e', name: 'Gary Gone', status: 'archived', createdAt: at(-30) },
+      f: { id: 'f', name: 'Joel Study', lastContact: at(0, 1), everyDays: 3, createdAt: at(-10), nextStudy: { date: ymdF(at(1)), time: '19:00', topic: 'Prayer' } }
+    };
+    S0.disciples = { x: { id: 'x', name: 'Ama Boateng', lastCheck: 0 } };
+    S0.events = { v: { id: 'v', name: 'Sunday service', date: ymdF(at(2)), time: '10:30', place: 'Main hall' } };
+    S0.profile = Object.assign({}, S0.profile, { alertTime: '08:00', notify: { chase: true, replies: true, catchup: true, disciples: true, studies: true, events: true, weekly: true } });
+    let items = W.buildSchedule();
+    const on = k => items.filter(x => ymdF(x.at) === ymdF(at(k)));
+    const tm = on(1).map(x => x.title);
+    ok(tm.includes('Reply to Grace') && tm.includes('Message Daniel') && tm.includes('Did Sam reply?'), 'tomorrow morning names Grace, Daniel and Sam');
+    const dan = on(1).find(x => x.title === 'Message Daniel');
+    ok(dan && /^3 days overdue/.test(dan.body) && dan.url === './?open=a' && new Date(dan.at).getHours() === 8, 'Daniel: 3 days overdue, at 8am, opens Daniel');
+    ok(on(1).find(x => x.title === 'Reply to Grace').body === 'Grace messaged you 2 days ago. Tap to reply.', 'Grace: how long she has waited');
+    ok(!items.some(x => /Gary/.test(x.title)), 'people you no longer contact never get notifications');
+    ok(!on(1).some(x => /Pete/.test(x.title)) && on(3).some(x => x.title === 'Message Pete' && /Back from a pause/.test(x.body)), 'a paused person comes back on the day the pause ends');
+    const st = items.find(x => x.title === 'Bible study with Joel at 7pm');
+    ok(st && ymdF(st.at) === ymdF(at(1)) && new Date(st.at).getHours() === 18 && /Prayer/.test(st.body) && st.url === './?open=f', 'study reminder an hour before, with the topic');
+    ok(items.some(x => x.title === 'Tomorrow: Sunday service' && ymdF(x.at) === ymdF(at(1)) && /10:30am · Main hall/.test(x.body)) && items.some(x => x.title === 'Sunday service at 10:30am' && new Date(x.at).getHours() === 9), 'event: the day before, and an hour before');
+    const disc = items.filter(x => x.title === 'Check in with Ama');
+    ok(disc.length >= 2 && disc.every(x => [1, 4].includes(new Date(x.at).getDay())), 'disciples: Monday and Thursday until checked in');
+    ok(items.every(x => x.at > Date.now()) && !items.some(x => /Mensah|Owusu|Boateng/.test(x.title + x.body)), 'nothing in the past, and first names only');
+    ok(new Set(items.map(x => x.tag)).size === items.length, 'every notification is its own (no two share a tag)');
+    ok(on(1).find(x => x.title === 'Message Daniel').badge === 2, 'app badge counts replies owed and people to message');
+    S0.profile.notify = Object.assign({}, S0.profile.notify, { replies: false, studies: false });
+    items = W.buildSchedule();
+    ok(!items.some(x => /^Reply to|^Bible study/.test(x.title)) && items.some(x => x.title === 'Message Daniel'), 'tickboxes in Settings turn kinds of notification off');
+    for (let i = 0; i < 12; i++) S0.contacts['z' + i] = { id: 'z' + i, name: 'Person' + i + ' X', lastContact: at(-9), everyDays: 3, createdAt: at(-20) };
+    items = W.buildSchedule();
+    const m1 = on(1).filter(x => new Date(x.at).getHours() === 8);
+    const more = m1.find(x => /^And \d+ more today$/.test(x.title));
+    ok(m1.filter(x => /^(Message|Did|Reply|Check)/.test(x.title)).length === 8 && more && /Message Person/.test(more.body), 'at most 8 named alerts each morning, then one "and N more" naming the rest');
+    S0.contacts = saved.c; S0.disciples = saved.d; S0.events = saved.e; S0.profile = saved.p;
+  }
+
+  current = 'Script errors';
+  const allErr = A.errors.concat(B.errors);
+  ok(allErr.length === 0, 'no script errors' + (allErr.length ? ': ' + allErr.slice(0, 3).join(' / ') : ''));
+
+  const pass = results.filter(r => r.ok).length, fail = results.length - pass;
+  console.log('\n' + pass + ' passed, ' + fail + ' failed');
+  process.exit(fail ? 1 : 0);
+})().catch(e => { console.log('CRASH', e && e.stack || e); process.exit(2); });
