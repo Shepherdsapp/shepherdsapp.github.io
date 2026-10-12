@@ -258,7 +258,7 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 /* guided tour */
 .tour{position:fixed;inset:0;z-index:55}
 .tour-hole{position:fixed;border-radius:14px;box-shadow:0 0 0 200vmax rgba(27,22,14,.62);transition:all .25s ease;pointer-events:none}
-.tour-card{position:fixed;left:16px;right:16px;max-width:400px;margin:0 auto;background:var(--surface);color:var(--fg);border-radius:18px;padding:18px;box-shadow:var(--shadow);display:grid;gap:10px;border:1px solid var(--line)}
+.tour-card{position:fixed;left:16px;right:16px;max-width:400px;margin:0 auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--surface);color:var(--fg);border-radius:18px;padding:18px;box-shadow:var(--shadow);display:grid;gap:10px;border:1px solid var(--line)}
 .tour-card h2{margin:0;font-family:var(--display);font-size:21px;font-weight:600;text-wrap:balance}
 .tour-card p{margin:0;font-size:15.5px}
 .tour-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -266,6 +266,8 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 .tourpill span{flex:1 1 160px;font-size:14.5px}
 .btn.small{min-height:38px;padding:6px 12px;font-size:14px}
 .tour-foot .step{font-size:13px;color:var(--muted);margin-right:auto;font-variant-numeric:tabular-nums}
+.tour-foot #tourNext{order:-1;flex:1 1 100%}
+.tour-foot .btn:not(#tourNext){min-height:44px;padding:8px 16px}
 
 /* iPhone and Android steps, side by side in every how-to */
 .os{display:grid;gap:10px}
@@ -319,7 +321,8 @@ body{font-size:17px}
 .tab svg{width:25px;height:25px}
 .tab[aria-current="page"] svg{background:var(--accent-soft);border-radius:99px;box-sizing:content-box;padding:2px 12px;margin:-2px 0}
 .iconbtn{border-width:1.5px}
-.tour-card{max-height:calc(100vh - 32px);overflow:auto}
+.tour-card{max-height:calc(100dvh - 40px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow:auto}
+.safeprobe{position:fixed;left:0;top:0;width:0;visibility:hidden;pointer-events:none;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .tour-card p{font-size:16.5px}
 .allclear{font-size:16.5px}
 .stat span{font-size:13.5px;color:var(--muted)}
@@ -495,7 +498,7 @@ var authEl = null;
 function authHtml(mode, msg) {
   var create = mode === 'create', forgot = mode === 'forgot', code = mode === 'code';
   return '<form class="auth-in" id="authForm" novalidate>' +
-    '<svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 1 1 24 0 v6"/></svg>' +
+    '<svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6"/></svg>' +
     '<h1 class="h1" style="text-align:center">Shepherd</h1>' +
     (forgot || code ? '<p class="lede" style="text-align:center">' + (code ? esc(msg || 'Enter your 6-digit code and choose a new password.') : 'Enter your email and we\'ll help you choose a new password.') + '</p>'
       : '<div class="seg" style="grid-template-columns:1fr 1fr" role="group"><button type="button" data-auth="signin" aria-pressed="' + !create + '">Sign in</button><button type="button" data-auth="create" aria-pressed="' + create + '">Create account</button></div>' +
@@ -644,7 +647,7 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
 <body>
 <header class="top" id="top">
   <div class="top-in">
-    <div class="brand"><svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 1 1 24 0 v6"/></svg><span>Shepherd</span></div>
+    <div class="brand"><svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6"/></svg><span>Shepherd</span></div>
     <span class="sync loading" id="sync" role="status"><i></i><span>Loading</span></span>
     <button class="iconbtn" data-act="settings" aria-label="Settings"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
   </div>
@@ -672,7 +675,7 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
 
 <div class="lock" id="lock" hidden>
   <form class="lock-in" id="lockForm">
-    <svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 1 1 24 0 v6"/></svg>
+    <svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6"/></svg>
     <h1 class="h2">Shepherd is locked</h1>
     <p class="muted small" style="margin:0">Enter your PIN to see your contacts.</p>
     <label class="sr" for="lockPin">PIN</label>
@@ -734,7 +737,7 @@ var ICON = {
   copy: '<svg class="i" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
   person: '<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.7-3.6 3.4-5.5 7-5.5s6.3 1.9 7 5.5"/><path d="M19 4v4M17 6h4"/></svg>'
 };
-var MARK = '<svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 1 1 24 0 v6"/></svg>';
+var MARK = '<svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6"/></svg>';
 var STAGES = ['First contact', 'Interested', 'Studying', 'Regular at church'];
 var ARCHIVE_REASONS = ['Asked us not to contact them', 'Moved away', 'Joined another church', 'No reply for a long time', 'Other'];
 var PAUSE_REASONS = ['Busy right now', 'Away or travelling', 'Wants some space', 'Exams or work', 'Other'];
@@ -863,6 +866,17 @@ function saveContact(c) { c.updatedAt = Date.now(); S.contacts[c.id] = c; put(cP
 function saveEvent(e) { e.updatedAt = Date.now(); S.events[e.id] = e; put(ePath(e.id), e); render(); }
 function saveProfile() { put(basePath(), S.profile); render(); }
 function dropContact(id) { delete S.contacts[id]; put(cPath(id), null); }
+
+/* the You form in Settings: saved when you tap Save, when you leave a box, and when the tour carries on */
+function saveProfileForm(andRender) {
+  var n = $('#pName'), ph = $('#pPhone'), it = $('#pIntro'), ev = $('#pEvery'); if (!n || !ph) return false;
+  var next = { name: n.value.trim(), phone: ph.value.trim(), intro: it.value.trim() || defaultProfile().intro, defaultEvery: Number(ev.value) || 3 };
+  var p = S.profile;
+  if (p.name === next.name && p.phone === next.phone && p.intro === next.intro && Number(p.defaultEvery) === next.defaultEvery) { if (andRender) render(); return false; }
+  Object.assign(S.profile, next);
+  if (andRender) saveProfile(); else put(basePath(), S.profile);
+  return true;
+}
 
 /* ---------- contact status ---------- */
 function eff(c) {
@@ -1285,9 +1299,9 @@ function viewEvents() {
   var past = evs.filter(function (x) { return x.date < td; }).sort(function (a, b) { return b.date.localeCompare(a.date); }).slice(0, 30);
   var h = '<div><h1 class="h1">Calendar</h1><p class="lede">Your services and events. Invite people, then tick who came.</p></div>';
   h += '<div class="row"><button class="btn primary grow" data-act="newevent">New event</button><button class="btn grow" data-act="calimport">' + ICON.cal + 'Add from a calendar file</button></div>';
-  h += '<button class="btn soft" data-act="calguide">' + ICON.cal + 'How to link your calendar and TimeTree</button>';
+  h += '<button class="btn soft" data-act="calguide">' + ICON.cal + 'How to link your phone calendar</button>';
   if (S.profile.calImportedAt) h += '<p class="note">Calendar events last brought in ' + esc(fmtStamp(S.profile.calImportedAt)) + '.</p>';
-  if (!evs.length) h += '<div class="empty"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="14" width="44" height="40" rx="6"/><path d="M10 26h44M22 8v10M42 8v10"/></svg><h2 class="h2">No events yet</h2><p>Save it in TimeTree first, then add your Sunday service, devotional or social here so you can invite people.</p></div>';
+  if (!evs.length) h += '<div class="empty"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="14" width="44" height="40" rx="6"/><path d="M10 26h44M22 8v10M42 8v10"/></svg><h2 class="h2">No events yet</h2><p>Add your Sunday service, devotional or social here so you can invite people and tick who came.</p></div>';
   if (up.length) h += '<section class="sec"><h2 class="h2">Coming up</h2>' + up.map(function (x) { return evCard(x, false); }).join('') + '</section>';
   if (past.length) h += '<section class="sec"><h2 class="h2">Past</h2>' + past.map(function (x) { return evCard(x, true); }).join('') + '</section>';
   return h;
@@ -1409,7 +1423,7 @@ function render() {
   if (WEB) { schedSoon(); try { if (navigator.setAppBadge) { if (owed) navigator.setAppBadge(owed); else navigator.clearAppBadge(); } } catch (e) {} }
   if (WEB && S.view === 'settings') refreshPush();
 }
-function go(v, id) { S.view = v; if (id) S.contactId = id; render(); try { window.scrollTo(0, 0); } catch (e) {} }
+function go(v, id) { if (S.view === 'settings' && v !== 'settings') saveProfileForm(false); S.view = v; if (id) S.contactId = id; render(); try { window.scrollTo(0, 0); } catch (e) {} }
 
 function bindView() {
   var q = $('#q');
@@ -1417,7 +1431,10 @@ function bindView() {
   var every = $('#every');
   if (every) every.addEventListener('change', function () { var c = S.contacts[every.dataset.id]; if (!c) return; c.everyDays = Number(every.value); logTo(c, 'change', 'Check-in rhythm set to every ' + plural(c.everyDays, 'day')); saveContact(c); toast('Saved'); });
   var pf = $('#profForm');
-  if (pf) pf.addEventListener('submit', function (e) { e.preventDefault(); S.profile.name = $('#pName').value.trim(); S.profile.phone = $('#pPhone').value.trim(); S.profile.intro = $('#pIntro').value.trim() || defaultProfile().intro; S.profile.defaultEvery = Number($('#pEvery').value); saveProfile(); toast('Settings saved'); if (S.profile.phone) tourEvent('profile'); });
+  if (pf) {
+    pf.addEventListener('submit', function (e) { e.preventDefault(); saveProfileForm(true); toast('Settings saved'); if (S.profile.phone) tourEvent('profile'); });
+    pf.addEventListener('change', function () { saveProfileForm(false); }); // saved as soon as you leave a box, Save or not
+  }
   var pa = $('#pAlert');
   if (pa) pa.addEventListener('change', function () { if (!/^\d\d:\d\d$/.test(pa.value)) return; S.profile.alertTime = pa.value; saveProfile(); toast('Reminder time set to ' + fmtClock(pa.value) + '. Change it in TimeTree too.'); });
   var nc = $('#notifCard');
@@ -1442,7 +1459,8 @@ function bindView() {
 /* ---------- sheets ---------- */
 var sheetAfter = null;
 function openSheet(title, body, mount, after) {
-  sheetAfter = after || null;
+  // opening one sheet over another keeps the first one's "when closed" step (e.g. going back to the tour)
+  sheetAfter = after || (!$('#sheet').hidden && $('#sheet').classList.contains('on') ? sheetAfter : null);
   var sh = $('#sheet'), sc = $('#scrim');
   var old = $('#sheetBody'), nb = old.cloneNode(false); old.parentNode.replaceChild(nb, old); // fresh element: no leftover listeners
   $('#sheetTitle').textContent = title; nb.innerHTML = body;
@@ -1457,25 +1475,26 @@ function closeSheet() {
   var after = sheetAfter; sheetAfter = null;
   setTimeout(function () { if (!sh.classList.contains('on')) { sh.hidden = true; sc.hidden = true; $('#sheetBody').innerHTML = ''; } if (after) after(); }, 330);
 }
-/* Two links, both on the phone itself: TimeTree shows the phone calendar, and Shepherd adds to the phone calendar. Never Google. */
+/* Connect Shepherd to the phone's own calendar. Never Google. TimeTree can't share its events with other apps. */
 function calGuide(fromTour) {
   var feed = WEB ? WEB.feedUrl() : '';
   openSheet('Link your calendar',
-    '<p style="margin:0">Two links put everything in one place. <b>TimeTree</b> shows your phone\'s calendar, and <b>Shepherd</b> adds your studies and events to your phone\'s calendar. So everything from Shepherd shows in TimeTree too.</p>' +
-    '<section class="card" style="background:var(--bg)"><h3>1. Link TimeTree to your phone calendar</h3>' +
-      osSteps(
-        ['Open your iPhone <b>Settings</b>.', 'Go to <span class="path">Settings › TimeTree › Calendars</span> and choose <b>Full Access</b>.', 'Open <b>TimeTree</b> and go to your <b>Home Calendar</b>.', 'Tap the <b>switch icon</b> at the top right, then <b>Select Display Filters</b>.', 'Tap <b>Allow Access</b> and tick the iPhone calendars you want to see, including <b>Shepherd</b> once step 2 is done.'],
-        ['Open your phone\'s <b>Settings</b>.', 'Go to <span class="path">Settings › Apps › TimeTree › Permissions › Calendar</span> and choose <b>Allow</b>.', 'Open <b>TimeTree</b> and go to your <b>Home Calendar</b>.', 'Tap the <b>switch icon</b> at the top right, then <b>Select Display Filters</b>.', 'Tap <b>Allow Access</b> and tick the phone calendars you want to see.']) +
-      '<p class="note">Your phone calendar shows only to you, on your TimeTree Home Calendar.</p></section>' +
-    '<section class="card" style="background:var(--bg)" id="calConnect"><h3>2. Connect Shepherd to your phone calendar</h3>' +
+    '<p style="margin:0">Connect Shepherd to your phone\'s calendar and your Bible studies and events appear there by themselves, alongside everything else in your day.</p>' +
+    '<section class="card" style="background:var(--bg)" id="calConnect"><h3>1. Connect Shepherd to your phone calendar</h3>' +
       (WEB && feed ?
         osSteps(
-          ['Tap <b>Connect to iPhone calendar</b> below.', 'Your iPhone asks if you want to subscribe. Tap <b>Subscribe</b>, then <b>Done</b>.', 'Your Bible studies and events now show in the <b>Calendar</b> app as <b>Shepherd</b>, and keep themselves up to date.', 'Because TimeTree shows your phone calendar (step 1), they show in TimeTree too.'],
-          ['On a study or an event in Shepherd, tap <b>Add to phone calendar</b>.', 'Your phone opens its <b>Calendar</b> app with the details filled in. Tap <b>Save</b>.', 'To have them added by themselves instead, get the <b>ICSx⁵</b> app, tap <b>Copy calendar link</b> below and add it in ICSx⁵ with <b>+</b>.', 'Because TimeTree shows your phone calendar (step 1), they show in TimeTree too.']) +
+          ['Tap <b>Connect to iPhone calendar</b> below.', 'Your iPhone asks if you want to subscribe. Tap <b>Subscribe</b>, then <b>Done</b>.', 'Come back to Shepherd. Your studies and events now show in the <b>Calendar</b> app as <b>Shepherd</b>, and keep themselves up to date.'],
+          ['On a study or an event in Shepherd, tap <b>Add to phone calendar</b>.', 'Your phone opens its <b>Calendar</b> app with the details filled in. Tap <b>Save</b>.', 'To have them added by themselves instead, get the <b>ICSx⁵</b> app, tap <b>Copy calendar link</b> below and add it in ICSx⁵ with <b>+</b>.']) +
         '<a class="btn primary" href="' + esc(feed) + '" data-act="calconnect">' + ICON.cal + 'Connect to iPhone calendar</a>' +
         '<button class="btn" data-act="copyfeed">' + ICON.copy + 'Copy calendar link</button>' +
         '<p class="note">This link is private to you. If you ever share it by mistake, <button class="linkrow" style="padding:0;min-height:0;display:inline" data-act="newcal">make a new link</button>.</p>'
       : '<p class="note">This works in the Shepherd app on your phone. Open <a href="' + WEB_APP_URL + '" target="_blank" rel="noopener">Shepherd</a>, sign in, then come back to this guide.</p>') +
+    '</section>' +
+    '<section class="card" style="background:var(--bg)"><h3>2. Keep your personal TimeTree events in your calendar too</h3>' +
+      '<p class="note">TimeTree doesn\'t share its events with other apps, so it can\'t copy them over by itself. For the personal events you keep in TimeTree that matter to your week, add them to your phone\'s calendar as well, so your calendar shows everything in one place.</p>' +
+      osSteps(
+        ['Open the <b>Calendar</b> app and tap <b>+</b>.', 'Type the title, then set the <b>date and time</b> from your TimeTree event.', 'Tap <b>Add</b>.'],
+        ['Open your phone\'s <b>Calendar</b> app and tap <b>+</b>.', 'Type the title, then set the <b>date and time</b> from your TimeTree event.', 'Tap <b>Save</b>.']) +
     '</section>' +
     '<button class="btn ' + (WEB ? '' : 'primary') + '" data-act="closesheet">' + (fromTour ? 'Back to the tour' : 'Done') + '</button>',
     null, fromTour ? resumeTour : null);
@@ -1857,7 +1876,7 @@ function calSheet() {
       ['Open the message or email with the file.', 'Tap the file, then the <b>Share</b> button, then <b>Save to Files</b>.', 'Come back here and tap <b>Choose calendar file</b>.'],
       ['Open the message or email with the file.', 'Tap the file, then <b>Download</b> (or the three dots › <b>Save</b>).', 'Come back here and tap <b>Choose calendar file</b>. It\'s in your <b>Downloads</b>.']) +
     '<label class="btn primary" for="icsFile" style="cursor:pointer">' + ICON.cal + 'Choose calendar file (.ics)</label><input type="file" id="icsFile" accept=".ics,text/calendar" class="sr">' +
-    '<button class="btn ghost" data-act="calguide">How to link your calendar and TimeTree</button>',
+    '<button class="btn ghost" data-act="calguide">How to link your phone calendar</button>',
     function (root) {
       var f = $('#icsFile', root);
       f.addEventListener('change', function () { var file = f.files && f.files[0]; if (!file) return; var r = new FileReader(); r.onload = function () { closeSheet(); importICS(String(r.result)); }; r.readAsText(file); });
@@ -1880,33 +1899,45 @@ var TOUR = [
   { view: 'today', target: function () { return $('#catchCard') || $('#main .rep'); }, title: 'When they reply', text: 'Tap Replied and they move to your Reply to list. Each day Shepherd also asks about anyone it\'s unsure of.' },
   { view: 'disciples', target: '#dForm', title: 'Disciples', text: 'Add the people that are already disciples. Shepherd reminds you to check in with those people every week. It\'s biblical to encourage one another! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Let\'s make this a habit each week!',
     doIt: { label: 'Add a disciple', note: 'Type their name and tap Add.', waitFor: 'disciple', run: function () { var n = $('#dName'); if (n) n.focus(); } } },
-  { view: 'events', target: '.tab[data-v="events"]', title: 'Calendar and TimeTree', text: 'Invite people and tick who came. Link TimeTree to your phone calendar, then connect Shepherd to it, so your studies and events show in TimeTree too.',
+  { view: 'events', target: '.tab[data-v="events"]', title: 'Your calendar', text: 'Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.',
     doIt: { label: 'Show me how to link my calendar', guide: true, run: function () { calGuide(true); } } },
   { view: 'today', target: '[data-act="settings"]', title: 'You\'re all set', text: 'Change what your morning summary shows in Settings. On a person\'s page, Add to phone contacts saves them to your phone. Replay this tour from Settings any time.' }
 ];
 var TOUR_I = -1, TOUR_PAUSED = false;
 function tourTarget(st) { if (!st.target) return null; var el = typeof st.target === 'function' ? st.target() : $(st.target); return el && el.getClientRects().length ? el : null; }
+function safeInsets() {
+  var p = $('#safeProbe'); if (!p) { p = document.createElement('div'); p.id = 'safeProbe'; p.className = 'safeprobe'; document.body.appendChild(p); }
+  var cs = getComputedStyle(p); return { top: parseFloat(cs.paddingTop) || 0, bottom: parseFloat(cs.paddingBottom) || 0 };
+}
+/* the tour card always sits fully on screen with room to spare, next to what it's pointing at when there's space */
 function placeTour() {
   var st = TOUR[TOUR_I]; if (!st || TOUR_PAUSED) return;
   var hole = $('#tourHole'), card = $('#tourCard'), el = tourTarget(st);
-  var vh = window.innerHeight || 700, vw = window.innerWidth || 400;
+  var vv = window.visualViewport, vh = (vv && vv.height) || window.innerHeight || 700, vw = window.innerWidth || 400;
+  var ins = safeInsets(), topM = ins.top + 16, botM = ins.bottom + 16, gap = 14;
+  card.style.top = '0px'; card.style.bottom = 'auto'; card.style.maxHeight = Math.max(160, vh - topM - botM) + 'px';
+  var ch = Math.min(card.offsetHeight || card.scrollHeight, vh - topM - botM), top;
   if (el) {
     try { if (el.scrollIntoView && !el.closest('.dock,.top') && el !== $('#fab')) el.scrollIntoView({ block: 'center' }); } catch (e) {}
     var r = el.getBoundingClientRect(), pad = 6;
-    hole.style.left = (r.left - pad) + 'px'; hole.style.top = Math.max(r.top - pad, 0) + 'px'; hole.style.width = (r.width + pad * 2) + 'px'; hole.style.height = Math.min(r.height + pad * 2, vh) + 'px';
-    var below = r.top + r.height / 2 < vh / 2;
-    if (below) { card.style.top = Math.min(r.bottom + 16, vh - 260) + 'px'; card.style.bottom = 'auto'; }
-    else { card.style.bottom = Math.max(vh - r.top + 16, 16) + 'px'; card.style.top = 'auto'; }
+    var hTop = Math.max(r.top - pad, ins.top), hBot = Math.min(r.bottom + pad, vh);
+    hole.style.left = (r.left - pad) + 'px'; hole.style.top = hTop + 'px'; hole.style.width = (r.width + pad * 2) + 'px'; hole.style.height = Math.max(0, hBot - hTop) + 'px';
+    var below = vh - botM - (hBot + gap), above = (hTop - gap) - topM;
+    if (ch <= below && (below >= above || ch > above)) top = hBot + gap;
+    else if (ch <= above) top = hTop - gap - ch;
+    else top = below >= above ? vh - botM - ch : topM; // no room either side: keep the card whole and let it cover part of the highlight
   } else {
     hole.style.left = (vw / 2) + 'px'; hole.style.top = (vh / 2) + 'px'; hole.style.width = '0px'; hole.style.height = '0px';
-    card.style.bottom = 'auto'; card.style.top = Math.max(16, vh / 2 - 130) + 'px';
+    top = (vh - ch) / 2;
   }
+  card.style.top = Math.round(Math.max(topM, Math.min(top, vh - botM - ch))) + 'px';
 }
 function showTourStep(i) {
   var steps = TOUR.length;
   if (i >= steps) return endTour();
   if (i < 0) i = 0;
   TOUR_I = i; TOUR_PAUSED = false; $('#tourPill').hidden = true;
+  lsSet('shepherd:tourStep:' + (S.uid || 'local'), String(i));
   var st = TOUR[i];
   if (st.view && S.view !== st.view) go(st.view);
   $('#tourTitle').textContent = st.title; $('#tourText').textContent = st.text;
@@ -1926,6 +1957,7 @@ function pauseTour(st) {
 }
 function resumeTour(advance) {
   if (TOUR_I < 0) return;
+  saveProfileForm(false);
   TOUR_PAUSED = false; $('#tourPill').hidden = true;
   showTourStep(advance === true ? TOUR_I + 1 : TOUR_I);
 }
@@ -1938,6 +1970,7 @@ function tourEvent(kind) {
 function startTour() { if (!$('#sheet').hidden) closeSheet(); TOUR_I = 0; showTourStep(0); }
 function endTour() {
   TOUR_I = -1; TOUR_PAUSED = false; $('#tour').hidden = true; $('#tourPill').hidden = true;
+  lsSet('shepherd:tourStep:' + (S.uid || 'local'), '');
   if (!S.profile.tourDone) { S.profile.tourDone = true; saveProfile(); }
   lsSet('shepherd:tourDone:' + (S.uid || 'local'), '1');
   go('today');
@@ -1946,7 +1979,11 @@ function endTour() {
 function maybeTour() {
   if (S.tourChecked || TOUR_I >= 0) return; S.tourChecked = true;
   if (S.profile.tourDone || lsGet('shepherd:tourDone:' + (S.uid || 'local'))) return;
-  setTimeout(function () { if (S.profile.pinHash && !S.unlocked) { S.tourChecked = false; return; } if (S.profile.tourDone) return; startTour(); }, 300);
+  setTimeout(function () {
+    if (S.profile.pinHash && !S.unlocked) { S.tourChecked = false; return; } if (S.profile.tourDone) return;
+    var at = Number(lsGet('shepherd:tourStep:' + (S.uid || 'local'))) || 0; // pick up where it left off
+    if (at > 0 && at < TOUR.length) { if (!$('#sheet').hidden) closeSheet(); showTourStep(at); } else startTour();
+  }, 300);
 }
 $('#tourMore').addEventListener('click', function () {
   var st = TOUR[TOUR_I]; if (!st || !st.doIt) return;
@@ -1959,6 +1996,7 @@ $('#tourNext').addEventListener('click', function () { if (TOUR_I === TOUR.lengt
 $('#tourBack').addEventListener('click', function () { showTourStep(TOUR_I - 1); });
 $('#tourSkip').addEventListener('click', function () { endTour(); });
 window.addEventListener('resize', function () { if (TOUR_I >= 0) placeTour(); });
+if (window.visualViewport) visualViewport.addEventListener('resize', function () { if (TOUR_I >= 0) placeTour(); });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && TOUR_I >= 0 && !TOUR_PAUSED && $('#sheet').hidden) endTour(); });
 
 /* ---------- phone alerts ---------- */
@@ -2230,9 +2268,9 @@ document.addEventListener('click', function (e) {
     case 'hideinstall': lsSet('shepherd:installHide', '1'); render(); break;
     case 'pushtest': WEB.push.test().then(function (r) { toast(r && r.sent ? 'Test sent. It should arrive in a few seconds.' : 'Couldn\'t reach this phone. Turn notifications off and on again.'); }, function (e2) { toast(e2.message); }); break;
     case 'installapp': WEB.install.prompt().then(function (ok2) { if (ok2) toast('Shepherd is installed. Open it from its new icon.'); }); break;
-    case 'calconnect': lsSet('shepherd:calConnected', '1'); setTimeout(function () { if (!$('#sheet').hidden) calGuide(false); }, 1500); break;
+    case 'calconnect': lsSet('shepherd:calConnected', '1'); setTimeout(function () { toast('If your phone asked, tap Subscribe. Then come back here.'); }, 800); break;
     case 'copyfeed': copyText(WEB.feedHttps(), 'Calendar link copied. Paste it into ICSx⁵.'); break;
-    case 'newcal': WEB.newCalLink().then(function () { lsSet('shepherd:calConnected', ''); toast('New link made. Connect your calendar again.'); calGuide(false); }, function (e2) { toast(e2.message); }); break;
+    case 'newcal': WEB.newCalLink().then(function () { lsSet('shepherd:calConnected', ''); toast('New link made. Connect your calendar again.'); var a2 = $('[data-act="calconnect"]'); if (a2) a2.setAttribute('href', WEB.feedUrl()); }, function (e2) { toast(e2.message); }); break;
     case 'signout': signOutSheet(); break;
     case 'changepw': pwSheet(); break;
     case 'delacct': delAcctSheet(); break;

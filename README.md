@@ -98,21 +98,17 @@ Worked out on the phone from your list, then sent by the server at the right tim
 
 ## The calendar
 
-In the app: **Calendar → How to link your calendar and TimeTree**.
+In the app: **Calendar → How to link your phone calendar**.
 
-1. **Link TimeTree to your phone calendar.**
-   - iPhone: Settings › TimeTree › Calendars › Full Access.
-   - Android: Settings › Apps › TimeTree › Permissions › Calendar › Allow.
-   - Then in TimeTree: Home Calendar › switch icon › Select Display Filters › Allow Access.
-2. **Connect Shepherd to your phone calendar.**
+1. **Connect Shepherd to your phone calendar.**
    - iPhone: tap **Connect to iPhone calendar** → **Subscribe**. Studies and events then appear in the Calendar app as
-     "Shepherd" and update by themselves.
+     "Shepherd" and keep themselves up to date.
    - Android: tap **Add to phone calendar** on a study or event. To have them added by themselves, use the ICSx⁵ app
      with **Copy calendar link**.
+2. **Keep your personal TimeTree events in your phone calendar too.** TimeTree doesn't share its events with other
+   apps, so it can't copy them over by itself. Add the ones that matter to your phone's Calendar app (tap **+**).
 
-Because TimeTree shows your phone calendar, everything from Shepherd shows in TimeTree too. TimeTree has no way to send
-its own events out to other apps, so events you create in TimeTree don't come into Shepherd. Add services and events on
-the Calendar tab so you can invite people and tick who came.
+Add services and events on Shepherd's Calendar tab so you can invite people and tick who came.
 
 ## Forgotten passwords
 
@@ -149,5 +145,5 @@ changes, paste it into the Worker again and **Deploy**.
 | Command | What it checks |
 |---|---|
 | `node test/worker.test.mjs` | 71 checks of the server: accounts, saving (newer copies always win), history, deleting, notifications (encrypted and signed exactly as Apple and Google require, then decrypted the way a phone does), the calendar link, password resets, privacy between accounts |
-| `node test/app.test.cjs` | 224 checks of the app: every screen, the tour, guides, and the notification schedule (names, times, pauses, caps) |
-| `node test/e2e.mjs` | 53 checks of the built website in Chromium at iPhone and Android sizes (320 to 430px wide), talking to the real server code: sign up, two phones in sync, notifications from schedule to delivery, tapping one, the calendar link, password reset, sign out, offline |
+| `node test/app.test.cjs` | 228 checks of the app: every screen, the tour, guides, and the notification schedule (names, times, pauses, caps) |
+| `node test/e2e.mjs` | 60 checks of the built website in Chromium at iPhone and Android sizes (320 to 430px wide), talking to the real server code: sign up, two phones in sync, notifications from schedule to delivery, tapping one, the calendar link, password reset, sign out, offline, and every tour card fully on screen at four phone sizes |

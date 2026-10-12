@@ -109,18 +109,18 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'disciples' && /already disciples/.test($('#tourText').textContent) && /1 Thessalonians 5:11/.test($('#tourText').textContent) && $('#tourMore').textContent === 'Add a disciple', 'opens Disciples by itself with the verse');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(S().view === 'events' && $('#tourText').textContent === 'Invite people and tick who came. Link TimeTree to your phone calendar, then connect Shepherd to it, so your studies and events show in TimeTree too.', 'opens Calendar by itself, with the new wording');
+  ok(S().view === 'events' && $('#tourText').textContent === 'Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.', 'opens Calendar by itself, with the new wording');
   ok(/link my calendar/.test($('#tourMore').textContent), 'Calendar step offers the step-by-step guide');
   click('#tourMore'); await wait(60);
   ok($('#tour').hidden && $('#sheetTitle').textContent === 'Link your calendar', 'calendar guide opens');
   const guide = $('#sheetBody').textContent;
-  ok(/1\. Link TimeTree to your phone calendar/.test(guide) && /2\. Connect Shepherd to your phone calendar/.test(guide) && /Settings › TimeTree › Calendars/.test(guide) && /Settings › Apps › TimeTree › Permissions › Calendar/.test(guide) && /Select Display Filters/.test(guide), 'step 1 links TimeTree to the phone calendar, step 2 connects Shepherd');
-  ok(!/Google/.test(guide) && !/Save it in TimeTree first/.test(guide) && !/Let TimeTree alert you/.test(guide) && $$('#sheetBody section h3').length === 2, 'no Google, no TimeTree-first step, no TimeTree alerts step');
+  ok(/1\. Connect Shepherd to your phone calendar/.test(guide) && /2\. Keep your personal TimeTree events in your calendar too/.test(guide) && !/Select Display Filters|Settings › TimeTree/.test(guide), 'step 1 connects Shepherd to the phone calendar; no linking TimeTree');
+  ok(!/Google/.test(guide) && $$('#sheetBody section h3').length === 2, 'two steps, no Google');
   ok($$('#sheetBody .osb[data-os="ios"]').length === 1 && $$('#sheetBody .osb[data-os="android"]').length === 1 && /works in the Shepherd app/.test(guide), 'iPhone and Android steps; connecting points to the Shepherd app inside Claude');
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
-  ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Calendar and TimeTree', 'closing the guide returns to the tour');
+  ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Your calendar', 'closing the guide returns to the tour');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(titles.join('|') === "Welcome to Shepherd|Start in Settings|Turn on notifications|Add someone|Start each day here|Message in one tap|When they reply|Disciples|Calendar and TimeTree|You're all set", 'all 10 steps in order: ' + titles.join(' / '));
+  ok(titles.join('|') === "Welcome to Shepherd|Start in Settings|Turn on notifications|Add someone|Start each day here|Message in one tap|When they reply|Disciples|Your calendar|You're all set", 'all 10 steps in order: ' + titles.join(' / '));
   ok($('#tourNext').textContent === 'Done', 'last step says Done');
   click('#tourNext'); await wait(60);
   ok($('#tour').hidden && S().view === 'today', 'finishing goes back to Today');
@@ -130,7 +130,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok($('.empty'), 'empty state shows for a new user');
   ok($('#sync').textContent.trim() === 'Saved', 'sync status reads Saved (got ' + $('#sync').textContent.trim() + ')');
   ok($('.brand').textContent.includes('Shepherd'), 'app name is Shepherd');
-  ok($('.mark path').getAttribute('d') === 'M45 79 V37 a12 12 0 1 1 24 0 v6', 'header uses the chosen crook icon');
+  ok($('.mark path').getAttribute('d') === 'M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6', 'header uses the chosen crook icon');
 
   current = 'Add contact: groups and where-met removed';
   click('#fab'); await wait();
@@ -543,6 +543,22 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click('[data-act="clearexamples"]'); await wait(60);
   ok(!Object.values(S().contacts).some(x => x.example), 'examples removed');
 
+  current = 'Your number is kept';
+  click('[data-act="settings"]'); await wait();
+  click('[data-act="tour"]'); await wait(40); click('#tourNext'); await wait(30);
+  click('#tourMore'); await wait(60);
+  setVal('#pPhone', '07585 524965');
+  click('#tourPillGo'); await wait(60);
+  ok(S().profile.phone === '07585 524965' && store.docs.get('data/users/u_test/profile').phone === '07585 524965', 'number typed then Continue tour (no Save) is saved');
+  click('#tourSkip'); await wait(40);
+  click('[data-act="tab"][data-v="today"]'); await wait(); click('[data-act="settings"]'); await wait();
+  ok($('#pPhone').value === '07585 524965', 'still there after the tour and leaving Settings');
+  setVal('#pIntro', 'Hello from the test'); $('#pIntro').dispatchEvent(new w.Event('change', { bubbles: true })); await wait(60);
+  ok(store.docs.get('data/users/u_test/profile').intro === 'Hello from the test', 'leaving a box saves it too');
+  setVal('#pName', 'Typed Not Saved'); click('[data-act="tab"][data-v="people"]'); await wait(60);
+  ok(S().profile.name === 'Typed Not Saved', 'going to another tab keeps what was typed');
+  click('[data-act="settings"]'); await wait(); setVal('#pName', 'Pavi'); submit('#profForm'); await wait(60);
+
   current = 'Tour jobs carry on by themselves';
   click('[data-act="settings"]'); await wait();
   click('[data-act="tour"]'); await wait(40);
@@ -556,10 +572,10 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click('#tourMore'); await wait(40);
   ok(!$('#tourPill').hidden, 'Continue tour bar while adding a disciple');
   setVal('#dName', 'Tour Dee'); submit('#dForm'); await wait(1300);
-  ok(Object.values(S().disciples).some(x => x.name === 'Tour Dee') && $('#tourTitle').textContent === 'Calendar and TimeTree', 'after adding a disciple, the tour carries on');
+  ok(Object.values(S().disciples).some(x => x.name === 'Tour Dee') && $('#tourTitle').textContent === 'Your calendar', 'after adding a disciple, the tour carries on');
   click('#tourBack'); await wait(30); click('#tourMore'); await wait(40);
   click('#tourPillGo'); await wait(40);
-  ok($('#tourTitle').textContent === 'Calendar and TimeTree', 'Continue tour moves on even without finishing the job');
+  ok($('#tourTitle').textContent === 'Your calendar', 'Continue tour moves on even without finishing the job');
   click('#tourSkip'); await wait(40);
   ok($('#tour').hidden && $('#tourPill').hidden, 'Skip ends the tour');
 

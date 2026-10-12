@@ -146,7 +146,7 @@ try {
   await A.p.click('.tab[data-v="events"]'); await wait(400);
   await A.p.click('[data-act="calguide"]'); await wait(500);
   const g = await A.p.textContent('#sheetBody');
-  ok(/1\. Link TimeTree to your phone calendar/.test(g) && /2\. Connect Shepherd to your phone calendar/.test(g) && !/Google/.test(g), 'guide: link TimeTree to the phone calendar, then connect Shepherd');
+  ok(/1\. Connect Shepherd to your phone calendar/.test(g) && /2\. Keep your personal TimeTree events/.test(g) && !/Google|Select Display Filters/.test(g), 'guide: connect Shepherd to the phone calendar first; no linking TimeTree');
   const feed = await A.p.getAttribute('[data-act="calconnect"]', 'href');
   ok(feed && feed.startsWith('webcal://localhost:8132/cal/') && feed.endsWith('.ics'), '"Connect to iPhone calendar" opens the phone\'s subscribe screen');
   const feedText = await (await realFetch(feed.replace('webcal:', 'http:'))).text();
@@ -237,6 +237,48 @@ try {
   await B.ctx.setOffline(false); await B.p.evaluate(() => window.dispatchEvent(new Event('online'))); await wait(2500);
   ok(/Saved/.test(await B.p.textContent('#sync')), 'top bar goes back to Saved');
   ok(db("SELECT COUNT(*) FROM docs WHERE data LIKE '%Offline Olive%'")[0][0] === 1, 'the offline contact reaches the server once back online');
+
+  current = 'Tour fits every phone';
+  for (const [wd, ht, n] of [[320, 568, 1], [375, 667, 2], [390, 844, 3], [430, 932, 4]]) {
+    const T = await phone(IPHONE, wd, ht);
+    await T.p.goto(APP); await wait(600);
+    await T.p.fill('#aName', 'Tour ' + n); await T.p.fill('#aEmail', 'tour' + n + '@church.test'); await T.p.fill('#aPw', 'tour password ' + n);
+    await T.p.click('#aGo'); await wait(2500);
+    const bad = []; let steps = 0, numberSaved = false, calOk = false, reloadOk = false;
+    for (let i = 0; i < 12; i++) {
+      if (!(await T.p.locator('#tour').isVisible())) break;
+      await wait(350);
+      const title = await T.p.textContent('#tourTitle');
+      const r = await T.p.evaluate(() => { const c = document.getElementById('tourCard').getBoundingClientRect(); const b = document.getElementById('tourNext').getBoundingClientRect(); return { t: c.top, b: c.bottom, h: innerHeight, nb: b.bottom, nt: b.top }; });
+      if (r.t < 15.5 || r.b > r.h - 15.5 || r.nb > r.h - 15.5) bad.push(title + ' (' + Math.round(r.t) + '–' + Math.round(r.b) + ' of ' + r.h + ')');
+      steps++;
+      if (wd === 375 && /Disciples|Turn on notifications/.test(title)) await T.p.screenshot({ path: path.join(OUT, 'tour-' + title.replace(/\W+/g, '-') + '-' + wd + '.png') });
+      if (title === 'Start in Settings') {
+        await T.p.click('#tourMore'); await wait(400);
+        await T.p.fill('#pPhone', '07585 524965'); await T.p.click('#tourPillGo'); await wait(2500);
+        const pr = db("SELECT data FROM docs WHERE path = 'profile' AND uid = (SELECT id FROM users WHERE email = 'tour" + n + "@church.test')");
+        numberSaved = pr.length && JSON.parse(pr[0][0]).phone === '07585 524965';
+        continue;
+      }
+      if (title === 'Your calendar') {
+        await T.p.click('#tourMore'); await wait(600);
+        await T.p.evaluate(() => document.addEventListener('click', e => { const a = e.target.closest('a[href^="webcal:"]'); if (a) e.preventDefault(); }, true));
+        await T.p.click('[data-act="calconnect"]'); await wait(1200);
+        await T.p.click('#sheetBody [data-act="closesheet"]'); await wait(700);
+        calOk = await T.p.locator('#tour').isVisible() && (await T.p.textContent('#tourTitle')) === 'Your calendar';
+        await T.p.reload(); await wait(2500);
+        reloadOk = await T.p.locator('#tour').isVisible() && (await T.p.textContent('#tourTitle')) === 'Your calendar';
+      }
+      await T.p.click('#tourNext'); await wait(300);
+    }
+    ok(steps === 10 && !bad.length, wd + 'x' + ht + ': all 10 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
+    if (n === 1) {
+      ok(numberSaved, 'typing your number and tapping Continue tour saves it');
+      ok(calOk, 'after connecting the calendar, closing the guide goes back to the tour');
+      ok(reloadOk, 'if the app reloads mid-tour, it picks up at the same step');
+    }
+    await T.ctx.close();
+  }
 
   current = 'Script errors';
   ok(errors.length === 0, 'no script errors' + (errors.length ? ': ' + errors.slice(0, 4).join(' / ') : ''));

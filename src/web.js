@@ -133,7 +133,7 @@ var authEl = null;
 function authHtml(mode, msg) {
   var create = mode === 'create', forgot = mode === 'forgot', code = mode === 'code';
   return '<form class="auth-in" id="authForm" novalidate>' +
-    '<svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 1 1 24 0 v6"/></svg>' +
+    '<svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6"/></svg>' +
     '<h1 class="h1" style="text-align:center">Shepherd</h1>' +
     (forgot || code ? '<p class="lede" style="text-align:center">' + (code ? esc(msg || 'Enter your 6-digit code and choose a new password.') : 'Enter your email and we\'ll help you choose a new password.') + '</p>'
       : '<div class="seg" style="grid-template-columns:1fr 1fr" role="group"><button type="button" data-auth="signin" aria-pressed="' + !create + '">Sign in</button><button type="button" data-auth="create" aria-pressed="' + create + '">Create account</button></div>' +
