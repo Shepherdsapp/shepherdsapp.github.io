@@ -73,7 +73,7 @@ const overflow = p => p.evaluate(() => document.documentElement.scrollWidth - in
 const tap = (p, sel) => p.locator(sel).first().click();
 async function skipTour(p) { for (let i = 0; i < 20; i++) { if (await p.locator('#tourSkip').isVisible().catch(() => false)) { await p.click('#tourSkip'); await wait(300); return true; } await wait(200); } return false; }
 async function addContact(p, name, phone) {
-  await tap(p, '#fab'); await wait(450); await p.fill('#cName', name); if (phone) await p.fill('#cPhone', phone);
+  await p.locator('#main [data-act="quickadd"]:visible, #fab:visible').first().click(); await wait(450); await p.fill('#cName', name); if (phone) await p.fill('#cPhone', phone);
   await p.$eval('#cForm', f => f.requestSubmit()); await wait(600);
   if (await p.locator('#sheet').isVisible()) { await p.evaluate(() => { const b = document.querySelector('#sheet [data-act="closesheet"]'); if (b) b.click(); }); await wait(400); }
 }
@@ -90,10 +90,16 @@ try {
   await A.p.click('#aGo'); await wait(200);
   ok(/at least 8 characters/.test(await A.p.textContent('#aErr')), 'too-short password explained');
   await A.p.fill('#aPw', 'correct horse 1');
+  await A.p.click('#aGo'); await wait(300);
+  ok(/agree to the acceptable use/.test(await A.p.textContent('#aErr')) && (() => { try { return !db("SELECT COUNT(*) FROM users")[0][0]; } catch (e) { return true; } })(), 'no account until the acceptable use statement is agreed');
+  ok(await A.p.locator('#auth a[href="privacy.html"]').count() === 1, 'the sign-up screen links to the privacy notice');
+  await A.p.check('#aAgree');
   await A.p.click('#aGo'); await wait(2500);
   ok(!(await A.p.locator('#auth').isVisible()), 'account created and signed in');
   ok(db("SELECT email FROM users")[0][0] === 'pavi@church.test' && !/correct horse/.test(JSON.stringify(db('SELECT * FROM users'))), 'account saved on the server without the password itself');
+  ok(!(await A.p.locator('#agree').isVisible()), 'agreeing on sign-up is enough, no second agreement screen');
   ok(await skipTour(A.p), 'the tour starts by itself for a new account');
+  { const ag = JSON.parse(db("SELECT data FROM docs WHERE path = 'profile'")[0][0]).agreed; ok(ag && ag.v === 1 && ag.at > 0, 'the agreement is saved with the account (version and time)'); }
   ok(await A.p.locator('#installCard').isVisible(), 'iPhone in Safari is shown how to put Shepherd on the Home Screen');
 
   current = 'Saving to the server';
@@ -221,10 +227,24 @@ try {
   const left = await C.p.evaluate(() => Object.keys(localStorage).filter(k => /mirror|shepherd:v1|token/.test(k)));
   ok(left.length === 0, 'nothing of Pavi\'s list is left on that phone');
   await C.p.click('[data-auth="create"]'); await wait(200);
-  await C.p.fill('#aName', 'Ama'); await C.p.fill('#aEmail', 'ama@church.test'); await C.p.fill('#aPw', 'ama password 1'); await C.p.click('#aGo'); await wait(2500);
+  await C.p.fill('#aName', 'Ama'); await C.p.fill('#aEmail', 'ama@church.test'); await C.p.fill('#aPw', 'ama password 1'); await C.p.check('#aAgree'); await C.p.click('#aGo'); await wait(2500);
   await skipTour(C.p);
   await C.p.click('.tab[data-v="people"]'); await wait(500);
   ok(!/Daniel|Grace|Sam/.test(await C.p.textContent('#main')), 'someone else signing in on the same phone sees only their own (empty) list');
+
+  current = 'Privacy page';
+  {
+    const P = await phone(IPHONE, 320, 568);
+    await P.p.goto(APP + 'privacy.html'); await wait(900);
+    const hs = await P.p.$$eval('#pv h3', h => h.length);
+    const txt = await P.p.textContent('body');
+    ok(hs === 7 && /Acceptable use/.test(txt) && /responsible for the people/.test(txt) && /passcode/.test(txt), 'privacy.html opens on its own with all 7 sections');
+    ok(await overflow(P.p) <= 0, 'privacy page fits a small phone');
+    await P.p.screenshot({ path: path.join(OUT, 'privacy-320.png'), fullPage: true });
+    await P.p.evaluate(() => localStorage.setItem('shepherd:lang', 'es')); await P.p.reload(); await wait(1500);
+    ok(/Normas de uso/.test(await P.p.textContent('body')), 'and shows in the language you chose: Spanish');
+    await P.ctx.close();
+  }
 
   current = 'Offline';
   await B.p.evaluate(() => window.SHEPHERD_WEB.pull()); await wait(800);
@@ -244,10 +264,10 @@ try {
   for (const [wd, ht, n] of [[320, 568, 1], [375, 667, 2], [390, 844, 3], [430, 932, 4]]) {
     const T = await phone(IPHONE, wd, ht);
     await T.p.goto(APP); await wait(600);
-    await T.p.fill('#aName', 'Tour ' + n); await T.p.fill('#aEmail', 'tour' + n + '@church.test'); await T.p.fill('#aPw', 'tour password ' + n);
+    await T.p.fill('#aName', 'Tour ' + n); await T.p.fill('#aEmail', 'tour' + n + '@church.test'); await T.p.fill('#aPw', 'tour password ' + n); await T.p.check('#aAgree');
     await T.p.click('#aGo'); await wait(2500);
     const bad = []; let steps = 0, numberSaved = false, calOk = false, reloadOk = false;
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 24; i++) {
       if (!(await T.p.locator('#tour').isVisible())) break;
       await wait(350);
       const title = await T.p.textContent('#tourTitle');
@@ -273,7 +293,7 @@ try {
       }
       await T.p.click('#tourNext'); await wait(300);
     }
-    ok(steps === 10 && !bad.length, wd + 'x' + ht + ': all 10 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
+    ok(steps === 16 && !bad.length, wd + 'x' + ht + ': all 16 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
     if (n === 1) {
       ok(numberSaved, 'typing your number and tapping Continue tour saves it');
       ok(calOk, 'after connecting the calendar, closing the guide goes back to the tour');

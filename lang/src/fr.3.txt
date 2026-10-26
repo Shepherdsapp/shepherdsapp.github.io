@@ -1,0 +1,74 @@
+780	Prier pour {0} et {1}
+781	Vous avez rencontré quelqu'un ?
+782	Ajoutez son nom et son numéro, ou montrez votre code QR pour qu'il vous écrive en premier.
+783	Événements aujourd'hui
+784	§one=Dernier contact il y a {0} jour|other=Dernier contact il y a {0} jours
+785	§one=Dernier contact il y a {0} jour|other=Dernier contact il y a {0} jours
+786	Merci
+787	Une nouvelle version de Shepherd est prête
+788	Mettre à jour
+789	Confidentialité et bon usage
+790	J'accepte d'utiliser Shepherd de façon responsable, comme le décrivent l'avis de confidentialité et les règles d'utilisation.
+791	Veuillez lire et accepter les règles d'utilisation.
+792	Avant de commencer
+793	J'accepte
+794	Lire l'avis de confidentialité complet
+795	Masquer l'avis de confidentialité complet
+796	N'enregistrez pas d'informations de santé ou d'autres détails sensibles sans l'accord de la personne.
+797	Shepherd est un outil personnel. Il vous aide à penser à suivre les personnes que vous connaissez, avec votre propre WhatsApp. Ce n'est ni une base de données de l'église ni un outil marketing, et personne d'autre ne peut voir votre liste.
+798	Dernière mise à jour : <b>{0}</b>
+799	Qui est responsable
+800	Shepherd est géré par <b>{0}</b>, qui est responsable de la façon dont les informations sont traitées (le responsable du traitement).
+801	Pour toute question de confidentialité, ou pour savoir ce qui est conservé sur vous, ou demander une correction ou une suppression, contactez <b>{0}</b>.
+802	Pour toute question de confidentialité, ou pour savoir ce qui est conservé sur vous, ou demander une correction ou une suppression, adressez-vous à <b>{0}</b> par votre église.
+803	Votre responsabilité
+804	Vous décidez qui ajouter et ce que vous écrivez à son sujet. Vous êtes responsable des personnes que vous contactez avec Shepherd et des informations que vous gardez sur elles.
+805	N'écrivez que ce que vous seriez à l'aise que cette personne lise. N'enregistrez pas d'informations de santé ou d'autres détails sensibles sans son accord.
+806	Règles d'utilisation
+807	Toute personne qui utilise Shepherd accepte ceci :
+808	Vous êtes responsable des personnes que vous choisissez de contacter avec Shepherd.
+809	N'ajoutez et ne contactez que des personnes dont vous avez obtenu les coordonnées de façon loyale, par exemple parce qu'elles vous ont donné leur numéro ou ont scanné votre code QR.
+810	Si quelqu'un vous demande d'arrêter de lui écrire, arrêtez. Passez-le en <b>Ne plus contacter</b>, et supprimez ses données s'il le demande.
+811	Ne partagez les coordonnées de personne sans bonne raison et sans son accord.
+812	N'utilisez jamais Shepherd pour du spam, des envois en masse, du harcèlement ou quoi que ce soit d'illégal.
+813	Vous restez responsable du respect des lois sur la protection des données et la vie privée quand vous utilisez Shepherd.
+814	Ce que Shepherd conserve, et pourquoi
+815	<b>Données liées à vous</b>, enregistrées dans votre propre compte privé pour que votre liste soit sur chaque téléphone où vous vous connectez et ne soit pas perdue :
+816	<b>Gardé uniquement sur ce téléphone</b> :
+817	<b>Jamais collecté</b> :
+818	<b>Quand quelqu'un scanne votre code QR</b> : la personne choisit de taper son nom (et son numéro si elle veut). Cela va seulement dans votre liste, puis elle vous écrit elle-même sur WhatsApp.
+819	Comment c'est protégé
+820	Votre liste est enregistrée dans votre propre compte privé. Personne d'autre utilisant Shepherd ne peut la voir.
+821	Tout passe par une connexion chiffrée et est stocké chez Cloudflare, qui le chiffre sur ses serveurs.
+822	Votre mot de passe est brouillé sur votre téléphone avant l'envoi, puis à nouveau sur le serveur, donc personne ne peut le lire.
+823	Les notifications sont chiffrées jusqu'à votre téléphone et n'affichent que des prénoms.
+824	Shepherd n'envoie jamais de messages à votre place. Chaque message WhatsApp, c'est vous qui l'envoyez.
+825	Les versions précédentes sont gardées jusqu'à un an pour que rien ne se perde par erreur. Supprimer les données de quelqu'un efface toutes les copies.
+826	Le serveur est géré par <b>{0}</b>, qui ne regarde la liste de personne et n'accède aux données que pour faire fonctionner Shepherd ou pour traiter une demande de suppression.
+827	Protégez votre téléphone
+828	Verrouillez votre téléphone avec un code, Face ID ou une empreinte.
+829	Activez le code PIN de Shepherd dans <b>Réglages › Verrouillage de l'app</b>.
+830	Gardez votre téléphone et Shepherd à jour. Quand Shepherd indique qu'une nouvelle version est prête, touchez <b>Mettre à jour</b>.
+831	Ne partagez pas votre mot de passe, et déconnectez-vous des téléphones qui ne sont pas les vôtres.
+832	Téléphone perdu ? Connectez-vous sur un autre téléphone et changez votre mot de passe. Cela déconnecte le téléphone perdu.
+833	Durée de conservation, et vos choix
+834	Les informations restent jusqu'à ce que vous les supprimiez. Les personnes que vous ne contactez plus restent dans Plus de contact jusqu'à ce que vous les supprimiez.
+835	Exportez une sauvegarde quand vous voulez depuis les Réglages. <b>Supprimer mon compte</b> efface tout définitivement.
+836	Chacun peut demander ce que Shepherd conserve à son sujet, et demander une correction ou une suppression.
+837	Shepherd est votre outil personnel pour suivre les personnes que vous connaissez. Avant de commencer, acceptez de l'utiliser de façon responsable :
+838	Ouvrir Shepherd
+839	Shepherd vous rappelle qui contacter, pour que personne que vous suivez ne passe entre les mailles. Cette visite passe par chaque partie de l'app et vous laisse la configurer au fur et à mesure. Elle dure environ trois minutes.
+840	Après avoir rencontré quelqu'un, touchez Ajouter quelqu'un. Tapez son nom et son numéro WhatsApp (les noms de vos contacts apparaissent pendant la saisie), et cochez qu'il est d'accord pour que vous gardiez ses coordonnées.
+841	Ou montrez votre code QR
+842	Touchez Mon code QR et laissez la personne le scanner avec l'appareil photo de son téléphone. Elle tape son nom, est ajoutée à votre liste toute seule, et WhatsApp s'ouvre avec votre message prêt à envoyer.
+843	Aujourd'hui donne un aperçu rapide de votre journée : à qui répondre, à qui écrire, les disciples à contacter, les événements du jour et pour qui prier. Vert : à jour, orange : pour aujourd'hui, rouge : en retard.
+844	La fiche de chaque personne
+845	Touchez quelqu'un pour ouvrir sa fiche. Notez une étude biblique et prévoyez la suivante, changez son étape, ajoutez des sujets de prière, enregistrez-la dans vos contacts ou votre liste de prière, mettez les rappels en pause avec Laisser pour l'instant, ou arrêtez avec Ne plus contacter.
+846	Liste ou Parcours
+847	Personnes montre tous ceux que vous suivez. Les boutons montrent qui est en retard, à contacter aujourd'hui ou en attente de réponse. Parcours montre chacun par étape, de Premier contact à Disciple. Touchez Passer à… pour faire avancer quelqu'un.
+848	Prier pour les autres
+849	Ajoutez qui vous voulez pour prier, avec des notes si vous voulez. Chaque jour, Shepherd en montre 2 ou 3, à tour de rôle, et peut vous le rappeler à l'heure choisie dans les Réglages.
+850	Semaine montre combien de personnes vous avez suivies, vos études, les nouveaux contacts et qui est venu aux événements, avec les quatre dernières semaines côte à côte.
+851	Les Réglages ont le reste
+852	Choisissez votre langue (les versets bibliques restent en anglais, NIV), importez vos contacts, définissez un code PIN, exportez une sauvegarde et lisez Confidentialité et bon usage.
+853	Vous êtes responsable des personnes que vous contactez : n'écrivez qu'à celles qui sont contentes d'avoir de vos nouvelles, et arrêtez si on vous le demande. Relancez cette visite depuis les Réglages quand vous voulez.

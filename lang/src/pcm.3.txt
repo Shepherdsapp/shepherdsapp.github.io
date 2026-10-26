@@ -1,0 +1,74 @@
+780	Pray for {0} and {1}
+781	You meet person?
+782	Add dem name and number, or show your QR code make dem message you first.
+783	Events today
+784	§one=Last contact na {0} day ago|other=Last contact na {0} days ago
+785	§one=Last contact na {0} day ago|other=Last contact na {0} days ago
+786	Thank you
+787	New version of Shepherd don ready
+788	Update
+789	Privacy and how to use am well
+790	I agree to use Shepherd well well, as e dey for the privacy notice and the rules for use.
+791	Abeg read and agree to the rules for use.
+792	Before you start
+793	I agree
+794	Read the full privacy notice
+795	Hide the full privacy notice
+796	No write anybody health matter or other private tori unless dem gree make you keep am.
+797	Shepherd na your own personal tool. E dey help you remember to follow up with people wey you sabi, with your own WhatsApp. E no be church database or marketing tool, and nobody else fit see your list.
+798	Last update: <b>{0}</b>
+799	Who dey responsible
+800	Na <b>{0}</b> dey run Shepherd, and na im dey responsible for how e take handle information (the data controller).
+801	For any privacy question, or to ask wetin dem keep about you, or make dem correct am or remove am, contact <b>{0}</b>.
+802	For any privacy question, or to ask wetin dem keep about you, or make dem correct am or remove am, ask <b>{0}</b> through your church.
+803	Your responsibility
+804	Na you go decide who you go add and wetin you go write about dem. Na you dey responsible for the people wey you contact with Shepherd and the information wey you keep about dem.
+805	Only write wetin you no go mind make that person read. No write health matter or other private tori unless dem gree make you keep am.
+806	Rules for use
+807	Everybody wey dey use Shepherd agree to this:
+808	Na you dey responsible for the people wey you choose to contact with Shepherd.
+809	Only add and contact people wey you get dem details the correct way, like dem give you dem number or dem scan your QR code.
+810	If person tell you make you stop to message am, stop. Mark am <b>No contact dem again</b>, and delete im details if e ask.
+811	No share anybody contact details without good reason and without dem agreement.
+812	No ever use Shepherd for spam, bulk message, harassment or anything wey no dey legal.
+813	Na still you dey responsible to follow data protection and privacy law when you dey use Shepherd.
+814	Wetin Shepherd dey keep, and why
+815	<b>Data wey join with you</b>, wey dem save for your own private account so your list go dey every phone wey you sign in and e no go loss:
+816	<b>Na only this phone e dey</b>:
+817	<b>We no dey collect am at all</b>:
+818	<b>When person scan your QR code</b>: dem go choose to type dem name (and number if dem want). E go only enter your list, then dem go message you for WhatsApp by demself.
+819	How we dey protect am
+820	Your list dey saved for your own private account. Nobody else wey dey use Shepherd fit see am.
+821	Everything dey travel through encrypted connection and e dey stored with Cloudflare, wey dey encrypt am for dem servers.
+822	Your password dey scrambled for your phone before e send, and dem scramble am again for the server, so nobody fit read am.
+823	Phone notifications dey encrypted on the way to your phone and na only first names e dey show.
+824	Shepherd no dey ever send message for you. Every WhatsApp message na you dey send am by yourself.
+825	Old versions dey kept reach one year so nothing go loss by mistake. If you delete person data, every copy go comot.
+826	Na <b>{0}</b> dey look after the server. E no dey look anybody list, and e dey only touch the data to keep Shepherd running or to do wetin person ask make dem remove.
+827	Keep your phone safe
+828	Lock your phone with passcode, Face ID or fingerprint.
+829	On Shepherd own PIN for <b>Settings › App lock</b>.
+830	Keep your phone and Shepherd up to date. When Shepherd talk say new version don ready, tap <b>Update</b>.
+831	No share your password, and sign out for phones wey no be your own.
+832	Your phone don loss? Sign in for another phone and change your password. That one go sign the lost phone out.
+833	How long we dey keep am, and your choices
+834	Information go stay until you delete am. People wey you stop to contact go stay for No more contact until you delete dem.
+835	Export backup anytime from Settings. <b>Delete my account</b> go remove everything forever.
+836	Anybody fit ask wetin Shepherd dey keep about dem, and ask make dem correct am or remove am.
+837	Shepherd na your personal tool to follow up with people wey you sabi. Before you start, abeg agree to use am well:
+838	Open Shepherd
+839	Shepherd dey remind you who you go check on, so nobody wey you dey look after go slip comot. This tour go show you every part of the app and you fit set am up as you dey go. E go take like three minutes.
+840	After you meet person, tap Add person. Type dem name and WhatsApp number (names from your phone contacts go show as you dey type), and tick say dem gree make you keep dem details.
+841	Or show your QR code
+842	Tap My QR code make dem scan am with dem phone camera. Dem go type dem name, dem go enter your list by demself, and WhatsApp go open with your message ready for dem to send.
+843	Today na quick look for your day: who to reply, who to message, disciples to check on, events today and who to pray for. Green mean say e dey on track, amber mean say e due today, red mean say e don pass time.
+844	Everybody page
+845	Tap anybody to open dem page. Log Bible study and set the next one, change dem stage, add prayer points, save dem for your phone contacts or prayer list, pause reminders with Leave am for now, or stop with No contact dem again.
+846	List or Journey
+847	Pipul dey show everybody wey you dey follow up. The buttons dey show who don pass time, who due today or who dey wait for reply. Journey dey show everybody by stage, from First contact reach Disciple. Tap Move go… to move person forward.
+848	Pray for people
+849	Add anybody wey you wan pray for, with notes if you like. Every day Shepherd go show 2 or 3 of dem, one after the other, and e fit remind you for the time wey you choose for Settings.
+850	Week dey show how many people you follow up, your studies, new contacts and who come for events, with the last four weeks side by side.
+851	Settings get the rest
+852	Choose your language (Bible verses go stay for English, NIV), bring your phone contacts enter, set PIN, export backup, and read Privacy and how to use am well.
+853	Na you dey responsible for the people wey you contact, so only message people wey happy to hear from you, and stop if dem ask. Replay this tour from Settings anytime.

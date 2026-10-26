@@ -180,7 +180,7 @@ All day
 Starts in one hour.
 Starts in one hour · {0}.
 Pray for {0}
-{0} and {1}
+Pray for {0} and {1}
 Your week
 #
 # --- people list and contact states
@@ -830,3 +830,79 @@ Sep
 Oct
 Nov
 Dec
+#
+# --- Today, privacy notice, acceptable use and the longer tour (October 2026)
+Pray for {0} and {1}
+Met someone?
+Add their name and number, or show your QR code so they message you first.
+Events today
+Last contact {0} day ago
+Last contact {0} days ago
+Thank you
+A new version of Shepherd is ready
+Update
+Privacy and safe use
+I agree to use Shepherd responsibly, as set out in the privacy notice and acceptable use statement.
+Please read and agree to the acceptable use statement.
+Before you start
+I agree
+Read the full privacy notice
+Hide the full privacy notice
+Don't record health or other sensitive details unless they're happy for you to.
+Shepherd is a personal tool. It helps you remember to follow up with people you know, using your own WhatsApp. It isn't a church database or a marketing tool, and nobody else can see your list.
+Last updated <b>{0}</b>
+Who is responsible
+Shepherd is run by <b>{0}</b>, who is responsible for how it handles information (the data controller).
+For any privacy question, or to ask what is held about you, or for it to be corrected or removed, contact <b>{0}</b>.
+For any privacy question, or to ask what is held about you, or for it to be corrected or removed, ask <b>{0}</b> through your church.
+Your responsibility
+You decide who to add and what to write about them. You are responsible for the people you contact through Shepherd and for the information you keep about them.
+Only write what you would be comfortable for that person to read. Don't record health or other sensitive details unless they are happy for you to keep them.
+Acceptable use
+Everyone who uses Shepherd agrees to this:
+You are responsible for the people you choose to contact through Shepherd.
+Only add and contact people whose details you got fairly, for example they gave you their number or scanned your QR code.
+If someone asks you to stop messaging them, stop. Mark them <b>No longer contact</b>, and delete their details if they ask.
+Don't share anyone's contact details without a good reason and their agreement.
+Never use Shepherd for spam, bulk messages, harassment or anything unlawful.
+You remain responsible for following data protection and privacy law when you use Shepherd.
+What Shepherd keeps, and why
+<b>Data linked to you</b>, saved to your own private account so your list is on every phone you sign in on and isn't lost:
+<b>Kept only on this phone</b>:
+<b>Never collected</b>:
+<b>When someone scans your QR code</b>: they choose to type their name (and number if they want). It goes only into your list, and they then message you on WhatsApp themselves.
+How it's protected
+Your list is saved to your own private account. Nobody else using Shepherd can see it.
+Everything travels over an encrypted connection and is stored with Cloudflare, which encrypts it on its servers.
+Your password is scrambled on your phone before it is sent and scrambled again on the server, so nobody can read it.
+Phone notifications are encrypted on the way to your phone and only show first names.
+Shepherd never sends messages for you. Every WhatsApp message is one you send yourself.
+Earlier versions are kept for up to a year so nothing is lost by mistake. Deleting someone's data removes every copy.
+The server is looked after by <b>{0}</b>, who doesn't look at anyone's list and only reaches stored data to keep Shepherd running or to act on a request to remove someone.
+Keep your phone safe
+Lock your phone with a passcode, Face ID or fingerprint.
+Turn on Shepherd's own PIN in <b>Settings › App lock</b>.
+Keep your phone and Shepherd up to date. When Shepherd says a new version is ready, tap <b>Update</b>.
+Don't share your password, and sign out on phones that aren't yours.
+Lost your phone? Sign in on another phone and change your password. That signs the lost phone out.
+How long it's kept, and your choices
+Information stays until you delete it. People you stop contacting are kept under No longer contacting until you delete them.
+Export a backup at any time from Settings. <b>Delete my account</b> removes everything for good.
+Anyone can ask what Shepherd holds about them, and ask for it to be corrected or removed.
+Shepherd is your personal tool for following up with people you know. Before you start, please agree to use it responsibly:
+Open Shepherd
+Shepherd reminds you who to check in with, so no one you're checking up on slips through. This tour walks through every part of the app and lets you set it up as you go. It takes about three minutes.
+After you meet someone, tap Add someone. Type their name and WhatsApp number (names from your phone contacts come up as you type), and tick that they're happy for you to keep their details.
+Or show your QR code
+Tap My QR code and let them scan it with their phone camera. They type their name, they're added to your list by themselves, and WhatsApp opens with your message ready for them to send.
+Today is a quick look at your day: who to reply to, who to message, disciples to check on, events today and who to pray for. Green is on track, amber is due today, red is overdue.
+Everyone's page
+Tap anyone to open their page. Log a Bible study and set the next one, change their stage, add prayer points, save them to your phone contacts or prayer list, pause reminders with Leave for now, or stop with No longer contact.
+List or Journey
+People shows everyone you're following up with. The buttons show who's overdue, due today or waiting on a reply. Journey shows everyone by stage, from First contact to Disciple. Tap Move to… to move someone on.
+Pray for people
+Add anyone you want to pray for, with notes if you like. Each day Shepherd shows 2 or 3 of them, taking turns, and can remind you at a time you choose in Settings.
+Week shows how many people you followed up with, your studies, new contacts and who came to events, with the last four weeks side by side.
+Settings has the rest
+Choose your language (Bible verses stay in English, NIV), bring in your phone contacts, set a PIN, export a backup, and read Privacy and safe use.
+You are responsible for the people you contact, so only message people who are happy to hear from you, and stop if they ask. Replay this tour from Settings any time.

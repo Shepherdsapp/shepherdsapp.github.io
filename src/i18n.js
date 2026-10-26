@@ -42,7 +42,7 @@
       if (k.indexOf('{0}') < 0) return;
       var lit = k.replace(/\{\d\}/g, '');
       var re = new RegExp('^' + esc(k).replace(/\\\{(\d)\\\}/g, '(.+?)') + '$');
-      tpls.push({ re: re, out: dict[k], w: lit.length, order: (k.match(/\{\d\}/g) || []).map(function (x) { return +x[1]; }) });
+      tpls.push({ re: re, out: dict[k], w: lit.length, joiner: !/[A-Za-z]/.test(lit.replace(/<[^>]+>/g, '')), order: (k.match(/\{\d\}/g) || []).map(function (x) { return +x[1]; }) });
     });
     tpls.sort(function (a, b) { return b.w - a.w; });
   }
@@ -60,11 +60,19 @@
     var out = null;
     for (var i = 0; i < tpls.length; i++) {
       var m = tpls[i].re.exec(k); if (!m) continue;
-      var t = tpls[i], firstNum = null;
+      var t = tpls[i], firstNum = null, bad = false;
       for (var j = 1; j < m.length; j++) if (firstNum === null && /^-?\d+$/.test(m[j])) firstNum = +m[j];
-      out = String(pick(t.out, firstNum)).replace(/\{(\d)\}/g, function (_, n) { var cap = m[t.order.indexOf(+n) + 1]; if (cap === undefined) return ''; var tr2 = lookup(cap); return tr2 === null ? cap : tr2; });
-      break;
+      var res = String(pick(t.out, firstNum)).replace(/\{(\d)\}/g, function (_, n) {
+        var cap = m[t.order.indexOf(+n) + 1]; if (cap === undefined) return '';
+        var tr2 = lookup(cap);
+        // a joiner like "{0}, {1}" only glues short pieces; it never half-translates a whole English sentence
+        if (tr2 === null && t.joiner && cap.split(/\s+/).length > 3) bad = true;
+        return tr2 === null ? cap : tr2;
+      });
+      if (bad) continue;
+      out = res; break;
     }
+    if (out === k) out = null; // a joiner matched but nothing in it had a translation
     if (out === null && collect) collect(k);
     if (cache.size > 4000) cache.clear();
     cache.set(k, out);

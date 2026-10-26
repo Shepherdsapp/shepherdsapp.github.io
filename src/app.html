@@ -139,7 +139,7 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 .search{position:relative}
 .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
 .search .inp{padding-left:40px}
-.filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.filters{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:2px}
 .filters::-webkit-scrollbar{display:none}
 .filters button{flex:none;min-height:38px;padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface);font-size:14px;white-space:nowrap}
 .filters button[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:var(--bg);font-weight:600}
@@ -289,7 +289,8 @@ body{font-size:17px}
 .pill{font-size:15px;padding:7px 14px;border-width:1.5px}
 .sec-h .count{font-size:14px;font-weight:700;color:var(--fg);background:var(--surface-2);padding:2px 10px;border-radius:99px}
 .chip{font-size:14.5px;min-height:32px}
-.pick button,.filters button{min-height:44px;font-size:15.5px;border-width:1.5px}
+.pick button{min-height:44px;font-size:15.5px;border-width:1.5px}
+.filters button{min-height:40px;font-size:14.5px;border-width:1.5px;padding:6px 13px}
 .seg button{min-height:46px;font-size:14.5px}
 .rep{min-height:40px;font-size:14px;border-width:1.5px;padding:4px 12px}
 .ch{width:62px;font-size:11.5px}
@@ -345,6 +346,14 @@ body{overflow-x:clip}
 .pushline.install,.pushline.off{background:var(--warn-soft);color:var(--warn);border-color:transparent}
 .card.install{border-color:var(--accent);border-width:2px}
 /* journey */
+.addcard .row{flex-wrap:wrap}.addcard .row .btn{min-height:48px;flex:1 1 130px;white-space:nowrap;padding-inline:12px;gap:6px}.addcard .i{width:18px;height:18px;flex:none}
+.dchips{display:flex;flex-wrap:wrap;gap:6px}.dchip{min-height:34px;padding:5px 12px;border-radius:99px;border:1.5px solid var(--line);background:var(--bg);font-size:14.5px;font-weight:600;color:var(--fg)}.dchip.more{font-weight:500;color:var(--muted)}
+.okline{display:flex;gap:8px;align-items:center}.okline .i{width:18px;height:18px;color:var(--ok)}
+.agree{position:fixed;inset:0;z-index:70;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:calc(env(safe-area-inset-top,0px) + 22px) 16px calc(env(safe-area-inset-bottom,0px) + 22px)}
+.agree-in{max-width:560px;margin:0 auto;display:grid;gap:14px}
+.agree .steps li{font-size:15.5px}
+.pvwrap{display:grid;gap:12px}.pv{background:var(--bg)}.pv .note{margin:0}.pvdate{margin:0}
+.hintline{margin:-4px 0 0;color:var(--muted)}
 .langh{display:flex;align-items:center;gap:8px;color:var(--fg);font-weight:700;font-size:15px}.langh .i{width:20px;height:20px}
 .jstrip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin:2px 0 0}
 .jstep{background:none;border:0;padding:6px 0 0;display:grid;justify-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--muted);line-height:1.15;text-align:center;min-height:44px;position:relative}
@@ -368,7 +377,7 @@ body{overflow-x:clip}
 .acl button{width:100%;display:grid;text-align:left;gap:1px;background:none;border:0;padding:10px 12px;border-radius:10px;min-height:48px}
 .acl button:hover,.acl button:focus{background:var(--accent-soft)}
 .acl b{font-weight:700;color:var(--fg)}.acl span{font-size:14px;color:var(--muted)}
-.tick1{display:flex;gap:12px;align-items:center;min-height:48px;cursor:pointer}.tick1 input{width:22px;height:22px;accent-color:var(--accent);flex:none}
+.tick1{display:flex;gap:12px;align-items:center;min-height:48px;cursor:pointer}.agreetick{align-items:flex-start;font-size:15px;line-height:1.4}.agreetick input{margin-top:2px}.tick1 input{width:22px;height:22px;accent-color:var(--accent);flex:none}
 @media (max-width:374px){.jsum{grid-template-columns:repeat(3,minmax(0,1fr))}.jstep span{font-size:10px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -587,7 +596,7 @@ function subscribe() {
       if (S.profile.lang && !I18N.chosen() && S.profile.lang !== I18N.lang) { I18N.use(S.profile.lang); return; } // a new phone takes the language chosen on another
       if (!S.profile.lang) { S.profile.lang = I18N.lang; put(basePath(), S.profile); } // so the QR hello page speaks your language
     }
-    S.profileSeen = true; saveLocal(); checkLock(); render(); maybeTour();
+    S.profileSeen = true; saveLocal(); checkLock(); render(); checkAgree(); maybeTour();
   }, onErr);
   base.collection('contacts').onSnapshot(function (q) {
     if (q.metadata && q.metadata.fromCache && q.empty && Object.keys(S.contacts).length) return;
@@ -841,10 +850,10 @@ async function saveToPhone(c) {
 
 /* ---------- toast & copy ---------- */
 var toastTimer;
-function toast(msg, actLabel, fn) {
+function toast(msg, actLabel, fn, ms) {
   var t = $('#toast'); $('#toastMsg').textContent = msg; var b = $('#toastAct');
   if (actLabel) { b.hidden = false; b.textContent = actLabel; b.onclick = function () { t.classList.remove('on'); fn(); }; } else { b.hidden = true; b.onclick = null; }
-  t.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('on'); }, actLabel ? 7000 : 3500);
+  t.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('on'); }, ms || (actLabel ? 7000 : 3500));
 }
 function copyText(text, okMsg) {
   var fallback = function () {
@@ -906,7 +915,8 @@ function discipleSheet(id) {
     '<p class="note" style="margin:0">' + esc(dLastText(d)) + '</p>' +
     '<form id="deForm" class="sec" style="gap:14px" novalidate><label class="field" for="deName">Name<input class="inp" id="deName" value="' + esc(d.name) + '" autocomplete="off"></label>' +
     '<label class="field" for="dePhone">WhatsApp (optional)<input class="inp" id="dePhone" type="tel" value="' + esc(d.phone) + '" autocomplete="off"></label>' +
-    '<label class="field" for="deNotes">Notes<textarea class="inp" id="deNotes" placeholder="What\'s going on for them, things to pray about">' + esc(d.notes) + '</textarea></label>' +
+    '<label class="field" for="deNotes">Notes<textarea class="inp" id="deNotes" placeholder="Anything to remember">' + esc(d.notes) + '</textarea></label>' +
+    '<p class="small hintline">Don\'t record health or other sensitive details unless they\'re happy for you to.</p>' +
     '<p class="note" id="deErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">Save</button></form>' +
     (checkedThisWeek(d) ? '' : '<button class="btn soft" id="deCheck">Checked in this week</button>') +
     (hist.length ? '<div class="card" style="background:var(--bg)"><h3>Check-ins</h3><ul class="timeline">' + hist.map(function (l) { return '<li><time>' + esc(fmtStamp(l.t)) + '</time><span>' + esc(l.text) + '</span></li>'; }).join('') + '</ul></div>' : '') +
@@ -976,6 +986,7 @@ function prayerSheet(focusAdd) {
     '<p style="margin:0">Add anyone you want to pray for. Each day Shepherd shows ' + plural(Number(S.profile.prayerCount) || 3, 'person', 'people') + ', taking turns' + (S.profile.prayerOn ? ', and reminds you at ' + esc(fmtClock(S.profile.prayerTime || '07:30')) : '') + '.</p>' +
     '<form class="card" id="prForm" style="background:var(--bg)"><label class="field" for="prName">Name<input class="inp" id="prName" autocomplete="off" placeholder="Who are you praying for?"></label>' +
     '<label class="field" for="prNotes">Notes (optional)<textarea class="inp" id="prNotes" placeholder="What to pray for"></textarea></label>' +
+    '<p class="small hintline">Don\'t record health or other sensitive details unless they\'re happy for you to.</p>' +
     '<p class="small" id="prErr" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" type="submit">Add to prayer list</button></form>' +
     (items.length ? '<ul class="list" id="prItems">' + items.map(function (x) { return '<li class="prow"><button class="prow-main" data-act="editprayer" data-id="' + x.id + '"><span class="pm"><span class="pn">' + esc(x.name) + '</span><span class="ps">' + (x.notes ? esc(x.notes) : 'No notes') + '</span></span></button></li>'; }).join('') + '</ul>' : '<p class="note">No one on your prayer list yet.</p>') +
     '<button class="btn ghost" data-act="prayersettings">Prayer reminder settings</button>',
@@ -1007,8 +1018,7 @@ function viewToday() {
   var h = '<div><p class="eyebrow">' + (LOC ? intl(now, { weekday: 'long', day: 'numeric', month: 'long' }) : WD[now.getDay()] + ' ' + now.getDate() + ' ' + MON[now.getMonth()]) + '</p><h1 class="h1">' + greeting() + name + '</h1>';
   var L = todayLists();
   if (!all.length) {
-    h += '</div>' + installCard() + emptyState() + disciplesCard();
-    if (L.events.length) h += eventsMini(L.events);
+    h += '</div>' + installCard() + emptyState() + disciplesCard() + eventsMini(L.events) + prayCard();
     return h;
   }
   var td = ymd(Date.now());
@@ -1021,28 +1031,27 @@ function viewToday() {
   if (all.some(function (c) { return c.example; })) h += '<p class="banner"><span>You\'re looking at example contacts. <b>Remove them</b> from Settings whenever you\'re ready.</span></p>';
   h += installCard();
   if (S.readonly) h += '<p class="banner"><span>Your changes are kept on this phone but can\'t be saved online. Ask whoever shared Shepherd with you for <b>Contributor</b> access.</span></p>';
-  h += summaryCard();
+  // Today is a quick look: add someone, who to chase, disciples to check on, what's on today, who to pray for
+  h += addCard();
   h += catchCard();
-  h += disciplesCard();
   h += section('Reply to', L.reply, 'They messaged you last. Tap the chat button to answer, then I replied.');
   h += section('Message today', L.msg);
-  var waitingNow = active().filter(function (c) { return c.replyState === 'them' && L.msg.indexOf(c) < 0; }).sort(function (a, b) { return waitSince(a) - waitSince(b); });
-  h += section('Waiting to hear back', waitingNow, 'Tap Replied when they message you back.');
+  if (!L.reply.length && !L.msg.length) h += '<div class="allclear">' + ICON.check + '<span>You\'re up to date. Nobody is waiting on you today.</span></div>';
+  h += disciplesCard();
   if (L.studies.length) {
     h += '<section class="sec"><div class="sec-h"><h2 class="h2">Studies today</h2><span class="count">' + L.studies.length + '</span></div><ul class="list">' +
       L.studies.map(function (c) { return '<li class="prow st-ok"><button class="prow-main" data-act="open" data-id="' + c.id + '"><span class="dot" aria-hidden="true"></span><span class="pm"><span class="pn">' + esc(c.name) + '</span><span class="ps"><b>' + esc(c.nextStudy.time ? fmtClock(c.nextStudy.time) : 'Time not set') + '</b>' + (c.nextStudy.topic ? ' · ' + esc(c.nextStudy.topic) : '') + '</span></span></button>' + chBtn(c) + '</li>'; }).join('') + '</ul></section>';
   }
-  if (!L.reply.length && !L.msg.length) h += '<div class="allclear">' + ICON.check + '<span>You\'re up to date. Nobody is waiting on you today.</span></div>';
-  if (L.events.length) h += eventsMini(L.events);
+  h += eventsMini(L.events);
   h += prayCard();
   return h;
 }
-/* the morning summary at the top of Today; Settings chooses what it shows */
-function summaryCard() {
-  var d = digest();
-  if (d === 'Alerts are off.' || d === 'Nothing due today.') return '';
-  return '<section class="card" id="sumCard"><div class="sec-h"><h3>Your morning summary</h3></div><ul class="summary">' + d.split('\n').map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul></section>';
+/* the shortcut to add someone, near the top of Today */
+function addCard() {
+  return '<section class="card addcard" id="addCard"><div class="sec-h"><h3>Met someone?</h3></div><p class="note">Add their name and number, or show your QR code so they message you first.</p>' +
+    '<div class="row"><button class="btn primary grow" data-act="quickadd"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add someone</button><button class="btn grow" data-act="qr">' + ICON.qr + 'My QR code</button></div></section>';
 }
+/* the morning summary at the top of Today; Settings chooses what it shows */
 function catchCard() {
   var items = catchupItems(); if (!items.length) return '';
   var c = items[0], fn = esc(firstName(c.name)), ch = channels(c)[0];
@@ -1060,12 +1069,16 @@ function catchCard() {
   return h + '<button class="linkrow" data-act="catchskip">Ask me tomorrow</button></section>';
 }
 function disciplesCard() {
-  var all = dList(), todo = discipleToDo(); if (!todo.length) return '';
-  var names = todo.slice(0, 4).map(function (d) { return esc(firstName(d.name)); }).join(', ') + (todo.length > 4 ? ' and ' + (todo.length - 4) + ' more' : '');
-  return '<section class="card"><div class="sec-h"><h3>Disciples this week</h3><span class="count">' + (all.length - todo.length) + ' of ' + all.length + ' done</span></div><p class="note">Still to check in with: ' + names + '.</p><button class="btn soft" data-act="tab" data-v="disciples">Open Disciples</button></section>';
+  var all = dList(), todo = discipleToDo(); if (!all.length) return '';
+  var head = '<div class="sec-h"><h3>Disciples this week</h3><span class="count">' + (all.length - todo.length) + ' of ' + all.length + ' done</span></div>';
+  if (!todo.length) return '<section class="card dsum" id="dSum">' + head + '<p class="note okline">' + ICON.check + '<span>You\'ve checked in with everyone this week.</span></p></section>';
+  return '<section class="card dsum" id="dSum">' + head + '<div class="dchips">' + todo.slice(0, 6).map(function (d) { return '<button class="dchip" data-act="tab" data-v="disciples">' + esc(firstName(d.name)) + '</button>'; }).join('') + (todo.length > 6 ? '<span class="dchip more">+' + (todo.length - 6) + '</span>' : '') + '</div>' +
+    '<button class="btn soft small" data-act="tab" data-v="disciples">Open Disciples</button></section>';
 }
 function eventsMini(evs) {
-  return '<section class="sec"><div class="sec-h"><h2 class="h2">Events today and tomorrow</h2><span class="count">' + evs.length + '</span></div>' + evs.map(function (x) { return evCard(x, false); }).join('') + '</section>';
+  var td = ymd(Date.now()); evs = evs.filter(function (x) { return x.date === td; });
+  if (!evs.length) return '';
+  return '<section class="sec" id="evToday"><div class="sec-h"><h2 class="h2">Events today</h2><span class="count">' + evs.length + '</span></div>' + evs.map(function (x) { return evCard(x, false); }).join('') + '</section>';
 }
 
 function filtered() {
@@ -1130,7 +1143,7 @@ function viewPeople() {
   var mode = S.peopleMode || lsGet('shepherd:peopleMode') || 'list';
   h += '<div class="seg" style="grid-template-columns:1fr 1fr" role="group" aria-label="View"><button data-act="pmode" data-m="list" aria-pressed="' + (mode === 'list') + '">List</button><button data-act="pmode" data-m="journey" aria-pressed="' + (mode === 'journey') + '">Journey</button></div>';
   if (mode === 'journey') { h += journeyBoard(); if (archived) h += '<button class="linkrow" data-act="archive-list">No longer contacting (' + archived + ')</button>'; return h; }
-  h += '<div class="search">' + ICON.search + '<label class="sr" for="q">Search people</label><input class="inp" id="q" type="search" placeholder="Search by name, number or handle" value="' + esc(S.search) + '" autocomplete="off"></div>';
+  h += '<div class="search">' + ICON.search + '<label class="sr" for="q">Search people</label><input class="inp" id="q" type="search" placeholder="Search people" value="' + esc(S.search) + '" autocomplete="off"></div>';
   h += '<div class="filters" role="group" aria-label="Filter">' + F.map(function (f) { return '<button data-act="filter" data-f="' + f[0] + '" aria-pressed="' + (S.filter === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>';
   h += '<div id="plist">' + peopleList() + '</div>';
   if (archived) h += '<button class="linkrow" data-act="archive-list">No longer contacting (' + archived + ')</button>';
@@ -1326,7 +1339,7 @@ function viewSettings() {
   h += '<section class="card"><h3>App lock</h3><p class="note">' + (p.pinHash ? 'Shepherd asks for your PIN when it opens and after 5 minutes away.' : 'Add a PIN so nobody who picks up your phone can read your contacts.') + '</p><div class="row">' +
     (p.pinHash ? '<button class="btn" data-act="setpin">Change PIN</button><button class="btn" data-act="locknow">Lock now</button><button class="btn danger" data-act="removepin">Remove PIN</button>' : '<button class="btn primary" data-act="setpin">Set a PIN</button>') + '</div></section>';
   if (WEB && WEB.user()) h += '<section class="card" id="acctCard"><h3>Your account</h3><p class="note">Signed in as <b style="color:var(--fg)">' + esc(WEB.user().email) + '</b>. You stay signed in on this phone.</p><div class="row"><button class="btn grow" data-act="changepw">Change password</button><button class="btn grow" data-act="signout">Sign out</button></div><button class="btn danger" data-act="delacct">Delete my account</button></section>';
-  h += '<section class="card"><h3>Your data</h3><p class="note">Your contacts are saved to your own private space' + (DB ? (WEB ? ' on the Shepherd server, with earlier versions kept' : '') : ' (right now only on this phone)') + '. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.</p><button class="btn soft" data-act="yourdata">What\'s saved and who can see it</button><div class="row"><button class="btn" data-act="export">Export a backup</button><label class="btn" for="importFile" style="cursor:pointer">Restore a backup</label><input type="file" id="importFile" accept=".json,application/json" class="sr"></div>' +
+  h += '<section class="card"><h3>Your data</h3><p class="note">Your contacts are saved to your own private space' + (DB ? (WEB ? ' on the Shepherd server, with earlier versions kept' : '') : ' (right now only on this phone)') + '. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.</p><button class="btn soft" data-act="yourdata">Privacy and safe use</button><div class="row"><button class="btn" data-act="export">Export a backup</button><label class="btn" for="importFile" style="cursor:pointer">Restore a backup</label><input type="file" id="importFile" accept=".json,application/json" class="sr"></div>' +
     (list().some(function (c) { return c.example; }) ? '<button class="btn danger" data-act="clearexamples">Remove example contacts</button>' : '') + '</section>';
   var acts = [];
   list().forEach(function (c) { (c.log || []).forEach(function (l) { acts.push({ t: l.t, text: c.name + ': ' + l.text }); }); });
@@ -1355,7 +1368,7 @@ function render() {
   document.querySelectorAll('.tab').forEach(function (t) { if (t.dataset.v === tabV) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
   var owed = active().filter(function (c) { return c.replyState === 'me' || dayDiff(dueDay(c), today()) < 0; }).length;
   var b = $('#badge'); b.hidden = !owed; b.textContent = owed > 99 ? '99+' : owed;
-  $('#fab').hidden = S.view === 'settings';
+  $('#fab').hidden = S.view === 'settings' || S.view === 'today'; // Today has its own Add someone box
   if (keep) { var el = document.getElementById(keep); if (el) { el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   bindView();
   if (TOUR_I >= 0) placeTour();
@@ -1476,6 +1489,7 @@ function contactForm(c, isNew) {
       '<label class="field" for="cMetOn">Met on<input class="inp" id="cMetOn" type="date" value="' + esc(c.metOn) + '"></label>' +
       '<label class="field" for="cMet">Where you met (optional)<input class="inp" id="cMet" value="' + esc(c.met) + '" autocomplete="off"></label>') +
     '<label class="field" for="cNotes">Notes<textarea class="inp" id="cNotes" placeholder="Anything to remember">' + esc(c.notes) + '</textarea></label>' +
+    '<p class="small hintline">Don\'t record health or other sensitive details unless they\'re happy for you to.</p>' +
     (isNew ? '' : '<label class="field" for="cPrayer">Prayer points<textarea class="inp" id="cPrayer">' + esc(c.prayer) + '</textarea></label>') +
     '<label style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px"><input type="checkbox" id="cConsent" style="width:22px;height:22px;accent-color:var(--accent);flex:none"' + (c.consent ? ' checked' : '') + '><span>They\'re happy for us to keep their details and stay in touch.</span></label>' +
     '<p class="note" id="cErr" role="alert" style="color:var(--bad)" hidden></p>' +
@@ -1864,21 +1878,27 @@ function calSheet() {
 /* The tour opens each part of the app itself. On steps with a job to do, it steps aside
    while you do it, then carries on by itself (or when you tap Continue tour). */
 var TOUR = [
-  { title: 'Welcome to Shepherd', text: 'Shepherd reminds you who to check in with, so no one you\'re checking up on slips through. This tour opens each part of the app and lets you set it up as you go.' },
+  { title: 'Welcome to Shepherd', text: 'Shepherd reminds you who to check in with, so no one you\'re checking up on slips through. This tour walks through every part of the app and lets you set it up as you go. It takes about three minutes.' },
   { view: 'settings', target: '#profForm', title: 'Start in Settings', text: 'First, open Settings and add your WhatsApp number and the first message that will be sent automatically when they scan your QR code.',
     doIt: { label: 'Add my number now', note: 'Add your number and message, then tap Save.', waitFor: 'profile', run: function () { var p = $('#pPhone'); if (p) p.focus(); } } },
   { view: 'settings', target: '#notifCard', title: 'Turn on notifications', text: 'Most people use Shepherd on their phone, so turn on notifications. Shepherd tells you by name who to message, who to reply to and who to check on, and opens that person when you tap.',
     doIt: { label: 'Show me how', guide: true, run: function () { notifGuide(true); } } },
-  { view: 'today', target: '#fab', title: 'Add someone', text: 'Tap here after you meet someone. Add their name and number, or show your QR code so they message you first.',
+  { view: 'today', target: function () { return $('#addCard') || $('#main .empty'); }, title: 'Add someone', text: 'After you meet someone, tap Add someone. Type their name and WhatsApp number (names from your phone contacts come up as you type), and tick that they\'re happy for you to keep their details.',
     doIt: { label: 'Add my first person', note: 'Fill in their details and tap Save contact.', waitFor: 'contact', run: function () { quickAdd(); } } },
-  { view: 'today', target: '.tab[data-v="today"]', title: 'Start each day here', text: 'Today shows who to message and who\'s waiting on you. Green is on track, amber is due today, red is overdue.' },
+  { view: 'today', target: '#main [data-act="qr"]', title: 'Or show your QR code', text: 'Tap My QR code and let them scan it with their phone camera. They type their name, they\'re added to your list by themselves, and WhatsApp opens with your message ready for them to send.' },
+  { view: 'today', target: '.tab[data-v="today"]', title: 'Start each day here', text: 'Today is a quick look at your day: who to reply to, who to message, disciples to check on, events today and who to pray for. Green is on track, amber is due today, red is overdue.' },
   { view: 'today', target: function () { return $('#main .prow .ch'); }, title: 'Message in one tap', text: 'The chat button opens WhatsApp or Instagram. Shepherd logs it and waits for their reply.' },
   { view: 'today', target: function () { return $('#catchCard') || $('#main .rep'); }, title: 'When they reply', text: 'Tap Replied and they move to your Reply to list. Each day Shepherd also asks about anyone it\'s unsure of.' },
+  { view: 'people', target: function () { return $('#plist .prow') || $('#main .filters'); }, title: 'Everyone\'s page', text: 'Tap anyone to open their page. Log a Bible study and set the next one, change their stage, add prayer points, save them to your phone contacts or prayer list, pause reminders with Leave for now, or stop with No longer contact.' },
+  { view: 'people', target: '#main .seg', title: 'List or Journey', text: 'People shows everyone you\'re following up with. The buttons show who\'s overdue, due today or waiting on a reply. Journey shows everyone by stage, from First contact to Disciple. Tap Move to… to move someone on.' },
   { view: 'disciples', target: '#dForm', title: 'Disciples', text: 'Add the people that are already disciples. Shepherd reminds you to check in with those people every week. It\'s biblical to encourage one another! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Let\'s make this a habit each week!',
     doIt: { label: 'Add a disciple', note: 'Type their name and tap Add.', waitFor: 'disciple', run: function () { var n = $('#dName'); if (n) n.focus(); } } },
+  { view: 'today', target: '#prayCard', title: 'Pray for people', text: 'Add anyone you want to pray for, with notes if you like. Each day Shepherd shows 2 or 3 of them, taking turns, and can remind you at a time you choose in Settings.' },
   { view: 'events', target: '.tab[data-v="events"]', title: 'Your calendar', text: 'Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.',
     doIt: { label: 'Show me how to link my calendar', guide: true, run: function () { calGuide(true); } } },
-  { view: 'today', target: '[data-act="settings"]', title: 'You\'re all set', text: 'Change what your morning summary shows in Settings. On a person\'s page, Add to phone contacts saves them to your phone. Replay this tour from Settings any time.' }
+  { view: 'week', target: '.tab[data-v="week"]', title: 'Your week', text: 'Week shows how many people you followed up with, your studies, new contacts and who came to events, with the last four weeks side by side.' },
+  { view: 'settings', target: '#langCard', title: 'Settings has the rest', text: 'Choose your language (Bible verses stay in English, NIV), bring in your phone contacts, set a PIN, export a backup, and read Privacy and safe use.' },
+  { view: 'today', target: '[data-act="settings"]', title: 'You\'re all set', text: 'You are responsible for the people you contact, so only message people who are happy to hear from you, and stop if they ask. Replay this tour from Settings any time.' }
 ];
 var TOUR_I = -1, TOUR_PAUSED = false;
 function tourTarget(st) { if (!st.target) return null; var el = typeof st.target === 'function' ? st.target() : $(st.target); return el && el.getClientRects().length ? el : null; }
@@ -1955,6 +1975,7 @@ function endTour() {
 }
 /* starts by itself the first time someone opens Shepherd and is signed in */
 function maybeTour() {
+  if (needAgree() && !(WEB && WEB.agreedAt)) return; // the tour waits until the acceptable use statement is agreed
   if (S.tourChecked || TOUR_I >= 0) return; S.tourChecked = true;
   if (S.profile.tourDone || lsGet('shepherd:tourDone:' + (S.uid || 'local'))) return;
   setTimeout(function () {
@@ -2162,14 +2183,29 @@ function importBackup(text) {
 }
 
 function yourDataSheet() {
-  openSheet('Your data',
-    '<p style="margin:0">Shepherd keeps your list private. Here is exactly what is saved, where, and who can see it.</p>' +
-    '<section class="card" style="background:var(--bg)"><h3>Data linked to you</h3><ul class="steps"><li>Your name, email and WhatsApp number.</li><li>The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies.</li><li>Your events, disciples and prayer list.</li></ul><p class="note">' + (WEB ? 'Saved to your own account on the Shepherd server so it\'s never lost, with earlier versions kept for a year. Only you can see it, when you\'re signed in.' : 'Saved to your own private space. Only you can see it.') + '</p></section>' +
-    '<section class="card" style="background:var(--bg)"><h3>Kept only on this phone</h3><ul class="steps"><li>Contacts you import from your phone, used to suggest names as you type. They are never uploaded.</li><li>A copy of your list, so Shepherd works without signal.</li></ul></section>' +
-    '<section class="card" style="background:var(--bg)"><h3>Never collected</h3><ul class="steps"><li>Your location.</li><li>Your WhatsApp, text or iMessage conversations.</li><li>Your whole address book (only the contacts you choose).</li><li>Anything for adverts or tracking.</li></ul></section>' +
-    '<section class="card" style="background:var(--bg)"><h3>When someone scans your QR code</h3><p class="note">They choose to type their name (and number if they want). It goes only into your list, and they then message you on WhatsApp themselves.</p></section>' +
-    '<p class="note">Someone asks you to delete their details? Open them, tap <b>No longer contact</b>, then <b>Delete all their data</b>. Every copy is removed.</p>' +
-    '<button class="btn" data-act="closesheet">Done</button>');
+  openSheet('Privacy and safe use', '<div class="pvwrap">' + window.ShepherdPrivacy.html() + '</div><button class="btn" data-act="closesheet">Done</button>');
+}
+/* everyone agrees once to the acceptable use statement (again if it changes) */
+function needAgree() { var a = S.profile.agreed; return !(a && Number(a.v) >= window.ShepherdPrivacy.USE_VERSION); }
+function recordAgree() { S.profile.agreed = { v: window.ShepherdPrivacy.USE_VERSION, at: Date.now() }; saveProfile(); }
+function checkAgree() {
+  var el = $('#agree');
+  if (!S.profileSeen || !needAgree()) { if (el) el.hidden = true; return false; }
+  if (WEB && WEB.agreedAt) { recordAgree(); return false; } // ticked when creating the account
+  if (!el) {
+    el = document.createElement('div'); el.className = 'agree'; el.id = 'agree'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-labelledby', 'agreeT');
+    document.body.appendChild(el);
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      if (b.id === 'agreeGo') { recordAgree(); el.hidden = true; document.body.classList.remove('noscroll'); toast('Thank you'); maybeTour(); }
+      if (b.id === 'agreeMore') { var m = $('#agreeFull'); m.hidden = !m.hidden; b.textContent = m.hidden ? 'Read the full privacy notice' : 'Hide the full privacy notice'; }
+    });
+  }
+  el.innerHTML = '<div class="agree-in"><h2 class="h2" id="agreeT">Before you start</h2>' + window.ShepherdPrivacy.agreeHtml() +
+    '<button class="linkrow" id="agreeMore" type="button">Read the full privacy notice</button><div class="pvwrap" id="agreeFull" hidden>' + window.ShepherdPrivacy.html() + '</div>' +
+    '<button class="btn primary block" id="agreeGo" type="button">I agree</button></div>';
+  el.hidden = false; document.body.classList.add('noscroll');
+  return true;
 }
 
 /* ---------- actions ---------- */
@@ -2336,7 +2372,8 @@ function handleLaunch() {
   var tries = 0, t = setInterval(function () { if (openFromLink(id, v) || ++tries > 20) { clearInterval(t); try { history.replaceState(null, '', location.pathname); } catch (e) {} } }, 300);
 }
 if (window.I18N && I18N.lang !== 'en') I18N.ready().then(function () { schedSoon(); }); // notifications in your language once it has loaded
-if (WEB) { WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; openFromLink(q.get('open'), q.get('view')); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
+if (WEB) { WEB.onUpdate = function () { toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); };
+  WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; openFromLink(q.get('open'), q.get('view')); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
 window.__shepherd = { inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
@@ -2368,7 +2405,7 @@ async function boot() {
   } else {
     if (!S.uid) S.uid = 'local';
     S.mode = 'local'; S.profileSeen = true; setSync(Object.keys(pending).length && S.uid !== 'local' ? 'offline' : 'local');
-    maybeTour();
+    checkAgree(); maybeTour();
   }
   checkLock(); render();
   if (WEB) { handleLaunch(); refreshPush(); schedNow(); if (WEB.newName && !S.profile.name) { S.profile.name = WEB.newName; saveProfile(); } }

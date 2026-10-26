@@ -142,10 +142,12 @@ function authHtml(mode, msg) {
     '<label class="field" for="aEmail">Email<input class="inp" id="aEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" value="' + esc(lsGet('shepherd:email') || '') + '"' + (code ? ' readonly' : '') + '></label>' +
     (code ? '<label class="field" for="aCode">6-digit code<input class="inp" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label>' : '') +
     (forgot ? '' : '<label class="field" for="aPw">' + (code ? 'New password' : 'Password') + '<span class="pwrow"><input class="inp" id="aPw" type="password" autocomplete="' + (create || code ? 'new-password' : 'current-password') + '" minlength="8"><button type="button" class="btn ghost small" id="aShow">Show</button></span></label>') +
+    (create ? '<label class="tick1 agreetick" for="aAgree"><input type="checkbox" id="aAgree"><span>I agree to use Shepherd responsibly, as set out in the privacy notice and acceptable use statement.</span></label>' : '') +
     '<p class="small" id="aErr" role="alert" style="margin:0;color:var(--bad)" hidden></p>' +
     '<button class="btn primary block" type="submit" id="aGo">' + (create ? 'Create my account' : forgot ? 'Get a reset code' : code ? 'Save new password' : 'Sign in') + '</button>' +
     (create || forgot || code ? '' : '<button type="button" class="linkrow" data-auth="forgot" style="justify-self:center">Forgot password?</button>') +
     (forgot || code ? '<button type="button" class="linkrow" data-auth="signin" style="justify-self:center">Back to sign in</button>' : '') +
+    '<a class="linkrow" href="privacy.html" target="_blank" rel="noopener" style="justify-self:center">Privacy and safe use</a>' +
     (!API ? '<p class="banner"><span>Shepherd isn\'t connected to its server yet. Put your Cloudflare Worker address in <b>config.js</b>.</span></p>' : '') +
     '</form>';
 }
@@ -170,6 +172,7 @@ function bindAuth() {
     var pwEl = authEl.querySelector('#aPw'), pw = pwEl ? pwEl.value : '';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return say('Enter your email address.');
     if (pwEl && pw.length < 8) return say(mode === 'signin' ? 'Enter your password.' : 'Choose a password of at least 8 characters.');
+    var ag = authEl.querySelector('#aAgree'); if (mode === 'create' && ag && !ag.checked) return say('Please read and agree to the acceptable use statement.');
     lsSet('shepherd:email', email);
     btn.disabled = true; var label = btn.textContent; btn.textContent = 'One moment…';
     try {
@@ -182,6 +185,7 @@ function bindAuth() {
       if (mode === 'create') r = await api('POST', '/api/signup', { email: email, key: key, name: (authEl.querySelector('#aName').value || '').trim() });
       else if (mode === 'code') r = await api('POST', '/api/reset/confirm', { email: email, code: authEl.querySelector('#aCode').value, key: key });
       else r = await api('POST', '/api/login', { email: email, key: key });
+      if (mode === 'create') W.agreedAt = Date.now(); // agreed to the acceptable use statement when creating the account
       finishSignIn(r.token, r.user);
       if (mode === 'create' && r.user.name) W.newName = r.user.name;
     } catch (x) {
@@ -236,7 +240,7 @@ var install = {
   prompt: async function () { if (!deferredInstall) return false; deferredInstall.prompt(); var c = await deferredInstall.userChoice.catch(function () { return {}; }); deferredInstall = null; return c && c.outcome === 'accepted'; }
 };
 if ('serviceWorker' in navigator && location.protocol !== 'file:') window.addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); });
-if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', function (e) { if (e.data && e.data.open && W.onOpen) W.onOpen(e.data.open); });
+if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', function (e) { if (e.data && e.data.open && W.onOpen) W.onOpen(e.data.open); if (e.data && e.data.update && W.onUpdate) W.onUpdate(); });
 
 /* ---------- the account ---------- */
 async function signOut() {

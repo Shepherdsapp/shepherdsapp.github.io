@@ -10,13 +10,14 @@ their own email and password, and each person's list is theirs alone.
 | File | What it is |
 |---|---|
 | `index.html` | The app. Built from `src/` by `node build.mjs`. **Upload this.** |
+| `privacy.html` | The privacy notice and acceptable use statement as its own page (linked from the sign-up screen). Built with `index.html`. **Upload this too.** |
 | `sw.js` | Lets the app open with no signal, and shows Shepherd's notifications. **Upload it again every time `index.html` changes.** |
-| `config.js` | Your server's address. **Edit it once** (step 2.3). |
+| `config.js` | Your server's address, and who to contact about privacy. **Edit it once** (step 2.3). |
 | `manifest.json`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`, `badge-96.png` | The Home Screen icon and install details. Upload once. |
 | `lang/` | The 14 other languages. `lang/<code>.json` is what phones download; `lang/src/<code>.txt` is the translation you edit; `lang/_keys.txt` is every English line. **Upload the whole folder.** |
 | `worker/worker.js` | The server: a Cloudflare Worker for accounts, saving, notifications, the calendar link and the QR hello page. **Paste this into Cloudflare.** |
 | `hosted/shepherd.html` | The same app built to live inside Claude (no notifications or calendar link there). |
-| `src/` | Source: `app.html` (the app), `web.js` (sign-in, saving to your server, notifications, installing) and `i18n.js` (languages). |
+| `src/` | Source: `app.html` (the app), `web.js` (sign-in, saving to your server, notifications, installing), `i18n.js` (languages) and `privacy.js` (the privacy notice and acceptable use statement). |
 | `test/` | The tests (see the end of this page). |
 
 No password, key or private address is written anywhere in this folder.
@@ -49,10 +50,12 @@ The tables and the notification keys are created by the Worker itself the first 
 ## 2. The app (GitHub Pages, free)
 
 1. github.com → **New repository**. Name it **shepherd**, set it to **Public** → **Create repository**.
-2. **Add file → Upload files**. Drag in `index.html`, `sw.js`, `config.js`, `manifest.json`, `icon-192.png`, `icon-512.png`,
+2. **Add file → Upload files**. Drag in `index.html`, `privacy.html`, `sw.js`, `config.js`, `manifest.json`, `icon-192.png`, `icon-512.png`,
    `apple-touch-icon.png`, `badge-96.png` and the `lang` folder → **Commit changes**.
 3. Click `config.js` → the pencil (Edit) → replace `https://shepherd.YOUR-NAME.workers.dev` with your **Worker address**
-   from 1.7 → **Commit changes**.
+   from 1.7. On the `privacy:` line, put the email people should write to about their data, e.g.
+   `privacy: { controller: 'Pavi', contact: 'you@example.com' }` → **Commit changes**. Until a contact is set, the
+   privacy notice tells people to ask you through the church.
 4. **Settings → Pages → Deploy from a branch → main / (root) → Save**.
 5. A minute or two later it's live at **https://sitbackco.github.io/shepherd/**.
 
@@ -72,7 +75,19 @@ variable `ALLOWED_ORIGINS` to the Worker with that address, and update `APP_URL`
 2. Open Shepherd from its icon → **Create account** or **Sign in**.
 3. Settings → **Turn on notifications** → **Allow** → **Send a test**.
 
-The tour starts by itself the first time and walks through all of this, with iPhone and Android steps side by side.
+Creating an account means ticking **I agree to use Shepherd responsibly** (the acceptable use statement). The date and
+version of that agreement are saved with the account. Anyone who signed up before it existed is asked once, on a
+"Before you start" screen, before they carry on.
+
+The tour starts by itself the first time. Its 16 cards walk through every part of the app (adding someone, the QR code,
+Today, messaging, replies, each person's page, List and Journey, disciples, the prayer list, the calendar, the week,
+Settings), with iPhone and Android steps side by side, and you can set things up as you go. Replay it from Settings.
+
+**Today** is a quick look at the day: a **Met someone?** card to add a person or show your QR code, who to reply to, who
+to message, the disciples still to check on this week, today's events only, and who to pray for.
+
+When a new version is uploaded, phones show **A new version of Shepherd is ready → Update** the next time Shepherd is
+opened.
 
 ### Moving your list from the Claude version
 
@@ -148,6 +163,12 @@ phones; they sign back in with the new password and nothing is lost.
 
 ## Your data
 
+The full privacy notice is in the app (Settings → **Privacy and safe use**) and at
+**https://sitbackco.github.io/shepherd/privacy.html**. It covers who is responsible, each user's own responsibility, the
+six-point acceptable use statement, what is kept and why, how it's protected, keeping your phone safe (passcode,
+Shepherd's PIN, staying up to date) and how long things are kept. Edit the wording in `src/privacy.js`, add any new
+lines to `lang/_keys.txt` and every `lang/src/<code>.*.txt`, then run `node lang/check.mjs` and `node build.mjs`.
+
 - Saved on the phone at once, and on your Shepherd server a second later. It works with no signal and catches up when
   back online.
 - The server keeps earlier versions of every contact for a year. Cloudflare can also roll the whole database back
@@ -164,7 +185,7 @@ seconds, about 180 requests an hour, so that covers several hundred hours of use
 ## Changing the app
 
 Edit `src/app.html` or `src/web.js`, run `node build.mjs`, then run the tests. When `index.html` changes, raise
-`VERSION` in `sw.js` (e.g. `shepherd-v4`) and upload both, so phones fetch the new version. When `worker/worker.js`
+`VERSION` in `sw.js` (e.g. `shepherd-v5`) and upload both, so phones fetch the new version. When `worker/worker.js`
 changes, paste it into the Worker again and **Deploy**.
 
 ## Tests
@@ -174,6 +195,6 @@ changes, paste it into the Worker again and **Deploy**.
 | Command | What it checks |
 |---|---|
 | `node test/worker.test.mjs` | 87 checks of the server: the QR hello page (adds the person, opens WhatsApp in your language, slows down spam), accounts, saving (newer copies always win), history, deleting, notifications (encrypted and signed exactly as Apple and Google require, then decrypted the way a phone does), the calendar link, password resets, privacy between accounts |
-| `node test/app.test.cjs` | 285 checks of the app: every screen, the tour, guides, the journey, the prayer list and its reminders, reading contacts files from iPhone and Android, the notification schedule (names, times, pauses, caps), and the app in Spanish (Bible verses stay English) |
-| `node test/e2e.mjs` | 69 checks of the built website in Chromium at iPhone and Android sizes (320 to 430px wide), talking to the real server code: sign up, two phones in sync, notifications from schedule to delivery, tapping one, the calendar link, password reset, sign out, offline, every tour card fully on screen at four phone sizes, and switching language (a second phone follows, works offline) |
+| `node test/app.test.cjs` | 304 checks of the app: every screen, the 16-card tour, the acceptable use agreement, the privacy page, guides, the journey, the prayer list and its reminders, reading contacts files from iPhone and Android, the notification schedule (names, times, pauses, caps), and the app in Spanish (Bible verses stay English) |
+| `node test/e2e.mjs` | 76 checks of the built website in Chromium at iPhone and Android sizes (320 to 430px wide), talking to the real server code: sign up (no account without agreeing), privacy.html on its own and in Spanish, two phones in sync, notifications from schedule to delivery, tapping one, the calendar link, password reset, sign out, offline, every tour card fully on screen at four phone sizes, and switching language (a second phone follows, works offline) |
 | `node lang/check.mjs` | every language has every line, with the same `{0}` gaps and bold words |

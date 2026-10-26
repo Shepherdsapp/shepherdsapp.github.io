@@ -1,18 +1,21 @@
 /* Shepherd service worker: opens with no signal, and shows the notifications the Shepherd server sends.
    It never stores anything from the server itself (your list is stored by the app, per person). */
-const VERSION = 'shepherd-v3', MINE = 'shepherd-';
+const VERSION = 'shepherd-v4', MINE = 'shepherd-';
 const PAGE = './index.html', REST = ['./config.js', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './badge-96.png'];
 const END = '<!--shepherd:end-->'; // the build writes this as the very last thing in the app page
 const scopePath = () => new URL(self.registration.scope).pathname;
 const isAppPage = url => url.origin === self.location.origin && (url.pathname === scopePath() || url.pathname === scopePath() + 'index.html');
 // only a real, complete copy of the app page may replace the stored one
 const looksRight = r => !!r && r.ok && r.status === 200 && !r.redirected && r.type === 'basic' && /text\/html/i.test(r.headers.get('content-type') || '');
-async function storePage(r) {
+async function storePage(r, tell) {
   if (!looksRight(r)) return false;
   const text = await r.text(), at = text.lastIndexOf(END);
   if (at < 0 || text.length - at > 400) return false;
   const c = await caches.open(VERSION);
+  const old = await c.match(PAGE).then(h => (h ? h.text() : null)).catch(() => null);
   await c.put(PAGE, new Response(text, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }));
+  // a newer Shepherd has arrived: let the open app offer to switch to it
+  if (tell && old !== null && old !== text) (await self.clients.matchAll({ type: 'window' })).forEach(w => w.postMessage({ update: true }));
   return true;
 }
 const direct = u => new Request(u, { cache: 'reload' });
@@ -31,7 +34,7 @@ self.addEventListener('fetch', e => {
     if (!isAppPage(url)) return;
     // open at once from this phone's copy, and fetch a newer copy in the background for next time
     const fresh = fetch(req, { cache: 'no-cache' });
-    e.waitUntil(fresh.then(r => storePage(r.clone())).catch(() => false));
+    e.waitUntil(fresh.then(r => storePage(r.clone(), true)).catch(() => false));
     e.respondWith(caches.open(VERSION).then(c => c.match(PAGE)).then(hit => hit || fresh));
     return;
   }

@@ -84,10 +84,20 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   let A = await open(store);
   const { $, $$, click, setVal, submit, byText, S, w } = A;
 
-  current = 'Tour for new users';
+  current = 'Acceptable use';
   await wait(400);
+  ok($('#agree') && !$('#agree').hidden && /Before you start/.test($('#agree').textContent), 'a new user is asked to agree to the acceptable use statement first');
+  const rules = $$('#agree .agree-in > .steps li').map(li => li.textContent);
+  ok(rules.length === 6 && /responsible for the people you choose to contact/.test(rules[0]) && /got fairly/.test(rules[1]) && /stop/.test(rules[2]) && /share anyone's contact details/.test(rules[3]) && /spam, bulk messages, harassment/.test(rules[4]) && /data protection and privacy law/.test(rules[5]), 'it covers the six points from the data protection team');
+  ok($('#tour').hidden, 'the tour waits until they agree');
+  click('#agreeMore'); await wait();
+  ok(!$('#agreeFull').hidden && /Who is responsible/.test($('#agreeFull').textContent) && /Pavi/.test($('#agreeFull').textContent), 'the full privacy notice can be read right there');
+  click('#agreeGo'); await wait(500);
+  ok($('#agree').hidden && store.docs.get('data/users/u_test/profile').agreed.v === 1 && store.docs.get('data/users/u_test/profile').agreed.at > 0, 'agreeing is recorded on their account, with the date');
+
+  current = 'Tour for new users';
   ok(!$('#tour').hidden, 'tour starts by itself the first time someone opens Shepherd');
-  ok($('#tourStep').textContent === '1 of 10' && /Welcome/.test($('#tourTitle').textContent), 'starts at step 1 of 10');
+  ok($('#tourStep').textContent === '1 of 16' && /Welcome/.test($('#tourTitle').textContent), 'starts at step 1 of 16');
   ok(/no one you're checking up on slips through/.test($('#tourText').textContent), 'welcome uses the new wording');
   const titles = [$('#tourTitle').textContent];
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
@@ -107,9 +117,17 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok($$('#sheetBody .osb[data-os="ios"]').length === 1 && $$('#sheetBody .osb[data-os="android"]').length === 1, 'install steps for iPhone and Android');
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
   ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Turn on notifications', 'returns to the tour after the guide');
-  for (let i = 0; i < 4; i++) { click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent); if (i === 0) ok(S().view === 'today', 'goes to Today by itself'); }
+  for (let i = 0; i < 7; i++) {
+    click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+    if (i === 0) ok(S().view === 'today' && /Add someone/.test($('#tourText').textContent), 'goes to Today by itself, to Add someone');
+    if (i === 1) ok(/QR code/.test($('#tourText').textContent), 'shows the QR code');
+    if (i === 5) ok(S().view === 'people' && /log a Bible study/i.test($('#tourText').textContent) && /No longer contact/.test($('#tourText').textContent), 'explains a person\'s page');
+    if (i === 6) ok(/Journey/.test($('#tourText').textContent), 'explains List and Journey');
+  }
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'disciples' && /already disciples/.test($('#tourText').textContent) && /1 Thessalonians 5:11/.test($('#tourText').textContent) && $('#tourMore').textContent === 'Add a disciple', 'opens Disciples by itself with the verse');
+  click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+  ok(S().view === 'today' && /pray for/.test($('#tourText').textContent), 'explains the prayer list');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'events' && $('#tourText').textContent === 'Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.', 'opens Calendar by itself, with the new wording');
   ok(/link my calendar/.test($('#tourMore').textContent), 'Calendar step offers the step-by-step guide');
@@ -122,7 +140,12 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
   ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Your calendar', 'closing the guide returns to the tour');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(titles.join('|') === "Welcome to Shepherd|Start in Settings|Turn on notifications|Add someone|Start each day here|Message in one tap|When they reply|Disciples|Your calendar|You're all set", 'all 10 steps in order: ' + titles.join(' / '));
+  ok(S().view === 'week', 'shows the Week tab');
+  click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+  ok(S().view === 'settings' && /language/.test($('#tourText').textContent) && /PIN/.test($('#tourText').textContent) && /Privacy and safe use/.test($('#tourText').textContent), 'points out language, contacts, PIN, backups and privacy in Settings');
+  click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+  ok(/responsible for the people you contact/.test($('#tourText').textContent), 'ends with the reminder that you are responsible for who you contact');
+  ok(titles.join('|') === "Welcome to Shepherd|Start in Settings|Turn on notifications|Add someone|Or show your QR code|Start each day here|Message in one tap|When they reply|Everyone's page|List or Journey|Disciples|Pray for people|Your calendar|Your week|Settings has the rest|You're all set", 'all 16 steps in order: ' + titles.join(' / '));
   ok($('#tourNext').textContent === 'Done', 'last step says Done');
   click('#tourNext'); await wait(60);
   ok($('#tour').hidden && S().view === 'today', 'finishing goes back to Today');
@@ -184,8 +207,10 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok(w.__shepherd.state(c) === 'ok', 'status turns green after contact');
   ok(c.replyState === 'them' && c.waitingSince, 'messaging marks them Waiting on them');
   ok(/Waiting on Sam to reply/.test($('#toastMsg').textContent), 'toast confirms Shepherd is waiting');
+  ok(!$$('#main .prow').some(r => r.textContent.includes('Sam Test')), 'once messaged, they leave Today (Today only shows who to chase)');
+  click('[data-act="tab"][data-v="people"]'); await wait();
   row = $$('.prow').find(r => r.textContent.includes('Sam Test'));
-  ok(row && row.querySelector('.rep') && row.querySelector('.rep').textContent === 'Replied', 'row shows a Replied button');
+  ok(row && row.querySelector('.rep') && row.querySelector('.rep').textContent === 'Replied', 'on People, their row shows a Replied button');
   ok(/waiting on them/.test(row.textContent), 'row says waiting on them');
   click('#toastAct'); await wait(60);
   c = S().contacts[samId];
@@ -212,11 +237,11 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click('[data-act="tab"][data-v="people"]'); await wait();
   click($$('.prow').find(r => r.textContent.includes('Sam Test')).querySelector('a.ch')); await wait(60);
   ok(S().contacts[samId].replyState === 'them', 'waiting after messaging');
-  click('[data-act="tab"][data-v="today"]'); await wait();
-  ok(byText('.sec h2', 'Waiting to hear back') && $$('.prow').some(r => r.textContent.includes('Sam Test') && r.querySelector('.rep')), 'Today lists people you\'re waiting on, with Replied');
+  ok($$('.prow').some(r => r.textContent.includes('Sam Test') && r.querySelector('.rep')), 'People shows who you\'re waiting on, with Replied');
   click($$('.prow').find(r => r.textContent.includes('Sam Test')).querySelector('.rep')); await wait(60);
   c = S().contacts[samId];
   ok(c.replyState === 'me' && c.meSince && c.log.some(l => l.text === 'Sam replied'), 'Replied moves them to Reply to');
+  click('[data-act="tab"][data-v="today"]'); await wait();
   row = $$('.prow').find(r => r.textContent.includes('Sam Test'));
   ok(byText('.sec h2', 'Reply to') && row.querySelector('.rep.me').textContent === 'I replied', 'row now offers I replied');
   click(row.querySelector('.rep.me')); await wait(60);
@@ -350,7 +375,11 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok(S().events[ev.id].invited.length === 1, 'after reopening, one tick = one invite');
   ok(S().contacts[samId].log.filter(l => /Invited to Sunday service/.test(l.text)).length === 2, 'invites recorded in their activity');
   click('[data-act="tab"][data-v="today"]'); await wait();
-  ok(byText('.sec h2', 'Events today and tomorrow') && $$('.ev').some(b => b.textContent.includes('Sunday service')), 'tomorrow\'s event shows on Today');
+  ok(!$$('#main .ev').some(b => b.textContent.includes('Sunday service')), 'tomorrow\'s event stays off Today (Today is just today)');
+  S().events.todayEv = { id: 'todayEv', name: 'Prayer meeting', date: ymd(Date.now()), time: '23:59', invited: [], came: [] };
+  click('[data-act="tab"][data-v="people"]'); await wait(); click('[data-act="tab"][data-v="today"]'); await wait();
+  ok(byText('.sec h2', 'Events today') && $$('#evToday .ev').some(b => b.textContent.includes('Prayer meeting')), 'an event today shows on Today');
+  delete S().events.todayEv;
 
   current = 'Invite an Instagram-only contact';
   w.__shepherd.S.contacts.igonly = { id: 'igonly', name: 'Ivy Gram', instagram: 'ivy.g', status: 'active', createdAt: Date.now(), log: [] };
@@ -417,7 +446,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok(amaRow().querySelector('a.ch').getAttribute('href') === 'https://wa.me/447700900777', 'message button opens WhatsApp');
   ok(/Disciples to check on this week: Ama, Ben/.test(w.__shepherd.digest()), 'morning alert lists who to check on');
   click('[data-act="tab"][data-v="today"]'); await wait();
-  ok(/Still to check in with: Ama, Ben/.test($('#main').textContent), 'Today reminds you too');
+  ok($('#dSum') && $$('#dSum .dchip').map(b => b.textContent).join(',') === 'Ama,Ben' && /0 of 2 done/.test($('#dSum').textContent), 'Today has a small summary of disciples to check on');
   click('[data-act="tab"][data-v="disciples"]'); await wait();
   click(amaRow().querySelector('[data-act="dcheck"]')); await wait(60);
   ok(byText('.sec h2', 'Done this week') && /Checked in today/.test(amaRow().textContent) && /1 of 2 this week/.test($('.meter').textContent), 'Checked in moves them to Done this week');
@@ -437,8 +466,8 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   current = 'Replay the tour';
   click('[data-act="settings"]'); await wait();
   click('[data-act="tour"]'); await wait(40);
-  ok(!$('#tour').hidden && $('#tourStep').textContent === '1 of 10', 'Show me around replays the tour');
-  for (let i = 0; i < 5; i++) { click('#tourNext'); await wait(20); }
+  ok(!$('#tour').hidden && $('#tourStep').textContent === '1 of 16', 'Show me around replays the tour');
+  for (let i = 0; i < 6; i++) { click('#tourNext'); await wait(20); }
   ok($('#tourTitle').textContent === 'Message in one tap' && S().view === 'today' && $('#main .prow .ch'), 'Message step shows Today with a real message button to point at');
   click('#tourSkip'); await wait(40);
   ok($('#tour').hidden, 'Skip closes it');
@@ -465,7 +494,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click('#nPreset button[data-preset="All"]'); await wait(60);
   ok(Object.values(S().profile.notify).every(Boolean), 'All preset');
   click('[data-act="tab"][data-v="today"]'); await wait();
-  ok($('#sumCard') && $$('#sumCard li').length >= 1 && /Message|Reply to|Did they reply/.test($('#sumCard').textContent), 'Today shows the morning summary at the top');
+  ok(!$('#sumCard') && $('#addCard') && $('#prayCard'), 'Today stays a quick look (the morning summary is previewed in Settings)');
   click('[data-act="settings"]'); await wait();
 
   current = 'Profile settings';
@@ -569,15 +598,15 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click('#tourMore'); await wait(60);
   ok($('#sheetTitle').textContent === 'Add a contact' && $('#tour').hidden, 'opens Add a contact for you');
   setVal('#cName', 'Tour Tess'); submit('#cForm'); await wait(1300);
-  ok(Object.values(S().contacts).some(x => x.name === 'Tour Tess') && !$('#tour').hidden && $('#tourTitle').textContent === 'Start each day here', 'after saving, the tour carries on');
-  for (let i = 0; i < 3; i++) { click('#tourNext'); await wait(30); }
+  ok(Object.values(S().contacts).some(x => x.name === 'Tour Tess') && !$('#tour').hidden && $('#tourTitle').textContent === 'Or show your QR code', 'after saving, the tour carries on');
+  for (let i = 0; i < 6; i++) { click('#tourNext'); await wait(30); }
   click('#tourMore'); await wait(40);
   ok(!$('#tourPill').hidden, 'Continue tour bar while adding a disciple');
   setVal('#dName', 'Tour Dee'); submit('#dForm'); await wait(1300);
-  ok(Object.values(S().disciples).some(x => x.name === 'Tour Dee') && $('#tourTitle').textContent === 'Your calendar', 'after adding a disciple, the tour carries on');
+  ok(Object.values(S().disciples).some(x => x.name === 'Tour Dee') && $('#tourTitle').textContent === 'Pray for people', 'after adding a disciple, the tour carries on');
   click('#tourBack'); await wait(30); click('#tourMore'); await wait(40);
   click('#tourPillGo'); await wait(40);
-  ok($('#tourTitle').textContent === 'Your calendar', 'Continue tour moves on even without finishing the job');
+  ok($('#tourTitle').textContent === 'Pray for people', 'Continue tour moves on even without finishing the job');
   click('#tourSkip'); await wait(40);
   ok($('#tour').hidden && $('#tourPill').hidden, 'Skip ends the tour');
 
@@ -806,6 +835,11 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     A.click('[data-act="yourdata"]'); await wait();
     const yd = A.$('#sheetBody').textContent;
     ok(/Data linked to you/.test(yd) && /Kept only on this phone/.test(yd) && /Never collected/.test(yd) && /location/.test(yd), 'Your data explains what is saved, where, and what is never collected');
+    ok(A.$('#sheetTitle').textContent === 'Privacy and safe use' && A.$$('#sheetBody .pv h3').map(h => h.textContent).join('|') === "Who is responsible|Your responsibility|Acceptable use|What Shepherd keeps, and why|How it's protected|Keep your phone safe|How long it's kept, and your choices", 'the privacy notice has every section the data protection team asked for');
+    ok(/run by Pavi/.test(yd) && /data controller/.test(yd), 'names Pavi as responsible for it');
+    ok(/isn't a church database or a marketing tool/.test(yd) && /You are responsible for the people you contact/.test(yd), 'puts personal responsibility first, not church marketing');
+    ok(/passcode/.test(yd) && /App lock/.test(yd) && /up to date/.test(yd), 'tells people to lock their phone, use the PIN and keep Shepherd updated');
+    ok(/encrypted/.test(yd) && /scrambled/.test(yd) && /never sends messages for you/.test(yd), 'explains how the information is protected');
     A.click('#sheet [data-act="closesheet"]'); await wait(400);
   }
 

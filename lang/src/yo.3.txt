@@ -1,0 +1,74 @@
+780	Gbàdúrà fún {0} àti {1}
+781	Ṣé o pàdé ẹnìkan?
+782	Fi orúkọ àti nọ́mbà wọn kún un, tàbí fi kóòdù QR rẹ hàn wọ́n kí wọ́n kọ́kọ́ fi ọ̀rọ̀ ránṣẹ́ sí ọ.
+783	Àwọn ìṣẹ̀lẹ̀ òní
+784	§other=Ìgbà ìkẹyìn tí ẹ bá ara yín sọ̀rọ̀: ọjọ́ {0} sẹ́yìn
+785	§other=Ìgbà ìkẹyìn tí ẹ bá ara yín sọ̀rọ̀: ọjọ́ {0} sẹ́yìn
+786	Ẹ ṣé
+787	Ẹ̀dà tuntun Shepherd ti ṣetán
+788	Ṣe àtúnṣe
+789	Àṣírí àti lílò tó yẹ
+790	Mo gbà láti lo Shepherd lọ́nà tó yẹ, bí ó ṣe wà nínú ìkéde àṣírí àti àwọn òfin lílò.
+791	Jọ̀wọ́ ka àwọn òfin lílò kí o sì gbà wọ́n.
+792	Kí o tó bẹ̀rẹ̀
+793	Mo gbà
+794	Ka gbogbo ìkéde àṣírí
+795	Fi gbogbo ìkéde àṣírí pamọ́
+796	Má ṣe kọ ọ̀rọ̀ ìlera tàbí àwọn ọ̀rọ̀ àṣírí mìíràn sílẹ̀ àyàfi tí ẹni náà bá fọwọ́ sí i.
+797	Shepherd jẹ́ irinṣẹ́ ti ara rẹ. Ó ń ràn ọ́ lọ́wọ́ láti rántí láti máa bá àwọn tí o mọ̀ sọ̀rọ̀, pẹ̀lú WhatsApp tìrẹ. Kì í ṣe àkójọ ìsọfúnni ìjọ tàbí irinṣẹ́ ìpolówó, kò sì sí ẹlòmíràn tó lè rí àtòjọ rẹ.
+798	Àtúnṣe ìkẹyìn: <b>{0}</b>
+799	Ta ló ní ojúṣe
+800	<b>{0}</b> ló ń ṣiṣẹ́ Shepherd, òun ló sì ní ojúṣe fún bí a ṣe ń ṣe ìsọfúnni (alákòóso ìsọfúnni).
+801	Fún ìbéèrè èyíkéyìí nípa àṣírí, tàbí láti béèrè ohun tí a tọ́jú nípa rẹ, tàbí kí a ṣe àtúnṣe rẹ̀ tàbí pa á rẹ́, kàn sí <b>{0}</b>.
+802	Fún ìbéèrè èyíkéyìí nípa àṣírí, tàbí láti béèrè ohun tí a tọ́jú nípa rẹ, tàbí kí a ṣe àtúnṣe rẹ̀ tàbí pa á rẹ́, béèrè lọ́wọ́ <b>{0}</b> nípasẹ̀ ìjọ rẹ.
+803	Ojúṣe rẹ
+804	Ìwọ lo máa pinnu ẹni tí o máa fi kún un àti ohun tí o máa kọ nípa wọn. Ìwọ ló ní ojúṣe fún àwọn tí o bá sọ̀rọ̀ pẹ̀lú Shepherd àti ìsọfúnni tí o tọ́jú nípa wọn.
+805	Kọ ohun tí kò ní dà ọ́ láàmú kí ẹni náà kà nìkan. Má ṣe kọ ọ̀rọ̀ ìlera tàbí àwọn ọ̀rọ̀ àṣírí mìíràn sílẹ̀ àyàfi tí wọ́n bá fọwọ́ sí i.
+806	Àwọn òfin lílò
+807	Gbogbo ẹni tó ń lo Shepherd gbà sí èyí:
+808	Ìwọ ló ní ojúṣe fún àwọn tí o yàn láti bá sọ̀rọ̀ pẹ̀lú Shepherd.
+809	Fi kún un kí o sì bá àwọn tí o gba ìsọfúnni wọn lọ́nà tó tọ́ sọ̀rọ̀ nìkan, fún àpẹẹrẹ wọ́n fún ọ ní nọ́mbà wọn tàbí wọ́n ṣe àyẹ̀wò kóòdù QR rẹ.
+810	Bí ẹnìkan bá ní kí o dá fífi ọ̀rọ̀ ránṣẹ́ sí wọn dúró, dá a dúró. Sàmì sí wọn <b>Má bá wọn sọ̀rọ̀ mọ́</b>, kí o sì pa ìsọfúnni wọn rẹ́ bí wọ́n bá béèrè.
+811	Má ṣe pín ìsọfúnni olùbásọ̀rọ̀ ẹnikẹ́ni láìsí ìdí tó dára àti ìfọwọ́sí wọn.
+812	Má ṣe lo Shepherd fún ìpolówó àìfẹ́, ọ̀rọ̀ tí a fi ránṣẹ́ lọ́pọ̀, ìyọlẹ́nu tàbí ohunkóhun tí kò bófin mu.
+813	Ìwọ ṣì ní ojúṣe láti tẹ̀lé òfin ààbò ìsọfúnni àti àṣírí nígbà tí o bá ń lo Shepherd.
+814	Ohun tí Shepherd ń tọ́jú, àti ìdí rẹ̀
+815	<b>Ìsọfúnni tó so mọ́ ọ</b>, tí a fi pamọ́ sínú àkáǹtì àdáni rẹ kí àtòjọ rẹ lè wà lórí gbogbo fóònù tí o bá wọlé sí, kí ó má sì sọnù:
+816	<b>Lórí fóònù yìí nìkan</b>:
+817	<b>A kò gbà á rárá</b>:
+818	<b>Nígbà tí ẹnìkan bá ṣe àyẹ̀wò kóòdù QR rẹ</b>: àwọn fúnra wọn ló máa yàn láti tẹ orúkọ wọn (àti nọ́mbà bí wọ́n bá fẹ́). Inú àtòjọ rẹ nìkan ló ń lọ, lẹ́yìn náà wọn yóò fi ọ̀rọ̀ ránṣẹ́ sí ọ lórí WhatsApp fúnra wọn.
+819	Bí a ṣe ń dáàbò bò ó
+820	A fi àtòjọ rẹ pamọ́ sínú àkáǹtì àdáni rẹ. Kò sí ẹlòmíràn tó ń lo Shepherd tó lè rí i.
+821	Gbogbo nǹkan ń rìn lórí ìsopọ̀ tí a ti pa láròkọ, a sì tọ́jú rẹ̀ sọ́dọ̀ Cloudflare, tí ń pa á láròkọ lórí àwọn sáfà rẹ̀.
+822	A da ọ̀rọ̀ aṣínà rẹ rú lórí fóònù rẹ kí a tó fi ránṣẹ́, a sì tún da á rú lórí sáfà, kí ẹnikẹ́ni má lè kà á.
+823	Àwọn ìkìlọ̀ fóònù ni a pa láròkọ lójú ọ̀nà sí fóònù rẹ, orúkọ àkọ́kọ́ nìkan ni wọ́n sì ń fi hàn.
+824	Shepherd kì í fi ọ̀rọ̀ ránṣẹ́ fún ọ rárá. Ìwọ fúnra rẹ lo ń fi gbogbo ọ̀rọ̀ WhatsApp ránṣẹ́.
+825	A ń tọ́jú àwọn ẹ̀dà àtijọ́ fún ọdún kan jù lọ kí nǹkan má bàa sọnù láìmọ̀. Pípa ìsọfúnni ẹnìkan rẹ́ ń mú gbogbo ẹ̀dà rẹ̀ kúrò.
+826	<b>{0}</b> ló ń bójú tó sáfà náà. Kì í wo àtòjọ ẹnikẹ́ni, ó sì máa ń dé ìsọfúnni tí a tọ́jú láti jẹ́ kí Shepherd máa ṣiṣẹ́ nìkan, tàbí láti ṣe ohun tí ẹnìkan béèrè pé kí a yọ wọ́n kúrò.
+827	Dáàbò bo fóònù rẹ
+828	Ti fóònù rẹ pẹ̀lú kóòdù, Face ID tàbí ìka ọwọ́.
+829	Tan PIN ti Shepherd fúnra rẹ̀ nínú <b>Ètò › Títì áàpù</b>.
+830	Máa ṣe àtúnṣe fóònù rẹ àti Shepherd. Nígbà tí Shepherd bá sọ pé ẹ̀dà tuntun ti ṣetán, tẹ <b>Ṣe àtúnṣe</b>.
+831	Má ṣe pín ọ̀rọ̀ aṣínà rẹ, kí o sì jáde lórí àwọn fóònù tí kì í ṣe tìrẹ.
+832	Ṣé fóònù rẹ sọnù? Wọlé lórí fóònù mìíràn kí o sì yí ọ̀rọ̀ aṣínà rẹ padà. Ìyẹn yóò mú fóònù tó sọnù jáde.
+833	Bí a ṣe ń tọ́jú rẹ̀ pẹ́ tó, àti àwọn àṣàyàn rẹ
+834	Ìsọfúnni máa wà títí o fi pa á rẹ́. Àwọn tí o dá bíbá sọ̀rọ̀ dúró máa wà lábẹ́ A kò bá wọn sọ̀rọ̀ mọ́ títí o fi pa wọ́n rẹ́.
+835	Gbé ẹ̀dà ààbò jáde nígbàkígbà láti Ètò. <b>Pa àkáǹtì mi rẹ́</b> ń mú gbogbo nǹkan kúrò títí láé.
+836	Ẹnikẹ́ni lè béèrè ohun tí Shepherd tọ́jú nípa wọn, kí wọ́n sì béèrè kí a ṣe àtúnṣe rẹ̀ tàbí pa á rẹ́.
+837	Shepherd jẹ́ irinṣẹ́ àdáni rẹ láti máa bá àwọn tí o mọ̀ sọ̀rọ̀. Kí o tó bẹ̀rẹ̀, jọ̀wọ́ gbà láti lò ó lọ́nà tó yẹ:
+838	Ṣí Shepherd
+839	Shepherd ń rán ọ létí ẹni tí o máa bá sọ̀rọ̀, kí ẹnikẹ́ni tí ò ń bójú tó má bàa yọ̀ mọ́ ọ lọ́wọ́. Ìrìn-àjò yìí ń fi gbogbo apá áàpù náà hàn ọ́, ó sì ń jẹ́ kí o ṣètò rẹ̀ bí o ṣe ń lọ. Yóò gba ìṣẹ́jú mẹ́ta.
+840	Lẹ́yìn tí o bá pàdé ẹnìkan, tẹ Fi ẹnìkan kún. Tẹ orúkọ wọn àti nọ́mbà WhatsApp wọn (àwọn orúkọ láti inú olùbásọ̀rọ̀ fóònù rẹ yóò jáde bí o ṣe ń tẹ̀ ẹ́), kí o sì sàmì pé inú wọn dùn kí o tọ́jú ìsọfúnni wọn.
+841	Tàbí fi kóòdù QR rẹ hàn
+842	Tẹ Kóòdù QR mi kí o sì jẹ́ kí wọ́n ṣe àyẹ̀wò rẹ̀ pẹ̀lú kámẹ́rà fóònù wọn. Wọn yóò tẹ orúkọ wọn, a ó fi wọ́n kún àtòjọ rẹ fúnra rẹ̀, WhatsApp yóò sì ṣí pẹ̀lú ọ̀rọ̀ rẹ tó ti ṣetán fún wọn láti fi ránṣẹ́.
+843	Òní jẹ́ ìwòyè kíákíá nípa ọjọ́ rẹ: ẹni tí o máa fèsì sí, ẹni tí o máa fi ọ̀rọ̀ ránṣẹ́ sí, àwọn ọmọ-ẹ̀yìn láti bẹ̀ wò, àwọn ìṣẹ̀lẹ̀ òní àti ẹni tí o máa gbàdúrà fún. Àwọ̀ ewé túmọ̀ sí pé ó ń lọ dáadáa, àwọ̀ ìyeyè túmọ̀ sí pé òní ni, pupa túmọ̀ sí pé ó ti pẹ́.
+844	Ojú-ìwé olúkúlùkù
+845	Tẹ ẹnikẹ́ni láti ṣí ojú-ìwé wọn. Kọ ẹ̀kọ́ Bíbélì sílẹ̀ kí o sì ṣètò èyí tó kàn, yí ìpele wọn padà, fi àwọn kókó àdúrà kún un, fi wọ́n pamọ́ sínú olùbásọ̀rọ̀ fóònù rẹ tàbí àtòjọ àdúrà, dá ìrántí dúró pẹ̀lú Fi sílẹ̀ fún báyìí, tàbí dá dúró pẹ̀lú Má bá wọn sọ̀rọ̀ mọ́.
+846	Àtòjọ tàbí Ìrìn-àjò
+847	Ènìyàn ń fi gbogbo àwọn tí ò ń bá sọ̀rọ̀ hàn. Àwọn bọ́tìnnì ń fi ẹni tó ti pẹ́, ẹni tí òní ni àti ẹni tó ń dúró de èsì hàn. Ìrìn-àjò ń fi gbogbo ènìyàn hàn ní ìpele-ìpele, láti Ìpàdé àkọ́kọ́ dé Ọmọ-ẹ̀yìn. Tẹ Gbé e lọ sí… láti gbé ẹnìkan síwájú.
+848	Gbàdúrà fún àwọn ènìyàn
+849	Fi ẹnikẹ́ni tí o fẹ́ gbàdúrà fún kún un, pẹ̀lú àkọsílẹ̀ bí o bá fẹ́. Lójoojúmọ́ Shepherd ń fi 2 tàbí 3 lára wọn hàn, ní àtẹ̀lé-ǹ-tẹ̀lé, ó sì lè rán ọ létí ní àkókò tí o yàn nínú Ètò.
+850	Ọ̀sẹ̀ ń fi iye àwọn tí o bá sọ̀rọ̀ hàn, àwọn ẹ̀kọ́ rẹ, àwọn olùbásọ̀rọ̀ tuntun àti àwọn tó wá sí ìṣẹ̀lẹ̀, pẹ̀lú ọ̀sẹ̀ mẹ́rin tó kọjá ní ẹ̀gbẹ́ ara wọn.
+851	Ètò ló ní èyí tó kù
+852	Yan èdè rẹ (àwọn ẹsẹ Bíbélì yóò wà ní èdè Gẹ̀ẹ́sì, NIV), mú àwọn olùbásọ̀rọ̀ fóònù rẹ wọlé, ṣètò PIN, gbé ẹ̀dà ààbò jáde, kí o sì ka Àṣírí àti lílò tó yẹ.
+853	Ìwọ ló ní ojúṣe fún àwọn tí o bá sọ̀rọ̀, nítorí náà fi ọ̀rọ̀ ránṣẹ́ sí àwọn tí inú wọn dùn láti gbọ́ láti ọ̀dọ̀ rẹ nìkan, kí o sì dá dúró bí wọ́n bá béèrè. Tún ìrìn-àjò yìí wò láti Ètò nígbàkígbà.

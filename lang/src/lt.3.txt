@@ -1,0 +1,74 @@
+780	Melskis už {0} ir {1}
+781	Susipažinai su kuo nors?
+782	Pridėk vardą ir numerį arba parodyk savo QR kodą, kad žmogus parašytų tau pirmas.
+783	Šiandienos renginiai
+784	§one=Paskutinis kontaktas prieš {0} dieną|few=Paskutinis kontaktas prieš {0} dienas|many=Paskutinis kontaktas prieš {0} dienos|other=Paskutinis kontaktas prieš {0} dienų
+785	§one=Paskutinis kontaktas prieš {0} dieną|few=Paskutinis kontaktas prieš {0} dienas|many=Paskutinis kontaktas prieš {0} dienos|other=Paskutinis kontaktas prieš {0} dienų
+786	Ačiū
+787	Yra nauja Shepherd versija
+788	Atnaujinti
+789	Privatumas ir atsakingas naudojimas
+790	Sutinku naudoti Shepherd atsakingai, kaip aprašyta privatumo pranešime ir naudojimo taisyklėse.
+791	Perskaityk naudojimo taisykles ir sutik su jomis.
+792	Prieš pradedant
+793	Sutinku
+794	Skaityti visą privatumo pranešimą
+795	Slėpti visą privatumo pranešimą
+796	Neužrašyk sveikatos ar kitų jautrių duomenų, nebent žmogus tam pritaria.
+797	Shepherd yra asmeninis įrankis. Jis padeda nepamiršti susisiekti su pažįstamais žmonėmis per tavo paties WhatsApp. Tai nėra bažnyčios duomenų bazė ar rinkodaros įrankis, ir niekas kitas nemato tavo sąrašo.
+798	Paskutinį kartą atnaujinta: <b>{0}</b>
+799	Kas atsakingas
+800	Shepherd tvarko <b>{0}</b>, kuris atsako už tai, kaip tvarkoma informacija (duomenų valdytojas).
+801	Dėl bet kokio privatumo klausimo, norėdamas sužinoti, kas apie tave saugoma, arba paprašyti tai pataisyti ar ištrinti, kreipkis į <b>{0}</b>.
+802	Dėl bet kokio privatumo klausimo, norėdamas sužinoti, kas apie tave saugoma, arba paprašyti tai pataisyti ar ištrinti, kreipkis į <b>{0}</b> per savo bažnyčią.
+803	Tavo atsakomybė
+804	Tu sprendi, ką pridėti ir ką apie juos rašyti. Tu atsakai už žmones, su kuriais susisieki per Shepherd, ir už informaciją, kurią apie juos saugai.
+805	Rašyk tik tai, ką tas žmogus galėtų ramiai perskaityti. Neužrašyk sveikatos ar kitų jautrių duomenų, nebent jis tam pritaria.
+806	Naudojimo taisyklės
+807	Kiekvienas, kas naudoja Shepherd, sutinka su tuo:
+808	Tu atsakai už žmones, su kuriais nusprendi susisiekti per Shepherd.
+809	Pridėk ir rašyk tik tiems, kurių duomenis gavai sąžiningai, pavyzdžiui, jie patys davė numerį arba nuskenavo tavo QR kodą.
+810	Jei kas nors paprašo nebesiųsti žinučių, liaukis. Pažymėk jį <b>Nebesusisiekti</b> ir ištrink jo duomenis, jei jis paprašo.
+811	Nesidalyk niekieno kontaktais be rimtos priežasties ir be to žmogaus sutikimo.
+812	Niekada nenaudok Shepherd šlamštui, masinėms žinutėms, priekabiavimui ar kam nors neteisėtam.
+813	Naudodamas Shepherd tu ir toliau atsakai už duomenų apsaugos ir privatumo įstatymų laikymąsi.
+814	Ką Shepherd saugo ir kodėl
+815	<b>Su tavimi susieti duomenys</b>, saugomi tavo asmeninėje paskyroje, kad sąrašas būtų kiekviename telefone, kuriame prisijungi, ir nepasimestų:
+816	<b>Tik šiame telefone</b>:
+817	<b>Niekada nerenkama</b>:
+818	<b>Kai kas nors nuskenuoja tavo QR kodą</b>: žmogus pats nusprendžia įrašyti vardą (ir numerį, jei nori). Tai patenka tik į tavo sąrašą, o paskui jis pats parašo tau per WhatsApp.
+819	Kaip tai apsaugota
+820	Tavo sąrašas saugomas tavo asmeninėje paskyroje. Niekas kitas iš Shepherd naudotojų jo nemato.
+821	Viskas keliauja šifruotu ryšiu ir saugoma Cloudflare, kuris duomenis šifruoja savo serveriuose.
+822	Tavo slaptažodis užšifruojamas telefone prieš išsiunčiant ir dar kartą serveryje, todėl niekas negali jo perskaityti.
+823	Pranešimai į telefoną keliauja šifruoti ir rodo tik vardus.
+824	Shepherd niekada nesiunčia žinučių už tave. Kiekvieną WhatsApp žinutę siunti pats.
+825	Ankstesnės versijos saugomos iki metų, kad niekas nepasimestų per klaidą. Ištrynus žmogaus duomenis, pašalinamos visos kopijos.
+826	Serverį prižiūri <b>{0}</b>, kuris nežiūri niekieno sąrašų ir prie duomenų prieina tik tam, kad Shepherd veiktų, arba kad įvykdytų prašymą ką nors ištrinti.
+827	Saugok savo telefoną
+828	Užrakink telefoną kodu, Face ID arba piršto atspaudu.
+829	Įjunk Shepherd PIN kodą <b>Nustatymai › Programėlės užraktas</b>.
+830	Atnaujink telefoną ir Shepherd. Kai Shepherd praneša, kad yra nauja versija, bakstelėk <b>Atnaujinti</b>.
+831	Niekam nesakyk slaptažodžio ir atsijunk svetimuose telefonuose.
+832	Pametei telefoną? Prisijunk kitame telefone ir pakeisk slaptažodį. Taip pamestas telefonas bus atjungtas.
+833	Kiek laiko saugoma ir ką gali pasirinkti
+834	Informacija lieka, kol ją ištrini. Žmonės, su kuriais nebesusisieki, lieka skiltyje Nebesusisiekiama, kol juos ištrini.
+835	Atsarginę kopiją bet kada gali eksportuoti Nustatymuose. <b>Ištrinti mano paskyrą</b> visam laikui pašalina viską.
+836	Kiekvienas gali paklausti, ką Shepherd apie jį saugo, ir paprašyti tai pataisyti ar ištrinti.
+837	Shepherd yra tavo asmeninis įrankis palaikyti ryšį su pažįstamais žmonėmis. Prieš pradėdamas sutik jį naudoti atsakingai:
+838	Atidaryti Shepherd
+839	Shepherd primena, su kuo susisiekti, kad nė vienas, kuriuo rūpiniesi, nepasimestų. Šis vadovas apeina kiekvieną programėlės dalį ir leidžia viską iškart nustatyti. Tai užtrunka apie tris minutes.
+840	Susipažinęs su kuo nors, bakstelėk Pridėti žmogų. Įrašyk vardą ir WhatsApp numerį (vardai iš telefono kontaktų pasirodo rašant) ir pažymėk, kad žmogus sutinka, jog saugotum jo duomenis.
+841	Arba parodyk savo QR kodą
+842	Bakstelėk Mano QR kodas ir leisk žmogui jį nuskenuoti telefono kamera. Jis įrašo vardą, pats patenka į tavo sąrašą, o WhatsApp atsidaro su tavo žinute, paruošta siųsti.
+843	Šiandien yra greita dienos apžvalga: kam atsakyti, kam parašyti, kuriuos mokinius aplankyti, šiandienos renginiai ir už ką melstis. Žalia reiškia laiku, geltona – šiandien, raudona – vėluoja.
+844	Kiekvieno žmogaus puslapis
+845	Bakstelėk bet kurį žmogų, kad atidarytum jo puslapį. Užrašyk Biblijos studiją ir suplanuok kitą, pakeisk etapą, pridėk maldos prašymų, išsaugok jį telefono kontaktuose ar maldos sąraše, sustabdyk priminimus mygtuku Kol kas palikti arba baik mygtuku Nebesusisiekti.
+846	Sąrašas arba Kelionė
+847	Žmonės rodo visus, su kuriais palaikai ryšį. Mygtukai rodo, kas vėluoja, kam laikas šiandien ir kas laukia atsakymo. Kelionė rodo visus pagal etapą, nuo Pirmas kontaktas iki Mokinys. Bakstelėk Perkelti…, kad perkeltum žmogų toliau.
+848	Melskis už žmones
+849	Pridėk visus, už kuriuos nori melstis, su pastabomis, jei nori. Kasdien Shepherd parodo 2 ar 3 iš jų paeiliui ir gali priminti tavo Nustatymuose pasirinktu laiku.
+850	Savaitė rodo, su kiek žmonių susisiekei, tavo studijas, naujus kontaktus ir kas atėjo į renginius, su paskutinėmis keturiomis savaitėmis greta.
+851	Visa kita – Nustatymuose
+852	Pasirink kalbą (Biblijos eilutės lieka anglų kalba, NIV), įkelk telefono kontaktus, nustatyk PIN kodą, eksportuok atsarginę kopiją ir perskaityk Privatumas ir atsakingas naudojimas.
+853	Tu atsakai už žmones, su kuriais susisieki, todėl rašyk tik tiems, kurie džiaugiasi tave girdėdami, ir liaukis, jei jie paprašo. Šį vadovą bet kada gali pakartoti Nustatymuose.

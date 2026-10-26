@@ -1,0 +1,74 @@
+780	Bid voor {0} en {1}
+781	Iemand ontmoet?
+782	Voeg naam en nummer toe, of laat je QR-code zien zodat zij jou eerst een bericht sturen.
+783	Activiteiten vandaag
+784	§one=Laatste contact {0} dag geleden|other=Laatste contact {0} dagen geleden
+785	§one=Laatste contact {0} dag geleden|other=Laatste contact {0} dagen geleden
+786	Dank je
+787	Er is een nieuwe versie van Shepherd
+788	Bijwerken
+789	Privacy en verantwoord gebruik
+790	Ik ga akkoord om Shepherd verantwoord te gebruiken, zoals beschreven in de privacyverklaring en de gebruiksregels.
+791	Lees de gebruiksregels en ga ermee akkoord.
+792	Voordat je begint
+793	Akkoord
+794	Lees de volledige privacyverklaring
+795	Verberg de volledige privacyverklaring
+796	Noteer geen gezondheids- of andere gevoelige gegevens, tenzij de persoon dat goed vindt.
+797	Shepherd is een persoonlijk hulpmiddel. Het helpt je eraan denken om mensen die je kent op te volgen, met je eigen WhatsApp. Het is geen kerkdatabase of marketingtool, en niemand anders kan je lijst zien.
+798	Laatst bijgewerkt: <b>{0}</b>
+799	Wie is verantwoordelijk
+800	Shepherd wordt beheerd door <b>{0}</b>, die verantwoordelijk is voor hoe er met gegevens wordt omgegaan (de verwerkingsverantwoordelijke).
+801	Voor elke privacyvraag, of om te vragen wat er over je bewaard wordt, of om het te laten verbeteren of verwijderen, neem contact op met <b>{0}</b>.
+802	Voor elke privacyvraag, of om te vragen wat er over je bewaard wordt, of om het te laten verbeteren of verwijderen, vraag het aan <b>{0}</b> via je kerk.
+803	Jouw verantwoordelijkheid
+804	Jij bepaalt wie je toevoegt en wat je over hen schrijft. Jij bent verantwoordelijk voor de mensen die je via Shepherd benadert en voor de gegevens die je over hen bewaart.
+805	Schrijf alleen op wat je die persoon gerust zou laten lezen. Noteer geen gezondheids- of andere gevoelige gegevens, tenzij zij dat goed vinden.
+806	Gebruiksregels
+807	Iedereen die Shepherd gebruikt, gaat hiermee akkoord:
+808	Jij bent verantwoordelijk voor de mensen die je via Shepherd benadert.
+809	Voeg alleen mensen toe en benader alleen mensen van wie je de gegevens op een eerlijke manier hebt gekregen, bijvoorbeeld omdat ze je hun nummer gaven of je QR-code scanden.
+810	Vraagt iemand je te stoppen met berichten sturen, stop dan. Zet ze op <b>Geen contact meer</b> en verwijder hun gegevens als ze dat vragen.
+811	Deel niemands contactgegevens zonder goede reden en zonder hun toestemming.
+812	Gebruik Shepherd nooit voor spam, massaberichten, intimidatie of iets wat niet mag.
+813	Jij blijft verantwoordelijk voor het naleven van de wetten voor gegevensbescherming en privacy als je Shepherd gebruikt.
+814	Wat Shepherd bewaart, en waarom
+815	<b>Gegevens gekoppeld aan jou</b>, bewaard in je eigen privéaccount zodat je lijst op elke telefoon staat waarop je inlogt en niet verloren gaat:
+816	<b>Alleen op deze telefoon</b>:
+817	<b>Nooit verzameld</b>:
+818	<b>Als iemand je QR-code scant</b>: zij kiezen zelf of ze hun naam typen (en hun nummer als ze willen). Dat gaat alleen naar jouw lijst, en daarna sturen ze je zelf een WhatsApp-bericht.
+819	Hoe het beschermd wordt
+820	Je lijst wordt bewaard in je eigen privéaccount. Niemand anders die Shepherd gebruikt kan hem zien.
+821	Alles gaat via een versleutelde verbinding en wordt opgeslagen bij Cloudflare, dat het op zijn servers versleutelt.
+822	Je wachtwoord wordt op je telefoon onleesbaar gemaakt voordat het wordt verstuurd, en op de server nog eens, dus niemand kan het lezen.
+823	Meldingen gaan versleuteld naar je telefoon en tonen alleen voornamen.
+824	Shepherd stuurt nooit berichten namens jou. Elk WhatsApp-bericht stuur je zelf.
+825	Eerdere versies worden tot een jaar bewaard zodat er niets per ongeluk verloren gaat. Iemands gegevens verwijderen wist elke kopie.
+826	De server wordt onderhouden door <b>{0}</b>, die niemands lijst bekijkt en alleen bij de gegevens komt om Shepherd draaiend te houden of om een verzoek tot verwijderen uit te voeren.
+827	Houd je telefoon veilig
+828	Vergrendel je telefoon met een toegangscode, Face ID of vingerafdruk.
+829	Zet de eigen pincode van Shepherd aan bij <b>Instellingen › App-vergrendeling</b>.
+830	Houd je telefoon en Shepherd up-to-date. Als Shepherd zegt dat er een nieuwe versie is, tik op <b>Bijwerken</b>.
+831	Deel je wachtwoord niet, en log uit op telefoons die niet van jou zijn.
+832	Telefoon kwijt? Log in op een andere telefoon en wijzig je wachtwoord. Dan wordt de kwijtgeraakte telefoon uitgelogd.
+833	Hoe lang het bewaard blijft, en jouw keuzes
+834	Gegevens blijven tot je ze verwijdert. Mensen met wie je geen contact meer hebt, blijven onder Geen contact meer staan tot je ze verwijdert.
+835	Maak wanneer je wilt een back-up via Instellingen. <b>Mijn account verwijderen</b> wist alles voorgoed.
+836	Iedereen kan vragen wat Shepherd over hen bewaart, en vragen om het te verbeteren of te verwijderen.
+837	Shepherd is je persoonlijke hulpmiddel om mensen die je kent op te volgen. Ga voordat je begint akkoord om het verantwoord te gebruiken:
+838	Shepherd openen
+839	Shepherd herinnert je met wie je contact moet opnemen, zodat niemand die je volgt tussen wal en schip valt. Deze rondleiding gaat langs elk deel van de app en laat je het onderweg instellen. Het duurt ongeveer drie minuten.
+840	Tik na een ontmoeting op Iemand toevoegen. Typ naam en WhatsApp-nummer (namen uit je telefooncontacten komen naar boven terwijl je typt) en vink aan dat ze het goed vinden dat je hun gegevens bewaart.
+841	Of laat je QR-code zien
+842	Tik op Mijn QR-code en laat ze die scannen met de camera van hun telefoon. Ze typen hun naam, worden vanzelf aan je lijst toegevoegd, en WhatsApp opent met jouw bericht klaar om te versturen.
+843	Vandaag is een snelle blik op je dag: wie je moet antwoorden, wie je moet berichten, discipelen om te spreken, activiteiten van vandaag en voor wie je bidt. Groen is op schema, oranje is vandaag, rood is te laat.
+844	Ieders pagina
+845	Tik op iemand om de pagina te openen. Noteer een bijbelstudie en plan de volgende, wijzig de fase, voeg gebedspunten toe, bewaar ze in je telefooncontacten of gebedslijst, pauzeer herinneringen met Even laten, of stop met Geen contact meer.
+846	Lijst of Reis
+847	Mensen toont iedereen die je opvolgt. De knoppen laten zien wie te laat is, vandaag aan de beurt is of op antwoord wacht. Reis toont iedereen per fase, van Eerste contact tot Discipel. Tik op Naar… om iemand verder te zetten.
+848	Bid voor mensen
+849	Voeg iedereen toe voor wie je wilt bidden, met notities als je wilt. Elke dag laat Shepherd er 2 of 3 zien, om de beurt, en kan je herinneren op een tijd die je in Instellingen kiest.
+850	Week laat zien hoeveel mensen je hebt opgevolgd, je studies, nieuwe contacten en wie naar activiteiten kwam, met de laatste vier weken naast elkaar.
+851	Instellingen heeft de rest
+852	Kies je taal (bijbelverzen blijven in het Engels, NIV), haal je telefooncontacten binnen, stel een pincode in, maak een back-up en lees Privacy en verantwoord gebruik.
+853	Jij bent verantwoordelijk voor de mensen die je benadert, dus stuur alleen berichten aan mensen die blij zijn iets van je te horen, en stop als ze dat vragen. Doe deze rondleiding opnieuw via Instellingen wanneer je wilt.
