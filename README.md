@@ -54,8 +54,7 @@ The tables and the notification keys are created by the Worker itself the first 
    `apple-touch-icon.png`, `badge-96.png` and the `lang` folder → **Commit changes**.
 3. Click `config.js` → the pencil (Edit) → replace `https://shepherd.YOUR-NAME.workers.dev` with your **Worker address**
    from 1.7. On the `privacy:` line, put the email people should write to about their data, e.g.
-   `privacy: { controller: 'Pavi', contact: 'you@example.com' }` → **Commit changes**. Until a contact is set, the
-   privacy notice tells people to ask you through the church.
+   `privacy: { controller: 'Pavi', contact: '8pavii@gmail.com' }` → **Commit changes**.
 4. **Settings → Pages → Deploy from a branch → main / (root) → Save**.
 5. A minute or two later it's live at **https://sitbackco.github.io/shepherd/**.
 

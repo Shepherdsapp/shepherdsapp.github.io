@@ -19,7 +19,7 @@
 798	Laatst bijgewerkt: <b>{0}</b>
 799	Wie is verantwoordelijk
 800	Shepherd wordt beheerd door <b>{0}</b>, die verantwoordelijk is voor hoe er met gegevens wordt omgegaan (de verwerkingsverantwoordelijke).
-801	Voor elke privacyvraag, of om te vragen wat er over je bewaard wordt, of om het te laten verbeteren of verwijderen, neem contact op met <b>{0}</b>.
+801	Voor elke privacyvraag, of om te vragen wat er over je bewaard wordt, of om het te laten verbeteren of verwijderen, mail naar <b>{0}</b>.
 802	Voor elke privacyvraag, of om te vragen wat er over je bewaard wordt, of om het te laten verbeteren of verwijderen, vraag het aan <b>{0}</b> via je kerk.
 803	Jouw verantwoordelijkheid
 804	Jij bepaalt wie je toevoegt en wat je over hen schrijft. Jij bent verantwoordelijk voor de mensen die je via Shepherd benadert en voor de gegevens die je over hen bewaart.

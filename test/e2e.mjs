@@ -25,7 +25,7 @@ const site = http.createServer((req, res) => {
   const u = new URL(req.url, APP); let p = decodeURIComponent(u.pathname);
   if (!p.startsWith('/shepherd/')) { res.writeHead(404); return res.end(); }
   p = p.slice('/shepherd/'.length) || 'index.html';
-  if (p === 'config.js') { res.writeHead(200, { 'Content-Type': 'text/javascript' }); return res.end("window.SHEPHERD_CONFIG = { api: '" + API + "' };"); }
+  if (p === 'config.js') { res.writeHead(200, { 'Content-Type': 'text/javascript' }); return res.end("window.SHEPHERD_CONFIG = { api: '" + API + "', privacy: { controller: 'Pavi', contact: '8pavii@gmail.com' } };"); }
   const f = path.join(ROOT, p);
   if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory() || /^(test|worker|src|node_modules)\//.test(p)) { res.writeHead(404); return res.end('not found'); }
   res.writeHead(200, { 'Content-Type': types[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res);
@@ -238,7 +238,7 @@ try {
     await P.p.goto(APP + 'privacy.html'); await wait(900);
     const hs = await P.p.$$eval('#pv h3', h => h.length);
     const txt = await P.p.textContent('body');
-    ok(hs === 7 && /Acceptable use/.test(txt) && /responsible for the people/.test(txt) && /passcode/.test(txt), 'privacy.html opens on its own with all 7 sections');
+    ok(hs === 7 && /Acceptable use/.test(txt) && /responsible for the people/.test(txt) && /passcode/.test(txt) && /email 8pavii@gmail\.com/.test(txt), 'privacy.html opens on its own with all 7 sections');
     ok(await overflow(P.p) <= 0, 'privacy page fits a small phone');
     await P.p.screenshot({ path: path.join(OUT, 'privacy-320.png'), fullPage: true });
     await P.p.evaluate(() => localStorage.setItem('shepherd:lang', 'es')); await P.p.reload(); await wait(1500);

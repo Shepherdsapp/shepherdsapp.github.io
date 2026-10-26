@@ -408,7 +408,7 @@ body{overflow-x:clip}
     ['ja', '日本語', 'ja'], ['de', 'Deutsch', 'de'], ['ru', 'Русский', 'ru'], ['lt', 'Lietuvių', 'lt']
   ];
   var CODES = LANGS.map(function (l) { return l[0]; });
-  var PACK_VER = '186e3f900a';
+  var PACK_VER = '6173cd2517';
   var lang = 'en', dict = null, tpls = [], cache = new Map(), outs = new WeakMap(), plural = null;
   var collect = typeof window !== 'undefined' && window.__i18nCollect ? window.__i18nCollect : null;
   var INLINE = { B: 1, STRONG: 1, I: 1, EM: 1, BR: 1, U: 1, SMALL: 1, CODE: 1 };
@@ -625,7 +625,7 @@ body{overflow-x:clip}
 (function () {
   var USE_VERSION = 1; // raise this when the acceptable use statement changes, so everyone agrees to the new one
   var UPDATED = '2026-10-26';
-  function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || '' }; }
+  function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || '8pavii@gmail.com' }; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
   function when() {
     var d = new Date(UPDATED + 'T12:00:00');
@@ -646,7 +646,7 @@ body{overflow-x:clip}
   }
   function contactLine(c) {
     return c.contact
-      ? '<p class="note">For any privacy question, or to ask what is held about you, or for it to be corrected or removed, contact <b>' + esc(c.contact) + '</b>.</p>'
+      ? '<p class="note">For any privacy question, or to ask what is held about you, or for it to be corrected or removed, email <b>' + esc(c.contact) + '</b>.</p>'
       : '<p class="note">For any privacy question, or to ask what is held about you, or for it to be corrected or removed, ask <b>' + esc(c.controller) + '</b> through your church.</p>';
   }
   // the whole notice

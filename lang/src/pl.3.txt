@@ -19,7 +19,7 @@
 798	Ostatnia aktualizacja: <b>{0}</b>
 799	Kto odpowiada
 800	Shepherd prowadzi <b>{0}</b>, który odpowiada za to, jak przetwarzane są dane (administrator danych).
-801	W każdej sprawie dotyczącej prywatności, żeby zapytać, co jest o tobie przechowywane, albo poprosić o poprawienie lub usunięcie, skontaktuj się z <b>{0}</b>.
+801	W każdej sprawie dotyczącej prywatności, żeby zapytać, co jest o tobie przechowywane, albo poprosić o poprawienie lub usunięcie, napisz e-mail na <b>{0}</b>.
 802	W każdej sprawie dotyczącej prywatności, żeby zapytać, co jest o tobie przechowywane, albo poprosić o poprawienie lub usunięcie, zwróć się do <b>{0}</b> przez swój kościół.
 803	Twoja odpowiedzialność
 804	To ty decydujesz, kogo dodać i co o nim napisać. Odpowiadasz za osoby, z którymi kontaktujesz się przez Shepherd, i za informacje, które o nich przechowujesz.

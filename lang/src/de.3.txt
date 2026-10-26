@@ -19,7 +19,7 @@
 798	Zuletzt aktualisiert: <b>{0}</b>
 799	Wer verantwortlich ist
 800	Shepherd wird von <b>{0}</b> betrieben, der dafür verantwortlich ist, wie mit Daten umgegangen wird (der Verantwortliche im Sinne des Datenschutzes).
-801	Bei Fragen zum Datenschutz, oder um zu erfahren, was über dich gespeichert ist, oder um es berichtigen oder löschen zu lassen, wende dich an <b>{0}</b>.
+801	Bei Fragen zum Datenschutz, oder um zu erfahren, was über dich gespeichert ist, oder um es berichtigen oder löschen zu lassen, schreib eine E-Mail an <b>{0}</b>.
 802	Bei Fragen zum Datenschutz, oder um zu erfahren, was über dich gespeichert ist, oder um es berichtigen oder löschen zu lassen, frag <b>{0}</b> über deine Gemeinde.
 803	Deine Verantwortung
 804	Du entscheidest, wen du hinzufügst und was du über die Person schreibst. Du bist verantwortlich für die Menschen, die du über Shepherd kontaktierst, und für die Angaben, die du über sie speicherst.

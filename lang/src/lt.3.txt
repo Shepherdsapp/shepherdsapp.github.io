@@ -19,7 +19,7 @@
 798	Paskutinį kartą atnaujinta: <b>{0}</b>
 799	Kas atsakingas
 800	Shepherd tvarko <b>{0}</b>, kuris atsako už tai, kaip tvarkoma informacija (duomenų valdytojas).
-801	Dėl bet kokio privatumo klausimo, norėdamas sužinoti, kas apie tave saugoma, arba paprašyti tai pataisyti ar ištrinti, kreipkis į <b>{0}</b>.
+801	Dėl bet kokio privatumo klausimo, norėdamas sužinoti, kas apie tave saugoma, arba paprašyti tai pataisyti ar ištrinti, rašyk el. paštu <b>{0}</b>.
 802	Dėl bet kokio privatumo klausimo, norėdamas sužinoti, kas apie tave saugoma, arba paprašyti tai pataisyti ar ištrinti, kreipkis į <b>{0}</b> per savo bažnyčią.
 803	Tavo atsakomybė
 804	Tu sprendi, ką pridėti ir ką apie juos rašyti. Tu atsakai už žmones, su kuriais susisieki per Shepherd, ir už informaciją, kurią apie juos saugai.

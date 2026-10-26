@@ -19,7 +19,7 @@
 798	Emelitere ikpeazụ: <b>{0}</b>
 799	Onye ọrụ dịịrị
 800	Ọ bụ <b>{0}</b> na-elekọta Shepherd, ọ bụkwa ya ka ọrụ dịịrị maka otú e si edozi ozi (onye na-achịkwa data).
-801	Maka ajụjụ ọ bụla gbasara nzuzo, ma ọ bụ ịjụ ihe e debere gbasara gị, ma ọ bụ ka e mezie ya ma ọ bụ hichapụ ya, kpọtụrụ <b>{0}</b>.
+801	Maka ajụjụ ọ bụla gbasara nzuzo, ma ọ bụ ịjụ ihe e debere gbasara gị, ma ọ bụ ka e mezie ya ma ọ bụ hichapụ ya, zitere <b>{0}</b> email.
 802	Maka ajụjụ ọ bụla gbasara nzuzo, ma ọ bụ ịjụ ihe e debere gbasara gị, ma ọ bụ ka e mezie ya ma ọ bụ hichapụ ya, jụọ <b>{0}</b> site na ụka gị.
 803	Ọrụ gị
 804	Ọ bụ gị na-ekpebi onye ị ga-etinye na ihe ị ga-ede gbasara ha. Ọrụ dịịrị gị maka ndị ị na-akpọtụrụ site na Shepherd na ozi ị debere gbasara ha.

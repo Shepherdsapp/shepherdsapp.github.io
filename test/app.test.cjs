@@ -837,6 +837,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     ok(/Data linked to you/.test(yd) && /Kept only on this phone/.test(yd) && /Never collected/.test(yd) && /location/.test(yd), 'Your data explains what is saved, where, and what is never collected');
     ok(A.$('#sheetTitle').textContent === 'Privacy and safe use' && A.$$('#sheetBody .pv h3').map(h => h.textContent).join('|') === "Who is responsible|Your responsibility|Acceptable use|What Shepherd keeps, and why|How it's protected|Keep your phone safe|How long it's kept, and your choices", 'the privacy notice has every section the data protection team asked for');
     ok(/run by Pavi/.test(yd) && /data controller/.test(yd), 'names Pavi as responsible for it');
+    ok(/email 8pavii@gmail\.com/.test(yd) && !/through your church/.test(yd), 'gives the email to write to about privacy');
     ok(/isn't a church database or a marketing tool/.test(yd) && /You are responsible for the people you contact/.test(yd), 'puts personal responsibility first, not church marketing');
     ok(/passcode/.test(yd) && /App lock/.test(yd) && /up to date/.test(yd), 'tells people to lock their phone, use the PIN and keep Shepherd updated');
     ok(/encrypted/.test(yd) && /scrambled/.test(yd) && /never sends messages for you/.test(yd), 'explains how the information is protected');

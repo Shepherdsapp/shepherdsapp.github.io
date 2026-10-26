@@ -19,7 +19,7 @@
 798	Àtúnṣe ìkẹyìn: <b>{0}</b>
 799	Ta ló ní ojúṣe
 800	<b>{0}</b> ló ń ṣiṣẹ́ Shepherd, òun ló sì ní ojúṣe fún bí a ṣe ń ṣe ìsọfúnni (alákòóso ìsọfúnni).
-801	Fún ìbéèrè èyíkéyìí nípa àṣírí, tàbí láti béèrè ohun tí a tọ́jú nípa rẹ, tàbí kí a ṣe àtúnṣe rẹ̀ tàbí pa á rẹ́, kàn sí <b>{0}</b>.
+801	Fún ìbéèrè èyíkéyìí nípa àṣírí, tàbí láti béèrè ohun tí a tọ́jú nípa rẹ, tàbí kí a ṣe àtúnṣe rẹ̀ tàbí pa á rẹ́, fi ímeèlì ránṣẹ́ sí <b>{0}</b>.
 802	Fún ìbéèrè èyíkéyìí nípa àṣírí, tàbí láti béèrè ohun tí a tọ́jú nípa rẹ, tàbí kí a ṣe àtúnṣe rẹ̀ tàbí pa á rẹ́, béèrè lọ́wọ́ <b>{0}</b> nípasẹ̀ ìjọ rẹ.
 803	Ojúṣe rẹ
 804	Ìwọ lo máa pinnu ẹni tí o máa fi kún un àti ohun tí o máa kọ nípa wọn. Ìwọ ló ní ojúṣe fún àwọn tí o bá sọ̀rọ̀ pẹ̀lú Shepherd àti ìsọfúnni tí o tọ́jú nípa wọn.

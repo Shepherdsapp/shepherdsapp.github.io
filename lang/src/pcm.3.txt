@@ -19,7 +19,7 @@
 798	Last update: <b>{0}</b>
 799	Who dey responsible
 800	Na <b>{0}</b> dey run Shepherd, and na im dey responsible for how e take handle information (the data controller).
-801	For any privacy question, or to ask wetin dem keep about you, or make dem correct am or remove am, contact <b>{0}</b>.
+801	For any privacy question, or to ask wetin dem keep about you, or make dem correct am or remove am, email <b>{0}</b>.
 802	For any privacy question, or to ask wetin dem keep about you, or make dem correct am or remove am, ask <b>{0}</b> through your church.
 803	Your responsibility
 804	Na you go decide who you go add and wetin you go write about dem. Na you dey responsible for the people wey you contact with Shepherd and the information wey you keep about dem.

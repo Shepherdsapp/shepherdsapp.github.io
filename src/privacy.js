@@ -4,7 +4,7 @@
 (function () {
   var USE_VERSION = 1; // raise this when the acceptable use statement changes, so everyone agrees to the new one
   var UPDATED = '2026-10-26';
-  function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || '' }; }
+  function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || '8pavii@gmail.com' }; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
   function when() {
     var d = new Date(UPDATED + 'T12:00:00');
@@ -25,7 +25,7 @@
   }
   function contactLine(c) {
     return c.contact
-      ? '<p class="note">For any privacy question, or to ask what is held about you, or for it to be corrected or removed, contact <b>' + esc(c.contact) + '</b>.</p>'
+      ? '<p class="note">For any privacy question, or to ask what is held about you, or for it to be corrected or removed, email <b>' + esc(c.contact) + '</b>.</p>'
       : '<p class="note">For any privacy question, or to ask what is held about you, or for it to be corrected or removed, ask <b>' + esc(c.controller) + '</b> through your church.</p>';
   }
   // the whole notice

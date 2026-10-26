@@ -19,7 +19,7 @@
 798	Dernière mise à jour : <b>{0}</b>
 799	Qui est responsable
 800	Shepherd est géré par <b>{0}</b>, qui est responsable de la façon dont les informations sont traitées (le responsable du traitement).
-801	Pour toute question de confidentialité, ou pour savoir ce qui est conservé sur vous, ou demander une correction ou une suppression, contactez <b>{0}</b>.
+801	Pour toute question de confidentialité, ou pour savoir ce qui est conservé sur vous, ou demander une correction ou une suppression, écrivez à <b>{0}</b>.
 802	Pour toute question de confidentialité, ou pour savoir ce qui est conservé sur vous, ou demander une correction ou une suppression, adressez-vous à <b>{0}</b> par votre église.
 803	Votre responsabilité
 804	Vous décidez qui ajouter et ce que vous écrivez à son sujet. Vous êtes responsable des personnes que vous contactez avec Shepherd et des informations que vous gardez sur elles.
