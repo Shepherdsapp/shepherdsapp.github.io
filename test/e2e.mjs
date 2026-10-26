@@ -57,11 +57,13 @@ const pushStub = sub => {
 
 const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
 const ANDROID = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Mobile Safari/537.36';
+const I18N_SINK = new Set();
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const errors = [];
 async function phone(uaStr, w, h) {
   const ctx = await browser.newContext({ viewport: { width: w || 390, height: h || 844 }, userAgent: uaStr, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
   await ctx.addInitScript(pushStub, FAKE_SUB);
+  if (process.env.I18N_COLLECT) { await ctx.exposeBinding('__i18nPush', (src, k) => I18N_SINK.add(k)); await ctx.addInitScript(() => { window.__i18nCollect = k => { try { window.__i18nPush(k); } catch (e) {} }; }); }
   const p = await ctx.newPage();
   p.on('pageerror', e => errors.push(e.message));
   p.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|fonts\.g|cdnjs|ERR_|net::/.test(m.text())) errors.push('console: ' + m.text()); });
@@ -280,10 +282,49 @@ try {
     await T.ctx.close();
   }
 
+  current = 'Languages';
+  {
+    await A.p.click('.tab[data-v="today"]'); await wait(300);
+    await A.p.click('[data-act="settings"]'); await wait(500);
+    const opts = await A.p.$$eval('#pLang option', o => o.map(x => x.value + ':' + x.textContent));
+    ok(opts.length === 15 && opts[0] === 'en:English' && opts.includes('ig:Igbo') && opts.includes('zh-Hant:中文（繁體・香港／台灣）') && !opts.some(o => o.startsWith('ur')), 'Settings lists 15 languages, each written in its own language');
+    await Promise.all([A.p.waitForNavigation({ timeout: 8000 }).catch(() => null), A.p.selectOption('#pLang', 'es')]);
+    await wait(1800);
+    const tabs = await A.p.$$eval('.tab', t => t.map(x => x.textContent.trim().replace(/\d+$/, '')).join('|'));
+    ok(/^Hoy\|Personas\|Discípulos\|Calendario\|Semana/.test(tabs), 'choosing Español turns the app Spanish: ' + tabs);
+    ok(await A.p.evaluate(() => document.documentElement.lang === 'es' && !!localStorage.getItem('shepherd:langpack:es')), 'the Spanish words were fetched once and kept on the phone');
+    ok(JSON.parse(db("SELECT data FROM docs WHERE path = 'profile'")[0][0]).lang === 'es', 'the choice is saved to the account');
+    await A.p.screenshot({ path: path.join(OUT, 'today-es.png') });
+    await wait(3500);
+    const es = db("SELECT title, body FROM outbox WHERE sent = 0 ORDER BY at").map(r => r[0]);
+    ok(es.includes('Escribir a Grace') && !es.some(t => /^(Message|Reply to|Did) /.test(t)), 'notifications are now written in Spanish: ' + es.slice(0, 3).join(' | '));
+    await A.p.click('[data-act="settings"]'); await wait(500); delivered.length = 0;
+    if (await A.p.locator('#notifCard [data-act="pushtest"]').isVisible()) { await A.p.click('#notifCard [data-act="pushtest"]'); await wait(1200); }
+    else { await A.p.click('#notifCard [data-act="pushon"]'); await wait(1500); await A.p.click('#notifCard [data-act="pushtest"]'); await wait(1200); }
+    ok(delivered.some(d => d.title === 'Las notificaciones de Shepherd están activadas'), 'the test notification is in Spanish too');
+    const D = await phone(ANDROID, 360, 780);
+    await D.p.goto(APP); await wait(600);
+    await D.p.click('[data-auth="signin"]'); await wait(200);
+    await D.p.fill('#aEmail', 'pavi@church.test'); await D.p.fill('#aPw', 'new password 22');
+    await Promise.all([D.p.waitForNavigation({ timeout: 10000 }).catch(() => null), D.p.click('#aGo')]);
+    await wait(2500);
+    const dTabs = await D.p.$$eval('.tab', t => t.map(x => x.textContent.trim().replace(/\d+$/, '')).join('|')).catch(() => '');
+    ok(/^Hoy\|Personas/.test(dTabs), 'a new phone signing in picks up Spanish by itself');
+    await D.ctx.setOffline(true); await D.p.reload(); await wait(1500);
+    const offTabs = await D.p.$$eval('.tab', t => t.map(x => x.textContent.trim().replace(/\d+$/, '')).join('|')).catch(() => '');
+    ok(/^Hoy\|Personas/.test(offTabs), 'and stays Spanish with no signal');
+    await D.ctx.close();
+    await A.p.click('[data-act="settings"]'); await wait(400);
+    await Promise.all([A.p.waitForNavigation({ timeout: 8000 }).catch(() => null), A.p.selectOption('#pLang', 'en')]);
+    await wait(1800);
+    ok(/^Today\|People/.test(await A.p.$$eval('.tab', t => t.map(x => x.textContent.trim().replace(/\d+$/, '')).join('|'))), 'and back to English');
+  }
+
   current = 'Script errors';
   ok(errors.length === 0, 'no script errors' + (errors.length ? ': ' + errors.slice(0, 4).join(' / ') : ''));
 } catch (e) { console.log('CRASH', e && e.stack || e); results.push({ ok: false, m: 'crash' }); }
 await browser.close(); site.close(); api.close();
 const pass = results.filter(r => r.ok).length;
+if (process.env.I18N_COLLECT) (await import('fs')).writeFileSync(process.env.I18N_COLLECT + '.e2e.json', JSON.stringify([...I18N_SINK], null, 1));
 console.log('\nEnd-to-end: ' + pass + ' passed, ' + (results.length - pass) + ' failed');
 process.exit(results.length === pass ? 0 : 1);

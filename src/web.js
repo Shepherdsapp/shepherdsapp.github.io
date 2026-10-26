@@ -216,7 +216,7 @@ var push = {
     try { var reg = await navigator.serviceWorker.getRegistration(); var s = reg && await reg.pushManager.getSubscription(); if (s) { await api('POST', '/api/push/unsub', { endpoint: s.endpoint }).catch(function () {}); await s.unsubscribe(); } } catch (e) {}
     return { ok: true };
   },
-  test: function () { return api('POST', '/api/push/test', {}); }
+  test: function (t) { return api('POST', '/api/push/test', t || {}); }
 };
 var lastSchedule = '';
 async function schedule(items) {
@@ -243,7 +243,7 @@ async function signOut() {
   try { await push.disable(); } catch (e) {}
   try { await api('POST', '/api/logout', {}); } catch (e) {}
   var id = user && user.id;
-  [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id, 'shepherd:tourDone:' + id].forEach(lsDel);
+  [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id, 'shepherd:tourDone:' + id, 'shepherd:qr:' + id, 'shepherd:phonebook:' + id].forEach(lsDel);
   location.reload();
 }
 var W = window.SHEPHERD_WEB = {
@@ -253,6 +253,13 @@ var W = window.SHEPHERD_WEB = {
   feedUrl: function () { return user && user.cal && API ? API.replace(/^https?:/, 'webcal:') + '/cal/' + user.cal + '.ics' : ''; },
   feedHttps: function () { return user && user.cal && API ? API + '/cal/' + user.cal + '.ics' : ''; },
   itemUrl: function (kind, id) { return user && user.cal && API ? API + '/cal/' + user.cal + '/' + kind + '/' + id + '.ics' : ''; },
+  /* the QR code's link: a Shepherd hello page that adds the person to your list, then opens WhatsApp */
+  qrLink: async function () {
+    if (!API || !user) return '';
+    var k = 'shepherd:qr:' + user.id, code = lsGet(k);
+    if (!code) { try { code = (await api('POST', '/api/qr', {})).code; lsSet(k, code); } catch (e) { return ''; } }
+    return API + '/hi/' + code;
+  },
   refreshMe: async function () { try { var r = await api('GET', '/api/me'); user = r.user; lsSet(UK, JSON.stringify(user)); W.devices = r.devices; return r; } catch (e) { return null; } },
   newCalLink: async function () { var r = await api('POST', '/api/cal/new', {}); user.cal = r.cal; lsSet(UK, JSON.stringify(user)); return r.cal; },
   changePassword: async function (oldPw, newPw) { return api('POST', '/api/password', { key: await pwKey(user.email, oldPw), newKey: await pwKey(user.email, newPw) }); },

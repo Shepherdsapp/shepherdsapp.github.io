@@ -1,0 +1,779 @@
+1	{0}: {1}
+2	{0} · {1}
+3	<b>{0}</b> · {1}
+4	{0}, {1}
+5	{0} und {1} weitere
+6	{0} ({1} T überfällig)
+7	{0} ({1} T)
+8	{0} (Beispiel)
+9	Heute
+10	Morgen
+11	Gestern
+12	heute
+13	morgen
+14	gestern
+15	Menschen
+16	Jünger
+17	Kalender
+18	Woche
+19	Einstellungen
+20	Hinzufügen
+21	Kontakt hinzufügen
+22	Jemanden hinzufügen
+23	Einen Kontakt hinzufügen
+24	Speichern
+25	Änderungen speichern
+26	Abbrechen
+27	Schließen
+28	Fertig
+29	Zurück
+30	Weiter
+31	Überspringen
+32	Bearbeiten
+33	Öffnen
+34	Zeigen
+35	Ausblenden
+36	Rückgängig
+37	Ansehen
+38	Filter
+39	Alle
+40	Aus
+41	Du
+42	Andere
+43	Beispiel
+44	Name
+45	Telefon
+46	E-Mail
+47	Passwort
+48	Benutzername
+49	Notizen
+50	Datum
+51	Uhrzeit
+52	Tag
+53	Ort
+54	Details
+55	Phase
+56	Grund
+57	Wird geladen
+58	Gespeichert
+59	Wird gespeichert…
+60	Einen Moment…
+61	Nicht jetzt
+62	Noch nicht
+63	Zeig es mir
+64	Zeig mir, wie
+65	Alle
+66	Haupt
+67	Liste
+68	Weg
+69	Vergangen
+70	Demnächst
+71	Studien
+72	Termine
+73	Termin
+74	Aktivität
+75	Auf diesem Gerät
+76	Offline · wird synchronisiert
+77	Nicht online gespeichert
+78	Auf diesem Gerät gespeichert
+79	Der Online-Speicher ist voll. Deine Änderungen bleiben auf diesem Handy. Exportiere eine Sicherung in den Einstellungen.
+80	Guten Morgen
+81	Guten Tag
+82	Guten Abend
+83	Guten Morgen, {0}
+84	Guten Tag, {0}
+85	Guten Abend, {0}
+86	Deine Morgenübersicht
+87	Übersicht für heute
+88	Du bist auf dem neuesten Stand. Heute wartet niemand auf dich.
+89	Heute steht nichts an.
+90	Benachrichtigungen sind aus.
+91	Heute schreiben
+92	Antworten an
+93	Antwort fällig
+94	Heute fällig
+95	Überfällig
+96	Im Plan
+97	Pausiert
+98	Studien heute
+99	Bibelstudien
+100	1 Studie heute
+101	§one={0} Studie heute|other={0} Studien heute
+102	{0} anschreiben
+103	§one={0} Antwort offen|other={0} Antworten offen
+104	§one={0} Antwort offen|other={0} Antworten offen
+105	{0} zu prüfen
+106	{0} von {1}
+107	Nachfassen
+108	Hat {0} geantwortet?
+109	§one=Du hast {0} vor {1} Tag geschrieben.|other=Du hast {0} vor {1} Tagen geschrieben.
+110	§one=Du hast {0} vor {1} Tag geschrieben.|other=Du hast {0} vor {1} Tagen geschrieben.
+111	Ja, ich habe geantwortet
+112	Warte noch
+113	Frag mich morgen
+114	Shepherd fragt morgen noch einmal
+115	Jünger diese Woche
+116	{0} von {1} erledigt
+117	Noch melden bei: {0}.
+118	Jünger öffnen
+119	Heute beten
+120	Gebetsliste ({0})
+121	Du siehst Beispielkontakte. <b>Entferne sie</b> in den Einstellungen, wann immer du willst.
+122	Deine Änderungen bleiben auf diesem Handy, können aber nicht online gespeichert werden. Bitte die Person, die Shepherd mit dir geteilt hat, um <b>Mitwirkenden</b>-Zugriff.
+123	Beginne mit den Menschen, die du triffst
+124	Füge jemanden hinzu, mit dem du deinen Glauben geteilt hast. Shepherd erinnert dich, dich alle paar Tage zu melden, und behält ihre Studien im Blick.
+125	Meine erste Person hinzufügen
+126	Shepherd auf den Home-Bildschirm
+127	Es öffnet sich wie eine App, und so kann Shepherd dir Benachrichtigungen mit Namen schicken.
+128	§one={0} Person schreiben: {1}|other={0} Personen schreiben: {1}
+129	§one={0} Person schreiben: {1}|other={0} Personen schreiben: {1}
+130	{0} antworten
+131	Haben sie geantwortet? {0}
+132	Jünger, bei denen du dich diese Woche meldest: {0}
+133	Studien heute: {0}
+134	{0} um {1}
+135	Termine: {0}
+136	{0} heute um {1}
+137	{0} morgen um {1}
+138	{0} heute
+139	{0} morgen
+140	Diese Woche hast du {0} von {1} begleitet.
+141	§one=Diese Woche hast du {0} von {1} Person begleitet.|other=Diese Woche hast du {0} von {1} Personen begleitet.
+142	§one=Diese Woche hast du {0} von {1} Person begleitet.|other=Diese Woche hast du {0} von {1} Personen begleitet.
+143	{0} schreiben
+144	§one={0} hat dir vor {1} Tag geschrieben. Tippe zum Antworten.|other={0} hat dir vor {1} Tagen geschrieben. Tippe zum Antworten.
+145	§one={0} hat dir vor {1} Tag geschrieben. Tippe zum Antworten.|other={0} hat dir vor {1} Tagen geschrieben. Tippe zum Antworten.
+146	{0} wartet auf deine Antwort.
+147	Heute zurück aus der Pause. Tippe, um {0} zu schreiben.
+148	Du hast {0} noch nicht geschrieben. Tippe, um Hallo zu sagen.
+149	§one={0} Tag überfällig. Tippe, um {1} zu schreiben.|other={0} Tage überfällig. Tippe, um {1} zu schreiben.
+150	§one={0} Tag überfällig. Tippe, um {1} zu schreiben.|other={0} Tage überfällig. Tippe, um {1} zu schreiben.
+151	Heute fällig. Tippe, um {0} zu schreiben.
+152	§one=Du hast {0} vor {1} Tag geschrieben. Tippe in Shepherd auf Geantwortet, falls ja.|other=Du hast {0} vor {1} Tagen geschrieben. Tippe in Shepherd auf Geantwortet, falls ja.
+153	§one=Du hast {0} vor {1} Tag geschrieben. Tippe in Shepherd auf Geantwortet, falls ja.|other=Du hast {0} vor {1} Tagen geschrieben. Tippe in Shepherd auf Geantwortet, falls ja.
+154	Melde dich bei {0}
+155	Du hast dich diese Woche noch nicht bei {0} gemeldet.
+156	Und {0} weitere heute
+157	Bibelstudium mit {0} um {1}
+158	Bibelstudium mit {0} heute
+159	In einer Stunde. Studie: {0}
+160	In einer Stunde.
+161	Studie: {0}
+162	Noch keine Uhrzeit.
+163	Morgen: {0}
+164	Ganztägig
+165	§one={0} Person eingeladen|other={0} Personen eingeladen
+166	§one={0} Person eingeladen|other={0} Personen eingeladen
+167	Beginnt in einer Stunde.
+168	Beginnt in einer Stunde · {0}.
+169	Bete für {0}
+170	{0} und {1}
+171	Deine Woche
+172	Menschen suchen
+173	Nach Name, Nummer oder Benutzername suchen
+174	Niemand passt dazu.
+175	Noch niemand hier.
+176	§one={0} Person, die du begleitest|other={0} Personen, die du begleitest
+177	§one={0} Person, die du begleitest|other={0} Personen, die du begleitest
+178	Kein Kontakt mehr
+179	Kein Kontakt mehr ({0})
+180	Sicher aufbewahrt, damit nichts verloren geht. Stelle jederzeit jemanden wieder her.
+181	Heute melden
+182	Morgen melden
+183	In {0} Tagen melden
+184	§one={0} Tag überfällig|other={0} Tage überfällig
+185	§one={0} Tag überfällig|other={0} Tage überfällig
+186	Zurück aus der Pause
+187	Du musst antworten
+188	wartet auf Antwort
+189	§one=wartet seit {0} Tag|other=wartet seit {0} Tagen
+190	§one=wartet seit {0} Tag|other=wartet seit {0} Tagen
+191	seit {0} Tagen still
+192	Pausiert bis {0}
+193	Noch nicht kontaktiert
+194	Letzter Kontakt heute
+195	Wartet auf Antwort
+196	Wartet auf Nachricht
+197	Füge einen Weg hinzu, {0} zu schreiben
+198	Eine Nachricht an {0} eintragen
+199	{0} über WhatsApp schreiben
+200	{0} über Instagram schreiben
+201	{0} über Snapchat schreiben
+202	{0} über TikTok schreiben
+203	{0} über Facebook schreiben
+204	Über WhatsApp schreiben
+205	Über Instagram schreiben
+206	Über Snapchat schreiben
+207	Chat öffnen
+208	Erster Kontakt
+209	Interessiert
+210	Studiert
+211	Regelmäßig in der Gemeinde
+212	Getauft
+213	Jünger
+214	Weiter zu {0} ›
+215	Zurück zu {0}
+216	{0} ist jetzt bei {1}
+217	Phase geändert zu {0}
+218	Letzte Phase
+219	{0} bearbeiten
+220	Bei {0} nachhaken
+221	Geantwortet
+222	Ich habe geantwortet
+223	Ich habe {0} geantwortet
+224	{0} hat geantwortet
+225	Du hast geantwortet
+226	Hast du {0} schon geantwortet?
+227	{0} wartet auf eine Nachricht von dir.
+228	Sie haben zuletzt geschrieben. Tippe auf den Chat-Knopf zum Antworten, dann auf Ich habe geantwortet.
+229	Tippe auf Geantwortet, wenn sie dir zurückschreiben.
+230	Eingetragen. Warte auf die Antwort von {0}.
+231	§one=Eingetragen. Nächster Kontakt in {0} Tag.|other=Eingetragen. Nächster Kontakt in {0} Tagen.
+232	§one=Eingetragen. Nächster Kontakt in {0} Tag.|other=Eingetragen. Nächster Kontakt in {0} Tagen.
+233	Wo das Gespräch steht
+234	Alles gut
+235	Ich muss antworten
+236	Markiert: alles gut
+237	Markiert: ich muss antworten
+238	Markiert: wartet auf Antwort
+239	Über WhatsApp geschrieben
+240	Über Instagram geschrieben
+241	Über Snapchat geschrieben
+242	Über WhatsApp nachgehakt
+243	Auf anderem Weg kontaktiert
+244	Melden alle
+245	§one=Kontaktrhythmus: alle {0} Tag|other=Kontaktrhythmus: alle {0} Tage
+246	§one=Kontaktrhythmus: alle {0} Tag|other=Kontaktrhythmus: alle {0} Tage
+247	Nächste Studie
+248	Geplante Studie
+249	Noch keine Studien eingetragen.
+250	Studie eintragen
+251	Studie mit {0} eintragen
+252	Bibelstudium
+253	Studie eingetragen: {0}
+254	Studie gespeichert
+255	Nächste Studie am {0}
+256	Die nächste Studie mit <b>{0}</b> ist gespeichert.
+257	Die nächste Studie mit <b>{0}</b> ist gespeichert, und Shepherd erinnert dich eine Stunde vorher.
+258	Shepherd ist mit dem Kalender deines Handys verbunden, also steht es dort schon.
+259	Was ihr studiert habt
+260	Name der Studie oder Bibelstelle
+261	Studie speichern
+262	Wie es lief
+263	Fragen, die sie hatten, woran du anknüpfen willst
+264	Die nächste Studie muss nach dieser liegen.
+265	Wähle das Datum der Studie.
+266	Keine Uhrzeit
+267	Kennengelernt am
+268	Gebetsanliegen
+269	Keine Notizen
+270	Aktivitätsprotokoll
+271	Jede Änderung, die du machst, die neueste zuerst.
+272	Hinzugefügt
+273	Über deinen QR-Code hinzugefügt
+274	Im Handy speichern
+275	In den Handy-Kontakten speichern
+276	Zur Gebetsliste hinzufügen
+277	Vorerst lassen
+278	{0} vorerst lassen
+279	Kein Kontakt mehr
+280	Kein Kontakt mehr mit {0}
+281	Alle ihre Daten löschen
+282	Wieder aktiv setzen
+283	Wieder aktiv
+284	Wiederhergestellt
+285	{0} ist wieder in deiner Liste
+286	Erinnerungen jetzt fortsetzen
+287	Erinnerungen fortgesetzt
+288	Erinnerungen wieder an
+289	Erinnerungen sind pausiert bis <b>{0}</b>.
+290	Erinnerungen sind pausiert bis <b>{0}</b> · {1}.
+291	Nummer oder Benutzernamen hinzufügen
+292	Füge eine WhatsApp-Nummer oder einen Social-Media-Namen hinzu, damit du ihnen schreiben kannst.
+293	Details aktualisiert
+294	Neue Kontakte
+295	Kontakt speichern
+296	Speichern und weiteren hinzufügen
+297	WhatsApp-Nummer
+298	WhatsApp (optional)
+299	Social Media (optional)
+300	App
+301	@benutzername
+302	Vor dem Bahnhof kennengelernt
+303	Wo ihr euch kennengelernt habt (optional)
+304	Etwas zum Merken
+305	Was sie gerade bewegt, Gebetsanliegen
+306	Sie sind einverstanden, dass wir ihre Daten speichern und in Kontakt bleiben.
+307	Vorname reicht
+308	Füge ihren Namen hinzu.
+309	Füge zuerst ihren Namen hinzu.
+310	Füge zuerst einen Namen hinzu.
+311	Diese Telefonnummer sieht nicht richtig aus. Nutze 07… oder +44…
+312	Diese Nummer sieht nicht richtig aus. Nutze 07… oder +44…
+313	07… oder +44…
+314	Tippe, um sie zu finden
+315	Aus Kontakten wählen
+316	Importiere deine Handy-Kontakte, um Menschen beim Tippen zu finden
+317	{0} hinzugefügt. Auch in den Handy-Kontakten speichern?
+318	{0} hinzugefügt. Melde dich diese Woche.
+319	Kopiert. Öffne die Kontakte-App, tippe auf + und füge ein.
+320	Öffne die Datei, um {0} zu deinen Kontakten hinzuzufügen
+321	Das kopieren
+322	Halte den Text unten gedrückt und wähle Kopieren.
+323	Keine Nummer
+324	Erinnerungen pausieren
+325	Keine Erinnerungen bis zum gewählten Datum. An dem Tag kommen sie zurück in deine Heute-Liste.
+326	Schnellauswahl
+327	1 Woche
+328	2 Wochen
+329	1 Monat
+330	3 Monate
+331	Oder wähle ein Datum
+332	Wähle ein Datum nach heute.
+333	Wähle zuerst einen Grund.
+334	Gerade viel los
+335	Weg oder auf Reisen
+336	Möchte etwas Abstand
+337	Prüfungen oder Arbeit
+338	Hat gebeten, nicht kontaktiert zu werden
+339	Weggezogen
+340	In eine andere Gemeinde gewechselt
+341	Lange keine Antwort
+342	Kein Grund angegeben
+343	Pausiert bis {0}
+344	Pausiert bis {0} ({1})
+345	Kein Kontakt mehr: {0}
+346	Kein Kontakt mehr: <b>{0}</b>.
+347	{0} verschwindet aus deinen Listen und die Erinnerungen stoppen. Der Verlauf bleibt erhalten und du kannst jederzeit wiederherstellen.
+348	Wenn sie um vollständige Löschung gebeten haben, nutze danach <b>Alle ihre Daten löschen</b>.
+349	Das löscht {0} und alles über diese Person: Nummer, Notizen, Studien und Verlauf. Das kann nicht rückgängig gemacht werden.
+350	Mach das nur, wenn jemand um Löschung seiner Daten bittet. Wenn du nur keinen Kontakt mehr möchtest, lass sie unter Kein Kontakt mehr.
+351	Gib DELETE ein, um zu bestätigen
+352	Endgültig löschen
+353	Daten von {0} löschen
+354	Die Daten von {0} wurden gelöscht
+355	Kontakt auf eigenen Wunsch gelöscht
+356	Melde dich einmal pro Woche bei jeder Person und baue die Freundschaft weiter auf.
+357	Jemanden zum wöchentlichen Melden hinzufügen
+358	Einen Jünger hinzufügen
+359	Gemeldet
+360	Heute gemeldet
+361	Gestern gemeldet
+362	Gemeldet am {0}
+363	Diese Woche gemeldet
+364	Noch nicht gemeldet
+365	Bei {0} gemeldet
+366	Diese Woche bei {0} gemeldet
+367	§one=Letzter Kontakt vor {0} Tag|other=Letzter Kontakt vor {0} Tagen
+368	§one=Letzter Kontakt vor {0} Tag|other=Letzter Kontakt vor {0} Tagen
+369	Diese Woche zu melden
+370	Diese Woche erledigt
+371	Du hast dich diese Woche bei allen gemeldet.
+372	Aus Jünger entfernen
+373	{0} aus Jünger entfernt
+374	Nochmal tippen, um {0} zu entfernen
+375	Gebetsliste
+376	Für wen betest du?
+377	Wofür beten
+378	Notiz (optional)
+379	Gebet bearbeiten
+380	Von der Gebetsliste entfernen
+381	Zurück zur Gebetsliste
+382	Noch niemand auf deiner Gebetsliste.
+383	Füge die Menschen hinzu, für die du betest. Shepherd zeigt jeden Tag ein paar im Wechsel und kann dich erinnern.
+384	Füge alle hinzu, für die du beten möchtest. Jeden Tag zeigt Shepherd {0} Personen im Wechsel.
+385	Füge alle hinzu, für die du beten möchtest. Jeden Tag zeigt Shepherd {0} Personen im Wechsel und erinnert dich um {1}.
+386	{0} zur Gebetsliste hinzugefügt
+387	{0} von der Gebetsliste entfernt
+388	{0} ist schon auf deiner Gebetsliste
+389	Gebetserinnerungen
+390	Erinnere mich täglich ans Beten
+391	Personen pro Tag
+392	Bete jeden Tag für {0} Personen von deiner Gebetsliste, im Wechsel.
+393	Bete jeden Tag für {0} Personen von deiner Gebetsliste, im Wechsel. Erinnerungen kommen von der Shepherd-App auf deinem Handy.
+394	Gebetserinnerung um {0}
+395	Gebetserinnerungen an
+396	Gebetserinnerungen aus
+397	Einstellungen für Gebetserinnerungen
+398	Deine Gottesdienste und Termine. Lade Menschen ein und hake ab, wer kam.
+399	Noch keine Termine
+400	Füge hier deinen Sonntagsgottesdienst, deine Andacht oder ein Treffen hinzu, damit du Menschen einladen und abhaken kannst, wer kam.
+401	Neuer Termin
+402	Termin bearbeiten
+403	Termin erstellen
+404	Termin löschen
+405	Termin gelöscht
+406	Nochmal tippen, um diesen Termin zu löschen
+407	Gib dem Termin einen Namen.
+408	Wähle ein Datum.
+409	z. B. Sonntagsgottesdienst
+410	Sonntagsgottesdienst
+411	Gottesdienst unter der Woche
+412	Hake ab, wen du eingeladen hast. Der Nachrichten-Knopf sendet eine fertige Einladung. Am Tag selbst hakst du ab, wer kam.
+413	Hake ab, wer kam.
+414	Füge zuerst Kontakte hinzu und lade sie dann hier ein.
+415	Gekommen
+416	Nicht gekommen
+417	Eingeladen
+418	Kam zu {0}
+419	Eingeladen zu {0}
+420	Einladung zu {0} zurückgenommen
+421	Nicht mehr als anwesend bei {0} markiert
+422	Einladung kopiert. Füge sie in deine Nachricht ein.
+423	Hallo {0}! Hast du Lust, zu {1} zu kommen, {2}? Es wäre schön, dich dort zu sehen.
+424	heute um {0}
+425	morgen um {0}
+426	am {0} um {1}
+427	am {0}
+428	§one={0} Einladung|other={0} Einladungen
+429	§one={0} Einladung|other={0} Einladungen
+430	§one={0} Einladung · {1} gekommen|other={0} Einladungen · {1} gekommen
+431	§one={0} Einladung · {1} gekommen|other={0} Einladungen · {1} gekommen
+432	Aus deinem Kalender
+433	Aus deinem Kalender · {0}
+434	Deine Kalendertermine sind schon da
+435	Kalendertermine zuletzt geholt am {0}.
+436	§one=Kalender: {0} Termin hinzugefügt|other=Kalender: {0} Termine hinzugefügt
+437	§one=Kalender: {0} Termin hinzugefügt|other=Kalender: {0} Termine hinzugefügt
+438	Keine Termine in dieser Datei gefunden
+439	Aus einer Kalenderdatei hinzufügen
+440	Kalenderdatei wählen (.ics)
+441	Einen Termin als Kalenderdatei bekommen (sie endet auf <b>.ics</b>), etwa eine Einladung der Gemeinde? Speichere sie auf deinem Handy und wähle sie hier. Wiederholungen wie ein wöchentlicher Gottesdienst sind dabei.
+442	Zum Handy-Kalender hinzufügen
+443	Kalenderlink kopieren
+444	Kalenderlink kopiert. Füge ihn in ICSx⁵ ein.
+445	Neuer Link erstellt. Verbinde deinen Kalender erneut.
+446	erstelle einen neuen Link
+447	Dieser Link gehört nur dir. Falls du ihn versehentlich teilst,
+448	Kalender verbinden
+449	So verbindest du deinen Handy-Kalender
+450	Zeig mir, wie ich meinen Kalender verbinde
+451	Mit iPhone-Kalender verbinden
+452	Verbinde Shepherd mit dem Kalender deines Handys, dann erscheinen deine Bibelstudien und Termine dort von selbst, neben allem anderen in deinem Tag.
+453	1. Verbinde Shepherd mit deinem Handy-Kalender
+454	2. Behalte deine privaten TimeTree-Termine auch in deinem Kalender
+455	Tippe unten auf <b>Mit iPhone-Kalender verbinden</b>.
+456	Dein iPhone fragt, ob du abonnieren möchtest. Tippe auf <b>Abonnieren</b> und dann auf <b>Fertig</b>.
+457	Falls dein Handy gefragt hat, tippe auf Abonnieren. Komm dann hierher zurück.
+458	Geh zurück zu Shepherd. Deine Studien und Termine stehen jetzt in der App <b>Kalender</b> unter <b>Shepherd</b> und bleiben von selbst aktuell.
+459	Tippe bei einer Studie oder einem Termin in Shepherd auf <b>Zum Handy-Kalender hinzufügen</b>.
+460	Dein Handy öffnet die App <b>Kalender</b> mit allen Details. Tippe auf <b>Speichern</b>.
+461	Damit sie von selbst hinzukommen, installiere die App <b>ICSx⁵</b>, tippe unten auf <b>Kalenderlink kopieren</b> und füge ihn in ICSx⁵ mit <b>+</b> hinzu.
+462	TimeTree teilt seine Termine nicht mit anderen Apps und kann sie daher nicht von selbst kopieren. Trag die privaten TimeTree-Termine, die für deine Woche wichtig sind, auch in den Handy-Kalender ein, damit du alles an einem Ort siehst.
+463	Öffne die App <b>Kalender</b> auf deinem Handy und tippe auf <b>+</b>.
+464	Öffne die App <b>Kalender</b> und tippe auf <b>+</b>.
+465	Öffne die Nachricht oder E-Mail mit der Datei.
+466	Tippe auf die Datei, dann auf <b>Teilen</b> und dann auf <b>In „Dateien“ sichern</b>.
+467	Tippe auf die Datei und dann auf <b>Herunterladen</b> (oder die drei Punkte › <b>Speichern</b>).
+468	Komm hierher zurück und tippe auf <b>Kalenderdatei wählen</b>.
+469	Komm hierher zurück und tippe auf <b>Kalenderdatei wählen</b>. Sie liegt in <b>Downloads</b>.
+470	Für TimeTree kopieren
+471	Details für TimeTree kopieren
+472	Kopiert. Öffne TimeTree und füge es in einen neuen Termin ein.
+473	Öffne die App <b>TimeTree</b> und tippe auf <b>+</b>.
+474	Füge die kopierten Details in Titel und Notiz ein und stelle dann <b>Datum und Uhrzeit</b> ein.
+475	Tippe den Titel ein und stelle dann <b>Datum und Uhrzeit</b> deines TimeTree-Termins ein.
+476	Wähle eine <b>Erinnerung</b>, zum Beispiel 1 Stunde vorher, damit dein iPhone dich erinnert.
+477	Wähle eine <b>Erinnerung</b>, zum Beispiel 1 Stunde vorher, damit dein Android-Handy dich erinnert.
+478	Tippe auf <b>Speichern</b>.
+479	Tippe auf <b>Speichern</b> (das Häkchen).
+480	Woche vom {0}
+481	Diese Woche
+482	Du hast <em>{0} von {1}</em> begleitet — starke Woche.
+483	Du hast <em>{0} von {1}</em> begleitet — gut gemacht.
+484	Du hast <em>{0} von {1}</em> begleitet — weiter so.
+485	Du hast <em>{0} von {1}</em> begleitet — fang mit der Liste für heute an.
+486	Deine Wochenübersicht erscheint, sobald du Kontakte hinzufügst.
+487	Kamen zu Terminen
+488	Begleitungsquote, letzte 4 Wochen
+489	Anteil der Menschen, die du begleitet hast, die in der Woche eine Nachricht, einen Anruf oder eine Studie bekamen.
+490	Diese Woche noch nicht erreicht
+491	Sprache
+492	Bibelverse bleiben auf Englisch (NIV).
+493	Dein Name
+494	Deine WhatsApp-Nummer
+495	Nachricht, die Menschen dir über deinen QR-Code schicken
+496	Neue Kontakte: melden alle
+497	Einstellungen gespeichert
+498	Benachrichtigungen
+499	Benachrichtigungen sind an
+500	Benachrichtigungen sind auf diesem Handy an.
+501	Benachrichtigungen sind auf diesem Handy aus.
+502	Benachrichtigungen mit Namen kommen von der Shepherd-App auf deinem Handy.
+503	Benachrichtigungen einschalten
+504	Test senden
+505	Schick mir eine Testbenachrichtigung
+506	So funktioniert es
+507	So bekommst du sie
+508	Morgenbenachrichtigungen um
+509	Morgenbenachrichtigungen um {0}
+510	Worüber Shepherd dich informiert
+511	Benachrichtigungsauswahl gespeichert
+512	Benachrichtigungen: {0}
+513	Menschen zum Nachhaken
+514	Alle, die überfällig sind oder heute dran sind
+515	Offene Antworten
+516	Menschen, die auf eine Nachricht von dir warten
+517	Menschen, von denen du noch eine Antwort erwartest
+518	Bei wem du dich diese Woche noch melden musst
+519	Bibelstudien heute
+520	Studien für heute, mit Uhrzeit
+521	Kalendertermine
+522	Termine heute und morgen, auch aus deinem Kalender
+523	Wochenübersicht
+524	Sonntags: wie viele Menschen du begleitet hast
+525	Menschen zum Nachhaken und Termine
+526	Nur Termine
+527	Handy-Kontakte
+528	Aus meinen Kontakten wählen
+529	Kontaktdatei importieren
+530	So bekommst du eine Kontaktdatei
+531	Eine Kontaktdatei bekommen
+532	Von diesem Handy entfernen
+533	Hol deine Handy-Kontakte herein, dann erscheinen Name und Nummer beim Tippen, wenn du jemanden hinzufügst. Sie bleiben nur auf diesem Handy und werden nie hochgeladen.
+534	§one={0} Kontakt auf diesem Handy. Wenn du jemanden hinzufügst, erscheinen passende Namen beim Tippen. Sie bleiben nur auf diesem Handy und werden nie hochgeladen.|other={0} Kontakte auf diesem Handy. Wenn du jemanden hinzufügst, erscheinen passende Namen beim Tippen. Sie bleiben nur auf diesem Handy und werden nie hochgeladen.
+535	1 Kontakt auf diesem Handy. Wenn du jemanden hinzufügst, erscheinen passende Namen beim Tippen. Sie bleiben nur auf diesem Handy und werden nie hochgeladen.
+536	§one={0} Kontakt zur Liste dieses Handys hinzugefügt|other={0} Kontakte zur Liste dieses Handys hinzugefügt
+537	§one={0} Kontakt zur Liste dieses Handys hinzugefügt|other={0} Kontakte zur Liste dieses Handys hinzugefügt
+538	Diese Kontakte sind schon da
+539	Keine Kontakte in dieser Datei gefunden
+540	Handy-Kontakte aus Shepherd auf diesem Handy entfernt
+541	Speichere deine Kontakte als eine Datei und wähle sie in Shepherd unter <b>Kontaktdatei importieren</b>.
+542	Öffne die App <b>Kontakte</b> und tippe auf <b>Listen</b> (oben links).
+543	Halte <b>Alle Kontakte</b> (oder Alle iCloud) gedrückt und tippe auf <b>Exportieren</b>.
+544	Tippe auf <b>In „Dateien“ sichern</b> und dann auf <b>Sichern</b>.
+545	Tippe zurück in Shepherd auf <b>Kontaktdatei importieren</b> und wähle sie aus.
+546	Öffne die App <b>Kontakte</b>.
+547	Tippe auf <b>Korrigieren und verwalten</b> (oder ⋮ › <b>Einstellungen</b>, oder <b>Kontakte verwalten</b> bei Samsung) und dann auf <b>In Datei exportieren</b>.
+548	Speichere sie in <b>Downloads</b>.
+549	Deine Kontakte bleiben nur auf diesem Handy. Shepherd lädt sie nie hoch.
+550	Erste Schritte
+551	Ein einminütiger Rundgang durch Shepherd.
+552	Zeig mir alles
+553	App-Sperre
+554	PIN festlegen
+555	PIN ändern
+556	PIN entfernen
+557	Jetzt sperren
+558	PIN speichern
+559	PIN gespeichert
+560	PIN entfernt
+561	Aktuelle PIN
+562	Neue PIN (4 bis 8 Ziffern)
+563	Noch einmal eingeben
+564	Nutze 4 bis 8 Ziffern.
+565	Die beiden PINs stimmen nicht überein.
+566	Deine aktuelle PIN stimmt nicht.
+567	Lege eine PIN fest, damit niemand, der dein Handy nimmt, deine Kontakte lesen kann.
+568	Shepherd fragt beim Öffnen und nach 5 Minuten Abwesenheit nach deiner PIN.
+569	Wenn du sie vergisst, brauchst du eine Sicherung, um wieder hineinzukommen, also wähle eine, die du dir merkst.
+570	Shepherd ist gesperrt
+571	Gib deine PIN ein, um deine Kontakte zu sehen.
+572	Entsperren
+573	Diese PIN stimmt nicht. Versuche es noch einmal.
+574	Dein Konto
+575	Angemeldet als
+576	. Du bleibst auf diesem Handy angemeldet.
+577	Passwort ändern
+578	Abmelden
+579	Mein Konto löschen
+580	Deine Daten
+581	Deine Kontakte werden in deinem eigenen privaten Bereich gespeichert. Niemand sonst, der Shepherd nutzt, kann sie sehen. Eine Kopie bleibt auch auf diesem Handy, damit die App ohne Empfang funktioniert.
+582	Deine Kontakte werden in deinem eigenen privaten Bereich gespeichert (gerade nur auf diesem Handy). Niemand sonst, der Shepherd nutzt, kann sie sehen. Eine Kopie bleibt auch auf diesem Handy, damit die App ohne Empfang funktioniert.
+583	Deine Kontakte werden in deinem eigenen privaten Bereich auf dem Shepherd-Server gespeichert, mit früheren Versionen. Niemand sonst, der Shepherd nutzt, kann sie sehen. Eine Kopie bleibt auch auf diesem Handy, damit die App ohne Empfang funktioniert.
+584	Was gespeichert wird und wer es sehen kann
+585	Sicherung exportieren
+586	Sicherung wiederherstellen
+587	Sicherung gespeichert
+588	Sicherung kopiert. Füge sie in eine Notiz ein oder schick sie dir per E-Mail.
+589	Diese Datei ist keine Shepherd-Sicherung
+590	Wiederhergestellt: {0} hinzugefügt, {1} aktualisiert
+591	Beispielkontakte entfernen
+592	Beispielkontakte entfernt
+593	Shepherd hält deine Liste privat. Hier steht genau, was gespeichert wird, wo und wer es sehen kann.
+594	Mit dir verknüpfte Daten
+595	Dein Name, deine E-Mail und WhatsApp-Nummer.
+596	Die Menschen, die du hinzufügst: Namen, Telefonnummern, Social-Media-Namen, Notizen, Gebetsanliegen und Bibelstudien.
+597	Deine Termine, Jünger und Gebetsliste.
+598	In deinem eigenen Konto auf dem Shepherd-Server gespeichert, damit nichts verloren geht, mit früheren Versionen für ein Jahr. Nur du kannst es sehen, wenn du angemeldet bist.
+599	In deinem eigenen privaten Bereich gespeichert. Nur du kannst es sehen.
+600	Nur auf diesem Handy
+601	Kontakte, die du von deinem Handy importierst, um beim Tippen Namen vorzuschlagen. Sie werden nie hochgeladen.
+602	Eine Kopie deiner Liste, damit Shepherd ohne Empfang funktioniert.
+603	Nie erfasst
+604	Dein Standort.
+605	Deine WhatsApp-, SMS- oder iMessage-Gespräche.
+606	Dein ganzes Adressbuch (nur die Kontakte, die du auswählst).
+607	Nichts für Werbung oder Tracking.
+608	Wenn jemand deinen QR-Code scannt
+609	Sie entscheiden selbst, ihren Namen einzugeben (und ihre Nummer, wenn sie möchten). Das landet nur in deiner Liste, und danach schreiben sie dir selbst über WhatsApp.
+610	Jemand bittet dich, seine Daten zu löschen? Öffne die Person, tippe auf <b>Kein Kontakt mehr</b> und dann auf <b>Alle ihre Daten löschen</b>. Jede Kopie wird entfernt.
+611	Mein QR-Code
+612	Dein QR-Code
+613	QR-Code, damit Menschen dir schreiben
+614	Scannen, um in Kontakt zu bleiben
+615	Meinen QR-Code erstellen
+616	Lieber meinen QR-Code zeigen
+617	Füge zuerst deine eigene WhatsApp-Nummer hinzu. Wenn jemand deinen Code scannt, öffnet sich WhatsApp mit einer Nachricht an dich, so bekommst du die Nummer und die Person entscheidet selbst, in Kontakt zu bleiben.
+618	Bitte sie, die Handykamera hierauf zu richten. Sie geben ihren Namen ein, <b>werden zu deinem Shepherd hinzugefügt</b>, und WhatsApp öffnet sich mit deiner Nachricht, bereit zum Senden.
+619	Du bekommst eine Benachrichtigung, wenn sie ihn scannen.
+620	Bitte sie, die Handykamera hierauf zu richten. WhatsApp öffnet sich mit einer Nachricht an dich, und sie müssen nur noch senden.
+621	Wenn ihre Nachricht ankommt, füge sie hier mit ihrer Nummer hinzu.
+622	Ihre Nachricht: „{0}“
+623	Hallo, schön dich kennenzulernen! Ich habe deinen Kontakt über Shepherd. Ich freue mich, bald von dir zu hören.
+624	Nachricht ändern
+625	Der QR-Code konnte nicht geladen werden. Teile stattdessen diesen Link:
+626	Der QR-Code konnte hier nicht gezeichnet werden.
+627	Jetzt meine Nummer hinzufügen
+628	Füge deine Nummer und Nachricht hinzu und tippe auf Speichern.
+629	Hol dir die Shepherd-App
+630	Das funktioniert in der Shepherd-App auf deinem Handy. Öffne
+631	, melde dich an und komm dann zu dieser Anleitung zurück.
+632	Benachrichtigungen mit Namen („Grace antworten“, „Daniel schreiben“) kommen von der <b>Shepherd-App</b> auf deinem Handy. Installiere sie einmal und schalte sie dort ein.
+633	Nutzt du Shepherd hier schon? Exportiere eine Sicherung in den Einstellungen und stelle sie in der App wieder her.
+634	Gespeichert. Erinnerungen kommen von der Shepherd-App.
+635	Shepherd schickt Benachrichtigungen mit Namen, wie <b>Grace antworten</b>, <b>Daniel schreiben</b> oder <b>Hat Sam geantwortet?</b>, jeden Morgen um <b>{0}</b> und vor jeder Studie und jedem Termin. Tippe darauf und die Person öffnet sich.
+636	1. Installiere Shepherd auf deinem Handy
+637	2. Erlaube Benachrichtigungen
+638	3. Prüfe, ob es funktioniert
+639	Shepherd ist auf diesem Handy installiert.
+640	Öffne Shepherd in <b>Safari</b>.
+641	Öffne Shepherd in <b>Chrome</b>.
+642	Tippe auf <b>Teilen</b> (das Quadrat mit dem Pfeil).
+643	Tippe auf <b>Zum Home-Bildschirm</b> und dann auf <b>Hinzufügen</b>.
+644	Tippe oben rechts auf <b>⋮</b> und dann auf <b>App installieren</b> (oder <b>Zum Startbildschirm hinzufügen</b>).
+645	Tippe auf <b>Installieren</b>.
+646	Tippe auf <b>Hinzufügen</b>.
+647	Öffne Shepherd über das neue Symbol.
+648	Öffne Shepherd über das neue Symbol auf deinem Home-Bildschirm. Auf dem iPhone funktionieren Benachrichtigungen nur von dort (ab iOS 16.4).
+649	Shepherd ist installiert. Öffne es über das neue Symbol.
+650	Wenn dein Handy fragt, tippe auf <b>Erlauben</b>. Versehentlich auf <b>Nicht erlauben</b> getippt?
+651	Schalte <b>Benachrichtigungen erlauben</b> ein.
+652	Schalte <b>Mitteilungen erlauben</b> ein, mit <b>Sperrbildschirm</b>, <b>Banner</b> und <b>Kennzeichen</b> aktiviert.
+653	Einstellungen › Mitteilungen › Shepherd
+654	Einstellungen › Apps › Shepherd › Benachrichtigungen
+655	In wenigen Sekunden kommt eine Benachrichtigung von Shepherd.
+656	Nichts? Prüfe, ob <b>Fokus</b> aus ist und ob du Shepherd über das Symbol auf dem Home-Bildschirm geöffnet hast.
+657	Nichts? Prüfe, ob <b>Nicht stören</b> aus ist und ob Benachrichtigungen von Shepherd erlaubt sind (Schritt 2).
+658	Ändere die Uhrzeit und worüber Shepherd dich informiert unter <b>Benachrichtigungen</b> in den Einstellungen. Schalte Benachrichtigungen einmal auf jedem Handy ein, das du nutzt.
+659	Test gesendet. Er sollte in wenigen Sekunden ankommen.
+660	Dieses Handy wird geprüft…
+661	Dieses Handy blockiert Benachrichtigungen von Shepherd. Siehe Schritt 2, um sie zu erlauben.
+662	Füge Shepherd zuerst zum Home-Bildschirm hinzu (Schritt 1) und öffne es dann von dort.
+663	Füge Shepherd zuerst zum Home-Bildschirm hinzu und öffne es dann von dort.
+664	Dieser Browser kann keine Benachrichtigungen zeigen. Öffne Shepherd in Safari (iPhone) oder Chrome (Android).
+665	Dieser Browser kann keine Benachrichtigungen zeigen. Nutze Safari (iPhone) oder Chrome (Android).
+666	Benachrichtigungen sind blockiert. Erlaube sie in den Einstellungen deines Handys.
+667	Benachrichtigungen konnten nicht eingeschaltet werden. Versuche es noch einmal.
+668	Dieses Handy war nicht erreichbar. Schalte Benachrichtigungen aus und wieder ein.
+669	Lass dir Zeit.
+670	auf deinem Handy, dann:
+671	Willkommen bei Shepherd
+672	Shepherd erinnert dich, bei wem du dich melden solltest, damit niemand, den du begleitest, untergeht. Dieser Rundgang öffnet jeden Teil der App und lässt dich alles nebenbei einrichten.
+673	Beginne in den Einstellungen
+674	Öffne zuerst die Einstellungen und füge deine WhatsApp-Nummer und die erste Nachricht hinzu, die automatisch gesendet wird, wenn jemand deinen QR-Code scannt.
+675	Die meisten nutzen Shepherd auf dem Handy, also schalte Benachrichtigungen ein. Shepherd sagt dir mit Namen, wem du schreiben, wem du antworten und bei wem du dich melden sollst, und öffnet die Person beim Tippen.
+676	Tippe hier, nachdem du jemanden getroffen hast. Füge Name und Nummer hinzu oder zeig deinen QR-Code, damit sie dir zuerst schreiben.
+677	Füll ihre Daten aus und tippe auf Kontakt speichern.
+678	Beginne jeden Tag hier
+679	Heute zeigt, wem du schreiben sollst und wer auf dich wartet. Grün ist im Plan, gelb ist heute fällig, rot ist überfällig.
+680	Schreiben mit einem Tipp
+681	Der Chat-Knopf öffnet WhatsApp oder Instagram. Shepherd trägt es ein und wartet auf die Antwort.
+682	Wenn sie antworten
+683	Tippe auf Geantwortet und sie kommen in deine Liste Antworten an. Jeden Tag fragt Shepherd auch nach allen, bei denen es unsicher ist.
+684	Füge die Menschen hinzu, die schon Jünger sind. Shepherd erinnert dich, dich jede Woche bei ihnen zu melden. Es ist biblisch, einander zu ermutigen! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Lass uns das jede Woche zur Gewohnheit machen!
+685	Gib den Namen ein und tippe auf Hinzufügen.
+686	Dein Kalender
+687	Lade Menschen ein und hake ab, wer kam. Verbinde Shepherd mit dem Kalender deines Handys, damit Studien und Termine dort von selbst erscheinen.
+688	Alles bereit
+689	Ändere in den Einstellungen, was deine Morgenübersicht zeigt. Auf der Seite einer Person speichert In den Handy-Kontakten speichern sie auf deinem Handy. Wiederhole diesen Rundgang jederzeit über die Einstellungen.
+690	Rundgang beenden
+691	Rundgang fortsetzen
+692	Zurück zum Rundgang
+693	Diesen Schritt überspringen
+694	Anmelden
+695	Konto erstellen
+696	Mein Konto erstellen
+697	Passwort vergessen?
+698	Zurück zur Anmeldung
+699	Code anfordern
+700	6-stelliger Code
+701	Neues Passwort
+702	Neues Passwort speichern
+703	Gib deine E-Mail-Adresse ein.
+704	Gib dein Passwort ein.
+705	Wähle ein Passwort mit mindestens 8 Zeichen.
+706	Wähle mindestens 8 Zeichen.
+707	Gib deine E-Mail ein und wir helfen dir, ein neues Passwort zu wählen.
+708	Gib deinen 6-stelligen Code ein und wähle ein neues Passwort.
+709	Bitte die Person, die Shepherd in deiner Gemeinde betreut, um einen Code, gib ihn ein und wähle ein neues Passwort.
+710	Falls {0} ein Konto hat, haben wir einen 6-stelligen Code gemailt. Gib ihn ein und wähle ein neues Passwort.
+711	Du musst dich auf diesem Handy nur einmal anmelden.
+712	Deine Liste ist privat: Niemand sonst, der Shepherd nutzt, kann sie sehen.
+713	Shepherd wird geöffnet…
+714	Keine Verbindung. Prüfe deinen Empfang und versuche es noch einmal.
+715	Keine Verbindung. Deine Änderungen bleiben auf diesem Handy.
+716	Etwas ist schiefgelaufen. Versuche es noch einmal.
+717	Shepherd hat noch keine Serveradresse.
+718	Shepherd ist noch nicht mit seinem Server verbunden. Trage die Adresse deines Cloudflare Workers in <b>config.js</b> ein.
+719	Aktuelles Passwort
+720	Dein Passwort
+721	Passwort geändert. Deine anderen Handys fragen dich, dich neu anzumelden.
+722	Das löscht dein Konto und <b>alle Menschen in deiner Shepherd-Liste</b> endgültig vom Server. Exportiere vorher eine Sicherung, falls du sie noch brauchen könntest.
+723	Alles löschen
+724	Alles ist gespeichert. Beim Abmelden wird deine Liste von diesem Handy entfernt; melde dich jederzeit wieder an, um sie zurückzubekommen.
+725	§one=<b>{0} Änderung hat den Server noch nicht erreicht.</b> Verbinde dich mit dem Internet und warte oben auf „Gespeichert“, bevor du dich abmeldest, sonst geht sie verloren.|other=<b>{0} Änderungen haben den Server noch nicht erreicht.</b> Verbinde dich mit dem Internet und warte oben auf „Gespeichert“, bevor du dich abmeldest, sonst gehen sie verloren.
+726	§one=<b>{0} Änderung hat den Server noch nicht erreicht.</b> Verbinde dich mit dem Internet und warte oben auf „Gespeichert“, bevor du dich abmeldest, sonst geht sie verloren.|other=<b>{0} Änderungen haben den Server noch nicht erreicht.</b> Verbinde dich mit dem Internet und warte oben auf „Gespeichert“, bevor du dich abmeldest, sonst gehen sie verloren.
+727	Trotzdem abmelden
+728	Auf dem Shepherd-Server ist etwas schiefgelaufen. Deine Änderungen bleiben auf deinem Handy.
+729	Prüfe den Code und wähle ein Passwort mit mindestens 8 Zeichen.
+730	Prüfe deine E-Mail und dein Passwort.
+731	Ein Eintrag ist zu groß zum Speichern.
+732	Bitte melde dich erneut an.
+733	Etwas in diesem Speichervorgang ist nicht erlaubt.
+734	Dieser Code ist abgelaufen. Fordere einen neuen an.
+735	Dieser Code stimmt nicht.
+736	Diese E-Mail-Adresse sieht nicht richtig aus.
+737	E-Mail und Passwort passen nicht zusammen.
+738	Das ist zu viel auf einmal zum Speichern.
+739	Es gibt schon ein Konto mit dieser E-Mail. Melde dich stattdessen an.
+740	Dieses Handy hat eine Benachrichtigungsadresse geliefert, die Shepherd nicht nutzen kann.
+741	Dieses Handy hat Benachrichtigungsschlüssel geliefert, die Shepherd nicht nutzen kann.
+742	Zu viele Änderungen auf einmal.
+743	Zu viele Versuche. Warte 15 Minuten und versuche es noch einmal.
+744	Schalte zuerst Benachrichtigungen auf diesem Handy ein.
+745	Dein Passwort stimmt nicht.
+746	§one={0} Tag|other={0} Tage
+747	§one={0} Tag|other={0} Tage
+748	{0} gespeichert
+749	Jetzt hinzufügen
+750	Wieder melden in
+751	Dieses Handy
+752	Wöchentliche Kontakte
+753	Noch nichts.
+754	Notizen (optional)
+755	Eingetragen. Nächster Kontakt heute.
+756	Eingetragen. Nächster Kontakt morgen.
+757	Andere App
+758	Über eine andere App geschrieben
+759	Shepherd-Benachrichtigungen sind an
+760	Jeden Morgen erfährst du mit Namen, wem du schreiben, wem du antworten und bei wem du dich melden sollst.
+761	So
+762	Mo
+763	Di
+764	Mi
+765	Do
+766	Fr
+767	Sa
+768	Jan
+769	Feb
+770	Mär
+771	Apr
+772	Mai
+773	Jun
+774	Jul
+775	Aug
+776	Sep
+777	Okt
+778	Nov
+779	Dez

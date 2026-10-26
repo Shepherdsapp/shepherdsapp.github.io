@@ -5,6 +5,7 @@ const { TextEncoder } = require('util');
 
 const SRC = fs.readFileSync(require('path').join(__dirname, '..', 'hosted', 'shepherd.html'), 'utf8');
 const results = []; let current = '';
+const I18N_SINK = new Set();
 function ok(cond, msg) { results.push({ group: current, ok: !!cond, msg }); if (!cond) console.log('  FAIL:', current, '-', msg); }
 const wait = (ms = 20) => new Promise(r => setTimeout(r, ms));
 
@@ -51,6 +52,7 @@ async function open(store, opts = {}) {
       if (opts.localStorage) for (const [k, v] of Object.entries(opts.localStorage)) w.localStorage.setItem(k, v);
       Object.defineProperty(w, 'crypto', { value: nodeCrypto.webcrypto });
       w.TextEncoder = TextEncoder;
+      if (process.env.I18N_COLLECT) w.__i18nCollect = k => I18N_SINK.add(k);
       Object.defineProperty(w.navigator, 'clipboard', { value: { writeText: t => { copied.push(t); return Promise.resolve(); } } });
       w.addEventListener('error', e => errors.push(String(e.message)));
       if (store) {
@@ -159,9 +161,9 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok(sam && !('group' in sam) && !sam.met, 'no group or where-met saved');
   ok(sam && sam.everyDays === 3, 'default check-in every 3 days');
   ok($('#sheet').classList.contains('on') === false, 'sheet closes after saving');
-  ok(!$('#toastAct').hidden && $('#toastAct').textContent === 'Copy details', 'toast offers to copy details for phone contacts');
+  ok(!$('#toastAct').hidden && $('#toastAct').textContent === 'Save to phone', 'toast offers to save them to phone contacts');
   click('#toastAct'); await wait();
-  ok(A.copied.pop() === 'Sam Test\n07700 900123\nInstagram: @sam.t', 'copied text is ready to paste into Contacts');
+  ok(A.copied.pop() === 'Sam Test\n07700 900123\nInstagram: @sam.t', 'inside Claude, details are copied ready to paste into Contacts');
 
   current = 'Save and add another';
   click('#fab'); await wait();
@@ -682,11 +684,174 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     S0.contacts = saved.c; S0.disciples = saved.d; S0.events = saved.e; S0.profile = saved.p;
   }
 
+  current = 'Journey';
+  {
+    const W = A.w.__shepherd, S0 = W.S;
+    S0.readonly = false; // the read-only check above left this phone read-only
+    A.click('[data-act="tab"][data-v="people"]'); await wait();
+    A.click('[data-act="pmode"][data-m="journey"]'); await wait();
+    const cols = A.$$('.jcol');
+    ok(cols.length === 6 && cols.map(c => c.querySelector('h2').textContent).join('|') === 'First contact|Interested|Studying|Regular at church|Baptised|Disciple', 'six stages, Regular at church between Studying and Baptised');
+    const sumTotal = A.$$('.jsum-i b').reduce((n, b) => n + Number(b.textContent), 0);
+    ok(sumTotal === Object.values(S0.contacts).filter(c => c.name && W.state(c) !== 'archived').length, 'stage counts add up to everyone not archived');
+    const card = A.$$('.jcol')[0].querySelector('.jcard');
+    const cid = card.querySelector('[data-act="open"]').dataset.id;
+    A.click(card.querySelector('[data-act="stage"]:not([aria-label])')); await wait();
+    ok(S0.contacts[cid].stage === 'Interested' && /moved to Interested/.test(A.$('#toastMsg').textContent), 'one tap moves someone to the next stage');
+    await wait(120); ok(store.docs.get('data/users/u_test/profile/contacts/' + cid).stage === 'Interested', 'the move is saved');
+    const back = A.$$('.jcol')[1].querySelector('[data-act="stage"][aria-label^="Move back"]');
+    A.click(back); await wait();
+    ok(S0.contacts[cid].stage === 'First contact', 'and back again');
+    S0.contacts[cid].stage = 'Baptised'; A.click('[data-act="pmode"][data-m="journey"]'); await wait();
+    const bc = A.$$('.jcol')[4].querySelector('[data-act="stage"]:not([aria-label])'); A.click(bc); await wait();
+    ok(S0.contacts[cid].stage === 'Disciple' && !Object.values(S0.disciples).some(d => d.name === S0.contacts[cid].name && d.createdAt > Date.now() - 5000), 'moving to Disciple does not add them to the Disciples tab');
+    A.click('[data-act="open"][data-id="' + cid + '"]'); await wait();
+    ok(A.$$('.jstep').length === 6 && A.$('.jstep.now').textContent === 'Disciple', 'contact page shows where they are on the journey');
+    A.click(A.$$('.jstep')[2]); await wait();
+    ok(S0.contacts[cid].stage === 'Studying' && /Stage changed to Studying/.test(JSON.stringify(S0.contacts[cid].log)), 'tapping a stage sets it and logs it');
+    A.click('[data-act="tab"][data-v="people"]'); await wait(); A.click('[data-act="pmode"][data-m="list"]'); await wait();
+    ok(A.$('#q'), 'List view is back');
+  }
+
+  current = 'Prayer list';
+  {
+    const W = A.w.__shepherd, S0 = W.S;
+    A.click('[data-act="tab"][data-v="today"]'); await wait();
+    ok(A.$('#prayCard'), 'Today has a Pray today card');
+    A.click('#prayCard [data-act="praylist"]'); await wait();
+    ok(A.$('#sheetTitle').textContent === 'Prayer list', 'prayer list opens');
+    A.submit('#prForm'); await wait();
+    ok(!A.$('#prErr').hidden, 'needs a name');
+    for (const [n, notes] of [['Grace Owusu', 'Exams this week'], ['Uncle Kofi', ''], ['Ama', 'Healing'], ['Joel', 'New job']]) { A.setVal('#prName', n); A.setVal('#prNotes', notes); A.submit('#prForm'); await wait(40); }
+    const pr = Object.values(S0.prayers);
+    ok(pr.length === 4 && pr.some(x => x.name === 'Uncle Kofi' && x.notes === ''), 'names with optional notes are added');
+    await wait(150); ok([...store.docs.keys()].filter(k => k.startsWith('data/users/u_test/profile/prayers/')).length === 4, 'saved to your own space');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+    A.click('[data-act="tab"][data-v="today"]'); await wait();
+    ok(A.$$('#prayCard li').length === 3, 'three people to pray for today');
+    A.click('[data-act="settings"]'); await wait();
+    const cnt = A.$('#pPrCount'); cnt.value = '2'; cnt.dispatchEvent(new A.w.Event('change', { bubbles: true })); await wait();
+    A.click('[data-act="tab"][data-v="today"]'); await wait();
+    ok(A.$$('#prayCard li').length === 2, 'can choose two a day');
+    // taking turns over the days
+    const W2 = A.w.__shepherd;
+    A.click('[data-act="settings"]'); await wait();
+    const on = A.$('#pPrOn'); on.checked = true; on.dispatchEvent(new A.w.Event('change', { bubbles: true })); await wait();
+    const t = A.$('#pPrTime'); t.value = '21:15'; t.dispatchEvent(new A.w.Event('change', { bubbles: true })); await wait();
+    ok(S0.profile.prayerOn === true && S0.profile.prayerTime === '21:15', 'prayer reminders switched on, at a chosen time');
+    const items = W2.buildSchedule().filter(x => x.tag.startsWith('pr-'));
+    ok(items.length >= 13 && items.every(x => new Date(x.at).getHours() === 21 && new Date(x.at).getMinutes() === 15), 'a prayer reminder every day at that time');
+    ok(/^Pray for \S+ and \S+$/.test(items[1].title) && items[1].body.length > 0, 'it names who to pray for: ' + items[1].title);
+    const seen = new Set(items.slice(0, 4).flatMap(x => x.title.replace('Pray for ', '').split(' and ')));
+    ok(seen.size === 4, 'everyone gets prayed for, taking turns');
+    on.checked = false; on.dispatchEvent(new A.w.Event('change', { bubbles: true })); await wait();
+    ok(!W2.buildSchedule().some(x => x.tag.startsWith('pr-')), 'switching them off stops them');
+    // add from a contact
+    const someone = Object.values(S0.contacts).find(c => c.name && W.state(c) !== 'archived');
+    A.click('[data-act="tab"][data-v="people"]'); await wait(); A.click('[data-act="open"][data-id="' + someone.id + '"]'); await wait();
+    A.click('[data-act="addpray"]'); await wait();
+    ok(Object.values(S0.prayers).some(x => x.contactId === someone.id), 'a contact can be added to the prayer list');
+    A.click('[data-act="addpray"]'); await wait();
+    ok(Object.values(S0.prayers).filter(x => x.contactId === someone.id).length === 1 && /already/.test(A.$('#toastMsg').textContent), 'not added twice');
+    // edit and remove
+    A.click('[data-act="tab"][data-v="today"]'); await wait(); A.click('#prayCard [data-act="praylist"]'); await wait();
+    const kofi = Object.values(S0.prayers).find(x => x.name === 'Uncle Kofi');
+    A.click('[data-act="editprayer"][data-id="' + kofi.id + '"]'); await wait();
+    A.setVal('#peNotes', 'Back pain'); A.submit('#pe'); await wait(40);
+    ok(S0.prayers[kofi.id].notes === 'Back pain', 'notes can be edited');
+    A.click('[data-act="editprayer"][data-id="' + kofi.id + '"]'); await wait(); A.click('#peDel'); await wait(40);
+    ok(!S0.prayers[kofi.id], 'removed from the prayer list');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+  }
+
+  current = 'Phone contacts';
+  {
+    const W = A.w.__shepherd;
+    const vcf = 'BEGIN:VCARD\r\nVERSION:3.0\r\nN:Mensah;Daniel;;;\r\nFN:Daniel Mensah\r\nTEL;TYPE=CELL:07700 900111\r\nTEL;TYPE=HOME:020 7946 0000\r\nEND:VCARD\r\nBEGIN:VCARD\r\nVERSION:2.1\r\nN;CHARSET=UTF-8;ENCODING=QUOTED-PRINTABLE:Nowak;Zofia;;;\r\nFN;CHARSET=UTF-8;ENCODING=QUOTED-PRINTABLE:Zofia =C5=81=\r\nukasz\r\nTEL;CELL:+48 600 100 200\r\nEND:VCARD\r\nBEGIN:VCARD\r\nVERSION:3.0\r\nN:Owusu;Grace;;;\r\nTEL:+447700900222\r\nitem1.TEL:07700 900333\r\nEND:VCARD\r\nBEGIN:VCARD\r\nVERSION:4.0\r\nFN:Chidi O\r\n kafor\r\nTEL;VALUE=uri:tel:+234-803-000-0000\r\nEND:VCARD\r\n';
+    const got = W.parseVCF(vcf);
+    ok(got.length === 4, 'reads four contacts from a contacts file');
+    ok(got[0].n === 'Daniel Mensah' && got[0].p.length === 2, 'names and every number');
+    ok(got[1].n === 'Zofia Łukasz' && got[1].p[0] === '+48 600 100 200', 'older Android files with accents (quoted-printable) read correctly');
+    ok(got[2].n === 'Grace Owusu' && got[2].p.length === 2, 'falls back to the N field when there is no FN, and grouped numbers');
+    ok(got[3].n === 'Chidi Okafor' && got[3].p[0] === '+234-803-000-0000', 'folded lines and tel: links');
+    ok(W.mergePhoneBook(got) === 4 && W.mergePhoneBook(got) === 0, 'importing twice adds nothing twice');
+    ok(!contactDocs(store).some(x => /Zofia/.test(x.name)) && ![...store.docs.values()].some(d => /Zofia/.test(JSON.stringify(d))), 'imported phone contacts are never uploaded');
+    A.click('#fab'); await wait();
+    A.setVal('#cName', 'zof'); A.$('#cName').dispatchEvent(new A.w.Event('input', { bubbles: true })); await wait();
+    ok(!A.$('#cSug').hidden && /Zofia Łukasz/.test(A.$('#cSug').textContent), 'typing shows matching phone contacts');
+    A.setVal('#cName', 'gr'); A.$('#cName').dispatchEvent(new A.w.Event('input', { bubbles: true })); await wait();
+    const opts = A.$$('#cSug button');
+    ok(opts.length === 2 && /07700 900333/.test(opts[1].textContent), 'each of their numbers is offered');
+    A.click(opts[1]); await wait();
+    ok(A.$('#cName').value === 'Grace Owusu' && A.$('#cPhone').value === '07700 900333' && A.$('#cSug').hidden, 'picking one fills in the name and number');
+    A.setVal('#cName', 'xyz'); A.$('#cName').dispatchEvent(new A.w.Event('input', { bubbles: true })); await wait();
+    ok(A.$('#cSug').hidden, 'no matches, no list');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+    A.click('[data-act="settings"]'); await wait();
+    ok(/4 contacts on this phone/.test(A.$('#pbCard').textContent) && A.$('#pbFile'), 'Settings shows how many are on this phone, with an import button');
+    A.click('[data-act="pbhow"]'); await wait();
+    ok(A.$$('#sheetBody .osb').length === 2 && /Export/.test(A.$('#sheetBody').textContent), 'how to get a contacts file, on iPhone and Android');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+    A.click('[data-act="pbclear"]'); await wait();
+    ok(!/contacts on this phone/.test(A.$('#pbCard').textContent), 'can remove them from this phone');
+    const card = W.vcard({ name: 'Sam Lee', phone: '07700 900123', instagram: 'sam.t' });
+    ok(/FN:Sam Lee/.test(card) && /TEL;TYPE=CELL:\+447700900123/.test(card) && /instagram\.com\/sam\.t/.test(card) && W.parseVCF(card)[0].n === 'Sam Lee', 'save-to-phone makes a proper contact card');
+  }
+
+  current = 'QR code and your data';
+  {
+    const W = A.w.__shepherd;
+    ok(W.S.profile.intro === 'Hi, nice to meet you, I got your contact from Shepherd! Hoping to hear from you soon.' || W.S.profile.intro !== "Hi! It was great meeting you today. Here's my number so we can keep in touch about studying the Bible.", 'the old default message becomes the new short one');
+    A.click('[data-act="settings"]'); await wait();
+    A.click('[data-act="yourdata"]'); await wait();
+    const yd = A.$('#sheetBody').textContent;
+    ok(/Data linked to you/.test(yd) && /Kept only on this phone/.test(yd) && /Never collected/.test(yd) && /location/.test(yd), 'Your data explains what is saved, where, and what is never collected');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+  }
+
+  current = 'Languages';
+  {
+    const st = makeStore();
+    const t0 = Date.now() - 3 * 864e5;
+    st.docs.set('data/users/u_test/profile', { name: 'Pavi Mensah', phone: '07700 900123', tourDone: true, lang: 'es', notify: { chase: true, replies: true, catchup: true, disciples: true, studies: true, events: true, weekly: true } });
+    st.docs.set('data/users/u_test/profile/contacts/k1', { id: 'k1', name: 'Kofi Boateng', phone: '07700 900555', status: 'active', stage: 'Studying', everyDays: 3, lastContact: t0, replyState: '', createdAt: t0, updatedAt: t0, studies: [], log: [] });
+    st.docs.set('data/users/u_test/profile/contacts/k2', { id: 'k2', name: 'Efua Asante', phone: '07700 900556', status: 'active', stage: 'First contact', everyDays: 3, replyState: 'me', meSince: t0, createdAt: t0, updatedAt: t0, studies: [], log: [] });
+    st.docs.set('data/users/u_test/profile/events/v1', { id: 'v1', name: 'Sunday service', date: ymd(Date.now() + 864e5), time: '10:30', place: 'Main hall', invited: [], came: [] });
+    const E = await open(st, { localStorage: { 'shepherd:lang': 'es' } }); await wait(200);
+    const tabs = E.$$('.tab').map(t => t.textContent.trim());
+    ok(/^Hoy\d*\|Personas\|Discípulos\|Calendario\|Semana/.test(tabs.join('|')), 'the tabs are in Spanish: ' + tabs.join(', '));
+    ok(E.d.documentElement.lang === 'es', 'the page says it is in Spanish');
+    ok(/Buen(os|as) (días|tardes|noches), Pavi/.test(E.$('.h1').textContent), 'greeting in Spanish, name untouched');
+    ok(/^(lunes|martes|miércoles|jueves|viernes|sábado|domingo)/.test(E.$('.eyebrow').textContent), 'today\'s date written the Spanish way: ' + E.$('.eyebrow').textContent);
+    ok(/Responder a Efua/.test(E.$('#main').textContent) || /Responder a/.test(E.$('#main').textContent), 'lists use Spanish headings');
+    ok(!/[A-Za-z]+ (to message|reply owed|Overdue by)/.test(E.$('#main').textContent), 'no English left in the Today counts');
+    const sched = E.w.__shepherd.buildSchedule();
+    ok(sched.some(x => x.title === 'Responder a Efua') && sched.some(x => x.title === 'Mañana: Culto del domingo' || x.title === 'Culto del domingo a las 10:30'), 'notifications are in Spanish too: ' + [...new Set(sched.map(x => x.title))].slice(0, 6).join(' | '));
+    ok(sched.every(x => !/^(Reply to|Message|Did|Tomorrow:)/.test(x.title)), 'no English notification titles');
+    E.click('[data-act="tab"][data-v="disciples"]'); await wait();
+    ok(/Therefore encourage one another/.test(E.$('.verse').textContent) && /NIV/.test(E.$('.verse cite').textContent), 'the Bible verse stays in English (NIV)');
+    E.click('[data-act="tab"][data-v="people"]'); await wait();
+    E.click('[data-act="open"][data-id="k1"]'); await wait();
+    ok(E.$('.h1').textContent.includes('Kofi Boateng') && E.$$('.jstep').map(x => x.textContent).join('|') === 'Primer contacto|Interesado|Estudiando|Asiste a la iglesia|Bautizado|Discípulo', 'journey stages in Spanish');
+    E.click('[data-act="tab"][data-v="events"]'); await wait();
+    E.click('[data-act="openevent"][data-id="v1"]'); await wait();
+    const inv = E.w.__shepherd.inviteText ? E.w.__shepherd.inviteText(E.S().events.v1, E.S().contacts.k1) : '';
+    ok(/^¡Hola, Kofi! ¿Te gustaría venir a Sunday service mañana a las 10:30/.test(inv), 'invites are written in Spanish: ' + inv);
+    E.click('#sheet [data-act="closesheet"]'); await wait(400);
+    E.click('[data-act="settings"]'); await wait();
+    const sel = E.$('#pLang');
+    ok(sel && sel.options.length === 15 && sel.value === 'es' && [...sel.options].map(o => o.textContent).includes('English') && [...sel.options].map(o => o.value).join(',') === 'en,es,fr,pt,nl,pl,pcm,yo,ig,zh-Hans,zh-Hant,ja,de,ru,lt', 'Settings has the language list, each in its own language');
+    ok(![...sel.options].some(o => o.value === 'ur'), 'no Urdu');
+    ok(/NIV/.test(E.$('#langCard').textContent) && /inglés/.test(E.$('#langCard').textContent), 'says Bible verses stay in English');
+    ok(E.$('#pIntro').value === '¡Hola, encantado de conocerte! Conseguí tu contacto con Shepherd. Espero saber de ti pronto.', 'the QR message is shown in Spanish');
+      }
+
   current = 'Script errors';
   const allErr = A.errors.concat(B.errors);
   ok(allErr.length === 0, 'no script errors' + (allErr.length ? ': ' + allErr.slice(0, 3).join(' / ') : ''));
 
   const pass = results.filter(r => r.ok).length, fail = results.length - pass;
   console.log('\n' + pass + ' passed, ' + fail + ' failed');
+  if (process.env.I18N_COLLECT) fs.writeFileSync(process.env.I18N_COLLECT + ".app.json", JSON.stringify([...I18N_SINK], null, 1));
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.log('CRASH', e && e.stack || e); process.exit(2); });

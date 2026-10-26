@@ -1,0 +1,779 @@
+1	{0}: {1}
+2	{0} · {1}
+3	<b>{0}</b> · {1}
+4	{0}, {1}
+5	{0} àti {1} míràn
+6	{0} (ọjọ́ {1} ti kọjá)
+7	{0} (ọjọ́ {1})
+8	{0} (àpẹẹrẹ)
+9	Òní
+10	Ọ̀la
+11	Àná
+12	òní
+13	ọ̀la
+14	àná
+15	Ènìyàn
+16	Ọmọ-ẹ̀yìn
+17	Kàlẹ́ńdà
+18	Ọ̀sẹ̀
+19	Ètò
+20	Fikún
+21	Fi olùbásọ̀rọ̀ kún
+22	Fi ẹnìkan kún
+23	Fi olùbásọ̀rọ̀ kan kún
+24	Fipamọ́
+25	Fi àwọn àyípadà pamọ́
+26	Fagilé
+27	Pa á dé
+28	Ó parí
+29	Padà
+30	Èyí tó kàn
+31	Fò ó
+32	Ṣàtúnṣe
+33	Ṣí i
+34	Fihàn
+35	Fi pamọ́
+36	Dá a padà
+37	Wò ó
+38	Àlẹ̀mọ́
+39	Gbogbo rẹ̀
+40	Ó ti pa
+41	Ìwọ
+42	Òmíràn
+43	Àpẹẹrẹ
+44	Orúkọ
+45	Fóònù
+46	Ímeèlì
+47	Ọ̀rọ̀ aṣínà
+48	Orúkọ olùmúlò
+49	Àkọsílẹ̀
+50	Ọjọ́
+51	Àkókò
+52	Ọjọ́
+53	Ibo
+54	Àlàyé
+55	Ìpele
+56	Ìdí
+57	Ó ń gbé e wá
+58	Ó ti wà ní ìpamọ́
+59	Ó ń fipamọ́…
+60	Dúró díẹ̀…
+61	Kì í ṣe báyìí
+62	Kò tíì
+63	Fi hàn mí
+64	Fi bí a ṣe ń ṣe é hàn mí
+65	Gbogbo ènìyàn
+66	Àkọ́kọ́
+67	Àtòjọ
+68	Ìrìn-àjò
+69	Èyí tó ti kọjá
+70	Èyí tó ń bọ̀
+71	Ẹ̀kọ́
+72	Àwọn ìṣẹ̀lẹ̀
+73	Ìṣẹ̀lẹ̀
+74	Iṣẹ́ tí a ṣe
+75	Lórí ẹ̀rọ yìí
+76	Kò sí íńtánẹ́ẹ̀tì · yóò mú un bá ara mu
+77	A kò fi pamọ́ lórí íńtánẹ́ẹ̀tì
+78	Ó wà ní ìpamọ́ lórí ẹ̀rọ yìí
+79	Àyè ìpamọ́ lórí íńtánẹ́ẹ̀tì ti kún. Àwọn àyípadà rẹ wà lórí fóònù yìí. Ṣe ẹ̀dà àfipamọ́ ní Ètò.
+80	Ẹ káàárọ̀
+81	Ẹ káàsán
+82	Ẹ káalẹ́
+83	Ẹ káàárọ̀, {0}
+84	Ẹ káàsán, {0}
+85	Ẹ káalẹ́, {0}
+86	Àkópọ̀ òwúrọ̀ rẹ
+87	Àkópọ̀ òní
+88	O ti ṣe gbogbo rẹ̀. Kò sí ẹni tó ń dúró dè ọ́ lónìí.
+89	Kò sí ohunkóhun fún òní.
+90	Ìkìlọ̀ ti pa.
+91	Kọ̀wé sí wọn lónìí
+92	Dá wọn lóhùn
+93	Ó nílò èsì
+94	Fún òní
+95	Ó ti pẹ́
+96	Ó wà ní àkókò
+97	Ó dánu dúró
+98	Ẹ̀kọ́ òní
+99	Ẹ̀kọ́ Bíbélì
+100	Ẹ̀kọ́ 1 lónìí
+101	Ẹ̀kọ́ {0} lónìí
+102	{0} láti kọ̀wé sí
+103	Èsì {0} tí o jẹ
+104	Èsì {0} tí o jẹ
+105	{0} láti ṣàyẹ̀wò
+106	{0} nínú {1}
+107	Àyẹ̀wò
+108	Ṣé {0} ti fèsì?
+109	O kọ̀wé sí {0} ní ọjọ́ {1} sẹ́yìn.
+110	O kọ̀wé sí {0} ní ọjọ́ {1} sẹ́yìn.
+111	Bẹ́ẹ̀ ni, mo ti fèsì
+112	Mo ṣì ń dúró
+113	Bi mí lọ́la
+114	Shepherd yóò tún béèrè lọ́la
+115	Àwọn ọmọ-ẹ̀yìn ọ̀sẹ̀ yìí
+116	{0} nínú {1} ti parí
+117	Ó ṣì kù láti bá sọ̀rọ̀: {0}.
+118	Ṣí Àwọn ọmọ-ẹ̀yìn
+119	Gbàdúrà lónìí
+120	Àtòjọ àdúrà ({0})
+121	Àwọn olùbásọ̀rọ̀ àpẹẹrẹ ni o ń wò. <b>Yọ wọ́n kúrò</b> ní Ètò nígbàkigbà tí o bá ṣetán.
+122	Àwọn àyípadà rẹ wà lórí fóònù yìí ṣùgbọ́n a kò lè fi wọ́n pamọ́ lórí íńtánẹ́ẹ̀tì. Béèrè lọ́wọ́ ẹni tó pín Shepherd fún ọ fún àṣẹ <b>Olùkópa</b>.
+123	Bẹ̀rẹ̀ pẹ̀lú àwọn ènìyàn tí o pàdé
+124	Fi ẹnìkan tí o ti bá sọ̀rọ̀ ìgbàgbọ́ rẹ kún. Shepherd yóò rán ọ létí láti bá wọn sọ̀rọ̀ ní ọjọ́ díẹ̀ díẹ̀, yóò sì máa tọpa ẹ̀kọ́ wọn.
+125	Fi ènìyàn àkọ́kọ́ mi kún
+126	Fi Shepherd sí ojú-ìbojú ilé rẹ
+127	Yóò ṣí bí áàpù, bẹ́ẹ̀ ni Shepherd ṣe lè fi ìfitónilétí tó ní orúkọ ènìyàn ránṣẹ́ sí ọ.
+128	Kọ̀wé sí ènìyàn {0}: {1}
+129	Kọ̀wé sí ènìyàn {0}: {1}
+130	Dá {0} lóhùn
+131	Ṣé wọ́n ti fèsì? {0}
+132	Àwọn ọmọ-ẹ̀yìn láti bá sọ̀rọ̀ ní ọ̀sẹ̀ yìí: {0}
+133	Ẹ̀kọ́ òní: {0}
+134	{0} ní {1}
+135	Àwọn ìṣẹ̀lẹ̀: {0}
+136	{0} lónìí ní {1}
+137	{0} lọ́la ní {1}
+138	{0} lónìí
+139	{0} lọ́la
+140	Ní ọ̀sẹ̀ yìí o tẹ̀lé {0} nínú {1}.
+141	Ní ọ̀sẹ̀ yìí o tẹ̀lé {0} nínú ènìyàn {1}.
+142	Ní ọ̀sẹ̀ yìí o tẹ̀lé {0} nínú ènìyàn {1}.
+143	Kọ̀wé sí {0}
+144	{0} kọ̀wé sí ọ ní ọjọ́ {1} sẹ́yìn. Tẹ̀ ẹ́ láti fèsì.
+145	{0} kọ̀wé sí ọ ní ọjọ́ {1} sẹ́yìn. Tẹ̀ ẹ́ láti fèsì.
+146	{0} ń dúró de èsì rẹ.
+147	Ìdánudúró parí lónìí. Tẹ̀ ẹ́ láti kọ̀wé sí {0}.
+148	O kò tíì kọ̀wé sí {0}. Tẹ̀ ẹ́ láti kí i.
+149	Ọjọ́ {0} ti kọjá. Tẹ̀ ẹ́ láti kọ̀wé sí {1}.
+150	Ọjọ́ {0} ti kọjá. Tẹ̀ ẹ́ láti kọ̀wé sí {1}.
+151	Òní ni ọjọ́ láti bá wọn sọ̀rọ̀. Tẹ̀ ẹ́ láti kọ̀wé sí {0}.
+152	O kọ̀wé sí {0} ní ọjọ́ {1} sẹ́yìn. Tẹ “Ó ti fèsì” nínú Shepherd tí wọ́n bá ti fèsì.
+153	O kọ̀wé sí {0} ní ọjọ́ {1} sẹ́yìn. Tẹ “Ó ti fèsì” nínú Shepherd tí wọ́n bá ti fèsì.
+154	Bá {0} sọ̀rọ̀
+155	O kò tíì bá {0} sọ̀rọ̀ ní ọ̀sẹ̀ yìí.
+156	Àti {0} míràn lónìí
+157	Ẹ̀kọ́ Bíbélì pẹ̀lú {0} ní {1}
+158	Ẹ̀kọ́ Bíbélì pẹ̀lú {0} lónìí
+159	Láàárín wákàtí kan. Ẹ̀kọ́: {0}
+160	Láàárín wákàtí kan.
+161	Ẹ̀kọ́: {0}
+162	A kò tíì yan àkókò.
+163	Ọ̀la: {0}
+164	Ní gbogbo ọjọ́
+165	A ti pe ènìyàn {0}
+166	A ti pe ènìyàn {0}
+167	Yóò bẹ̀rẹ̀ láàárín wákàtí kan.
+168	Yóò bẹ̀rẹ̀ láàárín wákàtí kan · {0}.
+169	Gbàdúrà fún {0}
+170	{0} àti {1}
+171	Ọ̀sẹ̀ rẹ
+172	Wá àwọn ènìyàn
+173	Wá pẹ̀lú orúkọ, nọ́ńbà tàbí orúkọ àmúlò
+174	Kò sí ẹni tó bá a mu.
+175	Kò sí ẹnìkan níbí síbẹ̀.
+176	Ènìyàn {0} tí o ń tẹ̀lé
+177	Ènìyàn {0} tí o ń tẹ̀lé
+178	A kò bá wọn sọ̀rọ̀ mọ́
+179	A kò bá wọn sọ̀rọ̀ mọ́ ({0})
+180	A pa wọ́n mọ́ dáadáa kí ohunkóhun má bàa sọnù. Dá ẹnikẹ́ni padà nígbàkigbà.
+181	Bá wọn sọ̀rọ̀ lónìí
+182	Bá wọn sọ̀rọ̀ lọ́la
+183	Bá wọn sọ̀rọ̀ lẹ́yìn ọjọ́ {0}
+184	Ó ti pẹ́ ní ọjọ́ {0}
+185	Ó ti pẹ́ ní ọjọ́ {0}
+186	Ó ti dé láti ìdánudúró
+187	Ìwọ ló yẹ kí o fèsì
+188	ń dúró dè wọ́n
+189	ti dúró fún ọjọ́ {0}
+190	ti dúró fún ọjọ́ {0}
+191	wọ́n ti dákẹ́ fún ọjọ́ {0}
+192	Ó dánu dúró títí di {0}
+193	A kò tíì bá wọn sọ̀rọ̀
+194	Ìbásọ̀rọ̀ tó kẹ́yìn jẹ́ òní
+195	Ń dúró dè wọ́n
+196	Ń dúró láti gbọ́ láti ọ̀dọ̀ wọn
+197	Fi ọ̀nà láti kọ̀wé sí {0} kún
+198	Kọ ìfiránṣẹ́ sí {0} sílẹ̀
+199	Kọ̀wé sí {0} lórí WhatsApp
+200	Kọ̀wé sí {0} lórí Instagram
+201	Kọ̀wé sí {0} lórí Snapchat
+202	Kọ̀wé sí {0} lórí TikTok
+203	Kọ̀wé sí {0} lórí Facebook
+204	Kọ̀wé lórí WhatsApp
+205	Kọ̀wé lórí Instagram
+206	Kọ̀wé lórí Snapchat
+207	Ṣí ìfọ̀rọ̀wérọ̀
+208	Ìpàdé àkọ́kọ́
+209	Ó nífẹ̀ẹ́ sí i
+210	Ó ń kẹ́kọ̀ọ́ Bíbélì
+211	Ó ń wá sí ṣọ́ọ̀ṣì déédéé
+212	Ó ti ṣe ìrìbọmi
+213	Ọmọ-ẹ̀yìn
+214	Gbé e lọ sí {0} ›
+215	Dá a padà sí {0}
+216	A ti gbé {0} lọ sí {1}
+217	Ìpele yípadà sí {0}
+218	Ìpele tó kẹ́yìn
+219	Ṣàtúnṣe {0}
+220	Rán {0} létí
+221	Ó ti fèsì
+222	Mo ti fèsì
+223	Mo ti fèsì sí {0}
+224	{0} ti fèsì
+225	O ti fèsì
+226	Ṣé o ti fèsì sí {0}?
+227	{0} ń dúró de ìfiránṣẹ́ láti ọ̀dọ̀ rẹ.
+228	Àwọn ni wọ́n kọ̀wé kẹ́yìn. Tẹ bọ́tìnnì ìfọ̀rọ̀wérọ̀ láti dáhùn, lẹ́yìn náà tẹ “Mo ti fèsì”.
+229	Tẹ “Ó ti fèsì” nígbà tí wọ́n bá kọ̀wé padà sí ọ.
+230	A ti kọ ọ́ sílẹ̀. À ń dúró de èsì {0}.
+231	A ti kọ ọ́ sílẹ̀. Ìbásọ̀rọ̀ tó kàn yóò jẹ́ lẹ́yìn ọjọ́ {0}.
+232	A ti kọ ọ́ sílẹ̀. Ìbásọ̀rọ̀ tó kàn yóò jẹ́ lẹ́yìn ọjọ́ {0}.
+233	Ibi tí ọ̀rọ̀ dé
+234	Gbogbo rẹ̀ dára
+235	Mo nílò láti fèsì
+236	A sàmì sí i: gbogbo rẹ̀ dára
+237	A sàmì sí i: mo nílò láti fèsì
+238	A sàmì sí i: ń dúró dè wọ́n
+239	A kọ̀wé lórí WhatsApp
+240	A kọ̀wé lórí Instagram
+241	A kọ̀wé lórí Snapchat
+242	A rán wọn létí lórí WhatsApp
+243	A bá wọn sọ̀rọ̀ ní ọ̀nà míràn
+244	Bá wọn sọ̀rọ̀ ní gbogbo
+245	Ìgbà ìbásọ̀rọ̀: ní gbogbo ọjọ́ {0}
+246	Ìgbà ìbásọ̀rọ̀: ní gbogbo ọjọ́ {0}
+247	Ẹ̀kọ́ tó kàn
+248	Ẹ̀kọ́ tí a ṣètò
+249	A kò tíì kọ ẹ̀kọ́ kankan sílẹ̀.
+250	Kọ ẹ̀kọ́ sílẹ̀
+251	Kọ ẹ̀kọ́ pẹ̀lú {0} sílẹ̀
+252	Ẹ̀kọ́ Bíbélì
+253	A ti kọ ẹ̀kọ́ sílẹ̀: {0}
+254	Ẹ̀kọ́ ti wà ní ìpamọ́
+255	Ẹ̀kọ́ tó kàn: {0}
+256	Ẹ̀kọ́ tó kàn pẹ̀lú <b>{0}</b> ti wà ní ìpamọ́.
+257	Ẹ̀kọ́ tó kàn pẹ̀lú <b>{0}</b> ti wà ní ìpamọ́, Shepherd yóò sì rán ọ létí ní wákàtí kan ṣáájú.
+258	Shepherd ti so pọ̀ mọ́ kàlẹ́ńdà fóònù rẹ, nítorí náà ó ti wà níbẹ̀.
+259	Ohun tí ẹ kọ́
+260	Orúkọ ẹ̀kọ́ tàbí ẹsẹ Bíbélì
+261	Fi ẹ̀kọ́ pamọ́
+262	Bí ó ṣe lọ
+263	Àwọn ìbéèrè wọn, ohun tí o fẹ́ tẹ̀lé
+264	Ẹ̀kọ́ tó kàn gbọ́dọ̀ wà lẹ́yìn èyí.
+265	Yan ọjọ́ ẹ̀kọ́ náà.
+266	A kò yan àkókò
+267	Ẹ pàdé ní
+268	Àwọn kókó àdúrà
+269	Kò sí àkọsílẹ̀
+270	Àkọsílẹ̀ iṣẹ́
+271	Gbogbo àyípadà tí o ṣe, èyí tó tuntun jù ní àkọ́kọ́.
+272	A ti fi kún un
+273	A fi kún un láti inú kóòdù QR rẹ
+274	Fi pamọ́ sórí fóònù
+275	Fi pamọ́ sí àwọn olùbásọ̀rọ̀ fóònù
+276	Fi kún àtòjọ àdúrà
+277	Fi sílẹ̀ fún báyìí
+278	Fi {0} sílẹ̀ fún báyìí
+279	Má bá wọn sọ̀rọ̀ mọ́
+280	Má bá {0} sọ̀rọ̀ mọ́
+281	Pa gbogbo dátà wọn rẹ́
+282	Dá a padà sí iṣẹ́
+283	Ó ti padà sí iṣẹ́
+284	Ó ti padà
+285	{0} ti padà sínú àtòjọ rẹ
+286	Tún bẹ̀rẹ̀ ìránnilétí báyìí
+287	Ìránnilétí ti tún bẹ̀rẹ̀
+288	Ìránnilétí ti tún ṣí
+289	Ìránnilétí dánu dúró títí di <b>{0}</b>.
+290	Ìránnilétí dánu dúró títí di <b>{0}</b> · {1}.
+291	Fi nọ́ńbà tàbí orúkọ àmúlò kún
+292	Fi nọ́ńbà WhatsApp tàbí orúkọ àmúlò lórí ìkànnì àjọlò kún kí o lè kọ̀wé sí wọn.
+293	A ti ṣàtúnṣe àlàyé
+294	Àwọn olùbásọ̀rọ̀ tuntun
+295	Fi olùbásọ̀rọ̀ pamọ́
+296	Fipamọ́ kí o sì fi òmíràn kún
+297	Nọ́ńbà WhatsApp
+298	WhatsApp (kò pọn dandan)
+299	Ìkànnì àjọlò (kò pọn dandan)
+300	Áàpù
+301	@orúkọàmúlò
+302	A pàdé níta ibùdókọ̀
+303	Ibi tí ẹ ti pàdé (kò pọn dandan)
+304	Ohun tí o fẹ́ rántí
+305	Bí nǹkan ṣe ń lọ fún wọn, ohun tí a ó gbàdúrà fún
+306	Wọ́n gbà kí a pa àlàyé wọn mọ́ kí a sì máa bá wọn sọ̀rọ̀.
+307	Orúkọ àkọ́kọ́ ti tó
+308	Kọ orúkọ wọn.
+309	Kọ́kọ́ kọ orúkọ wọn.
+310	Kọ́kọ́ kọ orúkọ kan.
+311	Nọ́ńbà fóònù yẹn kò dàbí ẹni pé ó tọ̀nà. Lo 07… tàbí +44…
+312	Nọ́ńbà yẹn kò dàbí ẹni pé ó tọ̀nà. Lo 07… tàbí +44…
+313	07… tàbí +44…
+314	Bẹ̀rẹ̀ sí í tẹ̀ láti rí wọn
+315	Yan láti inú àwọn olùbásọ̀rọ̀
+316	Mú àwọn olùbásọ̀rọ̀ fóònù rẹ wọlé láti rí àwọn ènìyàn bí o ṣe ń tẹ̀
+317	A ti fi {0} kún un. Ṣé kí a fi wọ́n pamọ́ sí àwọn olùbásọ̀rọ̀ fóònù rẹ pẹ̀lú?
+318	A ti fi {0} kún un. Bá wọn sọ̀rọ̀ ní ọ̀sẹ̀ yìí.
+319	A ti dà á kọ. Ṣí áàpù Contacts, tẹ + kí o sì lẹ̀ ẹ́.
+320	Ṣí fáìlì náà láti fi {0} kún àwọn olùbásọ̀rọ̀ rẹ
+321	Da èyí kọ
+322	Tẹ ọ̀rọ̀ tó wà nísàlẹ̀ mọ́lẹ̀, lẹ́yìn náà yan Copy.
+323	Kò sí nọ́ńbà
+324	Dá ìránnilétí dúró
+325	Kò ní sí ìránnilétí títí di ọjọ́ tí o yàn. Ní ọjọ́ náà, wọn yóò padà sí àtòjọ Òní rẹ.
+326	Àṣàyàn kíákíá
+327	Ọ̀sẹ̀ 1
+328	Ọ̀sẹ̀ 2
+329	Oṣù 1
+330	Oṣù 3
+331	Tàbí yan ọjọ́
+332	Yan ọjọ́ tó wà lẹ́yìn òní.
+333	Kọ́kọ́ yan ìdí.
+334	Ọwọ́ wọn dí báyìí
+335	Wọ́n rìnrìn-àjò tàbí wọn kò sí nítòsí
+336	Wọ́n fẹ́ àyè díẹ̀
+337	Ìdánwò tàbí iṣẹ́
+338	Wọ́n ní kí a má bá wọn sọ̀rọ̀
+339	Wọ́n ti kó lọ
+340	Wọ́n ti dara pọ̀ mọ́ ṣọ́ọ̀ṣì míràn
+341	Wọn kò fèsì fún ìgbà pípẹ́
+342	Kò sí ìdí
+343	Ó dánu dúró títí di {0}
+344	Ó dánu dúró títí di {0} ({1})
+345	A kò bá wọn sọ̀rọ̀ mọ́: {0}
+346	A kò bá wọn sọ̀rọ̀ mọ́: <b>{0}</b>.
+347	{0} yóò kúrò nínú àtòjọ rẹ, ìránnilétí yóò sì dúró. A ó pa ìtàn wọn mọ́, o sì lè dá wọn padà nígbàkigbà.
+348	Tí wọ́n bá ní kí a pa àlàyé wọn rẹ́ pátápátá, lo <b>Pa gbogbo dátà wọn rẹ́</b> lẹ́yìn náà.
+349	Èyí yóò pa {0} rẹ́ àti gbogbo nǹkan nípa wọn: nọ́ńbà, àkọsílẹ̀, ẹ̀kọ́ àti ìtàn. A kò lè dá a padà.
+350	Ṣe èyí nìkan tí ẹnìkan bá ní kí a pa àlàyé wọn rẹ́. Tí o bá kàn fẹ́ dẹ́kun láti bá ẹnìkan sọ̀rọ̀, fi wọ́n sílẹ̀ ní “A kò bá wọn sọ̀rọ̀ mọ́”.
+351	Tẹ DELETE láti fi múlẹ̀
+352	Pa á rẹ́ pátápátá
+353	Pa dátà {0} rẹ́
+354	A ti pa dátà {0} rẹ́
+355	A pa olùbásọ̀rọ̀ kan rẹ́ nítorí wọ́n béèrè
+356	Bá ẹnìkọ̀ọ̀kan sọ̀rọ̀ lẹ́ẹ̀kan lọ́sẹ̀, kí o sì máa kọ́ ọ̀rẹ́ náà.
+357	Fi ẹni tí o ó máa bá sọ̀rọ̀ lọ́sẹ̀ kún
+358	Fi ọmọ-ẹ̀yìn kún
+359	A ti bá wọn sọ̀rọ̀
+360	A bá wọn sọ̀rọ̀ lónìí
+361	A bá wọn sọ̀rọ̀ lánàá
+362	A bá wọn sọ̀rọ̀ ní {0}
+363	A bá wọn sọ̀rọ̀ ní ọ̀sẹ̀ yìí
+364	A kò tíì bá wọn sọ̀rọ̀
+365	O ti bá {0} sọ̀rọ̀
+366	O ti bá {0} sọ̀rọ̀ ní ọ̀sẹ̀ yìí
+367	Ìbásọ̀rọ̀ tó kẹ́yìn: ọjọ́ {0} sẹ́yìn
+368	Ìbásọ̀rọ̀ tó kẹ́yìn: ọjọ́ {0} sẹ́yìn
+369	Láti bá sọ̀rọ̀ ní ọ̀sẹ̀ yìí
+370	Ó parí ní ọ̀sẹ̀ yìí
+371	O ti bá gbogbo ènìyàn sọ̀rọ̀ ní ọ̀sẹ̀ yìí.
+372	Yọ kúrò nínú Àwọn ọmọ-ẹ̀yìn
+373	A ti yọ {0} kúrò nínú Àwọn ọmọ-ẹ̀yìn
+374	Tẹ̀ ẹ́ lẹ́ẹ̀kan sí i láti yọ {0}
+375	Àtòjọ àdúrà
+376	Ta ni o ń gbàdúrà fún?
+377	Ohun tí a ó gbàdúrà fún
+378	Àkọsílẹ̀ (kò pọn dandan)
+379	Ṣàtúnṣe àdúrà
+380	Yọ kúrò nínú àtòjọ àdúrà
+381	Padà sí àtòjọ àdúrà
+382	Kò sí ẹnìkan nínú àtòjọ àdúrà rẹ síbẹ̀.
+383	Fi àwọn tí o ń gbàdúrà fún kún. Shepherd yóò fi díẹ̀ hàn lójoojúmọ́, ní ìtẹ̀léra, ó sì lè rán ọ létí.
+384	Fi ẹnikẹ́ni tí o fẹ́ gbàdúrà fún kún. Lójoojúmọ́ Shepherd yóò fi ènìyàn {0} hàn, ní ìtẹ̀léra.
+385	Fi ẹnikẹ́ni tí o fẹ́ gbàdúrà fún kún. Lójoojúmọ́ Shepherd yóò fi ènìyàn {0} hàn, ní ìtẹ̀léra, yóò sì rán ọ létí ní {1}.
+386	A ti fi {0} kún àtòjọ àdúrà rẹ
+387	A ti yọ {0} kúrò nínú àtòjọ àdúrà rẹ
+388	{0} ti wà nínú àtòjọ àdúrà rẹ tẹ́lẹ̀
+389	Ìránnilétí àdúrà
+390	Rán mi létí láti gbàdúrà lójoojúmọ́
+391	Ènìyàn lójoojúmọ́
+392	Gbàdúrà fún ènìyàn {0} láti inú àtòjọ àdúrà rẹ lójoojúmọ́, ní ìtẹ̀léra.
+393	Gbàdúrà fún ènìyàn {0} láti inú àtòjọ àdúrà rẹ lójoojúmọ́, ní ìtẹ̀léra. Ìránnilétí ń wá láti inú áàpù Shepherd lórí fóònù rẹ.
+394	Ìránnilétí àdúrà ní {0}
+395	Ìránnilétí àdúrà ti ṣí
+396	Ìránnilétí àdúrà ti pa
+397	Ètò ìránnilétí àdúrà
+398	Àwọn ìsìn àti ìṣẹ̀lẹ̀ rẹ. Pe àwọn ènìyàn, lẹ́yìn náà sàmì sí àwọn tó wá.
+399	Kò sí ìṣẹ̀lẹ̀ síbẹ̀
+400	Fi ìsìn ọjọ́ Àìkú, ìfọkànsìn tàbí ìpéjọpọ̀ kún níbí kí o lè pe àwọn ènìyàn kí o sì sàmì sí àwọn tó wá.
+401	Ìṣẹ̀lẹ̀ tuntun
+402	Ṣàtúnṣe ìṣẹ̀lẹ̀
+403	Ṣẹ̀dá ìṣẹ̀lẹ̀
+404	Pa ìṣẹ̀lẹ̀ rẹ́
+405	A ti pa ìṣẹ̀lẹ̀ rẹ́
+406	Tẹ̀ ẹ́ lẹ́ẹ̀kan sí i láti pa ìṣẹ̀lẹ̀ yìí rẹ́
+407	Fún ìṣẹ̀lẹ̀ náà ní orúkọ.
+408	Yan ọjọ́.
+409	àpẹẹrẹ: Ìsìn ọjọ́ Àìkú
+410	Ìsìn ọjọ́ Àìkú
+411	Ìsìn àárín ọ̀sẹ̀
+412	Sàmì sí àwọn tí o pè. Bọ́tìnnì ìfiránṣẹ́ yóò fi ìpè tó ti ṣetán ránṣẹ́. Ní ọjọ́ náà, sàmì sí àwọn tó wá.
+413	Sàmì sí àwọn tó wá.
+414	Kọ́kọ́ fi àwọn olùbásọ̀rọ̀ kún, lẹ́yìn náà pè wọ́n níbí.
+415	Ó wá
+416	Kò wá
+417	A ti pè é
+418	Wá sí {0}
+419	A pè é sí {0}
+420	A fagilé ìpè sí {0}
+421	A yọ àmì wíwá sí {0}
+422	A ti da ìpè kọ. Lẹ̀ ẹ́ sínú ìfiránṣẹ́ rẹ.
+423	Báwo ni {0}! Ṣé wà á fẹ́ wá sí {1} {2}? Inú mi yóò dùn láti rí ọ níbẹ̀.
+424	lónìí ní {0}
+425	lọ́la ní {0}
+426	ní {0} ní {1}
+427	ní {0}
+428	Ìpè {0}
+429	Ìpè {0}
+430	Ìpè {0} · {1} wá
+431	Ìpè {0} · {1} wá
+432	Láti inú kàlẹ́ńdà rẹ
+433	Láti inú kàlẹ́ńdà rẹ · {0}
+434	Àwọn ìṣẹ̀lẹ̀ kàlẹ́ńdà rẹ ti wà níbí tẹ́lẹ̀
+435	Ìgbà tó kẹ́yìn tí a mú ìṣẹ̀lẹ̀ kàlẹ́ńdà wọlé: {0}.
+436	Kàlẹ́ńdà: a fi ìṣẹ̀lẹ̀ {0} kún un
+437	Kàlẹ́ńdà: a fi ìṣẹ̀lẹ̀ {0} kún un
+438	Kò sí ìṣẹ̀lẹ̀ kankan nínú fáìlì yẹn
+439	Fi kún un láti fáìlì kàlẹ́ńdà
+440	Yan fáìlì kàlẹ́ńdà (.ics)
+441	Ṣé wọ́n fi ìṣẹ̀lẹ̀ ránṣẹ́ sí ọ bí fáìlì kàlẹ́ńdà (ó parí sí <b>.ics</b>), bí ìpè ṣọ́ọ̀ṣì? Fi pamọ́ sórí fóònù rẹ, lẹ́yìn náà yan án níbí. Àwọn ìṣẹ̀lẹ̀ tó ń tún ṣẹlẹ̀, bí ìsìn ọ̀sọ̀ọ̀sẹ̀, wà nínú rẹ̀.
+442	Fi kún kàlẹ́ńdà fóònù
+443	Da lìǹkì kàlẹ́ńdà kọ
+444	A ti da lìǹkì kàlẹ́ńdà kọ. Lẹ̀ ẹ́ sínú ICSx⁵.
+445	A ti ṣe lìǹkì tuntun. Tún so kàlẹ́ńdà rẹ pọ̀.
+446	ṣe lìǹkì tuntun
+447	Lìǹkì yìí jẹ́ tìrẹ nìkan. Tí o bá pín in láìmọ̀,
+448	So kàlẹ́ńdà rẹ pọ̀
+449	Bí a ṣe ń so kàlẹ́ńdà fóònù pọ̀
+450	Fi bí a ṣe ń so kàlẹ́ńdà mi pọ̀ hàn mí
+451	So mọ́ kàlẹ́ńdà iPhone
+452	So Shepherd mọ́ kàlẹ́ńdà fóònù rẹ, àwọn ẹ̀kọ́ Bíbélì àti ìṣẹ̀lẹ̀ rẹ yóò sì fara hàn níbẹ̀ fúnra wọn, pẹ̀lú gbogbo nǹkan míràn ní ọjọ́ rẹ.
+453	1. So Shepherd mọ́ kàlẹ́ńdà fóònù rẹ
+454	2. Fi àwọn ìṣẹ̀lẹ̀ TimeTree ti ara rẹ sínú kàlẹ́ńdà rẹ pẹ̀lú
+455	Tẹ <b>So mọ́ kàlẹ́ńdà iPhone</b> nísàlẹ̀.
+456	iPhone rẹ yóò béèrè bóyá o fẹ́ ṣe àsopọ̀. Tẹ <b>Subscribe</b>, lẹ́yìn náà <b>Done</b>.
+457	Tí fóònù rẹ bá béèrè, tẹ Subscribe. Lẹ́yìn náà padà wá síbí.
+458	Padà sí Shepherd. Àwọn ẹ̀kọ́ àti ìṣẹ̀lẹ̀ rẹ ti wà nínú áàpù <b>Calendar</b> báyìí gẹ́gẹ́ bí <b>Shepherd</b>, wọ́n á sì máa ṣàtúnṣe ara wọn.
+459	Lórí ẹ̀kọ́ tàbí ìṣẹ̀lẹ̀ kan nínú Shepherd, tẹ <b>Fi kún kàlẹ́ńdà fóònù</b>.
+460	Fóònù rẹ yóò ṣí áàpù <b>Calendar</b> pẹ̀lú àlàyé tí a ti kọ sí i. Tẹ <b>Save</b>.
+461	Tí o bá fẹ́ kí wọ́n máa wọlé fúnra wọn, gba áàpù <b>ICSx⁵</b>, tẹ <b>Da lìǹkì kàlẹ́ńdà kọ</b> nísàlẹ̀ kí o sì fi kún un nínú ICSx⁵ pẹ̀lú <b>+</b>.
+462	TimeTree kì í pín àwọn ìṣẹ̀lẹ̀ rẹ̀ pẹ̀lú àwọn áàpù míràn, nítorí náà kò lè dà wọ́n kọ fúnra rẹ̀. Àwọn ìṣẹ̀lẹ̀ ti ara rẹ nínú TimeTree tó ṣe pàtàkì fún ọ̀sẹ̀ rẹ, fi wọ́n kún kàlẹ́ńdà fóònù rẹ pẹ̀lú, kí o lè rí gbogbo rẹ̀ ní ibì kan.
+463	Ṣí áàpù <b>Calendar</b> fóònù rẹ kí o sì tẹ <b>+</b>.
+464	Ṣí áàpù <b>Calendar</b> kí o sì tẹ <b>+</b>.
+465	Ṣí ìfiránṣẹ́ tàbí ímeèlì tó ní fáìlì náà.
+466	Tẹ fáìlì náà, lẹ́yìn náà bọ́tìnnì <b>Share</b>, lẹ́yìn náà <b>Save to Files</b>.
+467	Tẹ fáìlì náà, lẹ́yìn náà <b>Download</b> (tàbí àwọn àmì mẹ́ta › <b>Save</b>).
+468	Padà wá síbí kí o sì tẹ <b>Yan fáìlì kàlẹ́ńdà</b>.
+469	Padà wá síbí kí o sì tẹ <b>Yan fáìlì kàlẹ́ńdà</b>. Ó wà nínú <b>Downloads</b>.
+470	Dà á kọ fún TimeTree
+471	Da àlàyé kọ fún TimeTree
+472	A ti dà á kọ. Ṣí TimeTree kí o sì lẹ̀ ẹ́ sínú ìṣẹ̀lẹ̀ tuntun.
+473	Ṣí áàpù <b>TimeTree</b> kí o sì tẹ bọ́tìnnì <b>+</b>.
+474	Lẹ àlàyé tí o dà kọ sínú àkọlé àti àkọsílẹ̀, lẹ́yìn náà ṣètò <b>ọjọ́ àti àkókò</b>.
+475	Tẹ àkọlé, lẹ́yìn náà ṣètò <b>ọjọ́ àti àkókò</b> láti inú ìṣẹ̀lẹ̀ TimeTree rẹ.
+476	Yan <b>ìkìlọ̀</b> kan, bí wákàtí 1 ṣáájú, kí iPhone rẹ lè rán ọ létí.
+477	Yan <b>ìkìlọ̀</b> kan, bí wákàtí 1 ṣáájú, kí fóònù Android rẹ lè rán ọ létí.
+478	Tẹ <b>Save</b>.
+479	Tẹ <b>Save</b> (àmì ✓).
+480	Ọ̀sẹ̀ {0}
+481	Ọ̀sẹ̀ yìí
+482	O tẹ̀lé <em>{0} nínú {1}</em> — ọ̀sẹ̀ tó dára gan-an.
+483	O tẹ̀lé <em>{0} nínú {1}</em> — o ń gbìyànjú.
+484	O tẹ̀lé <em>{0} nínú {1}</em> — máa bá a lọ.
+485	O tẹ̀lé <em>{0} nínú {1}</em> — bẹ̀rẹ̀ pẹ̀lú àtòjọ òní.
+486	Àkópọ̀ ọ̀sẹ̀ rẹ yóò fara hàn nígbà tí o bá fi àwọn olùbásọ̀rọ̀ kún.
+487	Wá sí ìṣẹ̀lẹ̀
+488	Ìwọ̀n ìtẹ̀lé, ọ̀sẹ̀ 4 tó kọjá
+489	Iye àwọn tí o ń tẹ̀lé tí wọ́n gba ìfiránṣẹ́, ìpè tàbí ẹ̀kọ́ ní ọ̀sẹ̀ náà.
+490	A kò tíì dé ọ̀dọ̀ wọn ní ọ̀sẹ̀ yìí
+491	Èdè
+492	Àwọn ẹsẹ Bíbélì yóò wà ní èdè Gẹ̀ẹ́sì (NIV).
+493	Orúkọ rẹ
+494	Nọ́ńbà WhatsApp rẹ
+495	Ìfiránṣẹ́ tí àwọn ènìyàn yóò fi ránṣẹ́ sí ọ láti inú kóòdù QR rẹ
+496	Àwọn olùbásọ̀rọ̀ tuntun: bá wọn sọ̀rọ̀ ní gbogbo
+497	A ti fi ètò pamọ́
+498	Ìfitónilétí
+499	Ìfitónilétí ti ṣí
+500	Ìfitónilétí ti ṣí lórí fóònù yìí.
+501	Ìfitónilétí ti pa lórí fóònù yìí.
+502	Ìfitónilétí tó ní orúkọ ènìyàn ń wá láti inú áàpù Shepherd lórí fóònù rẹ.
+503	Ṣí ìfitónilétí
+504	Fi ìdánwò ránṣẹ́
+505	Fi ìfitónilétí ìdánwò ránṣẹ́ sí mi
+506	Bí ó ṣe ń ṣiṣẹ́
+507	Bí a ṣe ń gbà wọ́n
+508	Ìfitónilétí òwúrọ̀ ní
+509	Ìfitónilétí òwúrọ̀ ní {0}
+510	Ohun tí Shepherd ń sọ fún ọ nípa rẹ̀
+511	A ti fi àṣàyàn ìkìlọ̀ pamọ́
+512	Ìkìlọ̀: {0}
+513	Àwọn tí a ó lépa
+514	Ẹnikẹ́ni tó ti pẹ́ tàbí tó yẹ kí a bá sọ̀rọ̀ lónìí
+515	Èsì tí o jẹ
+516	Àwọn tó ń dúró de ìfiránṣẹ́ láti ọ̀dọ̀ rẹ
+517	Àwọn tí o ṣì ń dúró láti gbọ́ láti ọ̀dọ̀ wọn
+518	Àwọn tí o ṣì nílò láti bá sọ̀rọ̀ ní ọ̀sẹ̀ yìí
+519	Ẹ̀kọ́ Bíbélì òní
+520	Ẹ̀kọ́ tí a ṣètò fún òní, pẹ̀lú àkókò
+521	Ìṣẹ̀lẹ̀ kàlẹ́ńdà
+522	Ìṣẹ̀lẹ̀ òní àti ọ̀la, pẹ̀lú kàlẹ́ńdà rẹ
+523	Àkópọ̀ ọ̀sẹ̀
+524	Ní ọjọ́ Àìkú, iye ènìyàn tí o tẹ̀lé
+525	Àwọn tí a ó lépa àti ìṣẹ̀lẹ̀
+526	Ìṣẹ̀lẹ̀ nìkan
+527	Àwọn olùbásọ̀rọ̀ fóònù
+528	Yan láti inú àwọn olùbásọ̀rọ̀ mi
+529	Mú fáìlì olùbásọ̀rọ̀ wọlé
+530	Bí a ṣe ń rí fáìlì olùbásọ̀rọ̀
+531	Gba fáìlì olùbásọ̀rọ̀
+532	Yọ wọ́n kúrò lórí fóònù yìí
+533	Mú àwọn olùbásọ̀rọ̀ fóònù rẹ wọlé, nígbà tí o bá sì ń fi ẹnìkan kún, orúkọ àti nọ́ńbà wọn yóò fara hàn bí o ṣe ń tẹ̀. Wọ́n wà lórí fóònù yìí nìkan, a kì í gbé wọn sókè rárá.
+534	Olùbásọ̀rọ̀ {0} wà lórí fóònù yìí. Nígbà tí o bá ń fi ẹnìkan kún, orúkọ tó bá a mu yóò fara hàn bí o ṣe ń tẹ̀. Wọ́n wà lórí fóònù yìí nìkan, a kì í gbé wọn sókè rárá.
+535	Olùbásọ̀rọ̀ 1 wà lórí fóònù yìí. Nígbà tí o bá ń fi ẹnìkan kún, orúkọ tó bá a mu yóò fara hàn bí o ṣe ń tẹ̀. Wọ́n wà lórí fóònù yìí nìkan, a kì í gbé wọn sókè rárá.
+536	A fi olùbásọ̀rọ̀ {0} kún àtòjọ fóònù yìí
+537	A fi olùbásọ̀rọ̀ {0} kún àtòjọ fóònù yìí
+538	Àwọn olùbásọ̀rọ̀ yẹn ti wà níbí tẹ́lẹ̀
+539	Kò sí olùbásọ̀rọ̀ kankan nínú fáìlì yẹn
+540	A ti yọ àwọn olùbásọ̀rọ̀ fóònù kúrò nínú Shepherd lórí fóònù yìí
+541	Fi àwọn olùbásọ̀rọ̀ rẹ pamọ́ bí fáìlì kan, lẹ́yìn náà yan án nínú Shepherd lábẹ́ <b>Mú fáìlì olùbásọ̀rọ̀ wọlé</b>.
+542	Ṣí áàpù <b>Contacts</b> kí o sì tẹ <b>Lists</b> (lókè lápá òsì).
+543	Tẹ <b>All Contacts</b> (tàbí All iCloud) mọ́lẹ̀, lẹ́yìn náà tẹ <b>Export</b>.
+544	Tẹ <b>Save to Files</b>, lẹ́yìn náà <b>Save</b>.
+545	Padà sí Shepherd, tẹ <b>Mú fáìlì olùbásọ̀rọ̀ wọlé</b> kí o sì yan án.
+546	Ṣí áàpù <b>Contacts</b>.
+547	Tẹ <b>Fix &amp; manage</b> (tàbí ⋮ › <b>Settings</b>, tàbí <b>Manage contacts</b> lórí Samsung), lẹ́yìn náà <b>Export to file</b>.
+548	Fi pamọ́ sínú <b>Downloads</b>.
+549	Àwọn olùbásọ̀rọ̀ rẹ wà lórí fóònù yìí nìkan. Shepherd kì í gbé wọn sókè.
+550	Bí a ṣe ń bẹ̀rẹ̀
+551	Ìrìn ìṣẹ́jú kan káàkiri Shepherd.
+552	Fi ibi gbogbo hàn mí
+553	Títì áàpù
+554	Ṣètò PIN
+555	Yí PIN padà
+556	Yọ PIN kúrò
+557	Tì í báyìí
+558	Fi PIN pamọ́
+559	A ti fi PIN pamọ́
+560	A ti yọ PIN kúrò
+561	PIN rẹ lọ́wọ́lọ́wọ́
+562	PIN tuntun (nọ́ńbà 4 sí 8)
+563	Tún un tẹ̀
+564	Lo nọ́ńbà 4 sí 8.
+565	PIN méjèèjì kò bá ara wọn mu.
+566	PIN rẹ lọ́wọ́lọ́wọ́ kò tọ̀nà.
+567	Fi PIN kún un kí ẹni tó bá gbé fóònù rẹ má lè ka àwọn olùbásọ̀rọ̀ rẹ.
+568	Shepherd yóò béèrè PIN rẹ nígbà tó bá ṣí àti lẹ́yìn ìṣẹ́jú 5 tí o kò sí.
+569	Tí o bá gbàgbé rẹ̀, o máa nílò ẹ̀dà àfipamọ́ láti wọlé padà, nítorí náà yan èyí tí o máa rántí.
+570	Shepherd ti tì
+571	Tẹ PIN rẹ láti rí àwọn olùbásọ̀rọ̀ rẹ.
+572	Ṣí i
+573	PIN yẹn kò tọ̀nà. Gbìyànjú lẹ́ẹ̀kan sí i.
+574	Àkáǹtì rẹ
+575	O wọlé gẹ́gẹ́ bí
+576	. O ṣì wà nínú àkáǹtì rẹ lórí fóònù yìí.
+577	Yí ọ̀rọ̀ aṣínà padà
+578	Jáde
+579	Pa àkáǹtì mi rẹ́
+580	Dátà rẹ
+581	A ń fi àwọn olùbásọ̀rọ̀ rẹ pamọ́ sí àyè àdáni tìrẹ. Kò sí ẹlòmíràn tó ń lo Shepherd tó lè rí wọn. Ẹ̀dà kan tún wà lórí fóònù yìí kí áàpù lè ṣiṣẹ́ láìsí nẹ́tíwọ̀ọ̀kì.
+582	A ń fi àwọn olùbásọ̀rọ̀ rẹ pamọ́ sí àyè àdáni tìrẹ (lórí fóònù yìí nìkan fún báyìí). Kò sí ẹlòmíràn tó ń lo Shepherd tó lè rí wọn. Ẹ̀dà kan tún wà lórí fóònù yìí kí áàpù lè ṣiṣẹ́ láìsí nẹ́tíwọ̀ọ̀kì.
+583	A ń fi àwọn olùbásọ̀rọ̀ rẹ pamọ́ sí àyè àdáni tìrẹ lórí sáfà Shepherd, pẹ̀lú àwọn ẹ̀dà àtijọ́. Kò sí ẹlòmíràn tó ń lo Shepherd tó lè rí wọn. Ẹ̀dà kan tún wà lórí fóònù yìí kí áàpù lè ṣiṣẹ́ láìsí nẹ́tíwọ̀ọ̀kì.
+584	Ohun tí a ń fi pamọ́ àti ẹni tó lè rí i
+585	Ṣe ẹ̀dà àfipamọ́
+586	Dá ẹ̀dà àfipamọ́ padà
+587	A ti fi ẹ̀dà àfipamọ́ pamọ́
+588	A ti da ẹ̀dà àfipamọ́ kọ. Lẹ̀ ẹ́ sínú àkọsílẹ̀ tàbí fi ímeèlì rẹ̀ ránṣẹ́ sí ara rẹ.
+589	Fáìlì yẹn kì í ṣe ẹ̀dà àfipamọ́ Shepherd
+590	A ti dá a padà: a fi {0} kún un, a ṣàtúnṣe {1}
+591	Yọ àwọn olùbásọ̀rọ̀ àpẹẹrẹ kúrò
+592	A ti yọ àwọn olùbásọ̀rọ̀ àpẹẹrẹ kúrò
+593	Shepherd ń pa àtòjọ rẹ mọ́ ní àṣírí. Èyí ni gangan ohun tí a ń fi pamọ́, ibi tí ó wà, àti ẹni tó lè rí i.
+594	Dátà tó so mọ́ ọ
+595	Orúkọ rẹ, ímeèlì àti nọ́ńbà WhatsApp rẹ.
+596	Àwọn ènìyàn tí o fi kún: orúkọ wọn, nọ́ńbà fóònù, orúkọ àmúlò, àkọsílẹ̀, kókó àdúrà àti ẹ̀kọ́ Bíbélì.
+597	Àwọn ìṣẹ̀lẹ̀ rẹ, ọmọ-ẹ̀yìn àti àtòjọ àdúrà.
+598	A fi pamọ́ sí àkáǹtì tìrẹ lórí sáfà Shepherd kí ó má bàa sọnù, pẹ̀lú àwọn ẹ̀dà àtijọ́ fún ọdún kan. Ìwọ nìkan ló lè rí i nígbà tí o bá wọlé.
+599	A fi pamọ́ sí àyè àdáni tìrẹ. Ìwọ nìkan ló lè rí i.
+600	Lórí fóònù yìí nìkan
+601	Àwọn olùbásọ̀rọ̀ tí o mú wọlé láti fóònù rẹ, láti dábàá orúkọ bí o ṣe ń tẹ̀. A kì í gbé wọn sókè rárá.
+602	Ẹ̀dà àtòjọ rẹ kan, kí Shepherd lè ṣiṣẹ́ láìsí nẹ́tíwọ̀ọ̀kì.
+603	A kì í gbà á rárá
+604	Ibi tí o wà.
+605	Àwọn ìfọ̀rọ̀wérọ̀ WhatsApp, SMS tàbí iMessage rẹ.
+606	Gbogbo ìwé àdírẹ́sì rẹ (àwọn olùbásọ̀rọ̀ tí o yàn nìkan).
+607	Ohunkóhun fún ìpolówó tàbí ìtọpinpin.
+608	Nígbà tí ẹnìkan bá ṣàyẹ̀wò kóòdù QR rẹ
+609	Àwọn fúnra wọn ló yàn láti tẹ orúkọ wọn (àti nọ́ńbà tí wọ́n bá fẹ́). Ó ń lọ sínú àtòjọ rẹ nìkan, lẹ́yìn náà wọ́n á kọ̀wé sí ọ fúnra wọn lórí WhatsApp.
+610	Ẹnìkan ní kí o pa àlàyé wọn rẹ́? Ṣí wọn, tẹ <b>Má bá wọn sọ̀rọ̀ mọ́</b>, lẹ́yìn náà <b>Pa gbogbo dátà wọn rẹ́</b>. Gbogbo ẹ̀dà ni a ó pa rẹ́.
+611	Kóòdù QR mi
+612	Kóòdù QR rẹ
+613	Kóòdù QR kí àwọn ènìyàn lè kọ̀wé sí ọ
+614	Ṣàyẹ̀wò rẹ̀ kí a máa bá ara wa sọ̀rọ̀
+615	Ṣe kóòdù QR mi
+616	Fi kóòdù QR mi hàn dípò
+617	Kọ́kọ́ fi nọ́ńbà WhatsApp tìrẹ kún. Nígbà tí ẹnìkan bá ṣàyẹ̀wò kóòdù rẹ, WhatsApp yóò ṣí pẹ̀lú ìfiránṣẹ́ sí ọ, kí o lè gba nọ́ńbà wọn, wọ́n á sì yàn láti máa bá ọ sọ̀rọ̀.
+618	Ní kí wọ́n dojú kámẹ́rà fóònù wọn kọ ibí. Wọ́n á tẹ orúkọ wọn, <b>a ó fi wọ́n kún Shepherd rẹ</b>, WhatsApp yóò sì ṣí pẹ̀lú ìfiránṣẹ́ rẹ tó ti ṣetán láti fi ránṣẹ́.
+619	Wà á gba ìfitónilétí nígbà tí wọ́n bá ṣàyẹ̀wò rẹ̀.
+620	Ní kí wọ́n dojú kámẹ́rà fóònù wọn kọ ibí. WhatsApp yóò ṣí pẹ̀lú ìfiránṣẹ́ sí ọ, wọ́n á kàn tẹ “send”.
+621	Nígbà tí ìfiránṣẹ́ wọn bá dé, fi wọ́n kún un níbí pẹ̀lú nọ́ńbà wọn.
+622	Ìfiránṣẹ́ wọn: “{0}”
+623	Báwo ni, inú mi dùn láti pàdé rẹ! Mo rí nọ́ńbà rẹ láti Shepherd. Mo nírètí láti gbọ́ láti ọ̀dọ̀ rẹ láìpẹ́.
+624	Yí ìfiránṣẹ́ padà
+625	Kóòdù QR kò gbé wá. Pín lìǹkì yìí dípò:
+626	A kò lè ya kóòdù QR síbí.
+627	Fi nọ́ńbà mi kún báyìí
+628	Fi nọ́ńbà àti ìfiránṣẹ́ rẹ kún, lẹ́yìn náà tẹ Fipamọ́.
+629	Gba áàpù Shepherd
+630	Èyí ń ṣiṣẹ́ nínú áàpù Shepherd lórí fóònù rẹ. Ṣí
+631	, wọlé, lẹ́yìn náà padà sí ìtọ́sọ́nà yìí.
+632	Ìfitónilétí fóònù tó ní orúkọ ènìyàn (“Dá Grace lóhùn”, “Kọ̀wé sí Daniel”) ń wá láti inú <b>áàpù Shepherd</b> lórí fóònù rẹ. Fi í sórí ẹ̀rọ lẹ́ẹ̀kan kí o sì ṣí wọn níbẹ̀.
+633	Ṣé o ti ń lo Shepherd níbí? Ṣe ẹ̀dà àfipamọ́ ní Ètò, lẹ́yìn náà dá a padà nínú áàpù.
+634	A ti fi pamọ́. Ìránnilétí ń wá láti inú áàpù Shepherd.
+635	Shepherd ń fi ìfitónilétí tó ní orúkọ ènìyàn ránṣẹ́, bí <b>Dá Grace lóhùn</b>, <b>Kọ̀wé sí Daniel</b> tàbí <b>Ṣé Sam ti fèsì?</b>, ní àràárọ̀ ní <b>{0}</b>, àti ṣáájú ẹ̀kọ́ àti ìṣẹ̀lẹ̀ kọ̀ọ̀kan. Tẹ ọ̀kan, yóò sì ṣí ẹni náà.
+636	1. Fi Shepherd sórí fóònù rẹ
+637	2. Gba ìfitónilétí láàyè
+638	3. Ṣàyẹ̀wò pé ó ń ṣiṣẹ́
+639	Shepherd ti wà lórí fóònù yìí.
+640	Ṣí Shepherd nínú <b>Safari</b>.
+641	Ṣí Shepherd nínú <b>Chrome</b>.
+642	Tẹ bọ́tìnnì <b>Share</b> (onígun mẹ́rin tó ní ọfà).
+643	Tẹ <b>Add to Home Screen</b>, lẹ́yìn náà <b>Add</b>.
+644	Tẹ <b>⋮</b> lókè lápá ọ̀tún, lẹ́yìn náà <b>Install app</b> (tàbí <b>Add to Home screen</b>).
+645	Tẹ <b>Install</b>.
+646	Tẹ <b>Add</b>.
+647	Ṣí Shepherd láti àmì tuntun rẹ̀.
+648	Ṣí Shepherd láti àmì tuntun rẹ̀ lórí ojú-ìbojú ilé rẹ. Ìfitónilétí iPhone ń ṣiṣẹ́ láti ibẹ̀ nìkan (iOS 16.4 tàbí èyí tó tuntun jù).
+649	Shepherd ti wà lórí ẹ̀rọ. Ṣí i láti àmì tuntun rẹ̀.
+650	Nígbà tí fóònù rẹ bá béèrè, tẹ <b>Allow</b>. Ṣé o tẹ <b>Don't Allow</b> láìmọ̀?
+651	Ṣí <b>Allow notifications</b>.
+652	Ṣí <b>Allow Notifications</b>, pẹ̀lú àmì lórí <b>Lock Screen</b>, <b>Banners</b> àti <b>Badges</b>.
+653	Settings › Notifications › Shepherd
+654	Settings › Apps › Shepherd › Notifications
+655	Ìfitónilétí láti Shepherd yóò dé láàárín ìṣẹ́jú-àáyá díẹ̀.
+656	Kò sí nǹkan? Ṣàyẹ̀wò pé <b>Focus</b> ti pa, àti pé o ṣí Shepherd láti àmì rẹ̀ lórí ojú-ìbojú ilé.
+657	Kò sí nǹkan? Ṣàyẹ̀wò pé <b>Do Not Disturb</b> ti pa àti pé a gba ìfitónilétí Shepherd láàyè (ìgbésẹ̀ 2).
+658	Yí àkókò àti ohun tí Shepherd ń sọ fún ọ padà lábẹ́ <b>Ìfitónilétí</b> ní Ètò. Ṣí ìfitónilétí lẹ́ẹ̀kan lórí fóònù kọ̀ọ̀kan tí o ń lò.
+659	A ti fi ìdánwò ránṣẹ́. Ó yẹ kí ó dé láàárín ìṣẹ́jú-àáyá díẹ̀.
+660	À ń ṣàyẹ̀wò fóònù yìí…
+661	Fóònù yìí ń dí ìfitónilétí Shepherd lọ́wọ́. Wo ìgbésẹ̀ 2 láti gbà wọ́n láàyè.
+662	Kọ́kọ́ fi Shepherd sí ojú-ìbojú ilé rẹ (ìgbésẹ̀ 1), lẹ́yìn náà ṣí i láti ibẹ̀.
+663	Kọ́kọ́ fi Shepherd sí ojú-ìbojú ilé rẹ, lẹ́yìn náà ṣí i láti ibẹ̀.
+664	Ẹ̀rọ aṣàwákiri yìí kò lè fi ìfitónilétí hàn. Ṣí Shepherd nínú Safari (iPhone) tàbí Chrome (Android).
+665	Ẹ̀rọ aṣàwákiri yìí kò lè fi ìfitónilétí hàn. Lo Safari (iPhone) tàbí Chrome (Android).
+666	A ti dí ìfitónilétí. Gbà wọ́n láàyè nínú Settings fóònù rẹ.
+667	A kò lè ṣí ìfitónilétí. Gbìyànjú lẹ́ẹ̀kan sí i.
+668	A kò lè dé fóònù yìí. Pa ìfitónilétí kí o sì tún ṣí wọn.
+669	Má yára.
+670	lórí fóònù rẹ, lẹ́yìn náà:
+671	Káàbọ̀ sí Shepherd
+672	Shepherd ń rán ọ létí ẹni tí o yẹ kí o bá sọ̀rọ̀, kí ẹnikẹ́ni tí o ń bójú tó má bàa já bọ́. Ìrìn yìí yóò ṣí apá kọ̀ọ̀kan áàpù, yóò sì jẹ́ kí o ṣètò rẹ̀ bí o ṣe ń lọ.
+673	Bẹ̀rẹ̀ ní Ètò
+674	Lákọ̀ọ́kọ́, ṣí Ètò kí o sì fi nọ́ńbà WhatsApp rẹ kún, àti ìfiránṣẹ́ àkọ́kọ́ tí yóò lọ fúnra rẹ̀ nígbà tí wọ́n bá ṣàyẹ̀wò kóòdù QR rẹ.
+675	Ọ̀pọ̀ ènìyàn ń lo Shepherd lórí fóònù wọn, nítorí náà ṣí ìfitónilétí. Shepherd yóò sọ fún ọ ní orúkọ ẹni tí o ó kọ̀wé sí, ẹni tí o ó dá lóhùn àti ẹni tí o ó bá sọ̀rọ̀, yóò sì ṣí ẹni náà nígbà tí o bá tẹ̀ ẹ́.
+676	Tẹ ibí lẹ́yìn tí o bá pàdé ẹnìkan. Fi orúkọ àti nọ́ńbà wọn kún, tàbí fi kóòdù QR rẹ hàn kí wọ́n kọ́kọ́ kọ̀wé sí ọ.
+677	Kọ àlàyé wọn kí o sì tẹ Fi olùbásọ̀rọ̀ pamọ́.
+678	Bẹ̀rẹ̀ ọjọ́ kọ̀ọ̀kan níbí
+679	Òní ń fi ẹni tí o ó kọ̀wé sí àti ẹni tó ń dúró dè ọ́ hàn. Àwọ̀ ewé túmọ̀ sí pé ó wà ní àkókò, àwọ̀ ìyeyè túmọ̀ sí òní, pupa túmọ̀ sí pé ó ti pẹ́.
+680	Kọ̀wé pẹ̀lú ìtẹ̀ kan
+681	Bọ́tìnnì ìfọ̀rọ̀wérọ̀ ń ṣí WhatsApp tàbí Instagram. Shepherd yóò kọ ọ́ sílẹ̀, yóò sì dúró de èsì wọn.
+682	Nígbà tí wọ́n bá fèsì
+683	Tẹ “Ó ti fèsì”, wọn yóò sì lọ sínú àtòjọ “Dá wọn lóhùn” rẹ. Lójoojúmọ́ Shepherd tún ń béèrè nípa ẹnikẹ́ni tí kò dá a lójú.
+684	Fi àwọn tó ti jẹ́ ọmọ-ẹ̀yìn kún. Shepherd yóò rán ọ létí láti máa bá wọn sọ̀rọ̀ lọ́sẹ̀ọ̀sẹ̀. Ó bá Bíbélì mu láti máa gba ara wa níyànjú! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Ẹ jẹ́ kí a sọ èyí di àṣà lọ́sẹ̀ọ̀sẹ̀!
+685	Tẹ orúkọ wọn kí o sì tẹ Fikún.
+686	Kàlẹ́ńdà rẹ
+687	Pe àwọn ènìyàn kí o sì sàmì sí àwọn tó wá. So Shepherd mọ́ kàlẹ́ńdà fóònù rẹ kí àwọn ẹ̀kọ́ àti ìṣẹ̀lẹ̀ rẹ lè fara hàn níbẹ̀ fúnra wọn.
+688	Gbogbo rẹ̀ ti ṣetán
+689	Yí ohun tí àkópọ̀ òwúrọ̀ rẹ ń fihàn padà ní Ètò. Lórí ojú-ìwé ènìyàn kan, “Fi pamọ́ sí àwọn olùbásọ̀rọ̀ fóònù” yóò fi wọ́n pamọ́ sórí fóònù rẹ. Tún ìrìn yìí ṣe láti Ètò nígbàkigbà.
+690	Parí ìrìn náà
+691	Tẹ̀síwájú ìrìn náà
+692	Padà sí ìrìn náà
+693	Fo ìgbésẹ̀ yìí
+694	Wọlé
+695	Ṣẹ̀dá àkáǹtì
+696	Ṣẹ̀dá àkáǹtì mi
+697	Ṣé o gbàgbé ọ̀rọ̀ aṣínà?
+698	Padà sí wíwọlé
+699	Gba kóòdù àtúnṣe
+700	Kóòdù oní-nọ́ńbà 6
+701	Ọ̀rọ̀ aṣínà tuntun
+702	Fi ọ̀rọ̀ aṣínà tuntun pamọ́
+703	Tẹ àdírẹ́sì ímeèlì rẹ.
+704	Tẹ ọ̀rọ̀ aṣínà rẹ.
+705	Yan ọ̀rọ̀ aṣínà tí ó ní ó kéré tán lẹ́tà 8.
+706	Yan ó kéré tán lẹ́tà 8.
+707	Tẹ ímeèlì rẹ, a ó sì ràn ọ́ lọ́wọ́ láti yan ọ̀rọ̀ aṣínà tuntun.
+708	Tẹ kóòdù oní-nọ́ńbà 6 rẹ kí o sì yan ọ̀rọ̀ aṣínà tuntun.
+709	Béèrè kóòdù àtúnṣe lọ́wọ́ ẹni tó ń bójú tó Shepherd ní ṣọ́ọ̀ṣì rẹ, tẹ̀ ẹ́, kí o sì yan ọ̀rọ̀ aṣínà tuntun.
+710	Tí {0} bá ní àkáǹtì, a ti fi kóòdù oní-nọ́ńbà 6 ránṣẹ́ sí ímeèlì. Tẹ̀ ẹ́ kí o sì yan ọ̀rọ̀ aṣínà tuntun.
+711	Ẹ̀ẹ̀kan péré ni o nílò láti wọlé lórí fóònù yìí.
+712	Àtòjọ rẹ jẹ́ àṣírí: kò sí ẹlòmíràn tó ń lo Shepherd tó lè rí i.
+713	À ń ṣí Shepherd…
+714	Kò sí nẹ́tíwọ̀ọ̀kì. Ṣàyẹ̀wò àmì rẹ kí o sì gbìyànjú lẹ́ẹ̀kan sí i.
+715	Kò sí nẹ́tíwọ̀ọ̀kì. Àwọn àyípadà rẹ wà lórí fóònù yìí.
+716	Nǹkan kan ṣẹlẹ̀. Gbìyànjú lẹ́ẹ̀kan sí i.
+717	Shepherd kò tíì ní àdírẹ́sì sáfà.
+718	Shepherd kò tíì so mọ́ sáfà rẹ̀. Fi àdírẹ́sì Cloudflare Worker rẹ sínú <b>config.js</b>.
+719	Ọ̀rọ̀ aṣínà lọ́wọ́lọ́wọ́
+720	Ọ̀rọ̀ aṣínà rẹ
+721	A ti yí ọ̀rọ̀ aṣínà padà. Àwọn fóònù rẹ míràn yóò ní kí o tún wọlé.
+722	Èyí yóò pa àkáǹtì rẹ àti <b>gbogbo ènìyàn inú àtòjọ Shepherd rẹ</b> rẹ́ kúrò lórí sáfà, títí láé. Kọ́kọ́ ṣe ẹ̀dà àfipamọ́ tí o bá lè nílò rẹ̀ lẹ́ẹ̀kan sí i.
+723	Pa gbogbo rẹ̀ rẹ́
+724	Gbogbo rẹ̀ ti wà ní ìpamọ́. Jíjáde yóò yọ àtòjọ rẹ kúrò lórí fóònù yìí; wọlé lẹ́ẹ̀kan sí i nígbàkigbà láti rí i padà.
+725	<b>Àyípadà {0} kò tíì dé sáfà.</b> So mọ́ íńtánẹ́ẹ̀tì kí o sì dúró de “Ó ti wà ní ìpamọ́” lókè kí o tó jáde, bí bẹ́ẹ̀ kọ́ wọn yóò sọnù.
+726	<b>Àyípadà {0} kò tíì dé sáfà.</b> So mọ́ íńtánẹ́ẹ̀tì kí o sì dúró de “Ó ti wà ní ìpamọ́” lókè kí o tó jáde, bí bẹ́ẹ̀ kọ́ wọn yóò sọnù.
+727	Jáde bí ó ti wù kí ó rí
+728	Nǹkan kan ṣẹlẹ̀ lórí sáfà Shepherd. Àwọn àyípadà rẹ wà lórí fóònù rẹ.
+729	Ṣàyẹ̀wò kóòdù náà kí o sì yan ọ̀rọ̀ aṣínà tí ó ní ó kéré tán lẹ́tà 8.
+730	Ṣàyẹ̀wò ímeèlì àti ọ̀rọ̀ aṣínà rẹ.
+731	Nǹkan kan tóbi jù láti fi pamọ́.
+732	Jọ̀wọ́ wọlé lẹ́ẹ̀kan sí i.
+733	Nǹkan kan nínú àfipamọ́ yẹn kò jẹ́ àṣẹ.
+734	Àkókò kóòdù yẹn ti tán. Béèrè fún tuntun.
+735	Kóòdù yẹn kò tọ̀nà.
+736	Àdírẹ́sì ímeèlì yẹn kò dàbí ẹni pé ó tọ̀nà.
+737	Ímeèlì àti ọ̀rọ̀ aṣínà yẹn kò bá ara wọn mu.
+738	Ó pọ̀ jù láti fi pamọ́ lẹ́ẹ̀kan náà.
+739	Àkáǹtì ti wà pẹ̀lú ímeèlì yẹn. Wọlé dípò.
+740	Fóònù yìí fún wa ní àdírẹ́sì ìfitónilétí tí Shepherd kò lè lò.
+741	Fóònù yìí fún wa ní kọ́kọ́rọ́ ìfitónilétí tí Shepherd kò lè lò.
+742	Àyípadà pọ̀ jù lẹ́ẹ̀kan náà.
+743	O ti gbìyànjú jù. Dúró fún ìṣẹ́jú 15 kí o sì tún gbìyànjú.
+744	Kọ́kọ́ ṣí ìfitónilétí lórí fóònù yìí.
+745	Ọ̀rọ̀ aṣínà rẹ kò tọ̀nà.
+746	Ọjọ́ {0}
+747	Ọjọ́ {0}
+748	A ti fi {0} pamọ́
+749	Fi wọ́n kún un báyìí
+750	Tún bá wọn sọ̀rọ̀ lẹ́yìn
+751	Fóònù yìí
+752	Ìbásọ̀rọ̀ ọ̀sọ̀ọ̀sẹ̀
+753	Kò sí nǹkan kan síbẹ̀.
+754	Àkọsílẹ̀ (kò pọn dandan)
+755	A ti kọ ọ́ sílẹ̀. Ìbásọ̀rọ̀ tó kàn jẹ́ òní.
+756	A ti kọ ọ́ sílẹ̀. Ìbásọ̀rọ̀ tó kàn jẹ́ ọ̀la.
+757	Áàpù míràn
+758	A kọ̀wé lórí áàpù míràn
+759	Ìfitónilétí Shepherd ti ṣí
+760	Ní àràárọ̀ wà á gbọ́ ní orúkọ ẹni tí o ó kọ̀wé sí, ẹni tí o ó dá lóhùn àti ẹni tí o ó bá sọ̀rọ̀.
+761	Àìkú
+762	Ajé
+763	Ìsẹ́gun
+764	Ọjọ́rú
+765	Ọjọ́bọ
+766	Ẹtì
+767	Àbámẹ́ta
+768	Ṣẹ́rẹ́
+769	Èrèlè
+770	Ẹrẹ̀nà
+771	Ìgbé
+772	Ẹ̀bibi
+773	Òkúdu
+774	Agẹmọ
+775	Ògún
+776	Owewe
+777	Ọ̀wàrà
+778	Bélú
+779	Ọ̀pẹ̀

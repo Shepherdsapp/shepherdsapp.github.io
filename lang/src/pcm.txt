@@ -1,0 +1,779 @@
+1	{0}: {1}
+2	{0} · {1}
+3	<b>{0}</b> · {1}
+4	{0}, {1}
+5	{0} and {1} more
+6	{0} ({1}d don pass)
+7	{0} ({1}d)
+8	{0} (example)
+9	Today
+10	Tumoro
+11	Yesterday
+12	today
+13	tumoro
+14	yesterday
+15	Pipul
+16	Disciples
+17	Calenda
+18	Week
+19	Settings
+20	Add
+21	Add contact
+22	Add person
+23	Add contact
+24	Save am
+25	Save di changes
+26	Cancel
+27	Close
+28	E don finish
+29	Go back
+30	Next
+31	Skip
+32	Change am
+33	Open
+34	Show
+35	Hide
+36	Undo
+37	See am
+38	Filter
+39	All
+40	Off
+41	You
+42	Oda one
+43	Example
+44	Name
+45	Phone
+46	Email
+47	Password
+48	Username
+49	Notes
+50	Date
+51	Time
+52	Day
+53	Where
+54	Details
+55	Stage
+56	Reason
+57	E dey load
+58	E don save
+59	E dey save…
+60	Small time…
+61	No be now
+62	Never
+63	Show me
+64	Show me how
+65	Everybody
+66	Main
+67	List
+68	Journey
+69	Don pass
+70	Dey come
+71	Studies
+72	Events
+73	Event
+74	Wetin happen
+75	For dis phone only
+76	No network · e go sync later
+77	E never save online
+78	E save for dis phone
+79	Online space don full. Your changes still dey dis phone. Export backup for Settings.
+80	Good morning
+81	Good afternoon
+82	Good evening
+83	Good morning, {0}
+84	Good afternoon, {0}
+85	Good evening, {0}
+86	Your morning summary
+87	Today summary
+88	Everything dey okay. Nobody dey wait for you today.
+89	Nothing dey for today.
+90	Alerts don off.
+91	Message dem today
+92	Reply dem
+93	Need reply
+94	Na today
+95	E don pass time
+96	E dey on time
+97	E pause
+98	Studies today
+99	Bible studies
+100	1 study today
+101	§one={0} study today|other={0} studies today
+102	{0} to message
+103	§one={0} reply wey you owe|other={0} replies wey you owe
+104	§one={0} reply wey you owe|other={0} replies wey you owe
+105	{0} to check
+106	{0} of {1}
+107	Catch-up
+108	{0} don reply?
+109	§one=You message {0} {1} day ago.|other=You message {0} {1} days ago.
+110	§one=You message {0} {1} day ago.|other=You message {0} {1} days ago.
+111	Yes, I don reply
+112	I still dey wait
+113	Ask me tumoro
+114	Shepherd go ask again tumoro
+115	Disciples dis week
+116	{0} of {1} don do
+117	Still check on: {0}.
+118	Open Disciples
+119	Pray today
+120	Prayer list ({0})
+121	Na example contacts you dey see. <b>Comot dem</b> for Settings anytime you ready.
+122	Your changes dey dis phone but dem no fit save online. Ask di person wey share Shepherd with you make dem give you <b>Contributor</b> access.
+123	Start with di pipul wey you meet
+124	Add person wey you share your faith with. Shepherd go remind you to check on dem every few days and e go keep track of dia studies.
+125	Add my first person
+126	Put Shepherd for your Home Screen
+127	E go open like app, and na so Shepherd fit send you notifications wey get pipul name.
+128	§one=Message {0} person: {1}|other=Message {0} pipul: {1}
+129	§one=Message {0} person: {1}|other=Message {0} pipul: {1}
+130	Reply {0}
+131	Dem don reply? {0}
+132	Disciples to check on dis week: {0}
+133	Studies today: {0}
+134	{0} by {1}
+135	Events: {0}
+136	{0} today by {1}
+137	{0} tumoro by {1}
+138	{0} today
+139	{0} tumoro
+140	Dis week you follow up {0} out of {1}.
+141	§one=Dis week you follow up {0} out of {1} person.|other=Dis week you follow up {0} out of {1} pipul.
+142	§one=Dis week you follow up {0} out of {1} person.|other=Dis week you follow up {0} out of {1} pipul.
+143	Message {0}
+144	§one={0} message you {1} day ago. Tap to reply.|other={0} message you {1} days ago. Tap to reply.
+145	§one={0} message you {1} day ago. Tap to reply.|other={0} message you {1} days ago. Tap to reply.
+146	{0} dey wait for your reply.
+147	Pause don end today. Tap to message {0}.
+148	You never message {0}. Tap to say hello.
+149	§one={0} day don pass. Tap to message {1}.|other={0} days don pass. Tap to message {1}.
+150	§one={0} day don pass. Tap to message {1}.|other={0} days don pass. Tap to message {1}.
+151	Today na check-in day. Tap to message {0}.
+152	§one=You message {0} {1} day ago. Tap Replied for Shepherd if dem don reply.|other=You message {0} {1} days ago. Tap Replied for Shepherd if dem don reply.
+153	§one=You message {0} {1} day ago. Tap Replied for Shepherd if dem don reply.|other=You message {0} {1} days ago. Tap Replied for Shepherd if dem don reply.
+154	Check on {0}
+155	You never check on {0} dis week.
+156	And {0} more today
+157	Bible study with {0} by {1}
+158	Bible study with {0} today
+159	For one hour time. Study: {0}
+160	For one hour time.
+161	Study: {0}
+162	Time never set.
+163	Tumoro: {0}
+164	Whole day
+165	§one={0} person don get invite|other={0} pipul don get invite
+166	§one={0} person don get invite|other={0} pipul don get invite
+167	E go start for one hour time.
+168	E go start for one hour time · {0}.
+169	Pray for {0}
+170	{0} and {1}
+171	Your week
+172	Find pipul
+173	Find by name, number or handle
+174	Nobody match am.
+175	Nobody dey here yet.
+176	§one={0} person wey you dey follow up|other={0} pipul wey you dey follow up
+177	§one={0} person wey you dey follow up|other={0} pipul wey you dey follow up
+178	No more contact
+179	No more contact ({0})
+180	Dem dey safe so nothing go loss. Bring anybody back anytime.
+181	Check on dem today
+182	Check on dem tumoro
+183	Check on dem for {0} days time
+184	§one={0} day don pass|other={0} days don pass
+185	§one={0} day don pass|other={0} days don pass
+186	E don come back from pause
+187	Na you go reply
+188	dey wait for dem
+189	§one=don wait {0} day|other=don wait {0} days
+190	§one=don wait {0} day|other=don wait {0} days
+191	dem don quiet {0} days
+192	E pause reach {0}
+193	You never contact dem
+194	Last contact na today
+195	Dey wait for dem
+196	Dey wait to hear from dem
+197	Add way to message {0}
+198	Log message to {0}
+199	Message {0} for WhatsApp
+200	Message {0} for Instagram
+201	Message {0} for Snapchat
+202	Message {0} for TikTok
+203	Message {0} for Facebook
+204	Message for WhatsApp
+205	Message for Instagram
+206	Message for Snapchat
+207	Open chat
+208	First contact
+209	Interested
+210	Dey study Bible
+211	Dey come church well well
+212	Don baptise
+213	Disciple
+214	Move go {0} ›
+215	Move back to {0}
+216	{0} don move go {1}
+217	Stage don change to {0}
+218	Last stage
+219	Change {0}
+220	Remind {0}
+221	Dem don reply
+222	I don reply
+223	I don reply {0}
+224	{0} don reply
+225	You don reply
+226	You don reply {0}?
+227	{0} dey wait make you message dem.
+228	Na dem message last. Tap di chat button to answer, then tap I don reply.
+229	Tap Replied when dem message you back.
+230	E don log. Dey wait for {0} to reply.
+231	§one=E don log. Next check-in na for {0} day time.|other=E don log. Next check-in na for {0} days time.
+232	§one=E don log. Next check-in na for {0} day time.|other=E don log. Next check-in na for {0} days time.
+233	Where di talk reach
+234	All dey good
+235	I need to reply
+236	Marked: all dey good
+237	Marked: I need to reply
+238	Marked: dey wait for dem
+239	Message for WhatsApp
+240	Message for Instagram
+241	Message for Snapchat
+242	Remind dem for WhatsApp
+243	Contact dem anoda way
+244	Check on dem every
+245	§one=Check-in time na every {0} day|other=Check-in time na every {0} days
+246	§one=Check-in time na every {0} day|other=Check-in time na every {0} days
+247	Next study
+248	Study wey you plan
+249	No study wey you don log yet.
+250	Log study
+251	Log study with {0}
+252	Bible study
+253	Study don log: {0}
+254	Study don save
+255	Next study na {0}
+256	Di next study with <b>{0}</b> don save.
+257	Di next study with <b>{0}</b> don save, and Shepherd go remind you one hour before e start.
+258	Shepherd don connect to your phone calenda, so e don already dey there.
+259	Wetin una study
+260	Study name or Bible passage
+261	Save study
+262	How e go
+263	Questions wey dem ask, wetin to follow up
+264	Di next study suppose be after dis one.
+265	Pick di date for di study.
+266	Time never set
+267	Una meet for
+268	Prayer points
+269	No notes
+270	Activity log
+271	Every change wey you make, di newest first.
+272	E don add
+273	Dem add from your QR code
+274	Save for phone
+275	Save for phone contacts
+276	Add to prayer list
+277	Leave am for now
+278	Leave {0} for now
+279	No contact dem again
+280	No contact {0} again
+281	Delete all dia data
+282	Make dem active again
+283	Dem don active again
+284	E don come back
+285	{0} don come back for your list
+286	Start reminders again now
+287	Reminders don start again
+288	Reminders don on again
+289	Reminders pause reach <b>{0}</b>.
+290	Reminders pause reach <b>{0}</b> · {1}.
+291	Add number or social handle
+292	Add WhatsApp number or social media handle so you fit message dem.
+293	Details don update
+294	New contacts
+295	Save contact
+296	Save and add anoda one
+297	WhatsApp number
+298	WhatsApp (if you like)
+299	Social media (if you like)
+300	App
+301	@username
+302	We meet for outside di station
+303	Where una meet (if you like)
+304	Wetin to remember
+305	Wetin dey happen for dem, things to pray about
+306	Dem gree make we keep dia details and stay in touch.
+307	First name dey okay
+308	Add dia name.
+309	Add dia name first.
+310	Add name first.
+311	Dat phone number no look correct. Use 07… or +44…
+312	Dat number no look correct. Use 07… or +44…
+313	07… or +44…
+314	Start to type make you find dem
+315	Pick from contacts
+316	Bring your phone contacts make you find pipul as you dey type
+317	{0} don enter. Save dem for your phone contacts too?
+318	{0} don enter. Check on dem dis week.
+319	E don copy. Open your Contacts app, tap +, and paste.
+320	Open di file to add {0} to your contacts
+321	Copy dis one
+322	Press di text wey dey below hold am, then choose Copy.
+323	No number
+324	Pause reminders
+325	No reminders till di date wey you pick. Dem go come back to your Today list for dat day.
+326	Quick choice
+327	1 week
+328	2 weeks
+329	1 month
+330	3 months
+331	Or pick date
+332	Pick date wey dey after today.
+333	Pick reason first.
+334	Dem busy now
+335	Dem travel or dem no dey around
+336	Dem want small space
+337	Exams or work
+338	Dem say make we no contact dem
+339	Dem don move commot
+340	Dem join anoda church
+341	Dem never reply for long
+342	No reason
+343	E pause reach {0}
+344	E pause reach {0} ({1})
+345	No more contact: {0}
+346	No more contact: <b>{0}</b>.
+347	{0} go comot from your lists and reminders go stop. Dia history go remain and you fit bring dem back anytime.
+348	If dem ask make dem remove dia details finish, use <b>Delete all dia data</b> after.
+349	Dis one go delete {0} and everything about dem: number, notes, studies and history. You no fit undo am.
+350	Do dis only when person ask make dem remove dia details. If na just to stop to contact dem, keep dem for No more contact.
+351	Type DELETE to confirm
+352	Delete am finish
+353	Delete {0} data
+354	{0} data don delete
+355	Dem delete contact because di person ask
+356	Check on each person one time every week and keep building di friendship.
+357	Add person to check on every week
+358	Add disciple
+359	Don check in
+360	Don check in today
+361	Don check in yesterday
+362	Don check in {0}
+363	Don check in dis week
+364	Never check in
+365	You don check in with {0}
+366	{0} don check in for dis week
+367	§one=Last check-in na {0} day ago|other=Last check-in na {0} days ago
+368	§one=Last check-in na {0} day ago|other=Last check-in na {0} days ago
+369	To check dis week
+370	Don do am dis week
+371	You don check on everybody dis week.
+372	Comot from Disciples
+373	{0} don comot from Disciples
+374	Tap again to comot {0}
+375	Prayer list
+376	Who you dey pray for?
+377	Wetin to pray for
+378	Note (if you like)
+379	Change prayer
+380	Comot from prayer list
+381	Go back to prayer list
+382	Nobody dey your prayer list yet.
+383	Add di pipul wey you dey pray for. Shepherd go show some every day, one after di oda, and e fit remind you.
+384	Add anybody wey you want pray for. Every day Shepherd go show {0} pipul, one after di oda.
+385	Add anybody wey you want pray for. Every day Shepherd go show {0} pipul, one after di oda, and e go remind you by {1}.
+386	{0} don enter your prayer list
+387	{0} don comot from your prayer list
+388	{0} don already dey your prayer list
+389	Prayer reminders
+390	Remind me to pray every day
+391	Pipul every day
+392	Pray for {0} pipul from your prayer list every day, one after di oda.
+393	Pray for {0} pipul from your prayer list every day, one after di oda. Reminders go come from di Shepherd app for your phone.
+394	Prayer reminder by {0}
+395	Prayer reminders don on
+396	Prayer reminders don off
+397	Prayer reminder settings
+398	Your services and events. Invite pipul, then tick who come.
+399	No events yet
+400	Add your Sunday service, devotion or hangout here so you fit invite pipul and tick who come.
+401	New event
+402	Change event
+403	Create event
+404	Delete event
+405	Event don delete
+406	Tap again to delete dis event
+407	Give di event name.
+408	Pick date.
+409	e.g. Sunday service
+410	Sunday service
+411	Midweek service
+412	Tick who you don invite. Di message button go send invite wey don ready. For di day, tick who come.
+413	Tick who come.
+414	Add contacts first, then invite dem here.
+415	E come
+416	E no come
+417	Dem don get invite
+418	Come for {0}
+419	Get invite for {0}
+420	Invite for {0} don cancel
+421	No longer mark as person wey come {0}
+422	Invite don copy. Paste am for your message.
+423	Hi {0}! You go like come {1} {2}? E go sweet me to see you there.
+424	today by {0}
+425	tumoro by {0}
+426	on {0} by {1}
+427	on {0}
+428	§one={0} invite|other={0} invites
+429	§one={0} invite|other={0} invites
+430	§one={0} invite · {1} come|other={0} invites · {1} come
+431	§one={0} invite · {1} come|other={0} invites · {1} come
+432	From your calenda
+433	From your calenda · {0}
+434	Your calenda events don dey here already
+435	Last time we bring calenda events na {0}.
+436	§one=Calenda: {0} event don enter|other=Calenda: {0} events don enter
+437	§one=Calenda: {0} event don enter|other=Calenda: {0} events don enter
+438	No event dey dat file
+439	Add from calenda file
+440	Choose calenda file (.ics)
+441	Dem send you event as calenda file (e dey end with <b>.ics</b>), like church event invite? Save am for your phone, then choose am here. Repeat events like weekly service go enter too.
+442	Add to phone calenda
+443	Copy calenda link
+444	Calenda link don copy. Paste am for ICSx⁵.
+445	New link don ready. Connect your calenda again.
+446	make new link
+447	Dis link na your own only. If you mistakenly share am,
+448	Link your calenda
+449	How to link your phone calenda
+450	Show me how to link my calenda
+451	Connect to iPhone calenda
+452	Connect Shepherd to your phone calenda and your Bible studies and events go show there by demself, together with every oda thing for your day.
+453	1. Connect Shepherd to your phone calenda
+454	2. Keep your personal TimeTree events for your calenda too
+455	Tap <b>Connect to iPhone calenda</b> for below.
+456	Your iPhone go ask if you want subscribe. Tap <b>Subscribe</b>, then <b>Done</b>.
+457	If your phone ask, tap Subscribe. Then come back here.
+458	Come back to Shepherd. Your studies and events go now show for <b>Calendar</b> app as <b>Shepherd</b>, and dem go dey update by demself.
+459	For study or event inside Shepherd, tap <b>Add to phone calenda</b>.
+460	Your phone go open di <b>Calendar</b> app with di details inside. Tap <b>Save</b>.
+461	If you want make dem dey enter by demself, get di <b>ICSx⁵</b> app, tap <b>Copy calenda link</b> for below and add am for ICSx⁵ with <b>+</b>.
+462	TimeTree no dey share im events with oda apps, so e no fit copy dem by imself. Di personal events for TimeTree wey matter for your week, add dem to your phone calenda too, so your calenda go show everything for one place.
+463	Open your phone <b>Calendar</b> app and tap <b>+</b>.
+464	Open di <b>Calendar</b> app and tap <b>+</b>.
+465	Open di message or email wey get di file.
+466	Tap di file, then di <b>Share</b> button, then <b>Save to Files</b>.
+467	Tap di file, then <b>Download</b> (or di three dots › <b>Save</b>).
+468	Come back here and tap <b>Choose calenda file</b>.
+469	Come back here and tap <b>Choose calenda file</b>. E dey your <b>Downloads</b>.
+470	Copy for TimeTree
+471	Copy details for TimeTree
+472	E don copy. Open TimeTree and paste am for new event.
+473	Open di <b>TimeTree</b> app and tap di <b>+</b> button.
+474	Paste di details wey you copy for di title and memo, then set di <b>date and time</b>.
+475	Type di title, then set di <b>date and time</b> from your TimeTree event.
+476	Choose <b>alert</b>, like 1 hour before, so your iPhone go remind you.
+477	Choose <b>alert</b>, like 1 hour before, so your Android phone go remind you.
+478	Tap <b>Save</b>.
+479	Tap <b>Save</b> (di tick).
+480	Week of {0}
+481	Dis week
+482	You follow up <em>{0} of {1}</em> — dis week sweet well well.
+483	You follow up <em>{0} of {1}</em> — you dey try.
+484	You follow up <em>{0} of {1}</em> — no stop.
+485	You follow up <em>{0} of {1}</em> — start with today list.
+486	Your weekly summary go show when you add contacts.
+487	Come for events
+488	Follow-up rate, last 4 weeks
+489	How many of di pipul wey you dey follow up get message, call or study dat week.
+490	Never reach dem dis week
+491	Language
+492	Bible verses go still dey English (NIV).
+493	Your name
+494	Your WhatsApp number
+495	Di message wey pipul go send you from your QR code
+496	New contacts: check on dem every
+497	Settings don save
+498	Notifications
+499	Notifications don on
+500	Notifications don on for dis phone.
+501	Notifications don off for dis phone.
+502	Notifications wey get pipul name dey come from di Shepherd app for your phone.
+503	On notifications
+504	Send test
+505	Send me test notification
+506	How e dey work
+507	How to get dem
+508	Morning notifications by
+509	Morning notifications by {0}
+510	Wetin Shepherd go tell you about
+511	Alert choices don save
+512	Alerts don set to: {0}
+513	Pipul to chase
+514	Anybody wey time don pass or wey suppose get check-in today
+515	Replies wey you owe
+516	Pipul wey dey wait for your message
+517	Pipul wey you still dey wait to hear from
+518	Who you still need check on dis week
+519	Bible studies today
+520	Studies for today, with time
+521	Calenda events
+522	Events today and tumoro, plus your calenda
+523	Weekly summary
+524	For Sunday, how many pipul you don follow up
+525	Pipul to chase and events
+526	Events only
+527	Phone contacts
+528	Pick from my contacts
+529	Bring contacts file
+530	How to get contacts file
+531	Get contacts file
+532	Comot dem from dis phone
+533	Bring your phone contacts, and when you add person dia name and number go show as you dey type. Dem go stay for dis phone only, dem no go ever upload am.
+534	§one={0} contact dey dis phone. When you add person, names wey match go show as you dey type. Dem dey stay for dis phone only, dem no go ever upload am.|other={0} contacts dey dis phone. When you add person, names wey match go show as you dey type. Dem dey stay for dis phone only, dem no go ever upload am.
+535	1 contact dey dis phone. When you add person, names wey match go show as you dey type. Dem dey stay for dis phone only, dem no go ever upload am.
+536	§one={0} contact don enter dis phone list|other={0} contacts don enter dis phone list
+537	§one={0} contact don enter dis phone list|other={0} contacts don enter dis phone list
+538	Dem contacts don already dey here
+539	No contact dey dat file
+540	Phone contacts don comot from Shepherd for dis phone
+541	Save your contacts as one file, then choose am for Shepherd under <b>Bring contacts file</b>.
+542	Open di <b>Contacts</b> app and tap <b>Lists</b> (top left).
+543	Press <b>All Contacts</b> (or All iCloud) hold am, then tap <b>Export</b>.
+544	Tap <b>Save to Files</b>, then <b>Save</b>.
+545	Back for Shepherd, tap <b>Bring contacts file</b> and choose am.
+546	Open di <b>Contacts</b> app.
+547	Tap <b>Fix &amp; manage</b> (or ⋮ › <b>Settings</b>, or <b>Manage contacts</b> for Samsung), then <b>Export to file</b>.
+548	Save am for <b>Downloads</b>.
+549	Your contacts dey stay for dis phone only. Shepherd no dey upload dem.
+550	How to start
+551	One-minute waka round Shepherd.
+552	Show me around
+553	App lock
+554	Set PIN
+555	Change PIN
+556	Comot PIN
+557	Lock am now
+558	Save PIN
+559	PIN don save
+560	PIN don comot
+561	Your PIN now
+562	New PIN (4 to 8 numbers)
+563	Type am again
+564	Use 4 to 8 numbers.
+565	Di two PINs no match.
+566	Your PIN now no correct.
+567	Add PIN so anybody wey carry your phone no go fit read your contacts.
+568	Shepherd go ask for your PIN when e open and after 5 minutes wey you no dey.
+569	If you forget am, you go need backup to enter again, so pick one wey you go remember.
+570	Shepherd don lock
+571	Enter your PIN to see your contacts.
+572	Unlock
+573	Dat PIN no correct. Try again.
+574	Your account
+575	You don sign in as
+576	. You go still dey signed in for dis phone.
+577	Change password
+578	Sign out
+579	Delete my account
+580	Your data
+581	Your contacts dey save for your own private space. Nobody else wey dey use Shepherd fit see dem. One copy dey dis phone too so di app go work even without network.
+582	Your contacts dey save for your own private space (for now na only dis phone). Nobody else wey dey use Shepherd fit see dem. One copy dey dis phone too so di app go work even without network.
+583	Your contacts dey save for your own private space for Shepherd server, with di old versions. Nobody else wey dey use Shepherd fit see dem. One copy dey dis phone too so di app go work even without network.
+584	Wetin we save and who fit see am
+585	Export backup
+586	Bring back backup
+587	Backup don save
+588	Backup don copy. Paste am for note or email am give yourself.
+589	Dat file no be Shepherd backup
+590	E don come back: {0} added, {1} updated
+591	Comot example contacts
+592	Example contacts don comot
+593	Shepherd dey keep your list private. See exactly wetin we save, where, and who fit see am.
+594	Data wey connect to you
+595	Your name, email and WhatsApp number.
+596	Di pipul wey you add: dia names, phone numbers, social handles, notes, prayer points and Bible studies.
+597	Your events, disciples and prayer list.
+598	E dey save for your own account for Shepherd server so e no go ever loss, with old versions wey we keep for one year. Na only you fit see am when you sign in.
+599	E dey save for your own private space. Na only you fit see am.
+600	E dey only dis phone
+601	Contacts wey you bring from your phone, to suggest names as you dey type. We no dey upload dem.
+602	One copy of your list, so Shepherd go work without network.
+603	We no dey collect
+604	Where you dey.
+605	Your WhatsApp, text or iMessage chats.
+606	Your whole address book (na only di contacts wey you choose).
+607	Anything for adverts or tracking.
+608	When person scan your QR code
+609	Dem go choose to type dia name (and number if dem like). E go only enter your list, then dem go message you for WhatsApp by demself.
+610	Person ask make you delete dia details? Open dem, tap <b>No contact dem again</b>, then <b>Delete all dia data</b>. Every copy go comot.
+611	My QR code
+612	Your QR code
+613	QR code wey pipul go use message you
+614	Scan am make we keep in touch
+615	Make my QR code
+616	Show my QR code instead
+617	Add your own WhatsApp number first. When person scan your code, WhatsApp go open with message to you, so you go get dia number and dem go choose to keep in touch.
+618	Tell dem make dem point dia phone camera here. Dem go type dia name, <b>dem go enter your Shepherd</b>, and WhatsApp go open with your message wey don ready to send.
+619	You go get notification when dem scan am.
+620	Tell dem make dem point dia phone camera here. WhatsApp go open with message to you, and dem go just press send.
+621	When dia message land, add dem here with dia number.
+622	Dia message: “{0}”
+623	Hi, e sweet me to meet you! I get your contact from Shepherd. I hope to hear from you soon.
+624	Change di message
+625	Di QR code no load. Share dis link instead:
+626	Di QR code no fit show here.
+627	Add my number now
+628	Add your number and message, then tap Save.
+629	Get di Shepherd app
+630	Dis one dey work for di Shepherd app for your phone. Open
+631	, sign in, then come back to dis guide.
+632	Phone notifications wey get pipul name (“Reply Grace”, “Message Daniel”) dey come from di <b>Shepherd app</b> for your phone. Install am one time and on dem there.
+633	You don dey use Shepherd here? Export backup for Settings, then bring am back for di app.
+634	E don save. Reminders dey come from di Shepherd app.
+635	Shepherd dey send notifications wey get pipul name, like <b>Reply Grace</b>, <b>Message Daniel</b> or <b>Sam don reply?</b>, every morning by <b>{0}</b>, and before every study and event. Tap one and e go open dat person.
+636	1. Install Shepherd for your phone
+637	2. Allow notifications
+638	3. Check say e dey work
+639	Shepherd don install for dis phone.
+640	Open Shepherd for <b>Safari</b>.
+641	Open Shepherd for <b>Chrome</b>.
+642	Tap di <b>Share</b> button (di square wey get arrow).
+643	Tap <b>Add to Home Screen</b>, then <b>Add</b>.
+644	Tap <b>⋮</b> for top right, then <b>Install app</b> (or <b>Add to Home screen</b>).
+645	Tap <b>Install</b>.
+646	Tap <b>Add</b>.
+647	Open Shepherd from im new icon.
+648	Open Shepherd from im new icon for your Home Screen. iPhone notifications dey work only from there (iOS 16.4 or newer).
+649	Shepherd don install. Open am from im new icon.
+650	When your phone ask, tap <b>Allow</b>. You mistakenly tap <b>Don't Allow</b>?
+651	On <b>Allow notifications</b>.
+652	On <b>Allow Notifications</b>, with <b>Lock Screen</b>, <b>Banners</b> and <b>Badges</b> ticked.
+653	Settings › Notifications › Shepherd
+654	Settings › Apps › Shepherd › Notifications
+655	Notification from Shepherd go land in few seconds.
+656	Nothing? Check say <b>Focus</b> don off, and say you open Shepherd from im Home Screen icon.
+657	Nothing? Check say <b>Do Not Disturb</b> don off and say Shepherd notifications dey allowed (step 2).
+658	Change di time and wetin Shepherd go tell you about under <b>Notifications</b> for Settings. On notifications one time for every phone wey you dey use.
+659	Test don send. E suppose land in few seconds.
+660	E dey check dis phone…
+661	Dis phone dey block Shepherd notifications. See step 2 to allow dem.
+662	Add Shepherd to your Home Screen first (step 1), then open am from there.
+663	Add Shepherd to your Home Screen first, then open am from there.
+664	Dis browser no fit show notifications. Open Shepherd for Safari (iPhone) or Chrome (Android).
+665	Dis browser no fit show notifications. Use Safari (iPhone) or Chrome (Android).
+666	Notifications don block. Allow dem for your phone Settings.
+667	We no fit on notifications. Try again.
+668	We no fit reach dis phone. Off notifications and on dem again.
+669	Take your time.
+670	for your phone, then:
+671	Welcome to Shepherd
+672	Shepherd dey remind you who to check on, so nobody wey you dey look after go fall comot. Dis tour go open every part of di app and make you set am up as you dey go.
+673	Start for Settings
+674	First, open Settings and add your WhatsApp number and di first message wey go send by imself when dem scan your QR code.
+675	Most pipul dey use Shepherd for dia phone, so on notifications. Shepherd go tell you by name who to message, who to reply and who to check on, and e go open dat person when you tap.
+676	Tap here after you meet person. Add dia name and number, or show your QR code make dem message you first.
+677	Fill dia details and tap Save contact.
+678	Start every day here
+679	Today dey show who to message and who dey wait for you. Green mean e dey on time, amber mean na today, red mean time don pass.
+680	Message with one tap
+681	Di chat button dey open WhatsApp or Instagram. Shepherd go log am and wait for dia reply.
+682	When dem reply
+683	Tap Replied and dem go move go your Reply dem list. Every day Shepherd go also ask about anybody wey e no sure of.
+684	Add di pipul wey don already be disciples. Shepherd go remind you to check on dem every week. E dey for Bible say make we dey encourage each oda! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Make we turn am to habit every week!
+685	Type dia name and tap Add.
+686	Your calenda
+687	Invite pipul and tick who come. Connect Shepherd to your phone calenda so your studies and events go show there by demself.
+688	Everything don set
+689	Change wetin your morning summary dey show for Settings. For person page, Save for phone contacts go save dem for your phone. Play dis tour again from Settings anytime.
+690	End tour
+691	Continue tour
+692	Go back to di tour
+693	Skip dis step
+694	Sign in
+695	Create account
+696	Create my account
+697	You forget password?
+698	Go back to sign in
+699	Get reset code
+700	6-number code
+701	New password
+702	Save new password
+703	Enter your email address.
+704	Enter your password.
+705	Choose password wey get at least 8 characters.
+706	Choose at least 8 characters.
+707	Enter your email and we go help you choose new password.
+708	Enter your 6-number code and choose new password.
+709	Ask di person wey dey run Shepherd for your church for reset code, then enter am and choose new password.
+710	If {0} get account, we don email 6-number code. Enter am and choose new password.
+711	You need sign in only one time for dis phone.
+712	Your list na private: nobody else wey dey use Shepherd fit see am.
+713	Shepherd dey open…
+714	No network. Check your signal and try again.
+715	No network. Your changes dey dis phone.
+716	Something no work. Try again.
+717	Shepherd never get server address.
+718	Shepherd never connect to im server. Put your Cloudflare Worker address for <b>config.js</b>.
+719	Your password now
+720	Your password
+721	Password don change. Your oda phones go ask you to sign in again.
+722	Dis one go delete your account and <b>everybody for your Shepherd list</b> from di server, finish. Export backup first if you fit need am again.
+723	Delete everything
+724	Everything don save. If you sign out, your list go comot from dis phone; sign in again anytime to get am back.
+725	§one=<b>{0} change never reach di server.</b> Connect to internet and wait for “Saved” for top before you sign out, or e go loss.|other=<b>{0} changes never reach di server.</b> Connect to internet and wait for “Saved” for top before you sign out, or dem go loss.
+726	§one=<b>{0} change never reach di server.</b> Connect to internet and wait for “Saved” for top before you sign out, or e go loss.|other=<b>{0} changes never reach di server.</b> Connect to internet and wait for “Saved” for top before you sign out, or dem go loss.
+727	Sign out anyhow
+728	Something no work for Shepherd server. Your changes still dey your phone.
+729	Check di code and choose password wey get at least 8 characters.
+730	Check your email and password.
+731	One item too big to save.
+732	Abeg sign in again.
+733	Something for dat save no allowed.
+734	Dat code don expire. Ask for new one.
+735	Dat code no correct.
+736	Dat email address no look correct.
+737	Dat email and password no match.
+738	E too much to save one time.
+739	Account don already dey with dat email. Sign in instead.
+740	Dis phone give notification address wey Shepherd no fit use.
+741	Dis phone give notification keys wey Shepherd no fit use.
+742	Too many changes one time.
+743	You don try too many times. Wait 15 minutes and try again.
+744	On notifications for dis phone first.
+745	Your password no correct.
+746	§one={0} day|other={0} days
+747	§one={0} day|other={0} days
+748	{0} don save
+749	Add dem now
+750	Check on dem again for
+751	Dis phone
+752	Check-ins
+753	Nothing yet.
+754	Notes (if you like)
+755	E don log. Next check-in na today.
+756	E don log. Next check-in na tumoro.
+757	Oda app
+758	Message for anoda app
+759	Shepherd notifications don on
+760	Every morning you go hear by name who to message, who to reply and who to check on.
+761	Sun
+762	Mon
+763	Tue
+764	Wed
+765	Thu
+766	Fri
+767	Sat
+768	Jan
+769	Feb
+770	Mar
+771	Apr
+772	May
+773	Jun
+774	Jul
+775	Aug
+776	Sept
+777	Oct
+778	Nov
+779	Dec

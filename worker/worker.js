@@ -8,6 +8,7 @@
                Earlier versions of each contact are kept too (Settings in the app can't remove them by accident).
    • Alerts:   sends phone notifications that name people ("Reply to Grace", "Message Daniel"), at the
                times the app works out. Works on Android and on iPhone (iOS 16.4+, app added to Home Screen).
+   • QR code: people scan it, type their name, are added to your list, then WhatsApp opens for them.
    • Calendar: a private calendar link the phone's own Calendar app subscribes to, so studies and events
                show in the phone calendar (and from there in TimeTree).
 
@@ -25,13 +26,13 @@
    Open https://<this worker>/health to check: you should see "db":true.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-export const VERSION = 1;
+export const VERSION = 2;
 const DEFAULT_ORIGINS = 'https://sitbackco.github.io';
 const DEFAULT_APP_URL = 'https://sitbackco.github.io/shepherd/';
 const MAX_DOC = 256 * 1024;
 const MAX_OPS = 200;
 const SESSION_DAYS = 400;
-const PATH_RE = /^profile(\/(contacts|events|disciples)\/[A-Za-z0-9_-]{1,80})?$/;
+const PATH_RE = /^profile(\/(contacts|events|disciples|prayers)\/[A-Za-z0-9_-]{1,80})?$/;
 const PUSH_HOSTS = /(^|\.)(push\.apple\.com|fcm\.googleapis\.com|push\.services\.mozilla\.com|notify\.windows\.com|push\.api\.chromium\.org)$/;
 
 /* ---------- small helpers ---------- */
@@ -80,6 +81,7 @@ const SCHEMA = [
   'CREATE TABLE IF NOT EXISTS resets (uid TEXT PRIMARY KEY, ch TEXT, exp INTEGER, tries INTEGER DEFAULT 0)',
   'CREATE TABLE IF NOT EXISTS tries (k TEXT PRIMARY KEY, n INTEGER, since INTEGER)',
   'CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)',
+  'CREATE TABLE IF NOT EXISTS qrcodes (code TEXT PRIMARY KEY, uid TEXT UNIQUE NOT NULL, created INTEGER)',
   "INSERT OR IGNORE INTO meta (k, v) VALUES ('seq', '0')"
 ];
 let schemaReady = null;
@@ -186,7 +188,7 @@ async function deleteAccount(req, env, me) {
   const b = await body(req);
   const u = await one(env, 'SELECT * FROM users WHERE id = ?', me.uid);
   if (!okKey(b.key) || !same(await sha256(u.salt + b.key), u.pw)) fail(401, 'wrong_password', 'Your password isn\'t right.');
-  await env.DB.batch(['docs', 'hist', 'subs', 'outbox', 'resets', 'sessions'].map(t => env.DB.prepare('DELETE FROM ' + t + ' WHERE uid = ?').bind(me.uid)).concat([env.DB.prepare('DELETE FROM users WHERE id = ?').bind(me.uid)]));
+  await env.DB.batch(['docs', 'hist', 'subs', 'outbox', 'resets', 'sessions', 'qrcodes'].map(t => env.DB.prepare('DELETE FROM ' + t + ' WHERE uid = ?').bind(me.uid)).concat([env.DB.prepare('DELETE FROM users WHERE id = ?').bind(me.uid)]));
   return json({ ok: true });
 }
 
@@ -309,11 +311,14 @@ async function subscribe(req, env, me) {
 }
 async function unsubscribe(req, env, me) { const b = await body(req); await run(env, 'DELETE FROM subs WHERE ep = ? AND uid = ?', str(b.endpoint, 1000), me.uid); return json({ ok: true }); }
 async function testPush(req, env, me) {
+  const b = await body(req).catch(() => ({}));
+  const tt = typeof b.title === 'string' && b.title.trim() ? str(b.title, 120) : 'Shepherd notifications are on';
+  const tb = typeof b.body === 'string' && b.body.trim() ? str(b.body, 240) : 'Each morning you\'ll hear who to message, who to reply to and who to check on, by name.';
   const subs = await all(env, 'SELECT * FROM subs WHERE uid = ?', me.uid);
   if (!subs.length) fail(400, 'no_devices', 'Turn on notifications on this phone first.');
   const v = await vapid(env), cache = {}; const res = [];
   for (const s of subs) {
-    const st = await sendPush(env, v, s, { title: 'Shepherd notifications are on', body: 'Each morning you\'ll hear who to message, who to reply to and who to check on, by name.', tag: 'test', url: './' }, cache).catch(() => 0);
+    const st = await sendPush(env, v, s, { title: tt, body: tb, tag: 'test', url: './' }, cache).catch(() => 0);
     await afterSend(env, s, st); res.push(st);
   }
   return json({ ok: res.some(s => s >= 200 && s < 300), sent: res.filter(s => s >= 200 && s < 300).length, devices: subs.length });
@@ -374,16 +379,20 @@ function icsWhen(date, time, mins) {
   return { start: 'DTSTART:' + f(s), end: 'DTEND:' + f(e) };
 }
 const firstName = n => String(n || '').trim().split(/\s+/)[0];
+// calendar words in the language the owner uses Shepherd in
+const CAL = {"es":{"study":"Estudio bíblico","studyT":"Estudio: {0}","where":"Dónde: {0}"},"fr":{"study":"Étude biblique","studyT":"Étude : {0}","where":"Lieu : {0}"},"pt":{"study":"Estudo bíblico","studyT":"Estudo: {0}","where":"Onde: {0}"},"nl":{"study":"Bijbelstudie","studyT":"Studie: {0}","where":"Waar: {0}"},"pl":{"study":"Studium biblijne","studyT":"Studium: {0}","where":"Gdzie: {0}"},"pcm":{"study":"Bible study","studyT":"Study: {0}","where":"Where: {0}"},"yo":{"study":"Ẹ̀kọ́ Bíbélì","studyT":"Ẹ̀kọ́: {0}","where":"Ibo: {0}"},"ig":{"study":"Ọmụmụ Baịbụl","studyT":"Ọmụmụ: {0}","where":"Ebee: {0}"},"zh-Hans":{"study":"查经","studyT":"查经：{0}","where":"地点：{0}"},"zh-Hant":{"study":"查經","studyT":"查經：{0}","where":"地點：{0}"},"ja":{"study":"聖書研究","studyT":"研究：{0}","where":"場所：{0}"},"de":{"study":"Bibelstudium","studyT":"Studie: {0}","where":"Ort: {0}"},"ru":{"study":"Изучение Библии","studyT":"Изучение: {0}","where":"Где: {0}"},"lt":{"study":"Biblijos studija","studyT":"Studija: {0}","where":"Kur: {0}"}};
 export function calItems(rows) {
   const out = []; const cutoff = new Date(now() - 45 * 864e5).toISOString().slice(0, 10);
+  let lang = 'en'; for (const r of rows) if (r.path === 'profile' && !r.del && r.data) { try { lang = JSON.parse(r.data).lang || 'en'; } catch (e) {} }
+  const C = CAL[lang] || { study: 'Bible study', studyT: 'Study: {0}', where: 'Where: {0}' };
   for (const r of rows) {
     if (r.del || !r.data) continue;
     let d; try { d = JSON.parse(r.data); } catch (e) { continue; }
     const id = r.path.split('/').pop();
     if (r.path.indexOf('profile/contacts/') === 0 && d && d.name && d.nextStudy && d.nextStudy.date && d.status !== 'archived' && d.nextStudy.date >= cutoff)
-      out.push({ uid: 'study-' + id + '-' + d.nextStudy.date, kind: 'study', id, title: 'Bible study – ' + firstName(d.name), date: d.nextStudy.date, time: d.nextStudy.time, desc: d.nextStudy.topic ? 'Study: ' + d.nextStudy.topic : '', mins: 60 });
+      out.push({ uid: 'study-' + id + '-' + d.nextStudy.date, kind: 'study', id, title: C.study + ' – ' + firstName(d.name), date: d.nextStudy.date, time: d.nextStudy.time, desc: d.nextStudy.topic ? C.studyT.replace('{0}', d.nextStudy.topic) : '', mins: 60 });
     if (r.path.indexOf('profile/events/') === 0 && d && d.name && d.date && d.date >= cutoff && d.source !== 'calendar')
-      out.push({ uid: 'event-' + id, kind: 'event', id, title: d.name, date: d.date, time: d.time, desc: d.place ? 'Where: ' + d.place : '', place: d.place, mins: 90 });
+      out.push({ uid: 'event-' + id, kind: 'event', id, title: d.name, date: d.date, time: d.time, desc: d.place ? C.where.replace('{0}', d.place) : '', place: d.place, mins: 90 });
   }
   return out;
 }
@@ -410,13 +419,120 @@ async function calendar(req, env, parts) {
   if (parts.length === 4) { // /cal/<token>/<study|event>/<id>.ics : one item, for "Add to phone calendar"
     const id = parts[3].replace(/\.ics$/, '');
     if (!/^[A-Za-z0-9_-]{1,80}$/.test(id)) return new Response('Not found', { status: 404 });
-    rows = await all(env, 'SELECT path, data, del FROM docs WHERE uid = ? AND path = ?', u.id, (parts[2] === 'study' ? 'profile/contacts/' : 'profile/events/') + id);
-  } else rows = await all(env, "SELECT path, data, del FROM docs WHERE uid = ? AND (path LIKE 'profile/contacts/%' OR path LIKE 'profile/events/%')", u.id);
+    rows = await all(env, "SELECT path, data, del FROM docs WHERE uid = ? AND (path = ? OR path = 'profile')", u.id, (parts[2] === 'study' ? 'profile/contacts/' : 'profile/events/') + id);
+  } else rows = await all(env, "SELECT path, data, del FROM docs WHERE uid = ? AND (path = 'profile' OR path LIKE 'profile/contacts/%' OR path LIKE 'profile/events/%')", u.id);
   const items = calItems(rows).filter(x => parts.length !== 4 || x.kind === parts[2]);
   if (parts.length === 4 && !items.length) return new Response('That study or event isn\'t saved yet. Wait a moment and try again.', { status: 404 });
   return new Response(icsText(items, 'Shepherd'), { headers: { 'Content-Type': 'text/calendar; charset=utf-8', 'Content-Disposition': (parts.length === 4 ? 'inline' : 'inline') + '; filename="shepherd.ics"', 'Cache-Control': 'no-store' } });
 }
 async function newCalLink(req, env, me) { const cal = b64u(rand(24)); await run(env, 'UPDATE users SET cal = ? WHERE id = ?', cal, me.uid); return json({ cal }); }
+
+/* ---------- QR code: a hello page that adds the person to your list, then opens WhatsApp ---------- */
+const HI = {
+  en: { title: 'Say hi to {name}', lead: '{name} uses Shepherd to keep in touch. Type your name, then WhatsApp opens so you can send a message.', yourName: 'Your name', yourNum: 'Your WhatsApp number (optional)', go: 'Continue to WhatsApp', privacy: 'Your name and number go only to {name}.', notReady: 'This QR code isn\'t ready yet. Ask {name} to add their WhatsApp number in Shepherd.', needName: 'Please type your name.', slow: 'Too many tries. Please wait a little and try again.', pushT: '{name} scanned your QR code', pushB: 'They should message you on WhatsApp now. Tap to see them.' },
+  es: { title: 'Saluda a {name}', lead: '{name} usa Shepherd para mantenerse en contacto. Escribe tu nombre y se abrirá WhatsApp para que puedas enviar un mensaje.', yourName: 'Tu nombre', yourNum: 'Tu número de WhatsApp (opcional)', go: 'Continuar a WhatsApp', privacy: 'Tu nombre y número solo los verá {name}.', notReady: 'Este código QR aún no está listo. Pídele a {name} que añada su número de WhatsApp en Shepherd.', needName: 'Escribe tu nombre, por favor.', slow: 'Demasiados intentos. Espera un poco y vuelve a intentarlo.', pushT: '{name} escaneó tu código QR', pushB: 'Debería escribirte por WhatsApp ahora. Toca para verlo.' },
+  fr: { title: 'Dites bonjour à {name}', lead: '{name} utilise Shepherd pour garder le contact. Écrivez votre nom, puis WhatsApp s\'ouvre pour envoyer un message.', yourName: 'Votre nom', yourNum: 'Votre numéro WhatsApp (facultatif)', go: 'Continuer vers WhatsApp', privacy: 'Votre nom et votre numéro sont envoyés uniquement à {name}.', notReady: 'Ce code QR n\'est pas encore prêt. Demandez à {name} d\'ajouter son numéro WhatsApp dans Shepherd.', needName: 'Veuillez écrire votre nom.', slow: 'Trop de tentatives. Patientez un peu et réessayez.', pushT: '{name} a scanné votre code QR', pushB: 'Cette personne devrait vous écrire sur WhatsApp. Touchez pour la voir.' },
+  pt: { title: 'Diga olá a {name}', lead: '{name} usa o Shepherd para manter contacto. Escreva o seu nome e o WhatsApp abre para enviar uma mensagem.', yourName: 'O seu nome', yourNum: 'O seu número de WhatsApp (opcional)', go: 'Continuar para o WhatsApp', privacy: 'O seu nome e número vão apenas para {name}.', notReady: 'Este código QR ainda não está pronto. Peça a {name} para adicionar o número de WhatsApp no Shepherd.', needName: 'Por favor, escreva o seu nome.', slow: 'Demasiadas tentativas. Espere um pouco e tente de novo.', pushT: '{name} leu o seu código QR', pushB: 'Deve enviar-lhe uma mensagem no WhatsApp agora. Toque para ver.' },
+  nl: { title: 'Zeg hallo tegen {name}', lead: '{name} gebruikt Shepherd om contact te houden. Typ je naam, daarna opent WhatsApp zodat je een bericht kunt sturen.', yourName: 'Je naam', yourNum: 'Je WhatsApp-nummer (optioneel)', go: 'Verder naar WhatsApp', privacy: 'Je naam en nummer gaan alleen naar {name}.', notReady: 'Deze QR-code is nog niet klaar. Vraag {name} om een WhatsApp-nummer toe te voegen in Shepherd.', needName: 'Typ je naam.', slow: 'Te veel pogingen. Wacht even en probeer het opnieuw.', pushT: '{name} heeft je QR-code gescand', pushB: 'Diegene stuurt je nu een WhatsApp-bericht. Tik om te bekijken.' },
+  pl: { title: 'Przywitaj się z {name}', lead: '{name} używa Shepherd, by być w kontakcie. Wpisz swoje imię, a potem otworzy się WhatsApp, żebyś mógł wysłać wiadomość.', yourName: 'Twoje imię', yourNum: 'Twój numer WhatsApp (opcjonalnie)', go: 'Przejdź do WhatsApp', privacy: 'Twoje imię i numer trafią tylko do {name}.', notReady: 'Ten kod QR nie jest jeszcze gotowy. Poproś {name} o dodanie numeru WhatsApp w Shepherd.', needName: 'Wpisz swoje imię.', slow: 'Zbyt wiele prób. Odczekaj chwilę i spróbuj ponownie.', pushT: '{name} zeskanował(a) Twój kod QR', pushB: 'Powinien(na) teraz napisać do Ciebie na WhatsApp. Dotknij, aby zobaczyć.' },
+  pcm: { title: 'Greet {name}', lead: '{name} dey use Shepherd take keep in touch. Type your name, then WhatsApp go open make you fit send message.', yourName: 'Your name', yourNum: 'Your WhatsApp number (if you want)', go: 'Go WhatsApp', privacy: 'Na only {name} go see your name and number.', notReady: 'Dis QR code never ready. Tell {name} make e add im WhatsApp number for Shepherd.', needName: 'Abeg type your name.', slow: 'You don try too many times. Wait small, then try again.', pushT: '{name} don scan your QR code', pushB: 'E suppose message you for WhatsApp now. Tap make you see am.' },
+  yo: { title: 'Kí {name}', lead: '{name} ń lo Shepherd láti máa bá àwọn ènìyàn sọ̀rọ̀. Kọ orúkọ rẹ, lẹ́yìn náà WhatsApp yóò ṣí kí o lè fi ìfiránṣẹ́ ránṣẹ́.', yourName: 'Orúkọ rẹ', yourNum: 'Nọ́mbà WhatsApp rẹ (kò pọn dandan)', go: 'Tẹ̀síwájú sí WhatsApp', privacy: '{name} nìkan ni yóò rí orúkọ àti nọ́mbà rẹ.', notReady: 'Kóòdù QR yìí kò tíì ṣetán. Sọ fún {name} kí ó fi nọ́mbà WhatsApp rẹ̀ kún un nínú Shepherd.', needName: 'Jọ̀wọ́ kọ orúkọ rẹ.', slow: 'O ti gbìyànjú lọ́pọ̀ ìgbà. Dúró díẹ̀ kí o tún gbìyànjú.', pushT: '{name} ti ṣàyẹ̀wò kóòdù QR rẹ', pushB: 'Ó yẹ kí ó fi ìfiránṣẹ́ ránṣẹ́ sí ọ lórí WhatsApp báyìí. Tẹ̀ láti rí i.' },
+  ig: { title: 'Kelee {name}', lead: '{name} na-eji Shepherd na-akpakọrịta. Dee aha gị, mgbe ahụ WhatsApp ga-emeghe ka ị zitere ozi.', yourName: 'Aha gị', yourNum: 'Nọmba WhatsApp gị (ọ bụghị iwu)', go: 'Gaa n\'ihu na WhatsApp', privacy: 'Ọ bụ naanị {name} ga-ahụ aha na nọmba gị.', notReady: 'Koodu QR a adịbeghị njikere. Gwa {name} ka ọ tinye nọmba WhatsApp ya na Shepherd.', needName: 'Biko dee aha gị.', slow: 'Ị nwalere ọtụtụ ugboro. Chere obere oge ma nwaa ọzọ.', pushT: '{name} enyochala koodu QR gị', pushB: 'O kwesịrị iziga gị ozi na WhatsApp ugbu a. Pịa ka ịhụ ya.' },
+  'zh-Hans': { title: '向{name}问好', lead: '{name}用 Shepherd 保持联系。输入你的名字，然后会打开 WhatsApp，方便你发送消息。', yourName: '你的名字', yourNum: '你的 WhatsApp 号码（可选）', go: '继续前往 WhatsApp', privacy: '你的名字和号码只会发给{name}。', notReady: '这个二维码还不能用。请让{name}在 Shepherd 里添加 WhatsApp 号码。', needName: '请输入你的名字。', slow: '尝试次数太多。请稍等片刻再试。', pushT: '{name}扫描了你的二维码', pushB: '对方现在应该会在 WhatsApp 上给你发消息。点按查看。' },
+  'zh-Hant': { title: '向{name}問好', lead: '{name}用 Shepherd 保持聯絡。輸入你的名字，然後會打開 WhatsApp，方便你傳送訊息。', yourName: '你的名字', yourNum: '你的 WhatsApp 號碼（可選）', go: '繼續前往 WhatsApp', privacy: '你的名字和號碼只會傳給{name}。', notReady: '這個 QR 碼還不能使用。請{name}在 Shepherd 加入 WhatsApp 號碼。', needName: '請輸入你的名字。', slow: '嘗試次數太多。請稍候再試。', pushT: '{name}掃描了你的 QR 碼', pushB: '對方現在應該會在 WhatsApp 傳訊息給你。點按查看。' },
+  ja: { title: '{name}さんにあいさつ', lead: '{name}さんは Shepherd で連絡を取り合っています。名前を入力すると WhatsApp が開き、メッセージを送れます。', yourName: 'お名前', yourNum: 'WhatsApp の番号（任意）', go: 'WhatsApp へ進む', privacy: 'お名前と番号は{name}さんにだけ届きます。', notReady: 'この QR コードはまだ使えません。{name}さんに Shepherd で WhatsApp の番号を登録してもらってください。', needName: 'お名前を入力してください。', slow: '試行回数が多すぎます。少し待ってからもう一度お試しください。', pushT: '{name}さんが QR コードを読み取りました', pushB: 'まもなく WhatsApp でメッセージが届くはずです。タップして確認。' },
+  de: { title: 'Sag {name} Hallo', lead: '{name} nutzt Shepherd, um in Kontakt zu bleiben. Gib deinen Namen ein, dann öffnet sich WhatsApp, damit du eine Nachricht senden kannst.', yourName: 'Dein Name', yourNum: 'Deine WhatsApp-Nummer (optional)', go: 'Weiter zu WhatsApp', privacy: 'Dein Name und deine Nummer gehen nur an {name}.', notReady: 'Dieser QR-Code ist noch nicht bereit. Bitte {name}, in Shepherd eine WhatsApp-Nummer einzutragen.', needName: 'Bitte gib deinen Namen ein.', slow: 'Zu viele Versuche. Bitte warte kurz und versuche es erneut.', pushT: '{name} hat deinen QR-Code gescannt', pushB: 'Die Person sollte dir jetzt auf WhatsApp schreiben. Tippe, um sie zu sehen.' },
+  ru: { title: 'Поздоровайтесь с {name}', lead: '{name} использует Shepherd, чтобы оставаться на связи. Введите своё имя, и откроется WhatsApp, чтобы вы могли отправить сообщение.', yourName: 'Ваше имя', yourNum: 'Ваш номер WhatsApp (необязательно)', go: 'Перейти в WhatsApp', privacy: 'Ваше имя и номер увидит только {name}.', notReady: 'Этот QR-код ещё не готов. Попросите {name} добавить номер WhatsApp в Shepherd.', needName: 'Пожалуйста, введите своё имя.', slow: 'Слишком много попыток. Подождите немного и попробуйте снова.', pushT: '{name} отсканировал(а) ваш QR-код', pushB: 'Сейчас вам должны написать в WhatsApp. Нажмите, чтобы посмотреть.' },
+  lt: { title: 'Pasisveikinkite su {name}', lead: '{name} naudoja Shepherd, kad palaikytų ryšį. Įrašykite savo vardą, tada atsidarys WhatsApp ir galėsite parašyti žinutę.', yourName: 'Jūsų vardas', yourNum: 'Jūsų WhatsApp numeris (nebūtina)', go: 'Tęsti į WhatsApp', privacy: 'Jūsų vardą ir numerį matys tik {name}.', notReady: 'Šis QR kodas dar neparuoštas. Paprašykite {name} įrašyti WhatsApp numerį Shepherd programėlėje.', needName: 'Įrašykite savo vardą.', slow: 'Per daug bandymų. Palaukite ir bandykite dar kartą.', pushT: '{name} nuskenavo jūsų QR kodą', pushB: 'Netrukus turėtų parašyti jums per WhatsApp. Palieskite, kad pamatytumėte.' }
+};
+const hiT = (lang, k, name) => String((HI[lang] || HI.en)[k] || HI.en[k]).replace(/\{name\}/g, name);
+const htmlEsc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+// the standard first message, in the language the owner uses Shepherd in (Settings can change it)
+const HI_INTRO = {
+ "es": "¡Hola, encantado de conocerte! Conseguí tu contacto con Shepherd. Espero saber de ti pronto.",
+ "fr": "Bonjour, ravi de te rencontrer ! J'ai eu ton contact grâce à Shepherd. J'espère avoir de tes nouvelles bientôt.",
+ "pt": "Oi, prazer em te conhecer! Peguei seu contato pelo Shepherd. Espero ter notícias suas em breve.",
+ "nl": "Hoi, leuk je te ontmoeten! Ik heb je contact via Shepherd. Ik hoop snel van je te horen.",
+ "pl": "Cześć, miło Cię poznać! Mam Twój kontakt przez Shepherd. Mam nadzieję, że wkrótce się odezwiesz.",
+ "pcm": "Hi, e sweet me to meet you! I get your contact from Shepherd. I hope to hear from you soon.",
+ "yo": "Báwo ni, inú mi dùn láti pàdé rẹ! Mo rí nọ́ńbà rẹ láti Shepherd. Mo nírètí láti gbọ́ láti ọ̀dọ̀ rẹ láìpẹ́.",
+ "ig": "Ndewo, ọ dị m ụtọ izute gị! Enwetara m kọntaktị gị site na Shepherd. Ana m atụ anya ịnụ n'aka gị n'oge na-adịghị anya.",
+ "zh-Hans": "你好，很高兴认识你！我通过 Shepherd 得到了你的联系方式。希望很快收到你的消息。",
+ "zh-Hant": "你好，很高興認識你！我透過 Shepherd 得到了你的聯絡方式。希望很快收到你的訊息。",
+ "ja": "こんにちは、お会いできてうれしいです！Shepherd で連絡先を知りました。またお話しできるのを楽しみにしています。",
+ "de": "Hallo, schön dich kennenzulernen! Ich habe deinen Kontakt über Shepherd. Ich freue mich, bald von dir zu hören.",
+ "ru": "Привет, рад(а) знакомству! Я получил(а) твой контакт через Shepherd. Надеюсь скоро получить от тебя весточку.",
+ "lt": "Labas, malonu susipažinti! Tavo kontaktą gavau per Shepherd. Tikiuosi greitai išgirsti iš tavęs."
+};
+export function waNum(p) {
+  if (!p) return '';
+  const raw = String(p).trim(); let d = raw.replace(/\D/g, '');
+  if (!d) return '';
+  if (d.indexOf('00') === 0) d = d.slice(2);
+  else if (raw.charAt(0) !== '+' && d.charAt(0) === '0' && d.length === 11) d = '44' + d.slice(1);
+  return d.length >= 8 ? d : '';
+}
+const DEFAULT_INTRO = 'Hi, nice to meet you, I got your contact from Shepherd! Hoping to hear from you soon.';
+const OLD_INTRO = "Hi! It was great meeting you today. Here's my number so we can keep in touch about studying the Bible.";
+async function qrCode(req, env, me) {
+  const row = await one(env, 'SELECT code FROM qrcodes WHERE uid = ?', me.uid);
+  if (row) return json({ code: row.code });
+  const code = b64u(rand(9));
+  await run(env, 'INSERT OR IGNORE INTO qrcodes (code, uid, created) VALUES (?, ?, ?)', code, me.uid, now());
+  return json({ code: (await one(env, 'SELECT code FROM qrcodes WHERE uid = ?', me.uid)).code });
+}
+function hiPage(lang, ownerName, opts) {
+  const T = k => htmlEsc(hiT(lang, k, ownerName));
+  const dir = 'ltr';
+  return new Response('<!doctype html><html lang="' + htmlEsc(lang) + '" dir="' + dir + '"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>' + T('title') + '</title>' +
+    '<style>:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#FAF3DF;color:#241F18;font:17px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:max(28px,env(safe-area-inset-top)) 18px 28px}main{max-width:420px;margin:0 auto;display:grid;gap:16px}' +
+    '.mark{width:76px;height:76px;justify-self:center;border-radius:20px;background:#FAF3DF;box-shadow:0 10px 22px -16px rgba(70,52,22,.55),0 0 0 1.5px #D8C8A2}h1{font:600 30px/1.15 Georgia,serif;margin:0;text-align:center}p{margin:0}.lead{color:#574D3E;text-align:center}' +
+    'label{display:grid;gap:6px;font-weight:600;font-size:15.5px}input{font:inherit;width:100%;min-height:52px;padding:10px 14px;border-radius:14px;border:1.5px solid #D8C8A2;background:#FFFEFA;color:#241F18}input:focus{outline:none;border-color:#4E5A33;box-shadow:0 0 0 3px #E3E2C7}' +
+    'button{font:inherit;font-weight:700;min-height:54px;border-radius:14px;border:0;background:#4E5A33;color:#FFFBF3;width:100%;box-shadow:0 6px 14px -8px rgba(78,90,51,.8)}.small{font-size:14px;color:#574D3E;text-align:center}.err{color:#A9423A;font-weight:600;text-align:center}</style>' +
+    '<main><svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><path d="M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6" fill="none" stroke="#4E5A33" stroke-width="7" stroke-linecap="round"/></svg>' +
+    '<h1>' + T('title') + '</h1>' + (opts.notReady ? '<p class="lead">' + T('notReady') + '</p>' :
+      '<p class="lead">' + T('lead') + '</p>' + (opts.err ? '<p class="err" role="alert">' + T(opts.err) + '</p>' : '') +
+      '<form method="post"><div style="display:grid;gap:14px"><label>' + T('yourName') + '<input name="name" autocomplete="name" required maxlength="60" value="' + htmlEsc(opts.name || '') + '"></label>' +
+      '<label>' + T('yourNum') + '<input name="phone" type="tel" autocomplete="tel" maxlength="30" value="' + htmlEsc(opts.phone || '') + '"></label>' +
+      '<button type="submit">' + T('go') + '</button></div></form><p class="small">' + T('privacy') + '</p>') + '</main></html>',
+    { status: opts.status || 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Frame-Options': 'DENY', 'Referrer-Policy': 'no-referrer' } });
+}
+function ymdIn(tz) { try { return new Intl.DateTimeFormat('en-CA', { timeZone: tz || 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); } catch (e) { return new Date().toISOString().slice(0, 10); } }
+async function hello(req, env, parts) {
+  const code = parts[1] || '';
+  if (!/^[A-Za-z0-9_-]{6,40}$/.test(code)) return new Response('Not found', { status: 404 });
+  const q = await one(env, 'SELECT uid FROM qrcodes WHERE code = ?', code);
+  if (!q) return new Response('Not found', { status: 404 });
+  const prow = await one(env, "SELECT data FROM docs WHERE uid = ? AND path = 'profile' AND del = 0", q.uid);
+  const prof = prow ? JSON.parse(prow.data) : {};
+  const u = await one(env, 'SELECT name FROM users WHERE id = ?', q.uid);
+  const owner = firstName(prof.name || (u && u.name) || '') || 'them';
+  const lang = HI[prof.lang] ? prof.lang : 'en';
+  const num = waNum(prof.phone);
+  if (!num) return hiPage(lang, owner, { notReady: true });
+  if (req.method !== 'POST') return hiPage(lang, owner, {});
+  let name = '', phone = '';
+  const ct = req.headers.get('Content-Type') || '';
+  if (ct.includes('json')) { const b = await body(req); name = b.name; phone = b.phone; }
+  else { const f = await req.formData(); name = f.get('name'); phone = f.get('phone'); }
+  name = String(name || '').replace(/\s+/g, ' ').trim().slice(0, 60); phone = String(phone || '').trim().slice(0, 30);
+  if (!name) return hiPage(lang, owner, { err: 'needName', phone, status: 400 });
+  try { await rateLimit(env, 'hi:' + code + ':' + (req.headers.get('CF-Connecting-IP') || 'ip'), 5, 3600e3); await rateLimit(env, 'hiday:' + code, 80, 864e5); }
+  catch (e) { return hiPage(lang, owner, { err: 'slow', name, phone, status: 429 }); }
+  const t = now(), id = (t.toString(36) + b64u(rand(5))).replace(/[^A-Za-z0-9_-]/g, '');
+  const c = { id, name, phone, instagram: '', social2: '', social2Platform: '', notes: '', consent: true, source: 'qr', createdAt: t, updatedAt: t, status: 'active', stage: 'First contact', everyDays: Number(prof.defaultEvery) || 3, metOn: ymdIn(prof.tz), replyState: 'me', meSince: t, studies: [], log: [{ t, k: 'change', text: 'Added from your QR code' }] };
+  const seq = await nextSeqs(env, 1);
+  await run(env, 'INSERT INTO docs (uid, path, data, del, t, seq) VALUES (?, ?, ?, 0, ?, ?)', q.uid, 'profile/contacts/' + id, JSON.stringify(c), t, seq);
+  // tell the owner straight away
+  const subs = await all(env, 'SELECT * FROM subs WHERE uid = ?', q.uid);
+  if (subs.length) {
+    const v = await vapid(env), cache = {};
+    for (const s2 of subs) { const st = await sendPush(env, v, s2, { title: hiT(lang, 'pushT', firstName(name)), body: hiT(lang, 'pushB', ''), tag: 'qr-' + id, url: './?open=' + id }, cache).catch(() => 0); await afterSend(env, s2, st); }
+  }
+  const intro = !prof.intro || prof.intro === OLD_INTRO || prof.intro === DEFAULT_INTRO ? (HI_INTRO[lang] || DEFAULT_INTRO) : prof.intro;
+  const wa = 'https://wa.me/' + num + '?text=' + encodeURIComponent(intro);
+  return new Response(null, { status: 303, headers: { Location: wa, 'Cache-Control': 'no-store' } });
+}
 
 /* ---------- admin: give a church member a reset code ---------- */
 function adminPage(msg) {
@@ -447,6 +563,7 @@ async function route(req, env) {
   }
   if (parts[0] === 'cal') { await ready(env); return calendar(req, env, parts); }
   if (parts[0] === 'admin') { await ready(env); return admin(req, env); }
+  if (parts[0] === 'hi') { await ready(env); return hello(req, env, parts); }
   if (parts[0] !== 'api') return json({ error: 'not_found' }, 404);
   await ready(env);
   const p = parts.slice(1).join('/');
@@ -468,6 +585,7 @@ async function route(req, env) {
   if (m === 'POST' && p === 'push/test') return testPush(req, env, me);
   if (m === 'POST' && p === 'schedule') return schedule(req, env, me);
   if (m === 'POST' && p === 'cal/new') return newCalLink(req, env, me);
+  if (m === 'POST' && p === 'qr') return qrCode(req, env, me);
   return json({ error: 'not_found' }, 404);
 }
 

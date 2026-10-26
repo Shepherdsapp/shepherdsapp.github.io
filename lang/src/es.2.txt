@@ -1,0 +1,386 @@
+373	{0} quitado de Discípulos
+374	Toca otra vez para quitar a {0}
+375	Lista de oración
+376	¿Por quién oras?
+377	Por qué orar
+378	Nota (opcional)
+379	Editar oración
+380	Quitar de la lista de oración
+381	Volver a la lista de oración
+382	Aún no hay nadie en tu lista de oración.
+383	Añade a las personas por las que oras. Shepherd te muestra algunas cada día, por turnos, y puede recordártelo.
+384	Añade a cualquiera por quien quieras orar. Cada día Shepherd te muestra {0} personas, por turnos.
+385	Añade a cualquiera por quien quieras orar. Cada día Shepherd te muestra {0} personas, por turnos, y te lo recuerda a las {1}.
+386	{0} añadido a tu lista de oración
+387	{0} quitado de tu lista de oración
+388	{0} ya está en tu lista de oración
+389	Recordatorios de oración
+390	Recuérdame orar cada día
+391	Personas por día
+392	Ora por {0} personas de tu lista de oración cada día, por turnos.
+393	Ora por {0} personas de tu lista de oración cada día, por turnos. Los recordatorios llegan desde la app Shepherd en tu teléfono.
+394	Recordatorio de oración a las {0}
+395	Recordatorios de oración activados
+396	Recordatorios de oración desactivados
+397	Ajustes de recordatorios de oración
+398	Tus cultos y eventos. Invita a personas y marca quién vino.
+399	Aún no hay eventos
+400	Añade aquí tu culto del domingo, devocional o actividad social para invitar a personas y marcar quién vino.
+401	Nuevo evento
+402	Editar evento
+403	Crear evento
+404	Borrar evento
+405	Evento borrado
+406	Toca otra vez para borrar este evento
+407	Ponle nombre al evento.
+408	Elige una fecha.
+409	p. ej., Culto del domingo
+410	Culto del domingo
+411	Culto entre semana
+412	Marca a quién invitaste. El botón de mensaje envía una invitación lista. El día del evento, marca quién vino.
+413	Marca quién vino.
+414	Primero añade contactos y luego invítalos aquí.
+415	Vino
+416	No vino
+417	Invitado
+418	Vino a {0}
+419	Invitado a {0}
+420	Invitación retirada de {0}
+421	Ya no marcado como asistente a {0}
+422	Invitación copiada. Pégala en tu mensaje.
+423	¡Hola, {0}! ¿Te gustaría venir a {1} {2}? Sería genial verte allí.
+424	hoy a las {0}
+425	mañana a las {0}
+426	el {0} a las {1}
+427	el {0}
+428	§one={0} invitación|other={0} invitaciones
+429	§one={0} invitación|other={0} invitaciones
+430	§one={0} invitación · {1} vinieron|other={0} invitaciones · {1} vinieron
+431	§one={0} invitación · {1} vinieron|other={0} invitaciones · {1} vinieron
+432	De tu calendario
+433	De tu calendario · {0}
+434	Los eventos de tu calendario ya están aquí
+435	Eventos del calendario traídos por última vez el {0}.
+436	§one=Calendario: {0} evento añadido|other=Calendario: {0} eventos añadidos
+437	§one=Calendario: {0} evento añadido|other=Calendario: {0} eventos añadidos
+438	No se encontraron eventos en ese archivo
+439	Añadir desde un archivo de calendario
+440	Elegir archivo de calendario (.ics)
+441	¿Te enviaron un evento como archivo de calendario (termina en <b>.ics</b>), como una invitación de la iglesia? Guárdalo en tu teléfono y elígelo aquí. Se incluyen las repeticiones, como un culto semanal.
+442	Añadir al calendario del teléfono
+443	Copiar enlace del calendario
+444	Enlace del calendario copiado. Pégalo en ICSx⁵.
+445	Nuevo enlace creado. Conecta tu calendario de nuevo.
+446	crea un enlace nuevo
+447	Este enlace es privado. Si alguna vez lo compartes por error,
+448	Vincular tu calendario
+449	Cómo vincular el calendario del teléfono
+450	Muéstrame cómo vincular mi calendario
+451	Conectar al calendario del iPhone
+452	Conecta Shepherd al calendario de tu teléfono y tus estudios bíblicos y eventos aparecerán allí solos, junto a todo lo demás de tu día.
+453	1. Conecta Shepherd al calendario del teléfono
+454	2. Ten también en tu calendario tus eventos personales de TimeTree
+455	Toca <b>Conectar al calendario del iPhone</b> abajo.
+456	Tu iPhone te pregunta si quieres suscribirte. Toca <b>Suscribirse</b> y luego <b>OK</b>.
+457	Si tu teléfono preguntó, toca Suscribirse. Luego vuelve aquí.
+458	Vuelve a Shepherd. Tus estudios y eventos ya aparecen en la app <b>Calendario</b> como <b>Shepherd</b> y se actualizan solos.
+459	En un estudio o evento de Shepherd, toca <b>Añadir al calendario del teléfono</b>.
+460	Tu teléfono abre la app <b>Calendario</b> con los datos rellenados. Toca <b>Guardar</b>.
+461	Para que se añadan solos, instala la app <b>ICSx⁵</b>, toca <b>Copiar enlace del calendario</b> abajo y añádelo en ICSx⁵ con <b>+</b>.
+462	TimeTree no comparte sus eventos con otras apps, así que no puede copiarlos solo. Los eventos personales de TimeTree que importan para tu semana, añádelos también al calendario del teléfono, para verlo todo en un solo lugar.
+463	Abre la app <b>Calendario</b> de tu teléfono y toca <b>+</b>.
+464	Abre la app <b>Calendario</b> y toca <b>+</b>.
+465	Abre el mensaje o correo con el archivo.
+466	Toca el archivo, luego el botón <b>Compartir</b> y después <b>Guardar en Archivos</b>.
+467	Toca el archivo y luego <b>Descargar</b> (o los tres puntos › <b>Guardar</b>).
+468	Vuelve aquí y toca <b>Elegir archivo de calendario</b>.
+469	Vuelve aquí y toca <b>Elegir archivo de calendario</b>. Está en <b>Descargas</b>.
+470	Copiar para TimeTree
+471	Copiar detalles para TimeTree
+472	Copiado. Abre TimeTree y pégalo en un evento nuevo.
+473	Abre la app <b>TimeTree</b> y toca el botón <b>+</b>.
+474	Pega los detalles copiados en el título y la nota, y luego pon la <b>fecha y hora</b>.
+475	Escribe el título y luego pon la <b>fecha y hora</b> de tu evento de TimeTree.
+476	Elige un <b>aviso</b>, por ejemplo 1 hora antes, para que tu iPhone te lo recuerde.
+477	Elige un <b>aviso</b>, por ejemplo 1 hora antes, para que tu teléfono Android te lo recuerde.
+478	Toca <b>Guardar</b>.
+479	Toca <b>Guardar</b> (la marca).
+480	Semana del {0}
+481	Esta semana
+482	Diste seguimiento a <em>{0} de {1}</em> — ¡gran semana!
+483	Diste seguimiento a <em>{0} de {1}</em> — vas bien.
+484	Diste seguimiento a <em>{0} de {1}</em> — sigue así.
+485	Diste seguimiento a <em>{0} de {1}</em> — empieza por la lista de hoy.
+486	Tu resumen semanal aparecerá cuando añadas contactos.
+487	Vinieron a eventos
+488	Seguimiento en las últimas 4 semanas
+489	Parte de las personas a las que dabas seguimiento que recibieron un mensaje, una llamada o un estudio esa semana.
+490	Aún sin contactar esta semana
+491	Idioma
+492	Los versículos bíblicos siguen en inglés (NIV).
+493	Tu nombre
+494	Tu número de WhatsApp
+495	Mensaje que te envían desde tu código QR
+496	Contactos nuevos: contactar cada
+497	Ajustes guardados
+498	Notificaciones
+499	Notificaciones activadas
+500	Las notificaciones están activadas en este teléfono.
+501	Las notificaciones están desactivadas en este teléfono.
+502	Las notificaciones con nombres llegan desde la app Shepherd en tu teléfono.
+503	Activar notificaciones
+504	Enviar una prueba
+505	Envíame una notificación de prueba
+506	Cómo funciona
+507	Cómo conseguirlas
+508	Notificaciones de la mañana a las
+509	Notificaciones de la mañana a las {0}
+510	De qué te avisa Shepherd
+511	Opciones de alertas guardadas
+512	Alertas: {0}
+513	Personas a quien escribir
+514	Cualquiera atrasado o con contacto pendiente hoy
+515	Respuestas pendientes
+516	Personas que esperan un mensaje tuyo
+517	Personas de las que aún esperas noticias
+518	Con quién te falta hablar esta semana
+519	Estudios bíblicos de hoy
+520	Estudios programados para hoy, con hora
+521	Eventos del calendario
+522	Eventos de hoy y mañana, incluido tu calendario
+523	Resumen semanal
+524	Los domingos, a cuántas personas diste seguimiento
+525	Personas a quien escribir y eventos
+526	Solo eventos
+527	Contactos del teléfono
+528	Elegir de mis contactos
+529	Importar un archivo de contactos
+530	Cómo conseguir un archivo de contactos
+531	Conseguir un archivo de contactos
+532	Quitarlos de este teléfono
+533	Trae los contactos de tu teléfono y, al añadir a alguien, su nombre y número aparecerán mientras escribes. Se quedan solo en este teléfono y nunca se suben.
+534	§one={0} contacto en este teléfono. Al añadir a alguien, aparecen los nombres que coinciden mientras escribes. Se quedan solo en este teléfono y nunca se suben.|other={0} contactos en este teléfono. Al añadir a alguien, aparecen los nombres que coinciden mientras escribes. Se quedan solo en este teléfono y nunca se suben.
+535	1 contacto en este teléfono. Al añadir a alguien, aparecen los nombres que coinciden mientras escribes. Se quedan solo en este teléfono y nunca se suben.
+536	§one={0} contacto añadido a la lista de este teléfono|other={0} contactos añadidos a la lista de este teléfono
+537	§one={0} contacto añadido a la lista de este teléfono|other={0} contactos añadidos a la lista de este teléfono
+538	Esos contactos ya están aquí
+539	No se encontraron contactos en ese archivo
+540	Contactos del teléfono quitados de Shepherd en este teléfono
+541	Guarda tus contactos en un solo archivo y elígelo en Shepherd en <b>Importar un archivo de contactos</b>.
+542	Abre la app <b>Contactos</b> y toca <b>Listas</b> (arriba a la izquierda).
+543	Mantén pulsado <b>Todos los contactos</b> (o Todo iCloud) y toca <b>Exportar</b>.
+544	Toca <b>Guardar en Archivos</b> y luego <b>Guardar</b>.
+545	De vuelta en Shepherd, toca <b>Importar un archivo de contactos</b> y elígelo.
+546	Abre la app <b>Contactos</b>.
+547	Toca <b>Corregir y gestionar</b> (o ⋮ › <b>Ajustes</b>, o <b>Administrar contactos</b> en Samsung) y luego <b>Exportar a archivo</b>.
+548	Guárdalo en <b>Descargas</b>.
+549	Tus contactos se quedan solo en este teléfono. Shepherd nunca los sube.
+550	Primeros pasos
+551	Un paseo de un minuto por Shepherd.
+552	Enséñame Shepherd
+553	Bloqueo de la app
+554	Poner un PIN
+555	Cambiar PIN
+556	Quitar PIN
+557	Bloquear ahora
+558	Guardar PIN
+559	PIN guardado
+560	PIN quitado
+561	PIN actual
+562	PIN nuevo (de 4 a 8 cifras)
+563	Escríbelo otra vez
+564	Usa de 4 a 8 números.
+565	Los dos PIN no coinciden.
+566	Tu PIN actual no es correcto.
+567	Pon un PIN para que nadie que tome tu teléfono pueda leer tus contactos.
+568	Shepherd te pide el PIN al abrirse y tras 5 minutos fuera.
+569	Si lo olvidas, necesitarías una copia de seguridad para volver a entrar, así que elige uno que recuerdes.
+570	Shepherd está bloqueado
+571	Escribe tu PIN para ver tus contactos.
+572	Desbloquear
+573	Ese PIN no es correcto. Inténtalo de nuevo.
+574	Tu cuenta
+575	Sesión iniciada como
+576	. Tu sesión sigue abierta en este teléfono.
+577	Cambiar contraseña
+578	Cerrar sesión
+579	Borrar mi cuenta
+580	Tus datos
+581	Tus contactos se guardan en tu propio espacio privado. Nadie más que use Shepherd puede verlos. También se guarda una copia en este teléfono para que la app funcione sin señal.
+582	Tus contactos se guardan en tu propio espacio privado (por ahora solo en este teléfono). Nadie más que use Shepherd puede verlos. También se guarda una copia en este teléfono para que la app funcione sin señal.
+583	Tus contactos se guardan en tu propio espacio privado en el servidor de Shepherd, con versiones anteriores. Nadie más que use Shepherd puede verlos. También se guarda una copia en este teléfono para que la app funcione sin señal.
+584	Qué se guarda y quién puede verlo
+585	Exportar una copia de seguridad
+586	Restaurar una copia de seguridad
+587	Copia de seguridad guardada
+588	Copia de seguridad copiada. Pégala en una nota o envíatela por correo.
+589	Ese archivo no es una copia de seguridad de Shepherd
+590	Restaurado: {0} añadidos, {1} actualizados
+591	Quitar contactos de ejemplo
+592	Contactos de ejemplo quitados
+593	Shepherd mantiene tu lista en privado. Aquí tienes exactamente qué se guarda, dónde y quién puede verlo.
+594	Datos vinculados a ti
+595	Tu nombre, correo y número de WhatsApp.
+596	Las personas que añades: sus nombres, números, usuarios de redes, notas, motivos de oración y estudios bíblicos.
+597	Tus eventos, discípulos y lista de oración.
+598	Se guarda en tu propia cuenta en el servidor de Shepherd para que nunca se pierda, con versiones anteriores durante un año. Solo tú puedes verlo cuando inicias sesión.
+599	Se guarda en tu propio espacio privado. Solo tú puedes verlo.
+600	Solo en este teléfono
+601	Los contactos que importas de tu teléfono, para sugerir nombres mientras escribes. Nunca se suben.
+602	Una copia de tu lista, para que Shepherd funcione sin señal.
+603	Nunca se recoge
+604	Tu ubicación.
+605	Tus conversaciones de WhatsApp, SMS o iMessage.
+606	Toda tu agenda (solo los contactos que elijas).
+607	Nada para anuncios ni seguimiento.
+608	Cuando alguien escanea tu código QR
+609	Esa persona decide escribir su nombre (y su número si quiere). Va solo a tu lista y luego te escribe ella misma por WhatsApp.
+610	¿Alguien te pide que borres sus datos? Ábrelo, toca <b>Dejar de contactar</b> y luego <b>Borrar todos sus datos</b>. Se borran todas las copias.
+611	Mi código QR
+612	Tu código QR
+613	Código QR para que te escriban
+614	Escanea para seguir en contacto
+615	Crear mi código QR
+616	Mostrar mi código QR
+617	Primero añade tu propio número de WhatsApp. Cuando alguien escanee tu código, WhatsApp se abrirá con un mensaje para ti; así tienes su número y esa persona decide seguir en contacto.
+618	Pídele que apunte la cámara de su teléfono aquí. Escribe su nombre, <b>se añade a tu Shepherd</b> y WhatsApp se abre con tu mensaje listo para enviar.
+619	Recibirás una notificación cuando lo escanee.
+620	Pídele que apunte la cámara de su teléfono aquí. WhatsApp se abre con un mensaje para ti y solo tiene que enviarlo.
+621	Cuando llegue su mensaje, añádele aquí con su número.
+622	Su mensaje: “{0}”
+623	¡Hola, encantado de conocerte! Conseguí tu contacto con Shepherd. Espero saber de ti pronto.
+624	Cambiar el mensaje
+625	El código QR no se pudo cargar. Comparte este enlace:
+626	El código QR no se pudo dibujar aquí.
+627	Añadir mi número ahora
+628	Añade tu número y tu mensaje y toca Guardar.
+629	Consigue la app Shepherd
+630	Esto funciona en la app Shepherd de tu teléfono. Abre
+631	, inicia sesión y vuelve a esta guía.
+632	Las notificaciones con nombres (“Responder a Grace”, “Escribir a Daniel”) llegan desde la <b>app Shepherd</b> de tu teléfono. Instálala una vez y actívalas allí.
+633	¿Ya usas Shepherd aquí? Exporta una copia de seguridad en Ajustes y restáurala en la app.
+634	Guardado. Los recordatorios llegan desde la app Shepherd.
+635	Shepherd envía notificaciones con nombres, como <b>Responder a Grace</b>, <b>Escribir a Daniel</b> o <b>¿Respondió Sam?</b>, cada mañana a las <b>{0}</b> y antes de cada estudio y evento. Toca una y se abre esa persona.
+636	1. Instala Shepherd en tu teléfono
+637	2. Permite las notificaciones
+638	3. Comprueba que funciona
+639	Shepherd está instalado en este teléfono.
+640	Abre Shepherd en <b>Safari</b>.
+641	Abre Shepherd en <b>Chrome</b>.
+642	Toca el botón <b>Compartir</b> (el cuadrado con una flecha).
+643	Toca <b>Añadir a pantalla de inicio</b> y luego <b>Añadir</b>.
+644	Toca <b>⋮</b> arriba a la derecha y luego <b>Instalar app</b> (o <b>Añadir a pantalla de inicio</b>).
+645	Toca <b>Instalar</b>.
+646	Toca <b>Añadir</b>.
+647	Abre Shepherd desde su nuevo icono.
+648	Abre Shepherd desde su nuevo icono en la pantalla de inicio. Las notificaciones del iPhone solo funcionan desde ahí (iOS 16.4 o posterior).
+649	Shepherd está instalado. Ábrelo desde su nuevo icono.
+650	Cuando tu teléfono pregunte, toca <b>Permitir</b>. ¿Tocaste <b>No permitir</b> por error?
+651	Activa <b>Permitir notificaciones</b>.
+652	Activa <b>Permitir notificaciones</b>, con <b>Pantalla bloqueada</b>, <b>Tiras</b> y <b>Globos</b> marcados.
+653	Ajustes › Notificaciones › Shepherd
+654	Ajustes › Aplicaciones › Shepherd › Notificaciones
+655	Una notificación de Shepherd llega en unos segundos.
+656	¿Nada? Comprueba que <b>Concentración</b> esté desactivado y que abriste Shepherd desde su icono en la pantalla de inicio.
+657	¿Nada? Comprueba que <b>No molestar</b> esté desactivado y que las notificaciones de Shepherd estén permitidas (paso 2).
+658	Cambia la hora y de qué te avisa Shepherd en <b>Notificaciones</b>, en Ajustes. Activa las notificaciones una vez en cada teléfono que uses.
+659	Prueba enviada. Debería llegar en unos segundos.
+660	Comprobando este teléfono…
+661	Este teléfono está bloqueando las notificaciones de Shepherd. Mira el paso 2 para permitirlas.
+662	Primero añade Shepherd a tu pantalla de inicio (paso 1) y ábrelo desde allí.
+663	Primero añade Shepherd a tu pantalla de inicio y ábrelo desde allí.
+664	Este navegador no puede mostrar notificaciones. Abre Shepherd en Safari (iPhone) o Chrome (Android).
+665	Este navegador no puede mostrar notificaciones. Usa Safari (iPhone) o Chrome (Android).
+666	Las notificaciones están bloqueadas. Permítelas en los Ajustes de tu teléfono.
+667	No se pudieron activar las notificaciones. Inténtalo de nuevo.
+668	No se pudo llegar a este teléfono. Desactiva y vuelve a activar las notificaciones.
+669	Tómate tu tiempo.
+670	en tu teléfono y luego:
+671	Bienvenido a Shepherd
+672	Shepherd te recuerda con quién hablar, para que nadie a quien acompañas se te escape. Este recorrido abre cada parte de la app y te deja configurarla sobre la marcha.
+673	Empieza en Ajustes
+674	Primero, abre Ajustes y añade tu número de WhatsApp y el primer mensaje que se enviará automáticamente cuando escaneen tu código QR.
+675	Casi todos usan Shepherd en el teléfono, así que activa las notificaciones. Shepherd te dice por nombre a quién escribir, a quién responder y con quién hablar, y abre a esa persona al tocar.
+676	Toca aquí después de conocer a alguien. Añade su nombre y número, o enséñale tu código QR para que te escriba primero.
+677	Rellena sus datos y toca Guardar contacto.
+678	Empieza cada día aquí
+679	Hoy muestra a quién escribir y quién te espera. Verde es al día, ámbar es para hoy, rojo es atrasado.
+680	Escribe con un toque
+681	El botón de chat abre WhatsApp o Instagram. Shepherd lo registra y espera su respuesta.
+682	Cuando respondan
+683	Toca Respondió y pasan a tu lista de Responder a. Cada día Shepherd también pregunta por quien no está seguro.
+684	Añade a las personas que ya son discípulos. Shepherd te recuerda hablar con ellas cada semana. ¡Es bíblico animarnos unos a otros! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ ¡Hagamos de esto un hábito cada semana!
+685	Escribe su nombre y toca Añadir.
+686	Tu calendario
+687	Invita a personas y marca quién vino. Conecta Shepherd al calendario de tu teléfono para que tus estudios y eventos aparezcan allí solos.
+688	¡Todo listo!
+689	Cambia lo que muestra tu resumen de la mañana en Ajustes. En la página de una persona, Guardar en los contactos del teléfono la guarda en tu teléfono. Repite este recorrido desde Ajustes cuando quieras.
+690	Terminar recorrido
+691	Seguir el recorrido
+692	Volver al recorrido
+693	Saltar este paso
+694	Iniciar sesión
+695	Crear cuenta
+696	Crear mi cuenta
+697	¿Olvidaste tu contraseña?
+698	Volver a iniciar sesión
+699	Pedir un código
+700	Código de 6 cifras
+701	Contraseña nueva
+702	Guardar contraseña nueva
+703	Escribe tu correo electrónico.
+704	Escribe tu contraseña.
+705	Elige una contraseña de al menos 8 caracteres.
+706	Elige al menos 8 caracteres.
+707	Escribe tu correo y te ayudaremos a elegir una contraseña nueva.
+708	Escribe tu código de 6 cifras y elige una contraseña nueva.
+709	Pide un código a la persona que gestiona Shepherd en tu iglesia, escríbelo y elige una contraseña nueva.
+710	Si {0} tiene una cuenta, le hemos enviado un código de 6 cifras. Escríbelo y elige una contraseña nueva.
+711	Solo tienes que iniciar sesión una vez en este teléfono.
+712	Tu lista es privada: nadie más que use Shepherd puede verla.
+713	Abriendo Shepherd…
+714	Sin conexión. Revisa tu señal e inténtalo de nuevo.
+715	Sin conexión. Tus cambios se guardan en este teléfono.
+716	Algo salió mal. Inténtalo de nuevo.
+717	Shepherd aún no tiene dirección de servidor.
+718	Shepherd aún no está conectado a su servidor. Pon la dirección de tu Cloudflare Worker en <b>config.js</b>.
+719	Contraseña actual
+720	Tu contraseña
+721	Contraseña cambiada. Tus otros teléfonos te pedirán iniciar sesión de nuevo.
+722	Esto borra tu cuenta y <b>a todas las personas de tu lista de Shepherd</b> del servidor, para siempre. Exporta antes una copia de seguridad si quizá la quieras otra vez.
+723	Borrarlo todo
+724	Todo está guardado. Al cerrar sesión, tu lista se quita de este teléfono; inicia sesión de nuevo cuando quieras para recuperarla.
+725	§one=<b>{0} cambio aún no ha llegado al servidor.</b> Conéctate a internet y espera a ver “Guardado” arriba antes de cerrar sesión, o se perderá.|other=<b>{0} cambios aún no han llegado al servidor.</b> Conéctate a internet y espera a ver “Guardado” arriba antes de cerrar sesión, o se perderán.
+726	§one=<b>{0} cambio aún no ha llegado al servidor.</b> Conéctate a internet y espera a ver “Guardado” arriba antes de cerrar sesión, o se perderá.|other=<b>{0} cambios aún no han llegado al servidor.</b> Conéctate a internet y espera a ver “Guardado” arriba antes de cerrar sesión, o se perderán.
+727	Cerrar sesión igualmente
+728	Algo salió mal en el servidor de Shepherd. Tus cambios se guardan en tu teléfono.
+729	Revisa el código y elige una contraseña de al menos 8 caracteres.
+730	Revisa tu correo y tu contraseña.
+731	Un elemento es demasiado grande para guardarlo.
+732	Inicia sesión de nuevo.
+733	Algo de lo que intentas guardar no está permitido.
+734	Ese código ha caducado. Pide uno nuevo.
+735	Ese código no es correcto.
+736	Ese correo no parece correcto.
+737	El correo y la contraseña no coinciden.
+738	Es demasiado para guardar de una vez.
+739	Ya hay una cuenta con ese correo. Inicia sesión.
+740	Este teléfono dio una dirección de notificaciones que Shepherd no puede usar.
+741	Este teléfono dio claves de notificación que Shepherd no puede usar.
+742	Demasiados cambios a la vez.
+743	Demasiados intentos. Espera 15 minutos y vuelve a intentarlo.
+744	Primero activa las notificaciones en este teléfono.
+745	Tu contraseña no es correcta.
+746	§one={0} día|other={0} días
+747	§one={0} día|other={0} días
+748	{0} guardado
+749	Añadirle ahora
+750	Volver a contactar en
+751	Este teléfono
+752	Contactos semanales
+753	Nada todavía.
+754	Notas (opcional)
+755	Registrado. Próximo contacto hoy.
+756	Registrado. Próximo contacto mañana.
+757	Otra app
+758	Escribió por otra app

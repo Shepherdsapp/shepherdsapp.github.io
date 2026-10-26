@@ -1,0 +1,779 @@
+1	{0}: {1}
+2	{0} · {1}
+3	<b>{0}</b> · {1}
+4	{0}, {1}
+5	{0} en nog {1}
+6	{0} ({1} d te laat)
+7	{0} ({1} d)
+8	{0} (voorbeeld)
+9	Vandaag
+10	Morgen
+11	Gisteren
+12	vandaag
+13	morgen
+14	gisteren
+15	Mensen
+16	Discipelen
+17	Agenda
+18	Week
+19	Instellingen
+20	Toevoegen
+21	Contact toevoegen
+22	Iemand toevoegen
+23	Een contact toevoegen
+24	Bewaren
+25	Wijzigingen bewaren
+26	Annuleren
+27	Sluiten
+28	Klaar
+29	Terug
+30	Volgende
+31	Overslaan
+32	Wijzigen
+33	Openen
+34	Tonen
+35	Verbergen
+36	Ongedaan maken
+37	Bekijken
+38	Filter
+39	Alles
+40	Uit
+41	Jij
+42	Anders
+43	Voorbeeld
+44	Naam
+45	Telefoon
+46	E-mail
+47	Wachtwoord
+48	Gebruikersnaam
+49	Notities
+50	Datum
+51	Tijd
+52	Dag
+53	Waar
+54	Gegevens
+55	Fase
+56	Reden
+57	Laden
+58	Bewaard
+59	Bewaren…
+60	Even geduld…
+61	Niet nu
+62	Nog niet
+63	Laat zien
+64	Laat zien hoe
+65	Iedereen
+66	Hoofd
+67	Lijst
+68	Reis
+69	Voorbij
+70	Binnenkort
+71	Studies
+72	Activiteiten
+73	Activiteit
+74	Activiteit
+75	Op dit apparaat
+76	Offline · wordt gesynchroniseerd
+77	Niet online bewaard
+78	Bewaard op dit apparaat
+79	De online opslag is vol. Je wijzigingen blijven op deze telefoon. Maak een back-up via Instellingen.
+80	Goedemorgen
+81	Goedemiddag
+82	Goedenavond
+83	Goedemorgen, {0}
+84	Goedemiddag, {0}
+85	Goedenavond, {0}
+86	Je ochtendoverzicht
+87	Overzicht van vandaag
+88	Je bent bij. Niemand wacht vandaag op je.
+89	Niets voor vandaag.
+90	Meldingen staan uit.
+91	Vandaag berichten
+92	Antwoorden aan
+93	Wacht op antwoord
+94	Vandaag
+95	Te laat
+96	Op schema
+97	Gepauzeerd
+98	Studies vandaag
+99	Bijbelstudies
+100	1 studie vandaag
+101	§one={0} studie vandaag|other={0} studies vandaag
+102	{0} om te berichten
+103	§one={0} antwoord open|other={0} antwoorden open
+104	§one={0} antwoord open|other={0} antwoorden open
+105	{0} om na te gaan
+106	{0} van {1}
+107	Bijpraten
+108	Heeft {0} gereageerd?
+109	§one=Je stuurde {0} {1} dag geleden een bericht.|other=Je stuurde {0} {1} dagen geleden een bericht.
+110	§one=Je stuurde {0} {1} dag geleden een bericht.|other=Je stuurde {0} {1} dagen geleden een bericht.
+111	Ja, ik heb geantwoord
+112	Wacht nog
+113	Vraag het morgen
+114	Shepherd vraagt het morgen opnieuw
+115	Discipelen deze week
+116	{0} van {1} gedaan
+117	Nog contact opnemen met: {0}.
+118	Discipelen openen
+119	Bid vandaag
+120	Gebedslijst ({0})
+121	Je ziet voorbeeldcontacten. <b>Verwijder ze</b> via Instellingen wanneer je wilt.
+122	Je wijzigingen blijven op deze telefoon maar kunnen niet online worden bewaard. Vraag degene die Shepherd met je deelde om <b>Bijdrager</b>-toegang.
+123	Begin met de mensen die je ontmoet
+124	Voeg iemand toe met wie je je geloof hebt gedeeld. Shepherd herinnert je om elke paar dagen contact op te nemen en houdt hun studies bij.
+125	Mijn eerste persoon toevoegen
+126	Zet Shepherd op je beginscherm
+127	Het opent als een app, en zo kan Shepherd je meldingen sturen met de namen van mensen.
+128	§one={0} persoon een bericht sturen: {1}|other={0} mensen een bericht sturen: {1}
+129	§one={0} persoon een bericht sturen: {1}|other={0} mensen een bericht sturen: {1}
+130	Antwoord {0}
+131	Hebben ze gereageerd? {0}
+132	Discipelen om deze week te spreken: {0}
+133	Studies vandaag: {0}
+134	{0} om {1}
+135	Activiteiten: {0}
+136	{0} vandaag om {1}
+137	{0} morgen om {1}
+138	{0} vandaag
+139	{0} morgen
+140	Deze week heb je {0} van {1} opgevolgd.
+141	§one=Deze week heb je {0} van {1} persoon opgevolgd.|other=Deze week heb je {0} van {1} mensen opgevolgd.
+142	§one=Deze week heb je {0} van {1} persoon opgevolgd.|other=Deze week heb je {0} van {1} mensen opgevolgd.
+143	Bericht aan {0}
+144	§one={0} stuurde je {1} dag geleden een bericht. Tik om te antwoorden.|other={0} stuurde je {1} dagen geleden een bericht. Tik om te antwoorden.
+145	§one={0} stuurde je {1} dag geleden een bericht. Tik om te antwoorden.|other={0} stuurde je {1} dagen geleden een bericht. Tik om te antwoorden.
+146	{0} wacht op je antwoord.
+147	Vandaag terug van een pauze. Tik om {0} een bericht te sturen.
+148	Je hebt {0} nog geen bericht gestuurd. Tik om hallo te zeggen.
+149	§one={0} dag te laat. Tik om {1} een bericht te sturen.|other={0} dagen te laat. Tik om {1} een bericht te sturen.
+150	§one={0} dag te laat. Tik om {1} een bericht te sturen.|other={0} dagen te laat. Tik om {1} een bericht te sturen.
+151	Vandaag tijd voor contact. Tik om {0} een bericht te sturen.
+152	§one=Je stuurde {0} {1} dag geleden een bericht. Tik op Gereageerd in Shepherd als dat zo is.|other=Je stuurde {0} {1} dagen geleden een bericht. Tik op Gereageerd in Shepherd als dat zo is.
+153	§one=Je stuurde {0} {1} dag geleden een bericht. Tik op Gereageerd in Shepherd als dat zo is.|other=Je stuurde {0} {1} dagen geleden een bericht. Tik op Gereageerd in Shepherd als dat zo is.
+154	Neem contact op met {0}
+155	Je hebt deze week nog geen contact gehad met {0}.
+156	En nog {0} vandaag
+157	Bijbelstudie met {0} om {1}
+158	Bijbelstudie met {0} vandaag
+159	Over een uur. Studie: {0}
+160	Over een uur.
+161	Studie: {0}
+162	Nog geen tijd.
+163	Morgen: {0}
+164	Hele dag
+165	§one={0} persoon uitgenodigd|other={0} mensen uitgenodigd
+166	§one={0} persoon uitgenodigd|other={0} mensen uitgenodigd
+167	Begint over een uur.
+168	Begint over een uur · {0}.
+169	Bid voor {0}
+170	{0} en {1}
+171	Jouw week
+172	Mensen zoeken
+173	Zoek op naam, nummer of gebruikersnaam
+174	Niemand gevonden.
+175	Nog niemand hier.
+176	§one={0} persoon die je opvolgt|other={0} mensen die je opvolgt
+177	§one={0} persoon die je opvolgt|other={0} mensen die je opvolgt
+178	Geen contact meer
+179	Geen contact meer ({0})
+180	Veilig bewaard zodat er niets verloren gaat. Zet iemand altijd terug wanneer je wilt.
+181	Vandaag contact
+182	Morgen contact
+183	Contact over {0} dagen
+184	§one={0} dag te laat|other={0} dagen te laat
+185	§one={0} dag te laat|other={0} dagen te laat
+186	Terug van een pauze
+187	Jij moet antwoorden
+188	wacht op hen
+189	§one=wacht {0} dag|other=wacht {0} dagen
+190	§one=wacht {0} dag|other=wacht {0} dagen
+191	al {0} dagen stil
+192	Gepauzeerd tot {0}
+193	Nog geen contact
+194	Laatste contact vandaag
+195	Wacht op hen
+196	Wacht op nieuws
+197	Voeg een manier toe om {0} te berichten
+198	Een bericht aan {0} noteren
+199	{0} berichten via WhatsApp
+200	{0} berichten via Instagram
+201	{0} berichten via Snapchat
+202	{0} berichten via TikTok
+203	{0} berichten via Facebook
+204	Bericht via WhatsApp
+205	Bericht via Instagram
+206	Bericht via Snapchat
+207	Chat openen
+208	Eerste contact
+209	Geïnteresseerd
+210	Studeert
+211	Komt naar de kerk
+212	Gedoopt
+213	Discipel
+214	Naar {0} ›
+215	Terug naar {0}
+216	{0} is nu {1}
+217	Fase gewijzigd naar {0}
+218	Laatste fase
+219	{0} wijzigen
+220	{0} herinneren
+221	Gereageerd
+222	Ik heb geantwoord
+223	Ik heb {0} geantwoord
+224	{0} heeft gereageerd
+225	Jij hebt geantwoord
+226	Heb je {0} al geantwoord?
+227	{0} wacht op een bericht van jou.
+228	Zij stuurden het laatste bericht. Tik op de chatknop om te antwoorden, daarna op Ik heb geantwoord.
+229	Tik op Gereageerd als ze je terugschrijven.
+230	Genoteerd. Wacht op antwoord van {0}.
+231	§one=Genoteerd. Volgend contact over {0} dag.|other=Genoteerd. Volgend contact over {0} dagen.
+232	§one=Genoteerd. Volgend contact over {0} dag.|other=Genoteerd. Volgend contact over {0} dagen.
+233	Waar het gesprek staat
+234	Alles goed
+235	Ik moet antwoorden
+236	Gemarkeerd: alles goed
+237	Gemarkeerd: ik moet antwoorden
+238	Gemarkeerd: wacht op hen
+239	Bericht gestuurd via WhatsApp
+240	Bericht gestuurd via Instagram
+241	Bericht gestuurd via Snapchat
+242	Herinnerd via WhatsApp
+243	Op een andere manier contact gehad
+244	Contact elke
+245	§one=Contactritme: elke {0} dag|other=Contactritme: elke {0} dagen
+246	§one=Contactritme: elke {0} dag|other=Contactritme: elke {0} dagen
+247	Volgende studie
+248	Geplande studie
+249	Nog geen studies genoteerd.
+250	Studie noteren
+251	Studie met {0} noteren
+252	Bijbelstudie
+253	Studie genoteerd: {0}
+254	Studie bewaard
+255	Volgende studie op {0}
+256	De volgende studie met <b>{0}</b> is bewaard.
+257	De volgende studie met <b>{0}</b> is bewaard, en Shepherd herinnert je een uur van tevoren.
+258	Shepherd is verbonden met de agenda van je telefoon, dus daar staat het al.
+259	Wat jullie bestudeerden
+260	Naam van de studie of tekst
+261	Studie bewaren
+262	Hoe het ging
+263	Vragen die ze stelden, waar je op terugkomt
+264	De volgende studie moet na deze zijn.
+265	Kies de datum van de studie.
+266	Geen tijd ingesteld
+267	Ontmoet op
+268	Gebedspunten
+269	Geen notities
+270	Activiteitenlog
+271	Elke wijziging die je maakt, nieuwste eerst.
+272	Toegevoegd
+273	Toegevoegd via je QR-code
+274	Bewaren op telefoon
+275	Bewaren in telefooncontacten
+276	Toevoegen aan gebedslijst
+277	Even laten
+278	{0} even laten
+279	Geen contact meer
+280	Geen contact meer met {0}
+281	Al hun gegevens verwijderen
+282	Weer actief maken
+283	Weer actief
+284	Teruggezet
+285	{0} staat weer in je lijst
+286	Herinneringen nu hervatten
+287	Herinneringen hervat
+288	Herinneringen weer aan
+289	Herinneringen zijn gepauzeerd tot <b>{0}</b>.
+290	Herinneringen zijn gepauzeerd tot <b>{0}</b> · {1}.
+291	Nummer of gebruikersnaam toevoegen
+292	Voeg een WhatsApp-nummer of social media-naam toe zodat je ze een bericht kunt sturen.
+293	Gegevens bijgewerkt
+294	Nieuwe contacten
+295	Contact bewaren
+296	Bewaren en nog een toevoegen
+297	WhatsApp-nummer
+298	WhatsApp (optioneel)
+299	Social media (optioneel)
+300	App
+301	@gebruikersnaam
+302	Ontmoet bij het station
+303	Waar jullie elkaar ontmoetten (optioneel)
+304	Iets om te onthouden
+305	Hoe het met ze gaat, dingen om voor te bidden
+306	Ze vinden het goed dat we hun gegevens bewaren en contact houden.
+307	Voornaam is genoeg
+308	Vul hun naam in.
+309	Vul eerst hun naam in.
+310	Vul eerst een naam in.
+311	Dat telefoonnummer lijkt niet te kloppen. Gebruik 07… of +44…
+312	Dat nummer lijkt niet te kloppen. Gebruik 07… of +44…
+313	07… of +44…
+314	Begin te typen om ze te vinden
+315	Kies uit contacten
+316	Importeer je telefooncontacten om mensen te vinden terwijl je typt
+317	{0} toegevoegd. Ook in je telefooncontacten bewaren?
+318	{0} toegevoegd. Neem deze week contact op.
+319	Gekopieerd. Open de app Contacten, tik op + en plak.
+320	Open het bestand om {0} aan je contacten toe te voegen
+321	Kopieer dit
+322	Houd de tekst hieronder ingedrukt en kies Kopieer.
+323	Geen nummer
+324	Herinneringen pauzeren
+325	Geen herinneringen tot de datum die je kiest. Op die dag komen ze terug in je lijst Vandaag.
+326	Snelle keuzes
+327	1 week
+328	2 weken
+329	1 maand
+330	3 maanden
+331	Of kies een datum
+332	Kies een datum na vandaag.
+333	Kies eerst een reden.
+334	Even druk
+335	Weg of op reis
+336	Wil wat ruimte
+337	Examens of werk
+338	Vroeg ons geen contact meer op te nemen
+339	Verhuisd
+340	Naar een andere kerk gegaan
+341	Lang geen reactie
+342	Geen reden opgegeven
+343	Gepauzeerd tot {0}
+344	Gepauzeerd tot {0} ({1})
+345	Geen contact meer: {0}
+346	Geen contact meer: <b>{0}</b>.
+347	{0} verdwijnt uit je lijsten en de herinneringen stoppen. De geschiedenis blijft bewaard en je kunt ze altijd terugzetten.
+348	Als ze vroegen hun gegevens helemaal te verwijderen, gebruik daarna <b>Al hun gegevens verwijderen</b>.
+349	Dit verwijdert {0} en alles over deze persoon: nummer, notities, studies en geschiedenis. Dit kan niet ongedaan worden gemaakt.
+350	Doe dit alleen als iemand vraagt om hun gegevens te verwijderen. Wil je gewoon geen contact meer, laat ze dan bij Geen contact meer staan.
+351	Typ DELETE om te bevestigen
+352	Definitief verwijderen
+353	Gegevens van {0} verwijderen
+354	De gegevens van {0} zijn verwijderd
+355	Een contact verwijderd op eigen verzoek
+356	Neem één keer per week contact op met iedereen en blijf bouwen aan de vriendschap.
+357	Iemand toevoegen om wekelijks te spreken
+358	Een discipel toevoegen
+359	Contact gehad
+360	Vandaag contact gehad
+361	Gisteren contact gehad
+362	Contact gehad op {0}
+363	Deze week contact gehad
+364	Nog geen contact gehad
+365	Contact gehad met {0}
+366	Deze week contact gehad met {0}
+367	§one=Laatste contact {0} dag geleden|other=Laatste contact {0} dagen geleden
+368	§one=Laatste contact {0} dag geleden|other=Laatste contact {0} dagen geleden
+369	Deze week te spreken
+370	Gedaan deze week
+371	Je hebt deze week iedereen gesproken.
+372	Verwijderen uit Discipelen
+373	{0} verwijderd uit Discipelen
+374	Tik nogmaals om {0} te verwijderen
+375	Gebedslijst
+376	Voor wie bid je?
+377	Waarvoor bidden
+378	Notitie (optioneel)
+379	Gebed wijzigen
+380	Verwijderen van gebedslijst
+381	Terug naar gebedslijst
+382	Nog niemand op je gebedslijst.
+383	Voeg de mensen toe voor wie je bidt. Shepherd laat er elke dag een paar zien, om de beurt, en kan je eraan herinneren.
+384	Voeg iedereen toe voor wie je wilt bidden. Elke dag laat Shepherd {0} mensen zien, om de beurt.
+385	Voeg iedereen toe voor wie je wilt bidden. Elke dag laat Shepherd {0} mensen zien, om de beurt, en herinnert je om {1}.
+386	{0} toegevoegd aan je gebedslijst
+387	{0} verwijderd van je gebedslijst
+388	{0} staat al op je gebedslijst
+389	Gebedsherinneringen
+390	Herinner me elke dag om te bidden
+391	Mensen per dag
+392	Bid elke dag voor {0} mensen van je gebedslijst, om de beurt.
+393	Bid elke dag voor {0} mensen van je gebedslijst, om de beurt. Herinneringen komen van de Shepherd-app op je telefoon.
+394	Gebedsherinnering om {0}
+395	Gebedsherinneringen aan
+396	Gebedsherinneringen uit
+397	Instellingen gebedsherinneringen
+398	Je diensten en activiteiten. Nodig mensen uit en vink aan wie er kwam.
+399	Nog geen activiteiten
+400	Voeg hier je zondagsdienst, stille tijd of gezellige avond toe, zodat je mensen kunt uitnodigen en kunt aanvinken wie er kwam.
+401	Nieuwe activiteit
+402	Activiteit wijzigen
+403	Activiteit maken
+404	Activiteit verwijderen
+405	Activiteit verwijderd
+406	Tik nogmaals om deze activiteit te verwijderen
+407	Geef de activiteit een naam.
+408	Kies een datum.
+409	bijv. Zondagsdienst
+410	Zondagsdienst
+411	Doordeweekse dienst
+412	Vink aan wie je hebt uitgenodigd. De berichtknop stuurt een kant-en-klare uitnodiging. Op de dag zelf vink je aan wie er kwam.
+413	Vink aan wie er kwam.
+414	Voeg eerst contacten toe en nodig ze dan hier uit.
+415	Gekomen
+416	Niet gekomen
+417	Uitgenodigd
+418	Kwam naar {0}
+419	Uitgenodigd voor {0}
+420	Uitnodiging ingetrokken voor {0}
+421	Niet meer gemarkeerd als aanwezig bij {0}
+422	Uitnodiging gekopieerd. Plak hem in je bericht.
+423	Hoi {0}! Heb je zin om naar {1} te komen, {2}? Het zou fijn zijn je daar te zien.
+424	vandaag om {0}
+425	morgen om {0}
+426	op {0} om {1}
+427	op {0}
+428	§one={0} uitnodiging|other={0} uitnodigingen
+429	§one={0} uitnodiging|other={0} uitnodigingen
+430	§one={0} uitnodiging · {1} gekomen|other={0} uitnodigingen · {1} gekomen
+431	§one={0} uitnodiging · {1} gekomen|other={0} uitnodigingen · {1} gekomen
+432	Uit je agenda
+433	Uit je agenda · {0}
+434	Je agenda-activiteiten staan er al
+435	Agenda-activiteiten voor het laatst opgehaald op {0}.
+436	§one=Agenda: {0} activiteit toegevoegd|other=Agenda: {0} activiteiten toegevoegd
+437	§one=Agenda: {0} activiteit toegevoegd|other=Agenda: {0} activiteiten toegevoegd
+438	Geen activiteiten gevonden in dat bestand
+439	Toevoegen uit een agendabestand
+440	Agendabestand kiezen (.ics)
+441	Een activiteit gekregen als agendabestand (het eindigt op <b>.ics</b>), zoals een uitnodiging van de kerk? Bewaar het op je telefoon en kies het hier. Herhalingen, zoals een wekelijkse dienst, worden meegenomen.
+442	Toevoegen aan telefoonagenda
+443	Agendalink kopiëren
+444	Agendalink gekopieerd. Plak hem in ICSx⁵.
+445	Nieuwe link gemaakt. Verbind je agenda opnieuw.
+446	maak een nieuwe link
+447	Deze link is alleen voor jou. Deel je hem per ongeluk,
+448	Je agenda koppelen
+449	Zo koppel je je telefoonagenda
+450	Laat zien hoe ik mijn agenda koppel
+451	Verbinden met iPhone-agenda
+452	Verbind Shepherd met de agenda van je telefoon, dan verschijnen je bijbelstudies en activiteiten daar vanzelf, naast al het andere in je dag.
+453	1. Verbind Shepherd met je telefoonagenda
+454	2. Houd je persoonlijke TimeTree-afspraken ook in je agenda
+455	Tik hieronder op <b>Verbinden met iPhone-agenda</b>.
+456	Je iPhone vraagt of je je wilt abonneren. Tik op <b>Abonneer</b> en dan op <b>Gereed</b>.
+457	Als je telefoon het vroeg, tik op Abonneer. Kom dan hier terug.
+458	Ga terug naar Shepherd. Je studies en activiteiten staan nu in de app <b>Agenda</b> als <b>Shepherd</b> en blijven vanzelf bijgewerkt.
+459	Tik bij een studie of activiteit in Shepherd op <b>Toevoegen aan telefoonagenda</b>.
+460	Je telefoon opent de app <b>Agenda</b> met alles ingevuld. Tik op <b>Bewaren</b>.
+461	Wil je ze vanzelf laten toevoegen, installeer dan de app <b>ICSx⁵</b>, tik hieronder op <b>Agendalink kopiëren</b> en voeg hem in ICSx⁵ toe met <b>+</b>.
+462	TimeTree deelt zijn afspraken niet met andere apps, dus kan ze niet vanzelf kopiëren. Zet de persoonlijke TimeTree-afspraken die belangrijk zijn voor je week ook in je telefoonagenda, zodat je alles op één plek ziet.
+463	Open de app <b>Agenda</b> op je telefoon en tik op <b>+</b>.
+464	Open de app <b>Agenda</b> en tik op <b>+</b>.
+465	Open het bericht of de e-mail met het bestand.
+466	Tik op het bestand, dan op de knop <b>Deel</b> en dan op <b>Bewaar in Bestanden</b>.
+467	Tik op het bestand en dan op <b>Downloaden</b> (of de drie puntjes › <b>Opslaan</b>).
+468	Kom hier terug en tik op <b>Agendabestand kiezen</b>.
+469	Kom hier terug en tik op <b>Agendabestand kiezen</b>. Het staat in <b>Downloads</b>.
+470	Kopiëren voor TimeTree
+471	Gegevens kopiëren voor TimeTree
+472	Gekopieerd. Open TimeTree en plak het in een nieuwe afspraak.
+473	Open de app <b>TimeTree</b> en tik op de knop <b>+</b>.
+474	Plak de gekopieerde gegevens in de titel en notitie en stel dan de <b>datum en tijd</b> in.
+475	Typ de titel en stel dan de <b>datum en tijd</b> van je TimeTree-afspraak in.
+476	Kies een <b>melding</b>, bijvoorbeeld 1 uur van tevoren, zodat je iPhone je eraan herinnert.
+477	Kies een <b>melding</b>, bijvoorbeeld 1 uur van tevoren, zodat je Android-telefoon je eraan herinnert.
+478	Tik op <b>Bewaren</b>.
+479	Tik op <b>Bewaren</b> (het vinkje).
+480	Week van {0}
+481	Deze week
+482	Je volgde <em>{0} van {1}</em> op — geweldige week.
+483	Je volgde <em>{0} van {1}</em> op — goed bezig.
+484	Je volgde <em>{0} van {1}</em> op — ga zo door.
+485	Je volgde <em>{0} van {1}</em> op — begin met de lijst van vandaag.
+486	Je weekoverzicht verschijnt zodra je contacten toevoegt.
+487	Kwamen naar activiteiten
+488	Opvolging, afgelopen 4 weken
+489	Deel van de mensen die je opvolgde die die week een bericht, telefoontje of studie kregen.
+490	Deze week nog niet bereikt
+491	Taal
+492	Bijbelverzen blijven in het Engels (NIV).
+493	Je naam
+494	Je WhatsApp-nummer
+495	Bericht dat mensen je sturen via je QR-code
+496	Nieuwe contacten: contact elke
+497	Instellingen bewaard
+498	Meldingen
+499	Meldingen staan aan
+500	Meldingen staan aan op deze telefoon.
+501	Meldingen staan uit op deze telefoon.
+502	Meldingen met namen komen van de Shepherd-app op je telefoon.
+503	Meldingen aanzetten
+504	Test sturen
+505	Stuur me een testmelding
+506	Hoe het werkt
+507	Hoe je ze krijgt
+508	Ochtendmeldingen om
+509	Ochtendmeldingen om {0}
+510	Waarover Shepherd je meldt
+511	Keuzes voor meldingen bewaard
+512	Meldingen: {0}
+513	Mensen om op te volgen
+514	Iedereen die te laat is of vandaag contact moet krijgen
+515	Antwoorden die je verschuldigd bent
+516	Mensen die op een bericht van jou wachten
+517	Mensen van wie je nog wacht op nieuws
+518	Met wie je deze week nog contact moet hebben
+519	Bijbelstudies vandaag
+520	Studies voor vandaag gepland, met tijden
+521	Agenda-activiteiten
+522	Activiteiten vandaag en morgen, ook uit je agenda
+523	Weekoverzicht
+524	Op zondag, hoeveel mensen je hebt opgevolgd
+525	Mensen om op te volgen en activiteiten
+526	Alleen activiteiten
+527	Telefooncontacten
+528	Kies uit mijn contacten
+529	Contactenbestand importeren
+530	Hoe kom ik aan een contactenbestand
+531	Een contactenbestand krijgen
+532	Verwijder ze van deze telefoon
+533	Haal je telefooncontacten binnen, dan komen naam en nummer naar boven terwijl je typt als je iemand toevoegt. Ze blijven alleen op deze telefoon en worden nooit geüpload.
+534	§one={0} contact op deze telefoon. Als je iemand toevoegt, komen passende namen naar boven terwijl je typt. Ze blijven alleen op deze telefoon en worden nooit geüpload.|other={0} contacten op deze telefoon. Als je iemand toevoegt, komen passende namen naar boven terwijl je typt. Ze blijven alleen op deze telefoon en worden nooit geüpload.
+535	1 contact op deze telefoon. Als je iemand toevoegt, komen passende namen naar boven terwijl je typt. Ze blijven alleen op deze telefoon en worden nooit geüpload.
+536	§one={0} contact toegevoegd aan de lijst van deze telefoon|other={0} contacten toegevoegd aan de lijst van deze telefoon
+537	§one={0} contact toegevoegd aan de lijst van deze telefoon|other={0} contacten toegevoegd aan de lijst van deze telefoon
+538	Die contacten staan er al
+539	Geen contacten gevonden in dat bestand
+540	Telefooncontacten verwijderd uit Shepherd op deze telefoon
+541	Bewaar je contacten als één bestand en kies het in Shepherd onder <b>Contactenbestand importeren</b>.
+542	Open de app <b>Contacten</b> en tik op <b>Lijsten</b> (linksboven).
+543	Houd <b>Alle contacten</b> (of Alle iCloud) ingedrukt en tik op <b>Exporteer</b>.
+544	Tik op <b>Bewaar in Bestanden</b> en dan op <b>Bewaar</b>.
+545	Tik terug in Shepherd op <b>Contactenbestand importeren</b> en kies het.
+546	Open de app <b>Contacten</b>.
+547	Tik op <b>Corrigeren en beheren</b> (of ⋮ › <b>Instellingen</b>, of <b>Contacten beheren</b> op Samsung) en dan op <b>Exporteren naar bestand</b>.
+548	Bewaar het in <b>Downloads</b>.
+549	Je contacten blijven alleen op deze telefoon. Shepherd uploadt ze nooit.
+550	Aan de slag
+551	Een rondleiding van een minuut door Shepherd.
+552	Rondleiding
+553	App-vergrendeling
+554	Pincode instellen
+555	Pincode wijzigen
+556	Pincode verwijderen
+557	Nu vergrendelen
+558	Pincode bewaren
+559	Pincode bewaard
+560	Pincode verwijderd
+561	Huidige pincode
+562	Nieuwe pincode (4 tot 8 cijfers)
+563	Typ hem nog eens
+564	Gebruik 4 tot 8 cijfers.
+565	De twee pincodes komen niet overeen.
+566	Je huidige pincode klopt niet.
+567	Stel een pincode in zodat niemand die je telefoon pakt je contacten kan lezen.
+568	Shepherd vraagt je pincode bij het openen en na 5 minuten weg.
+569	Vergeet je hem, dan heb je een back-up nodig om er weer in te komen, dus kies er een die je onthoudt.
+570	Shepherd is vergrendeld
+571	Voer je pincode in om je contacten te zien.
+572	Ontgrendelen
+573	Die pincode klopt niet. Probeer het opnieuw.
+574	Je account
+575	Ingelogd als
+576	. Je blijft ingelogd op deze telefoon.
+577	Wachtwoord wijzigen
+578	Uitloggen
+579	Mijn account verwijderen
+580	Je gegevens
+581	Je contacten worden bewaard in je eigen privéruimte. Niemand anders die Shepherd gebruikt kan ze zien. Er staat ook een kopie op deze telefoon zodat de app werkt zonder bereik.
+582	Je contacten worden bewaard in je eigen privéruimte (nu alleen op deze telefoon). Niemand anders die Shepherd gebruikt kan ze zien. Er staat ook een kopie op deze telefoon zodat de app werkt zonder bereik.
+583	Je contacten worden bewaard in je eigen privéruimte op de Shepherd-server, met eerdere versies. Niemand anders die Shepherd gebruikt kan ze zien. Er staat ook een kopie op deze telefoon zodat de app werkt zonder bereik.
+584	Wat er bewaard wordt en wie het kan zien
+585	Back-up maken
+586	Back-up terugzetten
+587	Back-up bewaard
+588	Back-up gekopieerd. Plak hem in een notitie of mail hem naar jezelf.
+589	Dat bestand is geen Shepherd-back-up
+590	Teruggezet: {0} toegevoegd, {1} bijgewerkt
+591	Voorbeeldcontacten verwijderen
+592	Voorbeeldcontacten verwijderd
+593	Shepherd houdt je lijst privé. Hier zie je precies wat er bewaard wordt, waar, en wie het kan zien.
+594	Gegevens gekoppeld aan jou
+595	Je naam, e-mail en WhatsApp-nummer.
+596	De mensen die je toevoegt: namen, telefoonnummers, social media-namen, notities, gebedspunten en bijbelstudies.
+597	Je activiteiten, discipelen en gebedslijst.
+598	Bewaard in je eigen account op de Shepherd-server zodat het nooit verloren gaat, met eerdere versies een jaar lang. Alleen jij kunt het zien als je bent ingelogd.
+599	Bewaard in je eigen privéruimte. Alleen jij kunt het zien.
+600	Alleen op deze telefoon
+601	Contacten die je importeert van je telefoon, om namen voor te stellen terwijl je typt. Ze worden nooit geüpload.
+602	Een kopie van je lijst, zodat Shepherd werkt zonder bereik.
+603	Nooit verzameld
+604	Je locatie.
+605	Je WhatsApp-, sms- of iMessage-gesprekken.
+606	Je hele adresboek (alleen de contacten die je kiest).
+607	Niets voor advertenties of tracking.
+608	Als iemand je QR-code scant
+609	Ze kiezen zelf om hun naam te typen (en hun nummer als ze willen). Dat gaat alleen naar jouw lijst, en daarna sturen ze je zelf een WhatsApp-bericht.
+610	Vraagt iemand om hun gegevens te verwijderen? Open ze, tik op <b>Geen contact meer</b> en dan op <b>Al hun gegevens verwijderen</b>. Elke kopie wordt verwijderd.
+611	Mijn QR-code
+612	Je QR-code
+613	QR-code zodat mensen je een bericht sturen
+614	Scan om contact te houden
+615	Mijn QR-code maken
+616	Liever mijn QR-code tonen
+617	Voeg eerst je eigen WhatsApp-nummer toe. Als iemand je code scant, opent WhatsApp met een bericht aan jou, zodat je hun nummer krijgt en zij kiezen om contact te houden.
+618	Vraag ze de camera van hun telefoon hierop te richten. Ze typen hun naam, <b>ze worden toegevoegd aan je Shepherd</b>, en WhatsApp opent met jouw bericht klaar om te versturen.
+619	Je krijgt een melding als ze hem scannen.
+620	Vraag ze de camera van hun telefoon hierop te richten. WhatsApp opent met een bericht aan jou, en ze hoeven alleen op verzenden te drukken.
+621	Als hun bericht binnenkomt, voeg ze hier toe met hun nummer.
+622	Hun bericht: ‘{0}’
+623	Hoi, leuk je te ontmoeten! Ik heb je contact via Shepherd. Ik hoop snel van je te horen.
+624	Bericht wijzigen
+625	De QR-code kon niet laden. Deel in plaats daarvan deze link:
+626	De QR-code kon hier niet worden getekend.
+627	Nu mijn nummer toevoegen
+628	Vul je nummer en bericht in en tik op Bewaren.
+629	Download de Shepherd-app
+630	Dit werkt in de Shepherd-app op je telefoon. Open
+631	, log in en kom dan terug naar deze uitleg.
+632	Meldingen met namen (‘Antwoord Grace’, ‘Bericht aan Daniel’) komen van de <b>Shepherd-app</b> op je telefoon. Installeer hem één keer en zet ze daar aan.
+633	Gebruik je Shepherd hier al? Maak een back-up in Instellingen en zet die terug in de app.
+634	Bewaard. Herinneringen komen van de Shepherd-app.
+635	Shepherd stuurt meldingen met namen, zoals <b>Antwoord Grace</b>, <b>Bericht aan Daniel</b> of <b>Heeft Sam gereageerd?</b>, elke ochtend om <b>{0}</b> en voor elke studie en activiteit. Tik erop en die persoon gaat open.
+636	1. Installeer Shepherd op je telefoon
+637	2. Sta meldingen toe
+638	3. Controleer of het werkt
+639	Shepherd is geïnstalleerd op deze telefoon.
+640	Open Shepherd in <b>Safari</b>.
+641	Open Shepherd in <b>Chrome</b>.
+642	Tik op de knop <b>Deel</b> (het vierkantje met een pijl).
+643	Tik op <b>Zet op beginscherm</b> en dan op <b>Voeg toe</b>.
+644	Tik rechtsboven op <b>⋮</b> en dan op <b>App installeren</b> (of <b>Toevoegen aan startscherm</b>).
+645	Tik op <b>Installeren</b>.
+646	Tik op <b>Voeg toe</b>.
+647	Open Shepherd via het nieuwe icoon.
+648	Open Shepherd via het nieuwe icoon op je beginscherm. Op de iPhone werken meldingen alleen vanaf daar (iOS 16.4 of nieuwer).
+649	Shepherd is geïnstalleerd. Open het via het nieuwe icoon.
+650	Als je telefoon het vraagt, tik op <b>Sta toe</b>. Per ongeluk op <b>Sta niet toe</b> getikt?
+651	Zet <b>Meldingen toestaan</b> aan.
+652	Zet <b>Sta berichtgeving toe</b> aan, met <b>Toegangsscherm</b>, <b>Stroken</b> en <b>Badges</b> aangevinkt.
+653	Instellingen › Berichtgeving › Shepherd
+654	Instellingen › Apps › Shepherd › Meldingen
+655	Binnen een paar seconden komt er een melding van Shepherd.
+656	Niets? Controleer of <b>Focus</b> uit staat en of je Shepherd via het icoon op je beginscherm hebt geopend.
+657	Niets? Controleer of <b>Niet storen</b> uit staat en of meldingen van Shepherd zijn toegestaan (stap 2).
+658	Wijzig de tijd en waarover Shepherd je meldt onder <b>Meldingen</b> in Instellingen. Zet meldingen één keer aan op elke telefoon die je gebruikt.
+659	Test verstuurd. Hij komt binnen een paar seconden.
+660	Deze telefoon controleren…
+661	Deze telefoon blokkeert meldingen van Shepherd. Zie stap 2 om ze toe te staan.
+662	Zet Shepherd eerst op je beginscherm (stap 1) en open het daarvandaan.
+663	Zet Shepherd eerst op je beginscherm en open het daarvandaan.
+664	Deze browser kan geen meldingen tonen. Open Shepherd in Safari (iPhone) of Chrome (Android).
+665	Deze browser kan geen meldingen tonen. Gebruik Safari (iPhone) of Chrome (Android).
+666	Meldingen zijn geblokkeerd. Sta ze toe in de instellingen van je telefoon.
+667	Meldingen konden niet worden aangezet. Probeer het opnieuw.
+668	Deze telefoon was niet bereikbaar. Zet meldingen uit en weer aan.
+669	Neem de tijd.
+670	op je telefoon, en dan:
+671	Welkom bij Shepherd
+672	Shepherd herinnert je met wie je contact moet opnemen, zodat niemand die je volgt tussen wal en schip valt. Deze rondleiding opent elk deel van de app en laat je het onderweg instellen.
+673	Begin in Instellingen
+674	Open eerst Instellingen en voeg je WhatsApp-nummer toe en het eerste bericht dat automatisch wordt verstuurd als ze je QR-code scannen.
+675	De meeste mensen gebruiken Shepherd op hun telefoon, dus zet meldingen aan. Shepherd vertelt je bij naam wie je moet berichten, wie je moet antwoorden en met wie je contact moet opnemen, en opent die persoon als je tikt.
+676	Tik hier nadat je iemand hebt ontmoet. Voeg hun naam en nummer toe, of laat je QR-code zien zodat zij jou eerst een bericht sturen.
+677	Vul hun gegevens in en tik op Contact bewaren.
+678	Begin elke dag hier
+679	Vandaag laat zien wie je moet berichten en wie op je wacht. Groen is op schema, oranje is vandaag, rood is te laat.
+680	Bericht in één tik
+681	De chatknop opent WhatsApp of Instagram. Shepherd noteert het en wacht op hun antwoord.
+682	Als ze reageren
+683	Tik op Gereageerd en ze gaan naar je lijst Antwoorden aan. Elke dag vraagt Shepherd ook naar iedereen over wie het twijfelt.
+684	Voeg de mensen toe die al discipel zijn. Shepherd herinnert je om elke week contact met ze op te nemen. Het is bijbels om elkaar te bemoedigen! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Laten we hier elke week een gewoonte van maken!
+685	Typ hun naam en tik op Toevoegen.
+686	Je agenda
+687	Nodig mensen uit en vink aan wie er kwam. Verbind Shepherd met de agenda van je telefoon zodat je studies en activiteiten daar vanzelf verschijnen.
+688	Je bent er klaar voor
+689	Wijzig wat je ochtendoverzicht toont in Instellingen. Op iemands pagina bewaart Bewaren in telefooncontacten ze op je telefoon. Doe deze rondleiding opnieuw via Instellingen wanneer je wilt.
+690	Rondleiding beëindigen
+691	Rondleiding vervolgen
+692	Terug naar de rondleiding
+693	Deze stap overslaan
+694	Inloggen
+695	Account maken
+696	Mijn account maken
+697	Wachtwoord vergeten?
+698	Terug naar inloggen
+699	Een herstelcode krijgen
+700	Code van 6 cijfers
+701	Nieuw wachtwoord
+702	Nieuw wachtwoord bewaren
+703	Vul je e-mailadres in.
+704	Vul je wachtwoord in.
+705	Kies een wachtwoord van minstens 8 tekens.
+706	Kies minstens 8 tekens.
+707	Vul je e-mail in en we helpen je een nieuw wachtwoord te kiezen.
+708	Vul je code van 6 cijfers in en kies een nieuw wachtwoord.
+709	Vraag de persoon die Shepherd in je kerk beheert om een herstelcode, vul die in en kies een nieuw wachtwoord.
+710	Als {0} een account heeft, hebben we een code van 6 cijfers gemaild. Vul die in en kies een nieuw wachtwoord.
+711	Je hoeft maar één keer in te loggen op deze telefoon.
+712	Je lijst is privé: niemand anders die Shepherd gebruikt kan hem zien.
+713	Shepherd openen…
+714	Geen verbinding. Controleer je bereik en probeer het opnieuw.
+715	Geen verbinding. Je wijzigingen blijven op deze telefoon.
+716	Er ging iets mis. Probeer het opnieuw.
+717	Shepherd heeft nog geen serveradres.
+718	Shepherd is nog niet verbonden met zijn server. Zet het adres van je Cloudflare Worker in <b>config.js</b>.
+719	Huidig wachtwoord
+720	Je wachtwoord
+721	Wachtwoord gewijzigd. Je andere telefoons vragen je opnieuw in te loggen.
+722	Dit verwijdert je account en <b>iedereen in je Shepherd-lijst</b> voorgoed van de server. Maak eerst een back-up als je het misschien nog nodig hebt.
+723	Alles verwijderen
+724	Alles is bewaard. Uitloggen haalt je lijst van deze telefoon; log weer in wanneer je wilt om hem terug te krijgen.
+725	§one=<b>{0} wijziging heeft de server nog niet bereikt.</b> Maak verbinding met internet en wacht op ‘Bewaard’ bovenaan voordat je uitlogt, anders gaat hij verloren.|other=<b>{0} wijzigingen hebben de server nog niet bereikt.</b> Maak verbinding met internet en wacht op ‘Bewaard’ bovenaan voordat je uitlogt, anders gaan ze verloren.
+726	§one=<b>{0} wijziging heeft de server nog niet bereikt.</b> Maak verbinding met internet en wacht op ‘Bewaard’ bovenaan voordat je uitlogt, anders gaat hij verloren.|other=<b>{0} wijzigingen hebben de server nog niet bereikt.</b> Maak verbinding met internet en wacht op ‘Bewaard’ bovenaan voordat je uitlogt, anders gaan ze verloren.
+727	Toch uitloggen
+728	Er ging iets mis op de Shepherd-server. Je wijzigingen blijven op je telefoon.
+729	Controleer de code en kies een wachtwoord van minstens 8 tekens.
+730	Controleer je e-mail en wachtwoord.
+731	Eén onderdeel is te groot om te bewaren.
+732	Log opnieuw in.
+733	Iets in die opslag is niet toegestaan.
+734	Die code is verlopen. Vraag een nieuwe aan.
+735	Die code klopt niet.
+736	Dat e-mailadres lijkt niet te kloppen.
+737	Dat e-mailadres en wachtwoord horen niet bij elkaar.
+738	Dat is te veel om in één keer te bewaren.
+739	Er is al een account met dat e-mailadres. Log in plaats daarvan in.
+740	Deze telefoon gaf een meldingsadres dat Shepherd niet kan gebruiken.
+741	Deze telefoon gaf meldingssleutels die Shepherd niet kan gebruiken.
+742	Te veel wijzigingen tegelijk.
+743	Te veel pogingen. Wacht 15 minuten en probeer het opnieuw.
+744	Zet eerst meldingen aan op deze telefoon.
+745	Je wachtwoord klopt niet.
+746	§one={0} dag|other={0} dagen
+747	§one={0} dag|other={0} dagen
+748	{0} bewaard
+749	Nu toevoegen
+750	Opnieuw contact over
+751	Deze telefoon
+752	Contactmomenten
+753	Nog niets.
+754	Notities (optioneel)
+755	Genoteerd. Volgend contact vandaag.
+756	Genoteerd. Volgend contact morgen.
+757	Andere app
+758	Bericht gestuurd via een andere app
+759	Shepherd-meldingen staan aan
+760	Elke ochtend hoor je bij naam wie je moet berichten, wie je moet antwoorden en met wie je contact moet opnemen.
+761	zo
+762	ma
+763	di
+764	wo
+765	do
+766	vr
+767	za
+768	jan
+769	feb
+770	mrt
+771	apr
+772	mei
+773	jun
+774	jul
+775	aug
+776	sep
+777	okt
+778	nov
+779	dec

@@ -1,0 +1,779 @@
+1	{0}: {1}
+2	{0} · {1}
+3	<b>{0}</b> · {1}
+4	{0}, {1}
+5	{0} na {1} ndị ọzọ
+6	{0} (agafeela ụbọchị {1})
+7	{0} (ụbọchị {1})
+8	{0} (ọmụmaatụ)
+9	Taa
+10	Echi
+11	Ụnyaahụ
+12	taa
+13	echi
+14	ụnyaahụ
+15	Mmadụ
+16	Ndị na-eso ụzọ
+17	Kalenda
+18	Izu
+19	Ntọala
+20	Tinye
+21	Tinye kọntaktị
+22	Tinye mmadụ
+23	Tinye kọntaktị
+24	Chekwaa
+25	Chekwaa mgbanwe
+26	Kagbuo
+27	Mechie
+28	Emechaala
+29	Laghachi
+30	Ọzọ
+31	Wụfee
+32	Dezie
+33	Mepee
+34	Gosi
+35	Zoo
+36	Weghachi
+37	Lee
+38	Nzacha
+39	Niile
+40	Agbanyụọ
+41	Gị
+42	Ọzọ
+43	Ọmụmaatụ
+44	Aha
+45	Ekwentị
+46	Email
+47	Okwuntughe
+48	Aha njirimara
+49	Ndetu
+50	Ụbọchị
+51	Oge
+52	Ụbọchị
+53	Ebee
+54	Nkọwa
+55	Ọkwa
+56	Ihe kpatara ya
+57	Ọ na-ebu
+58	Echekwala
+59	Ọ na-echekwa…
+60	Chere ntakịrị…
+61	Ọ bụghị ugbu a
+62	Ọ bụbeghị
+63	Gosi m
+64	Gosi m otu esi eme ya
+65	Onye ọ bụla
+66	Isi
+67	Ndepụta
+68	Njem
+69	Ndị gafere agafe
+70	Ndị na-abịa
+71	Ọmụmụ
+72	Mmemme
+73	Mmemme
+74	Ihe e mere
+75	Naanị na ngwaọrụ a
+76	Enweghị ịntanetị · ọ ga-emekọ ya ma emechaa
+77	Echekwabeghị ya n'ịntanetị
+78	Echekwara ya na ngwaọrụ a
+79	Ebe nchekwa n'ịntanetị ejupụtala. Mgbanwe gị dị na ekwentị a. Bupụta nkwado na Ntọala.
+80	Ụtụtụ ọma
+81	Ehihie ọma
+82	Mgbede ọma
+83	Ụtụtụ ọma, {0}
+84	Ehihie ọma, {0}
+85	Mgbede ọma, {0}
+86	Nchịkọta ụtụtụ gị
+87	Nchịkọta taa
+88	Ihe niile dị mma. Ọ dịghị onye na-eche gị taa.
+89	Ọ dịghị ihe dị taa.
+90	Ọkwa agbanyụọla.
+91	Zigara ha ozi taa
+92	Zaghachi ha
+93	Na-achọ nzaghachi
+94	Maka taa
+95	Agafeela oge
+96	Ọ dị n'oge
+97	Akwụsịtụrụ
+98	Ọmụmụ taa
+99	Ọmụmụ Baịbụl
+100	Ọmụmụ 1 taa
+101	Ọmụmụ {0} taa
+102	{0} ka ị ga-ezigara ozi
+103	Nzaghachi {0} ị ji ụgwọ
+104	Nzaghachi {0} ị ji ụgwọ
+105	{0} ka ị ga-elele
+106	{0} n'ime {1}
+107	Nleta nlele
+108	{0} azaghachila?
+109	Ị zigara {0} ozi ụbọchị {1} gara aga.
+110	Ị zigara {0} ozi ụbọchị {1} gara aga.
+111	Ee, azaghachiri m
+112	Ana m eche
+113	Jụọ m echi
+114	Shepherd ga-ajụ ọzọ echi
+115	Ndị na-eso ụzọ n'izu a
+116	Emere {0} n'ime {1}
+117	Ka gị na ha kparịta: {0}.
+118	Mepee Ndị na-eso ụzọ
+119	Kpee ekpere taa
+120	Ndepụta ekpere ({0})
+121	Ị na-ele kọntaktị ọmụmaatụ. <b>Wepụ ha</b> na Ntọala mgbe ọ bụla ị dị njikere.
+122	Mgbanwe gị dị na ekwentị a mana enweghị ike ichekwa ha n'ịntanetị. Rịọ onye kesara gị Shepherd ka o nye gị ikike <b>Onye ntinye aka</b>.
+123	Bido na ndị ị na-ezute
+124	Tinye onye gị na ya kesara okwukwe gị. Shepherd ga-echetara gị ka ị kpọtụrụ ya kwa ụbọchị ole na ole, ma soro ọmụmụ ha.
+125	Tinye onye mbụ m
+126	Tinye Shepherd na Ihuenyo Ụlọ gị
+127	Ọ na-emeghe dị ka ngwa, nke a bụ otu Shepherd si enwe ike izite gị ọkwa nwere aha ndị mmadụ.
+128	Zigara mmadụ {0} ozi: {1}
+129	Zigara mmadụ {0} ozi: {1}
+130	Zaghachi {0}
+131	Ha azaghachila? {0}
+132	Ndị na-eso ụzọ ị ga-akpọtụrụ n'izu a: {0}
+133	Ọmụmụ taa: {0}
+134	{0} n'elekere {1}
+135	Mmemme: {0}
+136	{0} taa n'elekere {1}
+137	{0} echi n'elekere {1}
+138	{0} taa
+139	{0} echi
+140	N'izu a, ị sochiri {0} n'ime {1}.
+141	N'izu a, ị sochiri {0} n'ime mmadụ {1}.
+142	N'izu a, ị sochiri {0} n'ime mmadụ {1}.
+143	Zigara {0} ozi
+144	{0} zigara gị ozi ụbọchị {1} gara aga. Pịa ka ị zaghachi.
+145	{0} zigara gị ozi ụbọchị {1} gara aga. Pịa ka ị zaghachi.
+146	{0} na-eche nzaghachi gị.
+147	Nkwụsịtụ na-agwụ taa. Pịa ka ị zigara {0} ozi.
+148	Ị zigabeghị {0} ozi. Pịa ka ị kelee ha.
+149	Agafeela ụbọchị {0}. Pịa ka ị zigara {1} ozi.
+150	Agafeela ụbọchị {0}. Pịa ka ị zigara {1} ozi.
+151	Taa bụ ụbọchị ịkpọtụrụ ha. Pịa ka ị zigara {0} ozi.
+152	Ị zigara {0} ozi ụbọchị {1} gara aga. Pịa “Azaghachiri” na Shepherd ma ọ bụrụ na ha azaghachila.
+153	Ị zigara {0} ozi ụbọchị {1} gara aga. Pịa “Azaghachiri” na Shepherd ma ọ bụrụ na ha azaghachila.
+154	Kpọtụrụ {0}
+155	Ị kpọtụrụbeghị {0} n'izu a.
+156	Na {0} ọzọ taa
+157	Ọmụmụ Baịbụl na {0} n'elekere {1}
+158	Ọmụmụ Baịbụl na {0} taa
+159	N'ime otu awa. Ọmụmụ: {0}
+160	N'ime otu awa.
+161	Ọmụmụ: {0}
+162	Edobebeghị oge.
+163	Echi: {0}
+164	Ụbọchị niile
+165	Akpọọla mmadụ {0}
+166	Akpọọla mmadụ {0}
+167	Ọ ga-amalite n'ime otu awa.
+168	Ọ ga-amalite n'ime otu awa · {0}.
+169	Kpee ekpere maka {0}
+170	{0} na {1}
+171	Izu gị
+172	Chọọ ndị mmadụ
+173	Chọọ site n'aha, nọmba ma ọ bụ aha njirimara
+174	Ọ dịghị onye kwekọrọ.
+175	Ọ dịbeghị onye nọ ebe a.
+176	Mmadụ {0} ị na-esochi
+177	Mmadụ {0} ị na-esochi
+178	Anaghị akpọtụrụ ha ọzọ
+179	Anaghị akpọtụrụ ha ọzọ ({0})
+180	Echekwara ha nke ọma ka ihe ọ bụla ghara ịfu. Weghachi onye ọ bụla mgbe ọ bụla.
+181	Kpọtụrụ ha taa
+182	Kpọtụrụ ha echi
+183	Kpọtụrụ ha n'ime ụbọchị {0}
+184	Agafeela ụbọchị {0}
+185	Agafeela ụbọchị {0}
+186	Ọ lọghachiri na nkwụsịtụ
+187	Ọ bụ gị ga-azaghachi
+188	na-eche ha
+189	echere ụbọchị {0}
+190	echere ụbọchị {0}
+191	ha agbachiela nkịtị ụbọchị {0}
+192	Akwụsịtụrụ ruo {0}
+193	A kpọtụrụbeghị ha
+194	Nkpọtụrụ ikpeazụ bụ taa
+195	Na-eche ha
+196	Na-eche ịnụ n'aka ha
+197	Tinye ụzọ ị ga-esi zigara {0} ozi
+198	Dee ozi e zigara {0}
+199	Zigara {0} ozi na WhatsApp
+200	Zigara {0} ozi na Instagram
+201	Zigara {0} ozi na Snapchat
+202	Zigara {0} ozi na TikTok
+203	Zigara {0} ozi na Facebook
+204	Zie ozi na WhatsApp
+205	Zie ozi na Instagram
+206	Zie ozi na Snapchat
+207	Mepee mkparịta ụka
+208	Nzute mbụ
+209	Nwere mmasị
+210	Na-amụ Baịbụl
+211	Na-abịa ụka mgbe niile
+212	Emeela baptizim
+213	Onye na-eso ụzọ
+214	Bufee na {0} ›
+215	Weghachi na {0}
+216	Ebugara {0} na {1}
+217	Ọkwa gbanwere na {0}
+218	Ọkwa ikpeazụ
+219	Dezie {0}
+220	Chetara {0}
+221	Azaghachiri
+222	Azaghachiri m
+223	Azaghachiri m {0}
+224	{0} azaghachiri
+225	Ị zaghachiri
+226	Ị zaghachila {0}?
+227	{0} na-eche ozi gị.
+228	Ọ bụ ha zitere ozi ikpeazụ. Pịa bọtịnụ mkparịta ụka ka ị zaa, wee pịa “Azaghachiri m”.
+229	Pịa “Azaghachiri” mgbe ha zaghachiri gị.
+230	Edeela ya. Na-eche nzaghachi {0}.
+231	Edeela ya. Nkpọtụrụ ọzọ n'ime ụbọchị {0}.
+232	Edeela ya. Nkpọtụrụ ọzọ n'ime ụbọchị {0}.
+233	Ebe mkparịta ụka ruru
+234	Ihe niile dị mma
+235	Ekwesịrị m ịzaghachi
+236	Akara: ihe niile dị mma
+237	Akara: ekwesịrị m ịzaghachi
+238	Akara: na-eche ha
+239	E zigara ozi na WhatsApp
+240	E zigara ozi na Instagram
+241	E zigara ozi na Snapchat
+242	E chetaara ha na WhatsApp
+243	E kpọtụrụ ha n'ụzọ ọzọ
+244	Kpọtụrụ ha kwa
+245	Oge ịkpọtụrụ: kwa ụbọchị {0}
+246	Oge ịkpọtụrụ: kwa ụbọchị {0}
+247	Ọmụmụ na-esote
+248	Ọmụmụ e zubere
+249	Edebeghị ọmụmụ ọ bụla.
+250	Dee ọmụmụ
+251	Dee ọmụmụ na {0}
+252	Ọmụmụ Baịbụl
+253	Edeela ọmụmụ: {0}
+254	Echekwala ọmụmụ
+255	Ọmụmụ na-esote: {0}
+256	Echekwala ọmụmụ na-esote na <b>{0}</b>.
+257	Echekwala ọmụmụ na-esote na <b>{0}</b>, Shepherd ga-echetara gị otu awa tupu ọ malite.
+258	Shepherd jikọtara na kalenda ekwentị gị, ya mere ọ dị ebe ahụ.
+259	Ihe unu mụrụ
+260	Aha ọmụmụ ma ọ bụ akụkụ Akwụkwọ Nsọ
+261	Chekwaa ọmụmụ
+262	Otu o si gaa
+263	Ajụjụ ha jụrụ, ihe ị ga-esochi
+264	Ọmụmụ na-esote ga-abịa mgbe nke a gasịrị.
+265	Họrọ ụbọchị ọmụmụ ahụ.
+266	Edobeghị oge
+267	Unu zutere na
+268	Isi ekpere
+269	Enweghị ndetu
+270	Ndekọ ihe e mere
+271	Mgbanwe ọ bụla ị mere, nke ọhụrụ na mbụ.
+272	Etinyela
+273	Etinyere site na koodu QR gị
+274	Chekwaa na ekwentị
+275	Chekwaa na kọntaktị ekwentị
+276	Tinye na ndepụta ekpere
+277	Hapụ ya ugbu a
+278	Hapụ {0} ugbu a
+279	Akpọtụrụla ha ọzọ
+280	Akpọtụrụla {0} ọzọ
+281	Hichapụ data ha niile
+282	Weghachi ya ka ọ rụọ ọrụ
+283	Eweghachila ya
+284	Eweghachila
+285	{0} alọghachila na ndepụta gị
+286	Malitegharịa ncheta ugbu a
+287	Ncheta amalitegharịla
+288	Ncheta agbanwuola ọzọ
+289	Akwụsịtụrụ ncheta ruo <b>{0}</b>.
+290	Akwụsịtụrụ ncheta ruo <b>{0}</b> · {1}.
+291	Tinye nọmba ma ọ bụ aha njirimara
+292	Tinye nọmba WhatsApp ma ọ bụ aha njirimara na soshal midia ka ị nwee ike izigara ha ozi.
+293	Emelitere nkọwa
+294	Kọntaktị ọhụrụ
+295	Chekwaa kọntaktị
+296	Chekwaa ma tinye onye ọzọ
+297	Nọmba WhatsApp
+298	WhatsApp (ọ bụghị iwu)
+299	Soshal midia (ọ bụghị iwu)
+300	Ngwa
+301	@ahanjirimara
+302	Anyị zutere n'èzí ọdụ ụgbọ
+303	Ebe unu zutere (ọ bụghị iwu)
+304	Ihe ị ga-echeta
+305	Ihe na-eme ha, ihe a ga-ekpe ekpere maka ya
+306	Ha kwenyere ka anyị chekwaa nkọwa ha ma na-akpọtụrụ ha.
+307	Aha mbụ zuru
+308	Tinye aha ha.
+309	Buru ụzọ tinye aha ha.
+310	Buru ụzọ tinye aha.
+311	Nọmba ekwentị ahụ adịghị ka ọ ziri ezi. Jiri 07… ma ọ bụ +44…
+312	Nọmba ahụ adịghị ka ọ ziri ezi. Jiri 07… ma ọ bụ +44…
+313	07… ma ọ bụ +44…
+314	Malite ide ka ị chọta ha
+315	Họrọ na kọntaktị
+316	Bubata kọntaktị ekwentị gị ka ị chọta ndị mmadụ ka ị na-ede
+317	Etinyela {0}. Chekwaa ha na kọntaktị ekwentị gị kwa?
+318	Etinyela {0}. Kpọtụrụ ha n'izu a.
+319	Edepụtala ya. Mepee ngwa Contacts, pịa +, wee mado ya.
+320	Mepee faịlụ ahụ ka ị tinye {0} na kọntaktị gị
+321	Depụta nke a
+322	Jide ederede dị n'okpuru, wee họrọ Copy.
+323	Enweghị nọmba
+324	Kwụsịtụ ncheta
+325	Ọ dịghị ncheta ruo ụbọchị ị họọrọ. N'ụbọchị ahụ, ha ga-alọghachi na ndepụta Taa gị.
+326	Nhọrọ ngwa ngwa
+327	Izu 1
+328	Izu 2
+329	Ọnwa 1
+330	Ọnwa 3
+331	Ma ọ bụ họrọ ụbọchị
+332	Họrọ ụbọchị dị mgbe taa gasịrị.
+333	Buru ụzọ họrọ ihe kpatara ya.
+334	Ha nọ n'ọrụ ugbu a
+335	Ha gara njem ma ọ bụ ha anọghị
+336	Ha chọrọ ohere
+337	Ule ma ọ bụ ọrụ
+338	Ha gwara anyị ka anyị ghara ịkpọtụrụ ha
+339	Ha akwapụla
+340	Ha sonyere ụka ọzọ
+341	Ha azaghachibeghị ogologo oge
+342	Enweghị ihe kpatara ya
+343	Akwụsịtụrụ ruo {0}
+344	Akwụsịtụrụ ruo {0} ({1})
+345	Anaghị akpọtụrụ ha ọzọ: {0}
+346	Anaghị akpọtụrụ ha ọzọ: <b>{0}</b>.
+347	{0} ga-apụ na ndepụta gị, ncheta ga-akwụsịkwa. A ga-echekwa akụkọ ha, ị nwekwara ike iweghachi ha mgbe ọ bụla.
+348	Ọ bụrụ na ha rịọrọ ka ehichapụ nkọwa ha kpamkpam, jiri <b>Hichapụ data ha niile</b> mgbe nke a gasịrị.
+349	Nke a ga-ehichapụ {0} na ihe niile gbasara ha: nọmba, ndetu, ọmụmụ na akụkọ. Enweghị ike iweghachi ya.
+350	Mee nke a naanị mgbe mmadụ rịọrọ ka ehichapụ nkọwa ha. Ọ bụrụ na ọ bụ naanị ịkwụsị ịkpọtụrụ mmadụ, hapụ ha na “Anaghị akpọtụrụ ha ọzọ”.
+351	Dee DELETE ka ị kwado
+352	Hichapụ ya kpamkpam
+353	Hichapụ data {0}
+354	Ehichapụla data {0}
+355	E hichapụrụ kọntaktị n'arịrịọ ha
+356	Kpọtụrụ onye ọ bụla otu ugboro n'izu ma gaa n'ihu na-ewu ọbụbụenyi ahụ.
+357	Tinye onye ị ga-akpọtụrụ kwa izu
+358	Tinye onye na-eso ụzọ
+359	Akpọtụrụla
+360	Akpọtụrụla taa
+361	Akpọtụrụla ụnyaahụ
+362	Akpọtụrụla {0}
+363	Akpọtụrụla n'izu a
+364	A kpọtụrụbeghị
+365	Ị kpọtụrụla {0}
+366	E kpọtụrụla {0} n'izu a
+367	Nkpọtụrụ ikpeazụ: ụbọchị {0} gara aga
+368	Nkpọtụrụ ikpeazụ: ụbọchị {0} gara aga
+369	Ndị a ga-akpọtụrụ n'izu a
+370	Emechara n'izu a
+371	Ị kpọtụrụla onye ọ bụla n'izu a.
+372	Wepụ na Ndị na-eso ụzọ
+373	Ewepụla {0} na Ndị na-eso ụzọ
+374	Pịa ọzọ ka ị wepụ {0}
+375	Ndepụta ekpere
+376	Onye ka ị na-ekpere ekpere?
+377	Ihe a ga-ekpe ekpere maka ya
+378	Ndetu (ọ bụghị iwu)
+379	Dezie ekpere
+380	Wepụ na ndepụta ekpere
+381	Laghachi na ndepụta ekpere
+382	Ọ dịbeghị onye nọ na ndepụta ekpere gị.
+383	Tinye ndị ị na-ekpere ekpere. Shepherd na-egosi ole na ole kwa ụbọchị, n'usoro, ma nwee ike ichetara gị.
+384	Tinye onye ọ bụla ị chọrọ ikpere ekpere. Kwa ụbọchị Shepherd na-egosi mmadụ {0}, n'usoro.
+385	Tinye onye ọ bụla ị chọrọ ikpere ekpere. Kwa ụbọchị Shepherd na-egosi mmadụ {0}, n'usoro, ma chetara gị n'elekere {1}.
+386	Etinyela {0} na ndepụta ekpere gị
+387	Ewepụla {0} na ndepụta ekpere gị
+388	{0} nọlarị na ndepụta ekpere gị
+389	Ncheta ekpere
+390	Chetara m ikpe ekpere kwa ụbọchị
+391	Mmadụ kwa ụbọchị
+392	Kpee ekpere maka mmadụ {0} si na ndepụta ekpere gị kwa ụbọchị, n'usoro.
+393	Kpee ekpere maka mmadụ {0} si na ndepụta ekpere gị kwa ụbọchị, n'usoro. Ncheta na-abịa site na ngwa Shepherd dị na ekwentị gị.
+394	Ncheta ekpere n'elekere {0}
+395	Ncheta ekpere agbanwuola
+396	Ncheta ekpere agbanyụọla
+397	Ntọala ncheta ekpere
+398	Ofufe na mmemme gị. Kpọọ ndị mmadụ, wee kaa akara ndị bịara.
+399	Enweghị mmemme ka ọ dị ugbu a
+400	Tinye ofufe Ụbọchị Ụka, ofufe ụtụtụ ma ọ bụ nnọkọ ebe a ka ị nwee ike ịkpọ ndị mmadụ ma kaa akara ndị bịara.
+401	Mmemme ọhụrụ
+402	Dezie mmemme
+403	Mepụta mmemme
+404	Hichapụ mmemme
+405	Ehichapụla mmemme
+406	Pịa ọzọ ka ị hichapụ mmemme a
+407	Nye mmemme ahụ aha.
+408	Họrọ ụbọchị.
+409	ọmụmaatụ: Ofufe Ụbọchị Ụka
+410	Ofufe Ụbọchị Ụka
+411	Ofufe etiti izu
+412	Kaa akara ndị ị kpọrọ. Bọtịnụ ozi na-eziga òkù dị njikere. N'ụbọchị ahụ, kaa akara ndị bịara.
+413	Kaa akara ndị bịara.
+414	Buru ụzọ tinye kọntaktị, wee kpọọ ha ebe a.
+415	Ọ bịara
+416	Ọ bịaghị
+417	Akpọrọ ya
+418	Bịara {0}
+419	A kpọrọ ya na {0}
+420	Ewepụrụ òkù na {0}
+421	Ewepụrụ akara ọbịbịa na {0}
+422	Edepụtala òkù. Mado ya n'ozi gị.
+423	Ndewo {0}! Ị ga-achọ ịbịa {1} {2}? Ọ ga-atọ m ụtọ ịhụ gị ebe ahụ.
+424	taa n'elekere {0}
+425	echi n'elekere {0}
+426	na {0} n'elekere {1}
+427	na {0}
+428	Òkù {0}
+429	Òkù {0}
+430	Òkù {0} · {1} bịara
+431	Òkù {0} · {1} bịara
+432	Site na kalenda gị
+433	Site na kalenda gị · {0}
+434	Mmemme kalenda gị adịlarị ebe a
+435	Oge ikpeazụ e bubatara mmemme kalenda: {0}.
+436	Kalenda: etinyere mmemme {0}
+437	Kalenda: etinyere mmemme {0}
+438	Ọ dịghị mmemme dị na faịlụ ahụ
+439	Tinye site na faịlụ kalenda
+440	Họrọ faịlụ kalenda (.ics)
+441	E zitere gị mmemme dị ka faịlụ kalenda (ọ na-ejedebe na <b>.ics</b>), dị ka òkù ụka? Chekwaa ya na ekwentị gị, wee họrọ ya ebe a. Mmemme na-emeghachi, dị ka ofufe kwa izu, gụnyere.
+442	Tinye na kalenda ekwentị
+443	Depụta njikọ kalenda
+444	Edepụtala njikọ kalenda. Mado ya na ICSx⁵.
+445	Emepụtala njikọ ọhụrụ. Jikọọ kalenda gị ọzọ.
+446	mepụta njikọ ọhụrụ
+447	Njikọ a bụ nke gị naanị. Ọ bụrụ na ị kesaa ya na mberede,
+448	Jikọọ kalenda gị
+449	Otu esi ejikọ kalenda ekwentị gị
+450	Gosi m otu m ga-esi jikọọ kalenda m
+451	Jikọọ na kalenda iPhone
+452	Jikọọ Shepherd na kalenda ekwentị gị, ọmụmụ Baịbụl na mmemme gị ga-apụta ebe ahụ n'onwe ha, n'akụkụ ihe ndị ọzọ niile n'ụbọchị gị.
+453	1. Jikọọ Shepherd na kalenda ekwentị gị
+454	2. Debe mmemme TimeTree nke gị na kalenda gị kwa
+455	Pịa <b>Jikọọ na kalenda iPhone</b> n'okpuru.
+456	iPhone gị ga-ajụ ma ị chọrọ ịdenye aha. Pịa <b>Subscribe</b>, wee pịa <b>Done</b>.
+457	Ọ bụrụ na ekwentị gị jụrụ, pịa Subscribe. Wee laghachi ebe a.
+458	Laghachi na Shepherd. Ọmụmụ na mmemme gị na-apụta ugbu a na ngwa <b>Calendar</b> dị ka <b>Shepherd</b>, ha na-emelitekwa onwe ha.
+459	Na ọmụmụ ma ọ bụ mmemme dị na Shepherd, pịa <b>Tinye na kalenda ekwentị</b>.
+460	Ekwentị gị ga-emeghe ngwa <b>Calendar</b> ya na nkọwa ejupụtara. Pịa <b>Save</b>.
+461	Ọ bụrụ na ị chọrọ ka ha banye n'onwe ha, nweta ngwa <b>ICSx⁵</b>, pịa <b>Depụta njikọ kalenda</b> n'okpuru ma tinye ya na ICSx⁵ site na <b>+</b>.
+462	TimeTree anaghị ekesa mmemme ya na ngwa ndị ọzọ, ya mere ọ pụghị idepụta ha n'onwe ya. Mmemme nke gị na TimeTree dị mkpa maka izu gị, tinye ha na kalenda ekwentị gị kwa, ka kalenda gị gosi ihe niile n'otu ebe.
+463	Mepee ngwa <b>Calendar</b> dị na ekwentị gị wee pịa <b>+</b>.
+464	Mepee ngwa <b>Calendar</b> wee pịa <b>+</b>.
+465	Mepee ozi ma ọ bụ email nwere faịlụ ahụ.
+466	Pịa faịlụ ahụ, wee pịa bọtịnụ <b>Share</b>, wee pịa <b>Save to Files</b>.
+467	Pịa faịlụ ahụ, wee pịa <b>Download</b> (ma ọ bụ ntụpọ atọ › <b>Save</b>).
+468	Laghachi ebe a wee pịa <b>Họrọ faịlụ kalenda</b>.
+469	Laghachi ebe a wee pịa <b>Họrọ faịlụ kalenda</b>. Ọ dị na <b>Downloads</b>.
+470	Depụta maka TimeTree
+471	Depụta nkọwa maka TimeTree
+472	Edepụtala ya. Mepee TimeTree wee mado ya na mmemme ọhụrụ.
+473	Mepee ngwa <b>TimeTree</b> wee pịa bọtịnụ <b>+</b>.
+474	Mado nkọwa ị depụtara n'isiokwu na ndetu, wee setịpụ <b>ụbọchị na oge</b>.
+475	Dee isiokwu, wee setịpụ <b>ụbọchị na oge</b> site na mmemme TimeTree gị.
+476	Họrọ <b>ọkwa</b>, dị ka otu awa tupu, ka iPhone gị chetara gị.
+477	Họrọ <b>ọkwa</b>, dị ka otu awa tupu, ka ekwentị Android gị chetara gị.
+478	Pịa <b>Save</b>.
+479	Pịa <b>Save</b> (akara ✓).
+480	Izu nke {0}
+481	Izu a
+482	Ị sochiri <em>{0} n'ime {1}</em> — izu dị ebube.
+483	Ị sochiri <em>{0} n'ime {1}</em> — ọ na-aga nke ọma.
+484	Ị sochiri <em>{0} n'ime {1}</em> — gaa n'ihu.
+485	Ị sochiri <em>{0} n'ime {1}</em> — bido na ndepụta taa.
+486	Nchịkọta izu gị ga-apụta ozugbo ị tinyere kọntaktị.
+487	Bịara mmemme
+488	Ọnụọgụ nsochi, izu 4 gara aga
+489	Ole n'ime ndị ị na-esochi nwetara ozi, oku ma ọ bụ ọmụmụ n'izu ahụ.
+490	A kpọtụrụbeghị ha n'izu a
+491	Asụsụ
+492	Amaokwu Baịbụl ga-anọgide n'asụsụ Bekee (NIV).
+493	Aha gị
+494	Nọmba WhatsApp gị
+495	Ozi ndị mmadụ ga-ezigara gị site na koodu QR gị
+496	Kọntaktị ọhụrụ: kpọtụrụ ha kwa
+497	Echekwala ntọala
+498	Ọkwa
+499	Ọkwa agbanwuola
+500	Ọkwa agbanwuola na ekwentị a.
+501	Ọkwa agbanyụọla na ekwentị a.
+502	Ọkwa nwere aha ndị mmadụ na-abịa site na ngwa Shepherd dị na ekwentị gị.
+503	Gbanwuo ọkwa
+504	Zipu nnwale
+505	Zitere m ọkwa nnwale
+506	Otu o si arụ ọrụ
+507	Otu esi enweta ha
+508	Ọkwa ụtụtụ n'elekere
+509	Ọkwa ụtụtụ n'elekere {0}
+510	Ihe Shepherd na-agwa gị
+511	Echekwala nhọrọ ọkwa
+512	Ọkwa: {0}
+513	Ndị a ga-achụso
+514	Onye ọ bụla oge ya gafere ma ọ bụ onye a ga-akpọtụrụ taa
+515	Nzaghachi ị ji ụgwọ
+516	Ndị na-eche ozi gị
+517	Ndị ị ka na-eche ịnụ n'aka ha
+518	Ndị ị ka ga-akpọtụrụ n'izu a
+519	Ọmụmụ Baịbụl taa
+520	Ọmụmụ edobere maka taa, ya na oge
+521	Mmemme kalenda
+522	Mmemme taa na echi, gụnyere kalenda gị
+523	Nchịkọta izu
+524	N'Ụbọchị Ụka, ọnụọgụ ndị ị sochiri
+525	Ndị a ga-achụso na mmemme
+526	Naanị mmemme
+527	Kọntaktị ekwentị
+528	Họrọ na kọntaktị m
+529	Bubata faịlụ kọntaktị
+530	Otu esi enweta faịlụ kọntaktị
+531	Nweta faịlụ kọntaktị
+532	Wepụ ha na ekwentị a
+533	Bubata kọntaktị ekwentị gị, mgbe ị na-etinye mmadụ, aha na nọmba ha ga-apụta ka ị na-ede. Ha na-anọ naanị na ekwentị a, a naghị ebugo ha.
+534	Kọntaktị {0} dị na ekwentị a. Mgbe ị na-etinye mmadụ, aha kwekọrọ ga-apụta ka ị na-ede. Ha na-anọ naanị na ekwentị a, a naghị ebugo ha.
+535	Kọntaktị 1 dị na ekwentị a. Mgbe ị na-etinye mmadụ, aha kwekọrọ ga-apụta ka ị na-ede. Ha na-anọ naanị na ekwentị a, a naghị ebugo ha.
+536	Etinyere kọntaktị {0} na ndepụta ekwentị a
+537	Etinyere kọntaktị {0} na ndepụta ekwentị a
+538	Kọntaktị ndị ahụ adịlarị ebe a
+539	Ọ dịghị kọntaktị dị na faịlụ ahụ
+540	Ewepụla kọntaktị ekwentị na Shepherd na ekwentị a
+541	Chekwaa kọntaktị gị dị ka otu faịlụ, wee họrọ ya na Shepherd n'okpuru <b>Bubata faịlụ kọntaktị</b>.
+542	Mepee ngwa <b>Contacts</b> wee pịa <b>Lists</b> (n'elu aka ekpe).
+543	Jide <b>All Contacts</b> (ma ọ bụ All iCloud), wee pịa <b>Export</b>.
+544	Pịa <b>Save to Files</b>, wee pịa <b>Save</b>.
+545	Laghachi na Shepherd, pịa <b>Bubata faịlụ kọntaktị</b> wee họrọ ya.
+546	Mepee ngwa <b>Contacts</b>.
+547	Pịa <b>Fix &amp; manage</b> (ma ọ bụ ⋮ › <b>Settings</b>, ma ọ bụ <b>Manage contacts</b> na Samsung), wee pịa <b>Export to file</b>.
+548	Chekwaa ya na <b>Downloads</b>.
+549	Kọntaktị gị na-anọ naanị na ekwentị a. Shepherd anaghị ebugo ha.
+550	Ịmalite
+551	Njem otu nkeji gburugburu Shepherd.
+552	Gosi m gburugburu
+553	Mkpọchi ngwa
+554	Setịpụ PIN
+555	Gbanwee PIN
+556	Wepụ PIN
+557	Kpọchie ugbu a
+558	Chekwaa PIN
+559	Echekwala PIN
+560	Ewepụla PIN
+561	PIN gị ugbu a
+562	PIN ọhụrụ (nọmba 4 ruo 8)
+563	Dee ya ọzọ
+564	Jiri nọmba 4 ruo 8.
+565	PIN abụọ ahụ ekwekọghị.
+566	PIN gị ugbu a ezighị ezi.
+567	Tinye PIN ka onye ọ bụla buru ekwentị gị ghara ịgụ kọntaktị gị.
+568	Shepherd na-ajụ PIN gị mgbe ọ mepere na mgbe nkeji 5 gachara ị nọghị ya.
+569	Ọ bụrụ na i chefuo ya, ị ga-achọ nkwado iji banye ọzọ, ya mere họrọ nke ị ga-echeta.
+570	Ekpọchiri Shepherd
+571	Tinye PIN gị ka ị hụ kọntaktị gị.
+572	Meghee
+573	PIN ahụ ezighị ezi. Nwaa ọzọ.
+574	Akaụntụ gị
+575	Ị banyere dị ka
+576	. Ị ka nọ n'ime akaụntụ na ekwentị a.
+577	Gbanwee okwuntughe
+578	Pụọ
+579	Hichapụ akaụntụ m
+580	Data gị
+581	A na-echekwa kọntaktị gị n'ebe nzuzo nke gị. Ọ dịghị onye ọzọ na-eji Shepherd nwere ike ịhụ ha. A na-edobekwa otu mbipụta na ekwentị a ka ngwa ahụ rụọ ọrụ n'enweghị netwọk.
+582	A na-echekwa kọntaktị gị n'ebe nzuzo nke gị (ugbu a naanị na ekwentị a). Ọ dịghị onye ọzọ na-eji Shepherd nwere ike ịhụ ha. A na-edobekwa otu mbipụta na ekwentị a ka ngwa ahụ rụọ ọrụ n'enweghị netwọk.
+583	A na-echekwa kọntaktị gị n'ebe nzuzo nke gị na sava Shepherd, ya na ụdị ochie. Ọ dịghị onye ọzọ na-eji Shepherd nwere ike ịhụ ha. A na-edobekwa otu mbipụta na ekwentị a ka ngwa ahụ rụọ ọrụ n'enweghị netwọk.
+584	Ihe a na-echekwa na onye nwere ike ịhụ ya
+585	Bupụta nkwado
+586	Weghachi nkwado
+587	Echekwala nkwado
+588	Edepụtala nkwado. Mado ya na ndetu ma ọ bụ zigara onwe gị ya na email.
+589	Faịlụ ahụ abụghị nkwado Shepherd
+590	Eweghachila: etinyere {0}, emelitere {1}
+591	Wepụ kọntaktị ọmụmaatụ
+592	Ewepụla kọntaktị ọmụmaatụ
+593	Shepherd na-edobe ndepụta gị na nzuzo. Nke a bụ kpọmkwem ihe a na-echekwa, ebe ọ dị, na onye nwere ike ịhụ ya.
+594	Data jikọtara gị
+595	Aha gị, email na nọmba WhatsApp gị.
+596	Ndị ị tinyere: aha ha, nọmba ekwentị, aha njirimara, ndetu, isi ekpere na ọmụmụ Baịbụl.
+597	Mmemme gị, ndị na-eso ụzọ na ndepụta ekpere.
+598	Echekwara ya n'akaụntụ nke gị na sava Shepherd ka ọ ghara ịfu, ya na ụdị ochie edobere otu afọ. Naanị gị nwere ike ịhụ ya mgbe ị banyere.
+599	Echekwara ya n'ebe nzuzo nke gị. Naanị gị nwere ike ịhụ ya.
+600	Naanị na ekwentị a
+601	Kọntaktị ị bubatara site na ekwentị gị, iji tụọ aro aha ka ị na-ede. A naghị ebugo ha.
+602	Otu mbipụta nke ndepụta gị, ka Shepherd rụọ ọrụ n'enweghị netwọk.
+603	A naghị anakọta ya
+604	Ebe ị nọ.
+605	Mkparịta ụka WhatsApp, SMS ma ọ bụ iMessage gị.
+606	Akwụkwọ adreesị gị niile (naanị kọntaktị ị họọrọ).
+607	Ihe ọ bụla maka mgbasa ozi ma ọ bụ nsochi.
+608	Mgbe mmadụ nyochara koodu QR gị
+609	Ha n'onwe ha na-ahọrọ ide aha ha (na nọmba ha ma ọ bụrụ na ha chọrọ). Ọ na-abanye naanị na ndepụta gị, mgbe ahụ ha n'onwe ha ga-ezigara gị ozi na WhatsApp.
+610	Mmadụ rịọrọ gị ka ị hichapụ nkọwa ha? Mepee ha, pịa <b>Akpọtụrụla ha ọzọ</b>, wee pịa <b>Hichapụ data ha niile</b>. A na-ehichapụ mbipụta niile.
+611	Koodu QR m
+612	Koodu QR gị
+613	Koodu QR ka ndị mmadụ zigara gị ozi
+614	Nyochaa ya ka anyị na-akpọtụrụ onwe anyị
+615	Mepụta koodu QR m
+616	Gosi koodu QR m kama
+617	Buru ụzọ tinye nọmba WhatsApp nke gị. Mgbe mmadụ nyochara koodu gị, WhatsApp ga-emeghe ya na ozi e zigara gị, ka ị nweta nọmba ha, ha n'onwe ha ahọrọ ịna-akpọtụrụ gị.
+618	Gwa ha ka ha chee igwefoto ekwentị ha n'ebe a. Ha ga-ede aha ha, <b>a ga-etinye ha na Shepherd gị</b>, WhatsApp ga-emekwa ya na ozi gị dị njikere iziga.
+619	Ị ga-enweta ọkwa mgbe ha nyochara ya.
+620	Gwa ha ka ha chee igwefoto ekwentị ha n'ebe a. WhatsApp ga-emeghe ya na ozi e zigara gị, ha ga-apịa naanị “send”.
+621	Mgbe ozi ha rutere, tinye ha ebe a ya na nọmba ha.
+622	Ozi ha: “{0}”
+623	Ndewo, ọ dị m ụtọ izute gị! Enwetara m kọntaktị gị site na Shepherd. Ana m atụ anya ịnụ n'aka gị n'oge na-adịghị anya.
+624	Gbanwee ozi
+625	Koodu QR ebughị. Kesaa njikọ a kama:
+626	Enweghị ike ise koodu QR ebe a.
+627	Tinye nọmba m ugbu a
+628	Tinye nọmba na ozi gị, wee pịa Chekwaa.
+629	Nweta ngwa Shepherd
+630	Nke a na-arụ ọrụ na ngwa Shepherd dị na ekwentị gị. Mepee
+631	, banye, wee laghachi na ntuziaka a.
+632	Ọkwa ekwentị nwere aha ndị mmadụ (“Zaghachi Grace”, “Zigara Daniel ozi”) na-abịa site na <b>ngwa Shepherd</b> dị na ekwentị gị. Wụnye ya otu ugboro ma gbanwuo ha ebe ahụ.
+633	Ị na-eji Shepherd ebe a? Bupụta nkwado na Ntọala, wee weghachi ya na ngwa ahụ.
+634	Echekwala. Ncheta na-abịa site na ngwa Shepherd.
+635	Shepherd na-eziga ọkwa nwere aha ndị mmadụ, dị ka <b>Zaghachi Grace</b>, <b>Zigara Daniel ozi</b> ma ọ bụ <b>Sam azaghachila?</b>, kwa ụtụtụ n'elekere <b>{0}</b>, na tupu ọmụmụ na mmemme ọ bụla. Pịa otu, ọ ga-emeghe onye ahụ.
+636	1. Wụnye Shepherd na ekwentị gị
+637	2. Kwe ka ọkwa bata
+638	3. Lelee ma ọ na-arụ ọrụ
+639	Awụnyela Shepherd na ekwentị a.
+640	Mepee Shepherd na <b>Safari</b>.
+641	Mepee Shepherd na <b>Chrome</b>.
+642	Pịa bọtịnụ <b>Share</b> (igbe nwere akụ).
+643	Pịa <b>Add to Home Screen</b>, wee pịa <b>Add</b>.
+644	Pịa <b>⋮</b> n'elu aka nri, wee pịa <b>Install app</b> (ma ọ bụ <b>Add to Home screen</b>).
+645	Pịa <b>Install</b>.
+646	Pịa <b>Add</b>.
+647	Mepee Shepherd site n'akara ngosi ọhụrụ ya.
+648	Mepee Shepherd site n'akara ngosi ọhụrụ ya na Ihuenyo Ụlọ gị. Ọkwa iPhone na-arụ ọrụ naanị site ebe ahụ (iOS 16.4 ma ọ bụ nke ọhụrụ karịa).
+649	Awụnyela Shepherd. Mepee ya site n'akara ngosi ọhụrụ ya.
+650	Mgbe ekwentị gị jụrụ, pịa <b>Allow</b>. Ị pịara <b>Don't Allow</b> na mberede?
+651	Gbanwuo <b>Allow notifications</b>.
+652	Gbanwuo <b>Allow Notifications</b>, ya na akara na <b>Lock Screen</b>, <b>Banners</b> na <b>Badges</b>.
+653	Settings › Notifications › Shepherd
+654	Settings › Apps › Shepherd › Notifications
+655	Ọkwa sitere na Shepherd ga-abata n'ime sekọnd ole na ole.
+656	Ọ dịghị ihe? Lelee na <b>Focus</b> agbanyụọla, na i meghere Shepherd site n'akara ngosi ya na Ihuenyo Ụlọ.
+657	Ọ dịghị ihe? Lelee na <b>Do Not Disturb</b> agbanyụọla na e kwere ka ọkwa Shepherd bata (nzọụkwụ 2).
+658	Gbanwee oge na ihe Shepherd na-agwa gị n'okpuru <b>Ọkwa</b> na Ntọala. Gbanwuo ọkwa otu ugboro na ekwentị ọ bụla ị na-eji.
+659	Ezigala nnwale. Ọ ga-abata n'ime sekọnd ole na ole.
+660	Ọ na-enyocha ekwentị a…
+661	Ekwentị a na-egbochi ọkwa Shepherd. Lee nzọụkwụ 2 ka ị kwe ka ha bata.
+662	Buru ụzọ tinye Shepherd na Ihuenyo Ụlọ gị (nzọụkwụ 1), wee mepee ya site ebe ahụ.
+663	Buru ụzọ tinye Shepherd na Ihuenyo Ụlọ gị, wee mepee ya site ebe ahụ.
+664	Ihe nchọgharị a enweghị ike igosi ọkwa. Mepee Shepherd na Safari (iPhone) ma ọ bụ Chrome (Android).
+665	Ihe nchọgharị a enweghị ike igosi ọkwa. Jiri Safari (iPhone) ma ọ bụ Chrome (Android).
+666	Egbochiri ọkwa. Kwe ka ha bata na Settings ekwentị gị.
+667	Enweghị ike ịgbanwu ọkwa. Nwaa ọzọ.
+668	Enweghị ike iru ekwentị a. Gbanyụọ ọkwa ma gbanwuo ha ọzọ.
+669	Were nwayọ.
+670	na ekwentị gị, wee:
+671	Nnọọ na Shepherd
+672	Shepherd na-echetara gị onye ị ga-akpọtụrụ, ka onye ọ bụla ị na-elekọta ghara ịdapụ. Njem a ga-emeghe akụkụ ọ bụla nke ngwa ahụ ma kwe ka ị hazie ya ka ị na-aga.
+673	Bido na Ntọala
+674	Nke mbụ, mepee Ntọala ma tinye nọmba WhatsApp gị na ozi mbụ a ga-eziga n'onwe ya mgbe ha nyochara koodu QR gị.
+675	Ọtụtụ mmadụ na-eji Shepherd na ekwentị ha, ya mere gbanwuo ọkwa. Shepherd na-agwa gị site n'aha onye ị ga-ezigara ozi, onye ị ga-azaghachi na onye ị ga-akpọtụrụ, ma meghee onye ahụ mgbe ị pịara.
+676	Pịa ebe a mgbe ị zutere mmadụ. Tinye aha na nọmba ha, ma ọ bụ gosi koodu QR gị ka ha buru ụzọ zigara gị ozi.
+677	Dejupụta nkọwa ha wee pịa Chekwaa kọntaktị.
+678	Bido ụbọchị ọ bụla ebe a
+679	Taa na-egosi onye ị ga-ezigara ozi na onye na-eche gị. Akwụkwọ ndụ pụtara n'oge, odo pụtara taa, uhie pụtara na oge agafeela.
+680	Ozi n'otu mpịa
+681	Bọtịnụ mkparịta ụka na-emeghe WhatsApp ma ọ bụ Instagram. Shepherd na-edekọ ya ma chere nzaghachi ha.
+682	Mgbe ha zaghachiri
+683	Pịa “Azaghachiri” ha ga-abanye na ndepụta “Zaghachi ha” gị. Kwa ụbọchị Shepherd na-ajụkwa maka onye ọ bụla o jighị n'aka.
+684	Tinye ndị bụlarị ndị na-eso ụzọ. Shepherd ga-echetara gị ịkpọtụrụ ha kwa izu. Ọ dabara na Baịbụl ka anyị na-agba onwe anyị ume! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Ka anyị mee nke a omume kwa izu!
+685	Dee aha ha wee pịa Tinye.
+686	Kalenda gị
+687	Kpọọ ndị mmadụ ma kaa akara ndị bịara. Jikọọ Shepherd na kalenda ekwentị gị ka ọmụmụ na mmemme gị pụta ebe ahụ n'onwe ha.
+688	Ihe niile adịla njikere
+689	Gbanwee ihe nchịkọta ụtụtụ gị na-egosi na Ntọala. N'ibe mmadụ, “Chekwaa na kọntaktị ekwentị” na-echekwa ha na ekwentị gị. Megharịa njem a site na Ntọala mgbe ọ bụla.
+690	Kwụsị njem
+691	Gaa n'ihu na njem
+692	Laghachi na njem
+693	Wụfee nzọụkwụ a
+694	Banye
+695	Mepụta akaụntụ
+696	Mepụta akaụntụ m
+697	Ichefuru okwuntughe?
+698	Laghachi na ịbanye
+699	Nweta koodu ntọgharị
+700	Koodu nọmba 6
+701	Okwuntughe ọhụrụ
+702	Chekwaa okwuntughe ọhụrụ
+703	Tinye adreesị email gị.
+704	Tinye okwuntughe gị.
+705	Họrọ okwuntughe nwere opekata mpe mkpụrụedemede 8.
+706	Họrọ opekata mpe mkpụrụedemede 8.
+707	Tinye email gị, anyị ga-enyere gị aka ịhọrọ okwuntughe ọhụrụ.
+708	Tinye koodu nọmba 6 gị ma họrọ okwuntughe ọhụrụ.
+709	Rịọ onye na-ahụ maka Shepherd n'ụka gị ka o nye gị koodu ntọgharị, tinye ya, ma họrọ okwuntughe ọhụrụ.
+710	Ọ bụrụ na {0} nwere akaụntụ, anyị ezigala koodu nọmba 6 na email. Tinye ya ma họrọ okwuntughe ọhụrụ.
+711	Ị ga-abanye naanị otu ugboro na ekwentị a.
+712	Ndepụta gị bụ nzuzo: ọ dịghị onye ọzọ na-eji Shepherd nwere ike ịhụ ya.
+713	Ọ na-emeghe Shepherd…
+714	Enweghị njikọ. Lelee netwọk gị wee nwaa ọzọ.
+715	Enweghị njikọ. Mgbanwe gị dị na ekwentị a.
+716	Ihe adịghị mma mere. Nwaa ọzọ.
+717	Shepherd enwebeghị adreesị sava.
+718	Ejikọbeghị Shepherd na sava ya. Tinye adreesị Cloudflare Worker gị na <b>config.js</b>.
+719	Okwuntughe gị ugbu a
+720	Okwuntughe gị
+721	Agbanweela okwuntughe. Ekwentị gị ndị ọzọ ga-agwa gị ka ị banye ọzọ.
+722	Nke a ga-ehichapụ akaụntụ gị na <b>onye ọ bụla nọ na ndepụta Shepherd gị</b> na sava, ruo mgbe ebighị ebi. Buru ụzọ bupụta nkwado ma ọ bụrụ na ị nwere ike ịchọ ya ọzọ.
+723	Hichapụ ihe niile
+724	Echekwala ihe niile. Ịpụ na-ewepụ ndepụta gị na ekwentị a; banye ọzọ mgbe ọ bụla ka ị nweta ya.
+725	<b>Mgbanwe {0} eruteghị sava.</b> Jikọọ na ịntanetị ma chere ka “Echekwala” pụta n'elu tupu ị pụọ, ma ọ bụghị ya ha ga-efu.
+726	<b>Mgbanwe {0} eruteghị sava.</b> Jikọọ na ịntanetị ma chere ka “Echekwala” pụta n'elu tupu ị pụọ, ma ọ bụghị ya ha ga-efu.
+727	Pụọ n'agbanyeghị
+728	Ihe adịghị mma mere na sava Shepherd. Mgbanwe gị dị na ekwentị gị.
+729	Lelee koodu ahụ ma họrọ okwuntughe nwere opekata mpe mkpụrụedemede 8.
+730	Lelee email na okwuntughe gị.
+731	Otu ihe buru ibu nke ukwuu ichekwa.
+732	Biko banye ọzọ.
+733	Ihe dị na nchekwa ahụ anaghị ekwe.
+734	Koodu ahụ agwụla. Rịọ maka nke ọhụrụ.
+735	Koodu ahụ ezighị ezi.
+736	Adreesị email ahụ adịghị ka ọ ziri ezi.
+737	Email na okwuntughe ahụ ekwekọghị.
+738	Ọ karịrị ihe a ga-echekwa n'otu oge.
+739	Akaụntụ dịlarị na email ahụ. Banye kama.
+740	Ekwentị a nyere adreesị ọkwa Shepherd na-enweghị ike iji.
+741	Ekwentị a nyere igodo ọkwa Shepherd na-enweghị ike iji.
+742	Mgbanwe karịrị akarị n'otu oge.
+743	Ị nwaala ọtụtụ ugboro. Chere nkeji 15 wee nwaa ọzọ.
+744	Buru ụzọ gbanwuo ọkwa na ekwentị a.
+745	Okwuntughe gị ezighị ezi.
+746	Ụbọchị {0}
+747	Ụbọchị {0}
+748	Echekwala {0}
+749	Tinye ha ugbu a
+750	Kpọtụrụ ha ọzọ n'ime
+751	Ekwentị a
+752	Nkpọtụrụ kwa izu
+753	Ọ dịbeghị ihe ọ bụla.
+754	Ndetu (ọ bụghị iwu)
+755	Edeela ya. Nkpọtụrụ ọzọ bụ taa.
+756	Edeela ya. Nkpọtụrụ ọzọ bụ echi.
+757	Ngwa ọzọ
+758	E zigara ozi na ngwa ọzọ
+759	Ọkwa Shepherd agbanwuola
+760	Kwa ụtụtụ ị ga-anụ site n'aha onye ị ga-ezigara ozi, onye ị ga-azaghachi na onye ị ga-akpọtụrụ.
+761	Sọn
+762	Mọn
+763	Tiu
+764	Wen
+765	Tọọ
+766	Fraị
+767	Sat
+768	Jen
+769	Feb
+770	Maa
+771	Epr
+772	Mee
+773	Juu
+774	Jul
+775	Ọgọ
+776	Sep
+777	Ọkt
+778	Nov
+779	Dis

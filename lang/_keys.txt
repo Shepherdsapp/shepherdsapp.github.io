@@ -1,0 +1,832 @@
+# Every piece of English text in Shepherd that gets translated. One per line.
+# {0}, {1}… stand for a name, number or date that is filled in. Keep <b>…</b> and <em>…</em> around the same words.
+# Lines starting with # are notes. Build checks every language has every line (node lang/check.mjs).
+#
+# --- joiners (used to translate pieces of longer lines)
+{0}: {1}
+{0} · {1}
+<b>{0}</b> · {1}
+{0}, {1}
+{0} and {1} more
+{0} ({1}d overdue)
+{0} ({1}d)
+{0} (example)
+#
+# --- tabs, buttons and common words
+Today
+Tomorrow
+Yesterday
+today
+tomorrow
+yesterday
+People
+Disciples
+Calendar
+Week
+Settings
+Add
+Add contact
+Add someone
+Add a contact
+Save
+Save changes
+Cancel
+Close
+Done
+Back
+Next
+Skip
+Edit
+Open
+Show
+Hide
+Undo
+View
+Filter
+All
+Off
+You
+Other
+Example
+Name
+Phone
+Email
+Password
+Username
+Notes
+Date
+Time
+Day
+Where
+Details
+Stage
+Reason
+Loading
+Saved
+Saving…
+One moment…
+Not now
+Not yet
+Show me
+Show me how
+Everyone
+Main
+List
+Journey
+Past
+Coming up
+Studies
+Events
+Event
+Activity
+#
+# --- sync status
+On this device
+Offline · will sync
+Not saved online
+Saved on this device
+Online storage is full. Your changes are kept on this phone. Export a backup from Settings.
+#
+# --- Today
+Good morning
+Good afternoon
+Good evening
+Good morning, {0}
+Good afternoon, {0}
+Good evening, {0}
+Your morning summary
+Today's summary
+You're up to date. Nobody is waiting on you today.
+Nothing due today.
+Alerts are off.
+Message today
+Reply to
+Need reply
+Due today
+Overdue
+On track
+Paused
+Studies today
+Bible studies
+1 study today
+{0} studies today
+{0} to message
+{0} reply owed
+{0} replies owed
+{0} to check
+{0} of {1}
+Catch-up
+Did {0} reply?
+You messaged {0} {1} day ago.
+You messaged {0} {1} days ago.
+Yes, I replied
+Still waiting
+Ask me tomorrow
+Shepherd will ask again tomorrow
+Disciples this week
+{0} of {1} done
+Still to check in with: {0}.
+Open Disciples
+Pray today
+Prayer list ({0})
+You're looking at example contacts. <b>Remove them</b> from Settings whenever you're ready.
+Your changes are kept on this phone but can't be saved online. Ask whoever shared Shepherd with you for <b>Contributor</b> access.
+Start with the people you meet
+Add someone you shared your faith with. Shepherd reminds you to check in every few days and keeps track of their studies.
+Add my first person
+Put Shepherd on your Home Screen
+It opens like an app, and it's how Shepherd can send you notifications that name people.
+#
+# --- the morning summary lines and notifications
+Message {0} person: {1}
+Message {0} people: {1}
+Reply to {0}
+Did they reply? {0}
+Disciples to check on this week: {0}
+Studies today: {0}
+{0} at {1}
+Events: {0}
+{0} today at {1}
+{0} tomorrow at {1}
+{0} today
+{0} tomorrow
+This week you followed up with {0} of {1}.
+This week you followed up with {0} of {1} person.
+This week you followed up with {0} of {1} people.
+Message {0}
+{0} messaged you {1} day ago. Tap to reply.
+{0} messaged you {1} days ago. Tap to reply.
+{0} is waiting on your reply.
+Back from a pause today. Tap to message {0}.
+You haven't messaged {0} yet. Tap to say hello.
+{0} day overdue. Tap to message {1}.
+{0} days overdue. Tap to message {1}.
+Due a check-in today. Tap to message {0}.
+You messaged {0} {1} day ago. Tap Replied in Shepherd if they did.
+You messaged {0} {1} days ago. Tap Replied in Shepherd if they did.
+Check in with {0}
+You haven't checked in with {0} yet this week.
+And {0} more today
+Bible study with {0} at {1}
+Bible study with {0} today
+In one hour. Study: {0}
+In one hour.
+Study: {0}
+No time set yet.
+Tomorrow: {0}
+All day
+{0} person invited
+{0} people invited
+Starts in one hour.
+Starts in one hour · {0}.
+Pray for {0}
+{0} and {1}
+Your week
+#
+# --- people list and contact states
+Search people
+Search by name, number or handle
+No one matches that.
+No one here yet.
+{0} person you're following up with
+{0} people you're following up with
+No longer contacting
+No longer contacting ({0})
+Kept safely so nothing is lost. Restore anyone at any time.
+Check in today
+Check in tomorrow
+Check in in {0} days
+Overdue by {0} day
+Overdue by {0} days
+Back from a pause
+You need to reply
+waiting on them
+waiting {0} day
+waiting {0} days
+gone quiet {0} days
+Paused until {0}
+Not contacted yet
+Last contact today
+Waiting on them
+Waiting to hear back
+Add a way to message {0}
+Log a message to {0}
+Message {0} on WhatsApp
+Message {0} on Instagram
+Message {0} on Snapchat
+Message {0} on TikTok
+Message {0} on Facebook
+Message on WhatsApp
+Message on Instagram
+Message on Snapchat
+Open chat
+#
+# --- journey stages
+First contact
+Interested
+Studying
+Regular at church
+Baptised
+Disciple
+Move to {0} ›
+Move back to {0}
+{0} moved to {1}
+Stage changed to {0}
+Last stage
+#
+# --- a person's page
+Edit {0}
+Chase {0}
+Replied
+I replied
+I replied to {0}
+{0} replied
+You replied
+Have you replied to {0} yet?
+{0} is waiting on a message from you.
+They messaged you last. Tap the chat button to answer, then I replied.
+Tap Replied when they message you back.
+Logged. Waiting on {0} to reply.
+Logged. Next check-in in {0} days.
+Logged. Next check-in in {0} day.
+Where the conversation is
+All good
+I need to reply
+Marked: all good
+Marked: I need to reply
+Marked: waiting on them
+Messaged on WhatsApp
+Messaged on Instagram
+Messaged on Snapchat
+Chased up on WhatsApp
+Contacted another way
+Check in every
+Check-in rhythm set to every {0} days
+Check-in rhythm set to every {0} day
+Next study
+Planned study
+No studies logged yet.
+Log a study
+Log a study with {0}
+Bible study
+Study logged: {0}
+Study saved
+Next study set for {0}
+The next study with <b>{0}</b> is saved.
+The next study with <b>{0}</b> is saved, and Shepherd will remind you an hour before it starts.
+Shepherd is connected to your phone calendar, so this is already there.
+What you studied
+Study name or passage
+Save study
+How it went
+Questions they asked, what to follow up on
+The next study needs to be after this one.
+Pick the date of the study.
+Time not set
+Met on
+Prayer points
+No notes
+Activity log
+Every change you make, newest first.
+Added
+Added from your QR code
+Save to phone
+Save to phone contacts
+Add to prayer list
+Leave for now
+Leave {0} for now
+No longer contact
+No longer contact {0}
+Delete all their data
+Restore to active
+Restored to active
+Restored
+{0} is back in your list
+Resume reminders now
+Reminders resumed
+Reminders back on
+Reminders are paused until <b>{0}</b>.
+Reminders are paused until <b>{0}</b> · {1}.
+Add a number or social handle
+Add a WhatsApp number or a social media handle so you can message them.
+Details updated
+#
+# --- add / edit a contact
+New contacts
+Save contact
+Save and add another
+WhatsApp number
+WhatsApp (optional)
+Social media (optional)
+App
+@username
+Met outside the station
+Where you met (optional)
+Anything to remember
+What's going on for them, things to pray about
+They're happy for us to keep their details and stay in touch.
+First name is fine
+Add their name.
+Add their name first.
+Add a name first.
+That phone number doesn't look right. Use 07… or +44…
+That number doesn't look right. Use 07… or +44…
+07… or +44…
+Start typing to find them
+Choose from contacts
+Import your phone contacts to find people as you type
+{0} added. Save them to your phone contacts too?
+{0} added. Check in with them this week.
+Copied. Open your Contacts app, tap +, and paste.
+Open the file to add {0} to your contacts
+Copy this
+Press and hold the text below, then choose Copy.
+No number
+#
+# --- leave for now / no longer contact / delete
+Pause reminders
+No reminders until the date you pick. They come back to your Today list on that day.
+Quick choices
+1 week
+2 weeks
+1 month
+3 months
+Or pick a date
+Pick a date after today.
+Pick a reason first.
+Busy right now
+Away or travelling
+Wants some space
+Exams or work
+Asked us not to contact them
+Moved away
+Joined another church
+No reply for a long time
+No reason given
+Left for now until {0}
+Left for now until {0} ({1})
+No longer contacting: {0}
+No longer contacting: <b>{0}</b>.
+{0} moves out of your lists and reminders stop. Their history is kept and you can restore them any time.
+If they asked for their details to be removed completely, use <b>Delete all their data</b> afterwards.
+This removes {0} and everything about them: number, notes, studies and history. It can't be undone.
+Only do this when someone asks for their details to be removed. To simply stop contacting someone, keep them under No longer contacting.
+Type DELETE to confirm
+Delete permanently
+Delete {0}'s data
+{0}'s data was deleted
+Deleted a contact at their request
+#
+# --- disciples
+Check in with each person once a week and keep building the friendship.
+Add someone to check on weekly
+Add a disciple
+Checked in
+Checked in today
+Checked in yesterday
+Checked in {0}
+Checked in this week
+Not checked in yet
+Checked in with {0}
+{0} checked in for this week
+Last check-in {0} day ago
+Last check-in {0} days ago
+To check this week
+Done this week
+You've checked in with everyone this week.
+Remove from Disciples
+{0} removed from Disciples
+Tap again to remove {0}
+#
+# --- prayer list
+Prayer list
+Who are you praying for?
+What to pray for
+Note (optional)
+Edit prayer
+Remove from prayer list
+Back to prayer list
+No one on your prayer list yet.
+Add the people you're praying for. Shepherd shows a few each day, taking turns, and can remind you.
+Add anyone you want to pray for. Each day Shepherd shows {0} people, taking turns.
+Add anyone you want to pray for. Each day Shepherd shows {0} people, taking turns, and reminds you at {1}.
+{0} added to your prayer list
+{0} removed from your prayer list
+{0} is already on your prayer list
+Prayer reminders
+Remind me to pray each day
+People each day
+Pray for {0} people from your prayer list each day, taking turns.
+Pray for {0} people from your prayer list each day, taking turns. Reminders come from the Shepherd app on your phone.
+Prayer reminder at {0}
+Prayer reminders on
+Prayer reminders off
+Prayer reminder settings
+#
+# --- calendar and events
+Your services and events. Invite people, then tick who came.
+No events yet
+Add your Sunday service, devotional or social here so you can invite people and tick who came.
+New event
+Edit event
+Create event
+Delete event
+Event deleted
+Tap again to delete this event
+Give the event a name.
+Pick a date.
+e.g. Sunday service
+Sunday service
+Midweek service
+Tick who you've invited. The message button sends a ready-made invite. On the day, tick who came.
+Tick who came.
+Add contacts first, then invite them here.
+Came
+Didn't come
+Invited
+Came to {0}
+Invited to {0}
+Uninvited from {0}
+Unmarked as coming to {0}
+Invite copied. Paste it into your message.
+Hi {0}! Would you like to come to {1} {2}? It would be great to see you there.
+today at {0}
+tomorrow at {0}
+on {0} at {1}
+on {0}
+{0} invite
+{0} invites
+{0} invite · {1} came
+{0} invites · {1} came
+From your calendar
+From your calendar · {0}
+Your calendar events are already here
+Calendar events last brought in {0}.
+Calendar: {0} events added
+Calendar: {0} event added
+No events found in that file
+Add from a calendar file
+Choose calendar file (.ics)
+Been sent an event as a calendar file (it ends in <b>.ics</b>), like a church events invite? Save it to your phone, then choose it here. Repeats like a weekly service are included.
+Add to phone calendar
+Copy calendar link
+Calendar link copied. Paste it into ICSx⁵.
+New link made. Connect your calendar again.
+make a new link
+This link is private to you. If you ever share it by mistake,
+Link your calendar
+How to link your phone calendar
+Show me how to link my calendar
+Connect to iPhone calendar
+Connect Shepherd to your phone's calendar and your Bible studies and events appear there by themselves, alongside everything else in your day.
+1. Connect Shepherd to your phone calendar
+2. Keep your personal TimeTree events in your calendar too
+Tap <b>Connect to iPhone calendar</b> below.
+Your iPhone asks if you want to subscribe. Tap <b>Subscribe</b>, then <b>Done</b>.
+If your phone asked, tap Subscribe. Then come back here.
+Come back to Shepherd. Your studies and events now show in the <b>Calendar</b> app as <b>Shepherd</b>, and keep themselves up to date.
+On a study or an event in Shepherd, tap <b>Add to phone calendar</b>.
+Your phone opens its <b>Calendar</b> app with the details filled in. Tap <b>Save</b>.
+To have them added by themselves instead, get the <b>ICSx⁵</b> app, tap <b>Copy calendar link</b> below and add it in ICSx⁵ with <b>+</b>.
+TimeTree doesn't share its events with other apps, so it can't copy them over by itself. For the personal events you keep in TimeTree that matter to your week, add them to your phone's calendar as well, so your calendar shows everything in one place.
+Open your phone's <b>Calendar</b> app and tap <b>+</b>.
+Open the <b>Calendar</b> app and tap <b>+</b>.
+Open the message or email with the file.
+Tap the file, then the <b>Share</b> button, then <b>Save to Files</b>.
+Tap the file, then <b>Download</b> (or the three dots › <b>Save</b>).
+Come back here and tap <b>Choose calendar file</b>.
+Come back here and tap <b>Choose calendar file</b>. It's in your <b>Downloads</b>.
+Copy for TimeTree
+Copy details for TimeTree
+Copied. Open TimeTree and paste it into a new event.
+Open the <b>TimeTree</b> app and tap the <b>+</b> button.
+Paste the copied details into the title and memo, then set the <b>date and time</b>.
+Type the title, then set the <b>date and time</b> from your TimeTree event.
+Choose an <b>alert</b>, for example 1 hour before, so your iPhone reminds you.
+Choose an <b>alert</b>, for example 1 hour before, so your Android phone reminds you.
+Tap <b>Save</b>.
+Tap <b>Save</b> (the tick).
+#
+# --- week
+Week of {0}
+This week
+You followed up with <em>{0} of {1}</em> — great week.
+You followed up with <em>{0} of {1}</em> — good going.
+You followed up with <em>{0} of {1}</em> — keep going.
+You followed up with <em>{0} of {1}</em> — start with today's list.
+Your weekly summary will appear once you add contacts.
+New contacts
+Came to events
+Follow-up rate, last 4 weeks
+Share of the people you were following up with who got a message, a call or a study that week.
+Not reached yet this week
+#
+# --- settings
+Language
+Bible verses stay in English (NIV).
+Your name
+Your WhatsApp number
+Message people send you from your QR code
+New contacts: check in every
+Settings saved
+Notifications
+Notifications are on
+Notifications are on for this phone.
+Notifications are off on this phone.
+Notifications that name people come from the Shepherd app on your phone.
+Turn on notifications
+Send a test
+Send me a test notification
+How it works
+How to get them
+Morning notifications at
+Morning notifications at {0}
+What Shepherd tells you about
+Alert choices saved
+Alerts set to: {0}
+People to chase
+Anyone overdue or due a check-in today
+Replies you owe
+People waiting on a message from you
+People you're still waiting to hear back from
+Who you still need to check in with this week
+Bible studies today
+Studies booked for today, with times
+Calendar events
+Events today and tomorrow, including your calendar
+Weekly summary
+On Sundays, how many people you followed up with
+People to chase and events
+Events only
+Phone contacts
+Choose from my contacts
+Import a contacts file
+How to get a contacts file
+Get a contacts file
+Remove them from this phone
+Bring in your phone contacts, and when you add someone their name and number come up as you type. They stay on this phone only and are never uploaded.
+{0} contacts on this phone. When you add someone, matching names come up as you type. They stay on this phone only and are never uploaded.
+1 contact on this phone. When you add someone, matching names come up as you type. They stay on this phone only and are never uploaded.
+{0} contacts added to this phone's list
+{0} contact added to this phone's list
+Those contacts are already here
+No contacts found in that file
+Phone contacts removed from Shepherd on this phone
+Save your contacts as one file, then choose it in Shepherd under <b>Import a contacts file</b>.
+Open the <b>Contacts</b> app and tap <b>Lists</b> (top left).
+Touch and hold <b>All Contacts</b> (or All iCloud), then tap <b>Export</b>.
+Tap <b>Save to Files</b>, then <b>Save</b>.
+Back in Shepherd, tap <b>Import a contacts file</b> and choose it.
+Open the <b>Contacts</b> app.
+Tap <b>Fix &amp; manage</b> (or ⋮ › <b>Settings</b>, or <b>Manage contacts</b> on Samsung), then <b>Export to file</b>.
+Save it to <b>Downloads</b>.
+Your contacts stay on this phone only. Shepherd never uploads them.
+Getting started
+A one-minute walk around Shepherd.
+Show me around
+App lock
+Set a PIN
+Change PIN
+Remove PIN
+Lock now
+Save PIN
+PIN saved
+PIN removed
+Current PIN
+New PIN (4 to 8 digits)
+Type it again
+Use 4 to 8 numbers.
+The two PINs don't match.
+Your current PIN isn't right.
+Add a PIN so nobody who picks up your phone can read your contacts.
+Shepherd asks for your PIN when it opens and after 5 minutes away.
+If you forget it, you'd need a backup to get back in, so pick one you'll remember.
+Shepherd is locked
+Enter your PIN to see your contacts.
+Unlock
+That PIN isn't right. Try again.
+Your account
+Signed in as
+. You stay signed in on this phone.
+Change password
+Sign out
+Delete my account
+Your data
+Your contacts are saved to your own private space. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.
+Your contacts are saved to your own private space (right now only on this phone). Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.
+Your contacts are saved to your own private space on the Shepherd server, with earlier versions kept. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.
+What's saved and who can see it
+Export a backup
+Restore a backup
+Backup saved
+Backup copied. Paste it into a note or email it to yourself.
+That file isn't a Shepherd backup
+Restored: {0} added, {1} updated
+Remove example contacts
+Example contacts removed
+#
+# --- what's saved (privacy page)
+Your data
+Shepherd keeps your list private. Here is exactly what is saved, where, and who can see it.
+Data linked to you
+Your name, email and WhatsApp number.
+The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies.
+Your events, disciples and prayer list.
+Saved to your own account on the Shepherd server so it's never lost, with earlier versions kept for a year. Only you can see it, when you're signed in.
+Saved to your own private space. Only you can see it.
+Kept only on this phone
+Contacts you import from your phone, used to suggest names as you type. They are never uploaded.
+A copy of your list, so Shepherd works without signal.
+Never collected
+Your location.
+Your WhatsApp, text or iMessage conversations.
+Your whole address book (only the contacts you choose).
+Anything for adverts or tracking.
+When someone scans your QR code
+They choose to type their name (and number if they want). It goes only into your list, and they then message you on WhatsApp themselves.
+Someone asks you to delete their details? Open them, tap <b>No longer contact</b>, then <b>Delete all their data</b>. Every copy is removed.
+#
+# --- QR code
+My QR code
+Your QR code
+QR code for people to message you
+Scan to keep in touch
+Make my QR code
+Show my QR code instead
+Add your own WhatsApp number first. When someone scans your code, WhatsApp opens with a message to you, so you get their number and they choose to keep in touch.
+Ask them to point their phone camera at this. They type their name, <b>they're added to your Shepherd</b>, and WhatsApp opens with your message ready to send.
+You'll get a notification when they scan it.
+Ask them to point their phone camera at this. WhatsApp opens with a message to you, and they just press send.
+When their message arrives, add them here with their number.
+Their message: “{0}”
+Hi, nice to meet you, I got your contact from Shepherd! Hoping to hear from you soon.
+Change the message
+The QR code couldn't load. Share this link instead:
+The QR code could not be drawn here.
+Add my number now
+Add your number and message, then tap Save.
+#
+# --- notifications guide
+Get the Shepherd app
+This works in the Shepherd app on your phone. Open
+, sign in, then come back to this guide.
+Phone notifications that name people (“Reply to Grace”, “Message Daniel”) come from the <b>Shepherd app</b> on your phone. Install it once and turn them on there.
+Already using Shepherd here? Export a backup in Settings, then restore it in the app.
+Saved. Reminders come from the Shepherd app.
+Shepherd sends notifications that name people, like <b>Reply to Grace</b>, <b>Message Daniel</b> or <b>Did Sam reply?</b>, every morning at <b>{0}</b>, and before each study and event. Tap one and it opens that person.
+1. Install Shepherd on your phone
+2. Allow notifications
+3. Check it works
+Shepherd is installed on this phone.
+Open Shepherd in <b>Safari</b>.
+Open Shepherd in <b>Chrome</b>.
+Tap the <b>Share</b> button (the square with an arrow).
+Tap <b>Add to Home Screen</b>, then <b>Add</b>.
+Tap <b>⋮</b> at the top right, then <b>Install app</b> (or <b>Add to Home screen</b>).
+Tap <b>Install</b>.
+Tap <b>Add</b>.
+Open Shepherd from its new icon.
+Open Shepherd from its new icon on your Home Screen. iPhone notifications only work from there (iOS 16.4 or later).
+Shepherd is installed. Open it from its new icon.
+When your phone asks, tap <b>Allow</b>. Tapped <b>Don't Allow</b> by mistake?
+Turn notifications <b>on</b>.
+Turn on <b>Allow Notifications</b>, with <b>Lock Screen</b>, <b>Banners</b> and <b>Badges</b> ticked.
+Settings › Notifications › Shepherd
+Settings › Apps › Shepherd › Notifications
+A notification from Shepherd arrives within a few seconds.
+Nothing? Check <b>Focus</b> is off, and that you opened Shepherd from its Home Screen icon.
+Nothing? Check <b>Do Not Disturb</b> is off and that Shepherd's notifications are allowed (step 2).
+Change the time and what Shepherd tells you about under <b>Notifications</b> in Settings. Turn notifications on once on each phone you use.
+Test sent. It should arrive in a few seconds.
+Checking this phone…
+This phone is blocking Shepherd's notifications. See step 2 to allow them.
+Add Shepherd to your Home Screen first (step 1), then open it from there.
+Add Shepherd to your Home Screen first, then open it from there.
+This browser can't show notifications. Open Shepherd in Safari (iPhone) or Chrome (Android).
+This browser can't show notifications. Use Safari (iPhone) or Chrome (Android).
+Notifications are blocked. Allow them in your phone's Settings.
+Couldn't turn notifications on. Try again.
+Couldn't reach this phone. Turn notifications off and on again.
+Take your time.
+on your phone, then:
+#
+# --- tour
+Welcome to Shepherd
+Shepherd reminds you who to check in with, so no one you're checking up on slips through. This tour opens each part of the app and lets you set it up as you go.
+Start in Settings
+First, open Settings and add your WhatsApp number and the first message that will be sent automatically when they scan your QR code.
+Most people use Shepherd on their phone, so turn on notifications. Shepherd tells you by name who to message, who to reply to and who to check on, and opens that person when you tap.
+Tap here after you meet someone. Add their name and number, or show your QR code so they message you first.
+Fill in their details and tap Save contact.
+Start each day here
+Today shows who to message and who's waiting on you. Green is on track, amber is due today, red is overdue.
+Message in one tap
+The chat button opens WhatsApp or Instagram. Shepherd logs it and waits for their reply.
+When they reply
+Tap Replied and they move to your Reply to list. Each day Shepherd also asks about anyone it's unsure of.
+Add the people that are already disciples. Shepherd reminds you to check in with those people every week. It's biblical to encourage one another! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Let's make this a habit each week!
+Type their name and tap Add.
+Your calendar
+Invite people and tick who came. Connect Shepherd to your phone's calendar so your studies and events show there by themselves.
+You're all set
+Change what your morning summary shows in Settings. On a person's page, Add to phone contacts saves them to your phone. Replay this tour from Settings any time.
+{0} of {1}
+End tour
+Continue tour
+Back to the tour
+Skip this step
+#
+# --- signing in and account
+Sign in
+Create account
+Create my account
+Email
+Forgot password?
+Back to sign in
+Get a reset code
+6-digit code
+New password
+Save new password
+Enter your email address.
+Enter your password.
+Choose a password of at least 8 characters.
+Choose at least 8 characters.
+Enter your email and we'll help you choose a new password.
+Enter your 6-digit code and choose a new password.
+Ask the person who runs Shepherd at your church for a reset code, then enter it and choose a new password.
+If {0} has an account, we've emailed a 6-digit code. Enter it and choose a new password.
+You only need to sign in once on this phone.
+Your list is private: nobody else using Shepherd can see it.
+Opening Shepherd…
+No connection. Check your signal and try again.
+No connection. Your changes are kept on this phone.
+Something went wrong. Try again.
+Shepherd has no server address yet.
+Shepherd isn't connected to its server yet. Put your Cloudflare Worker address in <b>config.js</b>.
+Current password
+Your password
+Password changed. Other phones will ask you to sign in again.
+This removes your account and <b>everyone in your Shepherd list</b> from the server, for good. Export a backup first if you might want it again.
+Delete everything
+Everything is saved. Signing out removes your list from this phone; sign in again any time to get it back.
+<b>{0} change hasn't reached the server yet.</b> Connect to the internet and wait for “Saved” at the top before signing out, or they'll be lost.
+<b>{0} changes haven't reached the server yet.</b> Connect to the internet and wait for “Saved” at the top before signing out, or they'll be lost.
+Sign out anyway
+#
+# --- messages from the Shepherd server
+Something went wrong on the Shepherd server. Your changes are kept on your phone.
+Check the code and choose a password of at least 8 characters.
+Check your email and password.
+One item is too large to save.
+Please sign in again.
+Something in that save isn't allowed.
+That code has run out. Ask for a new one.
+That code isn't right.
+That email address doesn't look right.
+That email and password don't match.
+That is too much to save at once.
+There is already an account with that email. Sign in instead.
+This phone gave a notification address Shepherd can't use.
+This phone gave notification keys Shepherd can't use.
+Too many changes at once.
+Too many tries. Wait 15 minutes and try again.
+Turn on notifications on this phone first.
+Your password isn't right.
+#
+# --- added after checking coverage
+{0} day
+{0} days
+{0} saved
+Add them now
+Check again in
+This phone
+Check-ins
+Nothing yet.
+Notes (optional)
+Logged. Next check-in today.
+Logged. Next check-in tomorrow.
+Other app
+Messaged on another app
+Shepherd notifications are on
+Each morning you'll hear who to message, who to reply to and who to check on, by name.
+#
+# --- short day and month names (used when the phone has no calendar words for the language)
+Sun
+Mon
+Tue
+Wed
+Thu
+Fri
+Sat
+Jan
+Feb
+Mar
+Apr
+May
+Jun
+Jul
+Aug
+Sep
+Oct
+Nov
+Dec

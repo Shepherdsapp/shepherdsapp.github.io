@@ -1,0 +1,779 @@
+1	{0}: {1}
+2	{0} · {1}
+3	<b>{0}</b> · {1}
+4	{0}, {1}
+5	{0} ir dar {1}
+6	{0} (vėluoja {1} d.)
+7	{0} ({1} d.)
+8	{0} (pavyzdys)
+9	Šiandien
+10	Rytoj
+11	Vakar
+12	šiandien
+13	rytoj
+14	vakar
+15	Žmonės
+16	Mokiniai
+17	Kalendorius
+18	Savaitė
+19	Nustatymai
+20	Pridėti
+21	Pridėti kontaktą
+22	Pridėti žmogų
+23	Pridėti kontaktą
+24	Išsaugoti
+25	Išsaugoti pakeitimus
+26	Atšaukti
+27	Uždaryti
+28	Atlikta
+29	Atgal
+30	Toliau
+31	Praleisti
+32	Redaguoti
+33	Atidaryti
+34	Rodyti
+35	Slėpti
+36	Anuliuoti
+37	Peržiūrėti
+38	Filtras
+39	Visi
+40	Išjungta
+41	Jūs
+42	Kita
+43	Pavyzdys
+44	Vardas
+45	Telefonas
+46	El. paštas
+47	Slaptažodis
+48	Vartotojo vardas
+49	Pastabos
+50	Data
+51	Laikas
+52	Diena
+53	Kur
+54	Išsamiau
+55	Etapas
+56	Priežastis
+57	Įkeliama
+58	Išsaugota
+59	Išsaugoma…
+60	Akimirką…
+61	Ne dabar
+62	Dar ne
+63	Parodyk
+64	Parodyk kaip
+65	Visi
+66	Pagrindinis
+67	Sąrašas
+68	Kelionė
+69	Praėję
+70	Artėjantys
+71	Studijos
+72	Renginiai
+73	Renginys
+74	Veikla
+75	Šiame įrenginyje
+76	Neprisijungta · bus sinchronizuota
+77	Neišsaugota internete
+78	Išsaugota šiame įrenginyje
+79	Internetinė saugykla pilna. Jūsų pakeitimai lieka šiame telefone. Eksportuokite atsarginę kopiją nustatymuose.
+80	Labas rytas
+81	Laba diena
+82	Labas vakaras
+83	Labas rytas, {0}
+84	Laba diena, {0}
+85	Labas vakaras, {0}
+86	Jūsų rytinė santrauka
+87	Šiandienos santrauka
+88	Viskas atlikta. Šiandien niekas jūsų nelaukia.
+89	Šiandien nieko nėra.
+90	Pranešimai išjungti.
+91	Parašyti šiandien
+92	Atsakyti
+93	Laukia atsakymo
+94	Šiandien
+95	Vėluoja
+96	Laiku
+97	Pristabdyta
+98	Šiandienos studijos
+99	Biblijos studijos
+100	1 studija šiandien
+101	§one={0} studija šiandien|few={0} studijos šiandien|many={0} studijos šiandien|other={0} studijų šiandien
+102	Parašyti: {0}
+103	§one={0} neatsakyta žinutė|few={0} neatsakytos žinutės|many={0} neatsakytos žinutės|other={0} neatsakytų žinučių
+104	§one={0} neatsakyta žinutė|few={0} neatsakytos žinutės|many={0} neatsakytos žinutės|other={0} neatsakytų žinučių
+105	Patikrinti: {0}
+106	{0} iš {1}
+107	Pasitikrinimas
+108	Ar {0} atsakė?
+109	§one=Parašėte {0} prieš {1} dieną.|few=Parašėte {0} prieš {1} dienas.|many=Parašėte {0} prieš {1} dienos.|other=Parašėte {0} prieš {1} dienų.
+110	§one=Parašėte {0} prieš {1} dieną.|few=Parašėte {0} prieš {1} dienas.|many=Parašėte {0} prieš {1} dienos.|other=Parašėte {0} prieš {1} dienų.
+111	Taip, atsakiau
+112	Vis dar laukiu
+113	Paklausk rytoj
+114	Shepherd paklaus dar kartą rytoj
+115	Mokiniai šią savaitę
+116	Atlikta {0} iš {1}
+117	Dar susisiekti su: {0}.
+118	Atidaryti Mokinius
+119	Melskitės šiandien
+120	Maldos sąrašas ({0})
+121	Žiūrite pavyzdinius kontaktus. <b>Pašalinkite juos</b> nustatymuose, kai norėsite.
+122	Jūsų pakeitimai lieka šiame telefone, bet jų negalima išsaugoti internete. Paprašykite to, kas pasidalino Shepherd, suteikti <b>Bendradarbio</b> prieigą.
+123	Pradėkite nuo žmonių, kuriuos sutinkate
+124	Pridėkite žmogų, su kuriuo dalijotės tikėjimu. Shepherd primins susisiekti kas kelias dienas ir seks jo studijas.
+125	Pridėti pirmąjį žmogų
+126	Įkelkite Shepherd į pradžios ekraną
+127	Jis atsidaro kaip programėlė, ir taip Shepherd gali siųsti pranešimus su žmonių vardais.
+128	§one=Parašyti {0} žmogui: {1}|few=Parašyti {0} žmonėms: {1}|many=Parašyti {0} žmonėms: {1}|other=Parašyti {0} žmonių: {1}
+129	§one=Parašyti {0} žmogui: {1}|few=Parašyti {0} žmonėms: {1}|many=Parašyti {0} žmonėms: {1}|other=Parašyti {0} žmonių: {1}
+130	Atsakyti: {0}
+131	Ar atsakė? {0}
+132	Mokiniai, su kuriais susisiekti šią savaitę: {0}
+133	Šiandienos studijos: {0}
+134	{0} {1}
+135	Renginiai: {0}
+136	{0} šiandien {1}
+137	{0} rytoj {1}
+138	{0} šiandien
+139	{0} rytoj
+140	Šią savaitę susisiekėte su {0} iš {1}.
+141	§one=Šią savaitę susisiekėte su {0} iš {1} žmogaus.|few=Šią savaitę susisiekėte su {0} iš {1} žmonių.|many=Šią savaitę susisiekėte su {0} iš {1} žmonių.|other=Šią savaitę susisiekėte su {0} iš {1} žmonių.
+142	§one=Šią savaitę susisiekėte su {0} iš {1} žmogaus.|few=Šią savaitę susisiekėte su {0} iš {1} žmonių.|many=Šią savaitę susisiekėte su {0} iš {1} žmonių.|other=Šią savaitę susisiekėte su {0} iš {1} žmonių.
+143	Parašyti: {0}
+144	§one={0} jums parašė prieš {1} dieną. Bakstelėkite, kad atsakytumėte.|few={0} jums parašė prieš {1} dienas. Bakstelėkite, kad atsakytumėte.|many={0} jums parašė prieš {1} dienos. Bakstelėkite, kad atsakytumėte.|other={0} jums parašė prieš {1} dienų. Bakstelėkite, kad atsakytumėte.
+145	§one={0} jums parašė prieš {1} dieną. Bakstelėkite, kad atsakytumėte.|few={0} jums parašė prieš {1} dienas. Bakstelėkite, kad atsakytumėte.|many={0} jums parašė prieš {1} dienos. Bakstelėkite, kad atsakytumėte.|other={0} jums parašė prieš {1} dienų. Bakstelėkite, kad atsakytumėte.
+146	{0} laukia jūsų atsakymo.
+147	Šiandien baigiasi pauzė. Bakstelėkite ir parašykite: {0}.
+148	Dar neparašėte: {0}. Bakstelėkite ir pasisveikinkite.
+149	§one=Vėluoja {0} dieną. Bakstelėkite ir parašykite: {1}.|few=Vėluoja {0} dienas. Bakstelėkite ir parašykite: {1}.|many=Vėluoja {0} dienos. Bakstelėkite ir parašykite: {1}.|other=Vėluoja {0} dienų. Bakstelėkite ir parašykite: {1}.
+150	§one=Vėluoja {0} dieną. Bakstelėkite ir parašykite: {1}.|few=Vėluoja {0} dienas. Bakstelėkite ir parašykite: {1}.|many=Vėluoja {0} dienos. Bakstelėkite ir parašykite: {1}.|other=Vėluoja {0} dienų. Bakstelėkite ir parašykite: {1}.
+151	Šiandien metas susisiekti. Bakstelėkite ir parašykite: {0}.
+152	§one=Parašėte {0} prieš {1} dieną. Jei atsakė, Shepherd bakstelėkite „Atsakė“.|few=Parašėte {0} prieš {1} dienas. Jei atsakė, Shepherd bakstelėkite „Atsakė“.|many=Parašėte {0} prieš {1} dienos. Jei atsakė, Shepherd bakstelėkite „Atsakė“.|other=Parašėte {0} prieš {1} dienų. Jei atsakė, Shepherd bakstelėkite „Atsakė“.
+153	§one=Parašėte {0} prieš {1} dieną. Jei atsakė, Shepherd bakstelėkite „Atsakė“.|few=Parašėte {0} prieš {1} dienas. Jei atsakė, Shepherd bakstelėkite „Atsakė“.|many=Parašėte {0} prieš {1} dienos. Jei atsakė, Shepherd bakstelėkite „Atsakė“.|other=Parašėte {0} prieš {1} dienų. Jei atsakė, Shepherd bakstelėkite „Atsakė“.
+154	Susisiekti: {0}
+155	Šią savaitę dar nesusisiekėte: {0}.
+156	Ir dar {0} šiandien
+157	Biblijos studija: {0}, {1}
+158	Biblijos studija: {0} šiandien
+159	Po valandos. Studija: {0}
+160	Po valandos.
+161	Studija: {0}
+162	Laikas dar nenustatytas.
+163	Rytoj: {0}
+164	Visą dieną
+165	§one=Pakviestas {0} žmogus|few=Pakviesti {0} žmonės|many=Pakviesta {0} žmonių|other=Pakviesta {0} žmonių
+166	§one=Pakviestas {0} žmogus|few=Pakviesti {0} žmonės|many=Pakviesta {0} žmonių|other=Pakviesta {0} žmonių
+167	Prasidės po valandos.
+168	Prasidės po valandos · {0}.
+169	Melskitės už: {0}
+170	{0} ir {1}
+171	Jūsų savaitė
+172	Ieškoti žmonių
+173	Ieškokite pagal vardą, numerį ar slapyvardį
+174	Niekas neatitinka.
+175	Čia dar nieko nėra.
+176	§one={0} žmogus, kurį lydite|few={0} žmonės, kuriuos lydite|many={0} žmonių, kuriuos lydite|other={0} žmonių, kuriuos lydite
+177	§one={0} žmogus, kurį lydite|few={0} žmonės, kuriuos lydite|many={0} žmonių, kuriuos lydite|other={0} žmonių, kuriuos lydite
+178	Nebesusisiekiama
+179	Nebesusisiekiama ({0})
+180	Saugiai laikoma, kad niekas nedingtų. Bet kada galite ką nors grąžinti.
+181	Susisiekti šiandien
+182	Susisiekti rytoj
+183	§one=Susisiekti po {0} dienos|few=Susisiekti po {0} dienų|many=Susisiekti po {0} dienos|other=Susisiekti po {0} dienų
+184	§one=Vėluoja {0} dieną|few=Vėluoja {0} dienas|many=Vėluoja {0} dienos|other=Vėluoja {0} dienų
+185	§one=Vėluoja {0} dieną|few=Vėluoja {0} dienas|many=Vėluoja {0} dienos|other=Vėluoja {0} dienų
+186	Po pauzės
+187	Jums reikia atsakyti
+188	laukiama atsakymo
+189	§one=laukiama {0} dieną|few=laukiama {0} dienas|many=laukiama {0} dienos|other=laukiama {0} dienų
+190	§one=laukiama {0} dieną|few=laukiama {0} dienas|many=laukiama {0} dienos|other=laukiama {0} dienų
+191	§one=tyli {0} dieną|few=tyli {0} dienas|many=tyli {0} dienos|other=tyli {0} dienų
+192	Pristabdyta iki {0}
+193	Dar nesusisiekta
+194	Paskutinis kontaktas šiandien
+195	Laukiama atsakymo
+196	Laukiama žinių
+197	Pridėkite būdą parašyti: {0}
+198	Pažymėti žinutę: {0}
+199	Parašyti {0} per WhatsApp
+200	Parašyti {0} per Instagram
+201	Parašyti {0} per Snapchat
+202	Parašyti {0} per TikTok
+203	Parašyti {0} per Facebook
+204	Parašyti per WhatsApp
+205	Parašyti per Instagram
+206	Parašyti per Snapchat
+207	Atidaryti pokalbį
+208	Pirmas kontaktas
+209	Susidomėjęs
+210	Studijuoja
+211	Reguliariai bažnyčioje
+212	Pakrikštytas
+213	Mokinys
+214	Perkelti: {0} ›
+215	Grąžinti: {0}
+216	{0} → {1}
+217	Etapas pakeistas: {0}
+218	Paskutinis etapas
+219	Redaguoti: {0}
+220	Priminti: {0}
+221	Atsakė
+222	Atsakiau
+223	Atsakiau: {0}
+224	{0} atsakė
+225	Jūs atsakėte
+226	Ar jau atsakėte: {0}?
+227	{0} laukia jūsų žinutės.
+228	Paskutiniai rašė jie. Bakstelėkite pokalbio mygtuką, atsakykite, tada „Atsakiau“.
+229	Bakstelėkite „Atsakė“, kai jums atrašys.
+230	Pažymėta. Laukiama atsakymo: {0}.
+231	§one=Pažymėta. Kitas kontaktas po {0} dienos.|few=Pažymėta. Kitas kontaktas po {0} dienų.|many=Pažymėta. Kitas kontaktas po {0} dienos.|other=Pažymėta. Kitas kontaktas po {0} dienų.
+232	§one=Pažymėta. Kitas kontaktas po {0} dienos.|few=Pažymėta. Kitas kontaktas po {0} dienų.|many=Pažymėta. Kitas kontaktas po {0} dienos.|other=Pažymėta. Kitas kontaktas po {0} dienų.
+233	Kur dabar pokalbis
+234	Viskas gerai
+235	Turiu atsakyti
+236	Pažymėta: viskas gerai
+237	Pažymėta: turiu atsakyti
+238	Pažymėta: laukiama atsakymo
+239	Parašyta per WhatsApp
+240	Parašyta per Instagram
+241	Parašyta per Snapchat
+242	Priminta per WhatsApp
+243	Susisiekta kitaip
+244	Susisiekti kas
+245	§one=Kontakto ritmas: kas {0} dieną|few=Kontakto ritmas: kas {0} dienas|many=Kontakto ritmas: kas {0} dienos|other=Kontakto ritmas: kas {0} dienų
+246	§one=Kontakto ritmas: kas {0} dieną|few=Kontakto ritmas: kas {0} dienas|many=Kontakto ritmas: kas {0} dienos|other=Kontakto ritmas: kas {0} dienų
+247	Kita studija
+248	Suplanuota studija
+249	Studijų dar nepažymėta.
+250	Pažymėti studiją
+251	Pažymėti studiją: {0}
+252	Biblijos studija
+253	Studija pažymėta: {0}
+254	Studija išsaugota
+255	Kita studija: {0}
+256	Kita studija su <b>{0}</b> išsaugota.
+257	Kita studija su <b>{0}</b> išsaugota, o Shepherd primins valanda prieš pradžią.
+258	Shepherd prijungtas prie telefono kalendoriaus, tad ji jau ten.
+259	Ką studijavote
+260	Studijos pavadinimas ar ištrauka
+261	Išsaugoti studiją
+262	Kaip sekėsi
+263	Ko klausė, prie ko grįžti
+264	Kita studija turi būti po šios.
+265	Pasirinkite studijos datą.
+266	Laikas nenustatytas
+267	Susipažinote
+268	Maldos prašymai
+269	Pastabų nėra
+270	Veiklos žurnalas
+271	Kiekvienas jūsų pakeitimas, naujausi viršuje.
+272	Pridėta
+273	Pridėta per jūsų QR kodą
+274	Išsaugoti telefone
+275	Išsaugoti telefono kontaktuose
+276	Pridėti į maldos sąrašą
+277	Kol kas palikti
+278	Kol kas palikti: {0}
+279	Nebesusisiekti
+280	Nebesusisiekti: {0}
+281	Ištrinti visus jų duomenis
+282	Grąžinti į aktyvius
+283	Grąžinta į aktyvius
+284	Atkurta
+285	{0} vėl jūsų sąraše
+286	Atnaujinti priminimus dabar
+287	Priminimai atnaujinti
+288	Priminimai vėl įjungti
+289	Priminimai pristabdyti iki <b>{0}</b>.
+290	Priminimai pristabdyti iki <b>{0}</b> · {1}.
+291	Pridėti numerį ar slapyvardį
+292	Pridėkite WhatsApp numerį ar socialinių tinklų slapyvardį, kad galėtumėte parašyti.
+293	Duomenys atnaujinti
+294	Nauji kontaktai
+295	Išsaugoti kontaktą
+296	Išsaugoti ir pridėti kitą
+297	WhatsApp numeris
+298	WhatsApp (nebūtina)
+299	Socialiniai tinklai (nebūtina)
+300	Programėlė
+301	@slapyvardis
+302	Susipažinome prie stoties
+303	Kur susipažinote (nebūtina)
+304	Ką prisiminti
+305	Kaip jiems sekasi, už ką melstis
+306	Jie sutinka, kad saugotume jų duomenis ir palaikytume ryšį.
+307	Užtenka vardo
+308	Įrašykite vardą.
+309	Pirmiausia įrašykite vardą.
+310	Pirmiausia įrašykite vardą.
+311	Telefono numeris atrodo neteisingas. Naudokite 07… arba +44…
+312	Numeris atrodo neteisingas. Naudokite 07… arba +44…
+313	07… arba +44…
+314	Pradėkite rašyti, kad rastumėte
+315	Pasirinkti iš kontaktų
+316	Importuokite telefono kontaktus, kad rastumėte žmones rašydami
+317	{0} pridėtas. Išsaugoti ir telefono kontaktuose?
+318	{0} pridėtas. Susisiekite šią savaitę.
+319	Nukopijuota. Atidarykite „Kontaktus“, bakstelėkite + ir įklijuokite.
+320	Atidarykite failą, kad pridėtumėte {0} prie kontaktų
+321	Kopijuoti
+322	Palaikykite tekstą apačioje ir pasirinkite „Kopijuoti“.
+323	Numerio nėra
+324	Pristabdyti priminimus
+325	Jokių priminimų iki pasirinktos datos. Tą dieną žmogus grįš į jūsų sąrašą „Šiandien“.
+326	Greiti pasirinkimai
+327	1 savaitė
+328	2 savaitės
+329	1 mėnuo
+330	3 mėnesiai
+331	Arba pasirinkite datą
+332	Pasirinkite datą po šiandien.
+333	Pirmiausia pasirinkite priežastį.
+334	Dabar užsiėmęs
+335	Išvykęs ar keliauja
+336	Nori erdvės
+337	Egzaminai ar darbas
+338	Paprašė nebesusisiekti
+339	Išsikraustė
+340	Prisijungė prie kitos bažnyčios
+341	Ilgai neatsako
+342	Priežastis nenurodyta
+343	Pristabdyta iki {0}
+344	Pristabdyta iki {0} ({1})
+345	Nebesusisiekiama: {0}
+346	Nebesusisiekiama: <b>{0}</b>.
+347	{0} dingsta iš jūsų sąrašų, o priminimai sustoja. Istorija išsaugoma, ir bet kada galite grąžinti.
+348	Jei jie paprašė visiškai ištrinti duomenis, po to naudokite <b>Ištrinti visus jų duomenis</b>.
+349	Tai ištrins {0} ir viską apie šį žmogų: numerį, pastabas, studijas ir istoriją. Atšaukti negalima.
+350	Darykite tai tik tada, kai kas nors prašo ištrinti savo duomenis. Jei tiesiog nebenorite susisiekti, palikite žmogų skiltyje „Nebesusisiekiama“.
+351	Įrašykite DELETE, kad patvirtintumėte
+352	Ištrinti visam laikui
+353	Ištrinti duomenis: {0}
+354	Duomenys ištrinti: {0}
+355	Kontaktas ištrintas jo prašymu
+356	Susisiekite su kiekvienu kartą per savaitę ir toliau kurkite draugystę.
+357	Pridėkite žmogų kas savaitę susisiekti
+358	Pridėti mokinį
+359	Susisiekta
+360	Susisiekta šiandien
+361	Susisiekta vakar
+362	Susisiekta: {0}
+363	Susisiekta šią savaitę
+364	Dar nesusisiekta
+365	Susisiekta: {0}
+366	{0}: šią savaitę susisiekta
+367	§one=Paskutinis kontaktas prieš {0} dieną|few=Paskutinis kontaktas prieš {0} dienas|many=Paskutinis kontaktas prieš {0} dienos|other=Paskutinis kontaktas prieš {0} dienų
+368	§one=Paskutinis kontaktas prieš {0} dieną|few=Paskutinis kontaktas prieš {0} dienas|many=Paskutinis kontaktas prieš {0} dienos|other=Paskutinis kontaktas prieš {0} dienų
+369	Susisiekti šią savaitę
+370	Atlikta šią savaitę
+371	Šią savaitę susisiekėte su visais.
+372	Pašalinti iš Mokinių
+373	{0} pašalintas iš Mokinių
+374	Bakstelėkite dar kartą, kad pašalintumėte: {0}
+375	Maldos sąrašas
+376	Už ką meldžiatės?
+377	Už ką melstis
+378	Pastaba (nebūtina)
+379	Redaguoti maldą
+380	Pašalinti iš maldos sąrašo
+381	Atgal į maldos sąrašą
+382	Maldos sąraše dar nieko nėra.
+383	Pridėkite žmones, už kuriuos meldžiatės. Shepherd kasdien parodo kelis, paeiliui, ir gali priminti.
+384	§one=Pridėkite visus, už kuriuos norite melstis. Kasdien Shepherd parodo {0} žmogų, paeiliui.|few=Pridėkite visus, už kuriuos norite melstis. Kasdien Shepherd parodo {0} žmones, paeiliui.|many=Pridėkite visus, už kuriuos norite melstis. Kasdien Shepherd parodo {0} žmonių, paeiliui.|other=Pridėkite visus, už kuriuos norite melstis. Kasdien Shepherd parodo {0} žmonių, paeiliui.
+385	§one=Pridėkite visus, už kuriuos norite melstis. Kasdien Shepherd parodo {0} žmogų, paeiliui, ir primena {1}.|few=Pridėkite visus, už kuriuos norite melstis. Kasdien Shepherd parodo {0} žmones, paeiliui, ir primena {1}.|many=Pridėkite visus, už kuriuos norite melstis. Kasdien Shepherd parodo {0} žmonių, paeiliui, ir primena {1}.|other=Pridėkite visus, už kuriuos norite melstis. Kasdien Shepherd parodo {0} žmonių, paeiliui, ir primena {1}.
+386	{0} pridėtas į maldos sąrašą
+387	{0} pašalintas iš maldos sąrašo
+388	{0} jau yra maldos sąraše
+389	Maldos priminimai
+390	Primink melstis kasdien
+391	Žmonių per dieną
+392	§one=Kasdien melskitės už {0} žmogų iš maldos sąrašo, paeiliui.|few=Kasdien melskitės už {0} žmones iš maldos sąrašo, paeiliui.|many=Kasdien melskitės už {0} žmonių iš maldos sąrašo, paeiliui.|other=Kasdien melskitės už {0} žmonių iš maldos sąrašo, paeiliui.
+393	§one=Kasdien melskitės už {0} žmogų iš maldos sąrašo, paeiliui. Priminimai ateina iš Shepherd programėlės telefone.|few=Kasdien melskitės už {0} žmones iš maldos sąrašo, paeiliui. Priminimai ateina iš Shepherd programėlės telefone.|many=Kasdien melskitės už {0} žmonių iš maldos sąrašo, paeiliui. Priminimai ateina iš Shepherd programėlės telefone.|other=Kasdien melskitės už {0} žmonių iš maldos sąrašo, paeiliui. Priminimai ateina iš Shepherd programėlės telefone.
+394	Maldos priminimas {0}
+395	Maldos priminimai įjungti
+396	Maldos priminimai išjungti
+397	Maldos priminimų nustatymai
+398	Jūsų pamaldos ir renginiai. Pakvieskite žmones, tada pažymėkite, kas atėjo.
+399	Renginių dar nėra
+400	Pridėkite čia sekmadienio pamaldas, apmąstymus ar susitikimą, kad galėtumėte kviesti žmones ir pažymėti, kas atėjo.
+401	Naujas renginys
+402	Redaguoti renginį
+403	Sukurti renginį
+404	Ištrinti renginį
+405	Renginys ištrintas
+406	Bakstelėkite dar kartą, kad ištrintumėte renginį
+407	Duokite renginiui pavadinimą.
+408	Pasirinkite datą.
+409	pvz., Sekmadienio pamaldos
+410	Sekmadienio pamaldos
+411	Savaitės vidurio pamaldos
+412	Pažymėkite, ką pakvietėte. Žinutės mygtukas išsiunčia paruoštą kvietimą. Renginio dieną pažymėkite, kas atėjo.
+413	Pažymėkite, kas atėjo.
+414	Pirmiausia pridėkite kontaktų, tada kvieskite juos čia.
+415	Atėjo
+416	Neatėjo
+417	Pakviestas
+418	Atėjo į: {0}
+419	Pakviestas į: {0}
+420	Kvietimas atšauktas: {0}
+421	Atšauktas atvykimas į: {0}
+422	Kvietimas nukopijuotas. Įklijuokite jį į žinutę.
+423	Labas, {0}! Gal norėtum ateiti į {1} {2}? Būtų puiku tave ten pamatyti.
+424	šiandien {0}
+425	rytoj {0}
+426	{0} {1}
+427	{0}
+428	§one={0} kvietimas|few={0} kvietimai|many={0} kvietimo|other={0} kvietimų
+429	§one={0} kvietimas|few={0} kvietimai|many={0} kvietimo|other={0} kvietimų
+430	§one={0} kvietimas · atėjo {1}|few={0} kvietimai · atėjo {1}|many={0} kvietimo · atėjo {1}|other={0} kvietimų · atėjo {1}
+431	§one={0} kvietimas · atėjo {1}|few={0} kvietimai · atėjo {1}|many={0} kvietimo · atėjo {1}|other={0} kvietimų · atėjo {1}
+432	Iš jūsų kalendoriaus
+433	Iš jūsų kalendoriaus · {0}
+434	Jūsų kalendoriaus renginiai jau čia
+435	Kalendoriaus renginiai paskutinį kartą atsiųsti {0}.
+436	§one=Kalendorius: pridėtas {0} renginys|few=Kalendorius: pridėti {0} renginiai|many=Kalendorius: pridėta {0} renginio|other=Kalendorius: pridėta {0} renginių
+437	§one=Kalendorius: pridėtas {0} renginys|few=Kalendorius: pridėti {0} renginiai|many=Kalendorius: pridėta {0} renginio|other=Kalendorius: pridėta {0} renginių
+438	Tame faile renginių nerasta
+439	Pridėti iš kalendoriaus failo
+440	Pasirinkti kalendoriaus failą (.ics)
+441	Gavote renginį kaip kalendoriaus failą (jis baigiasi <b>.ics</b>), pavyzdžiui, bažnyčios kvietimą? Išsaugokite jį telefone ir pasirinkite čia. Pasikartojimai, kaip savaitinės pamaldos, įtraukiami.
+442	Pridėti į telefono kalendorių
+443	Kopijuoti kalendoriaus nuorodą
+444	Kalendoriaus nuoroda nukopijuota. Įklijuokite ją į ICSx⁵.
+445	Sukurta nauja nuoroda. Vėl prijunkite kalendorių.
+446	sukurkite naują nuorodą
+447	Ši nuoroda tik jums. Jei kada netyčia ja pasidalinsite,
+448	Prijungti kalendorių
+449	Kaip prijungti telefono kalendorių
+450	Parodyk, kaip prijungti mano kalendorių
+451	Prijungti prie iPhone kalendoriaus
+452	Prijunkite Shepherd prie telefono kalendoriaus, ir Biblijos studijos bei renginiai ten atsiras patys, šalia visko kito jūsų dienoje.
+453	1. Prijunkite Shepherd prie telefono kalendoriaus
+454	2. Laikykite kalendoriuje ir asmeninius TimeTree renginius
+455	Apačioje bakstelėkite <b>Prijungti prie iPhone kalendoriaus</b>.
+456	iPhone paklaus, ar norite prenumeruoti. Bakstelėkite <b>Prenumeruoti</b>, tada <b>Atlikta</b>.
+457	Jei telefonas paklausė, bakstelėkite „Prenumeruoti“. Tada grįžkite čia.
+458	Grįžkite į Shepherd. Jūsų studijos ir renginiai dabar matomi programėlėje <b>Kalendorius</b> kaip <b>Shepherd</b> ir patys atsinaujina.
+459	Prie studijos ar renginio Shepherd bakstelėkite <b>Pridėti į telefono kalendorių</b>.
+460	Telefonas atidarys programėlę <b>Kalendorius</b> su užpildytais duomenimis. Bakstelėkite <b>Išsaugoti</b>.
+461	Kad jie būtų pridedami patys, įdiekite programėlę <b>ICSx⁵</b>, apačioje bakstelėkite <b>Kopijuoti kalendoriaus nuorodą</b> ir pridėkite ją ICSx⁵ mygtuku <b>+</b>.
+462	TimeTree nesidalija renginiais su kitomis programėlėmis, todėl negali jų nukopijuoti pats. Asmeninius TimeTree renginius, svarbius jūsų savaitei, pridėkite ir į telefono kalendorių, kad viską matytumėte vienoje vietoje.
+463	Atidarykite telefono programėlę <b>Kalendorius</b> ir bakstelėkite <b>+</b>.
+464	Atidarykite programėlę <b>Kalendorius</b> ir bakstelėkite <b>+</b>.
+465	Atidarykite žinutę ar laišką su failu.
+466	Bakstelėkite failą, tada mygtuką <b>Bendrinti</b>, tada <b>Išsaugoti „Failuose“</b>.
+467	Bakstelėkite failą, tada <b>Atsisiųsti</b> (arba tris taškus › <b>Išsaugoti</b>).
+468	Grįžkite čia ir bakstelėkite <b>Pasirinkti kalendoriaus failą</b>.
+469	Grįžkite čia ir bakstelėkite <b>Pasirinkti kalendoriaus failą</b>. Jis yra <b>Atsisiuntimuose</b>.
+470	Kopijuoti į TimeTree
+471	Kopijuoti duomenis į TimeTree
+472	Nukopijuota. Atidarykite TimeTree ir įklijuokite į naują renginį.
+473	Atidarykite programėlę <b>TimeTree</b> ir bakstelėkite mygtuką <b>+</b>.
+474	Įklijuokite nukopijuotus duomenis į pavadinimą ir pastabą, tada nustatykite <b>datą ir laiką</b>.
+475	Įrašykite pavadinimą, tada nustatykite <b>datą ir laiką</b> iš TimeTree renginio.
+476	Pasirinkite <b>priminimą</b>, pavyzdžiui, 1 valanda prieš, kad iPhone jums primintų.
+477	Pasirinkite <b>priminimą</b>, pavyzdžiui, 1 valanda prieš, kad Android telefonas jums primintų.
+478	Bakstelėkite <b>Išsaugoti</b>.
+479	Bakstelėkite <b>Išsaugoti</b> (varnelę).
+480	Savaitė nuo {0}
+481	Ši savaitė
+482	Susisiekėte su <em>{0} iš {1}</em> — puiki savaitė.
+483	Susisiekėte su <em>{0} iš {1}</em> — gerai sekasi.
+484	Susisiekėte su <em>{0} iš {1}</em> — tęskite.
+485	Susisiekėte su <em>{0} iš {1}</em> — pradėkite nuo šiandienos sąrašo.
+486	Savaitės santrauka atsiras, kai pridėsite kontaktų.
+487	Atėjo į renginius
+488	Susisiekimas per paskutines 4 savaites
+489	Dalis lydimų žmonių, kurie tą savaitę gavo žinutę, skambutį ar studiją.
+490	Šią savaitę dar nesusisiekta
+491	Kalba
+492	Biblijos eilutės lieka anglų kalba (NIV).
+493	Jūsų vardas
+494	Jūsų WhatsApp numeris
+495	Žinutė, kurią jums siunčia per jūsų QR kodą
+496	Nauji kontaktai: susisiekti kas
+497	Nustatymai išsaugoti
+498	Pranešimai
+499	Pranešimai įjungti
+500	Šiame telefone pranešimai įjungti.
+501	Šiame telefone pranešimai išjungti.
+502	Pranešimai su vardais ateina iš Shepherd programėlės telefone.
+503	Įjungti pranešimus
+504	Siųsti bandomąjį
+505	Atsiųsk man bandomąjį pranešimą
+506	Kaip tai veikia
+507	Kaip juos gauti
+508	Rytiniai pranešimai
+509	Rytiniai pranešimai {0}
+510	Apie ką praneša Shepherd
+511	Pranešimų pasirinkimai išsaugoti
+512	Pranešimai: {0}
+513	Kam priminti
+514	Visi vėluojantys ar su kontaktu šiandien
+515	Jūsų atsakymai
+516	Žmonės, laukiantys jūsų žinutės
+517	Žmonės, iš kurių vis dar laukiate žinių
+518	Su kuo dar reikia susisiekti šią savaitę
+519	Šiandienos Biblijos studijos
+520	Šiandien suplanuotos studijos su laiku
+521	Kalendoriaus renginiai
+522	Šiandienos ir rytojaus renginiai, įskaitant jūsų kalendorių
+523	Savaitės santrauka
+524	Sekmadieniais: su kiek žmonių susisiekėte
+525	Kam priminti ir renginiai
+526	Tik renginiai
+527	Telefono kontaktai
+528	Pasirinkti iš mano kontaktų
+529	Importuoti kontaktų failą
+530	Kaip gauti kontaktų failą
+531	Gauti kontaktų failą
+532	Pašalinti juos iš šio telefono
+533	Įkelkite telefono kontaktus, ir pridedant žmogų vardas bei numeris atsiras jums rašant. Jie lieka tik šiame telefone ir niekada neįkeliami.
+534	§one={0} kontaktas šiame telefone. Pridedant žmogų, tinkami vardai atsiranda jums rašant. Jie lieka tik šiame telefone ir niekada neįkeliami.|few={0} kontaktai šiame telefone. Pridedant žmogų, tinkami vardai atsiranda jums rašant. Jie lieka tik šiame telefone ir niekada neįkeliami.|many={0} kontakto šiame telefone. Pridedant žmogų, tinkami vardai atsiranda jums rašant. Jie lieka tik šiame telefone ir niekada neįkeliami.|other={0} kontaktų šiame telefone. Pridedant žmogų, tinkami vardai atsiranda jums rašant. Jie lieka tik šiame telefone ir niekada neįkeliami.
+535	1 kontaktas šiame telefone. Pridedant žmogų, tinkami vardai atsiranda jums rašant. Jie lieka tik šiame telefone ir niekada neįkeliami.
+536	§one=Į šio telefono sąrašą pridėtas {0} kontaktas|few=Į šio telefono sąrašą pridėti {0} kontaktai|many=Į šio telefono sąrašą pridėta {0} kontakto|other=Į šio telefono sąrašą pridėta {0} kontaktų
+537	§one=Į šio telefono sąrašą pridėtas {0} kontaktas|few=Į šio telefono sąrašą pridėti {0} kontaktai|many=Į šio telefono sąrašą pridėta {0} kontakto|other=Į šio telefono sąrašą pridėta {0} kontaktų
+538	Šie kontaktai jau čia
+539	Tame faile kontaktų nerasta
+540	Telefono kontaktai pašalinti iš Shepherd šiame telefone
+541	Išsaugokite kontaktus viename faile ir pasirinkite jį Shepherd skiltyje <b>Importuoti kontaktų failą</b>.
+542	Atidarykite programėlę <b>Kontaktai</b> ir bakstelėkite <b>Sąrašai</b> (viršuje kairėje).
+543	Palaikykite <b>Visi kontaktai</b> (arba Visas iCloud), tada bakstelėkite <b>Eksportuoti</b>.
+544	Bakstelėkite <b>Išsaugoti „Failuose“</b>, tada <b>Išsaugoti</b>.
+545	Grįžę į Shepherd bakstelėkite <b>Importuoti kontaktų failą</b> ir pasirinkite jį.
+546	Atidarykite programėlę <b>Kontaktai</b>.
+547	Bakstelėkite <b>Taisyti ir tvarkyti</b> (arba ⋮ › <b>Nustatymai</b>, arba <b>Tvarkyti kontaktus</b> Samsung telefone), tada <b>Eksportuoti į failą</b>.
+548	Išsaugokite jį <b>Atsisiuntimuose</b>.
+549	Jūsų kontaktai lieka tik šiame telefone. Shepherd jų niekada neįkelia.
+550	Pradžia
+551	Minutės ekskursija po Shepherd.
+552	Aprodyk man
+553	Programėlės užraktas
+554	Nustatyti PIN
+555	Keisti PIN
+556	Pašalinti PIN
+557	Užrakinti dabar
+558	Išsaugoti PIN
+559	PIN išsaugotas
+560	PIN pašalintas
+561	Dabartinis PIN
+562	Naujas PIN (nuo 4 iki 8 skaitmenų)
+563	Įveskite dar kartą
+564	Naudokite nuo 4 iki 8 skaitmenų.
+565	PIN kodai nesutampa.
+566	Dabartinis PIN neteisingas.
+567	Nustatykite PIN, kad niekas, paėmęs jūsų telefoną, negalėtų skaityti kontaktų.
+568	Shepherd prašo PIN atidarant ir po 5 minučių nebuvimo.
+569	Jei jį pamiršite, norint vėl patekti reikės atsarginės kopijos, tad pasirinkite tokį, kurį prisiminsite.
+570	Shepherd užrakintas
+571	Įveskite PIN, kad matytumėte kontaktus.
+572	Atrakinti
+573	Neteisingas PIN. Bandykite dar kartą.
+574	Jūsų paskyra
+575	Prisijungta kaip
+576	. Šiame telefone liekate prisijungę.
+577	Keisti slaptažodį
+578	Atsijungti
+579	Ištrinti mano paskyrą
+580	Jūsų duomenys
+581	Jūsų kontaktai saugomi jūsų asmeninėje erdvėje. Niekas kitas, naudojantis Shepherd, jų nemato. Kopija laikoma ir šiame telefone, kad programėlė veiktų be ryšio.
+582	Jūsų kontaktai saugomi jūsų asmeninėje erdvėje (kol kas tik šiame telefone). Niekas kitas, naudojantis Shepherd, jų nemato. Kopija laikoma ir šiame telefone, kad programėlė veiktų be ryšio.
+583	Jūsų kontaktai saugomi jūsų asmeninėje erdvėje Shepherd serveryje, su ankstesnėmis versijomis. Niekas kitas, naudojantis Shepherd, jų nemato. Kopija laikoma ir šiame telefone, kad programėlė veiktų be ryšio.
+584	Kas saugoma ir kas tai mato
+585	Eksportuoti atsarginę kopiją
+586	Atkurti atsarginę kopiją
+587	Atsarginė kopija išsaugota
+588	Atsarginė kopija nukopijuota. Įklijuokite ją į užrašą arba nusiųskite sau el. paštu.
+589	Šis failas nėra Shepherd atsarginė kopija
+590	Atkurta: pridėta {0}, atnaujinta {1}
+591	Pašalinti pavyzdinius kontaktus
+592	Pavyzdiniai kontaktai pašalinti
+593	Shepherd laiko jūsų sąrašą privatų. Čia tiksliai parašyta, kas saugoma, kur ir kas tai mato.
+594	Su jumis susieti duomenys
+595	Jūsų vardas, el. paštas ir WhatsApp numeris.
+596	Žmonės, kuriuos pridedate: vardai, telefonų numeriai, slapyvardžiai, pastabos, maldos prašymai ir Biblijos studijos.
+597	Jūsų renginiai, mokiniai ir maldos sąrašas.
+598	Saugoma jūsų paskyroje Shepherd serveryje, kad niekas nedingtų, su ankstesnėmis versijomis metus. Matote tik jūs, kai esate prisijungę.
+599	Saugoma jūsų asmeninėje erdvėje. Matote tik jūs.
+600	Tik šiame telefone
+601	Kontaktai, importuoti iš telefono, kad rašant būtų siūlomi vardai. Jie niekada neįkeliami.
+602	Jūsų sąrašo kopija, kad Shepherd veiktų be ryšio.
+603	Niekada nerenkama
+604	Jūsų buvimo vieta.
+605	Jūsų WhatsApp, SMS ar iMessage pokalbiai.
+606	Visa jūsų adresų knygelė (tik jūsų pasirinkti kontaktai).
+607	Nieko reklamai ar sekimui.
+608	Kai kas nors nuskenuoja jūsų QR kodą
+609	Jie patys nusprendžia įrašyti vardą (ir numerį, jei nori). Tai patenka tik į jūsų sąrašą, o paskui jie patys jums parašo per WhatsApp.
+610	Kas nors prašo ištrinti jo duomenis? Atidarykite jį, bakstelėkite <b>Nebesusisiekti</b>, tada <b>Ištrinti visus jų duomenis</b>. Ištrinamos visos kopijos.
+611	Mano QR kodas
+612	Jūsų QR kodas
+613	QR kodas, kad žmonės jums parašytų
+614	Nuskenuokite, kad palaikytume ryšį
+615	Sukurti mano QR kodą
+616	Geriau parodyti mano QR kodą
+617	Pirmiausia pridėkite savo WhatsApp numerį. Kai kas nors nuskenuos jūsų kodą, atsidarys WhatsApp su žinute jums, tad gausite numerį, o žmogus pats nuspręs palaikyti ryšį.
+618	Paprašykite nukreipti telefono kamerą čia. Jie įrašo vardą, <b>yra pridedami prie jūsų Shepherd</b>, ir atsidaro WhatsApp su jūsų žinute, paruošta siųsti.
+619	Gausite pranešimą, kai jie nuskenuos.
+620	Paprašykite nukreipti telefono kamerą čia. Atsidarys WhatsApp su žinute jums, ir jiems liks tik išsiųsti.
+621	Kai ateis jų žinutė, pridėkite juos čia su numeriu.
+622	Jų žinutė: „{0}“
+623	Labas, malonu susipažinti! Tavo kontaktą gavau per Shepherd. Tikiuosi greitai išgirsti iš tavęs.
+624	Keisti žinutę
+625	QR kodas neįsikėlė. Pasidalinkite šia nuoroda:
+626	QR kodo čia nepavyko nupiešti.
+627	Pridėti mano numerį dabar
+628	Įrašykite savo numerį ir žinutę, tada bakstelėkite „Išsaugoti“.
+629	Gaukite Shepherd programėlę
+630	Tai veikia Shepherd programėlėje telefone. Atidarykite
+631	, prisijunkite ir grįžkite prie šio vadovo.
+632	Pranešimai su vardais („Atsakyti: Grace“, „Parašyti: Daniel“) ateina iš <b>Shepherd programėlės</b> telefone. Įdiekite ją kartą ir ten įjunkite pranešimus.
+633	Jau naudojate Shepherd čia? Eksportuokite atsarginę kopiją nustatymuose ir atkurkite ją programėlėje.
+634	Išsaugota. Priminimai ateina iš Shepherd programėlės.
+635	Shepherd siunčia pranešimus su vardais, pavyzdžiui, <b>Atsakyti: Grace</b>, <b>Parašyti: Daniel</b> ar <b>Ar Sam atsakė?</b>, kiekvieną rytą <b>{0}</b>, taip pat prieš kiekvieną studiją ir renginį. Bakstelėkite ir atsidarys tas žmogus.
+636	1. Įdiekite Shepherd telefone
+637	2. Leiskite pranešimus
+638	3. Patikrinkite, ar veikia
+639	Shepherd įdiegtas šiame telefone.
+640	Atidarykite Shepherd naršyklėje <b>Safari</b>.
+641	Atidarykite Shepherd naršyklėje <b>Chrome</b>.
+642	Bakstelėkite mygtuką <b>Bendrinti</b> (kvadratas su rodykle).
+643	Bakstelėkite <b>Įtraukti į pradžios ekraną</b>, tada <b>Pridėti</b>.
+644	Bakstelėkite <b>⋮</b> viršuje dešinėje, tada <b>Įdiegti programą</b> (arba <b>Pridėti prie pagrindinio ekrano</b>).
+645	Bakstelėkite <b>Įdiegti</b>.
+646	Bakstelėkite <b>Pridėti</b>.
+647	Atidarykite Shepherd per naują piktogramą.
+648	Atidarykite Shepherd per naują piktogramą pradžios ekrane. iPhone pranešimai veikia tik iš ten (iOS 16.4 ar naujesnė).
+649	Shepherd įdiegtas. Atidarykite jį per naują piktogramą.
+650	Kai telefonas paklaus, bakstelėkite <b>Leisti</b>. Netyčia bakstelėjote <b>Neleisti</b>?
+651	Įjunkite <b>Leisti pranešimus</b>.
+652	Įjunkite <b>Leisti pranešimus</b>, pažymėję <b>Užrakinimo ekranas</b>, <b>Juostelės</b> ir <b>Ženkleliai</b>.
+653	Nustatymai › Pranešimai › Shepherd
+654	Nustatymai › Programos › Shepherd › Pranešimai
+655	Pranešimas iš Shepherd ateis per kelias sekundes.
+656	Nieko? Patikrinkite, ar <b>Fokusavimas</b> išjungtas ir ar atidarėte Shepherd per piktogramą pradžios ekrane.
+657	Nieko? Patikrinkite, ar <b>Netrukdyti</b> išjungta ir ar Shepherd pranešimai leidžiami (2 žingsnis).
+658	Laiką ir tai, apie ką praneša Shepherd, keiskite skiltyje <b>Pranešimai</b> nustatymuose. Įjunkite pranešimus kartą kiekviename telefone, kurį naudojate.
+659	Bandomasis išsiųstas. Jis turėtų ateiti per kelias sekundes.
+660	Tikrinamas šis telefonas…
+661	Šis telefonas blokuoja Shepherd pranešimus. Žr. 2 žingsnį, kad juos leistumėte.
+662	Pirmiausia pridėkite Shepherd į pradžios ekraną (1 žingsnis) ir atidarykite iš ten.
+663	Pirmiausia pridėkite Shepherd į pradžios ekraną ir atidarykite iš ten.
+664	Ši naršyklė negali rodyti pranešimų. Atidarykite Shepherd per Safari (iPhone) arba Chrome (Android).
+665	Ši naršyklė negali rodyti pranešimų. Naudokite Safari (iPhone) arba Chrome (Android).
+666	Pranešimai užblokuoti. Leiskite juos telefono nustatymuose.
+667	Nepavyko įjungti pranešimų. Bandykite dar kartą.
+668	Nepavyko pasiekti šio telefono. Išjunkite ir vėl įjunkite pranešimus.
+669	Neskubėkite.
+670	telefone, tada:
+671	Sveiki atvykę į Shepherd
+672	Shepherd primena, su kuo susisiekti, kad nė vienas, kuriuo rūpinatės, nepasimestų. Ši ekskursija atidaro kiekvieną programėlės dalį ir leidžia viską nustatyti pakeliui.
+673	Pradėkite nuo nustatymų
+674	Pirmiausia atidarykite nustatymus ir pridėkite savo WhatsApp numerį bei pirmą žinutę, kuri bus išsiųsta automatiškai, kai nuskenuos jūsų QR kodą.
+675	Dauguma naudoja Shepherd telefone, tad įjunkite pranešimus. Shepherd vardu pasako, kam parašyti, kam atsakyti ir su kuo susisiekti, o bakstelėjus atidaro tą žmogų.
+676	Bakstelėkite čia, kai ką nors sutiksite. Pridėkite vardą ir numerį arba parodykite savo QR kodą, kad žmogus parašytų pirmas.
+677	Užpildykite duomenis ir bakstelėkite „Išsaugoti kontaktą“.
+678	Kiekvieną dieną pradėkite čia
+679	„Šiandien“ rodo, kam parašyti ir kas jūsų laukia. Žalia – laiku, geltona – šiandien, raudona – vėluoja.
+680	Žinutė vienu bakstelėjimu
+681	Pokalbio mygtukas atidaro WhatsApp ar Instagram. Shepherd tai pažymi ir laukia atsakymo.
+682	Kai atsakys
+683	Bakstelėkite „Atsakė“, ir žmogus pateks į sąrašą „Atsakyti“. Kasdien Shepherd taip pat paklausia apie tuos, dėl kurių nėra tikras.
+684	Pridėkite žmones, kurie jau yra mokiniai. Shepherd primins su jais susisiekti kas savaitę. Biblija ragina drąsinti vieni kitus! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Paverskime tai kas savaitės įpročiu!
+685	Įrašykite vardą ir bakstelėkite „Pridėti“.
+686	Jūsų kalendorius
+687	Pakvieskite žmones ir pažymėkite, kas atėjo. Prijunkite Shepherd prie telefono kalendoriaus, kad studijos ir renginiai ten atsirastų patys.
+688	Viskas paruošta
+689	Nustatymuose pakeiskite, ką rodo rytinė santrauka. Žmogaus puslapyje mygtukas „Išsaugoti telefono kontaktuose“ išsaugo jį telefone. Pakartokite šią ekskursiją nustatymuose bet kada.
+690	Baigti ekskursiją
+691	Tęsti ekskursiją
+692	Atgal į ekskursiją
+693	Praleisti šį žingsnį
+694	Prisijungti
+695	Sukurti paskyrą
+696	Sukurti mano paskyrą
+697	Pamiršote slaptažodį?
+698	Atgal į prisijungimą
+699	Gauti kodą
+700	6 skaitmenų kodas
+701	Naujas slaptažodis
+702	Išsaugoti naują slaptažodį
+703	Įveskite el. pašto adresą.
+704	Įveskite slaptažodį.
+705	Pasirinkite bent 8 simbolių slaptažodį.
+706	Pasirinkite bent 8 simbolius.
+707	Įveskite el. paštą, ir padėsime pasirinkti naują slaptažodį.
+708	Įveskite 6 skaitmenų kodą ir pasirinkite naują slaptažodį.
+709	Paprašykite kodo žmogaus, kuris jūsų bažnyčioje tvarko Shepherd, įveskite jį ir pasirinkite naują slaptažodį.
+710	Jei {0} turi paskyrą, išsiuntėme 6 skaitmenų kodą. Įveskite jį ir pasirinkite naują slaptažodį.
+711	Šiame telefone pakanka prisijungti vieną kartą.
+712	Jūsų sąrašas privatus: niekas kitas, naudojantis Shepherd, jo nemato.
+713	Atidaromas Shepherd…
+714	Nėra ryšio. Patikrinkite ryšį ir bandykite dar kartą.
+715	Nėra ryšio. Jūsų pakeitimai lieka šiame telefone.
+716	Kažkas nepavyko. Bandykite dar kartą.
+717	Shepherd dar neturi serverio adreso.
+718	Shepherd dar neprijungtas prie savo serverio. Įrašykite savo Cloudflare Worker adresą į <b>config.js</b>.
+719	Dabartinis slaptažodis
+720	Jūsų slaptažodis
+721	Slaptažodis pakeistas. Kiti telefonai paprašys prisijungti iš naujo.
+722	Tai visam laikui ištrins iš serverio jūsų paskyrą ir <b>visus žmones jūsų Shepherd sąraše</b>. Pirmiausia eksportuokite atsarginę kopiją, jei jos gali prireikti.
+723	Ištrinti viską
+724	Viskas išsaugota. Atsijungus sąrašas pašalinamas iš šio telefono; prisijunkite bet kada, kad jį atgautumėte.
+725	§one=<b>{0} pakeitimas dar nepasiekė serverio.</b> Prisijunkite prie interneto ir palaukite, kol viršuje pasirodys „Išsaugota“, prieš atsijungdami, kitaip jis dings.|few=<b>{0} pakeitimai dar nepasiekė serverio.</b> Prisijunkite prie interneto ir palaukite, kol viršuje pasirodys „Išsaugota“, prieš atsijungdami, kitaip jie dings.|many=<b>{0} pakeitimo dar nepasiekė serverio.</b> Prisijunkite prie interneto ir palaukite, kol viršuje pasirodys „Išsaugota“, prieš atsijungdami, kitaip jie dings.|other=<b>{0} pakeitimų dar nepasiekė serverio.</b> Prisijunkite prie interneto ir palaukite, kol viršuje pasirodys „Išsaugota“, prieš atsijungdami, kitaip jie dings.
+726	§one=<b>{0} pakeitimas dar nepasiekė serverio.</b> Prisijunkite prie interneto ir palaukite, kol viršuje pasirodys „Išsaugota“, prieš atsijungdami, kitaip jis dings.|few=<b>{0} pakeitimai dar nepasiekė serverio.</b> Prisijunkite prie interneto ir palaukite, kol viršuje pasirodys „Išsaugota“, prieš atsijungdami, kitaip jie dings.|many=<b>{0} pakeitimo dar nepasiekė serverio.</b> Prisijunkite prie interneto ir palaukite, kol viršuje pasirodys „Išsaugota“, prieš atsijungdami, kitaip jie dings.|other=<b>{0} pakeitimų dar nepasiekė serverio.</b> Prisijunkite prie interneto ir palaukite, kol viršuje pasirodys „Išsaugota“, prieš atsijungdami, kitaip jie dings.
+727	Vis tiek atsijungti
+728	Shepherd serveryje kažkas nepavyko. Jūsų pakeitimai lieka telefone.
+729	Patikrinkite kodą ir pasirinkite bent 8 simbolių slaptažodį.
+730	Patikrinkite el. paštą ir slaptažodį.
+731	Vienas elementas per didelis išsaugoti.
+732	Prisijunkite iš naujo.
+733	Kažkas šiame išsaugojime neleidžiama.
+734	Kodo galiojimas baigėsi. Paprašykite naujo.
+735	Neteisingas kodas.
+736	El. pašto adresas atrodo neteisingas.
+737	El. paštas ir slaptažodis nesutampa.
+738	Per daug išsaugoti vienu metu.
+739	Paskyra su šiuo el. paštu jau yra. Geriau prisijunkite.
+740	Šis telefonas pateikė pranešimų adresą, kurio Shepherd negali naudoti.
+741	Šis telefonas pateikė pranešimų raktus, kurių Shepherd negali naudoti.
+742	Per daug pakeitimų vienu metu.
+743	Per daug bandymų. Palaukite 15 minučių ir bandykite dar kartą.
+744	Pirmiausia įjunkite pranešimus šiame telefone.
+745	Neteisingas slaptažodis.
+746	§one={0} diena|few={0} dienos|many={0} dienos|other={0} dienų
+747	§one={0} diena|few={0} dienos|many={0} dienos|other={0} dienų
+748	Išsaugota: {0}
+749	Pridėti dabar
+750	Vėl susisiekti po
+751	Šis telefonas
+752	Savaitiniai susisiekimai
+753	Kol kas nieko.
+754	Pastabos (nebūtina)
+755	Pažymėta. Kitas kontaktas šiandien.
+756	Pažymėta. Kitas kontaktas rytoj.
+757	Kita programėlė
+758	Parašyta per kitą programėlę
+759	Shepherd pranešimai įjungti
+760	Kiekvieną rytą vardu sužinosite, kam parašyti, kam atsakyti ir su kuo susisiekti.
+761	sk
+762	pr
+763	an
+764	tr
+765	kt
+766	pn
+767	št
+768	saus.
+769	vas.
+770	kov.
+771	bal.
+772	geg.
+773	birž.
+774	liep.
+775	rugp.
+776	rugs.
+777	spal.
+778	lapkr.
+779	gruod.

@@ -13,9 +13,10 @@ their own email and password, and each person's list is theirs alone.
 | `sw.js` | Lets the app open with no signal, and shows Shepherd's notifications. **Upload it again every time `index.html` changes.** |
 | `config.js` | Your server's address. **Edit it once** (step 2.3). |
 | `manifest.json`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`, `badge-96.png` | The Home Screen icon and install details. Upload once. |
-| `worker/worker.js` | The server: a Cloudflare Worker for accounts, saving, notifications and the calendar link. **Paste this into Cloudflare.** |
+| `lang/` | The 14 other languages. `lang/<code>.json` is what phones download; `lang/src/<code>.txt` is the translation you edit; `lang/_keys.txt` is every English line. **Upload the whole folder.** |
+| `worker/worker.js` | The server: a Cloudflare Worker for accounts, saving, notifications, the calendar link and the QR hello page. **Paste this into Cloudflare.** |
 | `hosted/shepherd.html` | The same app built to live inside Claude (no notifications or calendar link there). |
-| `src/` | Source: `app.html` (the app) and `web.js` (sign-in, saving to your server, notifications, installing). |
+| `src/` | Source: `app.html` (the app), `web.js` (sign-in, saving to your server, notifications, installing) and `i18n.js` (languages). |
 | `test/` | The tests (see the end of this page). |
 
 No password, key or private address is written anywhere in this folder.
@@ -49,7 +50,7 @@ The tables and the notification keys are created by the Worker itself the first 
 
 1. github.com → **New repository**. Name it **shepherd**, set it to **Public** → **Create repository**.
 2. **Add file → Upload files**. Drag in `index.html`, `sw.js`, `config.js`, `manifest.json`, `icon-192.png`, `icon-512.png`,
-   `apple-touch-icon.png` and `badge-96.png` → **Commit changes**.
+   `apple-touch-icon.png`, `badge-96.png` and the `lang` folder → **Commit changes**.
 3. Click `config.js` → the pencil (Edit) → replace `https://shepherd.YOUR-NAME.workers.dev` with your **Worker address**
    from 1.7 → **Commit changes**.
 4. **Settings → Pages → Deploy from a branch → main / (root) → Save**.
@@ -110,6 +111,34 @@ In the app: **Calendar → How to link your phone calendar**.
 
 Add services and events on Shepherd's Calendar tab so you can invite people and tick who came.
 
+## Journey, prayer list, phone contacts and the QR code
+
+- **People → Journey** shows everyone by stage: First contact → Interested → Studying → Regular at church → Baptised →
+  Disciple. Tap **Move to …** to move someone on, or tap a stage on their page. Moving someone to Disciple doesn't add them
+  to the Disciples tab.
+- **Prayer list** (Today → Pray today, or Settings): add a name and optional notes. Each day Shepherd shows 2 or 3 of them,
+  taking turns. Turn on **Remind me to pray each day** in Settings and pick a time for a notification that names them.
+- **Phone contacts** (Settings): import a contacts file (any phone) or, on Android, pick contacts. When you add someone,
+  matching names and numbers come up as you type. They stay on that phone and are never uploaded. **Save to phone** on a
+  person's page makes a contact card for the phone's Contacts app.
+- **QR code**: someone scans it, types their name (and number if they like) on a small Shepherd page, and is added to
+  your list as First contact. WhatsApp then opens with your message ready for them to send, and you get a notification.
+  The standard message is *Hi, nice to meet you, I got your contact from Shepherd! Hoping to hear from you soon.* in your
+  language; change it in Settings.
+- **Settings → What's saved and who can see it** lists exactly what is kept, where, and what is never collected.
+
+## Languages
+
+Settings → **Language**: English, Español, Français, Português, Nederlands, Polski, Naijá, Yorùbá, Igbo, 中文（简体）,
+中文（繁體・香港／台灣）, 日本語, Deutsch, Русский, Lietuvių. A new phone starts in the phone's own language if it's one of
+these, and picks up the language you chose on your other phones once you sign in. Notifications, invites, the QR page and
+the calendar feed follow the language too. **Bible verses always stay in English (NIV).**
+
+The translations were written for Shepherd and haven't yet been checked by native speakers. To correct one, edit
+`lang/src/<code>.txt` (each line is `number<TAB>text`; the English is the same number in `lang/keys.json`), then run
+`node lang/check.mjs` and `node build.mjs`. Words that change with a number are written `§one=…|few=…|many=…|other=…`.
+To add a new English line, add it to `lang/_keys.txt`; `node lang/check.mjs` lists what each language is missing.
+
 ## Forgotten passwords
 
 Open `https://<your worker address>/admin`, type your `ADMIN_KEY` and the person's email. You get a 6-digit code that
@@ -135,7 +164,7 @@ seconds, about 180 requests an hour, so that covers several hundred hours of use
 ## Changing the app
 
 Edit `src/app.html` or `src/web.js`, run `node build.mjs`, then run the tests. When `index.html` changes, raise
-`VERSION` in `sw.js` (e.g. `shepherd-v2`) and upload both, so phones fetch the new version. When `worker/worker.js`
+`VERSION` in `sw.js` (e.g. `shepherd-v4`) and upload both, so phones fetch the new version. When `worker/worker.js`
 changes, paste it into the Worker again and **Deploy**.
 
 ## Tests
@@ -144,6 +173,7 @@ changes, paste it into the Worker again and **Deploy**.
 
 | Command | What it checks |
 |---|---|
-| `node test/worker.test.mjs` | 71 checks of the server: accounts, saving (newer copies always win), history, deleting, notifications (encrypted and signed exactly as Apple and Google require, then decrypted the way a phone does), the calendar link, password resets, privacy between accounts |
-| `node test/app.test.cjs` | 228 checks of the app: every screen, the tour, guides, and the notification schedule (names, times, pauses, caps) |
-| `node test/e2e.mjs` | 60 checks of the built website in Chromium at iPhone and Android sizes (320 to 430px wide), talking to the real server code: sign up, two phones in sync, notifications from schedule to delivery, tapping one, the calendar link, password reset, sign out, offline, and every tour card fully on screen at four phone sizes |
+| `node test/worker.test.mjs` | 87 checks of the server: the QR hello page (adds the person, opens WhatsApp in your language, slows down spam), accounts, saving (newer copies always win), history, deleting, notifications (encrypted and signed exactly as Apple and Google require, then decrypted the way a phone does), the calendar link, password resets, privacy between accounts |
+| `node test/app.test.cjs` | 285 checks of the app: every screen, the tour, guides, the journey, the prayer list and its reminders, reading contacts files from iPhone and Android, the notification schedule (names, times, pauses, caps), and the app in Spanish (Bible verses stay English) |
+| `node test/e2e.mjs` | 69 checks of the built website in Chromium at iPhone and Android sizes (320 to 430px wide), talking to the real server code: sign up, two phones in sync, notifications from schedule to delivery, tapping one, the calendar link, password reset, sign out, offline, every tour card fully on screen at four phone sizes, and switching language (a second phone follows, works offline) |
+| `node lang/check.mjs` | every language has every line, with the same `{0}` gaps and bold words |

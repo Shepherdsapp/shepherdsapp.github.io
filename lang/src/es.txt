@@ -1,0 +1,393 @@
+1	{0}: {1}
+2	{0} · {1}
+3	<b>{0}</b> · {1}
+4	{0}, {1}
+5	{0} y {1} más
+6	{0} ({1} d de retraso)
+7	{0} ({1} d)
+8	{0} (ejemplo)
+9	Hoy
+10	Mañana
+11	Ayer
+12	hoy
+13	mañana
+14	ayer
+15	Personas
+16	Discípulos
+17	Calendario
+18	Semana
+19	Ajustes
+20	Añadir
+21	Añadir contacto
+22	Añadir a alguien
+23	Añadir un contacto
+24	Guardar
+25	Guardar cambios
+26	Cancelar
+27	Cerrar
+28	Listo
+29	Atrás
+30	Siguiente
+31	Omitir
+32	Editar
+33	Abrir
+34	Mostrar
+35	Ocultar
+36	Deshacer
+37	Ver
+38	Filtrar
+39	Todo
+40	Desactivado
+41	Tú
+42	Otro
+43	Ejemplo
+44	Nombre
+45	Teléfono
+46	Correo electrónico
+47	Contraseña
+48	Usuario
+49	Notas
+50	Fecha
+51	Hora
+52	Día
+53	Dónde
+54	Detalles
+55	Etapa
+56	Motivo
+57	Cargando
+58	Guardado
+59	Guardando…
+60	Un momento…
+61	Ahora no
+62	Todavía no
+63	Muéstrame
+64	Muéstrame cómo
+65	Todos
+66	Principal
+67	Lista
+68	Camino
+69	Pasados
+70	Próximos
+71	Estudios
+72	Eventos
+73	Evento
+74	Actividad
+75	En este dispositivo
+76	Sin conexión · se sincronizará
+77	No guardado en línea
+78	Guardado en este dispositivo
+79	El almacenamiento en línea está lleno. Tus cambios se guardan en este teléfono. Exporta una copia de seguridad desde Ajustes.
+80	Buenos días
+81	Buenas tardes
+82	Buenas noches
+83	Buenos días, {0}
+84	Buenas tardes, {0}
+85	Buenas noches, {0}
+86	Tu resumen de la mañana
+87	Resumen de hoy
+88	Estás al día. Nadie te está esperando hoy.
+89	Nada pendiente hoy.
+90	Las alertas están desactivadas.
+91	Escribir hoy
+92	Responder a
+93	Pendiente de respuesta
+94	Para hoy
+95	Atrasado
+96	Al día
+97	En pausa
+98	Estudios de hoy
+99	Estudios bíblicos
+100	1 estudio hoy
+101	§one={0} estudio hoy|other={0} estudios hoy
+102	{0} para escribir
+103	§one={0} respuesta pendiente|other={0} respuestas pendientes
+104	§one={0} respuesta pendiente|other={0} respuestas pendientes
+105	{0} para revisar
+106	{0} de {1}
+107	Seguimiento
+108	¿Respondió {0}?
+109	§one=Le escribiste a {0} hace {1} día.|other=Le escribiste a {0} hace {1} días.
+110	§one=Le escribiste a {0} hace {1} día.|other=Le escribiste a {0} hace {1} días.
+111	Sí, respondí
+112	Sigo esperando
+113	Pregúntame mañana
+114	Shepherd te volverá a preguntar mañana
+115	Discípulos esta semana
+116	{0} de {1} hechos
+117	Falta hablar con: {0}.
+118	Abrir Discípulos
+119	Ora hoy
+120	Lista de oración ({0})
+121	Estás viendo contactos de ejemplo. <b>Quítalos</b> desde Ajustes cuando quieras.
+122	Tus cambios se guardan en este teléfono, pero no se pueden guardar en línea. Pide acceso de <b>Colaborador</b> a quien compartió Shepherd contigo.
+123	Empieza con las personas que conoces
+124	Añade a alguien con quien compartiste tu fe. Shepherd te recuerda contactarle cada pocos días y lleva la cuenta de sus estudios.
+125	Añadir a mi primera persona
+126	Pon Shepherd en tu pantalla de inicio
+127	Se abre como una app, y así Shepherd puede enviarte notificaciones con el nombre de cada persona.
+128	§one=Escribir a {0} persona: {1}|other=Escribir a {0} personas: {1}
+129	§one=Escribir a {0} persona: {1}|other=Escribir a {0} personas: {1}
+130	Responder a {0}
+131	¿Respondieron? {0}
+132	Discípulos con quienes hablar esta semana: {0}
+133	Estudios de hoy: {0}
+134	{0} a las {1}
+135	Eventos: {0}
+136	{0} hoy a las {1}
+137	{0} mañana a las {1}
+138	{0} hoy
+139	{0} mañana
+140	Esta semana diste seguimiento a {0} de {1}.
+141	§one=Esta semana diste seguimiento a {0} de {1} persona.|other=Esta semana diste seguimiento a {0} de {1} personas.
+142	§one=Esta semana diste seguimiento a {0} de {1} persona.|other=Esta semana diste seguimiento a {0} de {1} personas.
+143	Escribir a {0}
+144	§one={0} te escribió hace {1} día. Toca para responder.|other={0} te escribió hace {1} días. Toca para responder.
+145	§one={0} te escribió hace {1} día. Toca para responder.|other={0} te escribió hace {1} días. Toca para responder.
+146	{0} espera tu respuesta.
+147	Hoy termina la pausa. Toca para escribir a {0}.
+148	Aún no le has escrito a {0}. Toca para saludar.
+149	§one={0} día de retraso. Toca para escribir a {1}.|other={0} días de retraso. Toca para escribir a {1}.
+150	§one={0} día de retraso. Toca para escribir a {1}.|other={0} días de retraso. Toca para escribir a {1}.
+151	Toca contactarle hoy. Toca para escribir a {0}.
+152	§one=Le escribiste a {0} hace {1} día. Toca Respondió en Shepherd si te contestó.|other=Le escribiste a {0} hace {1} días. Toca Respondió en Shepherd si te contestó.
+153	§one=Le escribiste a {0} hace {1} día. Toca Respondió en Shepherd si te contestó.|other=Le escribiste a {0} hace {1} días. Toca Respondió en Shepherd si te contestó.
+154	Habla con {0}
+155	Aún no has hablado con {0} esta semana.
+156	Y {0} más hoy
+157	Estudio bíblico con {0} a las {1}
+158	Estudio bíblico con {0} hoy
+159	En una hora. Estudio: {0}
+160	En una hora.
+161	Estudio: {0}
+162	Aún sin hora.
+163	Mañana: {0}
+164	Todo el día
+165	§one={0} persona invitada|other={0} personas invitadas
+166	§one={0} persona invitada|other={0} personas invitadas
+167	Empieza en una hora.
+168	Empieza en una hora · {0}.
+169	Ora por {0}
+170	{0} y {1}
+171	Tu semana
+172	Buscar personas
+173	Busca por nombre, número o usuario
+174	Nadie coincide.
+175	Aún no hay nadie.
+176	§one={0} persona a la que das seguimiento|other={0} personas a las que das seguimiento
+177	§one={0} persona a la que das seguimiento|other={0} personas a las que das seguimiento
+178	Ya no se contacta
+179	Ya no se contacta ({0})
+180	Guardados para que no se pierda nada. Puedes restaurar a cualquiera cuando quieras.
+181	Contactar hoy
+182	Contactar mañana
+183	Contactar en {0} días
+184	§one=Atrasado {0} día|other=Atrasado {0} días
+185	§one=Atrasado {0} día|other=Atrasado {0} días
+186	Vuelve de una pausa
+187	Te toca responder
+188	esperando su respuesta
+189	§one=esperando {0} día|other=esperando {0} días
+190	§one=esperando {0} día|other=esperando {0} días
+191	sin respuesta desde hace {0} días
+192	En pausa hasta {0}
+193	Aún sin contactar
+194	Último contacto hoy
+195	Esperando su respuesta
+196	Esperando noticias
+197	Añade una forma de escribir a {0}
+198	Registrar un mensaje a {0}
+199	Escribir a {0} por WhatsApp
+200	Escribir a {0} por Instagram
+201	Escribir a {0} por Snapchat
+202	Escribir a {0} por TikTok
+203	Escribir a {0} por Facebook
+204	Escribir por WhatsApp
+205	Escribir por Instagram
+206	Escribir por Snapchat
+207	Abrir chat
+208	Primer contacto
+209	Interesado
+210	Estudiando
+211	Asiste a la iglesia
+212	Bautizado
+213	Discípulo
+214	Pasar a {0} ›
+215	Volver a {0}
+216	{0} pasó a {1}
+217	Etapa cambiada a {0}
+218	Última etapa
+219	Editar a {0}
+220	Recordar a {0}
+221	Respondió
+222	Respondí
+223	Respondí a {0}
+224	{0} respondió
+225	Respondiste
+226	¿Ya le respondiste a {0}?
+227	{0} espera un mensaje tuyo.
+228	Te escribió por última vez. Toca el botón de chat para contestar y luego Respondí.
+229	Toca Respondió cuando te conteste.
+230	Registrado. Esperando la respuesta de {0}.
+231	§one=Registrado. Próximo contacto en {0} día.|other=Registrado. Próximo contacto en {0} días.
+232	§one=Registrado. Próximo contacto en {0} día.|other=Registrado. Próximo contacto en {0} días.
+233	Cómo va la conversación
+234	Todo bien
+235	Tengo que responder
+236	Marcado: todo bien
+237	Marcado: tengo que responder
+238	Marcado: esperando su respuesta
+239	Escribió por WhatsApp
+240	Escribió por Instagram
+241	Escribió por Snapchat
+242	Recordatorio por WhatsApp
+243	Contactado de otra forma
+244	Contactar cada
+245	§one=Frecuencia de contacto: cada {0} día|other=Frecuencia de contacto: cada {0} días
+246	§one=Frecuencia de contacto: cada {0} día|other=Frecuencia de contacto: cada {0} días
+247	Próximo estudio
+248	Estudio previsto
+249	Aún no hay estudios registrados.
+250	Registrar un estudio
+251	Registrar un estudio con {0}
+252	Estudio bíblico
+253	Estudio registrado: {0}
+254	Estudio guardado
+255	Próximo estudio el {0}
+256	El próximo estudio con <b>{0}</b> está guardado.
+257	El próximo estudio con <b>{0}</b> está guardado y Shepherd te lo recordará una hora antes.
+258	Shepherd está conectado al calendario de tu teléfono, así que ya aparece allí.
+259	Qué estudiaron
+260	Nombre del estudio o pasaje
+261	Guardar estudio
+262	Cómo fue
+263	Preguntas que hicieron, qué retomar
+264	El próximo estudio tiene que ser después de este.
+265	Elige la fecha del estudio.
+266	Sin hora
+267	Se conocieron el
+268	Motivos de oración
+269	Sin notas
+270	Registro de actividad
+271	Cada cambio que haces, lo más reciente primero.
+272	Añadido
+273	Añadido desde tu código QR
+274	Guardar en el teléfono
+275	Guardar en los contactos del teléfono
+276	Añadir a la lista de oración
+277	Dejar por ahora
+278	Dejar a {0} por ahora
+279	Dejar de contactar
+280	Dejar de contactar a {0}
+281	Borrar todos sus datos
+282	Volver a activo
+283	Vuelto a activo
+284	Restaurado
+285	{0} vuelve a estar en tu lista
+286	Reanudar recordatorios ahora
+287	Recordatorios reanudados
+288	Recordatorios activados de nuevo
+289	Los recordatorios están en pausa hasta <b>{0}</b>.
+290	Los recordatorios están en pausa hasta <b>{0}</b> · {1}.
+291	Añadir número o usuario de redes
+292	Añade un número de WhatsApp o un usuario de redes sociales para poder escribirle.
+293	Datos actualizados
+294	Contactos nuevos
+295	Guardar contacto
+296	Guardar y añadir otro
+297	Número de WhatsApp
+298	WhatsApp (opcional)
+299	Redes sociales (opcional)
+300	App
+301	@usuario
+302	Nos conocimos fuera de la estación
+303	Dónde se conocieron (opcional)
+304	Algo para recordar
+305	Cómo le va, cosas por las que orar
+306	Está de acuerdo en que guardemos sus datos y sigamos en contacto.
+307	Basta con el nombre
+308	Añade su nombre.
+309	Primero añade su nombre.
+310	Primero añade un nombre.
+311	Ese número de teléfono no parece correcto. Usa 07… o +44…
+312	Ese número no parece correcto. Usa 07… o +44…
+313	07… o +44…
+314	Empieza a escribir para encontrarle
+315	Elegir de los contactos
+316	Importa los contactos de tu teléfono para encontrar a la gente mientras escribes
+317	{0} añadido. ¿Guardarlo también en los contactos del teléfono?
+318	{0} añadido. Habla con esta persona esta semana.
+319	Copiado. Abre la app Contactos, toca + y pega.
+320	Abre el archivo para añadir a {0} a tus contactos
+321	Copiar esto
+322	Mantén pulsado el texto de abajo y elige Copiar.
+323	Sin número
+324	Pausar recordatorios
+325	No habrá recordatorios hasta la fecha que elijas. Ese día vuelve a tu lista de Hoy.
+326	Opciones rápidas
+327	1 semana
+328	2 semanas
+329	1 mes
+330	3 meses
+331	O elige una fecha
+332	Elige una fecha posterior a hoy.
+333	Primero elige un motivo.
+334	Ocupado ahora
+335	De viaje o fuera
+336	Quiere espacio
+337	Exámenes o trabajo
+338	Nos pidió que no le contactáramos
+339	Se mudó
+340	Se unió a otra iglesia
+341	No responde desde hace mucho
+342	Sin motivo
+343	En pausa hasta {0}
+344	En pausa hasta {0} ({1})
+345	Ya no se contacta: {0}
+346	Ya no se contacta: <b>{0}</b>.
+347	{0} sale de tus listas y se detienen los recordatorios. Su historial se guarda y puedes restaurarle cuando quieras.
+348	Si pidió que se borraran sus datos por completo, usa <b>Borrar todos sus datos</b> después.
+349	Esto borra a {0} y todo sobre esta persona: número, notas, estudios e historial. No se puede deshacer.
+350	Hazlo solo cuando alguien pida que se borren sus datos. Para simplemente dejar de contactar a alguien, mantenle en Ya no se contacta.
+351	Escribe DELETE para confirmar
+352	Borrar para siempre
+353	Borrar los datos de {0}
+354	Se borraron los datos de {0}
+355	Se borró un contacto a petición suya
+356	Habla con cada persona una vez a la semana y sigue construyendo la amistad.
+357	Añade a alguien con quien hablar cada semana
+358	Añadir un discípulo
+359	Contactado
+360	Contactado hoy
+361	Contactado ayer
+362	Contactado el {0}
+363	Contactado esta semana
+364	Aún no contactado
+365	Hablaste con {0}
+366	Ya hablaste con {0} esta semana
+367	§one=Último contacto hace {0} día|other=Último contacto hace {0} días
+368	§one=Último contacto hace {0} día|other=Último contacto hace {0} días
+369	Por contactar esta semana
+370	Hecho esta semana
+371	Ya hablaste con todos esta semana.
+372	Quitar de Discípulos
+759	Las notificaciones de Shepherd están activadas
+760	Cada mañana sabrás por nombre a quién escribir, a quién responder y con quién hablar.
+761	dom
+762	lun
+763	mar
+764	mié
+765	jue
+766	vie
+767	sáb
+768	ene
+769	feb
+770	mar
+771	abr
+772	may
+773	jun
+774	jul
+775	ago
+776	sept
+777	oct
+778	nov
+779	dic

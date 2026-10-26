@@ -344,6 +344,32 @@ body{overflow-x:clip}
 .pushline.denied,.pushline.unsupported{background:var(--bad-soft);color:var(--bad);border-color:transparent}
 .pushline.install,.pushline.off{background:var(--warn-soft);color:var(--warn);border-color:transparent}
 .card.install{border-color:var(--accent);border-width:2px}
+/* journey */
+.langh{display:flex;align-items:center;gap:8px;color:var(--fg);font-weight:700;font-size:15px}.langh .i{width:20px;height:20px}
+.jstrip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin:2px 0 0}
+.jstep{background:none;border:0;padding:6px 0 0;display:grid;justify-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--muted);line-height:1.15;text-align:center;min-height:44px;position:relative}
+.jstep i{display:block;width:100%;height:6px;border-radius:99px;background:var(--surface-2)}
+.jstep.done i{background:var(--accent-soft)}.jstep.now i{background:var(--accent)}
+.jstep.now{color:var(--accent);font-weight:800}
+.jsum{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.jsum-i{display:grid;justify-items:center;gap:2px;padding:8px 2px;border-radius:12px;background:var(--surface);border:1.5px solid var(--line);text-decoration:none;color:var(--fg);text-align:center;min-width:0}
+.jsum-i b{font-size:20px;font-family:var(--display);color:var(--accent)}.jsum-i span{font-size:10.5px;font-weight:600;line-height:1.15;color:var(--muted);overflow-wrap:anywhere}
+.jboard{display:grid;grid-auto-flow:column;grid-auto-columns:min(86%,320px);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 10px;margin:0 -2px;overscroll-behavior-x:contain}
+.jcol{scroll-snap-align:start;display:grid;gap:10px;align-content:start;background:var(--surface-2);border-radius:var(--r);padding:12px;min-width:0}
+.jcol .h3{margin:0;font-size:17px;font-weight:800}
+.jlist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.jcard{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;display:grid;gap:8px;padding:10px;box-shadow:var(--card-shadow)}
+.jname{display:flex;gap:10px;align-items:center;background:none;border:0;padding:0;text-align:left;min-width:0}
+.jmove{display:flex;gap:6px;align-items:center}.jmove .grow{flex:1}
+.jempty{padding:8px 2px}
+/* name suggestions while adding */
+.acwrap{position:relative}
+.acl{list-style:none;margin:4px 0 0;padding:4px;position:absolute;left:0;right:0;top:100%;z-index:5;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;box-shadow:var(--shadow);max-height:300px;overflow:auto}
+.acl button{width:100%;display:grid;text-align:left;gap:1px;background:none;border:0;padding:10px 12px;border-radius:10px;min-height:48px}
+.acl button:hover,.acl button:focus{background:var(--accent-soft)}
+.acl b{font-weight:700;color:var(--fg)}.acl span{font-size:14px;color:var(--muted)}
+.tick1{display:flex;gap:12px;align-items:center;min-height:48px;cursor:pointer}.tick1 input{width:22px;height:22px;accent-color:var(--accent);flex:none}
+@media (max-width:374px){.jsum{grid-template-columns:repeat(3,minmax(0,1fr))}.jstep span{font-size:10px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -418,9 +444,22 @@ function dayDiff(a, b) { return Math.round((startOf(a) - startOf(b)) / DAY); }
 function weekStart(t) { var d = new Date(startOf(t)); var wd = (d.getDay() + 6) % 7; d.setDate(d.getDate() - wd); return d.getTime(); }
 var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 var WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-function fmtDate(s) { if (!s) return ''; var t = parseYmd(s); var d = new Date(t); var dd = dayDiff(t, today()); if (dd === 0) return 'Today'; if (dd === 1) return 'Tomorrow'; if (dd === -1) return 'Yesterday'; return WD[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()] + (d.getFullYear() !== new Date().getFullYear() ? ' ' + d.getFullYear() : ''); }
-function fmtStamp(t) { var d = new Date(t); return d.getDate() + ' ' + MON[d.getMonth()] + ', ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
-function fmtClock(s) { if (!s) return ''; var p = s.split(':').map(Number); var h = p[0] % 12 || 12; return h + (p[1] ? ':' + pad(p[1]) : '') + (p[0] < 12 ? 'am' : 'pm'); }
+// other languages: dates and times are written the way that language writes them (the words come from the phone)
+var LOC = window.I18N && I18N.lang !== 'en' ? I18N.locale() : '';
+function intl(d, o) { try { return new Intl.DateTimeFormat(LOC, o).format(d); } catch (e) { return ''; } }
+var locOk = false; try { locOk = !!LOC && Intl.DateTimeFormat.supportedLocalesOf([LOC]).length > 0; } catch (e) {}
+if (locOk && intl(new Date(2026, 0, 5), { weekday: 'short' })) {
+  WD = [0, 1, 2, 3, 4, 5, 6].map(function (i) { return intl(new Date(2026, 0, 4 + i), { weekday: 'short' }); });
+  MON = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (i) { return intl(new Date(2026, i, 1), { month: 'short' }); });
+} else {
+  // this phone has no calendar words for the language (Yorùbá or Igbo on some phones): use Shepherd's own
+  if (LOC) { WD = WD.map(function (w) { return I18N.tr(w); }); MON = MON.map(function (m) { return I18N.tr(m); }); }
+  LOC = '';
+}
+function fmtDay(t) { var d = new Date(t); return LOC ? intl(d, { day: 'numeric', month: 'short' }) : d.getDate() + ' ' + MON[d.getMonth()]; }
+function fmtDate(s) { if (!s) return ''; var t = parseYmd(s); var d = new Date(t); var dd = dayDiff(t, today()); if (dd === 0) return 'Today'; if (dd === 1) return 'Tomorrow'; if (dd === -1) return 'Yesterday'; var other = d.getFullYear() !== new Date().getFullYear(); if (LOC) return intl(d, other ? { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' } : { weekday: 'short', day: 'numeric', month: 'short' }); return WD[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()] + (other ? ' ' + d.getFullYear() : ''); }
+function fmtStamp(t) { var d = new Date(t); if (LOC) return intl(d, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); return d.getDate() + ' ' + MON[d.getMonth()] + ', ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+function fmtClock(s) { if (!s) return ''; var p = s.split(':').map(Number); if (LOC) return intl(new Date(2026, 0, 5, p[0], p[1] || 0), { hour: 'numeric', minute: '2-digit' }); var h = p[0] % 12 || 12; return h + (p[1] ? ':' + pad(p[1]) : '') + (p[0] < 12 ? 'am' : 'pm'); }
 function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
 function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 function plural(n, one, many) { return n + ' ' + (n === 1 ? one : (many || one + 's')); }
@@ -440,7 +479,7 @@ var ICON = {
   person: '<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.7-3.6 3.4-5.5 7-5.5s6.3 1.9 7 5.5"/><path d="M19 4v4M17 6h4"/></svg>'
 };
 var MARK = '<svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><rect width="104" height="104" rx="24"/><path d="M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6"/></svg>';
-var STAGES = ['First contact', 'Interested', 'Studying', 'Regular at church'];
+var STAGES = ['First contact', 'Interested', 'Studying', 'Regular at church', 'Baptised', 'Disciple'];
 var ARCHIVE_REASONS = ['Asked us not to contact them', 'Moved away', 'Joined another church', 'No reply for a long time', 'Other'];
 var PAUSE_REASONS = ['Busy right now', 'Away or travelling', 'Wants some space', 'Exams or work', 'Other'];
 var SOCIALS = ['Instagram', 'Snapchat', 'TikTok', 'Facebook', 'Other'];
@@ -460,26 +499,28 @@ var PRESETS = [
   ['Off', { chase: false, replies: false, catchup: false, disciples: false, studies: false, events: false, weekly: false }]
 ];
 
+var DEFAULT_INTRO = 'Hi, nice to meet you, I got your contact from Shepherd! Hoping to hear from you soon.';
+var OLD_INTRO = "Hi! It was great meeting you today. Here's my number so we can keep in touch about studying the Bible.";
 function defaultProfile() {
-  return { name: '', phone: '', intro: "Hi! It was great meeting you today. Here's my number so we can keep in touch about studying the Bible.", defaultEvery: 3, pinHash: '', alertTime: '08:00', notify: { chase: true, replies: true, catchup: true, disciples: true, studies: true, events: true, weekly: true }, log: [] };
+  return { name: '', phone: '', intro: DEFAULT_INTRO, defaultEvery: 3, pinHash: '', alertTime: '08:00', prayerOn: false, prayerTime: '07:30', prayerCount: 3, lang: '', notify: { chase: true, replies: true, catchup: true, disciples: true, studies: true, events: true, weekly: true }, log: [] };
 }
 
 /* ---------- state ---------- */
-var S = { uid: null, profile: defaultProfile(), contacts: {}, events: {}, disciples: {}, view: 'today', contactId: null, filter: 'all', search: '', mode: 'loading', sync: 'loading', unlocked: false, profileSeen: false, isOwner: false };
+var S = { uid: null, profile: defaultProfile(), contacts: {}, events: {}, disciples: {}, prayers: {}, view: 'today', contactId: null, filter: 'all', search: '', mode: 'loading', sync: 'loading', unlocked: false, profileSeen: false, isOwner: false };
 var DB = null, DOWN = null;
 var WEB = window.SHEPHERD_WEB || null; /* set when Shepherd runs as its own website (GitHub + Cloudflare) */
 var WEB_APP_URL = 'https://sitbackco.github.io/shepherd/';
 var pending = {}; var pv = 0; var flushing = false;
 
 function key() { return 'shepherd:v1:' + (S.uid || 'local'); }
-function saveLocal() { lsSet(key(), JSON.stringify({ profile: S.profile, contacts: S.contacts, events: S.events, disciples: S.disciples, pending: pending })); }
-function normProfile(p) { var d = defaultProfile(); var o = Object.assign(d, p || {}); o.notify = Object.assign(defaultProfile().notify, (p && p.notify) || {}); return o; }
+function saveLocal() { lsSet(key(), JSON.stringify({ profile: S.profile, contacts: S.contacts, events: S.events, disciples: S.disciples, prayers: S.prayers, pending: pending })); }
+function normProfile(p) { var d = defaultProfile(); var o = Object.assign(d, p || {}); o.notify = Object.assign(defaultProfile().notify, (p && p.notify) || {}); if (o.intro === OLD_INTRO) o.intro = DEFAULT_INTRO; return o; }
 function loadLocal() {
   var raw = lsGet(key()); if (!raw) return;
   try {
     var o = JSON.parse(raw);
     S.profile = normProfile(o.profile);
-    S.contacts = o.contacts || {}; S.events = o.events || {}; S.disciples = o.disciples || {};
+    S.contacts = o.contacts || {}; S.events = o.events || {}; S.disciples = o.disciples || {}; S.prayers = o.prayers || {};
     pending = o.pending || {};
     Object.keys(pending).forEach(function (p) { pv = Math.max(pv, pending[p].v || 0); });
   } catch (e) {}
@@ -488,6 +529,7 @@ function basePath() { return 'data/users/' + S.uid + '/profile'; }
 function cPath(id) { return basePath() + '/contacts/' + id; }
 function ePath(id) { return basePath() + '/events/' + id; }
 function dPath(id) { return basePath() + '/disciples/' + id; }
+function prPath(id) { return basePath() + '/prayers/' + id; }
 function clean(o) { return JSON.parse(JSON.stringify(o)); }
 
 function put(path, data) { pending[path] = { d: data === null ? null : clean(data), v: ++pv }; saveLocal(); flush(); }
@@ -540,6 +582,11 @@ function subscribe() {
   var onErr = function () { setSync('error'); };
   base.onSnapshot(function (s) {
     if (s.exists && !pending[basePath()]) S.profile = normProfile(s.data()); // an unsaved change on this phone wins until it's saved
+    if (s.exists && !pending[basePath()]) { try { var tz = Intl.DateTimeFormat().resolvedOptions().timeZone; if (tz && S.profile.tz !== tz) { S.profile.tz = tz; put(basePath(), S.profile); } } catch (e) {} } // so QR sign-ups get the right date
+    if (s.exists && !pending[basePath()] && window.I18N) {
+      if (S.profile.lang && !I18N.chosen() && S.profile.lang !== I18N.lang) { I18N.use(S.profile.lang); return; } // a new phone takes the language chosen on another
+      if (!S.profile.lang) { S.profile.lang = I18N.lang; put(basePath(), S.profile); } // so the QR hello page speaks your language
+    }
     S.profileSeen = true; saveLocal(); checkLock(); render(); maybeTour();
   }, onErr);
   base.collection('contacts').onSnapshot(function (q) {
@@ -559,6 +606,12 @@ function subscribe() {
     var next = {};
     q.docs.forEach(function (d) { next[d.id] = Object.assign({}, d.data(), { id: d.id }); });
     S.disciples = overlay(basePath() + '/disciples/', next); saveLocal(); render();
+  }, onErr);
+  base.collection('prayers').onSnapshot(function (q) {
+    if (q.metadata && q.metadata.fromCache && q.empty && Object.keys(S.prayers).length) return;
+    var next = {};
+    q.docs.forEach(function (d) { next[d.id] = Object.assign({}, d.data(), { id: d.id }); });
+    S.prayers = overlay(basePath() + '/prayers/', next); saveLocal(); render();
   }, onErr);
 }
 
@@ -695,6 +748,97 @@ function osSteps(ios, android) {
   return '<div class="os">' + (k === 'android' ? b + a : a + b) + '</div>';
 }
 
+/* ---------- phone contacts: kept on this phone only, never uploaded ---------- */
+function pbKey() { return 'shepherd:phonebook:' + (S.uid || 'local'); }
+function phoneBook() { try { var o = JSON.parse(lsGet(pbKey()) || 'null'); return o && Array.isArray(o.list) ? o : { list: [], at: 0 }; } catch (e) { return { list: [], at: 0 }; } }
+function mergePhoneBook(items) {
+  var pb = phoneBook(), seen = {}, added = 0;
+  pb.list.forEach(function (x) { seen[(x.n + '|' + (x.p[0] || '')).toLowerCase()] = 1; });
+  items.forEach(function (x) {
+    var n = String(x.n || '').trim(), ps = (x.p || []).map(function (v) { return String(v).trim(); }).filter(Boolean);
+    if (!n && !ps.length) return; if (!n) n = ps[0];
+    var k = (n + '|' + (ps[0] || '')).toLowerCase(); if (seen[k]) return;
+    seen[k] = 1; pb.list.push({ n: n.slice(0, 80), p: ps.slice(0, 4) }); added++;
+  });
+  pb.at = Date.now(); lsSet(pbKey(), JSON.stringify(pb)); return added;
+}
+/* contact files (.vcf) from any phone's Contacts app */
+function qpDecode(v) {
+  var bytes = [], s2 = v.replace(/=\r?\n/g, '');
+  for (var i = 0; i < s2.length; i++) { if (s2[i] === '=' && /^[0-9A-Fa-f]{2}$/.test(s2.substr(i + 1, 2))) { bytes.push(parseInt(s2.substr(i + 1, 2), 16)); i += 2; } else bytes.push(s2.charCodeAt(i) & 255); }
+  try { return new TextDecoder('utf-8').decode(new Uint8Array(bytes)); } catch (e) {}
+  try { return decodeURIComponent(bytes.map(function (b) { return '%' + (b < 16 ? '0' : '') + b.toString(16); }).join('')); } catch (e) { return s2; }
+}
+function vUnesc(v) { return String(v).replace(/\\n/gi, ' ').replace(/\\([,;\\])/g, '$1').trim(); }
+function parseVCF(text) {
+  var raw = String(text).replace(/\r\n/g, '\n');
+  raw = raw.replace(/=\n(?=[^\n])/g, '=\uE000'); // keep quoted-printable soft breaks for later
+  var lines = raw.split('\n').reduce(function (acc, ln) { if (/^[ \t]/.test(ln) && acc.length) acc[acc.length - 1] += ln.slice(1); else acc.push(ln); return acc; }, []);
+  var out = [], cur = null;
+  lines.forEach(function (ln) {
+    ln = ln.replace(/\uE000/g, '\n');
+    if (/^BEGIN:VCARD/i.test(ln)) { cur = { n: '', nAlt: '', p: [] }; return; }
+    if (/^END:VCARD/i.test(ln)) { if (cur) { out.push({ n: cur.n || cur.nAlt, p: cur.p }); } cur = null; return; }
+    if (!cur) return;
+    var i = ln.indexOf(':'); if (i < 0) return;
+    var head = ln.slice(0, i), val = ln.slice(i + 1), prop = head.split(';')[0].replace(/^item\d+\./i, '').toUpperCase();
+    if (/ENCODING=QUOTED-PRINTABLE/i.test(head)) val = qpDecode(val);
+    if (prop === 'FN') cur.n = vUnesc(val);
+    else if (prop === 'N') { var parts = val.split(';').map(vUnesc); cur.nAlt = [parts[3], parts[1], parts[2], parts[0], parts[4]].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim(); }
+    else if (prop === 'TEL') { var tel = val.replace(/^tel:/i, '').trim(); if (tel) cur.p.push(tel); }
+  });
+  return out.filter(function (x) { return x.n || x.p.length; });
+}
+function canPickContacts() { return !!(navigator.contacts && navigator.contacts.select && window.ContactsManager); }
+async function pickContacts(multiple) {
+  try {
+    var got = await navigator.contacts.select(['name', 'tel'], { multiple: !!multiple });
+    return (got || []).map(function (x) { return { n: (x.name && x.name[0]) || '', p: x.tel || [] }; });
+  } catch (e) { return []; }
+}
+function suggest(q) {
+  q = String(q || '').trim().toLowerCase(); if (!q) return [];
+  var starts = [], has = [];
+  phoneBook().list.forEach(function (x) {
+    var n = x.n.toLowerCase();
+    if (n.indexOf(q) === 0 || n.split(/\s+/).some(function (w) { return w.indexOf(q) === 0; })) starts.push(x);
+    else if (n.indexOf(q) >= 0 || x.p.some(function (v) { return v.replace(/\D/g, '').indexOf(q.replace(/\D/g, '') || '§') >= 0; })) has.push(x);
+  });
+  return starts.concat(has).slice(0, 6);
+}
+function phoneBookCard() {
+  var pb = phoneBook();
+  return '<section class="card" id="pbCard"><h3>Phone contacts</h3><p class="note">' + (pb.list.length ? plural(pb.list.length, 'contact') + ' on this phone. When you add someone, matching names come up as you type.' : 'Bring in your phone contacts, and when you add someone their name and number come up as you type.') + ' They stay on this phone only and are never uploaded.</p>' +
+    '<div class="row">' + (canPickContacts() ? '<button class="btn primary grow" data-act="pbpick">Choose from my contacts</button>' : '') + '<label class="btn grow' + (canPickContacts() ? '' : ' primary') + '" for="pbFile" style="cursor:pointer">Import a contacts file</label><input type="file" id="pbFile" accept=".vcf,text/vcard,text/x-vcard" class="sr"></div>' +
+    '<button class="btn ghost" data-act="pbhow">How to get a contacts file</button>' +
+    (pb.list.length ? '<button class="btn ghost" data-act="pbclear">Remove them from this phone</button>' : '') + '</section>';
+}
+function pbHowSheet() {
+  openSheet('Get a contacts file',
+    '<p style="margin:0">Save your contacts as one file, then choose it in Shepherd under <b>Import a contacts file</b>.</p>' +
+    osSteps(['Open the <b>Contacts</b> app and tap <b>Lists</b> (top left).', 'Touch and hold <b>All Contacts</b> (or All iCloud), then tap <b>Export</b>.', 'Tap <b>Save to Files</b>, then <b>Save</b>.', 'Back in Shepherd, tap <b>Import a contacts file</b> and choose it.'],
+            ['Open the <b>Contacts</b> app.', 'Tap <b>Fix &amp; manage</b> (or ⋮ › <b>Settings</b>, or <b>Manage contacts</b> on Samsung), then <b>Export to file</b>.', 'Save it to <b>Downloads</b>.', 'Back in Shepherd, tap <b>Import a contacts file</b> and choose it.']) +
+    '<p class="note">Your contacts stay on this phone only. Shepherd never uploads them.</p><button class="btn" data-act="closesheet">Done</button>');
+}
+function vcard(c) {
+  var esc2 = function (v) { return String(v || '').replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/[,;]/g, function (m) { return '\\' + m; }); };
+  var parts = String(c.name || '').trim().split(/\s+/), first = parts.shift() || '', last = parts.join(' ');
+  var L = ['BEGIN:VCARD', 'VERSION:3.0', 'FN:' + esc2(c.name), 'N:' + esc2(last) + ';' + esc2(first) + ';;;'];
+  if (c.phone) L.push('TEL;TYPE=CELL:' + (waNum(c.phone) ? '+' + waNum(c.phone) : c.phone));
+  if (c.instagram) L.push('X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/' + c.instagram, 'URL:https://instagram.com/' + c.instagram);
+  L.push('NOTE:' + esc2('Added from Shepherd'), 'END:VCARD');
+  return L.join('\r\n') + '\r\n';
+}
+async function saveToPhone(c) {
+  var text = vcard(c), name = (String(c.name).replace(/[^\w\- ]+/g, '').trim() || 'contact') + '.vcf';
+  try {
+    var file = new File([text], name, { type: 'text/vcard' });
+    if (/iPhone|iPad|Android/i.test(navigator.userAgent) && navigator.canShare && navigator.share && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file] }); return; }
+    if (WEB) { var a = document.createElement('a'); a.href = URL.createObjectURL(file); a.download = name; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 4000); toast('Open the file to add ' + firstName(c.name) + ' to your contacts'); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  copyToPhone(c);
+}
+
 /* ---------- toast & copy ---------- */
 var toastTimer;
 function toast(msg, actLabel, fn) {
@@ -747,7 +891,7 @@ function dRow(d) {
 function viewDisciples() {
   var all = dList(), todo = discipleToDo(), done = all.filter(checkedThisWeek).sort(function (a, b) { return b.lastCheck - a.lastCheck; });
   var h = '<div><h1 class="h1">Disciples</h1><p class="lede">Check in with each person once a week and keep building the friendship.</p></div>';
-  h += '<figure class="verse"><p>“Therefore encourage one another and build each other up, just as in fact you are doing.”</p><cite>1 Thessalonians 5:11 (NIV)</cite></figure>';
+  h += '<figure class="verse" data-noi18n><p>“Therefore encourage one another and build each other up, just as in fact you are doing.”</p><cite>1 Thessalonians 5:11 (NIV)</cite></figure>';
   if (all.length) { var pct = Math.round(done.length / all.length * 100); h += '<div class="meter"><div class="track"><span style="width:' + pct + '%"></span></div><span>' + done.length + ' of ' + all.length + ' this week</span></div>'; }
   h += '<form class="card" id="dForm" novalidate><h3>Add someone to check on weekly</h3><div class="grid2"><label class="field" for="dName">Name<input class="inp" id="dName" autocomplete="off" placeholder="Name"></label><label class="field" for="dPhone">WhatsApp (optional)<input class="inp" id="dPhone" type="tel" autocomplete="off" placeholder="07…"></label></div><p class="note" id="dErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">Add</button></form>';
   if (todo.length) h += '<section class="sec"><div class="sec-h"><h2 class="h2">To check this week</h2><span class="count">' + todo.length + '</span></div><ul class="list">' + todo.map(dRow).join('') + '</ul></section>';
@@ -803,11 +947,64 @@ function installCard() {
   if (!WEB || WEB.install.standalone() || lsGet('shepherd:installHide') === '1' || !/iPhone|iPad|Android/i.test(navigator.userAgent)) return '';
   return '<section class="card install" id="installCard"><h3>Put Shepherd on your Home Screen</h3><p class="note">It opens like an app, and it\'s how Shepherd can send you notifications that name people.</p><div class="row"><button class="btn primary grow" data-act="notifguide">Show me how</button><button class="btn ghost grow" data-act="hideinstall">Not now</button></div></section>';
 }
+/* ---------- prayer list: names you choose, with optional notes; a few each day, taking turns ---------- */
+function prList() { return Object.keys(S.prayers).map(function (k) { return S.prayers[k]; }).filter(function (x) { return x && x.name; }).sort(function (a, b) { return (a.createdAt || 0) - (b.createdAt || 0) || a.name.localeCompare(b.name); }); }
+function savePrayer(x) { x.updatedAt = Date.now(); S.prayers[x.id] = x; put(prPath(x.id), x); render(); }
+function dropPrayer(id) { delete S.prayers[id]; put(prPath(id), null); render(); }
+function dayNo(D) { return Math.round(startOf(D) / DAY); }
+function prayerPicks(D) {
+  var all = prList(), n = all.length, k = Math.min(Number(S.profile.prayerCount) || 3, n);
+  if (!n) return [];
+  var start = (dayNo(D) * k) % n, out = [];
+  for (var i = 0; i < k; i++) out.push(all[(start + i) % n]);
+  return out;
+}
+function joinNames(arr) { var a = arr.map(function (x) { return firstName(x.name); }); return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
+function prayCard() {
+  var picks = prayerPicks(today());
+  if (!picks.length) {
+    var legacy = active().filter(function (c) { return c.prayer && String(c.prayer).trim(); }).slice(0, 3);
+    return '<section class="card" id="prayCard"><div class="sec-h"><h3>Pray today</h3><button class="btn small soft" data-act="praylist">Prayer list</button></div>' +
+      (legacy.length ? '<ul class="timeline">' + legacy.map(function (c) { return '<li><b>' + esc(firstName(c.name)) + '</b><span>' + esc(c.prayer) + '</span></li>'; }).join('') + '</ul>' : '<p class="note">Add the people you\'re praying for. Shepherd shows a few each day, taking turns, and can remind you.</p>') + '</section>';
+  }
+  return '<section class="card" id="prayCard"><div class="sec-h"><h3>Pray today</h3><button class="btn small soft" data-act="praylist">Prayer list (' + prList().length + ')</button></div><ul class="timeline">' +
+    picks.map(function (x) { return '<li><b>' + esc(x.name) + '</b><span>' + (x.notes ? esc(x.notes) : '<span class="muted">No notes</span>') + '</span></li>'; }).join('') + '</ul></section>';
+}
+function prayerSheet(focusAdd) {
+  var items = prList();
+  openSheet('Prayer list',
+    '<p style="margin:0">Add anyone you want to pray for. Each day Shepherd shows ' + plural(Number(S.profile.prayerCount) || 3, 'person', 'people') + ', taking turns' + (S.profile.prayerOn ? ', and reminds you at ' + esc(fmtClock(S.profile.prayerTime || '07:30')) : '') + '.</p>' +
+    '<form class="card" id="prForm" style="background:var(--bg)"><label class="field" for="prName">Name<input class="inp" id="prName" autocomplete="off" placeholder="Who are you praying for?"></label>' +
+    '<label class="field" for="prNotes">Notes (optional)<textarea class="inp" id="prNotes" placeholder="What to pray for"></textarea></label>' +
+    '<p class="small" id="prErr" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" type="submit">Add to prayer list</button></form>' +
+    (items.length ? '<ul class="list" id="prItems">' + items.map(function (x) { return '<li class="prow"><button class="prow-main" data-act="editprayer" data-id="' + x.id + '"><span class="pm"><span class="pn">' + esc(x.name) + '</span><span class="ps">' + (x.notes ? esc(x.notes) : 'No notes') + '</span></span></button></li>'; }).join('') + '</ul>' : '<p class="note">No one on your prayer list yet.</p>') +
+    '<button class="btn ghost" data-act="prayersettings">Prayer reminder settings</button>',
+    function (root) {
+      $('#prForm', root).addEventListener('submit', function (e) {
+        e.preventDefault(); var nm = $('#prName', root).value.trim(), er = $('#prErr', root);
+        if (!nm) { er.hidden = false; er.textContent = 'Add a name first.'; $('#prName', root).focus(); return; }
+        savePrayer({ id: newId(), name: nm, notes: $('#prNotes', root).value.trim(), createdAt: Date.now() });
+        toast(firstName(nm) + ' added to your prayer list'); prayerSheet(true);
+      });
+      if (focusAdd) setTimeout(function () { try { $('#prName', root).focus(); } catch (e) {} }, 50);
+    });
+}
+function editPrayerSheet(id) {
+  var x = S.prayers[id]; if (!x) return;
+  openSheet('Edit prayer',
+    '<form class="hero" id="pe"><label class="field" for="peName">Name<input class="inp" id="peName" value="' + esc(x.name) + '" autocomplete="off"></label>' +
+    '<label class="field" for="peNotes">Notes (optional)<textarea class="inp" id="peNotes">' + esc(x.notes) + '</textarea></label>' +
+    '<button class="btn primary" type="submit">Save</button></form><button class="btn danger" id="peDel">Remove from prayer list</button><button class="btn ghost" data-act="praylist">Back to prayer list</button>',
+    function (root) {
+      $('#pe', root).addEventListener('submit', function (e) { e.preventDefault(); var nm = $('#peName', root).value.trim(); if (!nm) return; x.name = nm; x.notes = $('#peNotes', root).value.trim(); savePrayer(x); toast('Saved'); prayerSheet(); });
+      $('#peDel', root).addEventListener('click', function () { dropPrayer(x.id); toast(firstName(x.name) + ' removed from your prayer list'); prayerSheet(); });
+    });
+}
 function viewToday() {
   var all = list();
   var name = S.profile.name ? ', ' + esc(firstName(S.profile.name)) : '';
   var now = new Date();
-  var h = '<div><p class="eyebrow">' + WD[now.getDay()] + ' ' + now.getDate() + ' ' + MON[now.getMonth()] + '</p><h1 class="h1">' + greeting() + name + '</h1>';
+  var h = '<div><p class="eyebrow">' + (LOC ? intl(now, { weekday: 'long', day: 'numeric', month: 'long' }) : WD[now.getDay()] + ' ' + now.getDate() + ' ' + MON[now.getMonth()]) + '</p><h1 class="h1">' + greeting() + name + '</h1>';
   var L = todayLists();
   if (!all.length) {
     h += '</div>' + installCard() + emptyState() + disciplesCard();
@@ -815,7 +1012,6 @@ function viewToday() {
     return h;
   }
   var td = ymd(Date.now());
-  var pray = active().filter(function (c) { return c.prayer && String(c.prayer).trim(); }).sort(function (a, b) { return hashStr(a.id + td) - hashStr(b.id + td); }).slice(0, 5);
   var late = L.msg.filter(function (c) { return state(c) === 'late'; }).length;
   h += '<div class="pills">';
   if (L.reply.length) h += '<span class="pill late">' + plural(L.reply.length, 'reply', 'replies') + ' owed</span>';
@@ -838,7 +1034,7 @@ function viewToday() {
   }
   if (!L.reply.length && !L.msg.length) h += '<div class="allclear">' + ICON.check + '<span>You\'re up to date. Nobody is waiting on you today.</span></div>';
   if (L.events.length) h += eventsMini(L.events);
-  if (pray.length) h += '<section class="card"><h3>Pray for</h3><ul class="timeline">' + pray.map(function (c) { return '<li><b>' + esc(firstName(c.name)) + '</b><span>' + esc(c.prayer) + '</span></li>'; }).join('') + '</ul></section>';
+  h += prayCard();
   return h;
 }
 /* the morning summary at the top of Today; Settings chooses what it shows */
@@ -896,10 +1092,44 @@ function peopleList() {
   if (!items.length) return '<p class="muted" style="text-align:center;padding:20px 0">No one matches that.</p>';
   return '<ul class="list">' + items.map(row).join('') + '</ul>';
 }
+/* ---------- journey: everyone by stage ---------- */
+function stageOf(c) { return STAGES.indexOf(c.stage) >= 0 ? c.stage : 'First contact'; }
+function setStage(c, st) {
+  if (!c || STAGES.indexOf(st) < 0 || stageOf(c) === st) return;
+  c.stage = st; logTo(c, 'change', 'Stage changed to ' + st); saveContact(c);
+  toast(firstName(c.name) + ' moved to ' + st);
+}
+function journeyStrip(c) {
+  var cur = STAGES.indexOf(stageOf(c));
+  return '<div class="jstrip" role="group" aria-label="Journey">' + STAGES.map(function (st, i) {
+    return '<button type="button" class="jstep' + (i < cur ? ' done' : i === cur ? ' now' : '') + '" data-act="stage" data-id="' + c.id + '" data-to="' + esc(st) + '" aria-pressed="' + (i === cur) + '"><i aria-hidden="true"></i><span>' + esc(st) + '</span></button>';
+  }).join('') + '</div>';
+}
+function journeyBoard() {
+  var people = list().filter(function (c) { return eff(c) !== 'archived'; });
+  if (!people.length) return emptyState();
+  var by = {}; STAGES.forEach(function (st) { by[st] = []; });
+  people.forEach(function (c) { by[stageOf(c)].push(c); });
+  var h = '<div class="jsum" role="list">' + STAGES.map(function (st) { return '<a role="listitem" class="jsum-i" href="#j-' + STAGES.indexOf(st) + '"><b>' + by[st].length + '</b><span>' + esc(st) + '</span></a>'; }).join('') + '</div>';
+  h += '<div class="jboard" id="jboard">' + STAGES.map(function (st, i) {
+    var items = by[st].sort(function (a, b) { return String(a.name).localeCompare(b.name); });
+    return '<section class="jcol" id="j-' + i + '"><div class="sec-h"><h2 class="h3">' + esc(st) + '</h2><span class="count">' + items.length + '</span></div>' +
+      (items.length ? '<ul class="jlist">' + items.map(function (c) {
+        var next = STAGES[i + 1], prev = STAGES[i - 1];
+        return '<li class="jcard st-' + state(c) + '"><button class="jname" data-act="open" data-id="' + c.id + '"><span class="dot" aria-hidden="true"></span><span class="pm"><span class="pn">' + esc(c.name) + '</span><span class="ps">' + esc(statusText(c)) + '</span></span></button>' +
+          '<div class="jmove">' + (prev ? '<button class="btn small ghost" data-act="stage" data-id="' + c.id + '" data-to="' + esc(prev) + '" aria-label="Move back to ' + esc(prev) + '">‹</button>' : '') +
+          (next ? '<button class="btn small soft grow" data-act="stage" data-id="' + c.id + '" data-to="' + esc(next) + '">Move to ' + esc(next) + ' ›</button>' : '<span class="note">Last stage</span>') + '</div></li>';
+      }).join('') + '</ul>' : '<p class="note jempty">No one here yet.</p>') + '</section>';
+  }).join('') + '</div>';
+  return h;
+}
 function viewPeople() {
   var archived = list().filter(function (c) { return eff(c) === 'archived'; }).length;
   var F = [['all', 'Everyone'], ['late', 'Overdue'], ['due', 'Due today'], ['reply', 'Need reply'], ['waiting', 'Waiting on them'], ['ok', 'On track'], ['paused', 'Paused']];
   var h = '<div><h1 class="h1">People</h1><p class="lede">' + plural(list().filter(function (c) { return eff(c) !== 'archived'; }).length, 'person', 'people') + ' you\'re following up with</p></div>';
+  var mode = S.peopleMode || lsGet('shepherd:peopleMode') || 'list';
+  h += '<div class="seg" style="grid-template-columns:1fr 1fr" role="group" aria-label="View"><button data-act="pmode" data-m="list" aria-pressed="' + (mode === 'list') + '">List</button><button data-act="pmode" data-m="journey" aria-pressed="' + (mode === 'journey') + '">Journey</button></div>';
+  if (mode === 'journey') { h += journeyBoard(); if (archived) h += '<button class="linkrow" data-act="archive-list">No longer contacting (' + archived + ')</button>'; return h; }
   h += '<div class="search">' + ICON.search + '<label class="sr" for="q">Search people</label><input class="inp" id="q" type="search" placeholder="Search by name, number or handle" value="' + esc(S.search) + '" autocomplete="off"></div>';
   h += '<div class="filters" role="group" aria-label="Filter">' + F.map(function (f) { return '<button data-act="filter" data-f="' + f[0] + '" aria-pressed="' + (S.filter === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>';
   h += '<div id="plist">' + peopleList() + '</div>';
@@ -923,7 +1153,8 @@ function viewContact() {
   var e = eff(c), st = state(c);
   var h = '<div><button class="ghost-btn" data-act="back" data-id="' + c.id + '">' + ICON.back + (e === 'archived' ? 'No longer contacting' : 'People') + '</button>';
   h += '<section class="hero"><h1 class="h1">' + esc(c.name) + (c.example ? '<span class="ex">Example</span>' : '') + '</h1>';
-  h += '<div class="chips"><span class="chip st-' + st + '">' + esc(statusText(c)) + '</span><span class="chip">' + esc(c.stage || 'First contact') + '</span></div>';
+  h += '<div class="chips"><span class="chip st-' + st + '">' + esc(statusText(c)) + '</span><span class="chip">' + esc(stageOf(c)) + '</span></div>';
+  if (e !== 'archived') h += journeyStrip(c);
   h += '<p class="muted small" style="margin:0">' + esc(lastText(c)) + '</p>';
   if (e === 'active') {
     var chs = channels(c);
@@ -973,7 +1204,7 @@ function viewContact() {
     (c.met ? '<dt>Where you met</dt><dd>' + esc(c.met) + '</dd>' : '') +
     '<dt>Notes</dt><dd>' + (esc(c.notes) || '—') + '</dd>' +
     '<dt>Prayer points</dt><dd>' + (esc(c.prayer) || '—') + '</dd></dl>' +
-    '<button class="btn" data-act="tophone" data-id="' + c.id + '">' + ICON.person + 'Add to phone contacts</button></section>';
+    '<div class="row"><button class="btn grow" data-act="tophone" data-id="' + c.id + '">' + ICON.person + 'Save to phone contacts</button><button class="btn grow" data-act="addpray" data-id="' + c.id + '">Add to prayer list</button></div></section>';
 
   var evs = evList().filter(function (x) { return (x.invited || []).indexOf(c.id) >= 0; }).sort(function (a, b) { return String(b.date).localeCompare(a.date); });
   if (evs.length) h += '<section class="card"><h3>Events</h3><ul class="timeline">' + evs.map(function (x) { var came = (x.came || []).indexOf(c.id) >= 0; return '<li><time>' + esc(fmtDate(x.date)) + '</time><span>' + esc(x.name) + ' · ' + (came ? '<b style="color:var(--ok)">Came</b>' : parseYmd(x.date) < today() ? 'Didn\'t come' : 'Invited') + '</span></li>'; }).join('') + '</ul></section>';
@@ -1032,7 +1263,7 @@ function viewWeek() {
   });
   evList().forEach(function (x) { var t = parseYmd(x.date); if (t >= ws && t < cur.we) came += (x.came || []).length; });
   var n = cur.done.length, d = cur.pool.length;
-  var h = '<div><p class="eyebrow">Week of ' + new Date(ws).getDate() + ' ' + MON[new Date(ws).getMonth()] + '</p>';
+  var h = '<div><p class="eyebrow">Week of ' + fmtDay(ws) + '</p>';
   h += d ? '<p class="bigline">You followed up with <em>' + n + ' of ' + d + '</em> — ' + weekWord(n, d) + '.</p>' : '<p class="bigline">Your weekly summary will appear once you add contacts.</p>';
   h += '</div><div class="stats"><div class="stat"><span>Studies</span><b>' + studies + '</b></div><div class="stat"><span>New contacts</span><b>' + added + '</b></div><div class="stat"><span>Came to events</span><b>' + came + '</b></div></div>';
   var weeks = [];
@@ -1040,7 +1271,7 @@ function viewWeek() {
   h += '<section class="card"><h3>Follow-up rate, last 4 weeks</h3><div class="bars">' + weeks.map(function (w, idx) {
     var pct = w.pool.length ? Math.round(w.done.length / w.pool.length * 100) : 0;
     var dd = new Date(w.ws);
-    return '<div class="bar' + (idx === 3 ? ' now' : '') + '"><span>' + (w.pool.length ? pct + '%' : '–') + '</span><div class="track"><div class="fill" style="height:' + pct + '%"></div></div><span>' + (idx === 3 ? 'This week' : dd.getDate() + ' ' + MON[dd.getMonth()]) + '</span></div>';
+    return '<div class="bar' + (idx === 3 ? ' now' : '') + '"><span>' + (w.pool.length ? pct + '%' : '–') + '</span><div class="track"><div class="fill" style="height:' + pct + '%"></div></div><span>' + (idx === 3 ? 'This week' : fmtDay(dd)) + '</span></div>';
   }).join('') + '</div><p class="note">Share of the people you were following up with who got a message, a call or a study that week.</p></section>';
   var notYet = cur.pool.filter(function (c) { return cur.done.indexOf(c) < 0 && eff(c) === 'active'; }).sort(byDue);
   h += section('Not reached yet this week', notYet);
@@ -1069,10 +1300,11 @@ function digest(p) {
 function viewSettings() {
   var p = S.profile, N = p.notify || {};
   var h = '<div><button class="ghost-btn" data-act="tab" data-v="today">' + ICON.back + 'Today</button><h1 class="h1">Settings</h1></div>';
+  if (window.I18N) h += '<section class="card" id="langCard"><label class="field" for="pLang"><span class="langh"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>Language</span><select class="inp" id="pLang" data-noi18n>' + I18N.LANGS.map(function (l) { return '<option value="' + l[0] + '"' + (l[0] === I18N.lang ? ' selected' : '') + '>' + l[1] + '</option>'; }).join('') + '</select></label><p class="note">Bible verses stay in English (NIV).</p></section>';
   h += '<form class="card" id="profForm"><h3>You</h3>' +
     '<label class="field" for="pName">Your name<input class="inp" id="pName" value="' + esc(p.name) + '" autocomplete="name"></label>' +
     '<label class="field" for="pPhone">Your WhatsApp number<input class="inp" id="pPhone" type="tel" value="' + esc(p.phone) + '" placeholder="07… or +44…" autocomplete="tel"></label>' +
-    '<label class="field" for="pIntro">Message people send you from your QR code<textarea class="inp" id="pIntro">' + esc(p.intro) + '</textarea></label>' +
+    '<label class="field" for="pIntro">Message people send you from your QR code<textarea class="inp" id="pIntro">' + esc(introText(p)) + '</textarea></label>' +
     '<label class="field" for="pEvery">New contacts: check in every<select class="inp" id="pEvery">' + [1, 2, 3, 4, 5, 7].map(function (o) { return '<option value="' + o + '"' + (Number(p.defaultEvery) === o ? ' selected' : '') + '>' + (o === 1 ? 'Day' : o === 7 ? 'Week' : o + ' days') + '</option>'; }).join('') + '</select></label>' +
     '<button class="btn primary" type="submit">Save</button></form>';
   var preset = '';
@@ -1085,11 +1317,16 @@ function viewSettings() {
     '<div class="pick" id="nPreset" role="group" aria-label="Quick choices">' + PRESETS.map(function (pr) { return '<button type="button" data-preset="' + esc(pr[0]) + '" aria-pressed="' + (preset === pr[0]) + '">' + esc(pr[0]) + '</button>'; }).join('') + '</div>' +
     '<ul class="ticks">' + NOTIFY.map(function (n) { return '<li><label for="n-' + n[0] + '"><input type="checkbox" id="n-' + n[0] + '" data-n="' + n[0] + '"' + (N[n[0]] ? ' checked' : '') + '><span><b>' + n[1] + '</b><span>' + n[2] + '</span></span></label></li>'; }).join('') + '</ul>' +
     '<div><p class="note" style="margin-bottom:6px">Today\'s summary</p><div class="preview" id="nPreview">' + esc(digest()) + '</div></div></section>';
+  h += '<section class="card" id="prayerCard"><h3>Prayer reminders</h3><p class="note">Pray for ' + plural(Number(p.prayerCount) || 3, 'person', 'people') + ' from your prayer list each day, taking turns.' + (WEB ? '' : ' Reminders come from the Shepherd app on your phone.') + '</p>' +
+    '<label class="tick1" for="pPrOn"><input type="checkbox" id="pPrOn"' + (p.prayerOn ? ' checked' : '') + '><span><b>Remind me to pray each day</b></span></label>' +
+    '<div class="grid2"><label class="field" for="pPrTime">Time<input class="inp" id="pPrTime" type="time" value="' + esc(p.prayerTime || '07:30') + '"></label><label class="field" for="pPrCount">People each day<select class="inp" id="pPrCount"><option value="2"' + (Number(p.prayerCount) === 2 ? ' selected' : '') + '>2</option><option value="3"' + (Number(p.prayerCount) !== 2 ? ' selected' : '') + '>3</option></select></label></div>' +
+    '<button class="btn soft" data-act="praylist">Prayer list (' + prList().length + ')</button></section>';
+  h += phoneBookCard();
   h += '<section class="card"><h3>Getting started</h3><p class="note">A one-minute walk around Shepherd.</p><button class="btn" data-act="tour">Show me around</button></section>';
   h += '<section class="card"><h3>App lock</h3><p class="note">' + (p.pinHash ? 'Shepherd asks for your PIN when it opens and after 5 minutes away.' : 'Add a PIN so nobody who picks up your phone can read your contacts.') + '</p><div class="row">' +
     (p.pinHash ? '<button class="btn" data-act="setpin">Change PIN</button><button class="btn" data-act="locknow">Lock now</button><button class="btn danger" data-act="removepin">Remove PIN</button>' : '<button class="btn primary" data-act="setpin">Set a PIN</button>') + '</div></section>';
   if (WEB && WEB.user()) h += '<section class="card" id="acctCard"><h3>Your account</h3><p class="note">Signed in as <b style="color:var(--fg)">' + esc(WEB.user().email) + '</b>. You stay signed in on this phone.</p><div class="row"><button class="btn grow" data-act="changepw">Change password</button><button class="btn grow" data-act="signout">Sign out</button></div><button class="btn danger" data-act="delacct">Delete my account</button></section>';
-  h += '<section class="card"><h3>Your data</h3><p class="note">Your contacts are saved to your own private space' + (DB ? (WEB ? ' on the Shepherd server, with earlier versions kept' : '') : ' (right now only on this phone)') + '. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.</p><div class="row"><button class="btn" data-act="export">Export a backup</button><label class="btn" for="importFile" style="cursor:pointer">Restore a backup</label><input type="file" id="importFile" accept=".json,application/json" class="sr"></div>' +
+  h += '<section class="card"><h3>Your data</h3><p class="note">Your contacts are saved to your own private space' + (DB ? (WEB ? ' on the Shepherd server, with earlier versions kept' : '') : ' (right now only on this phone)') + '. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.</p><button class="btn soft" data-act="yourdata">What\'s saved and who can see it</button><div class="row"><button class="btn" data-act="export">Export a backup</button><label class="btn" for="importFile" style="cursor:pointer">Restore a backup</label><input type="file" id="importFile" accept=".json,application/json" class="sr"></div>' +
     (list().some(function (c) { return c.example; }) ? '<button class="btn danger" data-act="clearexamples">Remove example contacts</button>' : '') + '</section>';
   var acts = [];
   list().forEach(function (c) { (c.log || []).forEach(function (l) { acts.push({ t: l.t, text: c.name + ': ' + l.text }); }); });
@@ -1138,7 +1375,15 @@ function bindView() {
     pf.addEventListener('change', function () { saveProfileForm(false); }); // saved as soon as you leave a box, Save or not
   }
   var pa = $('#pAlert');
-  if (pa) pa.addEventListener('change', function () { if (!/^\d\d:\d\d$/.test(pa.value)) return; S.profile.alertTime = pa.value; saveProfile(); toast('Reminder time set to ' + fmtClock(pa.value) + '. Change it in TimeTree too.'); });
+  if (pa) pa.addEventListener('change', function () { if (!/^\d\d:\d\d$/.test(pa.value)) return; S.profile.alertTime = pa.value; saveProfile(); toast('Morning notifications at ' + fmtClock(pa.value)); });
+  var plang = $('#pLang');
+  if (plang) plang.addEventListener('change', function () { var v = plang.value; S.profile.lang = v; saveProfile(); setTimeout(function () { I18N.use(v); }, 150); });
+  var pron = $('#pPrOn'), prt = $('#pPrTime'), prc = $('#pPrCount');
+  if (pron) pron.addEventListener('change', function () { S.profile.prayerOn = pron.checked; saveProfile(); toast(pron.checked ? (WEB ? 'Prayer reminders on' : 'Saved. Reminders come from the Shepherd app.') : 'Prayer reminders off'); if (pron.checked && !prList().length) prayerSheet(true); });
+  if (prt) prt.addEventListener('change', function () { if (!/^\d\d:\d\d$/.test(prt.value)) return; S.profile.prayerTime = prt.value; saveProfile(); toast('Prayer reminder at ' + fmtClock(prt.value)); });
+  if (prc) prc.addEventListener('change', function () { S.profile.prayerCount = Number(prc.value); saveProfile(); toast('Saved'); });
+  var vcf = $('#pbFile');
+  if (vcf) vcf.addEventListener('change', function () { var f = vcf.files && vcf.files[0]; if (!f) return; var r = new FileReader(); r.onload = function () { var got = parseVCF(String(r.result)); var n = mergePhoneBook(got); render(); toast(n ? plural(n, 'contact') + ' added to this phone\'s list' : (got.length ? 'Those contacts are already here' : 'No contacts found in that file')); }; r.readAsText(f); vcf.value = ''; });
   var nc = $('#notifCard');
   if (nc) {
     nc.addEventListener('change', function (e) { var t = e.target; if (!t.dataset || !t.dataset.n) return; S.profile.notify = Object.assign({}, S.profile.notify); S.profile.notify[t.dataset.n] = t.checked; saveProfile(); toast('Alert choices saved'); });
@@ -1165,7 +1410,7 @@ function openSheet(title, body, mount, after) {
   sheetAfter = after || (!$('#sheet').hidden && $('#sheet').classList.contains('on') ? sheetAfter : null);
   var sh = $('#sheet'), sc = $('#scrim');
   var old = $('#sheetBody'), nb = old.cloneNode(false); old.parentNode.replaceChild(nb, old); // fresh element: no leftover listeners
-  $('#sheetTitle').textContent = title; nb.innerHTML = body;
+  $('#sheetTitle').textContent = title; sh.dataset.title = title; nb.innerHTML = body;
   sh.hidden = false; sc.hidden = false; document.body.classList.add('noscroll');
   requestAnimationFrame(function () { sh.classList.add('on'); sc.classList.add('on'); });
   nb.scrollTop = 0;
@@ -1223,7 +1468,8 @@ function socialPrefill(c) {
 function contactForm(c, isNew) {
   var sp = socialPrefill(c);
   return '<form id="cForm" class="sec" style="gap:14px" novalidate data-src="' + sp.src + '">' +
-    '<label class="field" for="cName">Name<input class="inp" id="cName" required value="' + esc(c.name) + '" autocomplete="off" placeholder="First name is fine"></label>' +
+    '<div class="field acwrap"><label for="cName">Name</label><div class="pwrow"><input class="inp" id="cName" required value="' + esc(c.name) + '" autocomplete="off" placeholder="' + (isNew && phoneBook().list.length ? 'Start typing to find them' : 'First name is fine') + '" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cSug">' + (isNew && canPickContacts() ? '<button type="button" class="btn small" id="cPick">' + ICON.person + '<span class="sr">Choose from contacts</span></button>' : '') + '</div><ul class="acl" id="cSug" role="listbox" hidden></ul>' +
+      (isNew && !phoneBook().list.length ? '<button type="button" class="linkrow" data-act="pbhowadd" style="padding:4px 0;min-height:0">Import your phone contacts to find people as you type</button>' : '') + '</div>' +
     '<label class="field" for="cPhone">WhatsApp number<input class="inp" id="cPhone" type="tel" value="' + esc(c.phone) + '" placeholder="07… or +44…" autocomplete="off"></label>' +
     '<div class="field"><span>Social media (optional)</span><div class="handle"><label class="sr" for="cSp">App</label><select class="inp" id="cSp">' + SOCIALS.map(function (s) { return '<option' + (sp.p === s ? ' selected' : '') + '>' + s + '</option>'; }).join('') + '</select><label class="sr" for="cSh">Username</label><input class="inp" id="cSh" value="' + esc(sp.h) + '" placeholder="@username" autocomplete="off" autocapitalize="off"></div></div>' +
     (isNew ? '' : '<div class="field"><span>Stage</span>' + pickHtml('cStage', STAGES, c.stage || 'First contact') + '</div>' +
@@ -1260,16 +1506,31 @@ function formError(root) {
   if (msg) (name ? $('#cPhone', root) : $('#cName', root)).focus();
   return !!msg;
 }
+function bindSuggest(root) {
+  var inp = $('#cName', root), ul = $('#cSug', root), ph = $('#cPhone', root); if (!inp || !ul) return;
+  var choose = function (x, num) { inp.value = x.n; if (num) ph.value = num; ul.hidden = true; inp.setAttribute('aria-expanded', 'false'); try { (num ? $('#cSh', root) : ph).focus(); } catch (e) {} };
+  var show = function () {
+    var m = suggest(inp.value); if (!m.length) { ul.hidden = true; inp.setAttribute('aria-expanded', 'false'); return; }
+    ul.innerHTML = m.map(function (x, i) { return (x.p.length ? x.p : ['']).slice(0, 2).map(function (num, j) { return '<li role="option"><button type="button" data-i="' + i + '" data-j="' + j + '"><b>' + esc(x.n) + '</b><span>' + esc(num || 'No number') + '</span></button></li>'; }).join(''); }).join('');
+    ul.hidden = false; inp.setAttribute('aria-expanded', 'true');
+    ul.querySelectorAll('button').forEach(function (b) { b.addEventListener('mousedown', function (e) { e.preventDefault(); }); b.addEventListener('click', function () { var x = m[Number(b.dataset.i)]; choose(x, x.p[Number(b.dataset.j)] || ''); }); });
+  };
+  inp.addEventListener('input', show);
+  inp.addEventListener('blur', function () { setTimeout(function () { ul.hidden = true; inp.setAttribute('aria-expanded', 'false'); }, 150); });
+  var pick = $('#cPick', root);
+  if (pick) pick.addEventListener('click', async function () { var got = await pickContacts(false); if (got[0]) { mergePhoneBook(got); choose(got[0], got[0].p[0] || ''); } });
+}
 function quickAdd() {
   var c = { name: '', phone: '', notes: '', consent: false };
   openSheet('Add a contact', contactForm(c, true), function (root) {
+    bindSuggest(root);
     var save = function (again) {
       if (formError(root)) return;
       var n = readForm(root, { id: newId(), createdAt: Date.now(), status: 'active', stage: 'First contact', everyDays: Number(S.profile.defaultEvery) || 3, metOn: ymd(Date.now()), replyState: 'none', studies: [], log: [] }, true);
       logTo(n, 'change', 'Added');
       saveContact(n);
       if (again) { quickAdd(); toast(firstName(n.name) + ' saved'); }
-      else { closeSheet(); toast(firstName(n.name) + ' added. Save them to your phone contacts too?', 'Copy details', function () { copyToPhone(n); }); }
+      else { closeSheet(); toast(firstName(n.name) + ' added. Save them to your phone contacts too?', 'Save to phone', function () { saveToPhone(n); }); }
       tourEvent('contact');
     };
     $('#cForm', root).addEventListener('submit', function (e) { e.preventDefault(); save(false); });
@@ -1421,12 +1682,19 @@ function qrSheet() {
     });
     return;
   }
-  var url = waUrl(n, p.intro);
-  openSheet('Scan to keep in touch', '<div class="qr" id="qrBox" role="img" aria-label="QR code that opens WhatsApp with a message to you"></div><p style="margin:0;text-align:center">Ask them to point their phone camera at this. WhatsApp opens with a message to you, and they just press send.</p><p class="note" style="text-align:center">When their message arrives, add them here with their number.</p><button class="btn primary" data-act="quickadd">Add them now</button>', function (root) {
-    var box = $('#qrBox', root);
-    if (window.QRCode) { try { new window.QRCode(box, { text: url, width: 232, height: 232, colorDark: '#2A251E', colorLight: '#FFFDF6', correctLevel: window.QRCode.CorrectLevel.M }); } catch (e) { box.textContent = 'The QR code could not be drawn here.'; } }
-    else box.innerHTML = '<p class="note">The QR code couldn\'t load. Share this link instead:</p><p style="overflow-wrap:anywhere;margin:0">' + esc(url) + '</p>';
-  });
+  var draw = function (url, auto) {
+    openSheet('Scan to keep in touch', '<div class="qr" id="qrBox" role="img" aria-label="QR code for people to message you"></div>' +
+      (auto ? '<p style="margin:0;text-align:center">Ask them to point their phone camera at this. They type their name, <b>they\'re added to your Shepherd</b>, and WhatsApp opens with your message ready to send.</p><p class="note" style="text-align:center">You\'ll get a notification when they scan it.</p>'
+        : '<p style="margin:0;text-align:center">Ask them to point their phone camera at this. WhatsApp opens with a message to you, and they just press send.</p><p class="note" style="text-align:center">When their message arrives, add them here with their number.</p><button class="btn primary" data-act="quickadd">Add them now</button>') +
+      '<p class="note" style="text-align:center">Their message: “' + esc(introText(p)) + '”</p><button class="btn ghost" data-act="editintro">Change the message</button>', function (root) {
+      var box = $('#qrBox', root);
+      if (window.QRCode) { try { new window.QRCode(box, { text: url, width: 232, height: 232, colorDark: '#2A251E', colorLight: '#FFFDF6', correctLevel: window.QRCode.CorrectLevel.M }); } catch (e) { box.textContent = 'The QR code could not be drawn here.'; } }
+      else box.innerHTML = '<p class="note">The QR code couldn\'t load. Share this link instead:</p><p style="overflow-wrap:anywhere;margin:0">' + esc(url) + '</p>';
+    });
+  };
+  var direct = waUrl(n, introText(p));
+  if (WEB && WEB.qrLink) WEB.qrLink().then(function (u) { draw(u || direct, !!u); }, function () { draw(direct, false); });
+  else draw(direct, false);
 }
 
 /* ---------- events ---------- */
@@ -1449,7 +1717,14 @@ function eventSheet(id) {
       });
     });
 }
-function inviteText(x, c) { return 'Hi ' + firstName(c.name) + '! Would you like to come to ' + x.name + ' ' + (dayDiff(parseYmd(x.date), today()) <= 1 ? fmtDate(x.date).toLowerCase() : 'on ' + fmtDate(x.date)) + (x.time ? ' at ' + fmtClock(x.time) : '') + (x.place ? ' (' + x.place + ')' : '') + '? It would be great to see you there.'; }
+function L(key) { var args = [].slice.call(arguments, 1); if (window.I18N) return I18N.fmt(key, args); return key.replace(/\{(\d)\}/g, function (_, j) { return args[+j] == null ? '' : String(args[+j]); }); }
+function inviteText(x, c) {
+  var dd = dayDiff(parseYmd(x.date), today()), t = x.time ? fmtClock(x.time) : '';
+  var when = dd === 0 ? (t ? L('today at {0}', t) : L('today')) : dd === 1 ? (t ? L('tomorrow at {0}', t) : L('tomorrow')) : (t ? L('on {0} at {1}', fmtDate(x.date), t) : L('on {0}', fmtDate(x.date)));
+  return L('Hi {0}! Would you like to come to {1} {2}? It would be great to see you there.', firstName(c.name), x.name, when + (x.place ? ' (' + x.place + ')' : ''));
+}
+// the first message people send from your QR code: the standard one is shown in your language
+function introText(p) { var i = (p || S.profile).intro; return !i || i === DEFAULT_INTRO || i === OLD_INTRO ? L(DEFAULT_INTRO) : i; }
 function openEvent(id) {
   var x = S.events[id]; if (!x) return;
   var isPast = parseYmd(x.date) < today();
@@ -1615,6 +1890,7 @@ function safeInsets() {
 function placeTour() {
   var st = TOUR[TOUR_I]; if (!st || TOUR_PAUSED) return;
   var hole = $('#tourHole'), card = $('#tourCard'), el = tourTarget(st);
+  if (window.I18N) I18N.apply(card); // measure the card in its own language
   var vv = window.visualViewport, vh = (vv && vv.height) || window.innerHeight || 700, vw = window.innerWidth || 400;
   var ins = safeInsets(), topM = ins.top + 16, botM = ins.bottom + 16, gap = 14;
   card.style.top = '0px'; card.style.bottom = 'auto'; card.style.maxHeight = Math.max(160, vh - topM - botM) + 'px';
@@ -1809,9 +2085,12 @@ function buildSchedule(days) {
       if (x.date === ymd(addDays(D, 1))) out.push({ at: morning + 11000, title: 'Tomorrow: ' + x.name, body: (x.time ? fmtClock(x.time) : 'All day') + (x.place ? ' · ' + x.place : '') + ((x.invited || []).length ? ' · ' + plural(x.invited.length, 'person', 'people') + ' invited' : ''), tag: 'e1-' + x.id, url: './?view=events' });
       if (x.date === dy && x.time) out.push({ at: atTime(D, x.time) - 3600e3, title: x.name + ' at ' + fmtClock(x.time), body: 'Starts in one hour' + (x.place ? ' · ' + x.place : '') + '.', tag: 'e0-' + x.id, url: './?view=events' });
     });
+    if (S.profile.prayerOn) { var pk = prayerPicks(D); if (pk.length) out.push({ at: atTime(D, S.profile.prayerTime || '07:30'), title: 'Pray for ' + joinNames(pk), body: pk.map(function (x) { return firstName(x.name) + (x.notes ? ': ' + x.notes : ''); }).join(' · ').slice(0, 280), tag: 'pr-' + dy, url: './?view=today' }); }
     if (N.weekly && wd === 0) { var w = weekStats(weekStart(D)); if (w.pool.length) out.push({ at: morning + 12000, title: 'Your week', body: 'This week you followed up with ' + w.done.length + ' of ' + plural(w.pool.length, 'person', 'people') + '.', tag: 'wk-' + dy, url: './?view=week' }); }
   }
-  return out.filter(function (x) { return x.at > nowT + 30000; }).sort(function (a, b) { return a.at - b.at; }).slice(0, 400);
+  out = out.filter(function (x) { return x.at > nowT + 30000; }).sort(function (a, b) { return a.at - b.at; }).slice(0, 400);
+  if (window.I18N && I18N.lang !== 'en') out.forEach(function (x) { x.title = I18N.tr(x.title); x.body = I18N.tr(x.body); });
+  return out;
 }
 var schedT = null;
 function schedNow() { if (!WEB || S.mode !== 'cloud') return; clearTimeout(schedT); schedT = null; try { WEB.schedule(buildSchedule()); } catch (e) { console.error(e); } }
@@ -1865,7 +2144,7 @@ function removePinSheet() {
 }
 
 /* ---------- backup ---------- */
-function backupText() { return JSON.stringify({ app: 'Shepherd', version: 2, exportedAt: new Date().toISOString(), profile: Object.assign({}, S.profile, { pinHash: '' }), contacts: list(), events: evList(), disciples: dList() }, null, 2); }
+function backupText() { return JSON.stringify({ app: 'Shepherd', version: 2, exportedAt: new Date().toISOString(), profile: Object.assign({}, S.profile, { pinHash: '' }), contacts: list(), events: evList(), disciples: dList(), prayers: prList() }, null, 2); }
 function exportBackup() {
   var data = backupText();
   if (!DOWN) { copyText(data, 'Backup copied. Paste it into a note or email it to yourself.'); return; }
@@ -1878,7 +2157,19 @@ function importBackup(text) {
   o.contacts.forEach(function (c) { if (!c || !c.id || !c.name || !/^[A-Za-z0-9_-]{1,80}$/.test(c.id)) return; var cur = S.contacts[c.id]; if (!cur) { added++; S.contacts[c.id] = c; put(cPath(c.id), c); } else if ((c.updatedAt || 0) > (cur.updatedAt || 0)) { updated++; S.contacts[c.id] = c; put(cPath(c.id), c); } });
   (o.events || []).forEach(function (x) { if (!x || !x.id || !/^[A-Za-z0-9_-]{1,80}$/.test(x.id)) return; var cur = S.events[x.id]; if (!cur || (x.updatedAt || 0) > (cur.updatedAt || 0)) { S.events[x.id] = x; put(ePath(x.id), x); } });
   (o.disciples || []).forEach(function (x) { if (!x || !x.id || !x.name || !/^[A-Za-z0-9_-]{1,80}$/.test(x.id)) return; var cur = S.disciples[x.id]; if (!cur || (x.updatedAt || 0) > (cur.updatedAt || 0)) { S.disciples[x.id] = x; put(dPath(x.id), x); } });
+  (o.prayers || []).forEach(function (x) { if (!x || !x.id || !x.name || !/^[A-Za-z0-9_-]{1,80}$/.test(x.id)) return; var cur = S.prayers[x.id]; if (!cur || (x.updatedAt || 0) > (cur.updatedAt || 0)) { S.prayers[x.id] = x; put(prPath(x.id), x); } });
   render(); toast('Restored: ' + added + ' added, ' + updated + ' updated');
+}
+
+function yourDataSheet() {
+  openSheet('Your data',
+    '<p style="margin:0">Shepherd keeps your list private. Here is exactly what is saved, where, and who can see it.</p>' +
+    '<section class="card" style="background:var(--bg)"><h3>Data linked to you</h3><ul class="steps"><li>Your name, email and WhatsApp number.</li><li>The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies.</li><li>Your events, disciples and prayer list.</li></ul><p class="note">' + (WEB ? 'Saved to your own account on the Shepherd server so it\'s never lost, with earlier versions kept for a year. Only you can see it, when you\'re signed in.' : 'Saved to your own private space. Only you can see it.') + '</p></section>' +
+    '<section class="card" style="background:var(--bg)"><h3>Kept only on this phone</h3><ul class="steps"><li>Contacts you import from your phone, used to suggest names as you type. They are never uploaded.</li><li>A copy of your list, so Shepherd works without signal.</li></ul></section>' +
+    '<section class="card" style="background:var(--bg)"><h3>Never collected</h3><ul class="steps"><li>Your location.</li><li>Your WhatsApp, text or iMessage conversations.</li><li>Your whole address book (only the contacts you choose).</li><li>Anything for adverts or tracking.</li></ul></section>' +
+    '<section class="card" style="background:var(--bg)"><h3>When someone scans your QR code</h3><p class="note">They choose to type their name (and number if they want). It goes only into your list, and they then message you on WhatsApp themselves.</p></section>' +
+    '<p class="note">Someone asks you to delete their details? Open them, tap <b>No longer contact</b>, then <b>Delete all their data</b>. Every copy is removed.</p>' +
+    '<button class="btn" data-act="closesheet">Done</button>');
 }
 
 /* ---------- actions ---------- */
@@ -1951,7 +2242,19 @@ document.addEventListener('click', function (e) {
     case 'tour': startTour(); break;
     case 'dcheck': if (S.disciples[id]) checkIn(S.disciples[id], 'Checked in'); break;
     case 'opendisciple': discipleSheet(id); break;
-    case 'tophone': if (c) copyToPhone(c); break;
+    case 'tophone': if (c) saveToPhone(c); break;
+    case 'pmode': S.peopleMode = b.dataset.m; lsSet('shepherd:peopleMode', b.dataset.m); render(); break;
+    case 'stage': if (c) setStage(c, b.dataset.to); break;
+    case 'praylist': prayerSheet(); break;
+    case 'editprayer': editPrayerSheet(id); break;
+    case 'prayersettings': closeSheet(); go('settings'); setTimeout(function () { var pc = $('#prayerCard'); if (pc) pc.scrollIntoView({ block: 'start' }); }, 80); break;
+    case 'addpray': if (c) { if (prList().some(function (x) { return x.contactId === c.id; })) { toast(firstName(c.name) + ' is already on your prayer list'); break; } savePrayer({ id: newId(), name: c.name, notes: c.prayer || '', contactId: c.id, createdAt: Date.now() }); toast(firstName(c.name) + ' added to your prayer list'); } break;
+    case 'yourdata': yourDataSheet(); break;
+    case 'editintro': closeSheet(); go('settings'); setTimeout(function () { var it = $('#pIntro'); if (it) { it.scrollIntoView({ block: 'center' }); it.focus(); } }, 80); break;
+    case 'pbpick': pickContacts(true).then(function (got) { var n = mergePhoneBook(got); render(); if (got.length) toast(plural(n, 'contact') + ' added to this phone\'s list'); }); break;
+    case 'pbhow': pbHowSheet(); break;
+    case 'pbhowadd': closeSheet(); setTimeout(pbHowSheet, 360); break;
+    case 'pbclear': lsSet(pbKey(), ''); render(); toast('Phone contacts removed from Shepherd on this phone'); break;
     case 'reply': if (c) setReplyState(c, b.dataset.r); break;
     case 'logstudy': logStudy(id); break;
     case 'copyttev': if (S.events[id]) copyText(evText(S.events[id]), 'Copied. Open TimeTree and paste it into a new event.'); break;
@@ -1968,7 +2271,7 @@ document.addEventListener('click', function (e) {
     case 'calguide': calGuide(false); break;
     case 'pushon': pushOn(); break;
     case 'hideinstall': lsSet('shepherd:installHide', '1'); render(); break;
-    case 'pushtest': WEB.push.test().then(function (r) { toast(r && r.sent ? 'Test sent. It should arrive in a few seconds.' : 'Couldn\'t reach this phone. Turn notifications off and on again.'); }, function (e2) { toast(e2.message); }); break;
+    case 'pushtest': WEB.push.test(window.I18N && I18N.lang !== 'en' ? { title: I18N.tr('Shepherd notifications are on'), body: I18N.tr('Each morning you\'ll hear who to message, who to reply to and who to check on, by name.') } : null).then(function (r) { toast(r && r.sent ? 'Test sent. It should arrive in a few seconds.' : 'Couldn\'t reach this phone. Turn notifications off and on again.'); }, function (e2) { toast(e2.message); }); break;
     case 'installapp': WEB.install.prompt().then(function (ok2) { if (ok2) toast('Shepherd is installed. Open it from its new icon.'); }); break;
     case 'calconnect': lsSet('shepherd:calConnected', '1'); setTimeout(function () { toast('If your phone asked, tap Subscribe. Then come back here.'); }, 800); break;
     case 'copyfeed': copyText(WEB.feedHttps(), 'Calendar link copied. Paste it into ICSx⁵.'); break;
@@ -2032,10 +2335,11 @@ function handleLaunch() {
   if (!id && !v) return;
   var tries = 0, t = setInterval(function () { if (openFromLink(id, v) || ++tries > 20) { clearInterval(t); try { history.replaceState(null, '', location.pathname); } catch (e) {} } }, 300);
 }
-if (WEB) { WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; openFromLink(q.get('open'), q.get('view')); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheetTitle').textContent === 'Turn on notifications') notifGuide(false); }; }
+if (window.I18N && I18N.lang !== 'en') I18N.ready().then(function () { schedSoon(); }); // notifications in your language once it has loaded
+if (WEB) { WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; openFromLink(q.get('open'), q.get('view')); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
-window.__shepherd = { buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
+window.__shepherd = { inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
 
 /* ---------- boot ---------- */
 async function boot() {
@@ -2052,11 +2356,12 @@ async function boot() {
   if (user) { try { id = await user.id(); } catch (e) {} try { S.isOwner = !!(user.isOwner && await user.isOwner()); } catch (e) {} }
   if (db && id) {
     if (S.uid !== id) {
-      var prev = { contacts: S.contacts, events: S.events, disciples: S.disciples };
-      S.uid = id; S.contacts = {}; S.events = {}; S.disciples = {}; pending = {}; S.profile = defaultProfile(); loadLocal();
+      var prev = { contacts: S.contacts, events: S.events, disciples: S.disciples, prayers: S.prayers };
+      S.uid = id; S.contacts = {}; S.events = {}; S.disciples = {}; S.prayers = {}; pending = {}; S.profile = defaultProfile(); loadLocal();
       Object.keys(prev.disciples || {}).forEach(function (k) { if (!S.disciples[k]) { S.disciples[k] = prev.disciples[k]; pending[dPath(k)] = { d: prev.disciples[k], v: ++pv }; } });
       Object.keys(prev.contacts || {}).forEach(function (k) { if (!S.contacts[k]) { S.contacts[k] = prev.contacts[k]; pending[cPath(k)] = { d: prev.contacts[k], v: ++pv }; } });
       Object.keys(prev.events || {}).forEach(function (k) { if (!S.events[k]) { S.events[k] = prev.events[k]; pending[ePath(k)] = { d: prev.events[k], v: ++pv }; } });
+      Object.keys(prev.prayers || {}).forEach(function (k) { if (!S.prayers[k]) { S.prayers[k] = prev.prayers[k]; pending[prPath(k)] = { d: prev.prayers[k], v: ++pv }; } });
     }
     lsSet('shepherd:last-uid', id);
     DB = db; S.mode = 'cloud'; saveLocal(); subscribe(); flush();
