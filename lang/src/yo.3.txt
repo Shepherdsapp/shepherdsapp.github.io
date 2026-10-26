@@ -67,8 +67,9 @@
 846	Àtòjọ tàbí Ìrìn-àjò
 847	Ènìyàn ń fi gbogbo àwọn tí ò ń bá sọ̀rọ̀ hàn. Àwọn bọ́tìnnì ń fi ẹni tó ti pẹ́, ẹni tí òní ni àti ẹni tó ń dúró de èsì hàn. Ìrìn-àjò ń fi gbogbo ènìyàn hàn ní ìpele-ìpele, láti Ìpàdé àkọ́kọ́ dé Ọmọ-ẹ̀yìn. Tẹ Gbé e lọ sí… láti gbé ẹnìkan síwájú.
 848	Gbàdúrà fún àwọn ènìyàn
-849	Fi ẹnikẹ́ni tí o fẹ́ gbàdúrà fún kún un, pẹ̀lú àkọsílẹ̀ bí o bá fẹ́. Lójoojúmọ́ Shepherd ń fi 2 tàbí 3 lára wọn hàn, ní àtẹ̀lé-ǹ-tẹ̀lé, ó sì lè rán ọ létí ní àkókò tí o yàn nínú Ètò.
+849	Fi ẹnikẹ́ni tí o fẹ́ gbàdúrà fún kún un, pẹ̀lú àkọsílẹ̀ bí o bá fẹ́. Lójoojúmọ́ Shepherd ń fi 1 sí 15 (ìwọ lo máa yan iye) lára wọn hàn, ní àtẹ̀lé-ǹ-tẹ̀lé, ó sì lè rán ọ létí ní àkókò tí o yàn nínú Ètò.
 850	Ọ̀sẹ̀ ń fi iye àwọn tí o bá sọ̀rọ̀ hàn, àwọn ẹ̀kọ́ rẹ, àwọn olùbásọ̀rọ̀ tuntun àti àwọn tó wá sí ìṣẹ̀lẹ̀, pẹ̀lú ọ̀sẹ̀ mẹ́rin tó kọjá ní ẹ̀gbẹ́ ara wọn.
 851	Ètò ló ní èyí tó kù
 852	Yan èdè rẹ (àwọn ẹsẹ Bíbélì yóò wà ní èdè Gẹ̀ẹ́sì, NIV), mú àwọn olùbásọ̀rọ̀ fóònù rẹ wọlé, ṣètò PIN, gbé ẹ̀dà ààbò jáde, kí o sì ka Àṣírí àti lílò tó yẹ.
 853	Ìwọ ló ní ojúṣe fún àwọn tí o bá sọ̀rọ̀, nítorí náà fi ọ̀rọ̀ ránṣẹ́ sí àwọn tí inú wọn dùn láti gbọ́ láti ọ̀dọ̀ rẹ nìkan, kí o sì dá dúró bí wọ́n bá béèrè. Tún ìrìn-àjò yìí wò láti Ètò nígbàkígbà.
+854	Gbàdúrà fún {0} àti {1} mìíràn

@@ -67,8 +67,9 @@
 846	Lista o Camino
 847	Personas muestra a todos a los que das seguimiento. Los botones muestran quién está atrasado, para hoy o esperando respuesta. Camino muestra a todos por etapa, de Primer contacto a Discípulo. Toca Pasar a… para avanzar a alguien.
 848	Ora por las personas
-849	Añade a cualquiera por quien quieras orar, con notas si quieres. Cada día Shepherd te muestra 2 o 3, por turnos, y puede recordártelo a la hora que elijas en Ajustes.
+849	Añade a cualquiera por quien quieras orar, con notas si quieres. Cada día Shepherd te muestra de 1 a 15 (tú eliges cuántas), por turnos, y puede recordártelo a la hora que elijas en Ajustes.
 850	Semana muestra a cuántas personas diste seguimiento, tus estudios, los contactos nuevos y quién vino a los eventos, con las últimas cuatro semanas una al lado de otra.
 851	Ajustes tiene el resto
 852	Elige tu idioma (los versículos bíblicos siguen en inglés, NIV), trae los contactos de tu teléfono, pon un PIN, exporta una copia de seguridad y lee Privacidad y uso responsable.
 853	Eres responsable de las personas a las que contactas, así que escribe solo a quien esté contento de saber de ti, y para si te lo piden. Repite este recorrido desde Ajustes cuando quieras.
+854	Ora por {0} y {1} más

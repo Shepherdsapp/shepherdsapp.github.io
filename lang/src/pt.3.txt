@@ -67,8 +67,9 @@
 846	Lista ou Jornada
 847	Pessoas mostra todos que você acompanha. Os botões mostram quem está atrasado, para hoje ou esperando resposta. Jornada mostra todos por etapa, de Primeiro contato a Discípulo. Toque em Mover para… para avançar alguém.
 848	Ore pelas pessoas
-849	Adicione quem você quiser para orar, com notas se quiser. A cada dia o Shepherd mostra 2 ou 3, revezando, e pode lembrar você no horário escolhido em Ajustes.
+849	Adicione quem você quiser para orar, com notas se quiser. A cada dia o Shepherd mostra de 1 a 15 (você escolhe quantos), revezando, e pode lembrar você no horário escolhido em Ajustes.
 850	Semana mostra quantas pessoas você acompanhou, seus estudos, novos contatos e quem veio aos eventos, com as últimas quatro semanas lado a lado.
 851	O resto está em Ajustes
 852	Escolha seu idioma (os versículos bíblicos ficam em inglês, NIV), traga os contatos do celular, defina um PIN, exporte um backup e leia Privacidade e uso responsável.
 853	Você é responsável pelas pessoas que contata, então só mande mensagem para quem fica feliz em ter notícias suas, e pare se pedirem. Repita este tour em Ajustes quando quiser.
+854	Orar por {0} e mais {1}

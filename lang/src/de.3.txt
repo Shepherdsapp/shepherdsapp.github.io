@@ -67,8 +67,9 @@
 846	Liste oder Weg
 847	Menschen zeigt alle, die du begleitest. Die Knöpfe zeigen, wer überfällig ist, heute dran ist oder auf Antwort wartet. Weg zeigt alle nach Phase, von Erster Kontakt bis Jünger. Tippe auf Weiter zu…, um jemanden weiterzubringen.
 848	Für Menschen beten
-849	Füge alle hinzu, für die du beten möchtest, gern mit Notizen. Jeden Tag zeigt Shepherd 2 oder 3 im Wechsel und kann dich zu einer Uhrzeit erinnern, die du in den Einstellungen wählst.
+849	Füge alle hinzu, für die du beten möchtest, gern mit Notizen. Jeden Tag zeigt Shepherd 1 bis 15 (du wählst, wie viele) im Wechsel und kann dich zu einer Uhrzeit erinnern, die du in den Einstellungen wählst.
 850	Woche zeigt, wie viele Menschen du begleitet hast, deine Studien, neue Kontakte und wer zu Terminen kam, mit den letzten vier Wochen nebeneinander.
 851	Der Rest steht in den Einstellungen
 852	Wähle deine Sprache (Bibelverse bleiben auf Englisch, NIV), hol deine Handy-Kontakte herein, lege eine PIN fest, exportiere eine Sicherung und lies Datenschutz und verantwortungsvolle Nutzung.
 853	Du bist verantwortlich für die Menschen, die du kontaktierst. Schreib also nur denen, die sich freuen, von dir zu hören, und hör auf, wenn sie darum bitten. Wiederhole diesen Rundgang jederzeit über die Einstellungen.
+854	Bete für {0} und {1} weitere

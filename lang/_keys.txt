@@ -901,8 +901,9 @@ Tap anyone to open their page. Log a Bible study and set the next one, change th
 List or Journey
 People shows everyone you're following up with. The buttons show who's overdue, due today or waiting on a reply. Journey shows everyone by stage, from First contact to Disciple. Tap Move to… to move someone on.
 Pray for people
-Add anyone you want to pray for, with notes if you like. Each day Shepherd shows 2 or 3 of them, taking turns, and can remind you at a time you choose in Settings.
+Add anyone you want to pray for, with notes if you like. Each day Shepherd shows 1 to 15 of them (you choose how many), taking turns, and can remind you at a time you choose in Settings.
 Week shows how many people you followed up with, your studies, new contacts and who came to events, with the last four weeks side by side.
 Settings has the rest
 Choose your language (Bible verses stay in English, NIV), bring in your phone contacts, set a PIN, export a backup, and read Privacy and safe use.
 You are responsible for the people you contact, so only message people who are happy to hear from you, and stop if they ask. Replay this tour from Settings any time.
+Pray for {0} and {1} more

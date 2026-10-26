@@ -130,7 +130,7 @@ Add services and events on Shepherd's Calendar tab so you can invite people and 
 - **People → Journey** shows everyone by stage: First contact → Interested → Studying → Regular at church → Baptised →
   Disciple. Tap **Move to …** to move someone on, or tap a stage on their page. Moving someone to Disciple doesn't add them
   to the Disciples tab.
-- **Prayer list** (Today → Pray today, or Settings): add a name and optional notes. Each day Shepherd shows 2 or 3 of them,
+- **Prayer list** (Today → Pray today, or Settings): add a name and optional notes. Each day Shepherd shows 1 to 15 of them (you choose how many in Settings),
   taking turns. Turn on **Remind me to pray each day** in Settings and pick a time for a notification that names them.
 - **Phone contacts** (Settings): import a contacts file (any phone) or, on Android, pick contacts. When you add someone,
   matching names and numbers come up as you type. They stay on that phone and are never uploaded. **Save to phone** on a
@@ -184,7 +184,7 @@ seconds, about 180 requests an hour, so that covers several hundred hours of use
 ## Changing the app
 
 Edit `src/app.html` or `src/web.js`, run `node build.mjs`, then run the tests. When `index.html` changes, raise
-`VERSION` in `sw.js` (e.g. `shepherd-v5`) and upload both, so phones fetch the new version. When `worker/worker.js`
+`VERSION` in `sw.js` (e.g. `shepherd-v6`) and upload both, so phones fetch the new version. When `worker/worker.js`
 changes, paste it into the Worker again and **Deploy**.
 
 ## Tests

@@ -67,8 +67,9 @@
 846	List or Journey
 847	Pipul dey show everybody wey you dey follow up. The buttons dey show who don pass time, who due today or who dey wait for reply. Journey dey show everybody by stage, from First contact reach Disciple. Tap Move go… to move person forward.
 848	Pray for people
-849	Add anybody wey you wan pray for, with notes if you like. Every day Shepherd go show 2 or 3 of dem, one after the other, and e fit remind you for the time wey you choose for Settings.
+849	Add anybody wey you wan pray for, with notes if you like. Every day Shepherd go show 1 to 15 (you choose how many) of dem, one after the other, and e fit remind you for the time wey you choose for Settings.
 850	Week dey show how many people you follow up, your studies, new contacts and who come for events, with the last four weeks side by side.
 851	Settings get the rest
 852	Choose your language (Bible verses go stay for English, NIV), bring your phone contacts enter, set PIN, export backup, and read Privacy and how to use am well.
 853	Na you dey responsible for the people wey you contact, so only message people wey happy to hear from you, and stop if dem ask. Replay this tour from Settings anytime.
+854	Pray for {0} and {1} more

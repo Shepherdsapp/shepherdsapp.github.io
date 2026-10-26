@@ -67,8 +67,9 @@
 846	Liste ou Parcours
 847	Personnes montre tous ceux que vous suivez. Les boutons montrent qui est en retard, à contacter aujourd'hui ou en attente de réponse. Parcours montre chacun par étape, de Premier contact à Disciple. Touchez Passer à… pour faire avancer quelqu'un.
 848	Prier pour les autres
-849	Ajoutez qui vous voulez pour prier, avec des notes si vous voulez. Chaque jour, Shepherd en montre 2 ou 3, à tour de rôle, et peut vous le rappeler à l'heure choisie dans les Réglages.
+849	Ajoutez qui vous voulez pour prier, avec des notes si vous voulez. Chaque jour, Shepherd en montre de 1 à 15 (vous choisissez combien), à tour de rôle, et peut vous le rappeler à l'heure choisie dans les Réglages.
 850	Semaine montre combien de personnes vous avez suivies, vos études, les nouveaux contacts et qui est venu aux événements, avec les quatre dernières semaines côte à côte.
 851	Les Réglages ont le reste
 852	Choisissez votre langue (les versets bibliques restent en anglais, NIV), importez vos contacts, définissez un code PIN, exportez une sauvegarde et lisez Confidentialité et bon usage.
 853	Vous êtes responsable des personnes que vous contactez : n'écrivez qu'à celles qui sont contentes d'avoir de vos nouvelles, et arrêtez si on vous le demande. Relancez cette visite depuis les Réglages quand vous voulez.
+854	Prier pour {0} et {1} autres

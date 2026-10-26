@@ -67,8 +67,9 @@
 846	Lista albo Droga
 847	Ludzie pokazuje wszystkich, z którymi utrzymujesz kontakt. Przyciski pokazują, kto ma zaległość, kto jest na dziś, a kto czeka na odpowiedź. Droga pokazuje wszystkich według etapu, od Pierwszy kontakt do Uczeń. Dotknij Przenieś do…, żeby przesunąć kogoś dalej.
 848	Módl się za ludzi
-849	Dodaj każdego, za kogo chcesz się modlić, z notatkami, jeśli chcesz. Każdego dnia Shepherd pokazuje 2 lub 3 osoby po kolei i może przypomnieć o godzinie wybranej w Ustawieniach.
+849	Dodaj każdego, za kogo chcesz się modlić, z notatkami, jeśli chcesz. Każdego dnia Shepherd pokazuje od 1 do 15 osób (sam wybierasz ile) po kolei i może przypomnieć o godzinie wybranej w Ustawieniach.
 850	Tydzień pokazuje, z iloma osobami utrzymałeś kontakt, twoje studia, nowe kontakty i kto przyszedł na wydarzenia, z ostatnimi czterema tygodniami obok siebie.
 851	Reszta jest w Ustawieniach
 852	Wybierz język (wersety biblijne zostają po angielsku, NIV), zaimportuj kontakty z telefonu, ustaw PIN, wyeksportuj kopię zapasową i przeczytaj Prywatność i odpowiedzialne korzystanie.
 853	Odpowiadasz za osoby, z którymi się kontaktujesz, więc pisz tylko do tych, które chcą mieć od ciebie wiadomość, i przestań, jeśli poproszą. Powtórz ten przewodnik z Ustawień w każdej chwili.
+854	Módl się za {0} i jeszcze {1}

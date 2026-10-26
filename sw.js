@@ -1,6 +1,6 @@
 /* Shepherd service worker: opens with no signal, and shows the notifications the Shepherd server sends.
    It never stores anything from the server itself (your list is stored by the app, per person). */
-const VERSION = 'shepherd-v4', MINE = 'shepherd-';
+const VERSION = 'shepherd-v5', MINE = 'shepherd-';
 const PAGE = './index.html', REST = ['./config.js', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './badge-96.png'];
 const END = '<!--shepherd:end-->'; // the build writes this as the very last thing in the app page
 const scopePath = () => new URL(self.registration.scope).pathname;

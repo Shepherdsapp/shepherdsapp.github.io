@@ -67,8 +67,9 @@
 846	Sąrašas arba Kelionė
 847	Žmonės rodo visus, su kuriais palaikai ryšį. Mygtukai rodo, kas vėluoja, kam laikas šiandien ir kas laukia atsakymo. Kelionė rodo visus pagal etapą, nuo Pirmas kontaktas iki Mokinys. Bakstelėk Perkelti…, kad perkeltum žmogų toliau.
 848	Melskis už žmones
-849	Pridėk visus, už kuriuos nori melstis, su pastabomis, jei nori. Kasdien Shepherd parodo 2 ar 3 iš jų paeiliui ir gali priminti tavo Nustatymuose pasirinktu laiku.
+849	Pridėk visus, už kuriuos nori melstis, su pastabomis, jei nori. Kasdien Shepherd parodo nuo 1 iki 15 (pats pasirenki kiek) iš jų paeiliui ir gali priminti tavo Nustatymuose pasirinktu laiku.
 850	Savaitė rodo, su kiek žmonių susisiekei, tavo studijas, naujus kontaktus ir kas atėjo į renginius, su paskutinėmis keturiomis savaitėmis greta.
 851	Visa kita – Nustatymuose
 852	Pasirink kalbą (Biblijos eilutės lieka anglų kalba, NIV), įkelk telefono kontaktus, nustatyk PIN kodą, eksportuok atsarginę kopiją ir perskaityk Privatumas ir atsakingas naudojimas.
 853	Tu atsakai už žmones, su kuriais susisieki, todėl rašyk tik tiems, kurie džiaugiasi tave girdėdami, ir liaukis, jei jie paprašo. Šį vadovą bet kada gali pakartoti Nustatymuose.
+854	Melskis už {0} ir dar {1}

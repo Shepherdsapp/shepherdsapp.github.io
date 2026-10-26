@@ -67,8 +67,9 @@
 846	Ndepụta ma ọ bụ Njem
 847	Mmadụ na-egosi onye ọ bụla ị na-akpọtụrụ. Bọtịnụ na-egosi onye gafeela oge, onye ọ bụ taa na onye na-eche nzaghachi. Njem na-egosi onye ọ bụla site n'ọkwa, site na Nzute mbụ ruo Onye na-eso ụzọ. Pịa Bufee na… iji bufee mmadụ n'ihu.
 848	Kpee ekpere maka mmadụ
-849	Tinye onye ọ bụla ị chọrọ ikpere ekpere, ya na ndetu ma ọ bụrụ na ị chọrọ. Kwa ụbọchị Shepherd na-egosi 2 ma ọ bụ 3 n'ime ha, otu otu, ma nwee ike ịchetara gị n'oge ị họọrọ na Ntọala.
+849	Tinye onye ọ bụla ị chọrọ ikpere ekpere, ya na ndetu ma ọ bụrụ na ị chọrọ. Kwa ụbọchị Shepherd na-egosi 1 ruo 15 (ị họrọ ole) n'ime ha, otu otu, ma nwee ike ịchetara gị n'oge ị họọrọ na Ntọala.
 850	Izu na-egosi ọnụ ọgụgụ ndị ị kpọtụrụ, ọmụmụ gị, kọntaktị ọhụrụ na ndị bịara mmemme, ya na izu anọ gara aga n'akụkụ ibe ha.
 851	Ntọala nwere ihe fọdụrụ
 852	Họrọ asụsụ gị (amaokwu Baịbụl na-anọ n'asụsụ Bekee, NIV), bubata kọntaktị ekwentị gị, debe PIN, bupụ ndabere, ma gụọ Nzuzo na iji ya nke ọma.
 853	Ọrụ dịịrị gị maka ndị ị na-akpọtụrụ, ya mere zigara naanị ndị obi dị ụtọ ịnụ olu gị ozi, ma kwụsị ma ọ bụrụ na ha rịọ. Megharịa njem nlegharị anya a site na Ntọala oge ọ bụla.
+854	Kpee ekpere maka {0} na {1} ndị ọzọ

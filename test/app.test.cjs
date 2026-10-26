@@ -773,6 +773,22 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     ok(/^Pray for \S+ and \S+$/.test(items[1].title) && items[1].body.length > 0, 'it names who to pray for: ' + items[1].title);
     const seen = new Set(items.slice(0, 4).flatMap(x => x.title.replace('Pray for ', '').split(' and ')));
     ok(seen.size === 4, 'everyone gets prayed for, taking turns');
+    {
+      const opts = A.$$('#pPrCount option').map(o => o.value).join(',');
+      ok(opts === Array.from({ length: 15 }, (_, i) => i + 1).join(','), 'you can choose anywhere from 1 to 15 people a day');
+      for (let i = 0; i < 10; i++) { const id = 'pbulk' + i; S0.prayers[id] = { id, name: 'Bulk ' + i + ' Person', notes: '', createdAt: Date.now() + i }; }
+      const c2 = A.$('#pPrCount'); c2.value = '12'; c2.dispatchEvent(new A.w.Event('change', { bubbles: true })); await wait();
+      ok(S0.profile.prayerCount === 12, 'the choice is saved');
+      const big = W2.buildSchedule().filter(x => x.tag.startsWith('pr-'));
+      ok(/^Pray for \S+, \S+ and 10 more$/.test(big[0].title), 'a long list keeps the notification title short: ' + big[0].title);
+      A.click('[data-act="tab"][data-v="today"]'); await wait();
+      ok(A.$$('#prayCard li').length === 12, 'Today shows all 12');
+      const c1 = (A.click('[data-act="settings"]'), await wait(), A.$('#pPrCount')); c1.value = '1'; c1.dispatchEvent(new A.w.Event('change', { bubbles: true })); await wait();
+      A.click('[data-act="tab"][data-v="today"]'); await wait();
+      ok(A.$$('#prayCard li').length === 1, 'or just one a day');
+      for (let i = 0; i < 10; i++) delete S0.prayers['pbulk' + i];
+      const c3 = (A.click('[data-act="settings"]'), await wait(), A.$('#pPrCount')); c3.value = '2'; c3.dispatchEvent(new A.w.Event('change', { bubbles: true })); await wait();
+    }
     on.checked = false; on.dispatchEvent(new A.w.Event('change', { bubbles: true })); await wait();
     ok(!W2.buildSchedule().some(x => x.tag.startsWith('pr-')), 'switching them off stops them');
     // add from a contact

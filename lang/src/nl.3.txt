@@ -67,8 +67,9 @@
 846	Lijst of Reis
 847	Mensen toont iedereen die je opvolgt. De knoppen laten zien wie te laat is, vandaag aan de beurt is of op antwoord wacht. Reis toont iedereen per fase, van Eerste contact tot Discipel. Tik op Naar… om iemand verder te zetten.
 848	Bid voor mensen
-849	Voeg iedereen toe voor wie je wilt bidden, met notities als je wilt. Elke dag laat Shepherd er 2 of 3 zien, om de beurt, en kan je herinneren op een tijd die je in Instellingen kiest.
+849	Voeg iedereen toe voor wie je wilt bidden, met notities als je wilt. Elke dag laat Shepherd er 1 tot 15 (jij kiest hoeveel) zien, om de beurt, en kan je herinneren op een tijd die je in Instellingen kiest.
 850	Week laat zien hoeveel mensen je hebt opgevolgd, je studies, nieuwe contacten en wie naar activiteiten kwam, met de laatste vier weken naast elkaar.
 851	Instellingen heeft de rest
 852	Kies je taal (bijbelverzen blijven in het Engels, NIV), haal je telefooncontacten binnen, stel een pincode in, maak een back-up en lees Privacy en verantwoord gebruik.
 853	Jij bent verantwoordelijk voor de mensen die je benadert, dus stuur alleen berichten aan mensen die blij zijn iets van je te horen, en stop als ze dat vragen. Doe deze rondleiding opnieuw via Instellingen wanneer je wilt.
+854	Bid voor {0} en {1} anderen
