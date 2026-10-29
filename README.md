@@ -42,6 +42,10 @@ No password, key or private address is written anywhere in this folder.
    Optional: `RESEND_API_KEY` (Secret) and `MAIL_FROM` (Text, e.g. `Shepherd <hello@yourchurch.org>`) so people can reset
    their own password by email. This needs your own web domain added to resend.com. Without them, use the admin page
    (see "Forgotten passwords").
+
+   Optional: `INVITE_CODE` (Text), a church invite code. When it's set, new people must type it to create an account
+   (capitals, spaces and dashes don't matter) and the sign-up screen shows the box by itself. Change or remove it any time;
+   people who already have an account aren't affected. Without it, anyone with the link can create an account.
 7. Open `https://shepherd.<your-name>.workers.dev/health`. You should see `"db":true`. The address at the top of the
    Worker's page is your **Worker address**.
 

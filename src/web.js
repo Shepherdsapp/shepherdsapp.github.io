@@ -144,7 +144,7 @@ function authHtml(mode, msg) {
       : '<div class="seg" style="grid-template-columns:1fr 1fr" role="group"><button type="button" data-auth="signin" aria-pressed="' + !create + '">Sign in</button><button type="button" data-auth="create" aria-pressed="' + create + '">Create account</button></div>' +
         '<p class="note" style="text-align:center">' + (create ? 'Your list is private: nobody else using Shepherd can see it.' : 'You only need to sign in once on this phone.') + '</p>') +
     (create ? '<label class="field" for="aName">Your name<input class="inp" id="aName" autocomplete="name" maxlength="80"></label>' : '') +
-    (create ? '<label class="field" for="aInvite">Church invite code<input class="inp" id="aInvite" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40"></label><p class="note" style="margin:-6px 0 0">Ask the person who runs Shepherd at your church.</p>' : '') +
+    (create ? '<div id="aInviteBox" hidden><label class="field" for="aInvite">Church invite code<input class="inp" id="aInvite" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40"></label><p class="note" style="margin:6px 0 0">Ask the person who runs Shepherd at your church.</p></div>' : '') +
     '<label class="field" for="aEmail">Email<input class="inp" id="aEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" value="' + esc(lsGet('shepherd:email') || '') + '"' + (code ? ' readonly' : '') + '></label>' +
     (code ? '<label class="field" for="aCode">6-digit code<input class="inp" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label>' : '') +
     (forgot ? '' : '<label class="field" for="aPw">' + (code ? 'New password' : 'Password') + '<span class="pwrow"><input class="inp" id="aPw" type="password" autocomplete="' + (create || code ? 'new-password' : 'current-password') + '" minlength="8"><button type="button" class="btn ghost small" id="aShow">Show</button></span></label>') +
@@ -162,7 +162,14 @@ function showAuth(mode, msg) {
   authEl.hidden = false; document.body.classList.add('noscroll');
   authEl.innerHTML = authHtml(mode || 'signin', msg); authEl.dataset.mode = mode || 'signin';
   bindAuth();
+  if (mode === 'create') inviteNeeded().then(function (on) { var b = authEl && authEl.querySelector('#aInviteBox'); if (b) b.hidden = !on; });
   setTimeout(function () { var f = authEl.querySelector(mode === 'code' ? '#aCode' : '#aEmail'); if (f && !f.value) try { f.focus(); } catch (e) {} }, 60);
+}
+// the invite code field only shows when the church has set a code on the server
+var inviteP = null;
+function inviteNeeded() {
+  if (!inviteP) inviteP = api('GET', '/api/signup/options').then(function (r) { return !!(r && r.invite); }, function () { inviteP = null; return false; });
+  return inviteP;
 }
 function hideAuth() { if (authEl) { authEl.hidden = true; authEl.innerHTML = ''; } document.body.classList.remove('noscroll'); }
 function bindAuth() {
@@ -189,13 +196,14 @@ function bindAuth() {
         return;
       }
       var key = await pwKey(email, pw), r;
-      if (mode === 'create') r = await api('POST', '/api/signup', { email: email, key: key, name: (authEl.querySelector('#aName').value || '').trim().slice(0, 80), invite: (authEl.querySelector('#aInvite').value || '').trim() });
+      if (mode === 'create') r = await api('POST', '/api/signup', { email: email, key: key, name: (authEl.querySelector('#aName').value || '').trim().slice(0, 80), invite: (authEl.querySelector('#aInvite') && !authEl.querySelector('#aInviteBox').hidden ? authEl.querySelector('#aInvite').value || '' : '').trim() });
       else if (mode === 'code') r = await api('POST', '/api/reset/confirm', { email: email, code: authEl.querySelector('#aCode').value, key: key });
       else r = await api('POST', '/api/login', { email: email, key: key });
       if (mode === 'create') W.agreedAt = Date.now(); // agreed to the acceptable use statement when creating the account
       finishSignIn(r.token, r.user);
       if (mode === 'create' && r.user.name) W.newName = r.user.name;
     } catch (x) {
+      if (x.code === 'bad_invite') { inviteP = Promise.resolve(true); var ib = authEl.querySelector('#aInviteBox'); if (ib) ib.hidden = false; }
       say(x.code === 'unavailable' ? 'No connection. Check your signal and try again.' : x.message);
     } finally { btn.disabled = false; btn.textContent = label; }
   });

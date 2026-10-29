@@ -22,16 +22,20 @@
         ADMIN_KEY        Secret  a long passcode you make up; lets you give someone a password reset code
         RESEND_API_KEY   Secret  from resend.com, to email reset codes (needs your own domain on Resend)
         MAIL_FROM        Text    e.g. Shepherd <hello@yourchurch.org>
+        INVITE_CODE      Text    the church invite code new people type to create an account.
+                                 Change it any time; people already signed up are not affected.
+                                 Leave it out and anyone can create an account.
    The database tables and the notification keys are created by this Worker the first time it runs.
    Open https://<this worker>/health to check: you should see "db":true.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-export const VERSION = 2;
+export const VERSION = 3;
 const DEFAULT_ORIGINS = 'https://sitbackco.github.io';
 const DEFAULT_APP_URL = 'https://sitbackco.github.io/shepherd/';
 const MAX_DOC = 256 * 1024;
 const MAX_OPS = 200;
-const SESSION_DAYS = 400;
+const SESSION_DAYS = 180;
+const SCHEMA_VERSION = '3';
 const PATH_RE = /^profile(\/(contacts|events|disciples|prayers)\/[A-Za-z0-9_-]{1,80})?$/;
 const PUSH_HOSTS = /(^|\.)(push\.apple\.com|fcm\.googleapis\.com|push\.services\.mozilla\.com|notify\.windows\.com|push\.api\.chromium\.org)$/;
 
@@ -82,12 +86,21 @@ const SCHEMA = [
   'CREATE TABLE IF NOT EXISTS tries (k TEXT PRIMARY KEY, n INTEGER, since INTEGER)',
   'CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)',
   'CREATE TABLE IF NOT EXISTS qrcodes (code TEXT PRIMARY KEY, uid TEXT UNIQUE NOT NULL, created INTEGER)',
-  "INSERT OR IGNORE INTO meta (k, v) VALUES ('seq', '0')"
+  "INSERT OR IGNORE INTO meta (k, v) VALUES ('seq', '0')",
+  "INSERT OR REPLACE INTO meta (k, v) VALUES ('schema', '" + SCHEMA_VERSION + "')"
 ];
+// The tables are set up once. After that each server start does one small read instead of 17 setup statements.
 let schemaReady = null;
+async function setUp(env) {
+  let v = null;
+  try { v = await env.DB.prepare("SELECT v FROM meta WHERE k = 'schema'").first('v'); } catch (e) { v = null; }
+  if (v === SCHEMA_VERSION) return true;
+  await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s)));
+  return true;
+}
 function ready(env) {
   if (!env.DB) fail(503, 'no_db', 'The Shepherd server has no database yet. Add the D1 binding called DB.');
-  if (!schemaReady) schemaReady = env.DB.batch(SCHEMA.map(s => env.DB.prepare(s))).catch(e => { schemaReady = null; throw e; });
+  if (!schemaReady) schemaReady = setUp(env).catch(e => { schemaReady = null; throw e; });
   return schemaReady;
 }
 const one = (env, sql, ...a) => env.DB.prepare(sql).bind(...a).first();
@@ -118,30 +131,39 @@ async function auth(req, env) {
   return { uid: s.uid, email: s.email, name: s.name, cal: s.cal, th };
 }
 const pub = u => ({ id: u.id || u.uid, email: u.email, name: u.name || '', cal: u.cal });
+const ipOf = req => req.headers.get('CF-Connecting-IP') || 'ip';
+// the church invite code: case, spaces and dashes don't matter
+const inviteNorm = s => String(s || '').toLowerCase().replace(/[\s-]+/g, '');
 
 async function signup(req, env) {
   const b = await body(req); const email = cleanEmail(b.email);
   if (!okEmail(email)) fail(400, 'bad_email', 'That email address doesn\'t look right.');
   if (!okKey(b.key)) fail(400, 'bad_password', 'Choose a password of at least 8 characters.');
-  await rateLimit(env, 'signup:' + (req.headers.get('CF-Connecting-IP') || 'ip'), 20, 3600e3);
+  await rateLimit(env, 'signup:' + ipOf(req), 20, 3600e3);
+  if (env.INVITE_CODE && !same(inviteNorm(b.invite), inviteNorm(env.INVITE_CODE))) fail(403, 'bad_invite', 'That invite code isn\'t right. Ask the person who runs Shepherd at your church.');
   if (await one(env, 'SELECT id FROM users WHERE email = ?', email)) fail(409, 'exists', 'There is already an account with that email. Sign in instead.');
+  if (!String(b.name || '').trim()) fail(400, 'bad_name', 'Add your name.');
   const id = 'u_' + b64u(rand(12)), salt = b64u(rand(16)), cal = b64u(rand(24));
-  await run(env, 'INSERT INTO users (id, email, pw, salt, name, created, cal) VALUES (?, ?, ?, ?, ?, ?, ?)', id, email, await sha256(salt + b.key), salt, str(b.name, 80), now(), cal);
-  return json({ token: await newSession(env, id, req), user: pub({ id, email, name: str(b.name, 80), cal }) });
+  await run(env, 'INSERT INTO users (id, email, pw, salt, name, created, cal) VALUES (?, ?, ?, ?, ?, ?, ?)', id, email, await sha256(salt + b.key), salt, str(String(b.name).trim(), 80), now(), cal);
+  return json({ token: await newSession(env, id, req), user: pub({ id, email, name: str(String(b.name).trim(), 80), cal }) });
 }
 async function login(req, env) {
   const b = await body(req); const email = cleanEmail(b.email);
   if (!okEmail(email) || !okKey(b.key)) fail(400, 'bad_login', 'Check your email and password.');
-  await rateLimit(env, 'login:' + email, 10, 15 * 60e3);
+  // Wrong tries are counted per network address and email, so a stranger elsewhere can't lock the owner out.
+  // A much higher limit per email alone still stops guessing spread over many addresses.
+  const k1 = 'login:' + ipOf(req) + ':' + email, k2 = 'loginall:' + email;
+  await rateLimit(env, k1, 10, 15 * 60e3);
+  await rateLimit(env, k2, 100, 60 * 60e3);
   const u = await one(env, 'SELECT * FROM users WHERE email = ?', email);
   if (!u || !same(await sha256(u.salt + b.key), u.pw)) fail(401, 'wrong_password', 'That email and password don\'t match.');
-  await run(env, 'DELETE FROM tries WHERE k = ?', 'login:' + email);
+  await run(env, 'DELETE FROM tries WHERE k = ?', k1);
   return json({ token: await newSession(env, u.id, req), user: pub(u) });
 }
 async function changePassword(req, env, me) {
   const b = await body(req);
   if (!okKey(b.key) || !okKey(b.newKey)) fail(400, 'bad_password', 'Choose a password of at least 8 characters.');
-  await rateLimit(env, 'login:' + me.email, 10, 15 * 60e3);
+  await rateLimit(env, 'pw:' + me.uid, 10, 15 * 60e3);
   const u = await one(env, 'SELECT * FROM users WHERE id = ?', me.uid);
   if (!same(await sha256(u.salt + b.key), u.pw)) fail(401, 'wrong_password', 'Your current password isn\'t right.');
   const salt = b64u(rand(16));
@@ -203,6 +225,41 @@ async function pull(req, env, me) {
   const more = rows.length > 500; if (more) rows.pop();
   return json({ docs: rows.map(r => ({ p: r.path, d: r.del ? null : JSON.parse(r.data), seq: r.seq })), seq: rows.length ? rows[rows.length - 1].seq : since, more });
 }
+/* Two phones changing the same person: changes are merged field by field.
+   Each save says what the phone started from (b). A field only this phone changed takes this phone's value,
+   a field only the other phone changed keeps the other phone's value, and lists such as the activity log keep
+   the entries added on both phones. Only when both phones changed the same field differently does the
+   later change win. */
+const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const itemKey = x => (isObj(x) && x.id != null ? 'id:' + x.id : 'j:' + JSON.stringify(x));
+function mergeList(base, theirs, mine, mineNewer) {
+  const m = arr => new Map((Array.isArray(arr) ? arr : []).map(x => [itemKey(x), x]));
+  const bm = m(base), tm = m(theirs), mm = m(mine);
+  const out = [], seen = new Set();
+  for (const x of theirs.concat(mine)) {
+    const k = itemKey(x); if (seen.has(k)) continue; seen.add(k);
+    if (bm.has(k) && (!tm.has(k) || !mm.has(k))) continue; // removed on one phone
+    out.push(tm.has(k) && mm.has(k) ? mergeDoc(bm.get(k), tm.get(k), mm.get(k), mineNewer) : x);
+  }
+  if (out.length && out.every(x => isObj(x) && typeof x.t === 'number')) out.sort((a, b) => a.t - b.t);
+  return out;
+}
+export function mergeDoc(base, theirs, mine, mineNewer) {
+  if (eq(mine, base)) return theirs;
+  if (eq(theirs, base) || eq(theirs, mine)) return mine;
+  if (Array.isArray(theirs) && Array.isArray(mine)) return mergeList(base, theirs, mine, mineNewer);
+  if (!isObj(theirs) || !isObj(mine)) return mineNewer ? mine : theirs;
+  const b = isObj(base) ? base : {};
+  const out = {};
+  new Set([...Object.keys(theirs), ...Object.keys(mine)]).forEach(k => {
+    let v;
+    if (k === 'updatedAt' && typeof theirs[k] === 'number' && typeof mine[k] === 'number') v = Math.max(theirs[k], mine[k]);
+    else v = mergeDoc(b[k], theirs[k], mine[k], mineNewer);
+    if (v !== undefined) out[k] = v;
+  });
+  return out;
+}
 async function push(req, env, me) {
   const b = await body(req); const ops = Array.isArray(b.ops) ? b.ops : [];
   if (!ops.length) return json({ ok: true, kept: [] });
@@ -214,7 +271,8 @@ async function push(req, env, me) {
     const data = del ? null : JSON.stringify(op.d);
     if (data && data.length > MAX_DOC) fail(413, 'too_big', 'One item is too large to save.');
     const t = Math.min(Number(op.t) || now(), now() + 5 * 60e3);
-    const prev = latest.get(op.p); if (!prev || t >= prev.t) latest.set(op.p, { p: op.p, data, del, t });
+    const hasBase = Object.prototype.hasOwnProperty.call(op, 'b'); // newer phones say what they started from
+    const prev = latest.get(op.p); if (!prev || t >= prev.t) latest.set(op.p, { p: op.p, data, del, t, hasBase, base: hasBase ? op.b : undefined });
   }
   const list = [...latest.values()];
   const existing = new Map();
@@ -226,10 +284,33 @@ async function push(req, env, me) {
   const kept = [], apply = [];
   for (const op of list) {
     const ex = existing.get(op.p);
-    if (ex && (ex.t || 0) > op.t) { kept.push({ p: op.p, d: ex.del ? null : JSON.parse(ex.data) }); continue; }
-    if (ex && !ex.del && ex.data === op.data) continue; // nothing changed
     if (ex && ex.del && op.del) continue;
-    apply.push({ op, ex });
+    if (op.del) { apply.push({ op, ex }); continue; } // a deletion (often at the person's request) always goes through
+    if (!ex) { apply.push({ op, ex }); continue; }
+    if (op.hasBase) {
+      if (ex.del) {
+        // deleted on another phone after this phone last saw it: stays deleted
+        if (op.base) { kept.push({ p: op.p, d: null }); continue; }
+        apply.push({ op, ex }); continue; // new on this phone, same path: keep it
+      }
+      const theirs = JSON.parse(ex.data), mine = JSON.parse(op.data);
+      const merged = mergeDoc(op.base === null ? {} : op.base, theirs, mine, op.t >= (ex.t || 0));
+      const mdata = JSON.stringify(merged);
+      if (mdata !== op.data) kept.push({ p: op.p, d: merged });
+      if (mdata === ex.data) continue; // nothing new for the server
+      apply.push({ op: Object.assign({}, op, { data: mdata, t: Math.max(op.t, ex.t || 0) }), ex });
+      continue;
+    }
+    // older app versions: the newer copy wins, but activity logs from both copies are kept
+    if (ex.del) { if ((ex.t || 0) > op.t) { kept.push({ p: op.p, d: null }); continue; } apply.push({ op, ex }); continue; }
+    const theirs = JSON.parse(ex.data), mine = JSON.parse(op.data);
+    const win = (ex.t || 0) > op.t ? theirs : mine, lose = win === theirs ? mine : theirs;
+    const out = Object.assign({}, win);
+    if (Array.isArray(lose.log) && Array.isArray(win.log)) out.log = mergeList([], win.log, lose.log, false).slice(-300);
+    const odata = JSON.stringify(out);
+    if (odata !== op.data) kept.push({ p: op.p, d: out });
+    if (odata === ex.data) continue;
+    apply.push({ op: Object.assign({}, op, { data: odata, t: Math.max(op.t, ex.t || 0) }), ex });
   }
   if (apply.length) {
     const first = await nextSeqs(env, apply.length); const t = now(); const stmts = [];
@@ -323,33 +404,48 @@ async function testPush(req, env, me) {
   }
   return json({ ok: res.some(s => s >= 200 && s < 300), sent: res.filter(s => s >= 200 && s < 300).length, devices: subs.length });
 }
+// The app sends its whole plan for the next two weeks. Only the notifications that changed are written,
+// so everyday use stays far inside the database's free daily write limit.
+const outKey = x => [Math.round(Number(x.at)), x.title, x.body, x.tag, x.url, x.badge == null ? '' : x.badge].join('\u0001');
 async function schedule(req, env, me) {
   const b = await body(req); const t = now();
-  const items = (Array.isArray(b.items) ? b.items : []).filter(x => x && Number(x.at) > t && Number(x.at) < t + 16 * 864e5 && x.title).slice(0, 400);
-  const stmts = [env.DB.prepare('DELETE FROM outbox WHERE uid = ? AND sent = 0 AND at > ?').bind(me.uid, t)];
-  items.forEach(x => stmts.push(env.DB.prepare('INSERT INTO outbox (uid, at, title, body, tag, url, badge, sent) VALUES (?, ?, ?, ?, ?, ?, ?, 0)')
-    .bind(me.uid, Math.round(Number(x.at)), str(x.title, 120), str(x.body, 300), str(x.tag, 80), str(x.url, 200), Number.isFinite(Number(x.badge)) ? Math.max(0, Math.min(999, Number(x.badge) | 0)) : null)));
+  const items = (Array.isArray(b.items) ? b.items : []).filter(x => x && Number(x.at) > t && Number(x.at) < t + 16 * 864e5 && x.title).slice(0, 400)
+    .map(x => ({ at: Math.round(Number(x.at)), title: str(x.title, 120), body: str(x.body, 300), tag: str(x.tag, 80), url: str(x.url, 200), badge: Number.isFinite(Number(x.badge)) && x.badge !== null && x.badge !== '' ? Math.max(0, Math.min(999, Number(x.badge) | 0)) : null }));
+  const have = await all(env, 'SELECT id, at, title, body, tag, url, badge FROM outbox WHERE uid = ? AND sent = 0 AND at > ?', me.uid, t);
+  const pool = new Map(); have.forEach(r => { const k = outKey(r); if (!pool.has(k)) pool.set(k, []); pool.get(k).push(r.id); });
+  const add = [];
+  items.forEach(x => { const ids = pool.get(outKey(x)); if (ids && ids.length) ids.pop(); else add.push(x); });
+  const drop = [].concat(...pool.values());
+  const stmts = [];
+  for (let i = 0; i < drop.length; i += 80) { const c = drop.slice(i, i + 80); stmts.push(env.DB.prepare('DELETE FROM outbox WHERE uid = ? AND id IN (' + c.map(() => '?').join(',') + ')').bind(me.uid, ...c)); }
+  add.forEach(x => stmts.push(env.DB.prepare('INSERT INTO outbox (uid, at, title, body, tag, url, badge, sent) VALUES (?, ?, ?, ?, ?, ?, ?, 0)').bind(me.uid, x.at, x.title, x.body, x.tag, x.url, x.badge)));
   for (let i = 0; i < stmts.length; i += 90) await env.DB.batch(stmts.slice(i, i + 90));
-  return json({ ok: true, scheduled: items.length });
+  return json({ ok: true, scheduled: items.length, added: add.length, removed: drop.length });
 }
 /* every 5 minutes: send what's due */
+// Each notification is marked sent only after it has been tried, so if a run is stopped part-way the rest
+// go out on the next run. If every phone was unreachable for a moment it is tried again (for up to 3 hours).
 export async function sendDue(env, limit) {
   await ready(env);
   const t = now();
-  const due = await all(env, 'SELECT * FROM outbox WHERE sent = 0 AND at <= ? AND at > ? ORDER BY at LIMIT ?', t, t - 3 * 3600e3, limit || 60);
+  const due = await all(env, 'SELECT * FROM outbox WHERE sent = 0 AND at <= ? AND at > ? ORDER BY at LIMIT ?', t, t - 3 * 3600e3, limit || 40);
   if (!due.length) return { sent: 0 };
-  const uids = [...new Set(due.map(d => d.uid))];
   const subs = {};
-  for (const u of uids) subs[u] = await all(env, 'SELECT * FROM subs WHERE uid = ?', u);
-  const v = await vapid(env), cache = {}; let sent = 0;
+  for (const u of [...new Set(due.map(d => d.uid))]) subs[u] = await all(env, 'SELECT * FROM subs WHERE uid = ?', u);
+  const v = await vapid(env), cache = {}; let sent = 0, retry = 0;
   for (const d of due) {
-    await run(env, 'UPDATE outbox SET sent = 1 WHERE id = ?', d.id);
-    for (const s of subs[d.uid] || []) {
+    let good = 0, later = 0;
+    const list = subs[d.uid] || [];
+    for (const s of list) {
       const st = await sendPush(env, v, s, { title: d.title, body: d.body, tag: d.tag, url: d.url || './', badge: d.badge }, cache).catch(() => 0);
-      await afterSend(env, s, st); if (st >= 200 && st < 300) sent++;
+      await afterSend(env, s, st);
+      if (st >= 200 && st < 300) good++; else if (!st || st === 429 || st >= 500) later++;
     }
+    sent += good;
+    if (list.length && !good && later === list.length) { retry++; continue; } // phones unreachable right now: try next run
+    await run(env, 'UPDATE outbox SET sent = 1 WHERE id = ?', d.id);
   }
-  return { sent, items: due.length };
+  return { sent, items: due.length, retry };
 }
 async function tidy(env) {
   const t = now();
@@ -364,8 +460,17 @@ async function tidy(env) {
 }
 
 /* ---------- calendar link for the phone's own Calendar app ---------- */
-function icsEsc(s) { return String(s || '').replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/[,;]/g, m => '\\' + m); }
-function icsFold(line) { const out = []; let s = line; while (s.length > 74) { out.push(s.slice(0, 74)); s = ' ' + s.slice(74); } out.push(s); return out.join('\r\n'); }
+function icsEsc(s) { return String(s || '').replace(/\\/g, '\\\\').replace(/\r\n|\r|\n/g, '\\n').replace(/[,;]/g, m => '\\' + m); }
+// lines are folded at 75 bytes (not letters), never splitting a letter, as calendar apps expect
+export function icsFold(line) {
+  const out = []; let cur = '', bytes = 0, max = 75;
+  for (const ch of line) {
+    const n = enc.encode(ch).length;
+    if (bytes + n > max) { out.push(cur); cur = ' '; bytes = 1; max = 75; }
+    cur += ch; bytes += n;
+  }
+  out.push(cur); return out.join('\r\n');
+}
 function icsWhen(date, time, mins) {
   const d = String(date || '').replace(/-/g, '');
   if (!/^\d{8}$/.test(d)) return null;
@@ -429,21 +534,21 @@ async function newCalLink(req, env, me) { const cal = b64u(rand(24)); await run(
 
 /* ---------- QR code: a hello page that adds the person to your list, then opens WhatsApp ---------- */
 const HI = {
-  en: { title: 'Say hi to {name}', lead: '{name} uses Shepherd to keep in touch. Type your name, then WhatsApp opens so you can send a message.', yourName: 'Your name', yourNum: 'Your WhatsApp number (optional)', go: 'Continue to WhatsApp', privacy: 'Your name and number go only to {name}.', notReady: 'This QR code isn\'t ready yet. Ask {name} to add their WhatsApp number in Shepherd.', needName: 'Please type your name.', slow: 'Too many tries. Please wait a little and try again.', pushT: '{name} scanned your QR code', pushB: 'They should message you on WhatsApp now. Tap to see them.' },
-  es: { title: 'Saluda a {name}', lead: '{name} usa Shepherd para mantenerse en contacto. Escribe tu nombre y se abrirá WhatsApp para que puedas enviar un mensaje.', yourName: 'Tu nombre', yourNum: 'Tu número de WhatsApp (opcional)', go: 'Continuar a WhatsApp', privacy: 'Tu nombre y número solo los verá {name}.', notReady: 'Este código QR aún no está listo. Pídele a {name} que añada su número de WhatsApp en Shepherd.', needName: 'Escribe tu nombre, por favor.', slow: 'Demasiados intentos. Espera un poco y vuelve a intentarlo.', pushT: '{name} escaneó tu código QR', pushB: 'Debería escribirte por WhatsApp ahora. Toca para verlo.' },
-  fr: { title: 'Dites bonjour à {name}', lead: '{name} utilise Shepherd pour garder le contact. Écrivez votre nom, puis WhatsApp s\'ouvre pour envoyer un message.', yourName: 'Votre nom', yourNum: 'Votre numéro WhatsApp (facultatif)', go: 'Continuer vers WhatsApp', privacy: 'Votre nom et votre numéro sont envoyés uniquement à {name}.', notReady: 'Ce code QR n\'est pas encore prêt. Demandez à {name} d\'ajouter son numéro WhatsApp dans Shepherd.', needName: 'Veuillez écrire votre nom.', slow: 'Trop de tentatives. Patientez un peu et réessayez.', pushT: '{name} a scanné votre code QR', pushB: 'Cette personne devrait vous écrire sur WhatsApp. Touchez pour la voir.' },
-  pt: { title: 'Diga olá a {name}', lead: '{name} usa o Shepherd para manter contacto. Escreva o seu nome e o WhatsApp abre para enviar uma mensagem.', yourName: 'O seu nome', yourNum: 'O seu número de WhatsApp (opcional)', go: 'Continuar para o WhatsApp', privacy: 'O seu nome e número vão apenas para {name}.', notReady: 'Este código QR ainda não está pronto. Peça a {name} para adicionar o número de WhatsApp no Shepherd.', needName: 'Por favor, escreva o seu nome.', slow: 'Demasiadas tentativas. Espere um pouco e tente de novo.', pushT: '{name} leu o seu código QR', pushB: 'Deve enviar-lhe uma mensagem no WhatsApp agora. Toque para ver.' },
-  nl: { title: 'Zeg hallo tegen {name}', lead: '{name} gebruikt Shepherd om contact te houden. Typ je naam, daarna opent WhatsApp zodat je een bericht kunt sturen.', yourName: 'Je naam', yourNum: 'Je WhatsApp-nummer (optioneel)', go: 'Verder naar WhatsApp', privacy: 'Je naam en nummer gaan alleen naar {name}.', notReady: 'Deze QR-code is nog niet klaar. Vraag {name} om een WhatsApp-nummer toe te voegen in Shepherd.', needName: 'Typ je naam.', slow: 'Te veel pogingen. Wacht even en probeer het opnieuw.', pushT: '{name} heeft je QR-code gescand', pushB: 'Diegene stuurt je nu een WhatsApp-bericht. Tik om te bekijken.' },
-  pl: { title: 'Przywitaj się z {name}', lead: '{name} używa Shepherd, by być w kontakcie. Wpisz swoje imię, a potem otworzy się WhatsApp, żebyś mógł wysłać wiadomość.', yourName: 'Twoje imię', yourNum: 'Twój numer WhatsApp (opcjonalnie)', go: 'Przejdź do WhatsApp', privacy: 'Twoje imię i numer trafią tylko do {name}.', notReady: 'Ten kod QR nie jest jeszcze gotowy. Poproś {name} o dodanie numeru WhatsApp w Shepherd.', needName: 'Wpisz swoje imię.', slow: 'Zbyt wiele prób. Odczekaj chwilę i spróbuj ponownie.', pushT: '{name} zeskanował(a) Twój kod QR', pushB: 'Powinien(na) teraz napisać do Ciebie na WhatsApp. Dotknij, aby zobaczyć.' },
-  pcm: { title: 'Greet {name}', lead: '{name} dey use Shepherd take keep in touch. Type your name, then WhatsApp go open make you fit send message.', yourName: 'Your name', yourNum: 'Your WhatsApp number (if you want)', go: 'Go WhatsApp', privacy: 'Na only {name} go see your name and number.', notReady: 'Dis QR code never ready. Tell {name} make e add im WhatsApp number for Shepherd.', needName: 'Abeg type your name.', slow: 'You don try too many times. Wait small, then try again.', pushT: '{name} don scan your QR code', pushB: 'E suppose message you for WhatsApp now. Tap make you see am.' },
-  yo: { title: 'Kí {name}', lead: '{name} ń lo Shepherd láti máa bá àwọn ènìyàn sọ̀rọ̀. Kọ orúkọ rẹ, lẹ́yìn náà WhatsApp yóò ṣí kí o lè fi ìfiránṣẹ́ ránṣẹ́.', yourName: 'Orúkọ rẹ', yourNum: 'Nọ́mbà WhatsApp rẹ (kò pọn dandan)', go: 'Tẹ̀síwájú sí WhatsApp', privacy: '{name} nìkan ni yóò rí orúkọ àti nọ́mbà rẹ.', notReady: 'Kóòdù QR yìí kò tíì ṣetán. Sọ fún {name} kí ó fi nọ́mbà WhatsApp rẹ̀ kún un nínú Shepherd.', needName: 'Jọ̀wọ́ kọ orúkọ rẹ.', slow: 'O ti gbìyànjú lọ́pọ̀ ìgbà. Dúró díẹ̀ kí o tún gbìyànjú.', pushT: '{name} ti ṣàyẹ̀wò kóòdù QR rẹ', pushB: 'Ó yẹ kí ó fi ìfiránṣẹ́ ránṣẹ́ sí ọ lórí WhatsApp báyìí. Tẹ̀ láti rí i.' },
-  ig: { title: 'Kelee {name}', lead: '{name} na-eji Shepherd na-akpakọrịta. Dee aha gị, mgbe ahụ WhatsApp ga-emeghe ka ị zitere ozi.', yourName: 'Aha gị', yourNum: 'Nọmba WhatsApp gị (ọ bụghị iwu)', go: 'Gaa n\'ihu na WhatsApp', privacy: 'Ọ bụ naanị {name} ga-ahụ aha na nọmba gị.', notReady: 'Koodu QR a adịbeghị njikere. Gwa {name} ka ọ tinye nọmba WhatsApp ya na Shepherd.', needName: 'Biko dee aha gị.', slow: 'Ị nwalere ọtụtụ ugboro. Chere obere oge ma nwaa ọzọ.', pushT: '{name} enyochala koodu QR gị', pushB: 'O kwesịrị iziga gị ozi na WhatsApp ugbu a. Pịa ka ịhụ ya.' },
-  'zh-Hans': { title: '向{name}问好', lead: '{name}用 Shepherd 保持联系。输入你的名字，然后会打开 WhatsApp，方便你发送消息。', yourName: '你的名字', yourNum: '你的 WhatsApp 号码（可选）', go: '继续前往 WhatsApp', privacy: '你的名字和号码只会发给{name}。', notReady: '这个二维码还不能用。请让{name}在 Shepherd 里添加 WhatsApp 号码。', needName: '请输入你的名字。', slow: '尝试次数太多。请稍等片刻再试。', pushT: '{name}扫描了你的二维码', pushB: '对方现在应该会在 WhatsApp 上给你发消息。点按查看。' },
-  'zh-Hant': { title: '向{name}問好', lead: '{name}用 Shepherd 保持聯絡。輸入你的名字，然後會打開 WhatsApp，方便你傳送訊息。', yourName: '你的名字', yourNum: '你的 WhatsApp 號碼（可選）', go: '繼續前往 WhatsApp', privacy: '你的名字和號碼只會傳給{name}。', notReady: '這個 QR 碼還不能使用。請{name}在 Shepherd 加入 WhatsApp 號碼。', needName: '請輸入你的名字。', slow: '嘗試次數太多。請稍候再試。', pushT: '{name}掃描了你的 QR 碼', pushB: '對方現在應該會在 WhatsApp 傳訊息給你。點按查看。' },
-  ja: { title: '{name}さんにあいさつ', lead: '{name}さんは Shepherd で連絡を取り合っています。名前を入力すると WhatsApp が開き、メッセージを送れます。', yourName: 'お名前', yourNum: 'WhatsApp の番号（任意）', go: 'WhatsApp へ進む', privacy: 'お名前と番号は{name}さんにだけ届きます。', notReady: 'この QR コードはまだ使えません。{name}さんに Shepherd で WhatsApp の番号を登録してもらってください。', needName: 'お名前を入力してください。', slow: '試行回数が多すぎます。少し待ってからもう一度お試しください。', pushT: '{name}さんが QR コードを読み取りました', pushB: 'まもなく WhatsApp でメッセージが届くはずです。タップして確認。' },
-  de: { title: 'Sag {name} Hallo', lead: '{name} nutzt Shepherd, um in Kontakt zu bleiben. Gib deinen Namen ein, dann öffnet sich WhatsApp, damit du eine Nachricht senden kannst.', yourName: 'Dein Name', yourNum: 'Deine WhatsApp-Nummer (optional)', go: 'Weiter zu WhatsApp', privacy: 'Dein Name und deine Nummer gehen nur an {name}.', notReady: 'Dieser QR-Code ist noch nicht bereit. Bitte {name}, in Shepherd eine WhatsApp-Nummer einzutragen.', needName: 'Bitte gib deinen Namen ein.', slow: 'Zu viele Versuche. Bitte warte kurz und versuche es erneut.', pushT: '{name} hat deinen QR-Code gescannt', pushB: 'Die Person sollte dir jetzt auf WhatsApp schreiben. Tippe, um sie zu sehen.' },
-  ru: { title: 'Поздоровайтесь с {name}', lead: '{name} использует Shepherd, чтобы оставаться на связи. Введите своё имя, и откроется WhatsApp, чтобы вы могли отправить сообщение.', yourName: 'Ваше имя', yourNum: 'Ваш номер WhatsApp (необязательно)', go: 'Перейти в WhatsApp', privacy: 'Ваше имя и номер увидит только {name}.', notReady: 'Этот QR-код ещё не готов. Попросите {name} добавить номер WhatsApp в Shepherd.', needName: 'Пожалуйста, введите своё имя.', slow: 'Слишком много попыток. Подождите немного и попробуйте снова.', pushT: '{name} отсканировал(а) ваш QR-код', pushB: 'Сейчас вам должны написать в WhatsApp. Нажмите, чтобы посмотреть.' },
-  lt: { title: 'Pasisveikinkite su {name}', lead: '{name} naudoja Shepherd, kad palaikytų ryšį. Įrašykite savo vardą, tada atsidarys WhatsApp ir galėsite parašyti žinutę.', yourName: 'Jūsų vardas', yourNum: 'Jūsų WhatsApp numeris (nebūtina)', go: 'Tęsti į WhatsApp', privacy: 'Jūsų vardą ir numerį matys tik {name}.', notReady: 'Šis QR kodas dar neparuoštas. Paprašykite {name} įrašyti WhatsApp numerį Shepherd programėlėje.', needName: 'Įrašykite savo vardą.', slow: 'Per daug bandymų. Palaukite ir bandykite dar kartą.', pushT: '{name} nuskenavo jūsų QR kodą', pushB: 'Netrukus turėtų parašyti jums per WhatsApp. Palieskite, kad pamatytumėte.' }
+  en: { title: 'Say hi to {name}', lead: '{name} uses Shepherd to keep in touch. Type your name, then WhatsApp opens so you can send a message.', yourName: 'Your name', yourNum: 'Your WhatsApp number (optional)', go: 'Continue to WhatsApp', privacy: 'Your name and number go only to {name}.', notReady: 'This QR code isn\'t ready yet. Ask {name} to add their WhatsApp number in Shepherd.', needName: 'Please type your name.', slow: 'Too many tries. Please wait a little and try again.', pushT: '{name} scanned your QR code', pushB: 'They should message you on WhatsApp now. Tap to see them.', agree: "I'm happy for {name} to keep my name and number and stay in touch.", needAgree: "Please tick the box to say you're happy to be added.", privLink: "How Shepherd uses your details" },
+  es: { title: 'Saluda a {name}', lead: '{name} usa Shepherd para mantenerse en contacto. Escribe tu nombre y se abrirá WhatsApp para que puedas enviar un mensaje.', yourName: 'Tu nombre', yourNum: 'Tu número de WhatsApp (opcional)', go: 'Continuar a WhatsApp', privacy: 'Tu nombre y número solo los verá {name}.', notReady: 'Este código QR aún no está listo. Pídele a {name} que añada su número de WhatsApp en Shepherd.', needName: 'Escribe tu nombre, por favor.', slow: 'Demasiados intentos. Espera un poco y vuelve a intentarlo.', pushT: '{name} escaneó tu código QR', pushB: 'Debería escribirte por WhatsApp ahora. Toca para verlo.', agree: "Acepto que {name} guarde mi nombre y mi número y siga en contacto conmigo.", needAgree: "Marca la casilla para confirmar que aceptas que te añada.", privLink: "Cómo usa Shepherd tus datos" },
+  fr: { title: 'Dites bonjour à {name}', lead: '{name} utilise Shepherd pour garder le contact. Écrivez votre nom, puis WhatsApp s\'ouvre pour envoyer un message.', yourName: 'Votre nom', yourNum: 'Votre numéro WhatsApp (facultatif)', go: 'Continuer vers WhatsApp', privacy: 'Votre nom et votre numéro sont envoyés uniquement à {name}.', notReady: 'Ce code QR n\'est pas encore prêt. Demandez à {name} d\'ajouter son numéro WhatsApp dans Shepherd.', needName: 'Veuillez écrire votre nom.', slow: 'Trop de tentatives. Patientez un peu et réessayez.', pushT: '{name} a scanné votre code QR', pushB: 'Cette personne devrait vous écrire sur WhatsApp. Touchez pour la voir.', agree: "J'accepte que {name} garde mon nom et mon numéro et reste en contact avec moi.", needAgree: "Cochez la case pour confirmer que vous acceptez d'être ajouté.", privLink: "Comment Shepherd utilise vos coordonnées" },
+  pt: { title: 'Diga olá a {name}', lead: '{name} usa o Shepherd para manter contacto. Escreva o seu nome e o WhatsApp abre para enviar uma mensagem.', yourName: 'O seu nome', yourNum: 'O seu número de WhatsApp (opcional)', go: 'Continuar para o WhatsApp', privacy: 'O seu nome e número vão apenas para {name}.', notReady: 'Este código QR ainda não está pronto. Peça a {name} para adicionar o número de WhatsApp no Shepherd.', needName: 'Por favor, escreva o seu nome.', slow: 'Demasiadas tentativas. Espere um pouco e tente de novo.', pushT: '{name} leu o seu código QR', pushB: 'Deve enviar-lhe uma mensagem no WhatsApp agora. Toque para ver.', agree: "Concordo que {name} guarde o meu nome e número e mantenha contacto comigo.", needAgree: "Marque a caixa para confirmar que concorda em ser adicionado.", privLink: "Como o Shepherd usa os seus dados" },
+  nl: { title: 'Zeg hallo tegen {name}', lead: '{name} gebruikt Shepherd om contact te houden. Typ je naam, daarna opent WhatsApp zodat je een bericht kunt sturen.', yourName: 'Je naam', yourNum: 'Je WhatsApp-nummer (optioneel)', go: 'Verder naar WhatsApp', privacy: 'Je naam en nummer gaan alleen naar {name}.', notReady: 'Deze QR-code is nog niet klaar. Vraag {name} om een WhatsApp-nummer toe te voegen in Shepherd.', needName: 'Typ je naam.', slow: 'Te veel pogingen. Wacht even en probeer het opnieuw.', pushT: '{name} heeft je QR-code gescand', pushB: 'Diegene stuurt je nu een WhatsApp-bericht. Tik om te bekijken.', agree: "Ik vind het goed dat {name} mijn naam en nummer bewaart en contact houdt.", needAgree: "Vink het vakje aan om te laten weten dat je toegevoegd wilt worden.", privLink: "Hoe Shepherd je gegevens gebruikt" },
+  pl: { title: 'Przywitaj się z {name}', lead: '{name} używa Shepherd, by być w kontakcie. Wpisz swoje imię, a potem otworzy się WhatsApp, żebyś mógł wysłać wiadomość.', yourName: 'Twoje imię', yourNum: 'Twój numer WhatsApp (opcjonalnie)', go: 'Przejdź do WhatsApp', privacy: 'Twoje imię i numer trafią tylko do {name}.', notReady: 'Ten kod QR nie jest jeszcze gotowy. Poproś {name} o dodanie numeru WhatsApp w Shepherd.', needName: 'Wpisz swoje imię.', slow: 'Zbyt wiele prób. Odczekaj chwilę i spróbuj ponownie.', pushT: '{name} zeskanował(a) Twój kod QR', pushB: 'Powinien(na) teraz napisać do Ciebie na WhatsApp. Dotknij, aby zobaczyć.', agree: "Zgadzam się, aby {name} przechowywał(a) moje imię i numer i utrzymywał(a) ze mną kontakt.", needAgree: "Zaznacz pole, aby potwierdzić, że zgadzasz się na dodanie.", privLink: "Jak Shepherd używa Twoich danych" },
+  pcm: { title: 'Greet {name}', lead: '{name} dey use Shepherd take keep in touch. Type your name, then WhatsApp go open make you fit send message.', yourName: 'Your name', yourNum: 'Your WhatsApp number (if you want)', go: 'Go WhatsApp', privacy: 'Na only {name} go see your name and number.', notReady: 'Dis QR code never ready. Tell {name} make e add im WhatsApp number for Shepherd.', needName: 'Abeg type your name.', slow: 'You don try too many times. Wait small, then try again.', pushT: '{name} don scan your QR code', pushB: 'E suppose message you for WhatsApp now. Tap make you see am.', agree: "I gree make {name} keep my name and number and dey in touch with me.", needAgree: "Abeg tick di box to show say you gree make dem add you.", privLink: "How Shepherd dey use your details" },
+  yo: { title: 'Kí {name}', lead: '{name} ń lo Shepherd láti máa bá àwọn ènìyàn sọ̀rọ̀. Kọ orúkọ rẹ, lẹ́yìn náà WhatsApp yóò ṣí kí o lè fi ìfiránṣẹ́ ránṣẹ́.', yourName: 'Orúkọ rẹ', yourNum: 'Nọ́mbà WhatsApp rẹ (kò pọn dandan)', go: 'Tẹ̀síwájú sí WhatsApp', privacy: '{name} nìkan ni yóò rí orúkọ àti nọ́mbà rẹ.', notReady: 'Kóòdù QR yìí kò tíì ṣetán. Sọ fún {name} kí ó fi nọ́mbà WhatsApp rẹ̀ kún un nínú Shepherd.', needName: 'Jọ̀wọ́ kọ orúkọ rẹ.', slow: 'O ti gbìyànjú lọ́pọ̀ ìgbà. Dúró díẹ̀ kí o tún gbìyànjú.', pushT: '{name} ti ṣàyẹ̀wò kóòdù QR rẹ', pushB: 'Ó yẹ kí ó fi ìfiránṣẹ́ ránṣẹ́ sí ọ lórí WhatsApp báyìí. Tẹ̀ láti rí i.', agree: "Inú mi dùn kí {name} tọ́jú orúkọ àti nọ́mbà mi kí ó sì máa bá mi sọ̀rọ̀.", needAgree: "Jọ̀wọ́ fi àmì sí àpótí náà láti fi hàn pé inú rẹ dùn kí a fi ọ́ kún un.", privLink: "Bí Shepherd ṣe ń lo àwọn àlàyé rẹ" },
+  ig: { title: 'Kelee {name}', lead: '{name} na-eji Shepherd na-akpakọrịta. Dee aha gị, mgbe ahụ WhatsApp ga-emeghe ka ị zitere ozi.', yourName: 'Aha gị', yourNum: 'Nọmba WhatsApp gị (ọ bụghị iwu)', go: 'Gaa n\'ihu na WhatsApp', privacy: 'Ọ bụ naanị {name} ga-ahụ aha na nọmba gị.', notReady: 'Koodu QR a adịbeghị njikere. Gwa {name} ka ọ tinye nọmba WhatsApp ya na Shepherd.', needName: 'Biko dee aha gị.', slow: 'Ị nwalere ọtụtụ ugboro. Chere obere oge ma nwaa ọzọ.', pushT: '{name} enyochala koodu QR gị', pushB: 'O kwesịrị iziga gị ozi na WhatsApp ugbu a. Pịa ka ịhụ ya.', agree: "Ekwenyere m ka {name} debe aha m na nọmba m ma na-akpọtụrụ m.", needAgree: "Biko kaa igbe ahụ akara iji gosi na i kwenyere ka e tinye gị.", privLink: "Otú Shepherd si eji nkọwa gị" },
+  'zh-Hans': { title: '向{name}问好', lead: '{name}用 Shepherd 保持联系。输入你的名字，然后会打开 WhatsApp，方便你发送消息。', yourName: '你的名字', yourNum: '你的 WhatsApp 号码（可选）', go: '继续前往 WhatsApp', privacy: '你的名字和号码只会发给{name}。', notReady: '这个二维码还不能用。请让{name}在 Shepherd 里添加 WhatsApp 号码。', needName: '请输入你的名字。', slow: '尝试次数太多。请稍等片刻再试。', pushT: '{name}扫描了你的二维码', pushB: '对方现在应该会在 WhatsApp 上给你发消息。点按查看。', agree: "我同意{name}保存我的名字和号码，并与我保持联系。", needAgree: "请勾选方框，表示你同意被添加。", privLink: "Shepherd 如何使用你的资料" },
+  'zh-Hant': { title: '向{name}問好', lead: '{name}用 Shepherd 保持聯絡。輸入你的名字，然後會打開 WhatsApp，方便你傳送訊息。', yourName: '你的名字', yourNum: '你的 WhatsApp 號碼（可選）', go: '繼續前往 WhatsApp', privacy: '你的名字和號碼只會傳給{name}。', notReady: '這個 QR 碼還不能使用。請{name}在 Shepherd 加入 WhatsApp 號碼。', needName: '請輸入你的名字。', slow: '嘗試次數太多。請稍候再試。', pushT: '{name}掃描了你的 QR 碼', pushB: '對方現在應該會在 WhatsApp 傳訊息給你。點按查看。', agree: "我同意{name}保存我的名字和號碼，並與我保持聯絡。", needAgree: "請勾選方框，表示你同意被加入。", privLink: "Shepherd 如何使用你的資料" },
+  ja: { title: '{name}さんにあいさつ', lead: '{name}さんは Shepherd で連絡を取り合っています。名前を入力すると WhatsApp が開き、メッセージを送れます。', yourName: 'お名前', yourNum: 'WhatsApp の番号（任意）', go: 'WhatsApp へ進む', privacy: 'お名前と番号は{name}さんにだけ届きます。', notReady: 'この QR コードはまだ使えません。{name}さんに Shepherd で WhatsApp の番号を登録してもらってください。', needName: 'お名前を入力してください。', slow: '試行回数が多すぎます。少し待ってからもう一度お試しください。', pushT: '{name}さんが QR コードを読み取りました', pushB: 'まもなく WhatsApp でメッセージが届くはずです。タップして確認。', agree: "{name}さんが私の名前と番号を保存し、連絡を取り合うことに同意します。", needAgree: "追加に同意する場合は、チェックを入れてください。", privLink: "Shepherd での情報の扱い" },
+  de: { title: 'Sag {name} Hallo', lead: '{name} nutzt Shepherd, um in Kontakt zu bleiben. Gib deinen Namen ein, dann öffnet sich WhatsApp, damit du eine Nachricht senden kannst.', yourName: 'Dein Name', yourNum: 'Deine WhatsApp-Nummer (optional)', go: 'Weiter zu WhatsApp', privacy: 'Dein Name und deine Nummer gehen nur an {name}.', notReady: 'Dieser QR-Code ist noch nicht bereit. Bitte {name}, in Shepherd eine WhatsApp-Nummer einzutragen.', needName: 'Bitte gib deinen Namen ein.', slow: 'Zu viele Versuche. Bitte warte kurz und versuche es erneut.', pushT: '{name} hat deinen QR-Code gescannt', pushB: 'Die Person sollte dir jetzt auf WhatsApp schreiben. Tippe, um sie zu sehen.', agree: "Ich bin einverstanden, dass {name} meinen Namen und meine Nummer speichert und mit mir in Kontakt bleibt.", needAgree: "Bitte hake das Kästchen an, wenn du hinzugefügt werden möchtest.", privLink: "Wie Shepherd deine Angaben verwendet" },
+  ru: { title: 'Поздоровайтесь с {name}', lead: '{name} использует Shepherd, чтобы оставаться на связи. Введите своё имя, и откроется WhatsApp, чтобы вы могли отправить сообщение.', yourName: 'Ваше имя', yourNum: 'Ваш номер WhatsApp (необязательно)', go: 'Перейти в WhatsApp', privacy: 'Ваше имя и номер увидит только {name}.', notReady: 'Этот QR-код ещё не готов. Попросите {name} добавить номер WhatsApp в Shepherd.', needName: 'Пожалуйста, введите своё имя.', slow: 'Слишком много попыток. Подождите немного и попробуйте снова.', pushT: '{name} отсканировал(а) ваш QR-код', pushB: 'Сейчас вам должны написать в WhatsApp. Нажмите, чтобы посмотреть.', agree: "Я согласен(на), чтобы {name} сохранил(а) моё имя и номер и оставался(лась) на связи.", needAgree: "Отметьте галочку, чтобы подтвердить согласие на добавление.", privLink: "Как Shepherd использует ваши данные" },
+  lt: { title: 'Pasisveikinkite su {name}', lead: '{name} naudoja Shepherd, kad palaikytų ryšį. Įrašykite savo vardą, tada atsidarys WhatsApp ir galėsite parašyti žinutę.', yourName: 'Jūsų vardas', yourNum: 'Jūsų WhatsApp numeris (nebūtina)', go: 'Tęsti į WhatsApp', privacy: 'Jūsų vardą ir numerį matys tik {name}.', notReady: 'Šis QR kodas dar neparuoštas. Paprašykite {name} įrašyti WhatsApp numerį Shepherd programėlėje.', needName: 'Įrašykite savo vardą.', slow: 'Per daug bandymų. Palaukite ir bandykite dar kartą.', pushT: '{name} nuskenavo jūsų QR kodą', pushB: 'Netrukus turėtų parašyti jums per WhatsApp. Palieskite, kad pamatytumėte.', agree: "Sutinku, kad {name} išsaugotų mano vardą ir numerį ir palaikytų su manimi ryšį.", needAgree: "Pažymėkite langelį, kad sutinkate būti pridėti.", privLink: "Kaip Shepherd naudoja jūsų duomenis" }
 };
 const hiT = (lang, k, name) => String((HI[lang] || HI.en)[k] || HI.en[k]).replace(/\{name\}/g, name);
 const htmlEsc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -464,13 +569,22 @@ const HI_INTRO = {
  "ru": "Привет, рад(а) знакомству! Я получил(а) твой контакт через Shepherd. Надеюсь скоро получить от тебя весточку.",
  "lt": "Labas, malonu susipažinti! Tavo kontaktą gavau per Shepherd. Tikiuosi greitai išgirsti iš tavęs."
 };
-export function waNum(p) {
+// [code, name, dialling code, length of a local number without its first 0 (0 = varies)] — the same table as the app
+const COUNTRIES = [['GB', 'United Kingdom', '44', 10], ['NG', 'Nigeria', '234', 10], ['GH', 'Ghana', '233', 9], ['IE', 'Ireland', '353', 9], ['US', 'United States / Canada', '1', 10], ['FR', 'France', '33', 9], ['DE', 'Germany', '49', 0], ['NL', 'Netherlands', '31', 9], ['ES', 'Spain', '34', 9], ['PT', 'Portugal', '351', 9], ['PL', 'Poland', '48', 9], ['LT', 'Lithuania', '370', 8], ['RU', 'Russia', '7', 10], ['JP', 'Japan', '81', 0], ['CN', 'China', '86', 11], ['HK', 'Hong Kong', '852', 8], ['TW', 'Taiwan', '886', 9], ['ZA', 'South Africa', '27', 9], ['KE', 'Kenya', '254', 9], ['IN', 'India', '91', 10], ['BR', 'Brazil', '55', 0], ['CM', 'Cameroon', '237', 9], ['ZW', 'Zimbabwe', '263', 9], ['JM', 'Jamaica', '1', 10]];
+// a phone number as WhatsApp wants it (digits with the country code); numbers starting with + are used as typed
+export function waNum(p, country) {
   if (!p) return '';
   const raw = String(p).trim(); let d = raw.replace(/\D/g, '');
+  const hc = COUNTRIES.find(c => c[0] === country) || COUNTRIES[0];
   if (!d) return '';
-  if (d.indexOf('00') === 0) d = d.slice(2);
-  else if (raw.charAt(0) !== '+' && d.charAt(0) === '0' && d.length === 11) d = '44' + d.slice(1);
-  return d.length >= 8 ? d : '';
+  if (raw.charAt(0) === '+' || d.indexOf('00') === 0) {
+    if (d.indexOf('00') === 0 && raw.charAt(0) !== '+') d = d.slice(2);
+    for (const c of COUNTRIES) { const cc = c[2]; if (d.indexOf(cc + '0') === 0 && d.length > cc.length + 8) { d = cc + d.slice(cc.length + 1); break; } }
+    return d.length >= 8 && d.length <= 15 ? d : '';
+  }
+  if (d.charAt(0) === '0') { const nat = d.slice(1); if (hc[3] && nat.length !== hc[3]) return ''; if (nat.length < 6) return ''; return hc[2] + nat; }
+  if (hc[3] && d.length === hc[3]) return hc[2] + d;
+  return d.length >= 8 && d.length <= 15 ? d : '';
 }
 const DEFAULT_INTRO = 'Hi, nice to meet you, I got your contact from Shepherd! Hoping to hear from you soon.';
 const OLD_INTRO = "Hi! It was great meeting you today. Here's my number so we can keep in touch about studying the Bible.";
@@ -481,6 +595,12 @@ async function qrCode(req, env, me) {
   await run(env, 'INSERT OR IGNORE INTO qrcodes (code, uid, created) VALUES (?, ?, ?)', code, me.uid, now());
   return json({ code: (await one(env, 'SELECT code FROM qrcodes WHERE uid = ?', me.uid)).code });
 }
+async function qrNew(req, env, me) {
+  await rateLimit(env, 'qrnew:' + me.uid, 10, 864e5);
+  const code = b64u(rand(9));
+  await run(env, 'INSERT INTO qrcodes (code, uid, created) VALUES (?, ?, ?) ON CONFLICT(uid) DO UPDATE SET code = excluded.code, created = excluded.created', code, me.uid, now());
+  return json({ code });
+}
 function hiPage(lang, ownerName, opts) {
   const T = k => htmlEsc(hiT(lang, k, ownerName));
   const dir = 'ltr';
@@ -488,13 +608,15 @@ function hiPage(lang, ownerName, opts) {
     '<style>:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#FAF3DF;color:#241F18;font:17px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:max(28px,env(safe-area-inset-top)) 18px 28px}main{max-width:420px;margin:0 auto;display:grid;gap:16px}' +
     '.mark{width:76px;height:76px;justify-self:center;border-radius:20px;background:#FAF3DF;box-shadow:0 10px 22px -16px rgba(70,52,22,.55),0 0 0 1.5px #D8C8A2}h1{font:600 30px/1.15 Georgia,serif;margin:0;text-align:center}p{margin:0}.lead{color:#574D3E;text-align:center}' +
     'label{display:grid;gap:6px;font-weight:600;font-size:15.5px}input{font:inherit;width:100%;min-height:52px;padding:10px 14px;border-radius:14px;border:1.5px solid #D8C8A2;background:#FFFEFA;color:#241F18}input:focus{outline:none;border-color:#4E5A33;box-shadow:0 0 0 3px #E3E2C7}' +
-    'button{font:inherit;font-weight:700;min-height:54px;border-radius:14px;border:0;background:#4E5A33;color:#FFFBF3;width:100%;box-shadow:0 6px 14px -8px rgba(78,90,51,.8)}.small{font-size:14px;color:#574D3E;text-align:center}.err{color:#A9423A;font-weight:600;text-align:center}</style>' +
+    'button{font:inherit;font-weight:700;min-height:54px;border-radius:14px;border:0;background:#4E5A33;color:#FFFBF3;width:100%;box-shadow:0 6px 14px -8px rgba(78,90,51,.8)}.small{font-size:14px;color:#574D3E;text-align:center}.err{color:#A9423A;font-weight:600;text-align:center}' +
+    '.tick{display:flex;gap:12px;align-items:flex-start;font-weight:500}.tick input{width:26px;min-height:26px;height:26px;flex:0 0 26px;margin:2px 0 0;accent-color:#4E5A33}a{color:#4E5A33;font-weight:600}</style>' +
     '<main><svg class="mark" viewBox="0 0 104 104" aria-hidden="true"><path d="M45 79 V37 a12 12 0 0 1 12 -12 a12 12 0 0 1 12 12 v6" fill="none" stroke="#4E5A33" stroke-width="7" stroke-linecap="round"/></svg>' +
     '<h1>' + T('title') + '</h1>' + (opts.notReady ? '<p class="lead">' + T('notReady') + '</p>' :
       '<p class="lead">' + T('lead') + '</p>' + (opts.err ? '<p class="err" role="alert">' + T(opts.err) + '</p>' : '') +
       '<form method="post"><div style="display:grid;gap:14px"><label>' + T('yourName') + '<input name="name" autocomplete="name" required maxlength="60" value="' + htmlEsc(opts.name || '') + '"></label>' +
       '<label>' + T('yourNum') + '<input name="phone" type="tel" autocomplete="tel" maxlength="30" value="' + htmlEsc(opts.phone || '') + '"></label>' +
-      '<button type="submit">' + T('go') + '</button></div></form><p class="small">' + T('privacy') + '</p>') + '</main></html>',
+      '<label class="tick"><input name="agree" type="checkbox" value="1" required' + (opts.agree ? ' checked' : '') + '><span>' + T('agree') + '</span></label>' +
+      '<button type="submit">' + T('go') + '</button></div></form><p class="small">' + T('privacy') + ' <a href="' + htmlEsc(opts.privacyUrl || '') + '">' + T('privLink') + '</a></p>') + '</main></html>',
     { status: opts.status || 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Frame-Options': 'DENY', 'Referrer-Policy': 'no-referrer' } });
 }
 function ymdIn(tz) { try { return new Intl.DateTimeFormat('en-CA', { timeZone: tz || 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); } catch (e) { return new Date().toISOString().slice(0, 10); } }
@@ -508,19 +630,22 @@ async function hello(req, env, parts) {
   const u = await one(env, 'SELECT name FROM users WHERE id = ?', q.uid);
   const owner = firstName(prof.name || (u && u.name) || '') || 'them';
   const lang = HI[prof.lang] ? prof.lang : 'en';
-  const num = waNum(prof.phone);
+  const num = waNum(prof.phone, prof.country);
+  const privacyUrl = String(env.APP_URL || DEFAULT_APP_URL).replace(/\/?$/, '/') + 'privacy.html';
   if (!num) return hiPage(lang, owner, { notReady: true });
-  if (req.method !== 'POST') return hiPage(lang, owner, {});
-  let name = '', phone = '';
+  if (req.method !== 'POST') return hiPage(lang, owner, { privacyUrl });
+  let name = '', phone = '', agree = '';
   const ct = req.headers.get('Content-Type') || '';
-  if (ct.includes('json')) { const b = await body(req); name = b.name; phone = b.phone; }
-  else { const f = await req.formData(); name = f.get('name'); phone = f.get('phone'); }
+  if (ct.includes('json')) { const b = await body(req); name = b.name; phone = b.phone; agree = b.agree; }
+  else { const f = await req.formData(); name = f.get('name'); phone = f.get('phone'); agree = f.get('agree'); }
   name = String(name || '').replace(/\s+/g, ' ').trim().slice(0, 60); phone = String(phone || '').trim().slice(0, 30);
-  if (!name) return hiPage(lang, owner, { err: 'needName', phone, status: 400 });
-  try { await rateLimit(env, 'hi:' + code + ':' + (req.headers.get('CF-Connecting-IP') || 'ip'), 5, 3600e3); await rateLimit(env, 'hiday:' + code, 80, 864e5); }
-  catch (e) { return hiPage(lang, owner, { err: 'slow', name, phone, status: 429 }); }
+  const agreed = agree === true || agree === '1' || agree === 'on' || agree === 1;
+  if (!name) return hiPage(lang, owner, { err: 'needName', phone, agree: agreed, privacyUrl, status: 400 });
+  if (!agreed) return hiPage(lang, owner, { err: 'needAgree', name, phone, privacyUrl, status: 400 });
+  try { await rateLimit(env, 'hi:' + code + ':' + ipOf(req), 5, 3600e3); await rateLimit(env, 'hiday:' + code, 20, 864e5); }
+  catch (e) { return hiPage(lang, owner, { err: 'slow', name, phone, agree: agreed, privacyUrl, status: 429 }); }
   const t = now(), id = (t.toString(36) + b64u(rand(5))).replace(/[^A-Za-z0-9_-]/g, '');
-  const c = { id, name, phone, instagram: '', social2: '', social2Platform: '', notes: '', consent: true, source: 'qr', createdAt: t, updatedAt: t, status: 'active', stage: 'First contact', everyDays: Number(prof.defaultEvery) || 3, metOn: ymdIn(prof.tz), replyState: 'me', meSince: t, studies: [], log: [{ t, k: 'change', text: 'Added from your QR code' }] };
+  const c = { id, name, phone, instagram: '', social2: '', social2Platform: '', notes: '', consent: true, consentAt: t, source: 'qr', createdAt: t, updatedAt: t, status: 'active', stage: 'First contact', everyDays: Number(prof.defaultEvery) || 3, metOn: ymdIn(prof.tz), replyState: 'me', meSince: t, studies: [], log: [{ t, k: 'change', text: 'Added from your QR code' }] };
   const seq = await nextSeqs(env, 1);
   await run(env, 'INSERT INTO docs (uid, path, data, del, t, seq) VALUES (?, ?, ?, 0, ?, ?)', q.uid, 'profile/contacts/' + id, JSON.stringify(c), t, seq);
   // tell the owner straight away
@@ -546,7 +671,7 @@ async function admin(req, env) {
   if (!env.ADMIN_KEY) return adminPage('Add a secret called ADMIN_KEY to this Worker first (Settings → Variables and Secrets).');
   if (req.method !== 'POST') return adminPage('');
   const f = await req.formData();
-  await rateLimit(env, 'admin', 20, 3600e3);
+  await rateLimit(env, 'admin:' + ipOf(req), 20, 3600e3); // per network address, so a stranger can't block you
   if (!same(String(f.get('admin') || ''), env.ADMIN_KEY)) return adminPage('That admin key isn\'t right.');
   const email = cleanEmail(f.get('email'));
   const u = await one(env, 'SELECT id FROM users WHERE email = ?', email);
@@ -559,7 +684,7 @@ async function route(req, env) {
   const url = new URL(req.url); const parts = url.pathname.split('/').filter(Boolean); const m = req.method;
   if (url.pathname === '/' || url.pathname === '/health') {
     let db = false; try { await ready(env); db = true; } catch (e) {}
-    return json({ app: 'Shepherd', version: VERSION, db, email: !!(env.RESEND_API_KEY && env.MAIL_FROM), admin: !!env.ADMIN_KEY, origins: origins(env) });
+    return json({ app: 'Shepherd', version: VERSION, db }); // nothing about how the server is set up
   }
   if (parts[0] === 'cal') { await ready(env); return calendar(req, env, parts); }
   if (parts[0] === 'admin') { await ready(env); return admin(req, env); }
@@ -572,9 +697,11 @@ async function route(req, env) {
   if (m === 'POST' && p === 'reset/request') return resetRequest(req, env);
   if (m === 'POST' && p === 'reset/confirm') return resetConfirm(req, env);
   if (m === 'GET' && p === 'push/key') return json({ key: (await vapid(env)).pub });
+  if (m === 'GET' && p === 'signup/options') return json({ invite: !!env.INVITE_CODE }); // whether sign-up asks for the church invite code
   const me = await auth(req, env);
   if (m === 'GET' && p === 'me') return json({ user: pub(me), devices: (await one(env, 'SELECT COUNT(*) AS n FROM subs WHERE uid = ?', me.uid)).n });
   if (m === 'POST' && p === 'logout') { await run(env, 'DELETE FROM sessions WHERE th = ?', me.th); return json({ ok: true }); }
+  if (m === 'POST' && p === 'logout/others') { const n = await one(env, 'SELECT COUNT(*) AS n FROM sessions WHERE uid = ? AND th != ?', me.uid, me.th); await run(env, 'DELETE FROM sessions WHERE uid = ? AND th != ?', me.uid, me.th); return json({ ok: true, signedOut: n ? n.n : 0 }); }
   if (m === 'POST' && p === 'password') return changePassword(req, env, me);
   if (m === 'POST' && p === 'account/delete') return deleteAccount(req, env, me);
   if (m === 'GET' && p === 'docs') return pull(req, env, me);
@@ -586,6 +713,7 @@ async function route(req, env) {
   if (m === 'POST' && p === 'schedule') return schedule(req, env, me);
   if (m === 'POST' && p === 'cal/new') return newCalLink(req, env, me);
   if (m === 'POST' && p === 'qr') return qrCode(req, env, me);
+  if (m === 'POST' && p === 'qr/new') return qrNew(req, env, me);
   return json({ error: 'not_found' }, 404);
 }
 
@@ -603,6 +731,6 @@ export default {
     return new Response(res.body, { status: res.status, headers: h });
   },
   async scheduled(event, env, ctx) {
-    ctx.waitUntil((async () => { await sendDue(env, 60); if (new Date().getUTCHours() === 3 && new Date().getUTCMinutes() < 5) await tidy(env); })().catch(e => console.error(e && e.stack || e)));
+    ctx.waitUntil((async () => { await sendDue(env, 40); if (new Date().getUTCHours() === 3 && new Date().getUTCMinutes() < 5) await tidy(env); })().catch(e => console.error(e && e.stack || e)));
   }
 };

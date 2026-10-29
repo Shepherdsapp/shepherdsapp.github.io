@@ -8,7 +8,8 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import ece from 'http_ece';
 import { makeD1 } from './d1.mjs';
-import worker, { sendDue } from '../worker/worker.js';
+const WMOD = await import(new URL(process.env.WORKER ? 'file://' + process.env.WORKER : '../worker/worker.js', import.meta.url).href); // WORKER=… tests another copy of the server
+const worker = WMOD.default, { sendDue } = WMOD;
 const require = createRequire(import.meta.url);
 const { chromium } = require('/opt/npm-tools/node_modules/playwright');
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -20,7 +21,7 @@ const ok = (c, m) => { results.push({ ok: !!c, m: current + ' - ' + m }); consol
 const wait = ms => new Promise(r => setTimeout(r, ms));
 
 // the website, as GitHub Pages would serve it (under /shepherd/), with config.js pointing at the local Worker
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.svg': 'image/svg+xml' };
+const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.svg': 'image/svg+xml', '.css': 'text/css', '.woff2': 'font/woff2' };
 const site = http.createServer((req, res) => {
   const u = new URL(req.url, APP); let p = decodeURIComponent(u.pathname);
   if (!p.startsWith('/shepherd/')) { res.writeHead(404); return res.end(); }
@@ -32,7 +33,7 @@ const site = http.createServer((req, res) => {
 }).listen(8131);
 
 // the Worker, behind a tiny Node server
-const env = { DB: await makeD1(), ALLOWED_ORIGINS: 'http://localhost:8131', ADMIN_KEY: 'admin-key-e2e' };
+const env = { DB: await makeD1(), ALLOWED_ORIGINS: 'http://localhost:8131', ADMIN_KEY: 'admin-key-e2e', APP_URL: APP };
 const api = http.createServer(async (req, res) => {
   const chunks = []; for await (const c of req) chunks.push(c);
   const r = await worker.fetch(new Request(API + req.url, { method: req.method, headers: req.headers, body: ['GET', 'HEAD', 'OPTIONS'].includes(req.method) ? undefined : Buffer.concat(chunks) }), env);
@@ -59,12 +60,13 @@ const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebK
 const ANDROID = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Mobile Safari/537.36';
 const I18N_SINK = new Set();
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
-const errors = [];
+const errors = []; const outside = [];
 async function phone(uaStr, w, h) {
   const ctx = await browser.newContext({ viewport: { width: w || 390, height: h || 844 }, userAgent: uaStr, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
   await ctx.addInitScript(pushStub, FAKE_SUB);
   if (process.env.I18N_COLLECT) { await ctx.exposeBinding('__i18nPush', (src, k) => I18N_SINK.add(k)); await ctx.addInitScript(() => { window.__i18nCollect = k => { try { window.__i18nPush(k); } catch (e) {} }; }); }
   const p = await ctx.newPage();
+  p.on('request', q => { const u = q.url(); if (!/^(http:\/\/localhost:813[12]|data:|blob:)/.test(u)) outside.push(u); });
   p.on('pageerror', e => errors.push(e.message));
   p.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|fonts\.g|cdnjs|ERR_|net::/.test(m.text())) errors.push('console: ' + m.text()); });
   return { ctx, p };
@@ -74,6 +76,7 @@ const tap = (p, sel) => p.locator(sel).first().click();
 async function skipTour(p) { for (let i = 0; i < 20; i++) { if (await p.locator('#tourSkip').isVisible().catch(() => false)) { await p.click('#tourSkip'); await wait(300); return true; } await wait(200); } return false; }
 async function addContact(p, name, phone) {
   await p.locator('#main [data-act="quickadd"]:visible, #fab:visible').first().click(); await wait(450); await p.fill('#cName', name); if (phone) await p.fill('#cPhone', phone);
+  if (await p.locator('#cConsent').count()) await p.check('#cConsent');
   await p.$eval('#cForm', f => f.requestSubmit()); await wait(600);
   if (await p.locator('#sheet').isVisible()) { await p.evaluate(() => { const b = document.querySelector('#sheet [data-act="closesheet"]'); if (b) b.click(); }); await wait(400); }
 }
@@ -94,6 +97,15 @@ try {
   ok(/agree to the acceptable use/.test(await A.p.textContent('#aErr')) && (() => { try { return !db("SELECT COUNT(*) FROM users")[0][0]; } catch (e) { return true; } })(), 'no account until the acceptable use statement is agreed');
   ok(await A.p.locator('#auth a[href="privacy.html"]').count() === 1, 'the sign-up screen links to the privacy notice');
   await A.p.check('#aAgree');
+  ok(!(await A.p.locator('#aInvite').isVisible()), 'with no invite code set on the server, sign-up doesn\'t ask for one');
+  env.INVITE_CODE = 'GRACE-2026'; // the church turns the invite code on
+  await A.p.reload(); await wait(800);
+  await A.p.fill('#aName', 'Pavi'); await A.p.fill('#aEmail', 'pavi@church.test'); await A.p.fill('#aPw', 'correct horse 1'); await A.p.check('#aAgree'); await wait(300);
+  ok(await A.p.locator('#aInvite').isVisible(), 'once a code is set, sign-up asks for the church invite code');
+  await A.p.fill('#aInvite', 'WRONG CODE');
+  await A.p.click('#aGo'); await wait(1500);
+  ok(/invite code isn't right/.test(await A.p.textContent('#aErr')) && (() => { try { return !db("SELECT COUNT(*) FROM users")[0][0]; } catch (e) { return true; } })(), 'a wrong invite code is refused, with a clear message');
+  await A.p.fill('#aInvite', 'grace-2026');
   await A.p.click('#aGo'); await wait(2500);
   ok(!(await A.p.locator('#auth').isVisible()), 'account created and signed in');
   ok(db("SELECT email FROM users")[0][0] === 'pavi@church.test' && !/correct horse/.test(JSON.stringify(db('SELECT * FROM users'))), 'account saved on the server without the password itself');
@@ -227,7 +239,7 @@ try {
   const left = await C.p.evaluate(() => Object.keys(localStorage).filter(k => /mirror|shepherd:v1|token/.test(k)));
   ok(left.length === 0, 'nothing of Pavi\'s list is left on that phone');
   await C.p.click('[data-auth="create"]'); await wait(200);
-  await C.p.fill('#aName', 'Ama'); await C.p.fill('#aEmail', 'ama@church.test'); await C.p.fill('#aPw', 'ama password 1'); await C.p.check('#aAgree'); await C.p.click('#aGo'); await wait(2500);
+  await C.p.fill('#aName', 'Ama'); await C.p.fill('#aEmail', 'ama@church.test'); await C.p.fill('#aPw', 'ama password 1'); await C.p.fill('#aInvite', 'GRACE-2026'); await C.p.check('#aAgree'); await C.p.click('#aGo'); await wait(2500);
   await skipTour(C.p);
   await C.p.click('.tab[data-v="people"]'); await wait(500);
   ok(!/Daniel|Grace|Sam/.test(await C.p.textContent('#main')), 'someone else signing in on the same phone sees only their own (empty) list');
@@ -264,7 +276,7 @@ try {
   for (const [wd, ht, n] of [[320, 568, 1], [375, 667, 2], [390, 844, 3], [430, 932, 4]]) {
     const T = await phone(IPHONE, wd, ht);
     await T.p.goto(APP); await wait(600);
-    await T.p.fill('#aName', 'Tour ' + n); await T.p.fill('#aEmail', 'tour' + n + '@church.test'); await T.p.fill('#aPw', 'tour password ' + n); await T.p.check('#aAgree');
+    await T.p.fill('#aName', 'Tour ' + n); await T.p.fill('#aEmail', 'tour' + n + '@church.test'); await T.p.fill('#aPw', 'tour password ' + n); await T.p.fill('#aInvite', 'GRACE-2026'); await T.p.check('#aAgree');
     await T.p.click('#aGo'); await wait(2500);
     const bad = []; let steps = 0, numberSaved = false, calOk = false, reloadOk = false;
     for (let i = 0; i < 24; i++) {
@@ -339,6 +351,32 @@ try {
     await wait(1800);
     ok(/^Today\|People/.test(await A.p.$$eval('.tab', t => t.map(x => x.textContent.trim().replace(/\d+$/, '')).join('|'))), 'and back to English');
   }
+
+  current = 'Two phones editing the same person';
+  {
+    const E = await phone(ANDROID, 360, 780);
+    await E.p.goto(APP); await wait(600);
+    await E.p.click('[data-auth="signin"]'); await wait(200);
+    await E.p.fill('#aEmail', 'pavi@church.test'); await E.p.fill('#aPw', 'new password 22'); await E.p.click('#aGo'); await wait(2500);
+    await A.p.evaluate(() => window.SHEPHERD_WEB.pull()); await wait(800);
+    const gid = db("SELECT path FROM docs WHERE data LIKE '%Grace Owusu%'")[0][0].split('/').pop();
+    await A.ctx.setOffline(true); await E.ctx.setOffline(true);
+    await A.p.evaluate(id => { const S = window.__shepherd.S; const c = JSON.parse(JSON.stringify(S.contacts[id])); c.notes = 'Note written on phone A'; window.__shepherd.saveContact(c); }, gid);
+    await wait(300);
+    await E.p.evaluate(id => { const S = window.__shepherd.S; const c = JSON.parse(JSON.stringify(S.contacts[id])); c.stage = 'Interested'; window.__shepherd.saveContact(c); }, gid);
+    await wait(300);
+    await E.ctx.setOffline(false); await E.p.evaluate(() => window.dispatchEvent(new Event('online'))); await wait(2500);
+    await A.ctx.setOffline(false); await A.p.evaluate(() => window.dispatchEvent(new Event('online'))); await wait(3000);
+    const g = JSON.parse(db("SELECT data FROM docs WHERE path LIKE '%/" + gid + "'")[0][0]);
+    ok(g.notes === 'Note written on phone A' && g.stage === 'Interested', 'two phones offline, each changing Grace: both changes reach the server (' + (g.notes || '(empty)') + ' / ' + g.stage + ')');
+    await A.p.evaluate(() => window.SHEPHERD_WEB.pull()); await wait(1200);
+    const onA = await A.p.evaluate(id => { const c = window.__shepherd.S.contacts[id]; return c.notes + ' / ' + c.stage; }, gid);
+    ok(onA === 'Note written on phone A / Interested', 'and phone A shows both: ' + onA);
+    await E.ctx.close();
+  }
+
+  current = 'Nothing loaded from other websites';
+  ok(outside.length === 0, 'fonts and the QR code tool come from Shepherd itself: no requests to Google or other sites' + (outside.length ? ' (' + [...new Set(outside.map(u => new URL(u).host))].join(', ') + ')' : ''));
 
   current = 'Script errors';
   ok(errors.length === 0, 'no script errors' + (errors.length ? ': ' + errors.slice(0, 4).join(' / ') : ''));
