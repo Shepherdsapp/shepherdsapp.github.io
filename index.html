@@ -12,20 +12,18 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <title>Shepherd</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="vendor/fonts.css">
+<script src="vendor/qrcode.min.js"></script>
 <style>
 /* Always the light cream look, matching the app icon (butter cream #FAF3DF, green #4E5A33), even when the phone is in dark mode.
    Layout: phone-first app shell. One column of views, a tab dock along the bottom, and sheets that slide up for every form. */
 :root{
   --bg:#FAF3DF; --surface:#FFFCF3; --surface-2:#F0E4C6; --fg:#241F18; --muted:#574D3E; --line:#D8C8A2;
   --card-shadow:0 1px 0 rgba(70,52,22,.06),0 10px 22px -16px rgba(70,52,22,.45);
-  --accent:#4E5A33; --accent-ink:#FFFBF3; --accent-soft:#E3E2C7; --gold:#9C7428; --gold-soft:#F2E4C4;
-  --ok:#3B7449; --ok-soft:#DCEAD7; --warn:#A06E0E; --warn-soft:#F5E5BF; --bad:#A9423A; --bad-soft:#F4DAD3; --idle:#857A6B; --idle-soft:#E8E1D2;
+  --accent:#4E5A33; --accent-ink:#FFFBF3; --accent-soft:#E3E2C7; --gold:#7D5C1D; --gold-soft:#F2E4C4;
+  --ok:#336640; --ok-soft:#DCEAD7; --warn:#86590A; --warn-soft:#F5E5BF; --bad:#9A3830; --bad-soft:#F4DAD3; --idle:#685E50; --idle-soft:#E8E1D2;
   --tile:#FAF3DF;
   color-scheme:light;
   --shadow:0 12px 32px -20px rgba(70,52,22,.5);
@@ -101,7 +99,7 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 
 /* cards & forms */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:12px}
-.card h3{margin:0;font-size:15px;font-weight:700}
+.card h3,.card .h3{margin:0;font-size:15px;font-weight:700}
 .kv{display:grid;grid-template-columns:minmax(0,9.5em) minmax(0,1fr);gap:6px 12px;font-size:15px;margin:0}
 .kv dt{color:var(--muted)} .kv dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 @media (max-width:400px){.kv{grid-template-columns:1fr}.kv dd{margin-bottom:6px}}
@@ -284,7 +282,7 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 /* bolder, easier to see: bigger text, darker lines, cards that stand out */
 body{font-size:17px}
 .card{border-width:1.5px;padding:18px;box-shadow:var(--card-shadow)}
-.card h3{font-size:17.5px;font-weight:800;color:var(--fg)}
+.card h3,.card .h3{font-size:17.5px;font-weight:800;color:var(--fg)}
 .prow,.ev,.stat,.empty{border-width:1.5px;box-shadow:var(--card-shadow)}
 .prow-main{min-height:68px;padding:14px 6px 14px 16px}
 .pn{font-size:17px;font-weight:700}
@@ -361,6 +359,9 @@ body{overflow-x:clip}
 .pushline.install,.pushline.off{background:var(--warn-soft);color:var(--warn);border-color:transparent}
 .card.install{border-color:var(--accent);border-width:2px}
 /* journey */
+@media (max-width:420px){.prow .rep{white-space:normal;max-width:38%;text-align:center;line-height:1.15;padding:5px 8px}}
+.consent-note{margin:0;font-size:14px;color:var(--warn);font-weight:600}
+.lock-forgot{display:grid;gap:10px;width:100%;text-align:left}
 .addcard .row{flex-wrap:wrap}.addcard .row .btn{min-height:48px;flex:1 1 130px;white-space:nowrap;padding-inline:12px;gap:6px}.addcard .i{width:18px;height:18px;flex:none}
 .dchips{display:flex;flex-wrap:wrap;gap:6px}.dchip{min-height:34px;padding:5px 12px;border-radius:99px;border:1.5px solid var(--line);background:var(--bg);font-size:14.5px;font-weight:600;color:var(--fg)}.dchip.more{font-weight:500;color:var(--muted)}
 .okline{display:flex;gap:8px;align-items:center}.okline .i{width:18px;height:18px;color:var(--ok)}
@@ -408,7 +409,7 @@ body{overflow-x:clip}
     ['ja', '日本語', 'ja'], ['de', 'Deutsch', 'de'], ['ru', 'Русский', 'ru'], ['lt', 'Lietuvių', 'lt']
   ];
   var CODES = LANGS.map(function (l) { return l[0]; });
-  var PACK_VER = '0c813fe93f';
+  var PACK_VER = 'a01e83ceea';
   var lang = 'en', dict = null, tpls = [], cache = new Map(), outs = new WeakMap(), plural = null;
   var collect = typeof window !== 'undefined' && window.__i18nCollect ? window.__i18nCollect : null;
   var INLINE = { B: 1, STRONG: 1, I: 1, EM: 1, BR: 1, U: 1, SMALL: 1, CODE: 1 };
@@ -624,13 +625,13 @@ body{overflow-x:clip}
    Written in English; the language files translate it on screen. */
 (function () {
   var USE_VERSION = 1; // raise this when the acceptable use statement changes, so everyone agrees to the new one
-  var UPDATED = '2026-10-26';
+  var UPDATED = '2026-10-29';
   function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || '8pavii@gmail.com' }; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
   function when() {
     var d = new Date(UPDATED + 'T12:00:00');
     try { var loc = window.I18N && I18N.lang !== 'en' ? I18N.locale() : 'en-GB'; if (Intl.DateTimeFormat.supportedLocalesOf([loc]).length) return new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'long', year: 'numeric' }).format(d); } catch (e) {}
-    return '26 October 2026';
+    return '29 October 2026';
   }
   function sec(title, body) { return '<section class="card pv"><h3>' + title + '</h3>' + body + '</section>'; }
   function ul(items) { return '<ul class="steps">' + items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; }
@@ -662,19 +663,23 @@ body{overflow-x:clip}
       sec('Acceptable use', '<p class="note">Everyone who uses Shepherd agrees to this:</p>' + rules()) +
       sec('What Shepherd keeps, and why',
         '<p class="note"><b>Data linked to you</b>, saved to your own private account so your list is on every phone you sign in on and isn\'t lost:</p>' +
-        ul(['Your name, email and WhatsApp number.', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies.', 'Your events, disciples and prayer list.']) +
+        ul(['Your name, email, WhatsApp number and home country.', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list.', 'For each phone you\'re signed in on: when it signed in and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks, until they\'re sent.']) +
         '<p class="note"><b>Kept only on this phone</b>:</p>' +
         ul(['Contacts you import from your phone, used to suggest names as you type. They are never uploaded.', 'A copy of your list, so Shepherd works without signal.']) +
         '<p class="note"><b>Never collected</b>:</p>' +
         ul(['Your location.', 'Your WhatsApp, text or iMessage conversations.', 'Your whole address book (only the contacts you choose).', 'Anything for adverts or tracking.']) +
-        '<p class="note"><b>When someone scans your QR code</b>: they choose to type their name (and number if they want). It goes only into your list, and they then message you on WhatsApp themselves.</p>') +
+        '<p class="note"><b>When someone scans your QR code</b>: they choose to type their name (and number if they want) and tick that they\'re happy to be added. It goes only into your list, and they then message you on WhatsApp themselves.</p>' +
+        '<p class="note"><b>If you connect your phone calendar</b>: a private calendar link shows your Bible studies (with first names) and your events. Anyone you give that link to can see them, and your phone\'s calendar service (such as Apple or Google) keeps a copy. You can replace the link in Shepherd at any time.</p>') +
       sec('How it\'s protected',
         ul(['Your list is saved to your own private account. Nobody else using Shepherd can see it.',
           'Everything travels over an encrypted connection and is stored with Cloudflare, which encrypts it on its servers.',
           'Your password is scrambled on your phone before it is sent and scrambled again on the server, so nobody can read it.',
-          'Phone notifications are encrypted on the way to your phone and only show first names.',
+          'Phone notifications are encrypted on the way to your phone and only show first names, never notes or prayer points.',
+          'Shepherd\'s fonts and code come from Shepherd itself, so no advertising or tracking company sees you use it.',
+          'Only people with your church\'s invite code can create an account.',
           'Shepherd never sends messages for you. Every WhatsApp message is one you send yourself.',
-          'Earlier versions are kept for up to a year so nothing is lost by mistake. Deleting someone\'s data removes every copy.',
+          'Earlier versions are kept for up to a year so nothing is lost by mistake. Deleting someone\'s data removes every copy Shepherd keeps.',
+          'For emergencies, the whole database can be restored to any point in the last 7 days, so a deletion is fully gone after 7 days.',
           'The server is looked after by <b>' + esc(c.controller) + '</b>, who doesn\'t look at anyone\'s list and only reaches stored data to keep Shepherd running or to act on a request to remove someone.'])) +
       sec('Keep your phone safe',
         ul(['Lock your phone with a passcode, Face ID or fingerprint.',
@@ -684,7 +689,7 @@ body{overflow-x:clip}
           'Lost your phone? Sign in on another phone and change your password. That signs the lost phone out.'])) +
       sec('How long it\'s kept, and your choices',
         ul(['Information stays until you delete it. People you stop contacting are kept under No longer contacting until you delete them.',
-          'Someone asks you to delete their details? Open them, tap <b>No longer contact</b>, then <b>Delete all their data</b>. Every copy is removed.',
+          'Someone asks you to delete their details? Open them, tap <b>No longer contact</b>, then <b>Delete all their data</b>. That removes them from Shepherd, including your prayer list. Copies you made yourself, such as an exported backup or your phone\'s contacts, are yours to delete.',
           'Export a backup at any time from Settings. <b>Delete my account</b> removes everything for good.',
           'Anyone can ask what Shepherd holds about them, and ask for it to be corrected or removed.']) + contactLine(c));
   }
@@ -708,7 +713,7 @@ var API = String(CFG.api || '').trim().replace(/\/+$/, '');
 if (/YOUR-NAME|example/i.test(API) || !/^https?:\/\//.test(API)) API = ''; // config.js not filled in yet
 var TK = 'shepherd:token', UK = 'shepherd:user', LAST = 'shepherd:last-uid';
 function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function lsSet(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
 function lsDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
 var te = new TextEncoder();
 function hex(b) { return Array.from(new Uint8Array(b)).map(function (x) { return x.toString(16).padStart(2, '0'); }).join(''); }
@@ -720,12 +725,15 @@ var user = null; try { user = JSON.parse(lsGet(UK) || 'null'); } catch (e) {}
 
 /* ---------- talking to the server ---------- */
 var onSignedOut = null;
+// whether the Shepherd server answered last time (the top bar says Offline when it didn't)
+function netState(up) { var was = W.online; W.online = up; if (was !== up && W.onNet) try { W.onNet(); } catch (e) {} }
 async function api(method, path, body) {
   if (!API) { var n = new Error('Shepherd has no server address yet.'); n.code = 'no_server'; throw n; }
   var r, data = null;
   try {
     r = await fetch(API + path, { method: method, headers: Object.assign({ 'Content-Type': 'application/json' }, token ? { Authorization: 'Bearer ' + token } : {}), body: body === undefined ? undefined : JSON.stringify(body), cache: 'no-store' });
-  } catch (e) { var off = new Error('No connection. Your changes are kept on this phone.'); off.code = 'unavailable'; throw off; }
+  } catch (e) { netState(false); var off = new Error('No connection. Your changes are kept on this phone.'); off.code = 'unavailable'; throw off; }
+  netState(r.status < 500);
   try { data = await r.json(); } catch (e) {}
   if (!r.ok) {
     var er = new Error((data && data.message) || 'Something went wrong. Try again.');
@@ -745,7 +753,7 @@ async function pwKey(email, pw) {
 var mirror = { docs: {}, seq: 0 }, loaded = false, listeners = [], pulling = null, pullAgain = false, pollTimer = null;
 function mkey() { return 'shepherd:mirror:' + (user && user.id); }
 function loadMirror() { try { var o = JSON.parse(lsGet(mkey()) || 'null'); if (o && o.docs) mirror = o; } catch (e) {} }
-function saveMirror() { lsSet(mkey(), JSON.stringify(mirror)); }
+function saveMirror() { if (!lsSet(mkey(), JSON.stringify(mirror)) && W.onStorageFull) W.onStorageFull(); }
 function rel(path) { return String(path).replace(/^data\/users\/[^/]+\//, ''); }
 function clone(o) { return o == null ? o : JSON.parse(JSON.stringify(o)); }
 function snapFor(l) {
@@ -788,11 +796,13 @@ function startPolling() {
 function docRef(path) {
   var r = rel(path);
   return {
-    set: async function (d) {
-      var res = await api('POST', '/api/docs', { ops: [{ p: r, d: d, t: (d && Number(d.updatedAt)) || Date.now() }] });
+    // b: the copy this change started from, so the server can merge changes made on another phone meanwhile
+    set: async function (d, b) {
+      var op = { p: r, d: d, t: (d && Number(d.updatedAt)) || Date.now() }; if (b !== undefined) op.b = b;
+      var res = await api('POST', '/api/docs', { ops: [op] });
       mirror.docs[r] = clone(d);
       (res.kept || []).forEach(function (k) { if (k.d === null) delete mirror.docs[k.p]; else mirror.docs[k.p] = k.d; });
-      saveMirror(); if (res.kept && res.kept.length) emit(); pullSoon();
+      saveMirror(); if (res.kept && res.kept.length) setTimeout(emit, 0); pullSoon();
     },
     delete: async function () { await api('POST', '/api/docs', { ops: [{ p: r, d: null, t: Date.now() }] }); delete mirror.docs[r]; saveMirror(); pullSoon(); },
     onSnapshot: function (cb, err) { var l = { kind: 'doc', rel: r, cb: cb, err: err }; listeners.push(l); if (Object.keys(mirror.docs).length) cb(snapFor(l)); return function () { listeners = listeners.filter(function (x) { return x !== l; }); }; },
@@ -839,7 +849,8 @@ function authHtml(mode, msg) {
     (forgot || code ? '<p class="lede" style="text-align:center">' + (code ? esc(msg || 'Enter your 6-digit code and choose a new password.') : 'Enter your email and we\'ll help you choose a new password.') + '</p>'
       : '<div class="seg" style="grid-template-columns:1fr 1fr" role="group"><button type="button" data-auth="signin" aria-pressed="' + !create + '">Sign in</button><button type="button" data-auth="create" aria-pressed="' + create + '">Create account</button></div>' +
         '<p class="note" style="text-align:center">' + (create ? 'Your list is private: nobody else using Shepherd can see it.' : 'You only need to sign in once on this phone.') + '</p>') +
-    (create ? '<label class="field" for="aName">Your name<input class="inp" id="aName" autocomplete="name"></label>' : '') +
+    (create ? '<label class="field" for="aName">Your name<input class="inp" id="aName" autocomplete="name" maxlength="80"></label>' : '') +
+    (create ? '<label class="field" for="aInvite">Church invite code<input class="inp" id="aInvite" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40"></label><p class="note" style="margin:-6px 0 0">Ask the person who runs Shepherd at your church.</p>' : '') +
     '<label class="field" for="aEmail">Email<input class="inp" id="aEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" value="' + esc(lsGet('shepherd:email') || '') + '"' + (code ? ' readonly' : '') + '></label>' +
     (code ? '<label class="field" for="aCode">6-digit code<input class="inp" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label>' : '') +
     (forgot ? '' : '<label class="field" for="aPw">' + (code ? 'New password' : 'Password') + '<span class="pwrow"><input class="inp" id="aPw" type="password" autocomplete="' + (create || code ? 'new-password' : 'current-password') + '" minlength="8"><button type="button" class="btn ghost small" id="aShow">Show</button></span></label>') +
@@ -872,7 +883,8 @@ function bindAuth() {
     var email = authEl.querySelector('#aEmail').value.trim().toLowerCase();
     var pwEl = authEl.querySelector('#aPw'), pw = pwEl ? pwEl.value : '';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return say('Enter your email address.');
-    if (pwEl && pw.length < 8) return say(mode === 'signin' ? 'Enter your password.' : 'Choose a password of at least 8 characters.');
+    if (mode === 'create' && !(authEl.querySelector('#aName').value || '').trim()) return say('Add your name.');
+    if (pwEl && (pw.length < 8 || (mode !== 'signin' && !pw.trim()))) return say(mode === 'signin' ? 'Enter your password.' : 'Choose a password of at least 8 characters.');
     var ag = authEl.querySelector('#aAgree'); if (mode === 'create' && ag && !ag.checked) return say('Please read and agree to the acceptable use statement.');
     lsSet('shepherd:email', email);
     btn.disabled = true; var label = btn.textContent; btn.textContent = 'One moment…';
@@ -883,7 +895,7 @@ function bindAuth() {
         return;
       }
       var key = await pwKey(email, pw), r;
-      if (mode === 'create') r = await api('POST', '/api/signup', { email: email, key: key, name: (authEl.querySelector('#aName').value || '').trim() });
+      if (mode === 'create') r = await api('POST', '/api/signup', { email: email, key: key, name: (authEl.querySelector('#aName').value || '').trim().slice(0, 80), invite: (authEl.querySelector('#aInvite').value || '').trim() });
       else if (mode === 'code') r = await api('POST', '/api/reset/confirm', { email: email, code: authEl.querySelector('#aCode').value, key: key });
       else r = await api('POST', '/api/login', { email: email, key: key });
       if (mode === 'create') W.agreedAt = Date.now(); // agreed to the acceptable use statement when creating the account
@@ -948,7 +960,7 @@ async function signOut() {
   try { await push.disable(); } catch (e) {}
   try { await api('POST', '/api/logout', {}); } catch (e) {}
   var id = user && user.id;
-  [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id, 'shepherd:tourDone:' + id, 'shepherd:qr:' + id, 'shepherd:phonebook:' + id].forEach(lsDel);
+  [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id, 'shepherd:tourDone:' + id, 'shepherd:tourStep:' + id, 'shepherd:qr:' + id, 'shepherd:phonebook:' + id, 'shepherd:pinwait:' + id].forEach(lsDel);
   location.reload();
 }
 var W = window.SHEPHERD_WEB = {
@@ -968,7 +980,16 @@ var W = window.SHEPHERD_WEB = {
   refreshMe: async function () { try { var r = await api('GET', '/api/me'); user = r.user; lsSet(UK, JSON.stringify(user)); W.devices = r.devices; return r; } catch (e) { return null; } },
   newCalLink: async function () { var r = await api('POST', '/api/cal/new', {}); user.cal = r.cal; lsSet(UK, JSON.stringify(user)); return r.cal; },
   changePassword: async function (oldPw, newPw) { return api('POST', '/api/password', { key: await pwKey(user.email, oldPw), newKey: await pwKey(user.email, newPw) }); },
-  deleteAccount: async function (pw) { await api('POST', '/api/account/delete', { key: await pwKey(user.email, pw) }); var id = user.id; [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id].forEach(lsDel); location.reload(); }
+  deleteAccount: async function (pw) { await api('POST', '/api/account/delete', { key: await pwKey(user.email, pw) }); var id = user.id; [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id, 'shepherd:tourDone:' + id, 'shepherd:tourStep:' + id, 'shepherd:qr:' + id, 'shepherd:phonebook:' + id, 'shepherd:pinwait:' + id].forEach(lsDel); location.reload(); },
+  /* forgot PIN: prove it's you with your password (the extra sign-in this makes is closed straight away) */
+  checkPassword: async function (pw) {
+    var r = await api('POST', '/api/login', { email: user.email, key: await pwKey(user.email, pw || '') });
+    try { await fetch(API + '/api/logout', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + r.token }, body: '{}' }); } catch (e) {}
+    return true;
+  },
+  synced: function (path) { var v = mirror.docs[rel(path)]; return v === undefined ? null : clone(v); },
+  qrNew: async function () { var r = await api('POST', '/api/qr/new', {}); lsSet('shepherd:qr:' + user.id, r.code); return r.code; },
+  logoutOthers: async function () { return api('POST', '/api/logout/others', {}); }
 };
 
 /* the app asks for these exactly as it does inside Claude */
@@ -1029,6 +1050,8 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
     <input class="inp" id="lockPin" type="password" inputmode="numeric" autocomplete="off" maxlength="8">
     <p class="small" id="lockMsg" style="margin:0;color:var(--bad);min-height:1.4em" role="alert"></p>
     <button class="btn primary block" type="submit">Unlock</button>
+    <button class="linkrow" type="button" id="lockForgot" style="justify-self:center">Forgot your PIN?</button>
+    <div class="lock-forgot" id="lockForgotBox" hidden></div>
   </form>
 </div>
 
@@ -1080,7 +1103,7 @@ function fmtDate(s) { if (!s) return ''; var t = parseYmd(s); var d = new Date(t
 function fmtStamp(t) { var d = new Date(t); if (LOC) return intl(d, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); return d.getDate() + ' ' + MON[d.getMonth()] + ', ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
 function fmtClock(s) { if (!s) return ''; var p = s.split(':').map(Number); if (LOC) return intl(new Date(2026, 0, 5, p[0], p[1] || 0), { hour: 'numeric', minute: '2-digit' }); var h = p[0] % 12 || 12; return h + (p[1] ? ':' + pad(p[1]) : '') + (p[0] < 12 ? 'am' : 'pm'); }
 function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function lsSet(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
 function plural(n, one, many) { return n + ' ' + (n === 1 ? one : (many || one + 's')); }
 function firstName(n) { return String(n || '').trim().split(/\s+/)[0]; }
 function hashStr(s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return h; }
@@ -1132,14 +1155,17 @@ var WEB_APP_URL = 'https://sitbackco.github.io/shepherd/';
 var pending = {}; var pv = 0; var flushing = false;
 
 function key() { return 'shepherd:v1:' + (S.uid || 'local'); }
-function saveLocal() { lsSet(key(), JSON.stringify({ profile: S.profile, contacts: S.contacts, events: S.events, disciples: S.disciples, prayers: S.prayers, pending: pending })); }
+var fullWarned = false;
+function storageFull() { if (fullWarned) return; fullWarned = true; toast('This phone is out of space for Shepherd. Your changes are still saved online when you have signal. Free up some space on your phone.', '', null, 12000); }
+// on the website the sync layer already keeps a full copy of the list on the phone, so only unsaved changes are kept here
+function saveLocal() { var ok = lsSet(key(), JSON.stringify(WEB ? { profile: S.profile, pending: pending } : { profile: S.profile, contacts: S.contacts, events: S.events, disciples: S.disciples, prayers: S.prayers, pending: pending })); if (!ok) storageFull(); }
 function normProfile(p) { var d = defaultProfile(); var o = Object.assign(d, p || {}); o.notify = Object.assign(defaultProfile().notify, (p && p.notify) || {}); if (o.intro === OLD_INTRO) o.intro = DEFAULT_INTRO; return o; }
 function loadLocal() {
   var raw = lsGet(key()); if (!raw) return;
   try {
     var o = JSON.parse(raw);
     S.profile = normProfile(o.profile);
-    S.contacts = o.contacts || {}; S.events = o.events || {}; S.disciples = o.disciples || {}; S.prayers = o.prayers || {};
+    if (o.contacts) S.contacts = o.contacts; if (o.events) S.events = o.events; if (o.disciples) S.disciples = o.disciples; if (o.prayers) S.prayers = o.prayers;
     pending = o.pending || {};
     Object.keys(pending).forEach(function (p) { pv = Math.max(pv, pending[p].v || 0); });
   } catch (e) {}
@@ -1151,7 +1177,11 @@ function dPath(id) { return basePath() + '/disciples/' + id; }
 function prPath(id) { return basePath() + '/prayers/' + id; }
 function clean(o) { return JSON.parse(JSON.stringify(o)); }
 
-function put(path, data) { pending[path] = { d: data === null ? null : clean(data), v: ++pv }; saveLocal(); flush(); }
+function put(path, data) {
+  var prev = pending[path], it = { d: data === null ? null : clean(data), v: ++pv };
+  if (prev && prev.b !== undefined) it.b = prev.b; else if (!prev && WEB && WEB.synced) it.b = WEB.synced(path); // what this change started from
+  pending[path] = it; saveLocal(); flush();
+}
 function setSync(s) {
   S.sync = s;
   var el = $('#sync'); if (!el) return;
@@ -1162,7 +1192,7 @@ function flush() {
   if (flushing) return;
   if (!DB) { setSync(S.mode === 'loading' ? 'loading' : 'local'); return; }
   if (S.readonly) { setSync('readonly'); return; }
-  if (!Object.keys(pending).length) { setSync('ok'); return; }
+  if (!Object.keys(pending).length) { setSync(WEB && WEB.online === false ? 'offline' : 'ok'); return; }
   if (navigator.onLine === false) { setSync('offline'); return; }
   flushing = true; setSync('saving');
   (async function () {
@@ -1171,8 +1201,9 @@ function flush() {
         var keys = Object.keys(pending); if (!keys.length) break;
         var p = keys[0]; var it = pending[p];
         try {
-          if (it.d === null) await DB.doc(p).delete(); else await DB.doc(p).set(it.d);
+          if (it.d === null) await DB.doc(p).delete(); else await DB.doc(p).set(it.d, it.b);
           if (pending[p] && pending[p].v === it.v) delete pending[p];
+          else if (pending[p] && WEB && WEB.synced) pending[p].b = WEB.synced(p); // a newer change waits: it now starts from what was just saved
           saveLocal();
         } catch (e) {
           var c = e && e.code;
@@ -1181,7 +1212,7 @@ function flush() {
           setSync('offline'); setTimeout(flush, 6000 + Math.random() * 4000); return;
         }
       }
-      setSync('ok');
+      setSync(WEB && WEB.online === false ? 'offline' : 'ok');
     } finally { flushing = false; }
   })();
 }
@@ -1244,9 +1275,9 @@ function dropContact(id) { delete S.contacts[id]; put(cPath(id), null); }
 /* the You form in Settings: saved when you tap Save, when you leave a box, and when the tour carries on */
 function saveProfileForm(andRender) {
   var n = $('#pName'), ph = $('#pPhone'), it = $('#pIntro'), ev = $('#pEvery'); if (!n || !ph) return false;
-  var next = { name: n.value.trim(), phone: ph.value.trim(), intro: it.value.trim() || defaultProfile().intro, defaultEvery: Number(ev.value) || 3 };
+  var co = $('#pCountry'), next = { name: n.value.trim().slice(0, 80), phone: ph.value.trim(), intro: it.value.trim().slice(0, 500) || defaultProfile().intro, defaultEvery: Number(ev.value) || 3, country: co ? co.value : (S.profile.country || 'GB') };
   var p = S.profile;
-  if (p.name === next.name && p.phone === next.phone && p.intro === next.intro && Number(p.defaultEvery) === next.defaultEvery) { if (andRender) render(); return false; }
+  if (p.name === next.name && p.phone === next.phone && p.intro === next.intro && Number(p.defaultEvery) === next.defaultEvery && (p.country || 'GB') === next.country) { if (andRender) render(); return false; }
   Object.assign(S.profile, next);
   if (andRender) saveProfile(); else put(basePath(), S.profile);
   return true;
@@ -1316,14 +1347,34 @@ function active() { return list().filter(function (c) { return eff(c) === 'activ
 function byDue(a, b) { return dueDay(a) - dueDay(b) || String(a.name).localeCompare(b.name); }
 
 /* ---------- channels ---------- */
-function waNum(p) {
+/* phone numbers: a number starting + or 00 is used as typed (a stray 0 after the country code is dropped);
+   a local number starting 0 gets the home country's code (Settings). Keep in step with waNum in worker/worker.js. */
+var COUNTRIES = [['GB', 'United Kingdom', '44', 10], ['NG', 'Nigeria', '234', 10], ['GH', 'Ghana', '233', 9], ['IE', 'Ireland', '353', 9], ['US', 'United States / Canada', '1', 10], ['FR', 'France', '33', 9], ['DE', 'Germany', '49', 0], ['NL', 'Netherlands', '31', 9], ['ES', 'Spain', '34', 9], ['PT', 'Portugal', '351', 9], ['PL', 'Poland', '48', 9], ['LT', 'Lithuania', '370', 8], ['RU', 'Russia', '7', 10], ['JP', 'Japan', '81', 0], ['CN', 'China', '86', 11], ['HK', 'Hong Kong', '852', 8], ['TW', 'Taiwan', '886', 9], ['ZA', 'South Africa', '27', 9], ['KE', 'Kenya', '254', 9], ['IN', 'India', '91', 10], ['BR', 'Brazil', '55', 0], ['CM', 'Cameroon', '237', 9], ['ZW', 'Zimbabwe', '263', 9], ['JM', 'Jamaica', '1', 10]];
+// country names in the person's own language, from the phone (no translation files needed)
+function countryName(k) { try { if (k[0] === 'US') return k[1]; var dn = new Intl.DisplayNames([window.I18N && I18N.lang !== 'en' ? I18N.locale() : 'en-GB'], { type: 'region' }); return dn.of(k[0]) || k[1]; } catch (e) { return k[1]; } }
+function homeCountry() { var c = (S.profile && S.profile.country) || 'GB'; for (var i = 0; i < COUNTRIES.length; i++) if (COUNTRIES[i][0] === c) return COUNTRIES[i]; return COUNTRIES[0]; }
+function waNum(p, country) {
   if (!p) return '';
-  var raw = String(p).trim(); var d = raw.replace(/\D/g, '');
+  var raw = String(p).trim(), d = raw.replace(/\D/g, ''), hc = country || homeCountry();
   if (!d) return '';
-  if (d.indexOf('00') === 0) d = d.slice(2);
-  else if (raw.charAt(0) !== '+' && d.charAt(0) === '0' && d.length === 11) d = '44' + d.slice(1);
-  return d.length >= 8 ? d : '';
+  if (raw.charAt(0) === '+' || d.indexOf('00') === 0) {
+    if (d.indexOf('00') === 0 && raw.charAt(0) !== '+') d = d.slice(2);
+    for (var i = 0; i < COUNTRIES.length; i++) { var cc = COUNTRIES[i][2]; if (d.indexOf(cc + '0') === 0 && d.length > cc.length + 8) { d = cc + d.slice(cc.length + 1); break; } }
+    return d.length >= 8 && d.length <= 15 ? d : '';
+  }
+  if (d.charAt(0) === '0') { var nat = d.slice(1); if (hc[3] && nat.length !== hc[3]) return ''; if (nat.length < 6) return ''; return hc[2] + nat; }
+  if (hc[3] && d.length === hc[3]) return hc[2] + d; // a local number typed without its first 0 (or a US number)
+  return d.length >= 8 && d.length <= 15 ? d : '';
 }
+// a UK number that isn't a mobile (07…) is almost always a number from another country typed without its code
+function phoneProblem(p) {
+  var v = String(p || '').trim(); if (!v) return '';
+  var hc = homeCountry(), d = v.replace(/\D/g, '');
+  if (!waNum(v)) return hc[0] === 'GB' ? 'That phone number doesn\'t look right. Use 07… or +44…' : 'That phone number doesn\'t look right. Start it with + and the country code.';
+  if (hc[0] === 'GB' && v.charAt(0) !== '+' && d.indexOf('00') !== 0 && d.charAt(0) === '0' && d.indexOf('07') !== 0) return 'UK WhatsApp numbers start with 07. For another country, start with + and the country code, or change your home country in Settings.';
+  return '';
+}
+function phoneHint() { return homeCountry()[0] === 'GB' ? '07… or +44…' : '+' + homeCountry()[2] + '…'; }
 function cleanHandle(h) {
   var s = String(h || '').trim(); if (!s) return '';
   s = s.replace(/[?#].*$/, '').replace(/\/+$/, '');
@@ -1427,7 +1478,7 @@ function suggest(q) {
 }
 function phoneBookCard() {
   var pb = phoneBook();
-  return '<section class="card" id="pbCard"><h3>Phone contacts</h3><p class="note">' + (pb.list.length ? plural(pb.list.length, 'contact') + ' on this phone. When you add someone, matching names come up as you type.' : 'Bring in your phone contacts, and when you add someone their name and number come up as you type.') + ' They stay on this phone only and are never uploaded.</p>' +
+  return '<section class="card" id="pbCard"><h2 class="h3">Phone contacts</h2><p class="note">' + (pb.list.length ? plural(pb.list.length, 'contact') + ' on this phone. When you add someone, matching names come up as you type.' : 'Bring in your phone contacts, and when you add someone their name and number come up as you type.') + ' They stay on this phone only and are never uploaded.</p>' +
     '<div class="row">' + (canPickContacts() ? '<button class="btn primary grow" data-act="pbpick">Choose from my contacts</button>' : '') + '<label class="btn grow' + (canPickContacts() ? '' : ' primary') + '" for="pbFile" style="cursor:pointer">Import a contacts file</label><input type="file" id="pbFile" accept=".vcf,text/vcard,text/x-vcard" class="sr"></div>' +
     '<button class="btn ghost" data-act="pbhow">How to get a contacts file</button>' +
     (pb.list.length ? '<button class="btn ghost" data-act="pbclear">Remove them from this phone</button>' : '') + '</section>';
@@ -1478,9 +1529,10 @@ function copyToPhone(c) { copyText(contactCard(c), 'Copied. Open your Contacts a
 function row(c) {
   return '<li class="prow st-' + state(c) + '"><button class="prow-main" data-act="open" data-id="' + c.id + '"><span class="dot" aria-hidden="true"></span><span class="pm"><span class="pn">' + esc(c.name) + (c.example ? '<span class="ex">Example</span>' : '') + '</span><span class="ps">' + subline(c) + '</span></span></button>' + repBtn(c) + chBtn(c) + '</li>';
 }
-function section(title, items, note) {
+function section(title, items, note, cap) {
   if (!items.length) return '';
-  return '<section class="sec"><div class="sec-h"><h2 class="h2">' + title + '</h2><span class="count">' + items.length + '</span></div>' + (note ? '<p class="note">' + note + '</p>' : '') + '<ul class="list">' + items.map(row).join('') + '</ul></section>';
+  var more = cap && !S.showAll && items.length > cap ? items.length - cap : 0, shown = more ? items.slice(0, cap) : items;
+  return '<section class="sec"><div class="sec-h"><h2 class="h2">' + title + '</h2><span class="count">' + items.length + '</span></div>' + (note ? '<p class="note">' + note + '</p>' : '') + '<ul class="list">' + shown.map(row).join('') + '</ul>' + (more ? '<button class="btn ghost" data-act="showall">Show ' + more + ' more</button>' : '') + '</section>';
 }
 function greeting() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening'; }
 function evList() { return Object.keys(S.events).map(function (k) { return S.events[k]; }).filter(function (x) { return x && x.name && x.date; }); }
@@ -1512,7 +1564,7 @@ function viewDisciples() {
   var h = '<div><h1 class="h1">Disciples</h1><p class="lede">Check in with each person once a week and keep building the friendship.</p></div>';
   h += '<figure class="verse" data-noi18n><p>“Therefore encourage one another and build each other up, just as in fact you are doing.”</p><cite>1 Thessalonians 5:11 (NIV)</cite></figure>';
   if (all.length) { var pct = Math.round(done.length / all.length * 100); h += '<div class="meter"><div class="track"><span style="width:' + pct + '%"></span></div><span>' + done.length + ' of ' + all.length + ' this week</span></div>'; }
-  h += '<form class="card" id="dForm" novalidate><h3>Add someone to check on weekly</h3><div class="grid2"><label class="field" for="dName">Name<input class="inp" id="dName" autocomplete="off" placeholder="Name"></label><label class="field" for="dPhone">WhatsApp (optional)<input class="inp" id="dPhone" type="tel" autocomplete="off" placeholder="07…"></label></div><p class="note" id="dErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">Add</button></form>';
+  h += '<form class="card" id="dForm" novalidate><h2 class="h3">Add someone to check on weekly</h2><div class="grid2"><label class="field" for="dName">Name<input class="inp" id="dName" autocomplete="off" placeholder="Name"></label><label class="field" for="dPhone">WhatsApp (optional)<input class="inp" id="dPhone" type="tel" autocomplete="off" placeholder="07…"></label></div><p class="note" id="dErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">Add</button></form>';
   if (todo.length) h += '<section class="sec"><div class="sec-h"><h2 class="h2">To check this week</h2><span class="count">' + todo.length + '</span></div><ul class="list">' + todo.map(dRow).join('') + '</ul></section>';
   if (done.length) h += '<section class="sec"><div class="sec-h"><h2 class="h2">Done this week</h2><span class="count">' + done.length + '</span></div><ul class="list">' + done.map(dRow).join('') + '</ul></section>';
   if (all.length && !todo.length) h += '<div class="allclear">' + ICON.check + '<span>You\'ve checked in with everyone this week.</span></div>';
@@ -1529,13 +1581,13 @@ function discipleSheet(id) {
     '<p class="small hintline">Don\'t record health or other sensitive details unless they\'re happy for you to.</p>' +
     '<p class="note" id="deErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">Save</button></form>' +
     (checkedThisWeek(d) ? '' : '<button class="btn soft" id="deCheck">Checked in this week</button>') +
-    (hist.length ? '<div class="card" style="background:var(--bg)"><h3>Check-ins</h3><ul class="timeline">' + hist.map(function (l) { return '<li><time>' + esc(fmtStamp(l.t)) + '</time><span>' + esc(l.text) + '</span></li>'; }).join('') + '</ul></div>' : '') +
+    (hist.length ? '<div class="card" style="background:var(--bg)"><h2 class="h3">Check-ins</h2><ul class="timeline">' + hist.map(function (l) { return '<li><time>' + esc(fmtStamp(l.t)) + '</time><span>' + esc(l.text) + '</span></li>'; }).join('') + '</ul></div>' : '') +
     '<button class="btn danger" id="deDel">Remove from Disciples</button>',
     function (root) {
       $('#deForm', root).addEventListener('submit', function (e) {
         e.preventDefault();
         var nm = $('#deName', root).value.trim(), ph = $('#dePhone', root).value.trim(), er = $('#deErr', root);
-        var msg = !nm ? 'Add their name.' : ph && !waNum(ph) ? 'That number doesn\'t look right. Use 07… or +44…' : '';
+        var msg = !nm ? 'Add their name.' : phoneProblem(ph);
         er.hidden = !msg; er.textContent = msg; if (msg) return;
         d.name = nm; d.phone = ph; d.notes = $('#deNotes', root).value.trim(); saveDisciple(d); closeSheet(); toast('Saved');
       });
@@ -1565,7 +1617,7 @@ function todayLists() {
 /* on the website in a phone browser: suggest installing, since notifications need it */
 function installCard() {
   if (!WEB || WEB.install.standalone() || lsGet('shepherd:installHide') === '1' || !/iPhone|iPad|Android/i.test(navigator.userAgent)) return '';
-  return '<section class="card install" id="installCard"><h3>Put Shepherd on your Home Screen</h3><p class="note">It opens like an app, and it\'s how Shepherd can send you notifications that name people.</p><div class="row"><button class="btn primary grow" data-act="notifguide">Show me how</button><button class="btn ghost grow" data-act="hideinstall">Not now</button></div></section>';
+  return '<section class="card install" id="installCard"><h2 class="h3">Put Shepherd on your Home Screen</h2><p class="note">It opens like an app, and it\'s how Shepherd can send you notifications that name people.</p><div class="row"><button class="btn primary grow" data-act="notifguide">Show me how</button><button class="btn ghost grow" data-act="hideinstall">Not now</button></div></section>';
 }
 /* ---------- prayer list: names you choose, with optional notes; a few each day, taking turns ---------- */
 function prList() { return Object.keys(S.prayers).map(function (k) { return S.prayers[k]; }).filter(function (x) { return x && x.name; }).sort(function (a, b) { return (a.createdAt || 0) - (b.createdAt || 0) || a.name.localeCompare(b.name); }); }
@@ -1584,10 +1636,10 @@ function prayCard() {
   var picks = prayerPicks(today());
   if (!picks.length) {
     var legacy = active().filter(function (c) { return c.prayer && String(c.prayer).trim(); }).slice(0, 3);
-    return '<section class="card" id="prayCard"><div class="sec-h"><h3>Pray today</h3><button class="btn small soft" data-act="praylist">Prayer list</button></div>' +
+    return '<section class="card" id="prayCard"><div class="sec-h"><h2 class="h3">Pray today</h2><button class="btn small soft" data-act="praylist">Prayer list</button></div>' +
       (legacy.length ? '<ul class="timeline">' + legacy.map(function (c) { return '<li><b>' + esc(firstName(c.name)) + '</b><span>' + esc(c.prayer) + '</span></li>'; }).join('') + '</ul>' : '<p class="note">Add the people you\'re praying for. Shepherd shows a few each day, taking turns, and can remind you.</p>') + '</section>';
   }
-  return '<section class="card" id="prayCard"><div class="sec-h"><h3>Pray today</h3><button class="btn small soft" data-act="praylist">Prayer list (' + prList().length + ')</button></div><ul class="timeline">' +
+  return '<section class="card" id="prayCard"><div class="sec-h"><h2 class="h3">Pray today</h2><button class="btn small soft" data-act="praylist">Prayer list (' + prList().length + ')</button></div><ul class="timeline">' +
     picks.map(function (x) { return '<li><b>' + esc(x.name) + '</b><span>' + (x.notes ? esc(x.notes) : '<span class="muted">No notes</span>') + '</span></li>'; }).join('') + '</ul></section>';
 }
 function prayerSheet(focusAdd) {
@@ -1604,6 +1656,7 @@ function prayerSheet(focusAdd) {
       $('#prForm', root).addEventListener('submit', function (e) {
         e.preventDefault(); var nm = $('#prName', root).value.trim(), er = $('#prErr', root);
         if (!nm) { er.hidden = false; er.textContent = 'Add a name first.'; $('#prName', root).focus(); return; }
+        var pf = $('#prForm', root); if (pf.dataset.done) return; pf.dataset.done = '1';
         savePrayer({ id: newId(), name: nm, notes: $('#prNotes', root).value.trim(), createdAt: Date.now() });
         toast(firstName(nm) + ' added to your prayer list'); prayerSheet(true);
       });
@@ -1644,8 +1697,8 @@ function viewToday() {
   // Today is a quick look: add someone, who to chase, disciples to check on, what's on today, who to pray for
   h += addCard();
   h += catchCard();
-  h += section('Reply to', L.reply, 'They messaged you last. Tap the chat button to answer, then I replied.');
-  h += section('Message today', L.msg);
+  h += section('Reply to', L.reply, 'They messaged you last. Tap the chat button to answer, then I replied.', 5);
+  h += section('Message today', L.msg, '', 5);
   if (!L.reply.length && !L.msg.length) h += '<div class="allclear">' + ICON.check + '<span>You\'re up to date. Nobody is waiting on you today.</span></div>';
   h += disciplesCard();
   if (L.studies.length) {
@@ -1658,14 +1711,14 @@ function viewToday() {
 }
 /* the shortcut to add someone, near the top of Today */
 function addCard() {
-  return '<section class="card addcard" id="addCard"><div class="sec-h"><h3>Met someone?</h3></div><p class="note">Add their name and number, or show your QR code so they message you first.</p>' +
+  return '<section class="card addcard" id="addCard"><div class="sec-h"><h2 class="h3">Met someone?</h2></div><p class="note">Add their name and number, or show your QR code so they message you first.</p>' +
     '<div class="row"><button class="btn primary grow" data-act="quickadd"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add someone</button><button class="btn grow" data-act="qr">' + ICON.qr + 'My QR code</button></div></section>';
 }
 /* the morning summary at the top of Today; Settings chooses what it shows */
 function catchCard() {
   var items = catchupItems(); if (!items.length) return '';
   var c = items[0], fn = esc(firstName(c.name)), ch = channels(c)[0];
-  var h = '<section class="card catch" id="catchCard" aria-live="polite"><div class="sec-h"><h3>Catch-up</h3><span class="count">' + (items.length > 1 ? '1 of ' + items.length : '1 to check') + '</span></div>';
+  var h = '<section class="card catch" id="catchCard" aria-live="polite"><div class="sec-h"><h2 class="h3">Catch-up</h2><span class="count">' + (items.length > 1 ? '1 of ' + items.length : '1 to check') + '</span></div>';
   if (c.replyState === 'them') {
     var d = waitDays(c);
     h += '<p class="q">Did ' + fn + ' reply?</p><p class="note">You messaged ' + fn + ' ' + (d === 1 ? 'yesterday' : d + ' days ago') + '.</p>' +
@@ -1680,7 +1733,7 @@ function catchCard() {
 }
 function disciplesCard() {
   var all = dList(), todo = discipleToDo(); if (!all.length) return '';
-  var head = '<div class="sec-h"><h3>Disciples this week</h3><span class="count">' + (all.length - todo.length) + ' of ' + all.length + ' done</span></div>';
+  var head = '<div class="sec-h"><h2 class="h3">Disciples this week</h2><span class="count">' + (all.length - todo.length) + ' of ' + all.length + ' done</span></div>';
   if (!todo.length) return '<section class="card dsum" id="dSum">' + head + '<p class="note okline">' + ICON.check + '<span>You\'ve checked in with everyone this week.</span></p></section>';
   return '<section class="card dsum" id="dSum">' + head + '<div class="dchips">' + todo.slice(0, 6).map(function (d) { return '<button class="dchip" data-act="tab" data-v="disciples">' + esc(firstName(d.name)) + '</button>'; }).join('') + (todo.length > 6 ? '<span class="dchip more">+' + (todo.length - 6) + '</span>' : '') + '</div>' +
     '<button class="btn soft small" data-act="tab" data-v="disciples">Open Disciples</button></section>';
@@ -1779,6 +1832,7 @@ function viewContact() {
   h += '<div class="chips"><span class="chip st-' + st + '">' + esc(statusText(c)) + '</span><span class="chip">' + esc(stageOf(c)) + '</span></div>';
   if (e !== 'archived') h += journeyStrip(c);
   h += '<p class="muted small" style="margin:0">' + esc(lastText(c)) + '</p>';
+  if (!c.consent && !c.example) h += '<p class="consent-note" id="consentNote">Consent not recorded. If they\'re happy for you to keep their details, tick it under Edit.</p>';
   if (e === 'active') {
     var chs = channels(c);
     h += '<div class="row">';
@@ -1802,7 +1856,7 @@ function viewContact() {
   h += '</section></div>';
 
   var ns = c.nextStudy;
-  h += '<section class="card"><div class="sec-h"><h3>Bible studies</h3><button class="btn soft" data-act="logstudy" data-id="' + c.id + '">Log a study</button></div>';
+  h += '<section class="card"><div class="sec-h"><h2 class="h3">Bible studies</h2><button class="btn soft" data-act="logstudy" data-id="' + c.id + '">Log a study</button></div>';
   if (ns && ns.date) {
     h += '<div><p class="note" style="margin-bottom:4px">Next study</p><p style="margin:0;font-weight:600">' + esc(fmtDate(ns.date)) + (ns.time ? ', ' + esc(fmtClock(ns.time)) : '') + (ns.topic ? ' · ' + esc(ns.topic) : '') + '</p></div>' +
       addCalHtml('study', c.id, 'btn primary');
@@ -1819,7 +1873,7 @@ function viewContact() {
     h += '<section class="card"><label class="field" for="every"><span style="color:var(--fg);font-weight:700;font-size:15px">Check in every</span><select class="inp" id="every" data-id="' + c.id + '">' + opts.sort(function (a, b) { return a - b; }).map(function (o) { return '<option value="' + o + '"' + (o === ev ? ' selected' : '') + '>' + (o === 1 ? 'Day' : o === 7 ? 'Week' : o === 14 ? '2 weeks' : o + ' days') + '</option>'; }).join('') + '</select></label></section>';
   }
 
-  h += '<section class="card"><div class="sec-h"><h3>Details</h3><button class="btn ghost" data-act="edit" data-id="' + c.id + '">Edit</button></div><dl class="kv">' +
+  h += '<section class="card"><div class="sec-h"><h2 class="h3">Details</h2><button class="btn ghost" data-act="edit" data-id="' + c.id + '">Edit</button></div><dl class="kv">' +
     '<dt>Phone</dt><dd>' + (esc(c.phone) || '—') + '</dd>' +
     '<dt>Instagram</dt><dd>' + (c.instagram ? '@' + esc(c.instagram) : '—') + '</dd>' +
     (c.social2 ? '<dt>' + esc(c.social2Platform || 'Other') + '</dt><dd>' + esc(c.social2) + '</dd>' : '') +
@@ -1830,10 +1884,10 @@ function viewContact() {
     '<div class="row"><button class="btn grow" data-act="tophone" data-id="' + c.id + '">' + ICON.person + 'Save to phone contacts</button><button class="btn grow" data-act="addpray" data-id="' + c.id + '">Add to prayer list</button></div></section>';
 
   var evs = evList().filter(function (x) { return (x.invited || []).indexOf(c.id) >= 0; }).sort(function (a, b) { return String(b.date).localeCompare(a.date); });
-  if (evs.length) h += '<section class="card"><h3>Events</h3><ul class="timeline">' + evs.map(function (x) { var came = (x.came || []).indexOf(c.id) >= 0; return '<li><time>' + esc(fmtDate(x.date)) + '</time><span>' + esc(x.name) + ' · ' + (came ? '<b style="color:var(--ok)">Came</b>' : parseYmd(x.date) < today() ? 'Didn\'t come' : 'Invited') + '</span></li>'; }).join('') + '</ul></section>';
+  if (evs.length) h += '<section class="card"><h2 class="h3">Events</h2><ul class="timeline">' + evs.map(function (x) { var came = (x.came || []).indexOf(c.id) >= 0; return '<li><time>' + esc(fmtDate(x.date)) + '</time><span>' + esc(x.name) + ' · ' + (came ? '<b style="color:var(--ok)">Came</b>' : parseYmd(x.date) < today() ? 'Didn\'t come' : 'Invited') + '</span></li>'; }).join('') + '</ul></section>';
 
   var log = (c.log || []).slice().reverse().slice(0, 25);
-  if (log.length) h += '<section class="card"><h3>Activity</h3><ul class="timeline">' + log.map(function (l) { return '<li><time>' + esc(fmtStamp(l.t)) + '</time><span>' + esc(l.text) + '</span></li>'; }).join('') + '</ul></section>';
+  if (log.length) h += '<section class="card"><h2 class="h3">Activity</h2><ul class="timeline">' + log.map(function (l) { return '<li><time>' + esc(fmtStamp(l.t)) + '</time><span>' + esc(l.text) + '</span></li>'; }).join('') + '</ul></section>';
 
   h += '<section class="row">';
   if (e === 'active') h += '<button class="btn grow" data-act="pause" data-id="' + c.id + '">Leave for now</button><button class="btn danger grow" data-act="archive" data-id="' + c.id + '">No longer contact</button>';
@@ -1842,7 +1896,6 @@ function viewContact() {
   h += '</section>';
   return h;
 }
-function chName(k) { return k === 'instagram' ? 'Instagram' : k === 'other' ? 'Other app' : 'WhatsApp'; }
 
 function evCard(x, isPast) {
   var d = new Date(parseYmd(x.date));
@@ -1886,12 +1939,12 @@ function viewWeek() {
   });
   evList().forEach(function (x) { var t = parseYmd(x.date); if (t >= ws && t < cur.we) came += (x.came || []).length; });
   var n = cur.done.length, d = cur.pool.length;
-  var h = '<div><p class="eyebrow">Week of ' + fmtDay(ws) + '</p>';
+  var h = '<div><p class="eyebrow">Week of ' + fmtDay(ws) + '</p><h1 class="sr">Your week</h1>';
   h += d ? '<p class="bigline">You followed up with <em>' + n + ' of ' + d + '</em> — ' + weekWord(n, d) + '.</p>' : '<p class="bigline">Your weekly summary will appear once you add contacts.</p>';
   h += '</div><div class="stats"><div class="stat"><span>Studies</span><b>' + studies + '</b></div><div class="stat"><span>New contacts</span><b>' + added + '</b></div><div class="stat"><span>Came to events</span><b>' + came + '</b></div></div>';
   var weeks = [];
   for (var i = 3; i >= 0; i--) weeks.push(weekStats(addDays(ws, -7 * i)));
-  h += '<section class="card"><h3>Follow-up rate, last 4 weeks</h3><div class="bars">' + weeks.map(function (w, idx) {
+  h += '<section class="card"><h2 class="h3">Follow-up rate, last 4 weeks</h2><div class="bars">' + weeks.map(function (w, idx) {
     var pct = w.pool.length ? Math.round(w.done.length / w.pool.length * 100) : 0;
     var dd = new Date(w.ws);
     return '<div class="bar' + (idx === 3 ? ' now' : '') + '"><span>' + (w.pool.length ? pct + '%' : '–') + '</span><div class="track"><div class="fill" style="height:' + pct + '%"></div></div><span>' + (idx === 3 ? 'This week' : fmtDay(dd)) + '</span></div>';
@@ -1924,15 +1977,16 @@ function viewSettings() {
   var p = S.profile, N = p.notify || {};
   var h = '<div><button class="ghost-btn" data-act="tab" data-v="today">' + ICON.back + 'Today</button><h1 class="h1">Settings</h1></div>';
   if (window.I18N) h += '<section class="card" id="langCard"><label class="field" for="pLang"><span class="langh"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>Language</span><select class="inp" id="pLang" data-noi18n>' + I18N.LANGS.map(function (l) { return '<option value="' + l[0] + '"' + (l[0] === I18N.lang ? ' selected' : '') + '>' + l[1] + '</option>'; }).join('') + '</select></label><p class="note">Bible verses stay in English (NIV).</p></section>';
-  h += '<form class="card" id="profForm"><h3>You</h3>' +
+  h += '<form class="card" id="profForm"><h2 class="h3">You</h2>' +
     '<label class="field" for="pName">Your name<input class="inp" id="pName" value="' + esc(p.name) + '" autocomplete="name"></label>' +
-    '<label class="field" for="pPhone">Your WhatsApp number<input class="inp" id="pPhone" type="tel" value="' + esc(p.phone) + '" placeholder="07… or +44…" autocomplete="tel"></label>' +
+    '<label class="field" for="pPhone">Your WhatsApp number<input class="inp" id="pPhone" type="tel" value="' + esc(p.phone) + '" placeholder="' + esc(phoneHint()) + '" autocomplete="tel"></label>' +
+    '<label class="field" for="pCountry">Home country (for phone numbers)<select class="inp" id="pCountry" data-noi18n>' + COUNTRIES.map(function (k) { return '<option value="' + k[0] + '"' + (k[0] === homeCountry()[0] ? ' selected' : '') + '>' + esc(countryName(k)) + ' (+' + k[2] + ')</option>'; }).join('') + '</select></label><p class="note" style="margin:-6px 0 0">Numbers starting with 0 get this country\'s code. Numbers starting with + are used as typed.</p>' +
     '<label class="field" for="pIntro">Message people send you from your QR code<textarea class="inp" id="pIntro">' + esc(introText(p)) + '</textarea></label>' +
     '<label class="field" for="pEvery">New contacts: check in every<select class="inp" id="pEvery">' + [1, 2, 3, 4, 5, 7].map(function (o) { return '<option value="' + o + '"' + (Number(p.defaultEvery) === o ? ' selected' : '') + '>' + (o === 1 ? 'Day' : o === 7 ? 'Week' : o + ' days') + '</option>'; }).join('') + '</select></label>' +
     '<button class="btn primary" type="submit">Save</button></form>';
   var preset = '';
   PRESETS.forEach(function (pr) { if (NOTIFY.every(function (n) { return !!N[n[0]] === pr[1][n[0]]; })) preset = pr[0]; });
-  h += '<section class="card" id="notifCard"><h3>Notifications</h3>' +
+  h += '<section class="card" id="notifCard"><h2 class="h3">Notifications</h2>' +
     (WEB ? '<p class="pushline" data-pushline>' + pushLine(PUSHSTATE) + '</p><div class="row"><button class="btn primary grow" type="button" data-act="pushon"' + (PUSHSTATE === 'on' ? ' hidden' : '') + '>Turn on notifications</button><button class="btn grow" type="button" data-act="pushtest"' + (PUSHSTATE === 'on' ? '' : ' hidden') + '>Send a test</button><button class="btn soft grow" type="button" data-act="notifguide">How it works</button></div>'
       : '<p class="note">Notifications that name people come from the Shepherd app on your phone.</p><button class="btn primary" type="button" data-act="notifguide">How to get them</button>') +
     '<label class="field" for="pAlert">Morning notifications at<input class="inp" id="pAlert" type="time" value="' + esc(p.alertTime || '08:00') + '"></label>' +
@@ -1940,22 +1994,22 @@ function viewSettings() {
     '<div class="pick" id="nPreset" role="group" aria-label="Quick choices">' + PRESETS.map(function (pr) { return '<button type="button" data-preset="' + esc(pr[0]) + '" aria-pressed="' + (preset === pr[0]) + '">' + esc(pr[0]) + '</button>'; }).join('') + '</div>' +
     '<ul class="ticks">' + NOTIFY.map(function (n) { return '<li><label for="n-' + n[0] + '"><input type="checkbox" id="n-' + n[0] + '" data-n="' + n[0] + '"' + (N[n[0]] ? ' checked' : '') + '><span><b>' + n[1] + '</b><span>' + n[2] + '</span></span></label></li>'; }).join('') + '</ul>' +
     '<div><p class="note" style="margin-bottom:6px">Today\'s summary</p><div class="preview" id="nPreview">' + esc(digest()) + '</div></div></section>';
-  h += '<section class="card" id="prayerCard"><h3>Prayer reminders</h3><p class="note">Pray for ' + plural(Number(p.prayerCount) || 3, 'person', 'people') + ' from your prayer list each day, taking turns.' + (WEB ? '' : ' Reminders come from the Shepherd app on your phone.') + '</p>' +
+  h += '<section class="card" id="prayerCard"><h2 class="h3">Prayer reminders</h2><p class="note">Pray for ' + plural(Number(p.prayerCount) || 3, 'person', 'people') + ' from your prayer list each day, taking turns.' + (WEB ? '' : ' Reminders come from the Shepherd app on your phone.') + '</p>' +
     '<label class="tick1" for="pPrOn"><input type="checkbox" id="pPrOn"' + (p.prayerOn ? ' checked' : '') + '><span><b>Remind me to pray each day</b></span></label>' +
     '<div class="grid2"><label class="field" for="pPrTime">Time<input class="inp" id="pPrTime" type="time" value="' + esc(p.prayerTime || '07:30') + '"></label><label class="field" for="pPrCount">People each day<select class="inp" id="pPrCount">' + (function () { var cur = Number(p.prayerCount) || 3, o = ''; for (var i = 1; i <= 15; i++) o += '<option value="' + i + '"' + (i === cur ? ' selected' : '') + '>' + i + '</option>'; return o; })() + '</select></label></div>' +
     '<button class="btn soft" data-act="praylist">Prayer list (' + prList().length + ')</button></section>';
   h += phoneBookCard();
-  h += '<section class="card"><h3>Getting started</h3><p class="note">A one-minute walk around Shepherd.</p><button class="btn" data-act="tour">Show me around</button></section>';
-  h += '<section class="card"><h3>App lock</h3><p class="note">' + (p.pinHash ? 'Shepherd asks for your PIN when it opens and after 5 minutes away.' : 'Add a PIN so nobody who picks up your phone can read your contacts.') + '</p><div class="row">' +
+  h += '<section class="card"><h2 class="h3">Getting started</h2><p class="note">A one-minute walk around Shepherd.</p><button class="btn" data-act="tour">Show me around</button></section>';
+  h += '<section class="card"><h2 class="h3">App lock</h2><p class="note">' + (p.pinHash ? 'Shepherd asks for your PIN when it opens and after 5 minutes away.' : 'Add a PIN so nobody who picks up your phone can read your contacts.') + '</p><div class="row">' +
     (p.pinHash ? '<button class="btn" data-act="setpin">Change PIN</button><button class="btn" data-act="locknow">Lock now</button><button class="btn danger" data-act="removepin">Remove PIN</button>' : '<button class="btn primary" data-act="setpin">Set a PIN</button>') + '</div></section>';
-  if (WEB && WEB.user()) h += '<section class="card" id="acctCard"><h3>Your account</h3><p class="note">Signed in as <b style="color:var(--fg)">' + esc(WEB.user().email) + '</b>. You stay signed in on this phone.</p><div class="row"><button class="btn grow" data-act="changepw">Change password</button><button class="btn grow" data-act="signout">Sign out</button></div><button class="btn danger" data-act="delacct">Delete my account</button></section>';
-  h += '<section class="card"><h3>Your data</h3><p class="note">Your contacts are saved to your own private space' + (DB ? (WEB ? ' on the Shepherd server, with earlier versions kept' : '') : ' (right now only on this phone)') + '. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.</p><button class="btn soft" data-act="yourdata">Privacy and safe use</button><div class="row"><button class="btn" data-act="export">Export a backup</button><label class="btn" for="importFile" style="cursor:pointer">Restore a backup</label><input type="file" id="importFile" accept=".json,application/json" class="sr"></div>' +
+  if (WEB && WEB.user()) h += '<section class="card" id="acctCard"><h2 class="h3">Your account</h2><p class="note">Signed in as <b style="color:var(--fg)">' + esc(WEB.user().email) + '</b>. You stay signed in on this phone.</p><div class="row"><button class="btn grow" data-act="changepw">Change password</button><button class="btn grow" data-act="signout">Sign out</button></div>' + (WEB.logoutOthers ? '<button class="btn ghost" data-act="logoutothers">Sign out on all my other phones</button>' : '') + '<button class="btn danger" data-act="delacct">Delete my account</button></section>';
+  h += '<section class="card"><h2 class="h3">Your data</h2><p class="note">Your contacts are saved to your own private space' + (DB ? (WEB ? ' on the Shepherd server, with earlier versions kept' : '') : ' (right now only on this phone)') + '. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.</p><button class="btn soft" data-act="yourdata">Privacy and safe use</button><div class="row"><button class="btn" data-act="export">Export a backup</button><label class="btn" for="importFile" style="cursor:pointer">Restore a backup</label><input type="file" id="importFile" accept=".json,application/json" class="sr"></div>' +
     (list().some(function (c) { return c.example; }) ? '<button class="btn danger" data-act="clearexamples">Remove example contacts</button>' : '') + '</section>';
   var acts = [];
   list().forEach(function (c) { (c.log || []).forEach(function (l) { acts.push({ t: l.t, text: c.name + ': ' + l.text }); }); });
   (p.log || []).forEach(function (l) { acts.push(l); });
   acts.sort(function (a, b) { return b.t - a.t; });
-  h += '<section class="card"><h3>Activity log</h3><p class="note">Every change you make, newest first.</p>' + (acts.length ? '<ul class="timeline">' + acts.slice(0, 40).map(function (l) { return '<li><time>' + esc(fmtStamp(l.t)) + '</time><span>' + esc(l.text) + '</span></li>'; }).join('') + '</ul>' : '<p class="note">Nothing yet.</p>') + '</section>';
+  h += '<section class="card"><h2 class="h3">Activity log</h2><p class="note">Every change you make, newest first.</p>' + (acts.length ? '<ul class="timeline">' + acts.slice(0, 40).map(function (l) { return '<li><time>' + esc(fmtStamp(l.t)) + '</time><span>' + esc(l.text) + '</span></li>'; }).join('') + '</ul>' : '<p class="note">Nothing yet.</p>') + '</section>';
   return h;
 }
 
@@ -1963,7 +2017,7 @@ function render() {
   var main = $('#main'); if (!main) return;
   var ae = document.activeElement, keep = ae && ae.id && main.contains(ae) ? ae.id : null, sel = null;
   try { sel = keep ? ae.selectionStart : null; } catch (e) {}
-  var v = S.view, html;
+  var v = S.view, html; setTimeout(function () { capLengths($('#main')); }, 0);
   if (S.mode === 'loading' && !list().length && !lsGet(key())) html = '<p class="muted" style="padding:40px 0;text-align:center">Opening Shepherd…</p>';
   else if (v === 'people') html = viewPeople();
   else if (v === 'contact') html = viewContact();
@@ -1978,14 +2032,14 @@ function render() {
   document.querySelectorAll('.tab').forEach(function (t) { if (t.dataset.v === tabV) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
   var owed = active().filter(function (c) { return c.replyState === 'me' || dayDiff(dueDay(c), today()) < 0; }).length;
   var b = $('#badge'); b.hidden = !owed; b.textContent = owed > 99 ? '99+' : owed;
-  $('#fab').hidden = S.view === 'settings' || S.view === 'today'; // Today has its own Add someone box
+  $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events'; // Today has its own Add someone box
   if (keep) { var el = document.getElementById(keep); if (el) { el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   bindView();
   if (TOUR_I >= 0) placeTour();
   if (WEB) { schedSoon(); try { if (navigator.setAppBadge) { if (owed) navigator.setAppBadge(owed); else navigator.clearAppBadge(); } } catch (e) {} }
   if (WEB && S.view === 'settings') refreshPush();
 }
-function go(v, id) { if (S.view === 'settings' && v !== 'settings') saveProfileForm(false); S.view = v; if (id) S.contactId = id; render(); try { window.scrollTo(0, 0); } catch (e) {} }
+function go(v, id) { if (v !== S.view) S.showAll = false; if (S.view === 'settings' && v !== 'settings') saveProfileForm(false); S.view = v; if (id) S.contactId = id; render(); try { window.scrollTo(0, 0); } catch (e) {} }
 
 function bindView() {
   var q = $('#q');
@@ -2016,8 +2070,9 @@ function bindView() {
   if (df) df.addEventListener('submit', function (e) {
     e.preventDefault();
     var nm = $('#dName').value.trim(), ph = $('#dPhone').value.trim(), er = $('#dErr');
-    var msg = !nm ? 'Add their name.' : ph && !waNum(ph) ? 'That number doesn\'t look right. Use 07… or +44…' : '';
+    var msg = !nm ? 'Add their name.' : phoneProblem(ph);
     er.hidden = !msg; er.textContent = msg; if (msg) { $(nm ? '#dPhone' : '#dName').focus(); return; }
+    if (df.dataset.t && Date.now() - Number(df.dataset.t) < 1500 && df.dataset.last === nm) return; df.dataset.t = String(Date.now()); df.dataset.last = nm;
     var d = { id: newId(), name: nm, phone: ph, notes: '', log: [], createdAt: Date.now() };
     saveDisciple(d); toast(firstName(nm) + ' added. Check in with them this week.'); tourEvent('disciple');
     var n2 = $('#dName'); if (n2) n2.focus();
@@ -2028,12 +2083,14 @@ function bindView() {
 
 /* ---------- sheets ---------- */
 var sheetAfter = null;
+var MAXLEN = { cName: 80, cPhone: 30, cSh: 60, cMet: 120, cNotes: 4000, cPrayer: 2000, prName: 80, prNotes: 2000, peName: 80, peNotes: 2000, dName: 80, dPhone: 30, deName: 80, dePhone: 30, deNotes: 2000, eName: 120, ePlace: 120, sTopic: 200, sNotes: 4000, pName: 80, pPhone: 30, pIntro: 500, qPhone: 30, aNote: 500 };
+function capLengths(root) { Object.keys(MAXLEN).forEach(function (id) { var el = root && root.querySelector('#' + id); if (el && !(el.maxLength > 0)) el.maxLength = MAXLEN[id]; }); }
 function openSheet(title, body, mount, after) {
   // opening one sheet over another keeps the first one's "when closed" step (e.g. going back to the tour)
   sheetAfter = after || (!$('#sheet').hidden && $('#sheet').classList.contains('on') ? sheetAfter : null);
   var sh = $('#sheet'), sc = $('#scrim');
   var old = $('#sheetBody'), nb = old.cloneNode(false); old.parentNode.replaceChild(nb, old); // fresh element: no leftover listeners
-  $('#sheetTitle').textContent = title; sh.dataset.title = title; nb.innerHTML = body;
+  $('#sheetTitle').textContent = title; sh.dataset.title = title; nb.innerHTML = body; capLengths(nb);
   sh.hidden = false; sc.hidden = false; document.body.classList.add('noscroll');
   requestAnimationFrame(function () { sh.classList.add('on'); sc.classList.add('on'); });
   nb.scrollTop = 0;
@@ -2050,7 +2107,7 @@ function calGuide(fromTour) {
   var feed = WEB ? WEB.feedUrl() : '';
   openSheet('Link your calendar',
     '<p style="margin:0">Connect Shepherd to your phone\'s calendar and your Bible studies and events appear there by themselves, alongside everything else in your day.</p>' +
-    '<section class="card" style="background:var(--bg)" id="calConnect"><h3>1. Connect Shepherd to your phone calendar</h3>' +
+    '<section class="card" style="background:var(--bg)" id="calConnect"><h2 class="h3">1. Connect Shepherd to your phone calendar</h2>' +
       (WEB && feed ?
         osSteps(
           ['Tap <b>Connect to iPhone calendar</b> below.', 'Your iPhone asks if you want to subscribe. Tap <b>Subscribe</b>, then <b>Done</b>.', 'Come back to Shepherd. Your studies and events now show in the <b>Calendar</b> app as <b>Shepherd</b>, and keep themselves up to date.'],
@@ -2060,7 +2117,7 @@ function calGuide(fromTour) {
         '<p class="note">This link is private to you. If you ever share it by mistake, <button class="linkrow" style="padding:0;min-height:0;display:inline" data-act="newcal">make a new link</button>.</p>'
       : '<p class="note">This works in the Shepherd app on your phone. Open <a href="' + WEB_APP_URL + '" target="_blank" rel="noopener">Shepherd</a>, sign in, then come back to this guide.</p>') +
     '</section>' +
-    '<section class="card" style="background:var(--bg)"><h3>2. Keep your personal TimeTree events in your calendar too</h3>' +
+    '<section class="card" style="background:var(--bg)"><h2 class="h3">2. Keep your personal TimeTree events in your calendar too</h2>' +
       '<p class="note">TimeTree doesn\'t share its events with other apps, so it can\'t copy them over by itself. For the personal events you keep in TimeTree that matter to your week, add them to your phone\'s calendar as well, so your calendar shows everything in one place.</p>' +
       osSteps(
         ['Open the <b>Calendar</b> app and tap <b>+</b>.', 'Type the title, then set the <b>date and time</b> from your TimeTree event.', 'Tap <b>Add</b>.'],
@@ -2093,7 +2150,7 @@ function contactForm(c, isNew) {
   return '<form id="cForm" class="sec" style="gap:14px" novalidate data-src="' + sp.src + '">' +
     '<div class="field acwrap"><label for="cName">Name</label><div class="pwrow"><input class="inp" id="cName" required value="' + esc(c.name) + '" autocomplete="off" placeholder="' + (isNew && phoneBook().list.length ? 'Start typing to find them' : 'First name is fine') + '" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cSug">' + (isNew && canPickContacts() ? '<button type="button" class="btn small" id="cPick">' + ICON.person + '<span class="sr">Choose from contacts</span></button>' : '') + '</div><ul class="acl" id="cSug" role="listbox" hidden></ul>' +
       (isNew && !phoneBook().list.length ? '<button type="button" class="linkrow" data-act="pbhowadd" style="padding:4px 0;min-height:0">Import your phone contacts to find people as you type</button>' : '') + '</div>' +
-    '<label class="field" for="cPhone">WhatsApp number<input class="inp" id="cPhone" type="tel" value="' + esc(c.phone) + '" placeholder="07… or +44…" autocomplete="off"></label>' +
+    '<label class="field" for="cPhone">WhatsApp number<input class="inp" id="cPhone" type="tel" value="' + esc(c.phone) + '" placeholder="' + esc(phoneHint()) + '" autocomplete="off"></label>' +
     '<div class="field"><span>Social media (optional)</span><div class="handle"><label class="sr" for="cSp">App</label><select class="inp" id="cSp">' + SOCIALS.map(function (s) { return '<option' + (sp.p === s ? ' selected' : '') + '>' + s + '</option>'; }).join('') + '</select><label class="sr" for="cSh">Username</label><input class="inp" id="cSh" value="' + esc(sp.h) + '" placeholder="@username" autocomplete="off" autocapitalize="off"></div></div>' +
     (isNew ? '' : '<div class="field"><span>Stage</span>' + pickHtml('cStage', STAGES, c.stage || 'First contact') + '</div>' +
       '<label class="field" for="cMetOn">Met on<input class="inp" id="cMetOn" type="date" value="' + esc(c.metOn) + '"></label>' +
@@ -2101,7 +2158,7 @@ function contactForm(c, isNew) {
     '<label class="field" for="cNotes">Notes<textarea class="inp" id="cNotes" placeholder="Anything to remember">' + esc(c.notes) + '</textarea></label>' +
     '<p class="small hintline">Don\'t record health or other sensitive details unless they\'re happy for you to.</p>' +
     (isNew ? '' : '<label class="field" for="cPrayer">Prayer points<textarea class="inp" id="cPrayer">' + esc(c.prayer) + '</textarea></label>') +
-    '<label style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px"><input type="checkbox" id="cConsent" style="width:22px;height:22px;accent-color:var(--accent);flex:none"' + (c.consent ? ' checked' : '') + '><span>They\'re happy for us to keep their details and stay in touch.</span></label>' +
+    '<label style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px"><input type="checkbox" id="cConsent" style="width:22px;height:22px;accent-color:var(--accent);flex:none"' + (c.consent ? ' checked' : '') + '><span>They\'re happy for us to keep their details and stay in touch.' + (isNew ? ' <b>(required)</b>' : '') + '</span></label>' +
     '<p class="note" id="cErr" role="alert" style="color:var(--bad)" hidden></p>' +
     '<div class="row"><button class="btn primary grow" type="submit">' + (isNew ? 'Save contact' : 'Save changes') + '</button>' + (isNew ? '<button class="btn grow" type="button" id="cAnother">Save and add another</button>' : '') + '</div>' +
     (isNew ? '<button class="btn ghost" type="button" data-act="qr">' + ICON.qr + 'Show my QR code instead</button>' : '') +
@@ -2121,11 +2178,13 @@ function readForm(root, c, isNew) {
   if (!isNew) { c.stage = pickVal(root, 'cStage') || c.stage || 'First contact'; c.metOn = $('#cMetOn', root).value; c.met = $('#cMet', root).value.trim(); c.prayer = $('#cPrayer', root).value.trim(); }
   return c;
 }
+function isNewForm(root) { return !!$('#cAnother', root); }
 function formError(root) {
   var err = $('#cErr', root), name = $('#cName', root).value.trim(), phone = $('#cPhone', root).value.trim();
   var msg = '';
   if (!name) msg = 'Add their name first.';
-  else if (phone && !waNum(phone)) msg = 'That phone number doesn\'t look right. Use 07… or +44…';
+  else if (phone && phoneProblem(phone)) msg = phoneProblem(phone);
+  else if (isNewForm(root) && !$('#cConsent', root).checked) msg = 'Tick that they\'re happy for you to keep their details. Only add people who agreed.';
   err.hidden = !msg; err.textContent = msg;
   if (msg) (name ? $('#cPhone', root) : $('#cName', root)).focus();
   return !!msg;
@@ -2150,6 +2209,7 @@ function quickAdd() {
     bindSuggest(root);
     var save = function (again) {
       if (formError(root)) return;
+      var cf = $('#cForm', root); if (cf.dataset.done) return; cf.dataset.done = '1'; // a second tap on Save doesn't add them twice
       var n = readForm(root, { id: newId(), createdAt: Date.now(), status: 'active', stage: 'First contact', everyDays: Number(S.profile.defaultEvery) || 3, metOn: ymd(Date.now()), replyState: 'none', studies: [], log: [] }, true);
       logTo(n, 'change', 'Added');
       saveContact(n);
@@ -2187,7 +2247,7 @@ function logStudy(id) {
     '<form id="sForm" class="sec" style="gap:14px" novalidate><div class="grid2"><label class="field" for="sDate">Date<input class="inp" id="sDate" type="date" value="' + defDate + '"></label><label class="field" for="sTime">Time<input class="inp" id="sTime" type="time" value="' + esc(same ? (ns.time || '') : '') + '"></label></div>' +
     '<label class="field" for="sTopic">What you studied<input class="inp" id="sTopic" list="topicList" value="' + esc(same ? (ns.topic || '') : '') + '" placeholder="Study name or passage" autocomplete="off"></label><datalist id="topicList">' + topics.map(function (t) { return '<option value="' + esc(t) + '">'; }).join('') + '</datalist>' +
     '<label class="field" for="sNotes">How it went<textarea class="inp" id="sNotes" placeholder="Questions they asked, what to follow up on"></textarea></label>' +
-    '<div class="card" style="background:var(--bg);gap:10px"><h3>Next study</h3><div class="grid2"><label class="field" for="nDate">Date<input class="inp" id="nDate" type="date"></label><label class="field" for="nTime">Time<input class="inp" id="nTime" type="time"></label></div><label class="field" for="nTopic">Planned study<input class="inp" id="nTopic" list="topicList" autocomplete="off"></label></div>' +
+    '<div class="card" style="background:var(--bg);gap:10px"><h2 class="h3">Next study</h2><div class="grid2"><label class="field" for="nDate">Date<input class="inp" id="nDate" type="date"></label><label class="field" for="nTime">Time<input class="inp" id="nTime" type="time"></label></div><label class="field" for="nTopic">Planned study<input class="inp" id="nTopic" list="topicList" autocomplete="off"></label></div>' +
     '<p class="note" id="sErr" role="alert" style="color:var(--bad)" hidden></p>' +
     '<button class="btn primary" type="submit">Save study</button></form>',
     function (root) {
@@ -2196,6 +2256,7 @@ function logStudy(id) {
         var err = $('#sErr', root), sd = $('#sDate', root).value, nd = $('#nDate', root).value;
         var msg = !sd ? 'Pick the date of the study.' : (nd && nd < sd) ? 'The next study needs to be after this one.' : '';
         err.hidden = !msg; err.textContent = msg; if (msg) return;
+        var sf = $('#sForm', root); if (sf.dataset.done) return; sf.dataset.done = '1';
         var s = { id: newId(), date: sd, time: $('#sTime', root).value, topic: $('#sTopic', root).value.trim(), notes: $('#sNotes', root).value.trim() };
         c.studies = (c.studies || []).concat([s]);
         c.nextStudy = nd ? { date: nd, time: $('#nTime', root).value, topic: $('#nTopic', root).value.trim() } : (c.nextStudy && c.nextStudy.date > s.date ? c.nextStudy : null);
@@ -2282,7 +2343,7 @@ function archiveSheet(id) {
 function deleteSheet(id) {
   var c = S.contacts[id]; if (!c) return;
   openSheet('Delete ' + firstName(c.name) + '\'s data',
-    '<p style="margin:0">This removes ' + esc(c.name) + ' and everything about them: number, notes, studies and history. It can\'t be undone.</p><p class="note">Only do this when someone asks for their details to be removed. To simply stop contacting someone, keep them under No longer contacting.</p>' +
+    '<p style="margin:0">This removes ' + esc(c.name) + ' and everything about them: number, notes, studies, history and their place on your prayer list. It can\'t be undone.</p><p class="note">If you exported a backup or saved them to your phone contacts, delete those copies yourself.</p><p class="note">Only do this when someone asks for their details to be removed. To simply stop contacting someone, keep them under No longer contacting.</p>' +
     '<label class="field" for="dConfirm">Type DELETE to confirm<input class="inp" id="dConfirm" autocomplete="off" autocapitalize="characters"></label><button class="btn danger" id="dGo" disabled>Delete permanently</button>',
     function (root) {
       var inp = $('#dConfirm', root), b = $('#dGo', root);
@@ -2291,7 +2352,9 @@ function deleteSheet(id) {
         if (inp.value.trim().toUpperCase() !== 'DELETE') return;
         var nm = c.name;
         evList().forEach(function (x) { if ((x.invited || []).indexOf(id) >= 0 || (x.came || []).indexOf(id) >= 0) { x.invited = (x.invited || []).filter(function (i) { return i !== id; }); x.came = (x.came || []).filter(function (i) { return i !== id; }); saveEvent(x); } });
+        prList().forEach(function (x) { if (x.contactId === id || String(x.name).trim().toLowerCase() === String(nm).trim().toLowerCase()) dropPrayer(x.id); });
         dropContact(id);
+        S.profile.deleted = (S.profile.deleted || []).concat([id]).slice(-1000); // so restoring an old backup can't bring them back
         S.profile.log = (S.profile.log || []).concat([{ t: Date.now(), text: 'Deleted a contact at their request' }]).slice(-100);
         saveProfile();
         closeSheet(); go(list().some(function (x) { return eff(x) === 'archived'; }) ? 'archive' : 'people'); toast(firstName(nm) + '\'s data was deleted');
@@ -2301,8 +2364,8 @@ function deleteSheet(id) {
 function qrSheet() {
   var p = S.profile, n = waNum(p.phone);
   if (!n) {
-    openSheet('Your QR code', '<p style="margin:0">Add your own WhatsApp number first. When someone scans your code, WhatsApp opens with a message to you, so you get their number and they choose to keep in touch.</p><form id="qrNum" class="sec" style="gap:12px" novalidate><label class="field" for="qPhone">Your WhatsApp number<input class="inp" id="qPhone" type="tel" placeholder="07… or +44…"></label><p class="note" id="qErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">Make my QR code</button></form>', function (root) {
-      $('#qrNum', root).addEventListener('submit', function (e) { e.preventDefault(); var v = $('#qPhone', root).value.trim(); if (!waNum(v)) { var er = $('#qErr', root); er.hidden = false; er.textContent = 'That number doesn\'t look right. Use 07… or +44…'; return; } S.profile.phone = v; saveProfile(); qrSheet(); });
+    openSheet('Your QR code', '<p style="margin:0">Add your own WhatsApp number first. When someone scans your code, WhatsApp opens with a message to you, so you get their number and they choose to keep in touch.</p><form id="qrNum" class="sec" style="gap:12px" novalidate><label class="field" for="qPhone">Your WhatsApp number<input class="inp" id="qPhone" type="tel" placeholder="' + esc(phoneHint()) + '"></label><p class="note" id="qErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">Make my QR code</button></form>', function (root) {
+      $('#qrNum', root).addEventListener('submit', function (e) { e.preventDefault(); var v = $('#qPhone', root).value.trim(); if (phoneProblem(v) || !waNum(v)) { var er = $('#qErr', root); er.hidden = false; er.textContent = phoneProblem(v) || 'That number doesn\'t look right. Use 07… or +44…'; return; } S.profile.phone = v; saveProfile(); qrSheet(); });
     });
     return;
   }
@@ -2310,7 +2373,7 @@ function qrSheet() {
     openSheet('Scan to keep in touch', '<div class="qr" id="qrBox" role="img" aria-label="QR code for people to message you"></div>' +
       (auto ? '<p style="margin:0;text-align:center">Ask them to point their phone camera at this. They type their name, <b>they\'re added to your Shepherd</b>, and WhatsApp opens with your message ready to send.</p><p class="note" style="text-align:center">You\'ll get a notification when they scan it.</p>'
         : '<p style="margin:0;text-align:center">Ask them to point their phone camera at this. WhatsApp opens with a message to you, and they just press send.</p><p class="note" style="text-align:center">When their message arrives, add them here with their number.</p><button class="btn primary" data-act="quickadd">Add them now</button>') +
-      '<p class="note" style="text-align:center">Their message: “' + esc(introText(p)) + '”</p><button class="btn ghost" data-act="editintro">Change the message</button>', function (root) {
+      '<p class="note" style="text-align:center">Their message: “' + esc(introText(p)) + '”</p><button class="btn ghost" data-act="editintro">Change the message</button>' + (auto && WEB && WEB.qrNew ? '<button class="btn ghost" data-act="qrnew">Make a new QR code</button>' : ''), function (root) {
       var box = $('#qrBox', root);
       if (window.QRCode) { try { new window.QRCode(box, { text: url, width: 232, height: 232, colorDark: '#2A251E', colorLight: '#FFFDF6', correctLevel: window.QRCode.CorrectLevel.M }); } catch (e) { box.textContent = 'The QR code could not be drawn here.'; } }
       else box.innerHTML = '<p class="note">The QR code couldn\'t load. Share this link instead:</p><p style="overflow-wrap:anywhere;margin:0">' + esc(url) + '</p>';
@@ -2640,7 +2703,7 @@ function notifGuide(fromTour) {
   if (!WEB) {
     openSheet('Turn on notifications',
       '<p style="margin:0">Phone notifications that name people (“Reply to Grace”, “Message Daniel”) come from the <b>Shepherd app</b> on your phone. Install it once and turn them on there.</p>' +
-      '<section class="card" style="background:var(--bg)"><h3>Get the Shepherd app</h3><p class="note">Open <a href="' + WEB_APP_URL + '" target="_blank" rel="noopener">' + WEB_APP_URL.replace(/^https:\/\//, '') + '</a> on your phone, then:</p>' + installSteps() + '</section>' +
+      '<section class="card" style="background:var(--bg)"><h2 class="h3">Get the Shepherd app</h2><p class="note">Open <a href="' + WEB_APP_URL + '" target="_blank" rel="noopener">' + WEB_APP_URL.replace(/^https:\/\//, '') + '</a> on your phone, then:</p>' + installSteps() + '</section>' +
       '<p class="note">Already using Shepherd here? Export a backup in Settings, then restore it in the app.</p>' +
       '<button class="btn primary" data-act="closesheet">' + (fromTour ? 'Back to the tour' : 'Done') + '</button>',
       null, fromTour ? resumeTour : null);
@@ -2650,17 +2713,17 @@ function notifGuide(fromTour) {
   openSheet('Turn on notifications',
     '<p style="margin:0">Shepherd sends notifications that name people, like <b>Reply to Grace</b>, <b>Message Daniel</b> or <b>Did Sam reply?</b>, every morning at <b>' + esc(t) + '</b>, and before each study and event. Tap one and it opens that person.</p>' +
     '<p class="pushline" data-pushline>' + pushLine(PUSHSTATE) + '</p>' +
-    '<section class="card" style="background:var(--bg)"><h3>1. Install Shepherd on your phone</h3>' +
+    '<section class="card" style="background:var(--bg)"><h2 class="h3">1. Install Shepherd on your phone</h2>' +
       (installed ? '<p class="note">' + ICON.check.replace('class="i"', 'class="i" style="width:16px;height:16px;vertical-align:-3px;color:var(--ok)"') + ' Shepherd is installed on this phone.</p>'
         : (WEB.install.canPrompt() ? '<button class="btn primary" data-act="installapp">Install Shepherd</button>' : '') + installSteps()) +
     '</section>' +
-    '<section class="card" style="background:var(--bg)"><h3>2. Allow notifications</h3>' +
+    '<section class="card" style="background:var(--bg)"><h2 class="h3">2. Allow notifications</h2>' +
       '<button class="btn primary" data-act="pushon">Turn on notifications</button>' +
       '<p class="note">When your phone asks, tap <b>Allow</b>. Tapped <b>Don\'t Allow</b> by mistake?</p>' +
       osSteps(['Open <span class="path">Settings › Notifications › Shepherd</span>.', 'Turn on <b>Allow Notifications</b>, with <b>Lock Screen</b>, <b>Banners</b> and <b>Badges</b> ticked.'],
               ['Open <span class="path">Settings › Apps › Shepherd › Notifications</span>.', 'Turn notifications <b>on</b>.']) +
     '</section>' +
-    '<section class="card" style="background:var(--bg)"><h3>3. Check it works</h3>' +
+    '<section class="card" style="background:var(--bg)"><h2 class="h3">3. Check it works</h2>' +
       '<button class="btn" data-act="pushtest">Send me a test notification</button>' +
       osSteps(['A notification from Shepherd arrives within a few seconds.', 'Nothing? Check <b>Focus</b> is off, and that you opened Shepherd from its Home Screen icon.'],
               ['A notification from Shepherd arrives within a few seconds.', 'Nothing? Check <b>Do Not Disturb</b> is off and that Shepherd\'s notifications are allowed (step 2).']) +
@@ -2709,14 +2772,14 @@ function buildSchedule(days) {
     if (rest.length) out.push({ at: morning + 9000, title: 'And ' + rest.length + ' more today', body: rest.map(function (x) { return x.title; }).join(' · '), tag: 'more-' + dy, url: './?view=today', badge: badge });
     if (N.studies) act.filter(function (c) { return c.nextStudy && c.nextStudy.date === dy; }).forEach(function (c) {
       var fn = firstName(c.name), ns = c.nextStudy;
-      out.push(ns.time ? { at: atTime(D, ns.time) - 3600e3, title: 'Bible study with ' + fn + ' at ' + fmtClock(ns.time), body: ns.topic ? 'In one hour. Study: ' + ns.topic : 'In one hour.', tag: 's-' + c.id + '-' + dy, url: './?open=' + c.id }
-        : { at: morning + 10000, title: 'Bible study with ' + fn + ' today', body: ns.topic ? 'Study: ' + ns.topic : 'No time set yet.', tag: 's-' + c.id + '-' + dy, url: './?open=' + c.id });
+      out.push(ns.time ? { at: atTime(D, ns.time) - 3600e3, title: 'Bible study with ' + fn + ' at ' + fmtClock(ns.time), body: 'In one hour.', tag: 's-' + c.id + '-' + dy, url: './?open=' + c.id }
+        : { at: morning + 10000, title: 'Bible study with ' + fn + ' today', body: 'No time set yet.', tag: 's-' + c.id + '-' + dy, url: './?open=' + c.id });
     });
     if (N.events) evList().forEach(function (x) {
       if (x.date === ymd(addDays(D, 1))) out.push({ at: morning + 11000, title: 'Tomorrow: ' + x.name, body: (x.time ? fmtClock(x.time) : 'All day') + (x.place ? ' · ' + x.place : '') + ((x.invited || []).length ? ' · ' + plural(x.invited.length, 'person', 'people') + ' invited' : ''), tag: 'e1-' + x.id, url: './?view=events' });
       if (x.date === dy && x.time) out.push({ at: atTime(D, x.time) - 3600e3, title: x.name + ' at ' + fmtClock(x.time), body: 'Starts in one hour' + (x.place ? ' · ' + x.place : '') + '.', tag: 'e0-' + x.id, url: './?view=events' });
     });
-    if (S.profile.prayerOn) { var pk = prayerPicks(D); if (pk.length) out.push({ at: atTime(D, S.profile.prayerTime || '07:30'), title: 'Pray for ' + (pk.length > 3 ? pk.slice(0, 2).map(function (x) { return firstName(x.name); }).join(', ') + ' and ' + (pk.length - 2) + ' more' : joinNames(pk)), body: pk.map(function (x) { return firstName(x.name) + (x.notes ? ': ' + x.notes : ''); }).join(' · ').slice(0, 280), tag: 'pr-' + dy, url: './?view=today' }); }
+    if (S.profile.prayerOn) { var pk = prayerPicks(D); if (pk.length) out.push({ at: atTime(D, S.profile.prayerTime || '07:30'), title: 'Pray for ' + (pk.length > 3 ? pk.slice(0, 2).map(function (x) { return firstName(x.name); }).join(', ') + ' and ' + (pk.length - 2) + ' more' : joinNames(pk)), body: 'Open Shepherd to see today\'s prayer list.', tag: 'pr-' + dy, url: './?view=today' }); }
     if (N.weekly && wd === 0) { var w = weekStats(weekStart(D)); if (w.pool.length) out.push({ at: morning + 12000, title: 'Your week', body: 'This week you followed up with ' + w.done.length + ' of ' + plural(w.pool.length, 'person', 'people') + '.', tag: 'wk-' + dy, url: './?view=week' }); }
   }
   out = out.filter(function (x) { return x.at > nowT + 30000; }).sort(function (a, b) { return a.at - b.at; }).slice(0, 400);
@@ -2738,10 +2801,22 @@ function checkLock() {
   $('#lock').hidden = !need;
   if (need) setTimeout(function () { try { $('#lockPin').focus(); } catch (e) {} }, 50);
 }
+function pinWaitKey() { return 'shepherd:pinwait:' + (S.uid || 'local'); }
+function pinWait() { try { return JSON.parse(lsGet(pinWaitKey()) || '{}') || {}; } catch (e) { return {}; } }
 $('#lockForm').addEventListener('submit', async function (e) {
-  e.preventDefault(); var v = $('#lockPin').value;
-  if ((await hashPin(v)) === S.profile.pinHash) { S.unlocked = true; $('#lockPin').value = ''; $('#lockMsg').textContent = ''; checkLock(); maybeTour(); }
-  else { $('#lockMsg').textContent = 'That PIN isn\'t right. Try again.'; try { $('#lockPin').select(); } catch (e2) {} }
+  e.preventDefault(); var v = $('#lockPin').value, w = pinWait(), now = Date.now();
+  if (w.until && w.until > now) { $('#lockMsg').textContent = 'Too many wrong PINs. Try again in ' + plural(Math.ceil((w.until - now) / 1000), 'second') + '.'; return; }
+  if ((await hashPin(v)) === S.profile.pinHash) { lsSet(pinWaitKey(), '{}'); S.unlocked = true; $('#lockPin').value = ''; $('#lockMsg').textContent = ''; checkLock(); maybeTour(); return; }
+  w.n = (w.n || 0) + 1; if (w.n >= 5) w.until = now + Math.min(15 * 60, 30 * Math.pow(2, w.n - 5)) * 1000; lsSet(pinWaitKey(), JSON.stringify(w));
+  $('#lockMsg').textContent = w.until && w.until > now ? 'Too many wrong PINs. Try again in ' + plural(Math.ceil((w.until - now) / 1000), 'second') + '.' : 'That PIN isn\'t right. Try again.'; try { $('#lockPin').select(); } catch (e2) {}
+});
+$('#lockForgot').addEventListener('click', function () {
+  var box = $('#lockForgotBox'); box.hidden = !box.hidden; if (box.hidden) return;
+  box.innerHTML = WEB && WEB.user() ? '<p class="note" style="margin:0">Enter your Shepherd password to remove the PIN. Your list is safe on the server.</p><label class="sr" for="lockPw">Password</label><input class="inp" id="lockPw" type="password" autocomplete="current-password" style="letter-spacing:normal;font-size:17px;text-align:left"><button class="btn primary" type="button" id="lockPwGo">Remove the PIN</button><button class="btn ghost" type="button" id="lockOut">Sign out instead</button><p class="small" id="lockPwMsg" style="margin:0;color:var(--bad)" role="alert"></p>'
+    : '<p class="note" style="margin:0">The PIN can only be removed with a backup. Ask whoever shared Shepherd with you.</p>';
+  if (window.I18N) I18N.apply(box);
+  var go = $('#lockPwGo'); if (go) go.addEventListener('click', async function () { var m = $('#lockPwMsg'); go.disabled = true; m.textContent = ''; try { await WEB.checkPassword($('#lockPw').value); S.profile.pinHash = ''; saveProfile(); lsSet(pinWaitKey(), '{}'); S.unlocked = true; box.hidden = true; checkLock(); toast('PIN removed. You can set a new one in Settings.'); } catch (x) { m.textContent = x.code === 'unavailable' ? 'No connection. Check your signal and try again.' : 'That password isn\'t right.'; } finally { go.disabled = false; } });
+  var out = $('#lockOut'); if (out) out.addEventListener('click', function () { WEB.signOut(); });
 });
 var hiddenAt = 0;
 document.addEventListener('visibilitychange', function () {
@@ -2755,7 +2830,7 @@ function pinSheet() {
     '<label class="field" for="pinNew">New PIN (4 to 8 digits)<input class="inp" id="pinNew" type="password" inputmode="numeric" autocomplete="off"></label>' +
     '<label class="field" for="pinNew2">Type it again<input class="inp" id="pinNew2" type="password" inputmode="numeric" autocomplete="off"></label>' +
     '<p class="note" id="pinErr" role="alert" style="color:var(--bad)" hidden></p>' +
-    '<p class="note">If you forget it, you\'d need a backup to get back in, so pick one you\'ll remember.</p><button class="btn primary" type="submit">Save PIN</button></form>',
+    '<p class="note">' + (WEB ? 'If you forget it, tap Forgot your PIN? and enter your Shepherd password.' : 'If you forget it, you\'d need a backup to get back in, so pick one you\'ll remember.') + '</p><button class="btn primary" type="submit">Save PIN</button></form>',
     function (root) {
       $('#pinForm', root).addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -2778,18 +2853,19 @@ function removePinSheet() {
 function backupText() { return JSON.stringify({ app: 'Shepherd', version: 2, exportedAt: new Date().toISOString(), profile: Object.assign({}, S.profile, { pinHash: '' }), contacts: list(), events: evList(), disciples: dList(), prayers: prList() }, null, 2); }
 function exportBackup() {
   var data = backupText();
-  if (!DOWN) { copyText(data, 'Backup copied. Paste it into a note or email it to yourself.'); return; }
-  DOWN.save({ filename: 'shepherd-backup-' + ymd(Date.now()) + '.json', data: data }).then(function (r) { if (r && r.status === 'saved') toast('Backup saved'); }).catch(function (e) { if (e && e.code === 'declined') return; copyText(data, 'Backup copied. Paste it into a note or email it to yourself.'); });
+  if (!DOWN) { copyText(data, 'Backup copied. Paste it somewhere private, such as a locked note.'); return; }
+  DOWN.save({ filename: 'shepherd-backup-' + ymd(Date.now()) + '.json', data: data }).then(function (r) { if (r && r.status === 'saved') toast('Backup saved'); }).catch(function (e) { if (e && e.code === 'declined') return; copyText(data, 'Backup copied. Paste it somewhere private, such as a locked note.'); });
 }
 function importBackup(text) {
   var o; try { o = JSON.parse(text); } catch (e) { toast('That file isn\'t a Shepherd backup'); return; }
   if (!o || o.app !== 'Shepherd' || !Array.isArray(o.contacts)) { toast('That file isn\'t a Shepherd backup'); return; }
   var added = 0, updated = 0;
-  o.contacts.forEach(function (c) { if (!c || !c.id || !c.name || !/^[A-Za-z0-9_-]{1,80}$/.test(c.id)) return; var cur = S.contacts[c.id]; if (!cur) { added++; S.contacts[c.id] = c; put(cPath(c.id), c); } else if ((c.updatedAt || 0) > (cur.updatedAt || 0)) { updated++; S.contacts[c.id] = c; put(cPath(c.id), c); } });
+  var gone = S.profile.deleted || [], skipped = 0;
+  o.contacts.forEach(function (c) { if (!c || !c.id || !c.name || !/^[A-Za-z0-9_-]{1,80}$/.test(c.id)) return; if (gone.indexOf(c.id) >= 0) { skipped++; return; } var cur = S.contacts[c.id]; if (!cur) { added++; S.contacts[c.id] = c; put(cPath(c.id), c); } else if ((c.updatedAt || 0) > (cur.updatedAt || 0)) { updated++; S.contacts[c.id] = c; put(cPath(c.id), c); } });
   (o.events || []).forEach(function (x) { if (!x || !x.id || !/^[A-Za-z0-9_-]{1,80}$/.test(x.id)) return; var cur = S.events[x.id]; if (!cur || (x.updatedAt || 0) > (cur.updatedAt || 0)) { S.events[x.id] = x; put(ePath(x.id), x); } });
   (o.disciples || []).forEach(function (x) { if (!x || !x.id || !x.name || !/^[A-Za-z0-9_-]{1,80}$/.test(x.id)) return; var cur = S.disciples[x.id]; if (!cur || (x.updatedAt || 0) > (cur.updatedAt || 0)) { S.disciples[x.id] = x; put(dPath(x.id), x); } });
-  (o.prayers || []).forEach(function (x) { if (!x || !x.id || !x.name || !/^[A-Za-z0-9_-]{1,80}$/.test(x.id)) return; var cur = S.prayers[x.id]; if (!cur || (x.updatedAt || 0) > (cur.updatedAt || 0)) { S.prayers[x.id] = x; put(prPath(x.id), x); } });
-  render(); toast('Restored: ' + added + ' added, ' + updated + ' updated');
+  (o.prayers || []).forEach(function (x) { if (!x || !x.id || !x.name || !/^[A-Za-z0-9_-]{1,80}$/.test(x.id)) return; if (x.contactId && gone.indexOf(x.contactId) >= 0) return; var cur = S.prayers[x.id]; if (!cur || (x.updatedAt || 0) > (cur.updatedAt || 0)) { S.prayers[x.id] = x; put(prPath(x.id), x); } });
+  render(); toast(skipped ? 'Restored: ' + added + ' added, ' + updated + ' updated. People deleted at their request stayed deleted.' : 'Restored: ' + added + ' added, ' + updated + ' updated');
 }
 
 function yourDataSheet() {
@@ -2875,7 +2951,10 @@ document.addEventListener('click', function (e) {
     case 'archive-list': go('archive'); break;
     case 'filter': S.filter = b.dataset.f; render(); break;
     case 'quickadd': quickAdd(); break;
+    case 'showall': S.showAll = true; render(); break;
     case 'qr': qrSheet(); break;
+    case 'qrnew': if (b.dataset.sure !== '1') { b.dataset.sure = '1'; b.textContent = 'Tap again: your old QR code will stop working'; if (window.I18N) I18N.apply(b); break; } WEB.qrNew().then(function () { toast('New QR code made. The old one no longer works.'); qrSheet(); }, function () { toast('Couldn\'t make a new code. Try again with signal.'); }); break;
+    case 'logoutothers': WEB.logoutOthers().then(function (r) { toast(r && r.signedOut ? plural(r.signedOut, 'other phone') + ' signed out' : 'No other phones were signed in'); }, function () { toast('Couldn\'t reach the Shepherd server. Try again with signal.'); }); break;
     case 'clearexamples': list().filter(function (x) { return x.example; }).forEach(function (x) { dropContact(x.id); }); render(); toast('Example contacts removed'); break;
     case 'needphone': editContact(id, 'Add a WhatsApp number or a social media handle so you can message them.'); break;
     case 'edit': editContact(id); break;
@@ -2982,11 +3061,11 @@ function handleLaunch() {
   var tries = 0, t = setInterval(function () { if (openFromLink(id, v) || ++tries > 20) { clearInterval(t); try { history.replaceState(null, '', location.pathname); } catch (e) {} } }, 300);
 }
 if (window.I18N && I18N.lang !== 'en') I18N.ready().then(function () { schedSoon(); }); // notifications in your language once it has loaded
-if (WEB) { WEB.onUpdate = function () { toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); };
+if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFull = storageFull; WEB.onUpdate = function () { toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); };
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; openFromLink(q.get('open'), q.get('view')); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
-window.__shepherd = { inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
+window.__shepherd = { saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
 
 /* ---------- boot ---------- */
 async function boot() {

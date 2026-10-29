@@ -1,0 +1,49 @@
+855	Ce téléphone n'a plus de place pour Shepherd. Vos changements restent enregistrés en ligne quand vous avez du réseau. Libérez un peu d'espace sur votre téléphone.
+856	Ce numéro ne semble pas correct. Commencez par + et l'indicatif du pays.
+857	Les numéros WhatsApp du Royaume-Uni commencent par 07. Pour un autre pays, commencez par + et l'indicatif, ou changez votre pays dans les Réglages.
+858	Pays (pour les numéros de téléphone)
+859	Les numéros qui commencent par 0 reçoivent l'indicatif de ce pays. Ceux qui commencent par + sont utilisés tels quels.
+860	Cochez que la personne est d'accord pour que vous gardiez ses coordonnées. N'ajoutez que des personnes qui ont accepté.
+861	La personne est d'accord pour que nous gardions ses coordonnées et restions en contact. <b>(obligatoire)</b>
+862	Consentement non enregistré. Si la personne est d'accord pour que vous gardiez ses coordonnées, cochez-le dans Modifier.
+863	Cela supprime {0} et tout ce qui la concerne : numéro, notes, études, historique et sa place dans votre liste de prière. C'est définitif.
+864	Si vous avez exporté une sauvegarde ou l'avez enregistrée dans les contacts du téléphone, supprimez vous-même ces copies.
+865	Restauré : {0} ajoutés, {1} mis à jour. Les personnes supprimées à leur demande restent supprimées.
+866	Sauvegarde copiée. Collez-la dans un endroit privé, comme une note verrouillée.
+867	Ouvrez Shepherd pour voir la liste de prière du jour.
+868	Afficher {0} de plus
+869	§one=Trop de codes PIN incorrects. Réessayez dans {0} seconde.|other=Trop de codes PIN incorrects. Réessayez dans {0} secondes.
+870	§one=Trop de codes PIN incorrects. Réessayez dans {0} seconde.|other=Trop de codes PIN incorrects. Réessayez dans {0} secondes.
+871	Code PIN oublié ?
+872	Saisissez votre mot de passe Shepherd pour retirer le code PIN. Votre liste est en sécurité sur le serveur.
+873	Retirer le code PIN
+874	Se déconnecter à la place
+875	Le code PIN ne peut être retiré qu'avec une sauvegarde. Demandez à la personne qui a partagé Shepherd avec vous.
+876	Ce mot de passe n'est pas correct.
+877	Code PIN retiré. Vous pouvez en choisir un nouveau dans les Réglages.
+878	Si vous l'oubliez, touchez Code PIN oublié ? et saisissez votre mot de passe Shepherd.
+879	Créer un nouveau code QR
+880	Touchez encore : votre ancien code QR ne marchera plus
+881	Nouveau code QR créé. L'ancien ne marche plus.
+882	Impossible de créer un nouveau code. Réessayez avec du réseau.
+883	§one={0} autre téléphone déconnecté|other={0} autres téléphones déconnectés
+884	§one={0} autre téléphone déconnecté|other={0} autres téléphones déconnectés
+885	Aucun autre téléphone n'était connecté
+886	Impossible de joindre le serveur Shepherd. Réessayez avec du réseau.
+887	Me déconnecter sur tous mes autres téléphones
+888	Code d'invitation de l'église
+889	Demandez-le à la personne qui gère Shepherd dans votre église.
+890	Ajoutez votre nom.
+891	Ce code d'invitation n'est pas correct. Demandez-le à la personne qui gère Shepherd dans votre église.
+892	Votre nom, e-mail, numéro WhatsApp et pays.
+893	Les personnes que vous ajoutez : leurs noms, numéros, comptes de réseaux sociaux, notes, sujets de prière et études bibliques, et si elles ont accepté d'être ajoutées.
+894	Pour chaque téléphone où vous êtes connecté : quand il s'est connecté et quel type de navigateur c'est, pour qu'il reste connecté.
+895	Les notifications prévues pour les deux prochaines semaines, jusqu'à leur envoi.
+896	<b>Quand quelqu'un scanne votre code QR</b> : la personne choisit de taper son nom (et son numéro si elle veut) et coche qu'elle est d'accord pour être ajoutée. Cela va seulement dans votre liste, puis elle vous écrit elle-même sur WhatsApp.
+897	<b>Si vous connectez le calendrier du téléphone</b> : un lien privé affiche vos études bibliques (avec les prénoms) et vos événements. Toute personne à qui vous donnez ce lien peut les voir, et le service de calendrier de votre téléphone (comme Apple ou Google) en garde une copie. Vous pouvez remplacer le lien dans Shepherd à tout moment.
+898	Les notifications sont chiffrées jusqu'à votre téléphone et n'affichent que des prénoms, jamais de notes ni de sujets de prière.
+899	Les polices et le code de Shepherd viennent de Shepherd lui-même, donc aucune entreprise de publicité ou de pistage ne voit que vous l'utilisez.
+900	Seules les personnes qui ont le code d'invitation de votre église peuvent créer un compte.
+901	Les versions précédentes sont gardées jusqu'à un an pour que rien ne se perde par erreur. Supprimer les données de quelqu'un efface toutes les copies que garde Shepherd.
+902	En cas d'urgence, toute la base de données peut être restaurée à n'importe quel moment des 7 derniers jours, donc une suppression disparaît complètement après 7 jours.
+903	Quelqu'un vous demande de supprimer ses coordonnées ? Ouvrez sa fiche, touchez <b>Ne plus contacter</b>, puis <b>Supprimer toutes ses données</b>. Cela l'efface de Shepherd, y compris de votre liste de prière. Les copies que vous avez faites vous-même, comme une sauvegarde exportée ou les contacts du téléphone, c'est à vous de les supprimer.

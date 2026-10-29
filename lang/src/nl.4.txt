@@ -1,0 +1,49 @@
+855	Deze telefoon heeft geen ruimte meer voor Shepherd. Je wijzigingen worden nog online bewaard als je bereik hebt. Maak wat ruimte vrij op je telefoon.
+856	Dat telefoonnummer klopt niet. Begin met + en de landcode.
+857	Britse WhatsApp-nummers beginnen met 07. Voor een ander land begin je met + en de landcode, of kies je land in Instellingen.
+858	Land (voor telefoonnummers)
+859	Nummers die met 0 beginnen krijgen de landcode van dit land. Nummers die met + beginnen worden gebruikt zoals getypt.
+860	Vink aan dat ze het goed vinden dat je hun gegevens bewaart. Voeg alleen mensen toe die akkoord gaven.
+861	Ze vinden het goed dat we hun gegevens bewaren en contact houden. <b>(verplicht)</b>
+862	Toestemming niet vastgelegd. Als ze het goed vinden dat je hun gegevens bewaart, vink het aan bij Wijzigen.
+863	Dit verwijdert {0} en alles over diegene: nummer, notities, studies, geschiedenis en de plek op je gebedslijst. Dit kan niet ongedaan worden.
+864	Heb je een back-up gemaakt of diegene in je telefooncontacten bewaard, verwijder die kopieën dan zelf.
+865	Teruggezet: {0} toegevoegd, {1} bijgewerkt. Mensen die op hun verzoek zijn verwijderd, blijven verwijderd.
+866	Back-up gekopieerd. Plak hem ergens privé, zoals een vergrendelde notitie.
+867	Open Shepherd om de gebedslijst van vandaag te zien.
+868	Nog {0} tonen
+869	§one=Te veel verkeerde pincodes. Probeer het over {0} seconde opnieuw.|other=Te veel verkeerde pincodes. Probeer het over {0} seconden opnieuw.
+870	§one=Te veel verkeerde pincodes. Probeer het over {0} seconde opnieuw.|other=Te veel verkeerde pincodes. Probeer het over {0} seconden opnieuw.
+871	Pincode vergeten?
+872	Typ je Shepherd-wachtwoord om de pincode te verwijderen. Je lijst is veilig op de server.
+873	Pincode verwijderen
+874	In plaats daarvan uitloggen
+875	De pincode kan alleen met een back-up worden verwijderd. Vraag het aan wie Shepherd met je deelde.
+876	Dat wachtwoord klopt niet.
+877	Pincode verwijderd. Je kunt een nieuwe instellen bij Instellingen.
+878	Vergeten? Tik op Pincode vergeten? en typ je Shepherd-wachtwoord.
+879	Nieuwe QR-code maken
+880	Tik nog eens: je oude QR-code werkt dan niet meer
+881	Nieuwe QR-code gemaakt. De oude werkt niet meer.
+882	Kon geen nieuwe code maken. Probeer het opnieuw met bereik.
+883	§one={0} andere telefoon uitgelogd|other={0} andere telefoons uitgelogd
+884	§one={0} andere telefoon uitgelogd|other={0} andere telefoons uitgelogd
+885	Er waren geen andere telefoons ingelogd
+886	Kon de Shepherd-server niet bereiken. Probeer het opnieuw met bereik.
+887	Uitloggen op al mijn andere telefoons
+888	Uitnodigingscode van de kerk
+889	Vraag het aan degene die Shepherd in je kerk beheert.
+890	Vul je naam in.
+891	Die uitnodigingscode klopt niet. Vraag het aan degene die Shepherd in je kerk beheert.
+892	Je naam, e-mail, WhatsApp-nummer en land.
+893	De mensen die je toevoegt: hun namen, telefoonnummers, social media-namen, notities, gebedspunten en bijbelstudies, en of ze akkoord gingen.
+894	Voor elke telefoon waarop je bent ingelogd: wanneer die inlogde en wat voor browser het is, zodat hij ingelogd blijft.
+895	De meldingen die voor de komende twee weken gepland staan, tot ze verstuurd zijn.
+896	<b>Als iemand je QR-code scant</b>: zij kiezen zelf of ze hun naam typen (en hun nummer als ze willen) en vinken aan dat ze toegevoegd willen worden. Dat gaat alleen naar jouw lijst, en daarna sturen ze je zelf een WhatsApp-bericht.
+897	<b>Als je je telefoonagenda koppelt</b>: een privélink toont je bijbelstudies (met voornamen) en je activiteiten. Iedereen aan wie je die link geeft, kan ze zien, en de agendadienst van je telefoon (zoals Apple of Google) bewaart een kopie. Je kunt de link in Shepherd altijd vervangen.
+898	Meldingen gaan versleuteld naar je telefoon en tonen alleen voornamen, nooit notities of gebedspunten.
+899	De lettertypen en code van Shepherd komen van Shepherd zelf, dus geen advertentie- of volgbedrijf ziet dat je het gebruikt.
+900	Alleen mensen met de uitnodigingscode van je kerk kunnen een account maken.
+901	Eerdere versies worden tot een jaar bewaard zodat er niets per ongeluk verloren gaat. Iemands gegevens verwijderen wist elke kopie die Shepherd bewaart.
+902	Voor noodgevallen kan de hele database worden teruggezet naar elk moment in de laatste 7 dagen, dus iets verwijderds is na 7 dagen helemaal weg.
+903	Vraagt iemand je hun gegevens te verwijderen? Open diegene, tik op <b>Geen contact meer</b> en dan op <b>Al hun gegevens verwijderen</b>. Dat haalt diegene uit Shepherd, ook van je gebedslijst. Kopieën die je zelf maakte, zoals een back-up of je telefooncontacten, verwijder je zelf.

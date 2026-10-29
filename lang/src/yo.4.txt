@@ -1,0 +1,49 @@
+855	Àyè ti tán lórí fóònù yìí fún Shepherd. Àwọn àyípadà rẹ ṣì ń wà ní ìpamọ́ lórí ayélujára nígbà tí o bá ní nẹ́tíwọ̀ọ̀kì. Pa àwọn nǹkan kan rẹ́ kí àyè lè wà lórí fóònù rẹ.
+856	Nọ́ńbà fóònù yẹn kò dàbí ẹni pé ó tọ̀nà. Bẹ̀rẹ̀ rẹ̀ pẹ̀lú + àti kóòdù orílẹ̀-èdè.
+857	Àwọn nọ́ńbà WhatsApp ti UK máa ń bẹ̀rẹ̀ pẹ̀lú 07. Fún orílẹ̀-èdè mìíràn, bẹ̀rẹ̀ pẹ̀lú + àti kóòdù orílẹ̀-èdè, tàbí yí orílẹ̀-èdè rẹ padà nínú Ètò.
+858	Orílẹ̀-èdè (fún àwọn nọ́ńbà fóònù)
+859	Àwọn nọ́ńbà tí ó bẹ̀rẹ̀ pẹ̀lú 0 yóò gba kóòdù orílẹ̀-èdè yìí. A ó lo àwọn nọ́ńbà tí ó bẹ̀rẹ̀ pẹ̀lú + bí o ṣe tẹ̀ wọ́n.
+860	Fi àmì sí i pé inú wọn dùn kí o tọ́jú àwọn àlàyé wọn. Àwọn tí wọ́n ti gbà nìkan ni kí o fi kún un.
+861	Inú wọn dùn kí a tọ́jú àwọn àlàyé wọn kí a sì máa bá wọn sọ̀rọ̀. <b>(dandan)</b>
+862	A kò kọ ìfọwọ́sí sílẹ̀. Bí inú wọn bá dùn kí o tọ́jú àwọn àlàyé wọn, fi àmì sí i nínú Ṣàtúnṣe.
+863	Èyí yóò pa {0} rẹ́ àti gbogbo nǹkan nípa wọn: nọ́ńbà, àkọsílẹ̀, ẹ̀kọ́, ìtàn àti ààyè wọn lórí àtòjọ àdúrà rẹ. A kò lè yí i padà.
+864	Bí o bá ti gbé àdàkọ jáde tàbí o ti fi wọ́n pamọ́ sínú àwọn olùbásọ̀rọ̀ fóònù rẹ, pa àwọn àdàkọ yẹn rẹ́ fúnra rẹ.
+865	A ti dá a padà: {0} ni a fi kún, {1} ni a ṣe àtúnṣe sí. Àwọn tí a pa rẹ́ nítorí pé wọ́n béèrè ṣì wà ní píparẹ́.
+866	A ti ṣe àdàkọ ìpamọ́. Lẹ̀ ẹ́ sí ibi àṣírí, bí àkọsílẹ̀ tí a tì pa.
+867	Ṣí Shepherd láti rí àtòjọ àdúrà òní.
+868	Fi {0} sí i hàn
+869	§other=Àwọn PIN tí kò tọ̀nà ti pọ̀ jù. Gbìyànjú lẹ́ẹ̀kan sí i lẹ́yìn ìṣẹ́jú-àáyá {0}.
+870	§other=Àwọn PIN tí kò tọ̀nà ti pọ̀ jù. Gbìyànjú lẹ́ẹ̀kan sí i lẹ́yìn ìṣẹ́jú-àáyá {0}.
+871	Ṣé o gbàgbé PIN rẹ?
+872	Tẹ ọ̀rọ̀ aṣínà Shepherd rẹ láti yọ PIN kúrò. Àtòjọ rẹ wà láìléwu lórí sáfà.
+873	Yọ PIN kúrò
+874	Jáde kúrò dípò bẹ́ẹ̀
+875	Àdàkọ ìpamọ́ nìkan ni a fi lè yọ PIN kúrò. Béèrè lọ́wọ́ ẹni tí ó pín Shepherd fún ọ.
+876	Ọ̀rọ̀ aṣínà yẹn kò tọ̀nà.
+877	A ti yọ PIN kúrò. O lè ṣètò tuntun nínú Ètò.
+878	Bí o bá gbàgbé rẹ̀, tẹ Ṣé o gbàgbé PIN rẹ? kí o sì tẹ ọ̀rọ̀ aṣínà Shepherd rẹ.
+879	Ṣe kóòdù QR tuntun
+880	Tẹ̀ ẹ́ lẹ́ẹ̀kan sí i: kóòdù QR àtijọ́ rẹ kò ní ṣiṣẹ́ mọ́
+881	A ti ṣe kóòdù QR tuntun. Èyí àtijọ́ kò ṣiṣẹ́ mọ́.
+882	A kò lè ṣe kóòdù tuntun. Gbìyànjú lẹ́ẹ̀kan sí i nígbà tí o bá ní nẹ́tíwọ̀ọ̀kì.
+883	§other=Fóònù mìíràn {0} ti jáde
+884	§other=Fóònù mìíràn {0} ti jáde
+885	Kò sí fóònù mìíràn tí ó wọlé
+886	A kò lè dé sáfà Shepherd. Gbìyànjú lẹ́ẹ̀kan sí i nígbà tí o bá ní nẹ́tíwọ̀ọ̀kì.
+887	Jáde lórí gbogbo àwọn fóònù mìíràn mi
+888	Kóòdù ìpè ìjọ
+889	Béèrè lọ́wọ́ ẹni tí ó ń bójú tó Shepherd ní ìjọ rẹ.
+890	Fi orúkọ rẹ kún un.
+891	Kóòdù ìpè yẹn kò tọ̀nà. Béèrè lọ́wọ́ ẹni tí ó ń bójú tó Shepherd ní ìjọ rẹ.
+892	Orúkọ rẹ, ímeèlì, nọ́ńbà WhatsApp àti orílẹ̀-èdè rẹ.
+893	Àwọn ènìyàn tí o fi kún un: orúkọ wọn, nọ́ńbà, orúkọ orí ìkànnì àjọlò, àkọsílẹ̀, kókó àdúrà àti ẹ̀kọ́ Bíbélì, àti bóyá wọ́n gbà kí a fi wọ́n kún un.
+894	Fún fóònù kọ̀ọ̀kan tí o wọlé sí: ìgbà tí ó wọlé àti irú ẹ̀rọ aṣàwákiri tí ó jẹ́, kí ó lè wà ní wíwọlé.
+895	Àwọn ìfitónilétí tí a ṣètò fún ọ̀sẹ̀ méjì tí ń bọ̀, títí a ó fi rán wọn.
+896	<b>Nígbà tí ẹnìkan bá ṣe àyẹ̀wò kóòdù QR rẹ</b>: wọ́n yàn láti tẹ orúkọ wọn (àti nọ́ńbà wọn bí wọ́n bá fẹ́), wọ́n sì fi àmì sí i pé inú wọn dùn kí o fi wọ́n kún un. Ó máa lọ sínú àtòjọ rẹ nìkan, lẹ́yìn náà wọ́n á fi WhatsApp ránṣẹ́ sí ọ fúnra wọn.
+897	<b>Bí o bá so kàlẹ́ńdà fóònù rẹ pọ̀</b>: ìjápọ̀ àṣírí kan ń fi àwọn ẹ̀kọ́ Bíbélì rẹ (pẹ̀lú orúkọ àkọ́kọ́) àti àwọn ìṣẹ̀lẹ̀ rẹ hàn. Ẹnikẹ́ni tí o bá fún ní ìjápọ̀ náà lè rí wọn, iṣẹ́ kàlẹ́ńdà fóònù rẹ (bí Apple tàbí Google) sì máa ń tọ́jú àdàkọ kan. O lè yí ìjápọ̀ náà padà nínú Shepherd nígbàkígbà.
+898	Àwọn ìfitónilétí ń lọ sí fóònù rẹ ní ìpamọ́ àṣírí, wọ́n sì ń fi orúkọ àkọ́kọ́ nìkan hàn, kì í ṣe àkọsílẹ̀ tàbí kókó àdúrà rárá.
+899	Àwọn fọ́ńtì àti kóòdù Shepherd ń wá láti Shepherd fúnra rẹ̀, nítorí náà kò sí ilé-iṣẹ́ ìpolówó tàbí ìtọpinpin tí ó rí i pé o ń lò ó.
+900	Àwọn tí wọ́n ní kóòdù ìpè ìjọ rẹ nìkan ni wọ́n lè ṣẹ̀dá àkáǹtì.
+901	A máa ń tọ́jú àwọn ẹ̀yà àtijọ́ fún ọdún kan kí ohunkóhun má bàa sọnù láìmọ̀. Pípa dátà ẹnìkan rẹ́ máa ń yọ gbogbo àdàkọ tí Shepherd ń tọ́jú kúrò.
+902	Fún pàjáwìrì, a lè dá gbogbo ibi ìpamọ́ dátà padà sí àkókò èyíkéyìí ní ọjọ́ méje tó kọjá, nítorí náà ohun tí a pa rẹ́ máa ń lọ pátápátá lẹ́yìn ọjọ́ méje.
+903	Ẹnìkan ní kí o pa àwọn àlàyé wọn rẹ́? Ṣí wọn, tẹ <b>Má bá wọn sọ̀rọ̀ mọ́</b>, lẹ́yìn náà <b>Pa gbogbo dátà wọn rẹ́</b>. Èyí yóò yọ wọ́n kúrò nínú Shepherd, títí kan àtòjọ àdúrà rẹ. Àwọn àdàkọ tí o ṣe fúnra rẹ, bí àdàkọ ìpamọ́ tí o gbé jáde tàbí àwọn olùbásọ̀rọ̀ fóònù rẹ, ìwọ ni yóò pa wọ́n rẹ́.

@@ -1,0 +1,49 @@
+855	Space don finish for dis phone for Shepherd. Your changes still dey save online when you get network. Clear small space for your phone.
+856	Dat phone number no look correct. Start am with + and di country code.
+857	UK WhatsApp numbers dey start with 07. For another country, start with + and di country code, or change your country for Settings.
+858	Country (for phone numbers)
+859	Numbers wey start with 0 go collect dis country code. Numbers wey start with + we go use am as you type am.
+860	Tick say dem gree make you keep dia details. Only add people wey don gree.
+861	Dem gree make we keep dia details and dey in touch. <b>(you must tick am)</b>
+862	Consent never dey recorded. If dem gree make you keep dia details, tick am for Change am.
+863	Dis one go remove {0} and everything about dem: number, notes, studies, history and dia place for your prayer list. You no fit undo am.
+864	If you export backup or save dem for your phone contacts, delete those copies by yourself.
+865	Restored: {0} added, {1} updated. People wey dem delete because dem ask, dem go still dey deleted.
+866	Backup don copy. Paste am for private place, like note wey get lock.
+867	Open Shepherd to see today prayer list.
+868	Show {0} more
+869	§one=Wrong PIN too many. Try again after {0} second.|other=Wrong PIN too many. Try again after {0} seconds.
+870	§one=Wrong PIN too many. Try again after {0} second.|other=Wrong PIN too many. Try again after {0} seconds.
+871	You forget your PIN?
+872	Put your Shepherd password to remove di PIN. Your list dey safe for di server.
+873	Remove di PIN
+874	Sign out instead
+875	Na only backup fit remove di PIN. Ask di person wey share Shepherd with you.
+876	Dat password no correct.
+877	PIN don comot. You fit set new one for Settings.
+878	If you forget am, tap You forget your PIN? and put your Shepherd password.
+879	Make new QR code
+880	Tap again: your old QR code go stop to work
+881	New QR code don ready. Di old one no dey work again.
+882	We no fit make new code. Try again when you get network.
+883	§one={0} other phone don sign out|other={0} other phones don sign out
+884	§one={0} other phone don sign out|other={0} other phones don sign out
+885	No other phone dey signed in
+886	We no fit reach Shepherd server. Try again when you get network.
+887	Sign out for all my other phones
+888	Church invite code
+889	Ask di person wey dey run Shepherd for your church.
+890	Put your name.
+891	Dat invite code no correct. Ask di person wey dey run Shepherd for your church.
+892	Your name, email, WhatsApp number and country.
+893	Di people wey you add: dia names, numbers, social media names, notes, prayer points and Bible studies, and whether dem gree make you add dem.
+894	For every phone wey you sign in: when e sign in and wetin kind browser e be, so e go stay signed in.
+895	Di notifications wey dey planned for di next two weeks, until dem send am.
+896	<b>When person scan your QR code</b>: dem decide to type dia name (and dia number if dem want) and tick say dem gree make you add dem. E go only your list, then dem go message you by demself for WhatsApp.
+897	<b>If you connect your phone calendar</b>: one private link go show your Bible studies (with first names) and your events. Anybody wey you give di link fit see dem, and your phone calendar service (like Apple or Google) go keep copy. You fit change di link for Shepherd anytime.
+898	Notifications dey go your phone encrypted and dem only show first names, never notes or prayer points.
+899	Shepherd fonts and code dey come from Shepherd itself, so no advert or tracking company go see say you dey use am.
+900	Only people wey get your church invite code fit create account.
+901	We dey keep old versions reach one year so nothing go lost by mistake. When you delete person data, e go remove every copy wey Shepherd dey keep.
+902	For emergency, we fit restore di whole database to any time for di last 7 days, so anything wey you delete go comot finish after 7 days.
+903	Person ask you make you delete dia details? Open dem, tap <b>No contact dem again</b>, then <b>Delete all dia data</b>. Dat one go remove dem from Shepherd, plus your prayer list. Copies wey you make by yourself, like backup wey you export or your phone contacts, na you go delete dem.

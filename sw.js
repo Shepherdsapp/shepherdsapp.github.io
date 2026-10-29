@@ -1,7 +1,7 @@
 /* Shepherd service worker: opens with no signal, and shows the notifications the Shepherd server sends.
    It never stores anything from the server itself (your list is stored by the app, per person). */
-const VERSION = 'shepherd-v5', MINE = 'shepherd-';
-const PAGE = './index.html', REST = ['./config.js', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './badge-96.png'];
+const VERSION = 'shepherd-v6', MINE = 'shepherd-';
+const PAGE = './index.html', REST = ['./config.js', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './badge-96.png', './vendor/fonts.css', './vendor/qrcode.min.js', './privacy.html'];
 const END = '<!--shepherd:end-->'; // the build writes this as the very last thing in the app page
 const scopePath = () => new URL(self.registration.scope).pathname;
 const isAppPage = url => url.origin === self.location.origin && (url.pathname === scopePath() || url.pathname === scopePath() + 'index.html');
@@ -48,7 +48,7 @@ self.addEventListener('fetch', e => {
 self.addEventListener('push', e => {
   let d = {};
   try { d = e.data ? e.data.json() : {}; } catch (x) { d = { title: 'Shepherd', body: e.data ? e.data.text() : '' }; }
-  const jobs = [self.registration.showNotification(d.title || 'Shepherd', { body: d.body || '', tag: d.tag || undefined, icon: 'icon-192.png', badge: 'badge-96.png', data: { url: d.url || './' }, lang: 'en-GB' })];
+  const jobs = [self.registration.showNotification(d.title || 'Shepherd', { body: d.body || '', tag: d.tag || undefined, icon: 'icon-192.png', badge: 'badge-96.png', data: { url: d.url || './' }, lang: d.lang || undefined })];
   if (typeof d.badge === 'number' && self.navigator && self.navigator.setAppBadge) jobs.push((d.badge ? self.navigator.setAppBadge(d.badge) : self.navigator.clearAppBadge()).catch(() => null));
   e.waitUntil(Promise.all(jobs));
 });

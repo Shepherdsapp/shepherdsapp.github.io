@@ -65,12 +65,15 @@ async function open(store, opts = {}) {
   await wait(80);
   const w = dom.window, d = w.document;
   const $ = s => d.querySelector(s), $$ = s => [...d.querySelectorAll(s)];
-  const click = el => { if (typeof el === 'string') el = $(el); if (!el) throw new Error('missing element'); el.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true })); };
+  const click = el => { if (el === '#cAnother') tickConsent(); if (typeof el === 'string') el = $(el); if (!el) throw new Error('missing element'); el.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true })); };
   const setVal = (sel, v) => { const el = typeof sel === 'string' ? $(sel) : sel; el.value = v; el.dispatchEvent(new w.Event('input', { bubbles: true })); el.dispatchEvent(new w.Event('change', { bubbles: true })); };
-  const submit = sel => $(sel).dispatchEvent(new w.Event('submit', { bubbles: true, cancelable: true }));
+  // adding someone needs the consent tick; tests tick it unless they're checking that it's required
+  const consent = { auto: true };
+  const tickConsent = () => { const c = $('#cConsent'); if (consent.auto && c && $('#cAnother') && !c.checked) c.checked = true; };
+  const submit = sel => { if (sel === '#cForm') tickConsent(); return $(sel).dispatchEvent(new w.Event('submit', { bubbles: true, cancelable: true })); };
   const byText = (sel, text) => $$(sel).find(e => e.textContent.trim().includes(text));
   const S = () => w.__shepherd.S;
-  return { dom, w, d, $, $$, click, setVal, submit, byText, S, errors, copied, saves };
+  return { dom, w, d, $, $$, click, setVal, submit, byText, S, errors, copied, saves, consent };
 }
 const TOURTEXT_OK = A => true;
 const dayDiffNow = t => { const a = new Date(t); a.setHours(0, 0, 0, 0); const b = new Date(); b.setHours(0, 0, 0, 0); return Math.round((b - a) / 864e5); };
@@ -135,7 +138,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok($('#tour').hidden && $('#sheetTitle').textContent === 'Link your calendar', 'calendar guide opens');
   const guide = $('#sheetBody').textContent;
   ok(/1\. Connect Shepherd to your phone calendar/.test(guide) && /2\. Keep your personal TimeTree events in your calendar too/.test(guide) && !/Select Display Filters|Settings › TimeTree/.test(guide), 'step 1 connects Shepherd to the phone calendar; no linking TimeTree');
-  ok(!/Google/.test(guide) && $$('#sheetBody section h3').length === 2, 'two steps, no Google');
+  ok(!/Google/.test(guide) && $$('#sheetBody section .h3, #sheetBody section h3').length === 2, 'two steps, no Google');
   ok($$('#sheetBody .osb[data-os="ios"]').length === 1 && $$('#sheetBody .osb[data-os="android"]').length === 1 && /works in the Shepherd app/.test(guide), 'iPhone and Android steps; connecting points to the Shepherd app inside Claude');
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
   ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Your calendar', 'closing the guide returns to the tour');
@@ -558,11 +561,12 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click('[data-act="tab"][data-v="today"]'); await wait();
   ok(!$('[data-act="examples"]') && !/example contacts/.test($('#main').textContent), 'no "try it with examples" button');
   const D = 864e5, now0 = Date.now(), td0 = new Date().toISOString().slice(0, 10);
+  const daysAgo = n => { const d = new Date(); d.setDate(d.getDate() - n); return d.getTime(); }; // calendar days, so a clock change can't shift the date
   const loc = new Date(); const tdLocal = loc.getFullYear() + '-' + String(loc.getMonth() + 1).padStart(2, '0') + '-' + String(loc.getDate()).padStart(2, '0');
   Object.assign(w.__shepherd.S.contacts, {
-    ex1: { id: 'ex1', name: 'Daniel (example)', example: true, status: 'active', everyDays: 3, createdAt: now0 - 12 * D, lastContact: now0 - 4 * D, replyState: 'none', log: [] },
-    ex2: { id: 'ex2', name: 'Grace (example)', example: true, status: 'active', everyDays: 2, createdAt: now0 - 12 * D, lastContact: now0 - 2 * D, replyState: 'me', log: [] },
-    ex3: { id: 'ex3', name: 'Joel (example)', example: true, status: 'active', everyDays: 3, createdAt: now0 - 12 * D, lastContact: now0 - 1 * D, replyState: 'none', nextStudy: { date: tdLocal, time: '19:00', topic: 'First study' }, log: [] }
+    ex1: { id: 'ex1', name: 'Daniel (example)', example: true, status: 'active', everyDays: 3, createdAt: now0 - 12 * D, lastContact: daysAgo(4), replyState: 'none', log: [] },
+    ex2: { id: 'ex2', name: 'Grace (example)', example: true, status: 'active', everyDays: 2, createdAt: now0 - 12 * D, lastContact: daysAgo(2), replyState: 'me', log: [] },
+    ex3: { id: 'ex3', name: 'Joel (example)', example: true, status: 'active', everyDays: 3, createdAt: now0 - 12 * D, lastContact: daysAgo(1), replyState: 'none', nextStudy: { date: tdLocal, time: '19:00', topic: 'First study' }, log: [] }
   });
   click('[data-act="tab"][data-v="today"]'); await wait();
   ok(Object.values(S().contacts).filter(x => x.example).length === 3, 'older example contacts still show');
@@ -695,7 +699,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     ok(!items.some(x => /Gary/.test(x.title)), 'people you no longer contact never get notifications');
     ok(!on(1).some(x => /Pete/.test(x.title)) && on(3).some(x => x.title === 'Message Pete' && /Back from a pause/.test(x.body)), 'a paused person comes back on the day the pause ends');
     const st = items.find(x => x.title === 'Bible study with Joel at 7pm');
-    ok(st && ymdF(st.at) === ymdF(at(1)) && new Date(st.at).getHours() === 18 && /Prayer/.test(st.body) && st.url === './?open=f', 'study reminder an hour before, with the topic');
+    ok(st && ymdF(st.at) === ymdF(at(1)) && new Date(st.at).getHours() === 18 && st.body === 'In one hour.' && !/Prayer/.test(st.title + st.body) && st.url === './?open=f', 'study reminder an hour before, without the study topic (names only on a lock screen)');
     ok(items.some(x => x.title === 'Tomorrow: Sunday service' && ymdF(x.at) === ymdF(at(1)) && /10:30am · Main hall/.test(x.body)) && items.some(x => x.title === 'Sunday service at 10:30am' && new Date(x.at).getHours() === 9), 'event: the day before, and an hour before');
     const disc = items.filter(x => x.title === 'Check in with Ama');
     ok(disc.length >= 2 && disc.every(x => [1, 4].includes(new Date(x.at).getDay())), 'disciples: Monday and Thursday until checked in');
@@ -896,6 +900,147 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     ok(/NIV/.test(E.$('#langCard').textContent) && /inglés/.test(E.$('#langCard').textContent), 'says Bible verses stay in English');
     ok(E.$('#pIntro').value === '¡Hola, encantado de conocerte! Conseguí tu contacto con Shepherd. Espero saber de ti pronto.', 'the QR message is shown in Spanish');
       }
+
+  current = 'Launch fixes';
+  {
+    const st = makeStore();
+    st.docs.set('data/users/u_test/profile', { name: 'Fix Tester', agreed: { v: 1, at: 1 }, tourDone: true, phone: '07700900123' });
+    const X = await open(st); await wait(300);
+    const XS = () => X.w.__shepherd.S, W = X.w.__shepherd;
+    const appSrc = require('fs').readFileSync(require('path').join(__dirname, '..', 'src', 'app.html'), 'utf8');
+    const addPerson = async (name, phone, tick) => { X.click('[data-act="tab"][data-v="people"]'); await wait(); X.click('#fab'); await wait(); X.setVal('#cName', name); if (phone) X.setVal('#cPhone', phone); X.consent.auto = tick !== false; X.submit('#cForm'); X.consent.auto = true; await wait(60); };
+
+    await (async () => {
+      // 9: consent is required when adding by hand, and older contacts without it are flagged
+      await addPerson('No Tick', '', false);
+      ok(!Object.values(XS().contacts).some(c => c.name === 'No Tick') && /Tick that they're happy/.test(X.$('#cErr').textContent), '9: can\'t add someone without ticking that they agreed');
+      X.click('#sheet [data-act="closesheet"]'); await wait(400);
+      XS().contacts.old1 = { id: 'old1', name: 'Old Olu', status: 'active', everyDays: 3, createdAt: Date.now() - 9e8, replyState: 'none', log: [], consent: false };
+      X.click('[data-act="tab"][data-v="people"]'); await wait(); X.click('[data-act="open"][data-id="old1"]'); await wait();
+      ok(X.$('#consentNote') && /Consent not recorded/.test(X.$('#consentNote').textContent), '9: a contact saved without consent shows "Consent not recorded"');
+    })().catch(e => ok(false, '9: consent is required when adding by hand, and older contac — crashed: ' + e.message));
+    await (async () => {
+      // 18: tapping Save twice quickly adds them once
+      X.click('[data-act="tab"][data-v="people"]'); await wait(); X.click('#fab'); await wait();
+      X.setVal('#cName', 'Twice Tapped'); X.consent.auto = true; X.submit('#cForm'); X.submit('#cForm'); await wait(80);
+      ok(Object.values(XS().contacts).filter(c => c.name === 'Twice Tapped').length === 1, '18: a double tap on Save adds the person once');
+    })().catch(e => ok(false, '18: tapping Save twice quickly adds them once — crashed: ' + e.message));
+    await (async () => {
+      // 19: sensible lengths
+      X.click('#fab'); await wait();
+      ok(X.$('#cName').maxLength === 80 && X.$('#cNotes').maxLength === 4000 && X.$('#cPhone').maxLength === 30, '19: name, notes and number have length limits');
+      X.click('#sheet [data-act="closesheet"]'); await wait(400);
+    })().catch(e => ok(false, '19: sensible lengths — crashed: ' + e.message));
+    await (async () => {
+      // 1 + 23: deleting someone takes them off the prayer list too, and an old backup can't bring them back
+      await addPerson('Rita Remove', '07700900555');
+      const rita = Object.values(XS().contacts).find(c => c.name === 'Rita Remove');
+      const backup = W.backupText();
+      X.click('[data-act="tab"][data-v="people"]'); await wait(); X.click('[data-act="open"][data-id="' + rita.id + '"]'); await wait();
+      X.click('[data-act="addpray"]'); await wait(60);
+      XS().prayers.same = { id: 'same', name: 'rita remove', notes: 'Knee surgery', createdAt: 2 };
+      ok(Object.values(XS().prayers).filter(x => /rita/i.test(x.name)).length === 2, 'set-up: Rita is on the prayer list twice');
+      X.click('[data-act="archive"]'); await wait(); X.click('#sheet .pick button'); await wait();
+      X.$('#sheet form') && X.submit('#sheet form'); await wait(80);
+      XS().contacts[rita.id].status = 'archived';
+      X.click('[data-act="tab"][data-v="people"]'); await wait(); X.click('[data-act="archive-list"]'); await wait(); X.click('[data-act="open"][data-id="' + rita.id + '"]'); await wait();
+      X.click('[data-act="delete"]'); await wait(); X.setVal('#dConfirm', 'DELETE'); X.click('#dGo'); await wait(120);
+      ok(!XS().contacts[rita.id] && !Object.values(XS().prayers).some(x => /rita/i.test(x.name)), '1: "Delete all their data" removes them from the prayer list too');
+      ok([...st.docs.entries()].every(([k, v]) => !JSON.stringify(v).includes('Rita Remove') || k === 'data/users/u_test/profile'), '1: nothing about Rita is left saved, apart from the deleted-ids list');
+      W.importBackup(backup); await wait(80);
+      ok(!XS().contacts[rita.id] && /stayed deleted/.test(X.$('#toast').textContent), '23: restoring an older backup doesn\'t bring back someone deleted at their request');
+      ok(!/email it to yourself/.test(X.d.documentElement.innerHTML.replace(/<script[\s\S]*?<\/script>/g, '')) && !/email it to yourself/.test(require('fs').readFileSync(require('path').join(__dirname, '..', 'src', 'app.html'), 'utf8')), '23: the backup message no longer suggests emailing it');
+    })().catch(e => ok(false, '1 + 23: deleting someone takes them off the prayer list too, — crashed: ' + e.message));
+    await (async () => {
+      // 2: notifications show names only
+      const t0 = Date.now(), tdy = addDays(1);
+      XS().contacts.kofi = { id: 'kofi', name: 'Kofi Boateng', status: 'active', everyDays: 3, createdAt: t0 - 9e8, lastContact: t0 - 5 * 864e5, replyState: 'none', log: [], consent: true, nextStudy: { date: tdy, time: '19:00', topic: 'Struggling with addiction' } };
+      XS().prayers.g = { id: 'g', name: 'Grace Owusu', notes: 'Chemo results on Friday', createdAt: 1 };
+      XS().profile.prayerOn = true;
+      const sch = W.buildSchedule().map(x => x.title + ' | ' + x.body).join('\n');
+      ok(/Pray for/.test(sch) && /Bible study with Kofi/.test(sch) && !/Chemo|addiction/.test(sch), '2: notifications name people but never show prayer notes or study topics');
+      XS().profile.prayerOn = false; delete XS().contacts.kofi; delete XS().prayers.g;
+    })().catch(e => ok(false, '2: notifications show names only — crashed: ' + e.message));
+    await (async () => {
+      // 8: phone numbers and home country
+      const gb = W.COUNTRIES[0], ng = W.COUNTRIES.find(c => c[0] === 'NG'), gh = W.COUNTRIES.find(c => c[0] === 'GH'), us = W.COUNTRIES.find(c => c[0] === 'US');
+      const cases = [['07700 900123', gb, '447700900123'], ['+44 07700 900123', gb, '447700900123'], ['0044 7700 900123', gb, '447700900123'], ['08031234567', ng, '2348031234567'], ['+234 0803 123 4567', gb, '2348031234567'], ['0244123456', gh, '233244123456'], ['(555) 123-4567', us, '15551234567'], ['+1 555 123 4567', gb, '15551234567'], ['0770090012', gb, ''], ['123', gb, '']];
+      const bad = cases.filter(([p, c, want]) => W.waNum(p, c) !== want).map(([p, c, want]) => p + ' (' + c[0] + ') gave ' + W.waNum(p, c) + ' not ' + want);
+      ok(!bad.length, '8: WhatsApp numbers come out right for UK, Nigerian, Ghanaian and US numbers' + (bad.length ? ': ' + bad.join('; ') : ''));
+      ok(/start with 07/.test(W.phoneProblem('08031234567')) && W.phoneProblem('07700 900123') === '' && W.phoneProblem('+234 803 123 4567') === '', '8: a Nigerian local number with a UK home country is caught, with advice');
+      X.click('[data-act="settings"]'); await wait();
+      const opts = [...X.$('#pCountry').options].map(o => o.value);
+      ok(X.$('#pCountry').value === 'GB' && opts[1] === 'NG' && opts[2] === 'GH', '8: Settings has a home country, United Kingdom by default, Nigeria and Ghana next');
+      X.$('#pCountry').value = 'NG'; X.submit('#profForm'); await wait(60);
+      ok(XS().profile.country === 'NG' && W.phoneProblem('08031234567') === '' && W.waNum('08031234567') === '2348031234567', '8: changing the home country to Nigeria makes local Nigerian numbers work');
+      XS().profile.country = 'GB';
+    })().catch(e => ok(false, '8: phone numbers and home country — crashed: ' + e.message));
+    await (async () => {
+      // 13: Today stays short with a backlog
+      for (let i = 0; i < 12; i++) XS().contacts['bk' + i] = { id: 'bk' + i, name: 'Backlog ' + i, status: 'active', everyDays: 3, createdAt: Date.now() - 9e8, lastContact: Date.now() - (6 + i) * 864e5, replyState: 'none', log: [], consent: true };
+      X.click('[data-act="tab"][data-v="today"]'); await wait();
+      const msgSec = () => X.$$('#main .sec').find(sx => /Message today/.test(sx.textContent));
+      ok(msgSec() && msgSec().querySelectorAll('.prow').length === 5 && X.$('[data-act="showall"]') && /more/.test(X.$('[data-act="showall"]').textContent), '13: Today shows 5 people to message, with "Show more"');
+      X.click('[data-act="showall"]'); await wait();
+      ok(msgSec().querySelectorAll('.prow').length >= 12, '13: "Show more" lists everyone');
+      for (let i = 0; i < 12; i++) delete XS().contacts['bk' + i];
+    })().catch(e => ok(false, '13: Today stays short with a backlog — crashed: ' + e.message));
+    await (async () => {
+      // 26: no "Add contact" button on Calendar
+      X.click('[data-act="tab"][data-v="events"]'); await wait();
+      ok(X.$('#fab').hidden, '26: the Add contact button is hidden on Calendar');
+    })().catch(e => ok(false, '26: no "Add contact" button on Calendar — crashed: ' + e.message));
+    await (async () => {
+      // 17: headings never skip a level, Week has a main heading, coloured text is dark enough
+      X.click('[data-act="tab"][data-v="week"]'); await wait();
+      ok(X.$('#main h1'), '17: Week has a main heading');
+      const appSrc = require('fs').readFileSync(require('path').join(__dirname, '..', 'src', 'app.html'), 'utf8');
+      ok(!/<h3>/.test(appSrc), '17: card headings are level 2 (no skipped heading levels)');
+      const L = h => { const c = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255).map(v => v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+      const ratio = (a, b) => { const x = L(a), y = L(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+      const v = n => (appSrc.match(new RegExp('--' + n + ':(#[0-9A-Fa-f]{6})')) || [])[1];
+      const pairs = [['gold', 'bg'], ['gold', 'gold-soft'], ['warn', 'warn-soft'], ['warn', 'surface'], ['bad', 'bad-soft'], ['ok', 'ok-soft'], ['idle', 'idle-soft']].map(([f, b]) => [f + ' on ' + b, ratio(v(f), v(b))]);
+      ok(pairs.every(p => p[1] >= 4.5), '17: coloured text meets 4.5:1 contrast: ' + pairs.map(p => p[0] + ' ' + p[1].toFixed(2)).join(', '));
+    })().catch(e => ok(false, '17: headings never skip a level, Week has a main heading, co — crashed: ' + e.message));
+    await (async () => {
+      // 11: PIN waits after 5 wrong tries, and has a "Forgot" way out
+      XS().profile.pinHash = await X.w.eval('(async () => 0)()') || ''; // set below through the app
+      X.click('[data-act="settings"]'); await wait(); X.click('[data-act="setpin"]'); await wait();
+      X.setVal('#pinNew', '2468'); X.setVal('#pinNew2', '2468'); X.submit('#pinForm'); await wait(120);
+      X.click('[data-act="settings"]'); await wait(); X.click('[data-act="locknow"]'); await wait();
+      for (let i = 0; i < 5; i++) { X.setVal('#lockPin', '000' + i); X.submit('#lockForm'); await wait(40); }
+      X.setVal('#lockPin', '2468'); X.submit('#lockForm'); await wait(60);
+      ok(!X.$('#lock').hidden && /Too many wrong PINs/.test(X.$('#lockMsg').textContent), '11: after 5 wrong PINs even the right one has to wait');
+      ok(X.$('#lockForgot') && /Forgot/.test(X.$('#lockForgot').textContent), '11: the lock screen has "Forgot your PIN?"');
+      X.click('#lockForgot'); await wait();
+      ok(!X.$('#lockForgotBox').hidden && X.$('#lockForgotBox').textContent.length > 20, '11: "Forgot your PIN?" explains what to do');
+      X.w.localStorage.setItem('shepherd:pinwait:u_test', '{}'); X.setVal('#lockPin', '2468'); X.submit('#lockForm'); await wait(60);
+      ok(X.$('#lock').hidden, '11: after the wait, the right PIN unlocks');
+      XS().profile.pinHash = '';
+    })().catch(e => ok(false, '11: PIN waits after 5 wrong tries, and has a "Forgot" way ou — crashed: ' + e.message));
+    await (async () => {
+      // 12: if the phone is full, the person is told
+      const real = X.w.Storage.prototype.setItem; X.w.Storage.prototype.setItem = function () { throw new Error('QuotaExceededError'); };
+      W.saveLocal(); await wait(30);
+      X.w.Storage.prototype.setItem = real;
+      ok(/out of space/.test(X.$('#toast').textContent), '12: running out of phone storage shows a warning instead of failing silently');
+    })().catch(e => ok(false, '12: if the phone is full, the person is told — crashed: ' + e.message));
+    await (async () => {
+      // 15: the website loads nothing from Google or other sites
+      const idx = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8'), pv = require('fs').readFileSync(require('path').join(__dirname, '..', 'privacy.html'), 'utf8');
+      ok(!/googleapis|gstatic|cdnjs/.test(idx + pv) && /vendor\/fonts\.css/.test(idx) && /vendor\/qrcode\.min\.js/.test(idx) && require('fs').existsSync(require('path').join(__dirname, '..', 'vendor', 'qrcode.min.js')), '15: fonts and the QR library are served by Shepherd itself');
+    })().catch(e => ok(false, '15: the website loads nothing from Google or other sites — crashed: ' + e.message));
+    await (async () => {
+      // 27: tidy-ups
+      ok(!/function chName/.test(appSrc) && !/lang: 'en-GB'/.test(require('fs').readFileSync(require('path').join(__dirname, '..', 'sw.js'), 'utf8')), '27: unused code removed; notifications carry their own language');
+    })().catch(e => ok(false, '27: tidy-ups — crashed: ' + e.message));
+    await (async () => {
+      // privacy notice tells the truth about the new behaviour
+      const pvt = require('fs').readFileSync(require('path').join(__dirname, '..', 'src', 'privacy.js'), 'utf8');
+      ok(/calendar link/.test(pvt) && /what kind of browser/.test(pvt) && /including your prayer list/.test(pvt) && /never notes or prayer points/.test(pvt) && /last 7 days/.test(pvt), 'privacy notice covers the calendar link, sign-in records, deletion, notifications and 7-day restore');
+    })().catch(e => ok(false, 'privacy notice tells the truth about the new behaviour — crashed: ' + e.message));
+    if (X.errors.length) ok(false, 'launch fixes: no script errors: ' + X.errors.slice(0, 3).join(' / '));
+  }
 
   current = 'Script errors';
   const allErr = A.errors.concat(B.errors);

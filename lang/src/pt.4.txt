@@ -1,0 +1,49 @@
+855	Este celular está sem espaço para o Shepherd. Suas mudanças continuam salvas online quando você tem sinal. Libere um pouco de espaço no celular.
+856	Esse número não parece certo. Comece com + e o código do país.
+857	Números de WhatsApp do Reino Unido começam com 07. Para outro país, comece com + e o código do país, ou mude seu país em Ajustes.
+858	País (para números de telefone)
+859	Números que começam com 0 recebem o código deste país. Números que começam com + são usados como digitados.
+860	Marque que a pessoa concorda que você guarde os dados dela. Só adicione quem concordou.
+861	A pessoa concorda que guardemos seus dados e mantenhamos contato. <b>(obrigatório)</b>
+862	Consentimento não registrado. Se a pessoa concorda que você guarde os dados dela, marque isso em Editar.
+863	Isto remove {0} e tudo sobre essa pessoa: número, notas, estudos, histórico e o lugar dela na sua lista de oração. Não dá para desfazer.
+864	Se você exportou um backup ou salvou a pessoa nos contatos do celular, apague essas cópias você mesmo.
+865	Restaurado: {0} adicionados, {1} atualizados. Pessoas apagadas a pedido delas continuam apagadas.
+866	Backup copiado. Cole em um lugar privado, como uma nota bloqueada.
+867	Abra o Shepherd para ver a lista de oração de hoje.
+868	Mostrar mais {0}
+869	§one=PINs errados demais. Tente de novo em {0} segundo.|other=PINs errados demais. Tente de novo em {0} segundos.
+870	§one=PINs errados demais. Tente de novo em {0} segundo.|other=PINs errados demais. Tente de novo em {0} segundos.
+871	Esqueceu o PIN?
+872	Digite sua senha do Shepherd para remover o PIN. Sua lista está segura no servidor.
+873	Remover o PIN
+874	Sair da conta
+875	O PIN só pode ser removido com um backup. Pergunte a quem compartilhou o Shepherd com você.
+876	Essa senha não está certa.
+877	PIN removido. Você pode definir um novo em Ajustes.
+878	Se esquecer, toque em Esqueceu o PIN? e digite sua senha do Shepherd.
+879	Criar um novo código QR
+880	Toque de novo: seu código QR antigo vai parar de funcionar
+881	Novo código QR criado. O antigo não funciona mais.
+882	Não foi possível criar um novo código. Tente de novo com sinal.
+883	§one={0} outro celular saiu da conta|other={0} outros celulares saíram da conta
+884	§one={0} outro celular saiu da conta|other={0} outros celulares saíram da conta
+885	Nenhum outro celular estava conectado
+886	Não foi possível falar com o servidor do Shepherd. Tente de novo com sinal.
+887	Sair da conta em todos os meus outros celulares
+888	Código de convite da igreja
+889	Peça à pessoa que cuida do Shepherd na sua igreja.
+890	Adicione seu nome.
+891	Esse código de convite não está certo. Peça à pessoa que cuida do Shepherd na sua igreja.
+892	Seu nome, e-mail, número de WhatsApp e país.
+893	As pessoas que você adiciona: nomes, números, perfis em redes sociais, notas, pedidos de oração e estudos bíblicos, e se concordaram em ser adicionadas.
+894	Para cada celular em que você está conectado: quando entrou e que tipo de navegador é, para continuar conectado.
+895	As notificações planejadas para as próximas duas semanas, até serem enviadas.
+896	<b>Quando alguém escaneia seu código QR</b>: a pessoa escolhe digitar o nome (e o número, se quiser) e marca que concorda em ser adicionada. Isso vai só para sua lista, e depois ela mesma manda mensagem para você no WhatsApp.
+897	<b>Se você conectar o calendário do celular</b>: um link privado mostra seus estudos bíblicos (com primeiros nomes) e seus eventos. Qualquer pessoa a quem você der esse link pode vê-los, e o serviço de calendário do seu celular (como Apple ou Google) guarda uma cópia. Você pode trocar o link no Shepherd quando quiser.
+898	As notificações vão criptografadas até seu celular e só mostram o primeiro nome, nunca notas ou pedidos de oração.
+899	As fontes e o código do Shepherd vêm do próprio Shepherd, então nenhuma empresa de anúncios ou rastreamento vê que você o usa.
+900	Só quem tem o código de convite da sua igreja pode criar uma conta.
+901	Versões anteriores são guardadas por até um ano para nada se perder por engano. Apagar os dados de alguém remove todas as cópias que o Shepherd guarda.
+902	Para emergências, todo o banco de dados pode ser restaurado para qualquer momento dos últimos 7 dias, então algo apagado some de vez depois de 7 dias.
+903	Alguém pediu para apagar os dados? Abra a pessoa, toque em <b>Não contatar mais</b> e depois em <b>Apagar todos os dados</b>. Isso remove a pessoa do Shepherd, inclusive da sua lista de oração. Cópias que você mesmo fez, como um backup exportado ou os contatos do celular, cabe a você apagar.

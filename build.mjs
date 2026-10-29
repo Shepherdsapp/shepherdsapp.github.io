@@ -30,23 +30,28 @@ const i18nTag = '\n<script>/* src/i18n.js */\n' + safe(i18n.replace('var PACK_VE
 const privacyTag = '\n<script>/* src/privacy.js */\n' + safe(privacy) + '\n</script>\n';
 const packTag = '\n<script>window.SHEPHERD_LANGS = ' + safe(JSON.stringify(packs)) + ';</script>';
 
+// the website serves its fonts and QR library itself (no Google or other sites); the Claude version keeps the CDN links
+const GFONTS = '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap">';
+const QRCDN = '<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>';
+if (!head.includes(GFONTS) || !head.includes(QRCDN)) throw new Error('src/app.html font or QR lines changed: update build.mjs');
+const webHead = head.replace(GFONTS, '<link rel="stylesheet" href="vendor/fonts.css">').replace(QRCDN, '<script src="vendor/qrcode.min.js"></script>');
 const page = '<!doctype html>\n<html lang="en-GB">\n<head>\n<meta charset="utf-8">\n' +
   '<meta name="description" content="Shepherd helps you follow up with the people you share your faith with: who to message, who to reply to, Bible studies and disciples.">\n' +
   '<meta name="theme-color" content="#FAF3DF">\n<meta name="color-scheme" content="light">\n' +
   '<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="mobile-web-app-capable" content="yes">\n' +
   '<meta name="apple-mobile-web-app-title" content="Shepherd">\n<meta name="apple-mobile-web-app-status-bar-style" content="default">\n' +
   '<link rel="manifest" href="manifest.json">\n<link rel="icon" type="image/png" href="icon-192.png">\n<link rel="apple-touch-icon" href="apple-touch-icon.png">\n' +
-  '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
-  head + i18nTag + privacyTag + '\n<script src="config.js"></script>\n<script>/* src/web.js */\n' + safe(web) + '\n</script>\n</head>\n<body>\n' +
+  webHead + i18nTag + privacyTag + '\n<script src="config.js"></script>\n<script>/* src/web.js */\n' + safe(web) + '\n</script>\n</head>\n<body>\n' +
   bodyPart.replace(/^\s*/, '') + '\n</body>\n</html>\n' + END + '\n';
 if (/claude\.ai\/artifact/.test(page)) throw new Error('The website still points at the Claude artifact');
+if (/googleapis|gstatic|cdnjs/.test(page)) throw new Error('The website still loads something from another site');
 fs.writeFileSync(path.join(ROOT, 'index.html'), page);
 fs.mkdirSync(path.join(ROOT, 'hosted'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'hosted', 'shepherd.html'), head + packTag + i18nTag + privacyTag + bodyPart);
 // privacy.html: the privacy notice and acceptable use statement on their own, for anyone to read before signing up
 const pvPage = '<!doctype html>\n<html lang="en-GB">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' +
   '<title>Shepherd · Privacy and safe use</title>\n<meta name="theme-color" content="#FAF3DF">\n<link rel="icon" type="image/png" href="icon-192.png">\n' +
-  '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600&display=swap">\n' +
+  '<link rel="stylesheet" href="vendor/fonts.css">\n' +
   '<style>:root{--bg:#FAF3DF;--surface:#FFFCF3;--fg:#241F18;--muted:#574D3E;--line:#D8C8A2;--accent:#4E5A33;color-scheme:light}*{box-sizing:border-box}' +
   'body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 "Figtree","Segoe UI",system-ui,-apple-system,sans-serif}' +
   'main{max-width:640px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 24px) 16px 40px;display:grid;gap:14px}' +

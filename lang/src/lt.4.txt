@@ -1,0 +1,49 @@
+855	Šiame telefone nebeliko vietos Shepherd. Tavo pakeitimai vis tiek išsaugomi internete, kai turi ryšį. Atlaisvink šiek tiek vietos telefone.
+856	Šis telefono numeris atrodo netinkamas. Pradėk nuo + ir šalies kodo.
+857	JK WhatsApp numeriai prasideda 07. Kitai šaliai pradėk nuo + ir šalies kodo arba pakeisk savo šalį Nustatymuose.
+858	Šalis (telefono numeriams)
+859	Prie numerių, kurie prasideda 0, pridedamas šios šalies kodas. Numeriai, kurie prasideda +, naudojami taip, kaip įvesti.
+860	Pažymėk, kad žmogus sutinka, jog saugotum jo duomenis. Pridėk tik tuos, kurie sutiko.
+861	Žmogus sutinka, kad saugotume jo duomenis ir palaikytume ryšį. <b>(privaloma)</b>
+862	Sutikimas neužfiksuotas. Jei žmogus sutinka, kad saugotum jo duomenis, pažymėk tai skiltyje Redaguoti.
+863	Tai ištrins {0} ir viską apie šį žmogų: numerį, pastabas, studijas, istoriją ir vietą tavo maldos sąraše. Atšaukti negalima.
+864	Jei eksportavai atsarginę kopiją ar išsaugojai žmogų telefono kontaktuose, tas kopijas ištrink pats.
+865	Atkurta: pridėta {0}, atnaujinta {1}. Jų pačių prašymu ištrinti žmonės lieka ištrinti.
+866	Atsarginė kopija nukopijuota. Įklijuok ją į privačią vietą, pavyzdžiui, užrakintą užrašą.
+867	Atidaryk Shepherd ir pamatysi šiandienos maldos sąrašą.
+868	Rodyti dar {0}
+869	§one=Per daug neteisingų PIN kodų. Bandyk dar kartą po {0} sekundės.|few=Per daug neteisingų PIN kodų. Bandyk dar kartą po {0} sekundžių.|many=Per daug neteisingų PIN kodų. Bandyk dar kartą po {0} sekundės.|other=Per daug neteisingų PIN kodų. Bandyk dar kartą po {0} sekundžių.
+870	§one=Per daug neteisingų PIN kodų. Bandyk dar kartą po {0} sekundės.|few=Per daug neteisingų PIN kodų. Bandyk dar kartą po {0} sekundžių.|many=Per daug neteisingų PIN kodų. Bandyk dar kartą po {0} sekundės.|other=Per daug neteisingų PIN kodų. Bandyk dar kartą po {0} sekundžių.
+871	Pamiršai PIN kodą?
+872	Įvesk Shepherd slaptažodį, kad pašalintum PIN kodą. Tavo sąrašas saugus serveryje.
+873	Pašalinti PIN kodą
+874	Geriau atsijungti
+875	PIN kodą galima pašalinti tik su atsargine kopija. Paklausk to, kas pasidalijo Shepherd su tavimi.
+876	Slaptažodis neteisingas.
+877	PIN kodas pašalintas. Naują gali nustatyti Nustatymuose.
+878	Jei pamirši, paliesk Pamiršai PIN kodą? ir įvesk Shepherd slaptažodį.
+879	Sukurti naują QR kodą
+880	Paliesk dar kartą: senas QR kodas nebeveiks
+881	Naujas QR kodas sukurtas. Senasis nebeveikia.
+882	Nepavyko sukurti naujo kodo. Bandyk dar kartą, kai turėsi ryšį.
+883	§one=Atjungtas {0} kitas telefonas|few=Atjungti {0} kiti telefonai|many=Atjungta {0} kito telefono|other=Atjungta {0} kitų telefonų
+884	§one=Atjungtas {0} kitas telefonas|few=Atjungti {0} kiti telefonai|many=Atjungta {0} kito telefono|other=Atjungta {0} kitų telefonų
+885	Jokie kiti telefonai nebuvo prisijungę
+886	Nepavyko pasiekti Shepherd serverio. Bandyk dar kartą, kai turėsi ryšį.
+887	Atsijungti visuose kituose mano telefonuose
+888	Bažnyčios pakvietimo kodas
+889	Paklausk žmogaus, kuris tvarko Shepherd tavo bažnyčioje.
+890	Įvesk savo vardą.
+891	Šis pakvietimo kodas neteisingas. Paklausk žmogaus, kuris tvarko Shepherd tavo bažnyčioje.
+892	Tavo vardas, el. paštas, WhatsApp numeris ir šalis.
+893	Žmonės, kuriuos pridedi: jų vardai, numeriai, socialinių tinklų vardai, pastabos, maldos prašymai ir Biblijos studijos, ir ar jie sutiko būti pridėti.
+894	Kiekvienam telefonui, kuriame esi prisijungęs: kada jis prisijungė ir kokia tai naršyklė, kad liktų prisijungęs.
+895	Pranešimai, suplanuoti ateinančioms dviem savaitėms, kol jie išsiunčiami.
+896	<b>Kai kas nors nuskenuoja tavo QR kodą</b>: žmogus pats nusprendžia įvesti savo vardą (ir numerį, jei nori) ir pažymi, kad sutinka būti pridėtas. Tai patenka tik į tavo sąrašą, o tada jis pats parašo tau per WhatsApp.
+897	<b>Jei prijungsi telefono kalendorių</b>: privati nuoroda rodo tavo Biblijos studijas (su vardais) ir renginius. Kiekvienas, kam duosi šią nuorodą, gali juos matyti, o telefono kalendoriaus paslauga (pvz., Apple ar Google) saugo kopiją. Nuorodą Shepherd gali pakeisti bet kada.
+898	Pranešimai į tavo telefoną siunčiami užšifruoti ir rodo tik vardus, niekada pastabų ar maldos prašymų.
+899	Shepherd šriftai ir kodas gaunami iš paties Shepherd, todėl jokia reklamos ar sekimo įmonė nemato, kad juo naudojiesi.
+900	Paskyrą sukurti gali tik tie, kas turi tavo bažnyčios pakvietimo kodą.
+901	Ankstesnės versijos saugomos iki metų, kad niekas nedingtų per klaidą. Ištrynus kieno nors duomenis, pašalinamos visos Shepherd saugomos kopijos.
+902	Nelaimės atveju visą duomenų bazę galima atkurti į bet kurį paskutinių 7 dienų momentą, todėl ištrinti duomenys visiškai dingsta po 7 dienų.
+903	Kas nors prašo ištrinti jo duomenis? Atidaryk tą žmogų, paliesk <b>Nebesusisiekti</b>, o tada <b>Ištrinti visus jų duomenis</b>. Tai pašalins jį iš Shepherd, taip pat iš tavo maldos sąrašo. Kopijas, kurias padarei pats, pvz., eksportuotą atsarginę kopiją ar telefono kontaktus, ištrink pats.

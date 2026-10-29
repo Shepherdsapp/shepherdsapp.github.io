@@ -7,7 +7,7 @@ var API = String(CFG.api || '').trim().replace(/\/+$/, '');
 if (/YOUR-NAME|example/i.test(API) || !/^https?:\/\//.test(API)) API = ''; // config.js not filled in yet
 var TK = 'shepherd:token', UK = 'shepherd:user', LAST = 'shepherd:last-uid';
 function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function lsSet(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
 function lsDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
 var te = new TextEncoder();
 function hex(b) { return Array.from(new Uint8Array(b)).map(function (x) { return x.toString(16).padStart(2, '0'); }).join(''); }
@@ -19,12 +19,15 @@ var user = null; try { user = JSON.parse(lsGet(UK) || 'null'); } catch (e) {}
 
 /* ---------- talking to the server ---------- */
 var onSignedOut = null;
+// whether the Shepherd server answered last time (the top bar says Offline when it didn't)
+function netState(up) { var was = W.online; W.online = up; if (was !== up && W.onNet) try { W.onNet(); } catch (e) {} }
 async function api(method, path, body) {
   if (!API) { var n = new Error('Shepherd has no server address yet.'); n.code = 'no_server'; throw n; }
   var r, data = null;
   try {
     r = await fetch(API + path, { method: method, headers: Object.assign({ 'Content-Type': 'application/json' }, token ? { Authorization: 'Bearer ' + token } : {}), body: body === undefined ? undefined : JSON.stringify(body), cache: 'no-store' });
-  } catch (e) { var off = new Error('No connection. Your changes are kept on this phone.'); off.code = 'unavailable'; throw off; }
+  } catch (e) { netState(false); var off = new Error('No connection. Your changes are kept on this phone.'); off.code = 'unavailable'; throw off; }
+  netState(r.status < 500);
   try { data = await r.json(); } catch (e) {}
   if (!r.ok) {
     var er = new Error((data && data.message) || 'Something went wrong. Try again.');
@@ -44,7 +47,7 @@ async function pwKey(email, pw) {
 var mirror = { docs: {}, seq: 0 }, loaded = false, listeners = [], pulling = null, pullAgain = false, pollTimer = null;
 function mkey() { return 'shepherd:mirror:' + (user && user.id); }
 function loadMirror() { try { var o = JSON.parse(lsGet(mkey()) || 'null'); if (o && o.docs) mirror = o; } catch (e) {} }
-function saveMirror() { lsSet(mkey(), JSON.stringify(mirror)); }
+function saveMirror() { if (!lsSet(mkey(), JSON.stringify(mirror)) && W.onStorageFull) W.onStorageFull(); }
 function rel(path) { return String(path).replace(/^data\/users\/[^/]+\//, ''); }
 function clone(o) { return o == null ? o : JSON.parse(JSON.stringify(o)); }
 function snapFor(l) {
@@ -87,11 +90,13 @@ function startPolling() {
 function docRef(path) {
   var r = rel(path);
   return {
-    set: async function (d) {
-      var res = await api('POST', '/api/docs', { ops: [{ p: r, d: d, t: (d && Number(d.updatedAt)) || Date.now() }] });
+    // b: the copy this change started from, so the server can merge changes made on another phone meanwhile
+    set: async function (d, b) {
+      var op = { p: r, d: d, t: (d && Number(d.updatedAt)) || Date.now() }; if (b !== undefined) op.b = b;
+      var res = await api('POST', '/api/docs', { ops: [op] });
       mirror.docs[r] = clone(d);
       (res.kept || []).forEach(function (k) { if (k.d === null) delete mirror.docs[k.p]; else mirror.docs[k.p] = k.d; });
-      saveMirror(); if (res.kept && res.kept.length) emit(); pullSoon();
+      saveMirror(); if (res.kept && res.kept.length) setTimeout(emit, 0); pullSoon();
     },
     delete: async function () { await api('POST', '/api/docs', { ops: [{ p: r, d: null, t: Date.now() }] }); delete mirror.docs[r]; saveMirror(); pullSoon(); },
     onSnapshot: function (cb, err) { var l = { kind: 'doc', rel: r, cb: cb, err: err }; listeners.push(l); if (Object.keys(mirror.docs).length) cb(snapFor(l)); return function () { listeners = listeners.filter(function (x) { return x !== l; }); }; },
@@ -138,7 +143,8 @@ function authHtml(mode, msg) {
     (forgot || code ? '<p class="lede" style="text-align:center">' + (code ? esc(msg || 'Enter your 6-digit code and choose a new password.') : 'Enter your email and we\'ll help you choose a new password.') + '</p>'
       : '<div class="seg" style="grid-template-columns:1fr 1fr" role="group"><button type="button" data-auth="signin" aria-pressed="' + !create + '">Sign in</button><button type="button" data-auth="create" aria-pressed="' + create + '">Create account</button></div>' +
         '<p class="note" style="text-align:center">' + (create ? 'Your list is private: nobody else using Shepherd can see it.' : 'You only need to sign in once on this phone.') + '</p>') +
-    (create ? '<label class="field" for="aName">Your name<input class="inp" id="aName" autocomplete="name"></label>' : '') +
+    (create ? '<label class="field" for="aName">Your name<input class="inp" id="aName" autocomplete="name" maxlength="80"></label>' : '') +
+    (create ? '<label class="field" for="aInvite">Church invite code<input class="inp" id="aInvite" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40"></label><p class="note" style="margin:-6px 0 0">Ask the person who runs Shepherd at your church.</p>' : '') +
     '<label class="field" for="aEmail">Email<input class="inp" id="aEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" value="' + esc(lsGet('shepherd:email') || '') + '"' + (code ? ' readonly' : '') + '></label>' +
     (code ? '<label class="field" for="aCode">6-digit code<input class="inp" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label>' : '') +
     (forgot ? '' : '<label class="field" for="aPw">' + (code ? 'New password' : 'Password') + '<span class="pwrow"><input class="inp" id="aPw" type="password" autocomplete="' + (create || code ? 'new-password' : 'current-password') + '" minlength="8"><button type="button" class="btn ghost small" id="aShow">Show</button></span></label>') +
@@ -171,7 +177,8 @@ function bindAuth() {
     var email = authEl.querySelector('#aEmail').value.trim().toLowerCase();
     var pwEl = authEl.querySelector('#aPw'), pw = pwEl ? pwEl.value : '';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return say('Enter your email address.');
-    if (pwEl && pw.length < 8) return say(mode === 'signin' ? 'Enter your password.' : 'Choose a password of at least 8 characters.');
+    if (mode === 'create' && !(authEl.querySelector('#aName').value || '').trim()) return say('Add your name.');
+    if (pwEl && (pw.length < 8 || (mode !== 'signin' && !pw.trim()))) return say(mode === 'signin' ? 'Enter your password.' : 'Choose a password of at least 8 characters.');
     var ag = authEl.querySelector('#aAgree'); if (mode === 'create' && ag && !ag.checked) return say('Please read and agree to the acceptable use statement.');
     lsSet('shepherd:email', email);
     btn.disabled = true; var label = btn.textContent; btn.textContent = 'One moment…';
@@ -182,7 +189,7 @@ function bindAuth() {
         return;
       }
       var key = await pwKey(email, pw), r;
-      if (mode === 'create') r = await api('POST', '/api/signup', { email: email, key: key, name: (authEl.querySelector('#aName').value || '').trim() });
+      if (mode === 'create') r = await api('POST', '/api/signup', { email: email, key: key, name: (authEl.querySelector('#aName').value || '').trim().slice(0, 80), invite: (authEl.querySelector('#aInvite').value || '').trim() });
       else if (mode === 'code') r = await api('POST', '/api/reset/confirm', { email: email, code: authEl.querySelector('#aCode').value, key: key });
       else r = await api('POST', '/api/login', { email: email, key: key });
       if (mode === 'create') W.agreedAt = Date.now(); // agreed to the acceptable use statement when creating the account
@@ -247,7 +254,7 @@ async function signOut() {
   try { await push.disable(); } catch (e) {}
   try { await api('POST', '/api/logout', {}); } catch (e) {}
   var id = user && user.id;
-  [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id, 'shepherd:tourDone:' + id, 'shepherd:qr:' + id, 'shepherd:phonebook:' + id].forEach(lsDel);
+  [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id, 'shepherd:tourDone:' + id, 'shepherd:tourStep:' + id, 'shepherd:qr:' + id, 'shepherd:phonebook:' + id, 'shepherd:pinwait:' + id].forEach(lsDel);
   location.reload();
 }
 var W = window.SHEPHERD_WEB = {
@@ -267,7 +274,16 @@ var W = window.SHEPHERD_WEB = {
   refreshMe: async function () { try { var r = await api('GET', '/api/me'); user = r.user; lsSet(UK, JSON.stringify(user)); W.devices = r.devices; return r; } catch (e) { return null; } },
   newCalLink: async function () { var r = await api('POST', '/api/cal/new', {}); user.cal = r.cal; lsSet(UK, JSON.stringify(user)); return r.cal; },
   changePassword: async function (oldPw, newPw) { return api('POST', '/api/password', { key: await pwKey(user.email, oldPw), newKey: await pwKey(user.email, newPw) }); },
-  deleteAccount: async function (pw) { await api('POST', '/api/account/delete', { key: await pwKey(user.email, pw) }); var id = user.id; [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id].forEach(lsDel); location.reload(); }
+  deleteAccount: async function (pw) { await api('POST', '/api/account/delete', { key: await pwKey(user.email, pw) }); var id = user.id; [TK, UK, LAST, 'shepherd:v1:' + id, 'shepherd:mirror:' + id, 'shepherd:sched:' + id, 'shepherd:tourDone:' + id, 'shepherd:tourStep:' + id, 'shepherd:qr:' + id, 'shepherd:phonebook:' + id, 'shepherd:pinwait:' + id].forEach(lsDel); location.reload(); },
+  /* forgot PIN: prove it's you with your password (the extra sign-in this makes is closed straight away) */
+  checkPassword: async function (pw) {
+    var r = await api('POST', '/api/login', { email: user.email, key: await pwKey(user.email, pw || '') });
+    try { await fetch(API + '/api/logout', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + r.token }, body: '{}' }); } catch (e) {}
+    return true;
+  },
+  synced: function (path) { var v = mirror.docs[rel(path)]; return v === undefined ? null : clone(v); },
+  qrNew: async function () { var r = await api('POST', '/api/qr/new', {}); lsSet('shepherd:qr:' + user.id, r.code); return r.code; },
+  logoutOthers: async function () { return api('POST', '/api/logout/others', {}); }
 };
 
 /* the app asks for these exactly as it does inside Claude */

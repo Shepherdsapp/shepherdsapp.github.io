@@ -1,0 +1,49 @@
+855	Ohere agwụla na ekwentị a maka Shepherd. A ka na-echekwa mgbanwe gị n'ịntanetị mgbe ị nwere netwọk. Mee ka ohere dịtụ na ekwentị gị.
+856	Nọmba ekwentị ahụ adịghị ka ọ ziri ezi. Malite ya na + na koodu mba.
+857	Nọmba WhatsApp nke UK na-amalite na 07. Maka mba ọzọ, malite na + na koodu mba, ma ọ bụ gbanwee mba gị na Ntọala.
+858	Mba (maka nọmba ekwentị)
+859	Nọmba ndị malitere na 0 ga-enweta koodu mba a. A ga-eji nọmba ndị malitere na + dịka i dere ha.
+860	Kaa akara na ha kwenyere ka i debe nkọwa ha. Tinye naanị ndị kwenyere.
+861	Ha kwenyere ka anyị debe nkọwa ha ma na-akpọtụrụ ha. <b>(achọrọ)</b>
+862	E deghị nkwenye ha. Ọ bụrụ na ha kwenyere ka i debe nkọwa ha, kaa ya akara na Dezie.
+863	Nke a ga-ehichapụ {0} na ihe niile gbasara ha: nọmba, ndetu, ọmụmụ, akụkọ na ọnọdụ ha na ndepụta ekpere gị. A gaghị enwe ike ịlaghachi ya.
+864	Ọ bụrụ na i bupụrụ ndabere ma ọ bụ chekwaa ha na kọntaktị ekwentị gị, hichapụ nnomi ndị ahụ n'onwe gị.
+865	E weghachiri: e tinyere {0}, e melitere {1}. Ndị e hichapụrụ n'ihi na ha rịọrọ ka a na-ehichapụ ha.
+866	E depụtaghachiri ndabere. Mado ya n'ebe nzuzo, dị ka ndetu a kpọchiri akpọchi.
+867	Mepee Shepherd ka ịhụ ndepụta ekpere taa.
+868	Gosi {0} ọzọ
+869	§other=PIN ezighi ezi dị ọtụtụ. Nwaa ọzọ mgbe sekọnd {0} gachara.
+870	§other=PIN ezighi ezi dị ọtụtụ. Nwaa ọzọ mgbe sekọnd {0} gachara.
+871	Ị chefuru PIN gị?
+872	Tinye okwuntughe Shepherd gị ka iwepụ PIN. Ndepụta gị nọ n'udo na sava.
+873	Wepụ PIN
+874	Pụọ kama nke ahụ
+875	Ọ bụ naanị ndabere ka e ji ewepụ PIN. Jụọ onye kesara gị Shepherd.
+876	Okwuntughe ahụ ezighi ezi.
+877	E wepụla PIN. Ị nwere ike ịtọ ọhụrụ na Ntọala.
+878	Ọ bụrụ na ị chefuo ya, pịa Ị chefuru PIN gị? ma tinye okwuntughe Shepherd gị.
+879	Mee koodu QR ọhụrụ
+880	Pịa ọzọ: koodu QR ochie gị agaghị arụ ọrụ ọzọ
+881	E mere koodu QR ọhụrụ. Nke ochie anaghị arụ ọrụ ọzọ.
+882	Enweghị ike ime koodu ọhụrụ. Nwaa ọzọ mgbe ị nwere netwọk.
+883	§other=Ekwentị ọzọ {0} apụọla
+884	§other=Ekwentị ọzọ {0} apụọla
+885	Ọ dịghị ekwentị ọzọ banyere
+886	Enweghị ike iru sava Shepherd. Nwaa ọzọ mgbe ị nwere netwọk.
+887	Pụọ na ekwentị m ndị ọzọ niile
+888	Koodu ọkpụkpọ chọọchị
+889	Jụọ onye na-ahụ maka Shepherd na chọọchị gị.
+890	Tinye aha gị.
+891	Koodu ọkpụkpọ ahụ ezighi ezi. Jụọ onye na-ahụ maka Shepherd na chọọchị gị.
+892	Aha gị, email, nọmba WhatsApp na mba gị.
+893	Ndị ị tinyere: aha ha, nọmba, aha soshal midia, ndetu, isi ekpere na ọmụmụ Baịbụl, na ma ha kwenyere ka e tinye ha.
+894	Maka ekwentị ọ bụla ị banyere: mgbe ọ banyere na ụdị ihe nchọgharị ọ bụ, ka ọ nọrọ n'ime.
+895	Ọkwa e mere atụmatụ maka izu abụọ na-abịa, ruo mgbe e zigara ha.
+896	<b>Mgbe mmadụ nyochara koodu QR gị</b>: ha na-ahọrọ ide aha ha (na nọmba ha ma ọ bụrụ na ha chọrọ) ma kaa akara na ha kwenyere ka i tinye ha. Ọ na-aga naanị na ndepụta gị, mgbe ahụ ha ga-ezitere gị ozi WhatsApp n'onwe ha.
+897	<b>Ọ bụrụ na ị jikọọ kalenda ekwentị gị</b>: njikọ nzuzo na-egosi ọmụmụ Baịbụl gị (ya na aha mbụ) na mmemme gị. Onye ọ bụla i nyere njikọ ahụ nwere ike ịhụ ha, ọrụ kalenda ekwentị gị (dị ka Apple ma ọ bụ Google) na-edebekwa otu nnomi. Ị nwere ike ịgbanwe njikọ ahụ na Shepherd mgbe ọ bụla.
+898	A na-ezigara ekwentị gị ọkwa n'ụdị ezoro ezo, ha na-egosikwa naanị aha mbụ, ọ dịghị mgbe ndetu ma ọ bụ isi ekpere.
+899	Mkpụrụedemede na koodu Shepherd si na Shepherd n'onwe ya, ya mere ọ dịghị ụlọ ọrụ mgbasa ozi ma ọ bụ nsochi na-ahụ na ị na-eji ya.
+900	Naanị ndị nwere koodu ọkpụkpọ chọọchị gị nwere ike ịmepụta akaụntụ.
+901	A na-edebe ụdị ochie ruo otu afọ ka ihe ọ bụla ghara ifu n'amaghị ama. Ihichapụ data mmadụ na-ewepụ nnomi ọ bụla Shepherd na-edebe.
+902	Maka mberede, enwere ike iweghachi nchekwa data niile n'oge ọ bụla n'ime ụbọchị 7 gara aga, ya mere ihe e hichapụrụ na-apụ kpamkpam mgbe ụbọchị 7 gachara.
+903	Mmadụ rịọrọ gị ka i hichapụ nkọwa ha? Mepee ha, pịa <b>Akpọtụrụla ha ọzọ</b>, wee pịa <b>Hichapụ data ha niile</b>. Nke ahụ na-ewepụ ha na Shepherd, gụnyere ndepụta ekpere gị. Nnomi ndị i mere n'onwe gị, dị ka ndabere i bupụrụ ma ọ bụ kọntaktị ekwentị gị, ọ bụ gị ga-ehichapụ ha.
