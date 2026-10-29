@@ -332,12 +332,14 @@ try {
   const realNow2 = Date.now; Date.now = () => realNow2() + 5 * 60e3;
   pushStatus = 503;
   await sendDue(env);
-  const st1 = env.DB.raw.exec("SELECT sent FROM outbox WHERE title = 'Message Fix5'")[0].values[0][0];
+  const st1 = env.DB.raw.exec("SELECT sent FROM outbox WHERE tag = 'f5'")[0].values[0][0];
   ok(st1 === 0, 'when the phone service is briefly down, the notification waits for the next run');
   pushStatus = 201; sentPushes.length = 0;
   await sendDue(env);
-  const st2 = env.DB.raw.exec("SELECT sent FROM outbox WHERE title = 'Message Fix5'")[0].values[0][0];
+  const st2 = env.DB.raw.exec("SELECT sent FROM outbox WHERE tag = 'f5'")[0].values[0][0];
   ok(st2 === 1 && sentPushes.some(x => x.url.endsWith('/fix5')), 'and goes out on the next run');
+  const kept5 = env.DB.raw.exec("SELECT title, body FROM outbox WHERE tag = 'f5'")[0].values[0];
+  ok(kept5[0] === '' && kept5[1] === '', 'once sent, the names in it aren\'t kept on the server (as the privacy notice says)');
   Date.now = realNow2;
 } catch (e) { pushStatus = 201; ok(false, 'crashed: ' + e.message); }
 

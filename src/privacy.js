@@ -41,13 +41,13 @@
       sec('Acceptable use', '<p class="note">Everyone who uses Shepherd agrees to this:</p>' + rules()) +
       sec('What Shepherd keeps, and why',
         '<p class="note"><b>Data linked to you</b>, saved to your own private account so your list is on every phone you sign in on and isn\'t lost:</p>' +
-        ul(['Your name, email, WhatsApp number and home country.', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list.', 'For each phone you\'re signed in on: when it signed in and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks, until they\'re sent.']) +
+        ul(['Your name, email, WhatsApp number, home country and settings (such as language, time zone and notification times).', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list.', 'For each phone you\'re signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.']) +
         '<p class="note"><b>Kept only on this phone</b>:</p>' +
         ul(['Contacts you import from your phone, used to suggest names as you type. They are never uploaded.', 'A copy of your list, so Shepherd works without signal.']) +
         '<p class="note"><b>Never collected</b>:</p>' +
         ul(['Your location.', 'Your WhatsApp, text or iMessage conversations.', 'Your whole address book (only the contacts you choose).', 'Anything for adverts or tracking.']) +
         '<p class="note"><b>When someone scans your QR code</b>: they choose to type their name (and number if they want) and tick that they\'re happy to be added. It goes only into your list, and they then message you on WhatsApp themselves.</p>' +
-        '<p class="note"><b>If you connect your phone calendar</b>: a private calendar link shows your Bible studies (with first names) and your events. Anyone you give that link to can see them, and your phone\'s calendar service (such as Apple or Google) keeps a copy. You can replace the link in Shepherd at any time.</p>') +
+        '<p class="note"><b>If you connect your phone calendar</b>: a private calendar link shows your Bible studies (with first names and topics) and your events. Anyone you give that link to can see them, and your phone\'s calendar service (such as Apple or Google) keeps a copy. You can replace the link in Shepherd at any time.</p>') +
       sec('How it\'s protected',
         ul(['Your list is saved to your own private account. Nobody else using Shepherd can see it.',
           'Everything travels over an encrypted connection and is stored with Cloudflare, which encrypts it on its servers.',

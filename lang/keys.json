@@ -901,5 +901,9 @@
  "900": "Only people with your church's invite code can create an account.",
  "901": "Earlier versions are kept for up to a year so nothing is lost by mistake. Deleting someone's data removes every copy Shepherd keeps.",
  "902": "For emergencies, the whole database can be restored to any point in the last 7 days, so a deletion is fully gone after 7 days.",
- "903": "Someone asks you to delete their details? Open them, tap <b>No longer contact</b>, then <b>Delete all their data</b>. That removes them from Shepherd, including your prayer list. Copies you made yourself, such as an exported backup or your phone's contacts, are yours to delete."
+ "903": "Someone asks you to delete their details? Open them, tap <b>No longer contact</b>, then <b>Delete all their data</b>. That removes them from Shepherd, including your prayer list. Copies you made yourself, such as an exported backup or your phone's contacts, are yours to delete.",
+ "904": "Your name, email, WhatsApp number, home country and settings (such as language, time zone and notification times).",
+ "905": "For each phone you're signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.",
+ "906": "The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.",
+ "907": "<b>If you connect your phone calendar</b>: a private calendar link shows your Bible studies (with first names and topics) and your events. Anyone you give that link to can see them, and your phone's calendar service (such as Apple or Google) keeps a copy. You can replace the link in Shepherd at any time."
 }

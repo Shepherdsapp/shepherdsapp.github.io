@@ -1,0 +1,4 @@
+904	Dein Name, deine E-Mail, WhatsApp-Nummer, dein Land und deine Einstellungen (etwa Sprache, Zeitzone und Benachrichtigungszeiten).
+905	Für jedes Handy, auf dem du angemeldet bist: wann es sich angemeldet hat und zuletzt benutzt wurde und welcher Browser es ist, damit es angemeldet bleibt.
+906	Die für die nächsten zwei Wochen geplanten Benachrichtigungen. Nach dem Versand wird nur die Uhrzeit aufbewahrt, 3 Tage lang.
+907	<b>Wenn du deinen Handy-Kalender verbindest</b>: Ein privater Kalender-Link zeigt deine Bibelstudien (mit Vornamen und Themen) und deine Termine. Alle, denen du den Link gibst, können sie sehen, und der Kalenderdienst deines Handys (etwa Apple oder Google) speichert eine Kopie. Du kannst den Link in Shepherd jederzeit ersetzen.

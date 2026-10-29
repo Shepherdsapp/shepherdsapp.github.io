@@ -946,12 +946,12 @@ Church invite code
 Ask the person who runs Shepherd at your church.
 Add your name.
 That invite code isn't right. Ask the person who runs Shepherd at your church.
-Your name, email, WhatsApp number and home country.
+Your name, email, WhatsApp number, home country and settings (such as language, time zone and notification times).
 The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.
-For each phone you're signed in on: when it signed in and what kind of browser it is, so it stays signed in.
-The notifications planned for the next two weeks, until they're sent.
+For each phone you're signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.
+The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.
 <b>When someone scans your QR code</b>: they choose to type their name (and number if they want) and tick that they're happy to be added. It goes only into your list, and they then message you on WhatsApp themselves.
-<b>If you connect your phone calendar</b>: a private calendar link shows your Bible studies (with first names) and your events. Anyone you give that link to can see them, and your phone's calendar service (such as Apple or Google) keeps a copy. You can replace the link in Shepherd at any time.
+<b>If you connect your phone calendar</b>: a private calendar link shows your Bible studies (with first names and topics) and your events. Anyone you give that link to can see them, and your phone's calendar service (such as Apple or Google) keeps a copy. You can replace the link in Shepherd at any time.
 Phone notifications are encrypted on the way to your phone and only show first names, never notes or prayer points.
 Shepherd's fonts and code come from Shepherd itself, so no advertising or tracking company sees you use it.
 Only people with your church's invite code can create an account.

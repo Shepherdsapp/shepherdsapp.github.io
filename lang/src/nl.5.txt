@@ -1,0 +1,4 @@
+904	Je naam, e-mail, WhatsApp-nummer, land en instellingen (zoals taal, tijdzone en meldingstijden).
+905	Voor elke telefoon waarop je bent ingelogd: wanneer die inlogde en voor het laatst gebruikt werd, en wat voor browser het is, zodat hij ingelogd blijft.
+906	De meldingen die voor de komende twee weken gepland staan. Na verzending wordt alleen de tijd bewaard, 3 dagen lang.
+907	<b>Als je je telefoonagenda koppelt</b>: een privélink toont je bijbelstudies (met voornamen en onderwerpen) en je activiteiten. Iedereen aan wie je die link geeft, kan ze zien, en de agendadienst van je telefoon (zoals Apple of Google) bewaart een kopie. Je kunt de link in Shepherd altijd vervangen.

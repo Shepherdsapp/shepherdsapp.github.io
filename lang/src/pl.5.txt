@@ -1,0 +1,4 @@
+904	Twoje imię, e-mail, numer WhatsApp, kraj i ustawienia (np. język, strefa czasowa i godziny powiadomień).
+905	Dla każdego telefonu, na którym jesteś zalogowany: kiedy się zalogował i kiedy był ostatnio używany oraz jaka to przeglądarka, żeby pozostał zalogowany.
+906	Powiadomienia zaplanowane na najbliższe dwa tygodnie. Po wysłaniu zostaje tylko godzina, przez 3 dni.
+907	<b>Jeśli połączysz kalendarz telefonu</b>: prywatny link pokazuje Twoje studia biblijne (z imionami i tematami) i wydarzenia. Każdy, komu dasz ten link, może je zobaczyć, a usługa kalendarza w telefonie (np. Apple lub Google) przechowuje kopię. Link możesz w każdej chwili zmienić w Shepherd.

@@ -1,0 +1,4 @@
+904	Your name, email, WhatsApp number, country and settings (like language, time zone and notification times).
+905	For every phone wey you sign in: when e sign in and when you use am last, and wetin kind browser e be, so e go stay signed in.
+906	Di notifications wey dey planned for di next two weeks. After we send dem, na only di time we dey keep, for 3 days.
+907	<b>If you connect your phone calendar</b>: one private link go show your Bible studies (with first names and topics) and your events. Anybody wey you give di link fit see dem, and your phone calendar service (like Apple or Google) go keep copy. You fit change di link for Shepherd anytime.

@@ -443,7 +443,7 @@ export async function sendDue(env, limit) {
     }
     sent += good;
     if (list.length && !good && later === list.length) { retry++; continue; } // phones unreachable right now: try next run
-    await run(env, 'UPDATE outbox SET sent = 1 WHERE id = ?', d.id);
+    await run(env, "UPDATE outbox SET sent = 1, title = '', body = '', url = '' WHERE id = ?", d.id); // once sent, only the time is kept (for 3 days)
   }
   return { sent, items: due.length, retry };
 }

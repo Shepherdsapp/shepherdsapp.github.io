@@ -1,0 +1,4 @@
+904	Seu nome, e-mail, número de WhatsApp, país e ajustes (como idioma, fuso horário e horários das notificações).
+905	Para cada celular em que você está conectado: quando entrou e quando foi usado pela última vez, e que tipo de navegador é, para continuar conectado.
+906	As notificações planejadas para as próximas duas semanas. Depois de enviadas, só o horário é guardado, por 3 dias.
+907	<b>Se você conectar o calendário do celular</b>: um link privado mostra seus estudos bíblicos (com primeiros nomes e temas) e seus eventos. Qualquer pessoa a quem você der esse link pode vê-los, e o serviço de calendário do seu celular (como Apple ou Google) guarda uma cópia. Você pode trocar o link no Shepherd quando quiser.

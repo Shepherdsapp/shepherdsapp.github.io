@@ -1,0 +1,4 @@
+904	Tavo vardas, el. paštas, WhatsApp numeris, šalis ir nustatymai (pvz., kalba, laiko juosta ir pranešimų laikas).
+905	Kiekvienam telefonui, kuriame esi prisijungęs: kada jis prisijungė ir kada paskutinį kartą naudotas, ir kokia tai naršyklė, kad liktų prisijungęs.
+906	Pranešimai, suplanuoti ateinančioms dviem savaitėms. Išsiuntus saugomas tik laikas, 3 dienas.
+907	<b>Jei prijungsi telefono kalendorių</b>: privati nuoroda rodo tavo Biblijos studijas (su vardais ir temomis) ir renginius. Kiekvienas, kam duosi šią nuorodą, gali juos matyti, o telefono kalendoriaus paslauga (pvz., Apple ar Google) saugo kopiją. Nuorodą Shepherd gali pakeisti bet kada.
