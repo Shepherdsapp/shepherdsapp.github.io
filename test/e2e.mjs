@@ -218,8 +218,7 @@ try {
   await C.p.goto(APP); await wait(600);
   await C.p.click('[data-auth="signin"]'); await wait(200); await C.p.click('[data-auth="forgot"]'); await wait(200);
   await C.p.fill('#aEmail', 'pavi@church.test'); await C.p.click('#aGo'); await wait(1000);
-  ok(/Ask the person who runs Shepherd/.test(await C.p.textContent('#auth')) && await C.p.locator('#aCode').isVisible(), 'asks for a reset code from the church\'s Shepherd admin');
-  ok(/or email lostshepherdapp@gmail\.com/.test(await C.p.textContent('#auth')), 'and offers lostshepherdapp@gmail.com for help');
+  ok(/Email lostshepherdapp@gmail\.com for a reset code/.test(await C.p.textContent('#auth')) && await C.p.locator('#aCode').isVisible(), 'says to email lostshepherdapp@gmail.com for a reset code');
   const adm = await (await realFetch(API + '/admin', { method: 'POST', body: new URLSearchParams({ admin: 'admin-key-e2e', email: 'pavi@church.test' }) })).text();
   const code = (/(\d{6})<\/b>/.exec(adm) || [])[1];
   await C.p.fill('#aCode', code); await C.p.fill('#aPw', 'new password 22'); await C.p.click('#aGo'); await wait(2500);

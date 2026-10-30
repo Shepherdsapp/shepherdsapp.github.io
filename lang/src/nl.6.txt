@@ -4,3 +4,4 @@
 911	Vragen, problemen of ideeën? Mail naar {0}.
 912	Mail Shepherd
 913	Vraag je per e-mail een code om je wachtwoord te herstellen, dan wordt die naar het adres gestuurd dat je typte, vanaf <b>{0}</b> via Gmail van Google.
+914	Mail naar {0} voor een code, typ die daarna in en kies een nieuw wachtwoord.

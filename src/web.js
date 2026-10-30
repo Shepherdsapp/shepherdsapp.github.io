@@ -193,7 +193,7 @@ function bindAuth() {
       if (mode === 'forgot') {
         var rq = await api('POST', '/api/reset/request', { email: email });
         var help = (CFG.privacy && CFG.privacy.contact) || 'lostshepherdapp@gmail.com';
-        showAuth('code', rq.emailed ? 'If ' + email + ' has an account, we\'ve emailed a 6-digit code. Enter it and choose a new password. Check your spam folder too.' : 'Ask the person who runs Shepherd at your church for a reset code, or email ' + help + '. Then enter it and choose a new password.');
+        showAuth('code', rq.emailed ? 'If ' + email + ' has an account, we\'ve emailed a 6-digit code. Enter it and choose a new password. Check your spam folder too.' : 'Email ' + help + ' for a reset code, then enter it and choose a new password.');
         return;
       }
       var key = await pwKey(email, pw), r;

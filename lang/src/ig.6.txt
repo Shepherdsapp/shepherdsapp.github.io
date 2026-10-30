@@ -4,3 +4,4 @@
 911	Ajụjụ, nsogbu ma ọ bụ echiche? Zitere {0} email.
 912	Zitere Shepherd email
 913	Ọ bụrụ na ị rịọ koodu ntọghari okwuntughe site na email, a na-ezigara ya n'adreesị i dere, site na <b>{0}</b> site na Gmail nke Google.
+914	Zitere {0} email maka koodu ntọghari, mgbe ahụ tinye ya ma họrọ okwuntughe ọhụrụ.

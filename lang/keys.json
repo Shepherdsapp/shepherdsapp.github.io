@@ -911,5 +911,6 @@
  "910": "Help",
  "911": "Questions, problems or ideas? Email {0}.",
  "912": "Email Shepherd",
- "913": "If you ask for a password reset code by email, it is sent to the address you typed, from <b>{0}</b> through Google's Gmail."
+ "913": "If you ask for a password reset code by email, it is sent to the address you typed, from <b>{0}</b> through Google's Gmail.",
+ "914": "Email {0} for a reset code, then enter it and choose a new password."
 }

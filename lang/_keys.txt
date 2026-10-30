@@ -753,7 +753,7 @@ Choose a password of at least 8 characters.
 Choose at least 8 characters.
 Enter your email and we'll help you choose a new password.
 Enter your 6-digit code and choose a new password.
-Ask the person who runs Shepherd at your church for a reset code, or email {0}. Then enter it and choose a new password.
+Email {0} for a reset code, then enter it and choose a new password.
 If {0} has an account, we've emailed a 6-digit code. Enter it and choose a new password. Check your spam folder too.
 You only need to sign in once on this phone.
 Your list is private: nobody else using Shepherd can see it.

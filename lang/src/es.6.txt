@@ -4,3 +4,4 @@
 911	¿Preguntas, problemas o ideas? Escribe a {0}.
 912	Escribir a Shepherd
 913	Si pides un código para restablecer la contraseña por correo, se envía a la dirección que escribiste, desde <b>{0}</b> a través de Gmail de Google.
+914	Escribe a {0} para pedir un código, luego escríbelo y elige una contraseña nueva.

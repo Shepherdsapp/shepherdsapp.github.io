@@ -4,3 +4,4 @@
 911	Ìbéèrè, ìṣòro tàbí èrò? Kọ ímeèlì sí {0}.
 912	Kọ ímeèlì sí Shepherd
 913	Bí o bá béèrè kóòdù àtúnṣe ọ̀rọ̀ aṣínà nípasẹ̀ ímeèlì, a ó fi ránṣẹ́ sí àdírẹ́sì tí o tẹ̀, láti <b>{0}</b> nípasẹ̀ Gmail ti Google.
+914	Kọ ímeèlì sí {0} fún kóòdù àtúnṣe, lẹ́yìn náà tẹ̀ ẹ́ kí o sì yan ọ̀rọ̀ aṣínà tuntun.

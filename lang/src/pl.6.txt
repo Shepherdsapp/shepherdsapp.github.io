@@ -4,3 +4,4 @@
 911	Pytania, problemy lub pomysły? Napisz na {0}.
 912	Napisz do Shepherd
 913	Jeśli poprosisz o kod do zresetowania hasła e-mailem, zostanie wysłany na wpisany adres z <b>{0}</b> przez Gmail firmy Google.
+914	Napisz na {0}, aby dostać kod, potem wpisz go i wybierz nowe hasło.

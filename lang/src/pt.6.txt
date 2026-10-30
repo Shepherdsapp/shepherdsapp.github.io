@@ -4,3 +4,4 @@
 911	Dúvidas, problemas ou ideias? Escreva para {0}.
 912	Escrever para o Shepherd
 913	Se você pedir um código para redefinir a senha por e-mail, ele é enviado para o endereço que você digitou, a partir de <b>{0}</b>, pelo Gmail do Google.
+914	Escreva para {0} pedindo um código, depois digite-o e escolha uma nova senha.

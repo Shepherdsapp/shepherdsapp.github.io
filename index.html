@@ -409,7 +409,7 @@ body{overflow-x:clip}
     ['ja', '日本語', 'ja'], ['de', 'Deutsch', 'de'], ['ru', 'Русский', 'ru'], ['lt', 'Lietuvių', 'lt']
   ];
   var CODES = LANGS.map(function (l) { return l[0]; });
-  var PACK_VER = 'f2c741e581';
+  var PACK_VER = 'a68ea27746';
   var lang = 'en', dict = null, tpls = [], cache = new Map(), outs = new WeakMap(), plural = null;
   var collect = typeof window !== 'undefined' && window.__i18nCollect ? window.__i18nCollect : null;
   var INLINE = { B: 1, STRONG: 1, I: 1, EM: 1, BR: 1, U: 1, SMALL: 1, CODE: 1 };
@@ -899,7 +899,7 @@ function bindAuth() {
       if (mode === 'forgot') {
         var rq = await api('POST', '/api/reset/request', { email: email });
         var help = (CFG.privacy && CFG.privacy.contact) || 'lostshepherdapp@gmail.com';
-        showAuth('code', rq.emailed ? 'If ' + email + ' has an account, we\'ve emailed a 6-digit code. Enter it and choose a new password. Check your spam folder too.' : 'Ask the person who runs Shepherd at your church for a reset code, or email ' + help + '. Then enter it and choose a new password.');
+        showAuth('code', rq.emailed ? 'If ' + email + ' has an account, we\'ve emailed a 6-digit code. Enter it and choose a new password. Check your spam folder too.' : 'Email ' + help + ' for a reset code, then enter it and choose a new password.');
         return;
       }
       var key = await pwKey(email, pw), r;

@@ -4,3 +4,4 @@
 911	Fragen, Probleme oder Ideen? Schreib an {0}.
 912	Shepherd schreiben
 913	Wenn du einen Code zum Zurücksetzen des Passworts per E-Mail anforderst, wird er an die eingegebene Adresse geschickt, von <b>{0}</b> über Googles Gmail.
+914	Schreib an {0}, um einen Code zu bekommen, gib ihn dann ein und wähle ein neues Passwort.

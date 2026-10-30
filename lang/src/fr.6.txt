@@ -4,3 +4,4 @@
 911	Des questions, un problème ou une idée ? Écrivez à {0}.
 912	Écrire à Shepherd
 913	Si vous demandez un code de réinitialisation par e-mail, il est envoyé à l'adresse que vous avez saisie, depuis <b>{0}</b> via Gmail de Google.
+914	Écrivez à {0} pour obtenir un code, puis saisissez-le et choisissez un nouveau mot de passe.
