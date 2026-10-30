@@ -117,7 +117,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click('#tourMore'); await wait(60);
   ok($('#tour').hidden && $('#sheetTitle').textContent === 'Turn on notifications', 'opens the notifications guide');
   const ng = $('#sheetBody').textContent;
-  ok(/Shepherd app/.test(ng) && ng.includes('sitbackco.github.io/shepherd') && /Add to Home Screen/.test(ng) && /Install app/.test(ng), 'inside Claude, the guide points to the Shepherd app and how to install it');
+  ok(/Shepherd app/.test(ng) && ng.includes('shepherdsapp.github.io') && /Add to Home Screen/.test(ng) && /Install app/.test(ng), 'inside Claude, the guide points to the Shepherd app and how to install it');
   ok(!/Claude/.test(ng) && !/Google/.test(ng) && !/TimeTree/.test(ng), 'notifications guide has nothing to do with Claude, Google or TimeTree');
   ok($$('#sheetBody .osb[data-os="ios"]').length === 1 && $$('#sheetBody .osb[data-os="android"]').length === 1, 'install steps for iPhone and Android');
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);

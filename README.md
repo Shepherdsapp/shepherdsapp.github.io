@@ -64,15 +64,15 @@ The tables and the notification keys are created by the Worker itself the first 
    from 1.7. On the `privacy:` line, put the email people should write to about their data, e.g.
    `privacy: { controller: 'Pavi', contact: 'lostshepherdapp@gmail.com' }` → **Commit changes**.
 4. **Settings → Pages → Deploy from a branch → main / (root) → Save**.
-5. A minute or two later it's live at **https://sitbackco.github.io/shepherd/**.
+5. A minute or two later it's live at **https://shepherdsapp.github.io/**.
 
-The server only accepts requests from `https://sitbackco.github.io`. If the app ever lives somewhere else, add a Text
+The server only accepts requests from `https://shepherdsapp.github.io`. If the app ever lives somewhere else, add a Text
 variable `ALLOWED_ORIGINS` to the Worker with that address, and update `APP_URL` too.
 
 ## 3. On each phone
 
 **iPhone** (iOS 16.4 or later)
-1. Open **https://sitbackco.github.io/shepherd/** in **Safari** → **Share** → **Add to Home Screen** → **Add**.
+1. Open **https://shepherdsapp.github.io/** in **Safari** → **Share** → **Add to Home Screen** → **Add**.
 2. Open Shepherd from that icon from then on. Notifications only work from the Home Screen icon.
 3. **Create account** (or **Sign in**). You only sign in once on each phone.
 4. Settings → **Turn on notifications** → **Allow** → **Send a test**.
@@ -171,7 +171,7 @@ phones; they sign back in with the new password and nothing is lost.
 ## Your data
 
 The full privacy notice is in the app (Settings → **Privacy and safe use**) and at
-**https://sitbackco.github.io/shepherd/privacy.html**. It covers who is responsible, each user's own responsibility, the
+**https://shepherdsapp.github.io/privacy.html**. It covers who is responsible, each user's own responsibility, the
 six-point acceptable use statement, what is kept and why, how it's protected, keeping your phone safe (passcode,
 Shepherd's PIN, staying up to date) and how long things are kept. Edit the wording in `src/privacy.js`, add any new
 lines to `lang/_keys.txt` and every `lang/src/<code>.*.txt`, then run `node lang/check.mjs` and `node build.mjs`.

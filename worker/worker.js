@@ -17,8 +17,8 @@
    2. This Worker → Settings → Bindings → Add → D1 database → Variable name  DB  → pick  shepherd
    3. This Worker → Settings → Triggers → Cron Triggers → Add → choose "Every 5 minutes" (cron: star-slash-5 then four stars)
    4. Settings → Variables and Secrets (all optional):
-        ALLOWED_ORIGINS  Text    where the app lives. Default https://sitbackco.github.io
-        APP_URL          Text    the app's address. Default https://sitbackco.github.io/shepherd/
+        ALLOWED_ORIGINS  Text    where the app lives. Default https://shepherdsapp.github.io
+        APP_URL          Text    the app's address. Default https://shepherdsapp.github.io/
         ADMIN_KEY        Secret  a long passcode you make up; lets you give someone a password reset code
         GMAIL_USER       Text    a Gmail address to email reset codes from (free), e.g. lostshepherdapp@gmail.com
         GMAIL_APP_PASSWORD Secret an App Password made in that Google account (Security → App passwords)
@@ -32,8 +32,8 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 export const VERSION = 3;
-const DEFAULT_ORIGINS = 'https://sitbackco.github.io';
-const DEFAULT_APP_URL = 'https://sitbackco.github.io/shepherd/';
+const DEFAULT_ORIGINS = 'https://shepherdsapp.github.io';
+const DEFAULT_APP_URL = 'https://shepherdsapp.github.io/';
 const MAX_DOC = 256 * 1024;
 const MAX_OPS = 200;
 const SESSION_DAYS = 180;

@@ -10,7 +10,7 @@ const worker = mod.default, { sendDue, encryptPush, icsText, calItems } = mod;
 const results = []; let current = '';
 const ok = (c, m) => { results.push({ ok: !!c, m: current + ' - ' + m }); if (!c) console.log('  FAIL: ' + current + ' - ' + m); };
 const key = s => crypto.createHash('sha256').update(s).digest('hex');
-const ORIGIN = 'https://sitbackco.github.io';
+const ORIGIN = 'https://shepherdsapp.github.io';
 
 const env = { DB: await makeD1(), ADMIN_KEY: 'admin-secret-123', ALLOWED_ORIGINS: ORIGIN };
 async function call(method, path, bodyObj, token, extra) {
@@ -363,7 +363,7 @@ try {
   const code = (await call('POST', '/api/qr', {}, A.token)).data.code;
   r = await call('GET', '/hi/' + code);
   ok(/type="checkbox"[^>]*name="agree"|name="agree"[^>]*type="checkbox"/.test(r.data) && /required/.test(r.data), 'the hello page has a required tick to agree');
-  ok(/href="https:\/\/sitbackco\.github\.io\/shepherd\/privacy\.html"/.test(r.data), 'and a link to the privacy notice');
+  ok(/href="https:\/\/shepherdsapp\.github\.io\/privacy\.html"/.test(r.data), 'and a link to the privacy notice');
   r = await call('POST', '/hi/' + code, { name: 'No Tick' }, null, ipH('10.5.0.2'));
   const none = ((await call('GET', '/api/docs?since=0', undefined, A.token)).data.docs || []).filter(d => d.d && d.d.source === 'qr');
   ok(r.status === 400 && none.length === 0, 'without the tick nobody is added');

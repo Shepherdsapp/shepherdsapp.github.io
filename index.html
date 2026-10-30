@@ -1175,7 +1175,7 @@ function defaultProfile() {
 var S = { uid: null, profile: defaultProfile(), contacts: {}, events: {}, disciples: {}, prayers: {}, view: 'today', contactId: null, filter: 'all', search: '', mode: 'loading', sync: 'loading', unlocked: false, profileSeen: false, isOwner: false };
 var DB = null, DOWN = null;
 var WEB = window.SHEPHERD_WEB || null; /* set when Shepherd runs as its own website (GitHub + Cloudflare) */
-var WEB_APP_URL = 'https://sitbackco.github.io/shepherd/';
+var WEB_APP_URL = 'https://shepherdsapp.github.io/';
 var pending = {}; var pv = 0; var flushing = false;
 
 function key() { return 'shepherd:v1:' + (S.uid || 'local'); }
