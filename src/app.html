@@ -182,11 +182,12 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 
 /* dock */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-.dock-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);height:var(--dock)}
+.dock-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));height:var(--dock)}
 .tab{background:none;border:0;display:grid;justify-items:center;align-content:center;gap:3px;font-size:12px;font-weight:600;color:var(--muted);position:relative}
 .tab svg{width:23px;height:23px}
 .tab[aria-current="page"]{color:var(--accent)}
 .tab[aria-current="page"]::before{content:"";position:absolute;top:0;width:28px;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
+.tab{min-width:0;padding:0 1px;text-align:center;line-height:1.1;overflow-wrap:anywhere;hyphens:auto}
 .tab .badge{position:absolute;top:8px;left:calc(50% + 8px);min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--bad);color:var(--surface);font-size:11px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
 .fab{position:fixed;z-index:31;right:max(16px,calc(50% - 264px));bottom:calc(var(--dock) + 16px + env(safe-area-inset-bottom,0px));height:56px;padding:0 20px 0 16px;border-radius:18px;border:0;background:var(--accent);color:var(--accent-ink);font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow)}
 .fab svg{width:22px;height:22px;stroke-width:2.2}
@@ -221,6 +222,10 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 .verse{margin:0;padding:16px 18px;border-radius:var(--r);background:var(--gold-soft);display:grid;gap:6px}
 .verse p{margin:0;font-family:var(--display);font-size:17.5px;line-height:1.4;text-wrap:balance}
 .verse cite{font-style:normal;font-size:13px;color:var(--muted);font-weight:600}
+.about-v{margin:0 0 10px;font-family:var(--display);font-style:italic;font-size:16px;line-height:1.4;color:var(--fg)}
+.about-v cite{font-family:var(--body,inherit);font-style:normal;font-size:13px;color:var(--muted);font-weight:600;white-space:nowrap}
+.about-ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.about-ul li{line-height:1.45}
 .meter{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
 .meter .track{flex:1;height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}
 .meter .track span{display:block;height:100%;background:var(--accent);border-radius:99px}
@@ -324,8 +329,8 @@ body{overflow-x:clip}
   .prow-main{gap:10px;padding-left:12px}
   .ch{width:52px}
   .rep{padding:4px 9px;font-size:13px;margin-right:6px}
-  .tab{font-size:11px}
-  .tab svg{width:22px;height:22px}
+  .tab{font-size:10.5px}
+  .tab svg{width:21px;height:21px}
   .tab[aria-current="page"] svg{padding:2px 8px}
   .seg button{font-size:13px}
   .stats{gap:6px} .stat{padding:8px} .stat b{font-size:20px}
@@ -404,6 +409,7 @@ body{overflow-x:clip}
     <button class="tab" data-act="tab" data-v="disciples"><svg class="i" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Disciples</button>
     <button class="tab" data-act="tab" data-v="events"><svg class="i" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m12 13 1 2 2.2.3-1.6 1.5.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.5L11 15z"/></svg>Calendar</button>
     <button class="tab" data-act="tab" data-v="week"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Week</button>
+    <button class="tab" data-act="tab" data-v="about"><svg class="i" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7.5 4.5 3.5 4.8v13.7c4-.3 6.5.2 8.5 1.7 2-1.5 4.5-2 8.5-1.7V4.8c-4-.3-6.5.2-8.5 1.7z"/><path d="M12 6.5v13.7"/></svg>About</button>
   </div>
 </nav>
 
@@ -1302,6 +1308,41 @@ function weekStats(ws) {
   return { ws: ws, we: we, pool: pool, done: done };
 }
 function weekWord(n, d) { var r = d ? n / d : 0; return !d ? '' : r >= 0.9 ? 'great week' : r >= 0.6 ? 'good going' : n > 0 ? 'keep going' : 'start with today\'s list'; }
+// About: what Shepherd does and why. Bible verses stay in English (NIV) in every language.
+function viewAbout() {
+  var helpMail = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy && window.SHEPHERD_CONFIG.privacy.contact) || 'lostshepherdapp@gmail.com';
+  var vl = function (text, ref) { return '<p class="about-v" data-noi18n>“' + text + '” <cite>' + ref + ' (NIV)</cite></p>'; };
+  var sec = function (title, verses, items) { return '<section class="card"><h2 class="h3">' + title + '</h2>' + verses + '<ul class="about-ul">' + items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></section>'; };
+  return '<header class="hd"><h1 class="h1">About Shepherd</h1></header>' +
+    '<figure class="verse" data-noi18n><p>“Suppose one of you has a hundred sheep and loses one of them. Doesn\'t he leave the ninety-nine in the open country and go after the lost sheep until he finds it?”</p><cite>Luke 15:4 (NIV)</cite></figure>' +
+    '<p class="lede">Shepherd helps you care for the people God puts in your path, so nobody slips through the cracks.</p>' +
+    sec('Know your flock', vl('Be sure you know the condition of your flocks', 'Proverbs 27:23'), [
+      '<b>Today</b> shows who to message, who\'s waiting on your reply and who needs a check-in.',
+      '<b>People</b> keeps everyone you meet, with notes and history. <b>Journey</b> shows them by stage, from first contact to disciple.',
+      'One tap records <b>I replied</b>, <b>Waiting on them</b> or <b>I need to reply</b>, and a catch-up checks in on anyone still waiting.']) +
+    sec('Reach out', vl('Make the most of every opportunity', 'Colossians 4:5'), [
+      'Message on WhatsApp in one tap.',
+      'Share your QR code and new people add themselves.',
+      'Bring in your phone contacts, or save someone to your phone.',
+      'Phone notifications tell you by name who to reach out to.']) +
+    sec('Open the Word together', vl('…examined the Scriptures every day', 'Acts 17:11'), [
+      'Log Bible studies, plan the next one, and get a reminder an hour before.']) +
+    sec('Make disciples', vl('…go and make disciples of all nations', 'Matthew 28:19') + vl('…entrust to reliable people who will also be qualified to teach others', '2 Timothy 2:2'), [
+      '<b>Disciples</b> tracks the people you\'re investing in, with a weekly check-in.']) +
+    sec('Pray for one another', vl('…pray for each other', 'James 5:16'), [
+      'A daily prayer list of 1 to 15 people, with gentle reminders.']) +
+    sec('Gather together', vl('…not giving up meeting together… but encouraging one another', 'Hebrews 10:25'), [
+      '<b>Calendar</b> keeps church events, invites (sent on WhatsApp) and who came, and links to your phone calendar.',
+      '<b>Week</b> shows how faithfully you followed up.']) +
+    sec('Every nation and language', vl('…from every nation, tribe, people and language', 'Revelation 7:9'), [
+      '15 languages, iPhone and Android, works without signal.']) +
+    sec('Treat people as you\'d want to be treated', vl('Do to others as you would have them do to you.', 'Luke 6:31'), [
+      'Your list is private to you. People are only added with their agreement and deleted whenever they ask.',
+      'Lock Shepherd with a PIN and export a backup any time.']) +
+    '<figure class="verse" data-noi18n><p>“Feed my sheep.”</p><cite>John 21:17 (NIV)</cite></figure>' +
+    '<section class="card" id="aboutHelp"><p class="note">New here? Take the tour, or read how your data is kept.</p><div class="row"><button class="btn grow" data-act="tour">Show me around</button><button class="btn grow" data-act="yourdata">Privacy and safe use</button></div>' +
+    '<p class="note">Questions, problems or ideas? Email ' + esc(helpMail) + '.</p><a class="btn" href="mailto:' + esc(helpMail) + '?subject=Shepherd">Email Shepherd</a></section>';
+}
 function viewWeek() {
   var ws = weekStart(Date.now()), cur = weekStats(ws);
   var studies = 0, added = 0, came = 0;
@@ -1399,6 +1440,7 @@ function render() {
   else if (v === 'events') html = viewEvents();
   else if (v === 'disciples') html = viewDisciples();
   else if (v === 'week') html = viewWeek();
+  else if (v === 'about') html = viewAbout();
   else if (v === 'settings') html = viewSettings();
   else html = viewToday();
   main.innerHTML = '<div class="view">' + html + '</div>';
@@ -1406,7 +1448,7 @@ function render() {
   document.querySelectorAll('.tab').forEach(function (t) { if (t.dataset.v === tabV) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
   var owed = active().filter(function (c) { return c.replyState === 'me' || dayDiff(dueDay(c), today()) < 0; }).length;
   var b = $('#badge'); b.hidden = !owed; b.textContent = owed > 99 ? '99+' : owed;
-  $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events'; // Today has its own Add someone box
+  $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events' || S.view === 'about'; // Today has its own Add someone box; About is for reading
   if (keep) { var el = document.getElementById(keep); if (el) { el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   bindView();
   if (TOUR_I >= 0) placeTour();
@@ -1926,6 +1968,7 @@ function calSheet() {
    while you do it, then carries on by itself (or when you tap Continue tour). */
 var TOUR = [
   { title: 'Welcome to Shepherd', text: 'Shepherd reminds you who to check in with, so no one you\'re checking up on slips through. This tour walks through every part of the app and lets you set it up as you go. It takes about three minutes.' },
+  { view: 'about', target: '.tab[data-v="about"]', title: 'Read what Shepherd does and why', text: 'About explains everything Shepherd can do, with the Bible verses behind it. Read it now or come back any time.' },
   { view: 'settings', target: '#profForm', title: 'Start in Settings', text: 'First, open Settings and add your WhatsApp number and the first message that will be sent automatically when they scan your QR code.',
     doIt: { label: 'Add my number now', note: 'Add your number and message, then tap Save.', waitFor: 'profile', run: function () { var p = $('#pPhone'); if (p) p.focus(); } } },
   { view: 'settings', target: '#notifCard', title: 'Turn on notifications', text: 'Most people use Shepherd on their phone, so turn on notifications. Shepherd tells you by name who to message, who to reply to and who to check on, and opens that person when you tap.',
@@ -1982,7 +2025,7 @@ function showTourStep(i) {
   if (i >= steps) return endTour();
   if (i < 0) i = 0;
   TOUR_I = i; TOUR_PAUSED = false; $('#tourPill').hidden = true;
-  lsSet('shepherd:tourStep:' + (S.uid || 'local'), String(i));
+  lsSet('shepherd:tourStep:' + (S.uid || 'local'), 'v2:' + i); // v2 = the 17-step tour with About as step 2
   var st = TOUR[i];
   if (st.view && S.view !== st.view) go(st.view);
   $('#tourTitle').textContent = st.title; $('#tourText').textContent = st.text;
@@ -2012,6 +2055,13 @@ function tourEvent(kind) {
   var st = TOUR[TOUR_I];
   if (st.doIt && st.doIt.waitFor === kind) setTimeout(function () { if (TOUR_PAUSED) resumeTour(true); }, 900);
 }
+// where to pick the tour up again; someone halfway through the old 16-step tour moves along one, because About was added as step 2
+function tourResumeAt(raw) {
+  raw = String(raw || '');
+  if (raw.indexOf('v2:') === 0) return Number(raw.slice(3)) || 0;
+  var old = Number(raw) || 0;
+  return old >= 1 ? old + 1 : old;
+}
 function startTour() { if (!$('#sheet').hidden) closeSheet(); TOUR_I = 0; showTourStep(0); }
 function endTour() {
   TOUR_I = -1; TOUR_PAUSED = false; $('#tour').hidden = true; $('#tourPill').hidden = true;
@@ -2027,7 +2077,7 @@ function maybeTour() {
   if (S.profile.tourDone || lsGet('shepherd:tourDone:' + (S.uid || 'local'))) return;
   setTimeout(function () {
     if (S.profile.pinHash && !S.unlocked) { S.tourChecked = false; return; } if (S.profile.tourDone) return;
-    var at = Number(lsGet('shepherd:tourStep:' + (S.uid || 'local'))) || 0; // pick up where it left off
+    var at = tourResumeAt(lsGet('shepherd:tourStep:' + (S.uid || 'local'))); // pick up where it left off
     if (at > 0 && at < TOUR.length) { if (!$('#sheet').hidden) closeSheet(); showTourStep(at); } else startTour();
   }, 300);
 }
@@ -2439,7 +2489,7 @@ if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFul
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; openFromLink(q.get('open'), q.get('view')); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
-window.__shepherd = { saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
+window.__shepherd = { tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
 
 /* ---------- boot ---------- */
 async function boot() {

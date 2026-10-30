@@ -1,0 +1,29 @@
+915	About
+916	About Shepherd
+917	Shepherd dey help you take care of di people wey God put for your way, so nobody go fall comot.
+918	Know your flock
+919	<b>Today</b> dey show who you go message, who dey wait for your reply and who need check-in.
+920	<b>Pipul</b> dey keep everybody wey you meet, with notes and history. <b>Journey</b> dey show dem by stage, from first contact reach disciple.
+921	One tap dey record <b>I don reply</b>, <b>Dey wait for dem</b> or <b>I need to reply</b>, and catch-up dey check on anybody wey still dey wait.
+922	Reach out
+923	Message for WhatsApp with one tap.
+924	Share your QR code and new people go add demself.
+925	Bring your phone contacts come, or save person for your phone.
+926	Phone notifications dey tell you by name who to reach out to.
+927	Open di Word together
+928	Log Bible studies, plan di next one, and get reminder one hour before.
+929	Make disciples
+930	<b>Disciples</b> dey track di people wey you dey invest in, with weekly check-in.
+931	Pray for one another
+932	Daily prayer list of 1 to 15 people, with gentle reminders.
+933	Gather together
+934	<b>Calenda</b> dey keep church events, invites (wey you send for WhatsApp) and who come, and e dey link to your phone calendar.
+935	<b>Week</b> dey show how faithfully you follow up.
+936	Every nation and language
+937	15 languages, iPhone and Android, e dey work without network.
+938	Treat people as you go want make dem treat you
+939	Your list na your own alone. We only dey add people wey gree, and we dey delete dem anytime wey dem ask.
+940	Lock Shepherd with PIN and export backup anytime.
+941	You new here? Take di tour, or read how we dey keep your data.
+942	Read wetin Shepherd dey do and why
+943	About dey explain everything wey Shepherd fit do, with di Bible verses wey dey behind am. Read am now or come back anytime.

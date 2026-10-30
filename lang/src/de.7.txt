@@ -1,0 +1,29 @@
+915	Über
+916	Über Shepherd
+917	Shepherd hilft dir, dich um die Menschen zu kümmern, die Gott dir über den Weg schickt, damit niemand verloren geht.
+918	Kenne deine Herde
+919	<b>Heute</b> zeigt, wem du schreiben solltest, wer auf deine Antwort wartet und wer sich über ein Lebenszeichen freut.
+920	<b>Menschen</b> bewahrt alle, die du kennenlernst, mit Notizen und Verlauf. <b>Weg</b> zeigt sie nach Etappen, vom ersten Kontakt bis zum Jünger.
+921	Ein Tippen hält <b>Ich habe geantwortet</b>, <b>Wartet auf Antwort</b> oder <b>Ich muss antworten</b> fest, und ein Rückblick erinnert an alle, die noch warten.
+922	Geh auf Menschen zu
+923	Schreib mit einem Tippen auf WhatsApp.
+924	Teile deinen QR-Code, und neue Leute tragen sich selbst ein.
+925	Hol deine Handy-Kontakte herein oder speichere jemanden in deinem Handy.
+926	Benachrichtigungen sagen dir mit Namen, wen du ansprechen solltest.
+927	Öffnet gemeinsam das Wort
+928	Halte Bibelstudien fest, plane das nächste und bekomme eine Stunde vorher eine Erinnerung.
+929	Macht zu Jüngern
+930	<b>Jünger</b> begleitet die Menschen, in die du investierst, mit einem wöchentlichen Check-in.
+931	Betet füreinander
+932	Eine tägliche Gebetsliste mit 1 bis 15 Menschen, mit sanften Erinnerungen.
+933	Kommt zusammen
+934	<b>Kalender</b> bewahrt Gemeindetermine, Einladungen (per WhatsApp) und wer da war, und verbindet sich mit deinem Handy-Kalender.
+935	<b>Woche</b> zeigt, wie treu du nachgefasst hast.
+936	Jede Nation und Sprache
+937	15 Sprachen, iPhone und Android, funktioniert ohne Empfang.
+938	Behandle andere, wie du behandelt werden willst
+939	Deine Liste gehört nur dir. Menschen werden nur mit ihrem Einverständnis hinzugefügt und gelöscht, sobald sie es wünschen.
+940	Sperre Shepherd mit einer PIN und exportiere jederzeit eine Sicherung.
+941	Neu hier? Mach die Tour oder lies, wie deine Daten aufbewahrt werden.
+942	Lies, was Shepherd kann und warum
+943	Über erklärt alles, was Shepherd kann, mit den Bibelversen dahinter. Lies es jetzt oder komm jederzeit zurück.

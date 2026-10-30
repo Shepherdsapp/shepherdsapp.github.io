@@ -1,0 +1,29 @@
+915	Nípa rẹ̀
+916	Nípa Shepherd
+917	Shepherd ń ràn ọ́ lọ́wọ́ láti tọ́jú àwọn ènìyàn tí Ọlọ́run fi sí ọ̀nà rẹ, kí ẹnikẹ́ni má bàa sọnù.
+918	Mọ agbo rẹ
+919	<b>Òní</b> ń fi hàn ẹni tí o yẹ kí o kọ̀wé sí, ẹni tí ń dúró de èsì rẹ àti ẹni tí ó nílò ìbẹ̀wò.
+920	<b>Ènìyàn</b> ń tọ́jú gbogbo ẹni tí o bá pàdé, pẹ̀lú àkọsílẹ̀ àti ìtàn. <b>Ìrìn-àjò</b> ń fi wọ́n hàn ní ìpele-ìpele, láti ìbẹ̀rẹ̀ títí dé ọmọ-ẹ̀yìn.
+921	Ìfọwọ́kàn kan ń kọ <b>Mo ti fèsì</b>, <b>Ń dúró dè wọ́n</b> tàbí <b>Mo nílò láti fèsì</b>, àyẹ̀wò sì ń rán ọ létí àwọn tí wọ́n ṣì ń dúró.
+922	Dé ọ̀dọ̀ wọn
+923	Kọ̀wé lórí WhatsApp pẹ̀lú ìfọwọ́kàn kan.
+924	Pín kóòdù QR rẹ, àwọn ènìyàn tuntun á sì fi ara wọn kún un.
+925	Mú àwọn olùbásọ̀rọ̀ fóònù rẹ wọlé, tàbí fi ẹnìkan pamọ́ sínú fóònù rẹ.
+926	Ìfitónilétí ń sọ orúkọ ẹni tí o yẹ kí o kàn sí fún ọ.
+927	Ẹ jọ ṣí Ọ̀rọ̀ náà
+928	Kọ ẹ̀kọ́ Bíbélì sílẹ̀, ṣètò èyí tó kàn, kí o sì gba ìránnilétí wákàtí kan ṣáájú.
+929	Sọ àwọn ènìyàn di ọmọ-ẹ̀yìn
+930	<b>Ọmọ-ẹ̀yìn</b> ń tọpa àwọn ènìyàn tí o ń náwó-nára sí, pẹ̀lú àyẹ̀wò ọ̀sọ̀ọ̀sẹ̀.
+931	Ẹ máa gbàdúrà fún ara yín
+932	Àtòjọ àdúrà ojoojúmọ́ ti ènìyàn 1 sí 15, pẹ̀lú ìránnilétí pẹ̀lẹ́.
+933	Ẹ péjọ pọ̀
+934	<b>Kàlẹ́ńdà</b> ń tọ́jú àwọn ìṣẹ̀lẹ̀ ìjọ, ìpè (tí a fi WhatsApp rán) àti àwọn tí ó wá, ó sì so mọ́ kàlẹ́ńdà fóònù rẹ.
+935	<b>Ọ̀sẹ̀</b> ń fi hàn bí o ṣe tẹ̀lé àwọn ènìyàn pẹ̀lú òtítọ́.
+936	Gbogbo orílẹ̀-èdè àti èdè
+937	Èdè 15, iPhone àti Android, ó ń ṣiṣẹ́ láìsí nẹ́tíwọ̀ọ̀kì.
+938	Ṣe sí àwọn ẹlòmíràn bí o ṣe fẹ́ kí wọ́n ṣe sí ọ
+939	Àtòjọ rẹ jẹ́ tìrẹ nìkan. A máa ń fi ènìyàn kún un pẹ̀lú ìfọwọ́sí wọn nìkan, a sì ń pa wọ́n rẹ́ nígbàkígbà tí wọ́n bá béèrè.
+940	Fi PIN tì Shepherd, kí o sì gbé àdàkọ ìpamọ́ jáde nígbàkígbà.
+941	Ṣé o jẹ́ tuntun níbí? Wo ìrìnàjò àfihàn, tàbí kà bí a ṣe ń tọ́jú dátà rẹ.
+942	Kà ohun tí Shepherd ń ṣe àti ìdí rẹ̀
+943	Nípa rẹ̀ ṣàlàyé gbogbo ohun tí Shepherd lè ṣe, pẹ̀lú àwọn ẹsẹ Bíbélì tó wà lẹ́yìn rẹ̀. Kà á báyìí tàbí padà wá nígbàkígbà.

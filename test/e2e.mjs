@@ -114,6 +114,13 @@ try {
   { const ag = JSON.parse(db("SELECT data FROM docs WHERE path = 'profile'")[0][0]).agreed; ok(ag && ag.v === 1 && ag.at > 0, 'the agreement is saved with the account (version and time)'); }
   ok(await A.p.locator('#installCard').isVisible(), 'iPhone in Safari is shown how to put Shepherd on the Home Screen');
 
+  current = 'About tab';
+  await A.p.click('.tab[data-v="about"]'); await wait(400);
+  { const at = await A.p.textContent('#main');
+    ok(/About Shepherd/.test(at) && /Luke 15:4 \(NIV\)/.test(at) && /Feed my sheep/.test(at) && (await A.p.$$('.tab')).length === 6, 'the About tab opens with the verses, and there are 6 tabs');
+    ok(await A.p.locator('#aboutHelp a[href^="mailto:lostshepherdapp@gmail.com"]').count() === 1, 'About has the email link'); }
+  await A.p.click('.tab[data-v="today"]'); await wait(300);
+
   current = 'Saving to the server';
   await addContact(A.p, 'Daniel Mensah', '07700900111');
   await addContact(A.p, 'Grace Owusu', '07700900222');
@@ -202,7 +209,7 @@ try {
   for (const [wd, ht] of [[320, 568], [375, 667], [390, 844], [430, 932]]) {
     await A.p.setViewportSize({ width: wd, height: ht });
     const bad = [];
-    for (const v of ['today', 'people', 'disciples', 'events', 'week']) { await A.p.click('.tab[data-v="' + v + '"]'); await wait(250); if (await overflow(A.p) > 0) bad.push(v); }
+    for (const v of ['today', 'people', 'disciples', 'events', 'week', 'about']) { await A.p.click('.tab[data-v="' + v + '"]'); await wait(250); if (await overflow(A.p) > 0) bad.push(v); }
     await A.p.click('[data-act="settings"]'); await wait(300); if (await overflow(A.p) > 0) bad.push('settings');
     await A.p.click('#notifCard [data-act="notifguide"]'); await wait(500); if (await overflow(A.p) > 0) bad.push('notifguide');
     if (wd === 320 || wd === 430) await A.p.screenshot({ path: path.join(OUT, 'notif-' + wd + '.png') });
@@ -305,7 +312,7 @@ try {
       }
       await T.p.click('#tourNext'); await wait(300);
     }
-    ok(steps === 16 && !bad.length, wd + 'x' + ht + ': all 16 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
+    ok(steps === 17 && !bad.length, wd + 'x' + ht + ': all 17 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
     if (n === 1) {
       ok(numberSaved, 'typing your number and tapping Continue tour saves it');
       ok(calOk, 'after connecting the calendar, closing the guide goes back to the tour');

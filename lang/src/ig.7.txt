@@ -1,0 +1,29 @@
+915	Banyere
+916	Banyere Shepherd
+917	Shepherd na-enyere gị aka ilekọta ndị Chineke tinyere n'ụzọ gị, ka onye ọ bụla ghara ifu efu.
+918	Mara ìgwè atụrụ gị
+919	<b>Taa</b> na-egosi onye ị ga-ezitere ozi, onye na-eche nzaghachi gị na onye chọrọ ịkpọtụrụ.
+920	<b>Mmadụ</b> na-edebe onye ọ bụla ị zutere, ya na ndetu na akụkọ. <b>Njem</b> na-egosi ha site n'ọkwa, site na mmalite ruo onye na-eso ụzọ.
+921	Otu mpị na-edekọ <b>Azaghachiri m</b>, <b>Na-eche ha</b> ma ọ bụ <b>Ekwesịrị m ịzaghachi</b>, nlele na-echetakwara gị ndị ka na-eche.
+922	Ruo ha aka
+923	Zite ozi na WhatsApp n'otu mpị.
+924	Kesaa koodu QR gị, ndị ọhụrụ ga-etinye onwe ha.
+925	Bubata kọntaktị ekwentị gị, ma ọ bụ chekwaa mmadụ na ekwentị gị.
+926	Ọkwa na-agwa gị aha onye ị ga-akpọtụrụ.
+927	Meghee Okwu ahụ ọnụ
+928	Dekọọ ọmụmụ Baịbụl, hazie nke ọzọ, ma nweta ncheta otu awa tupu oge eruo.
+929	Mee ndị na-eso ụzọ
+930	<b>Ndị na-eso ụzọ</b> na-eso ndị ị na-etinye oge na ha, ya na nlele kwa izu.
+931	Na-ekpe ekpere maka ibe unu
+932	Ndepụta ekpere kwa ụbọchị nke mmadụ 1 ruo 15, ya na ncheta dị nro.
+933	Zukọọ ọnụ
+934	<b>Kalenda</b> na-edebe mmemme chọọchị, òkù (e zigara na WhatsApp) na ndị bịara, ma jikọọ na kalenda ekwentị gị.
+935	<b>Izu</b> na-egosi otú i si soro ndị mmadụ n'ikwesị ntụkwasị obi.
+936	Mba niile na asụsụ niile
+937	Asụsụ 15, iPhone na Android, ọ na-arụ ọrụ n'enweghị netwọk.
+938	Mesoo ndị ọzọ otú ị chọrọ ka ha meso gị
+939	Ndepụta gị bụ nke gị naanị. A na-etinye naanị ndị kwenyere, a na-ehichapụkwa ha mgbe ha rịọrọ.
+940	Jiri PIN kpọchie Shepherd ma bupụ ndabere mgbe ọ bụla.
+941	Ị bụ onye ọhụrụ? Mee njem nlegharị anya, ma ọ bụ gụọ otú e si edebe data gị.
+942	Gụọ ihe Shepherd na-eme na ihe kpatara ya
+943	Banyere na-akọwa ihe niile Shepherd nwere ike ime, ya na amaokwu Baịbụl dị n'azụ ya. Gụọ ya ugbu a ma ọ bụ laghachi mgbe ọ bụla.

@@ -1,0 +1,29 @@
+915	Apie
+916	Apie Shepherd
+917	Shepherd padeda rūpintis žmonėmis, kuriuos Dievas pastato tavo kelyje, kad niekas nebūtų pamirštas.
+918	Pažink savo kaimenę
+919	<b>Šiandien</b> rodo, kam parašyti, kas laukia tavo atsakymo ir kam reikia dėmesio.
+920	<b>Žmonės</b> saugo visus, ką sutinki, su pastabomis ir istorija. <b>Kelionė</b> rodo juos pagal etapus, nuo pirmojo kontakto iki mokinio.
+921	Vienu palietimu pažymi <b>Atsakiau</b>, <b>Laukiama atsakymo</b> arba <b>Turiu atsakyti</b>, o peržiūra primena apie tuos, kurie vis dar laukia.
+922	Eik pas žmones
+923	Rašyk per WhatsApp vienu palietimu.
+924	Pasidalyk savo QR kodu, ir nauji žmonės prisidės patys.
+925	Įkelk telefono kontaktus arba išsaugok žmogų telefone.
+926	Pranešimai vardu pasako, su kuo susisiekti.
+927	Atsiverskite Žodį kartu
+928	Užrašyk Biblijos studijas, suplanuok kitą ir gauk priminimą valandą prieš.
+929	Darykite mokiniais
+930	<b>Mokiniai</b> seka žmones, į kuriuos investuoji, su savaitiniu patikrinimu.
+931	Melskitės vieni už kitus
+932	Kasdienis maldos sąrašas nuo 1 iki 15 žmonių su švelniais priminimais.
+933	Rinkitės kartu
+934	<b>Kalendorius</b> saugo bažnyčios renginius, kvietimus (siunčiamus per WhatsApp) ir kas atėjo, ir susijungia su telefono kalendoriumi.
+935	<b>Savaitė</b> rodo, kaip ištikimai palaikei ryšį.
+936	Kiekviena tauta ir kalba
+937	15 kalbų, iPhone ir Android, veikia be ryšio.
+938	Elkis su kitais taip, kaip nori, kad elgtųsi su tavimi
+939	Tavo sąrašas yra tik tavo. Žmonės pridedami tik jiems sutikus ir ištrinami, kai tik jie paprašo.
+940	Užrakink Shepherd PIN kodu ir bet kada eksportuok atsarginę kopiją.
+941	Esi naujas? Peržiūrėk apžvalgą arba perskaityk, kaip saugomi tavo duomenys.
+942	Perskaityk, ką daro Shepherd ir kodėl
+943	Skiltis „Apie“ paaiškina viską, ką gali Shepherd, su Biblijos eilutėmis. Perskaityk dabar arba sugrįžk bet kada.

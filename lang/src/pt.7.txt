@@ -1,0 +1,29 @@
+915	Sobre
+916	Sobre o Shepherd
+917	O Shepherd ajuda você a cuidar das pessoas que Deus coloca no seu caminho, para que ninguém fique esquecido.
+918	Conheça o seu rebanho
+919	<b>Hoje</b> mostra para quem escrever, quem espera sua resposta e quem precisa de um contato.
+920	<b>Pessoas</b> guarda todos que você conhece, com notas e histórico. <b>Jornada</b> mostra cada um por etapa, do primeiro contato até discípulo.
+921	Um toque registra <b>Respondi</b>, <b>Esperando a resposta</b> ou <b>Preciso responder</b>, e um lembrete confere quem ainda está esperando.
+922	Vá ao encontro
+923	Mande mensagem no WhatsApp com um toque.
+924	Compartilhe seu código QR e as pessoas novas se adicionam sozinhas.
+925	Traga seus contatos do celular ou salve alguém no celular.
+926	As notificações dizem pelo nome com quem falar.
+927	Abram a Palavra juntos
+928	Registre estudos bíblicos, planeje o próximo e receba um lembrete uma hora antes.
+929	Faça discípulos
+930	<b>Discípulos</b> acompanha as pessoas em quem você investe, com um contato semanal.
+931	Orem uns pelos outros
+932	Uma lista de oração diária de 1 a 15 pessoas, com lembretes gentis.
+933	Reúnam-se
+934	<b>Calendário</b> guarda os eventos da igreja, os convites (enviados pelo WhatsApp) e quem veio, e se liga ao calendário do celular.
+935	<b>Semana</b> mostra com que fidelidade você acompanhou as pessoas.
+936	Toda nação e língua
+937	15 idiomas, iPhone e Android, funciona sem sinal.
+938	Trate os outros como quer ser tratado
+939	Sua lista é só sua. As pessoas só são adicionadas se concordarem e são apagadas quando pedirem.
+940	Bloqueie o Shepherd com um PIN e exporte um backup quando quiser.
+941	É novo aqui? Faça o tour ou leia como seus dados são guardados.
+942	Leia o que o Shepherd faz e por quê
+943	Sobre explica tudo o que o Shepherd faz, com os versículos bíblicos por trás. Leia agora ou volte quando quiser.

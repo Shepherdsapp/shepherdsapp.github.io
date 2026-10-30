@@ -1,0 +1,29 @@
+915	À propos
+916	À propos de Shepherd
+917	Shepherd vous aide à prendre soin des personnes que Dieu met sur votre chemin, pour que personne ne soit oublié.
+918	Connaître son troupeau
+919	<b>Aujourd'hui</b> montre à qui écrire, qui attend votre réponse et qui a besoin de nouvelles.
+920	<b>Personnes</b> garde tous ceux que vous rencontrez, avec notes et historique. <b>Parcours</b> les montre par étape, du premier contact jusqu'à disciple.
+921	Un toucher enregistre <b>J'ai répondu</b>, <b>Attend sa réponse</b> ou <b>Je dois répondre</b>, et un point régulier vous rappelle ceux qui attendent encore.
+922	Aller vers les autres
+923	Écrivez sur WhatsApp en un toucher.
+924	Partagez votre code QR et les nouveaux s'ajoutent eux-mêmes.
+925	Importez vos contacts du téléphone ou enregistrez quelqu'un dans votre téléphone.
+926	Les notifications vous disent par leur nom à qui écrire.
+927	Ouvrir la Parole ensemble
+928	Notez les études bibliques, prévoyez la suivante et recevez un rappel une heure avant.
+929	Faire des disciples
+930	<b>Disciples</b> suit les personnes dans lesquelles vous investissez, avec un point chaque semaine.
+931	Prier les uns pour les autres
+932	Une liste de prière quotidienne de 1 à 15 personnes, avec des rappels discrets.
+933	Se rassembler
+934	<b>Calendrier</b> garde les événements de l'église, les invitations (envoyées sur WhatsApp) et qui est venu, et se relie au calendrier du téléphone.
+935	<b>Semaine</b> montre avec quelle fidélité vous avez fait le suivi.
+936	Toute nation et toute langue
+937	15 langues, iPhone et Android, fonctionne sans réseau.
+938	Traiter les autres comme on veut être traité
+939	Votre liste est privée. Les personnes ne sont ajoutées qu'avec leur accord et supprimées dès qu'elles le demandent.
+940	Verrouillez Shepherd avec un code PIN et exportez une sauvegarde à tout moment.
+941	Nouveau ? Faites la visite, ou lisez comment vos données sont gardées.
+942	Découvrez ce que fait Shepherd et pourquoi
+943	À propos explique tout ce que fait Shepherd, avec les versets bibliques qui le fondent. Lisez-le maintenant ou revenez quand vous voulez.

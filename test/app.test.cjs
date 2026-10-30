@@ -100,9 +100,11 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
 
   current = 'Tour for new users';
   ok(!$('#tour').hidden, 'tour starts by itself the first time someone opens Shepherd');
-  ok($('#tourStep').textContent === '1 of 16' && /Welcome/.test($('#tourTitle').textContent), 'starts at step 1 of 16');
+  ok($('#tourStep').textContent === '1 of 17' && /Welcome/.test($('#tourTitle').textContent), 'starts at step 1 of 17');
   ok(/no one you're checking up on slips through/.test($('#tourText').textContent), 'welcome uses the new wording');
   const titles = [$('#tourTitle').textContent];
+  click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
+  ok(S().view === 'about' && $('#tourStep').textContent === '2 of 17' && /About explains everything Shepherd can do/.test($('#tourText').textContent) && /Luke 15:4/.test($('#main').textContent), 'step 2 opens the new About tab');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'settings' && $('#tourText').textContent === 'First, open Settings and add your WhatsApp number and the first message that will be sent automatically when they scan your QR code.', 'opens Settings by itself, with the new wording');
   ok($('#tourMore').textContent === 'Add my number now' && $('#tourNext').textContent === 'Skip this step', 'offers to do it now, or skip');
@@ -148,11 +150,33 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok(S().view === 'settings' && /language/.test($('#tourText').textContent) && /PIN/.test($('#tourText').textContent) && /Privacy and safe use/.test($('#tourText').textContent), 'points out language, contacts, PIN, backups and privacy in Settings');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(/responsible for the people you contact/.test($('#tourText').textContent), 'ends with the reminder that you are responsible for who you contact');
-  ok(titles.join('|') === "Welcome to Shepherd|Start in Settings|Turn on notifications|Add someone|Or show your QR code|Start each day here|Message in one tap|When they reply|Everyone's page|List or Journey|Disciples|Pray for people|Your calendar|Your week|Settings has the rest|You're all set", 'all 16 steps in order: ' + titles.join(' / '));
+  ok(titles.join('|') === "Welcome to Shepherd|Read what Shepherd does and why|Start in Settings|Turn on notifications|Add someone|Or show your QR code|Start each day here|Message in one tap|When they reply|Everyone's page|List or Journey|Disciples|Pray for people|Your calendar|Your week|Settings has the rest|You're all set", 'all 16 steps in order: ' + titles.join(' / '));
   ok($('#tourNext').textContent === 'Done', 'last step says Done');
   click('#tourNext'); await wait(60);
   ok($('#tour').hidden && S().view === 'today', 'finishing goes back to Today');
   ok(store.docs.get('data/users/u_test/profile').tourDone === true && store.docs.get('data/users/u_test/profile').phone === '07700 900111', 'tour marked done, and the number you added is saved');
+
+  current = 'About tab';
+  {
+    const tabs = $$('.tab').map(t => t.dataset.v).join(',');
+    ok(tabs === 'today,people,disciples,events,week,about', 'there are 6 tabs and the last one is About');
+    click('.tab[data-v="about"]'); await wait(30);
+    const at = $('#main').textContent;
+    ok(S().view === 'about' && /About Shepherd/.test(at) && $('.tab[data-v="about"]').getAttribute('aria-current') === 'page', 'About opens and is marked as the current tab');
+    const verses = ['Luke 15:4', 'Proverbs 27:23', 'Colossians 4:5', 'Acts 17:11', 'Matthew 28:19', '2 Timothy 2:2', 'James 5:16', 'Hebrews 10:25', 'Revelation 7:9', 'Luke 6:31', 'John 21:17'];
+    ok(verses.every(v => at.includes(v + ' (NIV)')), 'all 11 verses are there, marked NIV');
+    ok(/Doesn't he leave the ninety-nine in the open country and go after the lost sheep until he finds it\?/.test(at) && /Be sure you know the condition of your flocks/.test(at) && /entrust to reliable people who will also be qualified to teach others/.test(at) && /Do to others as you would have them do to you\./.test(at), 'verses are word for word NIV');
+    ok(/Journey/.test(at) && /QR code/.test(at) && /phone contacts/.test(at) && /PIN/.test(at) && /backup/.test(at) && /prayer list of 1 to 15/.test(at) && /15 languages/.test(at), 'About covers every part of the app');
+    ok($$('#main [data-noi18n] cite').length === 11, 'every verse is kept out of translation, so it stays English NIV');
+    ok($('#fab').hidden, 'the floating Add contact button stays out of the way on About');
+    const mail = $('#aboutHelp a[href^="mailto:lostshepherdapp@gmail.com"]');
+    ok(mail && $('#aboutHelp [data-act="tour"]') && $('#aboutHelp [data-act="yourdata"]'), 'About has the tour, privacy and email buttons');
+    const T = w.__shepherd.TOUR;
+    ok(T.length === 17 && T[1].view === 'about', 'the tour has 17 steps and step 2 is About');
+    const R = w.__shepherd.tourResumeAt;
+    ok(R('') === 0 && R('0') === 0 && R('1') === 2 && R('15') === 16 && R('v2:1') === 1 && R('v2:16') === 16, 'someone halfway through the old 16-step tour carries on at the same place');
+    click('.tab[data-v="today"]'); await wait(30);
+  }
 
   current = 'Boot';
   ok($('.empty'), 'empty state shows for a new user');
@@ -469,8 +493,8 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   current = 'Replay the tour';
   click('[data-act="settings"]'); await wait();
   click('[data-act="tour"]'); await wait(40);
-  ok(!$('#tour').hidden && $('#tourStep').textContent === '1 of 16', 'Show me around replays the tour');
-  for (let i = 0; i < 6; i++) { click('#tourNext'); await wait(20); }
+  ok(!$('#tour').hidden && $('#tourStep').textContent === '1 of 17', 'Show me around replays the tour');
+  for (let i = 0; i < 7; i++) { click('#tourNext'); await wait(20); }
   ok($('#tourTitle').textContent === 'Message in one tap' && S().view === 'today' && $('#main .prow .ch'), 'Message step shows Today with a real message button to point at');
   click('#tourSkip'); await wait(40);
   ok($('#tour').hidden, 'Skip closes it');
@@ -580,7 +604,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
 
   current = 'Your number is kept';
   click('[data-act="settings"]'); await wait();
-  click('[data-act="tour"]'); await wait(40); click('#tourNext'); await wait(30);
+  click('[data-act="tour"]'); await wait(40); click('#tourNext'); await wait(30); click('#tourNext'); await wait(30);
   click('#tourMore'); await wait(60);
   setVal('#pPhone', '07585 524965');
   click('#tourPillGo'); await wait(60);
@@ -597,7 +621,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   current = 'Tour jobs carry on by themselves';
   click('[data-act="settings"]'); await wait();
   click('[data-act="tour"]'); await wait(40);
-  for (let i = 0; i < 3; i++) { click('#tourNext'); await wait(30); }
+  for (let i = 0; i < 4; i++) { click('#tourNext'); await wait(30); }
   ok($('#tourTitle').textContent === 'Add someone' && $('#tourMore').textContent === 'Add my first person', 'Add someone step');
   click('#tourMore'); await wait(60);
   ok($('#sheetTitle').textContent === 'Add a contact' && $('#tour').hidden, 'opens Add a contact for you');
@@ -892,6 +916,11 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     E.click('[data-act="tab"][data-v="people"]'); await wait();
     E.click('[data-act="open"][data-id="k1"]'); await wait();
     ok(E.$('.h1').textContent.includes('Kofi Boateng') && E.$$('.jstep').map(x => x.textContent).join('|') === 'Primer contacto|Interesado|Estudiando|Asiste a la iglesia|Bautizado|Discípulo', 'journey stages in Spanish');
+    E.click('[data-act="edit"]'); await wait(80);
+    { const ta = E.$('#cNotes'); ok(ta && ta.getAttribute('placeholder') && ta.getAttribute('placeholder') !== 'Anything to remember', 'the hint inside the Notes box is in Spanish too: ' + (ta && ta.getAttribute('placeholder'))); }
+    E.click('#sheet [data-act="closesheet"]'); await wait(400);
+    E.click('[data-act="tab"][data-v="about"]'); await wait();
+    { const at = E.$('#main').textContent; ok(/Acerca de Shepherd/.test(at) && /Conoce a tu rebaño/.test(at) && /Be sure you know the condition of your flocks/.test(at) && /Luke 15:4 \(NIV\)/.test(at), 'About is in Spanish, with the verses kept in English NIV'); }
     E.click('[data-act="tab"][data-v="events"]'); await wait();
     E.click('[data-act="openevent"][data-id="v1"]'); await wait();
     const inv = E.w.__shepherd.inviteText ? E.w.__shepherd.inviteText(E.S().events.v1, E.S().contacts.k1) : '';

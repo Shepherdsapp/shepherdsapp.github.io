@@ -963,3 +963,33 @@ Help
 Questions, problems or ideas? Email {0}.
 Email Shepherd
 If you ask for a password reset code by email, it is sent to the address you typed, from <b>{0}</b> through Google's Gmail.
+# --- About tab (30 October 2026)
+About
+About Shepherd
+Shepherd helps you care for the people God puts in your path, so nobody slips through the cracks.
+Know your flock
+<b>Today</b> shows who to message, who's waiting on your reply and who needs a check-in.
+<b>People</b> keeps everyone you meet, with notes and history. <b>Journey</b> shows them by stage, from first contact to disciple.
+One tap records <b>I replied</b>, <b>Waiting on them</b> or <b>I need to reply</b>, and a catch-up checks in on anyone still waiting.
+Reach out
+Message on WhatsApp in one tap.
+Share your QR code and new people add themselves.
+Bring in your phone contacts, or save someone to your phone.
+Phone notifications tell you by name who to reach out to.
+Open the Word together
+Log Bible studies, plan the next one, and get a reminder an hour before.
+Make disciples
+<b>Disciples</b> tracks the people you're investing in, with a weekly check-in.
+Pray for one another
+A daily prayer list of 1 to 15 people, with gentle reminders.
+Gather together
+<b>Calendar</b> keeps church events, invites (sent on WhatsApp) and who came, and links to your phone calendar.
+<b>Week</b> shows how faithfully you followed up.
+Every nation and language
+15 languages, iPhone and Android, works without signal.
+Treat people as you'd want to be treated
+Your list is private to you. People are only added with their agreement and deleted whenever they ask.
+Lock Shepherd with a PIN and export a backup any time.
+New here? Take the tour, or read how your data is kept.
+Read what Shepherd does and why
+About explains everything Shepherd can do, with the Bible verses behind it. Read it now or come back any time.

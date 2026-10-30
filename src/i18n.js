@@ -116,6 +116,7 @@
     if (!root) return;
     if (root.nodeType === 3) { var p = root.parentNode; if (p && !skipped(p)) { if (inlineBlock(p)) doBlock(p); else doText(root); } return; }
     if (root.nodeType !== 1 && root.nodeType !== 9 && root.nodeType !== 11) return;
+    if (root.nodeType === 1 && root.tagName === 'TEXTAREA' && !skipped(root.parentNode || root)) { doAttrs(root); return; }
     if (root.nodeType === 1 && skipped(root)) return;
     if (root.nodeType === 1) {
       doAttrs(root);
@@ -125,7 +126,10 @@
     for (var i = 0; i < kids.length; i++) {
       var n = kids[i];
       if (n.nodeType === 3) doText(n);
-      else if (n.nodeType === 1) { if (!SKIP[n.tagName] && !(n.hasAttribute && n.hasAttribute('data-noi18n'))) walk(n); }
+      else if (n.nodeType === 1) {
+        if (!SKIP[n.tagName] && !(n.hasAttribute && n.hasAttribute('data-noi18n'))) walk(n);
+        else if (n.tagName === 'TEXTAREA' && !n.hasAttribute('data-noi18n')) doAttrs(n); // what's typed stays as typed, but the hint inside is translated
+      }
     }
   }
   function doBlock(el) {
@@ -150,7 +154,7 @@
         var m = list[i];
         if (m.type === 'childList') { for (var j = 0; j < m.addedNodes.length; j++) walk(m.addedNodes[j]); if (m.target.nodeType === 1 && inlineBlock(m.target) && !skipped(m.target)) doBlock(m.target); }
         else if (m.type === 'characterData') walk(m.target);
-        else if (m.type === 'attributes') { if (m.target.nodeType === 1 && !skipped(m.target)) doAttrs(m.target); }
+        else if (m.type === 'attributes') { if (m.target.nodeType === 1 && (!skipped(m.target) || (m.target.tagName === 'TEXTAREA' && !m.target.hasAttribute('data-noi18n')))) doAttrs(m.target); }
       }
     });
     mo.observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ATTRS });
