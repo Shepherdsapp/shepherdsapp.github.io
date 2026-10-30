@@ -943,8 +943,11 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
       X.click('[data-act="archive"]'); await wait(); X.click('#sheet .pick button'); await wait();
       X.$('#sheet form') && X.submit('#sheet form'); await wait(80);
       XS().contacts[rita.id].status = 'archived';
-      X.click('[data-act="tab"][data-v="people"]'); await wait(); X.click('[data-act="archive-list"]'); await wait(); X.click('[data-act="open"][data-id="' + rita.id + '"]'); await wait();
-      X.click('[data-act="delete"]'); await wait(); X.setVal('#dConfirm', 'DELETE'); X.click('#dGo'); await wait(120);
+      X.click('[data-act="tab"][data-v="people"]'); await wait(); X.click('[data-act="archive-list"]'); await wait(); for (let i = 0; i < 40 && !X.$('[data-act="open"][data-id="' + rita.id + '"]'); i++) await wait(25); X.click('[data-act="open"][data-id="' + rita.id + '"]'); await wait();
+      for (let i = 0; i < 40 && !X.$('[data-act="delete"]'); i++) await wait(25); // the page can take a moment on a busy machine
+      X.click('[data-act="delete"]');
+      for (let i = 0; i < 40 && !X.$('#dConfirm'); i++) await wait(25);
+      X.setVal('#dConfirm', 'DELETE'); X.click('#dGo'); await wait(120);
       ok(!XS().contacts[rita.id] && !Object.values(XS().prayers).some(x => /rita/i.test(x.name)), '1: "Delete all their data" removes them from the prayer list too');
       ok([...st.docs.entries()].every(([k, v]) => !JSON.stringify(v).includes('Rita Remove') || k === 'data/users/u_test/profile'), '1: nothing about Rita is left saved, apart from the deleted-ids list');
       W.importBackup(backup); await wait(80);
