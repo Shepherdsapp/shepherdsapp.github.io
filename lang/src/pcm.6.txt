@@ -1,0 +1,6 @@
+908	Ask di person wey dey run Shepherd for your church for reset code, or email {0}. Then put am and choose new password.
+909	If {0} get account, we don email you 6-digit code. Put am and choose new password. Check your spam folder too.
+910	Help
+911	Question, problem or idea? Email {0}.
+912	Email Shepherd
+913	If you ask for password reset code by email, we go send am to di address wey you type, from <b>{0}</b> through Google Gmail.

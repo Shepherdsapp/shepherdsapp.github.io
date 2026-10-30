@@ -1,0 +1,6 @@
+908	Paprašyk kodo žmogaus, kuris tvarko Shepherd tavo bažnyčioje, arba rašyk {0}. Tada įvesk jį ir pasirink naują slaptažodį.
+909	Jei {0} turi paskyrą, išsiuntėme 6 skaitmenų kodą el. paštu. Įvesk jį ir pasirink naują slaptažodį. Patikrink ir šlamšto aplanką.
+910	Pagalba
+911	Klausimų, problemų ar idėjų? Rašyk {0}.
+912	Rašyti Shepherd
+913	Jei paprašysi slaptažodžio atkūrimo kodo el. paštu, jis bus išsiųstas tavo įvestu adresu iš <b>{0}</b> per Google Gmail.

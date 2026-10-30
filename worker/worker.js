@@ -20,6 +20,8 @@
         ALLOWED_ORIGINS  Text    where the app lives. Default https://sitbackco.github.io
         APP_URL          Text    the app's address. Default https://sitbackco.github.io/shepherd/
         ADMIN_KEY        Secret  a long passcode you make up; lets you give someone a password reset code
+        GMAIL_USER       Text    a Gmail address to email reset codes from (free), e.g. lostshepherdapp@gmail.com
+        GMAIL_APP_PASSWORD Secret an App Password made in that Google account (Security → App passwords)
         RESEND_API_KEY   Secret  from resend.com, to email reset codes (needs your own domain on Resend)
         MAIL_FROM        Text    e.g. Shepherd <hello@yourchurch.org>
         INVITE_CODE      Text    the church invite code new people type to create an account.
@@ -178,16 +180,86 @@ async function makeResetCode(env, uid) {
   await run(env, 'INSERT OR REPLACE INTO resets (uid, ch, exp, tries) VALUES (?, ?, ?, 0)', uid, await sha256(uid + ':' + code), now() + 60 * 60e3);
   return code;
 }
+/* ---------- emailing reset codes ----------
+   Either through Gmail (free: GMAIL_USER + GMAIL_APP_PASSWORD, an app password from that Google account)
+   or through Resend (RESEND_API_KEY + MAIL_FROM). Gmail is used when both are set. */
+const CONTACT = 'lostshepherdapp@gmail.com';
+const MAILT = {
+  en: ['Your Shepherd code: {code}', 'Your Shepherd password reset code is {code}.', 'It works for one hour. If you didn\'t ask for it, you can ignore this email.', 'Questions or problems? Email {contact}.'],
+  es: ['Tu código de Shepherd: {code}', 'Tu código para restablecer la contraseña de Shepherd es {code}.', 'Sirve durante una hora. Si no lo pediste, puedes ignorar este correo.', '¿Preguntas o problemas? Escribe a {contact}.'],
+  fr: ['Votre code Shepherd : {code}', 'Votre code pour réinitialiser le mot de passe Shepherd est {code}.', 'Il est valable une heure. Si vous ne l\'avez pas demandé, ignorez cet e-mail.', 'Des questions ou un problème ? Écrivez à {contact}.'],
+  pt: ['Seu código do Shepherd: {code}', 'Seu código para redefinir a senha do Shepherd é {code}.', 'Ele vale por uma hora. Se você não pediu, pode ignorar este e-mail.', 'Dúvidas ou problemas? Escreva para {contact}.'],
+  nl: ['Je Shepherd-code: {code}', 'Je code om je Shepherd-wachtwoord opnieuw in te stellen is {code}.', 'Hij werkt een uur. Heb je hier niet om gevraagd, dan kun je deze e-mail negeren.', 'Vragen of problemen? Mail naar {contact}.'],
+  pl: ['Twój kod Shepherd: {code}', 'Twój kod do zresetowania hasła Shepherd to {code}.', 'Działa przez godzinę. Jeśli o niego nie prosiłeś, zignoruj tę wiadomość.', 'Pytania lub problemy? Napisz na {contact}.'],
+  pcm: ['Your Shepherd code: {code}', 'Your Shepherd password reset code na {code}.', 'E go work for one hour. If no be you ask for am, you fit ignore dis email.', 'Question or problem? Email {contact}.'],
+  yo: ['Kóòdù Shepherd rẹ: {code}', 'Kóòdù láti tún ọ̀rọ̀ aṣínà Shepherd rẹ ṣe ni {code}.', 'Ó máa ṣiṣẹ́ fún wákàtí kan. Bí kì í bá ṣe ìwọ ló béèrè, o lè fojú fo ímeèlì yìí.', 'Ìbéèrè tàbí ìṣòro? Kọ ímeèlì sí {contact}.'],
+  ig: ['Koodu Shepherd gị: {code}', 'Koodu iji tọgharịa okwuntughe Shepherd gị bụ {code}.', 'Ọ na-arụ ọrụ otu awa. Ọ bụrụ na ọ bụghị gị rịọrọ ya, ị nwere ike ileghara email a anya.', 'Ajụjụ ma ọ bụ nsogbu? Zitere {contact} email.'],
+  'zh-Hans': ['你的 Shepherd 验证码：{code}', '你的 Shepherd 重设密码验证码是 {code}。', '验证码一小时内有效。如果不是你本人申请的，可以忽略这封邮件。', '有问题？请发邮件到 {contact}。'],
+  'zh-Hant': ['你的 Shepherd 驗證碼：{code}', '你的 Shepherd 重設密碼驗證碼是 {code}。', '驗證碼一小時內有效。如果不是你本人申請的，可以忽略這封郵件。', '有問題？請寄信到 {contact}。'],
+  ja: ['Shepherd の確認コード：{code}', 'Shepherd のパスワード再設定コードは {code} です。', '有効期間は 1 時間です。心当たりがない場合は、このメールを無視してください。', 'ご質問や問題は {contact} までメールでどうぞ。'],
+  de: ['Dein Shepherd-Code: {code}', 'Dein Code zum Zurücksetzen deines Shepherd-Passworts lautet {code}.', 'Er gilt eine Stunde. Wenn du ihn nicht angefordert hast, ignoriere diese E-Mail.', 'Fragen oder Probleme? Schreib an {contact}.'],
+  ru: ['Твой код Shepherd: {code}', 'Твой код для сброса пароля Shepherd: {code}.', 'Он действует один час. Если ты его не запрашивал(а), просто не обращай внимания на это письмо.', 'Вопросы или проблемы? Пиши на {contact}.'],
+  lt: ['Tavo Shepherd kodas: {code}', 'Tavo Shepherd slaptažodžio atkūrimo kodas yra {code}.', 'Jis galioja vieną valandą. Jei jo neprašei, gali nekreipti dėmesio į šį laišką.', 'Klausimų ar problemų? Rašyk {contact}.']
+};
+export function resetMail(lang, code) {
+  const T = MAILT[lang] || MAILT.en, f = s => s.replace('{code}', code).replace('{contact}', CONTACT);
+  return { subject: f(T[0]), text: f(T[1]) + '\n\n' + f(T[2]) + '\n\n' + f(T[3]) + '\n' };
+}
+const b64 = s => { const b = enc.encode(s); let o = ''; for (let i = 0; i < b.length; i++) o += String.fromCharCode(b[i]); return btoa(o); };
+// a plain email in the form mail servers expect: encoded subject, base64 body in lines of 76
+export function mimeMessage(from, to, subject, text) {
+  const body = b64(text).replace(/.{1,76}/g, '$&\r\n');
+  return ['From: "Shepherd" <' + from + '>', 'To: <' + to + '>', 'Subject: =?UTF-8?B?' + b64(subject) + '?=', 'Date: ' + new Date().toUTCString(),
+    'Message-ID: <' + b64u(rand(12)) + '@shepherd>', 'Reply-To: <' + CONTACT + '>', 'MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: base64', '', body].join('\r\n');
+}
+// sends one email through Gmail's mail server (smtp.gmail.com, port 465, encrypted), signing in with an app password
+export async function gmailSend(env, to, subject, text) {
+  const connect = env.__connect || (await import('cloudflare:sockets')).connect;
+  const sock = connect({ hostname: 'smtp.gmail.com', port: 465 }, { secureTransport: 'on', allowHalfOpen: false });
+  const w = sock.writable.getWriter(), r = sock.readable.getReader(), dec = new TextDecoder();
+  let buf = '';
+  const reply = async () => {
+    for (;;) {
+      const lines = buf.split('\r\n');
+      for (let i = 0; i < lines.length - 1; i++) if (/^\d{3} /.test(lines[i])) { const code = +lines[i].slice(0, 3); buf = lines.slice(i + 1).join('\r\n'); return code; }
+      const { value, done } = await r.read(); if (done) throw new Error('mail server closed the connection');
+      buf += dec.decode(value, { stream: true });
+    }
+  };
+  const say = async (line, want) => { if (line !== null) await w.write(enc.encode(line + '\r\n')); const c = await reply(); if (!want.includes(c)) throw new Error('mail server said ' + c); return c; };
+  try {
+    await say(null, [220]);
+    await say('EHLO shepherd', [250]);
+    await say('AUTH PLAIN ' + b64('\0' + env.GMAIL_USER + '\0' + String(env.GMAIL_APP_PASSWORD).replace(/\s+/g, '')), [235]);
+    await say('MAIL FROM:<' + env.GMAIL_USER + '>', [250]);
+    await say('RCPT TO:<' + to + '>', [250, 251]);
+    await say('DATA', [354]);
+    await say(mimeMessage(env.GMAIL_USER, to, subject, text).replace(/\r\n\./g, '\r\n..') + '\r\n.', [250]);
+    await w.write(enc.encode('QUIT\r\n')).catch(() => {});
+    return true;
+  } finally { try { await sock.close(); } catch (e) {} }
+}
+const mailOn = env => !!((env.GMAIL_USER && env.GMAIL_APP_PASSWORD) || (env.RESEND_API_KEY && env.MAIL_FROM));
+async function sendResetMail(env, uid, email, code) {
+  let lang = 'en';
+  try { const p = await one(env, "SELECT data FROM docs WHERE uid = ? AND path = 'profile' AND del = 0", uid); if (p) lang = JSON.parse(p.data).lang || 'en'; } catch (e) {}
+  const m = resetMail(lang, code);
+  if (env.GMAIL_USER && env.GMAIL_APP_PASSWORD) return gmailSend(env, email, m.subject, m.text);
+  const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: env.MAIL_FROM, to: [email], reply_to: CONTACT, subject: m.subject, text: m.text }) });
+  if (!r.ok) throw new Error('Resend said ' + r.status);
+  return true;
+}
 async function resetRequest(req, env) {
   const b = await body(req); const email = cleanEmail(b.email);
-  const canEmail = !!(env.RESEND_API_KEY && env.MAIL_FROM);
+  const canEmail = mailOn(env);
   if (!okEmail(email)) fail(400, 'bad_email', 'That email address doesn\'t look right.');
   await rateLimit(env, 'reset:' + email, 5, 60 * 60e3);
+  if (canEmail) { await rateLimit(env, 'resetip:' + ipOf(req), 20, 60 * 60e3); await rateLimit(env, 'resetday', 300, 864e5); } // keeps well inside Gmail's daily limit
   const u = await one(env, 'SELECT id FROM users WHERE email = ?', email);
   if (u && canEmail) {
     const code = await makeResetCode(env, u.id);
-    await fetch('https://api.resend.com/emails', { method: 'POST', headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: env.MAIL_FROM, to: [email], subject: 'Your Shepherd code: ' + code, text: 'Your Shepherd password reset code is ' + code + '.\n\nIt works for one hour. If you didn\'t ask for it, you can ignore this email.' }) }).catch(() => null);
+    try { await sendResetMail(env, u.id, email, code); } catch (e) { console.error('reset email failed: ' + (e && e.message)); } // the answer is the same either way, so nobody can tell who has an account
   }
   return json({ emailed: canEmail });
 }

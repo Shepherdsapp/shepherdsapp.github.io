@@ -4,5 +4,5 @@
    Then commit. */
 window.SHEPHERD_CONFIG = {
   api: 'https://shepherd.8pavii.workers.dev',
-  privacy: { controller: 'Pavi', contact: '8pavii@gmail.com' }
+  privacy: { controller: 'Pavi', contact: 'lostshepherdapp@gmail.com' }
 };

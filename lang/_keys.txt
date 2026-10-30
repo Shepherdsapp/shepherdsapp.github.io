@@ -753,8 +753,8 @@ Choose a password of at least 8 characters.
 Choose at least 8 characters.
 Enter your email and we'll help you choose a new password.
 Enter your 6-digit code and choose a new password.
-Ask the person who runs Shepherd at your church for a reset code, then enter it and choose a new password.
-If {0} has an account, we've emailed a 6-digit code. Enter it and choose a new password.
+Ask the person who runs Shepherd at your church for a reset code, or email {0}. Then enter it and choose a new password.
+If {0} has an account, we've emailed a 6-digit code. Enter it and choose a new password. Check your spam folder too.
 You only need to sign in once on this phone.
 Your list is private: nobody else using Shepherd can see it.
 Opening Shepherd…
@@ -958,3 +958,8 @@ Only people with your church's invite code can create an account.
 Earlier versions are kept for up to a year so nothing is lost by mistake. Deleting someone's data removes every copy Shepherd keeps.
 For emergencies, the whole database can be restored to any point in the last 7 days, so a deletion is fully gone after 7 days.
 Someone asks you to delete their details? Open them, tap <b>No longer contact</b>, then <b>Delete all their data</b>. That removes them from Shepherd, including your prayer list. Copies you made yourself, such as an exported backup or your phone's contacts, are yours to delete.
+# --- help and reset email (30 October 2026)
+Help
+Questions, problems or ideas? Email {0}.
+Email Shepherd
+If you ask for a password reset code by email, it is sent to the address you typed, from <b>{0}</b> through Google's Gmail.

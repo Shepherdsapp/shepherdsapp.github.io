@@ -43,6 +43,10 @@ No password, key or private address is written anywhere in this folder.
    their own password by email. This needs your own web domain added to resend.com. Without them, use the admin page
    (see "Forgotten passwords").
 
+   Optional, to email reset codes for free: `GMAIL_USER` (Text, e.g. `lostshepherdapp@gmail.com`) and `GMAIL_APP_PASSWORD`
+   (Secret): in that Google account turn on 2-Step Verification, then Security → App passwords → make one called Shepherd
+   and paste the 16 letters here. With both set, "Forgot password?" emails a 6-digit code to the address the person typed.
+
    Optional: `INVITE_CODE` (Text), a church invite code. When it's set, new people must type it to create an account
    (capitals, spaces and dashes don't matter) and the sign-up screen shows the box by itself. Change or remove it any time;
    people who already have an account aren't affected. Without it, anyone with the link can create an account.
@@ -58,7 +62,7 @@ The tables and the notification keys are created by the Worker itself the first 
    `apple-touch-icon.png`, `badge-96.png` and the `lang` folder → **Commit changes**.
 3. Click `config.js` → the pencil (Edit) → replace `https://shepherd.YOUR-NAME.workers.dev` with your **Worker address**
    from 1.7. On the `privacy:` line, put the email people should write to about their data, e.g.
-   `privacy: { controller: 'Pavi', contact: '8pavii@gmail.com' }` → **Commit changes**.
+   `privacy: { controller: 'Pavi', contact: 'lostshepherdapp@gmail.com' }` → **Commit changes**.
 4. **Settings → Pages → Deploy from a branch → main / (root) → Save**.
 5. A minute or two later it's live at **https://sitbackco.github.io/shepherd/**.
 

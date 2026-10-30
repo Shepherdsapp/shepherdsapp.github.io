@@ -1,0 +1,6 @@
+908	Vraag een code aan degene die Shepherd in je kerk beheert, of mail naar {0}. Typ die daarna in en kies een nieuw wachtwoord.
+909	Als {0} een account heeft, hebben we een code van 6 cijfers gemaild. Typ die in en kies een nieuw wachtwoord. Kijk ook in je spammap.
+910	Hulp
+911	Vragen, problemen of ideeën? Mail naar {0}.
+912	Mail Shepherd
+913	Vraag je per e-mail een code om je wachtwoord te herstellen, dan wordt die naar het adres gestuurd dat je typte, vanaf <b>{0}</b> via Gmail van Google.

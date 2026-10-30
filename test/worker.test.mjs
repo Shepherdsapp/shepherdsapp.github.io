@@ -453,6 +453,60 @@ try {
   ok(counted.n === 0, 'a server restart with the tables already there doesn\'t run the set-up statements again');
 } catch (e) { ok(false, 'crashed: ' + e.message); }
 
+current = 'Reset codes by email (Gmail)';
+try {
+  // a stand-in for Gmail's mail server: answers like smtp.gmail.com and keeps what it was sent
+  const smtpLog = []; let authOk = true;
+  const fakeConnect = (addr, opts) => {
+    smtpLog.push({ addr, opts, lines: [] }); const sess = smtpLog[smtpLog.length - 1];
+    let ctrl; const readable = new ReadableStream({ start(c) { ctrl = c; c.enqueue(new TextEncoder().encode('220 smtp.gmail.com ESMTP ready\r\n')); } });
+    let inData = false, data = '';
+    const writable = new WritableStream({ write(chunk) {
+      const t = new TextDecoder().decode(chunk);
+      if (inData) { data += t; if (data.endsWith('\r\n.\r\n')) { inData = false; sess.data = data; ctrl.enqueue(new TextEncoder().encode('250 2.0.0 OK queued\r\n')); } return; }
+      for (const line of t.split('\r\n').filter(Boolean)) {
+        sess.lines.push(line);
+        const say = x => ctrl.enqueue(new TextEncoder().encode(x + '\r\n'));
+        if (/^EHLO/.test(line)) say('250-smtp.gmail.com at your service\r\n250-AUTH LOGIN PLAIN\r\n250 SMTPUTF8');
+        else if (/^AUTH PLAIN/.test(line)) say(authOk ? '235 2.7.0 Accepted' : '535 5.7.8 Username and Password not accepted');
+        else if (/^MAIL FROM/.test(line) || /^RCPT TO/.test(line)) say('250 2.1.0 OK');
+        else if (line === 'DATA') { inData = true; data = ''; say('354 Go ahead'); }
+        else if (line === 'QUIT') { say('221 bye'); ctrl.close(); }
+      }
+    } });
+    return { readable, writable, close: async () => {} };
+  };
+  const A = await fresh('forgot@example.com', '10.20.0.1');
+  await call('POST', '/api/docs', { ops: [{ p: 'profile', d: { name: 'Forgot Me', lang: 'es' }, t: Date.now() }] }, A.token);
+  r = await call('POST', '/api/reset/request', { email: 'forgot@example.com' }, null, ipH('10.20.0.2'));
+  ok(r.status === 200 && r.data.emailed === false, 'with no email set up, the app is told to ask the church admin instead');
+  env.GMAIL_USER = 'lostshepherdapp@gmail.com'; env.GMAIL_APP_PASSWORD = 'abcd efgh ijkl mnop'; env.__connect = fakeConnect;
+  r = await call('POST', '/api/reset/request', { email: ' Forgot@Example.com ' }, null, ipH('10.20.0.2'));
+  const sess = smtpLog[smtpLog.length - 1] || { lines: [] };
+  ok(r.status === 200 && r.data.emailed === true, 'with Gmail set up, the app is told the code was emailed');
+  ok(sess.addr && sess.addr.hostname === 'smtp.gmail.com' && sess.addr.port === 465 && sess.opts.secureTransport === 'on', 'sends through Gmail\'s mail server over an encrypted connection');
+  const auth = (sess.lines.find(l => /^AUTH PLAIN/.test(l)) || '').slice(11);
+  ok(Buffer.from(auth, 'base64').toString() === '\0lostshepherdapp@gmail.com\0abcdefghijklmnop', 'signs in as lostshepherdapp@gmail.com with the app password (spaces ignored)');
+  ok(sess.lines.includes('RCPT TO:<forgot@example.com>') && sess.lines.includes('MAIL FROM:<lostshepherdapp@gmail.com>'), 'goes to the email address they typed, from the Shepherd Gmail');
+  const msg = sess.data || '';
+  const subj = Buffer.from((/Subject: =\?UTF-8\?B\?([^?]+)\?=/.exec(msg) || [])[1] || '', 'base64').toString();
+  const bodyTxt = Buffer.from(msg.split('\r\n\r\n').slice(1).join('').replace(/\r\n\.\r\n$/, '').replace(/\s+/g, ''), 'base64').toString();
+  const code = (/(\d{6})/.exec(subj) || [])[1];
+  ok(/^Tu código de Shepherd: \d{6}$/.test(subj) && bodyTxt.includes(code) && /lostshepherdapp@gmail\.com/.test(bodyTxt) && /Reply-To: <lostshepherdapp@gmail\.com>/.test(msg), 'the email is in their own language (Spanish), with the code and the contact address');
+  r = await call('POST', '/api/reset/confirm', { email: 'forgot@example.com', code, key: key('new forgot pw') }, null, ipH('10.20.0.2'));
+  ok(r.status === 200 && r.data.token, 'the emailed code lets them choose a new password');
+  const before = smtpLog.length;
+  r = await call('POST', '/api/reset/request', { email: 'nobody-at-all@example.com' }, null, ipH('10.20.0.3'));
+  ok(r.data.emailed === true && smtpLog.length === before, 'an email with no account gets the same answer, and no email is sent');
+  authOk = false;
+  r = await call('POST', '/api/reset/request', { email: 'forgot@example.com' }, null, ipH('10.20.0.4'));
+  ok(r.status === 200 && r.data.emailed === true, 'if Gmail refuses (for example the app password was changed), the app doesn\'t break');
+  let last = 0;
+  for (let i = 0; i < 22; i++) last = (await call('POST', '/api/reset/request', { email: 'x' + i + '@example.com' }, null, ipH('10.20.9.9'))).status;
+  ok(last === 429, 'one network can ask for at most 20 codes an hour, so nobody can use up the Gmail account');
+  delete env.GMAIL_USER; delete env.GMAIL_APP_PASSWORD; delete env.__connect;
+} catch (e) { delete env.GMAIL_USER; delete env.GMAIL_APP_PASSWORD; delete env.__connect; ok(false, 'crashed: ' + e.message); }
+
 current = 'Browser access';
 r = await call('GET', '/api/push/key', undefined, null, { Origin: 'https://evil.example.com' });
 ok(!r.headers.get('Access-Control-Allow-Origin'), 'other websites can\'t use the server');

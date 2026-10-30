@@ -409,7 +409,7 @@ body{overflow-x:clip}
     ['ja', '日本語', 'ja'], ['de', 'Deutsch', 'de'], ['ru', 'Русский', 'ru'], ['lt', 'Lietuvių', 'lt']
   ];
   var CODES = LANGS.map(function (l) { return l[0]; });
-  var PACK_VER = 'b73a266861';
+  var PACK_VER = 'f2c741e581';
   var lang = 'en', dict = null, tpls = [], cache = new Map(), outs = new WeakMap(), plural = null;
   var collect = typeof window !== 'undefined' && window.__i18nCollect ? window.__i18nCollect : null;
   var INLINE = { B: 1, STRONG: 1, I: 1, EM: 1, BR: 1, U: 1, SMALL: 1, CODE: 1 };
@@ -626,7 +626,7 @@ body{overflow-x:clip}
 (function () {
   var USE_VERSION = 1; // raise this when the acceptable use statement changes, so everyone agrees to the new one
   var UPDATED = '2026-10-29';
-  function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || '8pavii@gmail.com' }; }
+  function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || 'lostshepherdapp@gmail.com' }; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
   function when() {
     var d = new Date(UPDATED + 'T12:00:00');
@@ -677,6 +677,7 @@ body{overflow-x:clip}
           'Phone notifications are encrypted on the way to your phone and only show first names, never notes or prayer points.',
           'Shepherd\'s fonts and code come from Shepherd itself, so no advertising or tracking company sees you use it.',
           'Shepherd never sends messages for you. Every WhatsApp message is one you send yourself.',
+          'If you ask for a password reset code by email, it is sent to the address you typed, from <b>' + esc(c.contact) + '</b> through Google\'s Gmail.',
           'Earlier versions are kept for up to a year so nothing is lost by mistake. Deleting someone\'s data removes every copy Shepherd keeps.',
           'For emergencies, the whole database can be restored to any point in the last 7 days, so a deletion is fully gone after 7 days.',
           'The server is looked after by <b>' + esc(c.controller) + '</b>, who doesn\'t look at anyone\'s list and only reaches stored data to keep Shepherd running or to act on a request to remove someone.'])) +
@@ -897,7 +898,8 @@ function bindAuth() {
     try {
       if (mode === 'forgot') {
         var rq = await api('POST', '/api/reset/request', { email: email });
-        showAuth('code', rq.emailed ? 'If ' + email + ' has an account, we\'ve emailed a 6-digit code. Enter it and choose a new password.' : 'Ask the person who runs Shepherd at your church for a reset code, then enter it and choose a new password.');
+        var help = (CFG.privacy && CFG.privacy.contact) || 'lostshepherdapp@gmail.com';
+        showAuth('code', rq.emailed ? 'If ' + email + ' has an account, we\'ve emailed a 6-digit code. Enter it and choose a new password. Check your spam folder too.' : 'Ask the person who runs Shepherd at your church for a reset code, or email ' + help + '. Then enter it and choose a new password.');
         return;
       }
       var key = await pwKey(email, pw), r;
@@ -2010,6 +2012,8 @@ function viewSettings() {
   h += '<section class="card"><h2 class="h3">App lock</h2><p class="note">' + (p.pinHash ? 'Shepherd asks for your PIN when it opens and after 5 minutes away.' : 'Add a PIN so nobody who picks up your phone can read your contacts.') + '</p><div class="row">' +
     (p.pinHash ? '<button class="btn" data-act="setpin">Change PIN</button><button class="btn" data-act="locknow">Lock now</button><button class="btn danger" data-act="removepin">Remove PIN</button>' : '<button class="btn primary" data-act="setpin">Set a PIN</button>') + '</div></section>';
   if (WEB && WEB.user()) h += '<section class="card" id="acctCard"><h2 class="h3">Your account</h2><p class="note">Signed in as <b style="color:var(--fg)">' + esc(WEB.user().email) + '</b>. You stay signed in on this phone.</p><div class="row"><button class="btn grow" data-act="changepw">Change password</button><button class="btn grow" data-act="signout">Sign out</button></div>' + (WEB.logoutOthers ? '<button class="btn ghost" data-act="logoutothers">Sign out on all my other phones</button>' : '') + '<button class="btn danger" data-act="delacct">Delete my account</button></section>';
+  var helpMail = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy && window.SHEPHERD_CONFIG.privacy.contact) || 'lostshepherdapp@gmail.com';
+  h += '<section class="card" id="helpCard"><h2 class="h3">Help</h2><p class="note">Questions, problems or ideas? Email ' + esc(helpMail) + '.</p><a class="btn" href="mailto:' + esc(helpMail) + '?subject=Shepherd">Email Shepherd</a></section>';
   h += '<section class="card"><h2 class="h3">Your data</h2><p class="note">Your contacts are saved to your own private space' + (DB ? (WEB ? ' on the Shepherd server, with earlier versions kept' : '') : ' (right now only on this phone)') + '. Nobody else using Shepherd can see them. A copy is also kept on this phone so the app works without signal.</p><button class="btn soft" data-act="yourdata">Privacy and safe use</button><div class="row"><button class="btn" data-act="export">Export a backup</button><label class="btn" for="importFile" style="cursor:pointer">Restore a backup</label><input type="file" id="importFile" accept=".json,application/json" class="sr"></div>' +
     (list().some(function (c) { return c.example; }) ? '<button class="btn danger" data-act="clearexamples">Remove example contacts</button>' : '') + '</section>';
   var acts = [];

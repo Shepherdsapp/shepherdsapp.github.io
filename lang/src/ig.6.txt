@@ -1,0 +1,6 @@
+908	Jụọ onye na-ahụ maka Shepherd na chọọchị gị maka koodu ntọghari, ma ọ bụ zitere {0} email. Mgbe ahụ tinye ya ma họrọ okwuntughe ọhụrụ.
+909	Ọ bụrụ na {0} nwere akaụntụ, anyị ezigala koodu ọnụọgụ 6 na email. Tinye ya ma họrọ okwuntughe ọhụrụ. Lelekwa folda spam.
+910	Enyemaka
+911	Ajụjụ, nsogbu ma ọ bụ echiche? Zitere {0} email.
+912	Zitere Shepherd email
+913	Ọ bụrụ na ị rịọ koodu ntọghari okwuntughe site na email, a na-ezigara ya n'adreesị i dere, site na <b>{0}</b> site na Gmail nke Google.

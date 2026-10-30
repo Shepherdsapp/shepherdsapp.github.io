@@ -905,5 +905,11 @@
  "904": "Your name, email, WhatsApp number, home country and settings (such as language, time zone and notification times).",
  "905": "For each phone you're signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.",
  "906": "The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.",
- "907": "<b>If you connect your phone calendar</b>: a private calendar link shows your Bible studies (with first names and topics) and your events. Anyone you give that link to can see them, and your phone's calendar service (such as Apple or Google) keeps a copy. You can replace the link in Shepherd at any time."
+ "907": "<b>If you connect your phone calendar</b>: a private calendar link shows your Bible studies (with first names and topics) and your events. Anyone you give that link to can see them, and your phone's calendar service (such as Apple or Google) keeps a copy. You can replace the link in Shepherd at any time.",
+ "908": "Ask the person who runs Shepherd at your church for a reset code, or email {0}. Then enter it and choose a new password.",
+ "909": "If {0} has an account, we've emailed a 6-digit code. Enter it and choose a new password. Check your spam folder too.",
+ "910": "Help",
+ "911": "Questions, problems or ideas? Email {0}.",
+ "912": "Email Shepherd",
+ "913": "If you ask for a password reset code by email, it is sent to the address you typed, from <b>{0}</b> through Google's Gmail."
 }

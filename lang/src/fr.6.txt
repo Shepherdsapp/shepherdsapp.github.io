@@ -1,0 +1,6 @@
+908	Demandez un code à la personne qui gère Shepherd dans votre église, ou écrivez à {0}. Saisissez-le ensuite et choisissez un nouveau mot de passe.
+909	Si {0} a un compte, nous avons envoyé un code à 6 chiffres par e-mail. Saisissez-le et choisissez un nouveau mot de passe. Regardez aussi dans les spams.
+910	Aide
+911	Des questions, un problème ou une idée ? Écrivez à {0}.
+912	Écrire à Shepherd
+913	Si vous demandez un code de réinitialisation par e-mail, il est envoyé à l'adresse que vous avez saisie, depuis <b>{0}</b> via Gmail de Google.

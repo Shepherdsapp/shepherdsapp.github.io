@@ -1,0 +1,6 @@
+908	Frag die Person, die Shepherd in deiner Gemeinde betreut, nach einem Code, oder schreib an {0}. Gib ihn dann ein und wähle ein neues Passwort.
+909	Wenn {0} ein Konto hat, haben wir dir einen 6-stelligen Code gemailt. Gib ihn ein und wähle ein neues Passwort. Schau auch im Spam-Ordner nach.
+910	Hilfe
+911	Fragen, Probleme oder Ideen? Schreib an {0}.
+912	Shepherd schreiben
+913	Wenn du einen Code zum Zurücksetzen des Passworts per E-Mail anforderst, wird er an die eingegebene Adresse geschickt, von <b>{0}</b> über Googles Gmail.

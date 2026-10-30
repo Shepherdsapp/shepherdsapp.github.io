@@ -1,0 +1,6 @@
+908	Pide un código a la persona que gestiona Shepherd en tu iglesia, o escribe a {0}. Luego escríbelo y elige una contraseña nueva.
+909	Si {0} tiene una cuenta, te hemos enviado un código de 6 cifras por correo. Escríbelo y elige una contraseña nueva. Mira también en la carpeta de spam.
+910	Ayuda
+911	¿Preguntas, problemas o ideas? Escribe a {0}.
+912	Escribir a Shepherd
+913	Si pides un código para restablecer la contraseña por correo, se envía a la dirección que escribiste, desde <b>{0}</b> a través de Gmail de Google.

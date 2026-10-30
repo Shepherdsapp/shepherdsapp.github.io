@@ -26,7 +26,7 @@ const site = http.createServer((req, res) => {
   const u = new URL(req.url, APP); let p = decodeURIComponent(u.pathname);
   if (!p.startsWith('/shepherd/')) { res.writeHead(404); return res.end(); }
   p = p.slice('/shepherd/'.length) || 'index.html';
-  if (p === 'config.js') { res.writeHead(200, { 'Content-Type': 'text/javascript' }); return res.end("window.SHEPHERD_CONFIG = { api: '" + API + "', privacy: { controller: 'Pavi', contact: '8pavii@gmail.com' } };"); }
+  if (p === 'config.js') { res.writeHead(200, { 'Content-Type': 'text/javascript' }); return res.end("window.SHEPHERD_CONFIG = { api: '" + API + "', privacy: { controller: 'Pavi', contact: 'lostshepherdapp@gmail.com' } };"); }
   const f = path.join(ROOT, p);
   if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory() || /^(test|worker|src|node_modules)\//.test(p)) { res.writeHead(404); return res.end('not found'); }
   res.writeHead(200, { 'Content-Type': types[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res);
@@ -219,6 +219,7 @@ try {
   await C.p.click('[data-auth="signin"]'); await wait(200); await C.p.click('[data-auth="forgot"]'); await wait(200);
   await C.p.fill('#aEmail', 'pavi@church.test'); await C.p.click('#aGo'); await wait(1000);
   ok(/Ask the person who runs Shepherd/.test(await C.p.textContent('#auth')) && await C.p.locator('#aCode').isVisible(), 'asks for a reset code from the church\'s Shepherd admin');
+  ok(/or email lostshepherdapp@gmail\.com/.test(await C.p.textContent('#auth')), 'and offers lostshepherdapp@gmail.com for help');
   const adm = await (await realFetch(API + '/admin', { method: 'POST', body: new URLSearchParams({ admin: 'admin-key-e2e', email: 'pavi@church.test' }) })).text();
   const code = (/(\d{6})<\/b>/.exec(adm) || [])[1];
   await C.p.fill('#aCode', code); await C.p.fill('#aPw', 'new password 22'); await C.p.click('#aGo'); await wait(2500);
@@ -250,7 +251,7 @@ try {
     await P.p.goto(APP + 'privacy.html'); await wait(900);
     const hs = await P.p.$$eval('#pv h3', h => h.length);
     const txt = await P.p.textContent('body');
-    ok(hs === 7 && /Acceptable use/.test(txt) && /responsible for the people/.test(txt) && /passcode/.test(txt) && /email 8pavii@gmail\.com/.test(txt), 'privacy.html opens on its own with all 7 sections');
+    ok(hs === 7 && /Acceptable use/.test(txt) && /responsible for the people/.test(txt) && /passcode/.test(txt) && /email lostshepherdapp@gmail\.com/.test(txt), 'privacy.html opens on its own with all 7 sections');
     ok(await overflow(P.p) <= 0, 'privacy page fits a small phone');
     await P.p.screenshot({ path: path.join(OUT, 'privacy-320.png'), fullPage: true });
     await P.p.evaluate(() => localStorage.setItem('shepherd:lang', 'es')); await P.p.reload(); await wait(1500);
@@ -350,6 +351,39 @@ try {
     await Promise.all([A.p.waitForNavigation({ timeout: 8000 }).catch(() => null), A.p.selectOption('#pLang', 'en')]);
     await wait(1800);
     ok(/^Today\|People/.test(await A.p.$$eval('.tab', t => t.map(x => x.textContent.trim().replace(/\d+$/, '')).join('|'))), 'and back to English');
+  }
+
+  current = 'Forgot password, code by email';
+  {
+    // a stand-in for Gmail's mail server, so the emailed code can be read
+    let lastMail = '';
+    env.GMAIL_USER = 'lostshepherdapp@gmail.com'; env.GMAIL_APP_PASSWORD = 'test app password';
+    env.__connect = () => {
+      let ctrl, inData = false, data = '';
+      const readable = new ReadableStream({ start(c) { ctrl = c; c.enqueue(new TextEncoder().encode('220 ready\r\n')); } });
+      const writable = new WritableStream({ write(chunk) {
+        const t = new TextDecoder().decode(chunk); const say = x => ctrl.enqueue(new TextEncoder().encode(x + '\r\n'));
+        if (inData) { data += t; if (data.endsWith('\r\n.\r\n')) { inData = false; lastMail = data; say('250 OK'); } return; }
+        for (const line of t.split('\r\n').filter(Boolean)) {
+          if (/^EHLO/.test(line)) say('250 hi'); else if (/^AUTH/.test(line)) say('235 OK'); else if (/^(MAIL|RCPT)/.test(line)) say('250 OK');
+          else if (line === 'DATA') { inData = true; data = ''; say('354 go'); } else if (line === 'QUIT') { say('221 bye'); ctrl.close(); }
+        }
+      } });
+      return { readable, writable, close: async () => {} };
+    };
+    const F = await phone(ANDROID, 360, 780);
+    await F.p.goto(APP); await wait(600);
+    await F.p.click('[data-auth="signin"]'); await wait(200); await F.p.click('[data-auth="forgot"]'); await wait(200);
+    await F.p.fill('#aEmail', 'ama@church.test'); await F.p.click('#aGo'); await wait(1500);
+    const msg = await F.p.textContent('#auth');
+    ok(/we've emailed a 6-digit code/.test(msg) && /Check your spam folder too/.test(msg), 'with Gmail set up, the app says the code was emailed (and to check spam)');
+    const subj = Buffer.from((/Subject: =\?UTF-8\?B\?([^?]+)\?=/.exec(lastMail) || [])[1] || '', 'base64').toString();
+    const code = (/(\d{6})/.exec(subj) || [])[1];
+    ok(!!code && /To: <ama@church\.test>/.test(lastMail), 'the code is emailed to the address typed: ' + subj);
+    await F.p.fill('#aCode', code || ''); await F.p.fill('#aPw', 'ama new password 2'); await F.p.click('#aGo'); await wait(2500);
+    ok(!(await F.p.locator('#auth').isVisible()), 'the emailed code works: new password set and signed in');
+    await F.ctx.close();
+    delete env.GMAIL_USER; delete env.GMAIL_APP_PASSWORD; delete env.__connect;
   }
 
   current = 'Two phones editing the same person';

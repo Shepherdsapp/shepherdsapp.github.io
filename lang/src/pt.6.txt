@@ -1,0 +1,6 @@
+908	Peça um código à pessoa que cuida do Shepherd na sua igreja, ou escreva para {0}. Depois digite o código e escolha uma nova senha.
+909	Se {0} tiver uma conta, enviamos um código de 6 dígitos por e-mail. Digite o código e escolha uma nova senha. Confira também a pasta de spam.
+910	Ajuda
+911	Dúvidas, problemas ou ideias? Escreva para {0}.
+912	Escrever para o Shepherd
+913	Se você pedir um código para redefinir a senha por e-mail, ele é enviado para o endereço que você digitou, a partir de <b>{0}</b>, pelo Gmail do Google.

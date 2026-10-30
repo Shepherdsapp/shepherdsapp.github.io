@@ -1,0 +1,6 @@
+908	Béèrè kóòdù àtúnṣe lọ́wọ́ ẹni tí ó ń bójú tó Shepherd ní ìjọ rẹ, tàbí kọ ímeèlì sí {0}. Lẹ́yìn náà tẹ̀ ẹ́ kí o sì yan ọ̀rọ̀ aṣínà tuntun.
+909	Bí {0} bá ní àkáǹtì, a ti fi kóòdù oní-nọ́ńbà 6 ránṣẹ́ sí ímeèlì. Tẹ̀ ẹ́ kí o sì yan ọ̀rọ̀ aṣínà tuntun. Wo inú fódà spam náà pẹ̀lú.
+910	Ìrànlọ́wọ́
+911	Ìbéèrè, ìṣòro tàbí èrò? Kọ ímeèlì sí {0}.
+912	Kọ ímeèlì sí Shepherd
+913	Bí o bá béèrè kóòdù àtúnṣe ọ̀rọ̀ aṣínà nípasẹ̀ ímeèlì, a ó fi ránṣẹ́ sí àdírẹ́sì tí o tẹ̀, láti <b>{0}</b> nípasẹ̀ Gmail ti Google.

@@ -4,7 +4,7 @@
 (function () {
   var USE_VERSION = 1; // raise this when the acceptable use statement changes, so everyone agrees to the new one
   var UPDATED = '2026-10-29';
-  function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || '8pavii@gmail.com' }; }
+  function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || 'lostshepherdapp@gmail.com' }; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
   function when() {
     var d = new Date(UPDATED + 'T12:00:00');
@@ -55,6 +55,7 @@
           'Phone notifications are encrypted on the way to your phone and only show first names, never notes or prayer points.',
           'Shepherd\'s fonts and code come from Shepherd itself, so no advertising or tracking company sees you use it.',
           'Shepherd never sends messages for you. Every WhatsApp message is one you send yourself.',
+          'If you ask for a password reset code by email, it is sent to the address you typed, from <b>' + esc(c.contact) + '</b> through Google\'s Gmail.',
           'Earlier versions are kept for up to a year so nothing is lost by mistake. Deleting someone\'s data removes every copy Shepherd keeps.',
           'For emergencies, the whole database can be restored to any point in the last 7 days, so a deletion is fully gone after 7 days.',
           'The server is looked after by <b>' + esc(c.controller) + '</b>, who doesn\'t look at anyone\'s list and only reaches stored data to keep Shepherd running or to act on a request to remove someone.'])) +

@@ -1,0 +1,6 @@
+908	Poproś o kod osobę, która prowadzi Shepherd w Twoim kościele, albo napisz na {0}. Potem wpisz kod i wybierz nowe hasło.
+909	Jeśli {0} ma konto, wysłaliśmy e-mailem 6-cyfrowy kod. Wpisz go i wybierz nowe hasło. Sprawdź też folder spam.
+910	Pomoc
+911	Pytania, problemy lub pomysły? Napisz na {0}.
+912	Napisz do Shepherd
+913	Jeśli poprosisz o kod do zresetowania hasła e-mailem, zostanie wysłany na wpisany adres z <b>{0}</b> przez Gmail firmy Google.
