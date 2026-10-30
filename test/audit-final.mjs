@@ -86,7 +86,7 @@ async function waitSaved(p) { for (let i = 0; i < 40; i++) { if (/Saved/.test(aw
 
 const LANGS = process.env.LANGS ? process.env.LANGS.split(',') : ['en', 'es', 'fr', 'pt', 'nl', 'pl', 'pcm', 'yo', 'ig', 'zh-Hans', 'zh-Hant', 'ja', 'de', 'ru', 'lt'];
 const SHOT_LANGS = ['en', 'de', 'ru', 'yo', 'ja'];
-const WIDTHS = process.env.QUICK ? [[390, 844]] : [[320, 568], [360, 740], [390, 844], [430, 932]];
+const WIDTHS = process.env.ONLY320 ? [[320, 568]] : process.env.QUICK ? [[390, 844]] : [[320, 568], [360, 740], [390, 844], [430, 932]];
 const VIEWS = ['today', 'people', 'disciples', 'events', 'week', 'about'];
 const KEYS = Object.values(JSON.parse(fs.readFileSync(path.join(ROOT, 'lang', 'keys.json'), 'utf8')));
 const normT = s => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
@@ -111,6 +111,9 @@ const layoutProblems = p => p.evaluate(() => {
     const cs = getComputedStyle(el);
     if (el.children.length === 0 && el.innerText && el.innerText.trim() && (cs.overflow === 'hidden' || cs.overflowX === 'hidden') && cs.textOverflow !== 'ellipsis' && el.scrollWidth > el.clientWidth + 2) out.push('cut off: ' + el.innerText.trim().slice(0, 40));
   });
+  document.querySelectorAll('.tab .tl').forEach(l => { if (l.scrollWidth > l.clientWidth + 1) out.push('tab name does not fit: ' + l.textContent.trim()); });
+  { const b = document.querySelector('.brand'), sy = document.querySelector('#sync'); if (b && sy && sy.offsetParent && b.getBoundingClientRect().right > sy.getBoundingClientRect().left + 1) out.push('header: app name overlaps the Saved label'); }
+  { const sp = document.querySelector('#sync > span'); if (sp && sp.offsetParent && sp.scrollWidth > sp.clientWidth + 1) out.push('note: Saved label shortened with … (' + sp.textContent.trim() + ')'); }
   document.querySelectorAll('.tab').forEach(t => { const r = t.getBoundingClientRect(); if (t.scrollWidth > t.clientWidth + 2 || t.scrollHeight > t.clientHeight + 2) out.push('tab label cut off: ' + t.innerText.trim()); if (r.height < 44 || r.width < 44) out.push('tab too small to tap: ' + t.innerText.trim() + ' ' + Math.round(r.width) + 'x' + Math.round(r.height)); });
   return [...new Set(out)].slice(0, 12);
 });
