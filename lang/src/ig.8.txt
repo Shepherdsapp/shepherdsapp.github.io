@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Agbamume
+945	Soro ụmụnna gị nwoke na nwanyị n'okwukwe nọrọ.
+946	Mmemme gị dị mkpa, dịka Network Events, EMC na GMC. Kpọọ ndị mmadụ, wee kaa ndị bịara akara.
+947	Dee mmemme ọ bụla dị mkpa ebe a, dịka <b>Network Event</b>, <b>EMC</b> ma ọ bụ <b>GMC</b>. Kaa <b>Chetara m</b> akara ma họrọ ọgụgụ azụ kwa izu ma ọ bụ kwa ọnwa ka ị ghara ịtụfu otu.
+948	Ego na-egosi na <b>{0}</b>. I nwere ike ịgbanwe ego na Ntọala.
+949	Gbanwee ego
+950	Ego maka mmefu Agbamume
+951	Ọnụ ahịa ({0})
+952	Zutere mgbe m na-ekesa okwukwe
+953	Alaeze
+954	Ezinụlọ
+955	Ndị enyi
+956	Naanị na ekwentị a
+957	Agaghị echekwa ya
+958	Hazie kọntaktị gị
+959	Kọntaktị {0} ka a ga-ahazi. Pịa ebe onye ọ bụla dabara.
+960	Kọntaktị {0} ka a ga-ahazi. Pịa ebe onye ọ bụla dabara.
+961	Ahapụrụ mmadụ {0} nọbuladị na Shepherd.
+962	Ahapụrụ mmadụ {0} nọbuladị na Shepherd.
+963	Naanị gị na-ahụ aha na nọmba ha. Ọ dịghị onye ọzọ na-eji Shepherd nwere ike ịhụ ha.
+964	M ga-etinye naanị ndị kwere ka m chekwaa ozi ha ma anyị na-akpakọrịta.
+965	Buru ụzọ kaa igbe ahụ akara. Tinye naanị ndị kwere.
+966	Malite ịhazi
+967	Emesịa
+968	{0} fọdụrụ
+969	Hazie ndị fọdụrụ emesịa
+970	Kọntaktị {0} fọdụrụ ịhazi. Gaa n'ihu site na Mmadụ mgbe ọ bụla.
+971	Kọntaktị {0} fọdụrụ ịhazi. Gaa n'ihu site na Mmadụ mgbe ọ bụla.
+972	Ahaziela ha niile
+973	Etinyeghị onye ọ bụla.
+974	Ndị ọhụrụ na-apụta na Taa ole na ole kwa ụbọchị, ka ọ ghara ịka gị.
+975	Jiri <b>Mgbakwunye ngwa ngwa</b> n'elu Mmadụ chọta onye ọ bụla ngwa ngwa, zie ha ozi, hazie nzute ma ọ bụ tinye ha na ndepụta.
+976	Mepee Mmadụ
+977	Bubata kọntaktị gị
+978	Họrọ onye ọ bụla i soro kesaa okwukwe gị n'ime ọnwa 6 gara aga, ndị na-eso ụzọ niile (ụmụnna nwoke na nwanyị n'okwukwe), na ezinụlọ & ndị enyi ị chọrọ ileta ma ọ bụ kpee ekpere maka ha.
+979	Shepherd na-ebubata aha na nọmba ha. Naanị gị na-ahụ ha: ọ dịghị onye ọzọ na-eji Shepherd nwere ike ịhụ ha, ka gị na ha nọrọ n'udo.
+980	Họrọ mmadụ: tinye mkpịsị aka abụọ na ndepụta wee dọkpụrụ ya ala n'elu aha ị chọrọ. Iji were mmadụ niile, pịa <b>Lists</b> wee jide <b>All Contacts</b>.
+981	Jide aha ị họrọ, pịa <b>Export</b>, wee pịa <b>Save to Files</b>.
+982	Pịa <b>Họrọ na kọntaktị m</b> n'elu wee kaa ndị ị chọrọ akara.
+983	Ma ọ bụ, na ngwa <b>Contacts</b>, jide otu aha, kaa ndị ọzọ akara, wee pịa <b>Share</b> ma chekwaa faịlụ ahụ.
+984	Mgbe ahụ hazie onye ọ bụla otu mpị: Zutere mgbe m na-ekesa okwukwe, Alaeze, Ezinụlọ, Ndị enyi ma ọ bụ Ọzọ. A naghị echekwa onye ị wụfere.
+985	Ndị niile ị họrọ nọbuladị na Shepherd
+986	Etinyere site na kọntaktị ekwentị gị
+987	Mgbakwunye ngwa ngwa
+988	Onye
+989	Mmadụ
+990	Ihe a ga-eme
+991	{0} ({1})
+992	Pịa ka ịhụ mmadụ niile, ma ọ bụ dee aha
+993	Mepee ibe ha
+994	Hazie nzute agbamume
+995	Tinye na Mmadụ (na-eleta)
+996	Tinye na Ndị na-eso ụzọ
+997	Tinye nọmba ha
+998	Gaa
+999	Bubata kọntaktị site na ekwentị gị
+1000	Bubata mmadụ site na ekwentị gị ma hazie ha otu mpị. Mgbe ahụ chọta onye ọ bụla ebe a ka i zie ha ozi, hazie nzute ma ọ bụ tinye ha na ndepụta.
+1001	Kọntaktị {0} fọdụrụ ịhazi
+1002	Kọntaktị {0} fọdụrụ ịhazi
+1003	Buru ụzọ họrọ otu onye.
+1004	Enweghị nọmba WhatsApp echekwara maka {0}
+1005	A na-edobe {0} naanị na ekwentị a. Tinye ha na ndepụta iji mepee ibe ha.
+1006	{0} nọbuladị na Mmadụ
+1007	{0} nọbuladị na Ndị na-eso ụzọ
+1008	Etinyela {0} na Ndị na-eso ụzọ
+1009	Tinye na Mmadụ
+1010	Shepherd ga-echetara gị ileta ha.
+1011	Etinyela {0} na Mmadụ
+1012	Dee nọmba ha.
+1013	Chekwaa nọmba
+1014	Echekwala nọmba maka {0}
+1015	Etinyela nọmba
+1016	Onye ka ị ga-agba ume n'izu a?
+1017	Hazie kọfị, ije ma ọ bụ nri ya na nwanne nwoke ma ọ bụ nwanne nwanyị.
+1018	Dee oge unu nọkọrọ
+1019	Ọnwa gara aga
+1020	Ọnwa na-abịa
+1021	Atụmatụ {0}
+1022	Atụmatụ {0}
+1023	Ọ dịghị ihe a haziri maka ụbọchị a.
+1024	Hazie maka ụbọchị a
+1025	Gosi ihe niile
+1026	Enweghị nzute ka
+1027	Kọfị, ije, nri. Oge unu nọkọrọ na-ewuli ibe unu elu. Hazie nke mbụ.
+1028	Mmefu
+1029	Ọnwa a
+1030	Nzute agbamume ({0})
+1031	Oge nọkọ ({0})
+1032	Nri dị na {0} n'ime {1} n'ọnwa a.
+1033	Eletara: <b>{0} n'ime {1}</b>
+1034	Ndị a gbara ume
+1035	Nzute agbamume
+1036	Oge nọkọ
+1037	Nri
+1038	Nwanne nwoke ma ọ bụ nwanne nwanyị
+1039	Dee aha
+1040	dịka: Kọfị na ije
+1041	Ị ga-eri nri?
+1042	Ụdị
+1043	Dee ọnụ ahịa dịka nọmba, dịka 12.50.
+1044	Hichapụ
+1045	Pịa ọzọ iji hichapụ
+1046	Ehichapụla
+1047	Echekwala oge nọkọ
+1048	Echekwala nzute agbamume
+1049	Agbamume taa
+1050	Nzute agbamume ya na {0}
+1051	Oge nọkọ ya na {0}
+1052	Chetara m maka mmemme a
+1053	Ọgụgụ azụ
+1054	Ọ dịghị
+1055	Kwa izu
+1056	Kwa ọnwa
+1057	Kwa izu: ncheta kwa izu maka izu 8 tupu ya. Kwa ọnwa: otu kwa ọnwa maka ọnwa 6 tupu ya. A ga-echetakwa gị ụbọchị tupu ya na otu awa tupu ya.
+1058	Ọgụgụ azụ kwa izu
+1059	Ọgụgụ azụ kwa ọnwa
+1060	Hazie nzute agbamume ma ọ bụ oge nọkọ ya na nwanne nwoke ma ọ bụ nwanne nwanyị.
+1061	{0} n'ime {1}
+1062	izu {0}
+1063	izu {0}
+1064	ọnwa {0}
+1065	ọnwa {0}
+1066	Ncheta kwa izu iji gbaa mmadụ ume, na ncheta tupu nzute ọ bụla
+1067	Ihe Shepherd na-eme na ihe kpatara ya, ya na amaokwu Baịbụl dị n'azụ ya.
+1068	Gụọ Banyere Shepherd
+1069	Bubata mmadụ site na ekwentị gị ma hazie ha otu mpị. A na-echekwa aha na nọmba ị haziri na ndepụta nzuzo gị. A naghị echekwa onye ị wụfere, ndị nọ na Ọzọ na-anọkwa naanị na ekwentị a.
+1070	Bubata kọntaktị
+1071	Bubata kọntaktị ekwentị gị ma hazie ha otu mpị, wee jiri Mgbakwunye ngwa ngwa ruo onye ọ bụla ngwa ngwa.
+1072	<b>Kalenda</b> na-edobe mmemme dị mkpa dịka Network Events, EMC na GMC, ya na ọgụgụ azụ kwa izu ma ọ bụ kwa ọnwa, akwụkwọ ọkpụkpọ (ezigara na WhatsApp) na ndị bịara, ma jikọọ na kalenda ekwentị gị.
+1073	Na-agbarịta ibe unu ume
+1074	<b>Agbamume</b> na-ahazi nzute agbamume na oge nọkọ ya na ụmụnna nwoke na nwanyị, ya na ncheta kwa izu, ma na-egosi ihe ị na-emefu kwa izu na kwa ọnwa.
+1075	Ọ na-egosikwa otú i si na-eleta ndị mmadụ n'ikwesị ntụkwasị obi kwa izu.
+1076	Banyere na-akọwa ihe niile Shepherd nwere ike ime, ya na amaokwu Baịbụl dị n'azụ ya. Ọ dị n'elu Ntọala. Gụọ ya ugbu a ma ọ bụ laghachi mgbe ọ bụla.
+1077	Bubata mmadụ site na ekwentị gị, wee hazie onye ọ bụla otu mpị: Zutere mgbe m na-ekesa okwukwe, Alaeze, Ezinụlọ, Ndị enyi ma ọ bụ Ọzọ. Mgbakwunye ngwa ngwa ga-achọta onye ọ bụla ngwa ngwa, ka i zie ha ozi, hazie nzute ma ọ bụ tinye ha na ndepụta.
+1078	Dee mmemme dị mkpa dịka Network Events, EMC ma ọ bụ GMC, ma họrọ ọgụgụ azụ kwa izu ma ọ bụ kwa ọnwa. Kpọọ ndị mmadụ ma kaa ndị bịara akara. Jikọọ Shepherd na kalenda ekwentị gị ka ọmụmụ na mmemme gị pụta ebe ahụ n'onwe ha.
+1079	Hazie nzute agbamume na oge nọkọ ya na ụmụnna nwoke na nwanyị, kaa akara ma unu ga-eri nri, ma hụ ihe ị na-emefu kwa izu na kwa ọnwa. Shepherd na-echetara gị kwa izu. Ọnụ ọgụgụ nleta gị kwa izu dịkwa ebe a.
+1080	Họrọ asụsụ gị (amaokwu Baịbụl na-anọ n'asụsụ Bekee, NIV) na ego gị, gụọ Banyere Shepherd, tọọ PIN, bupụ ndabere, ma gụọ Nzuzo na iji ya nke ọma.
+1081	Aha gị, email, nọmba WhatsApp, mba gị na ntọala gị (dị ka asụsụ, ego, mpaghara oge na oge ọkwa).
+1082	Mmemme gị, ndị na-eso ụzọ na ndepụta ekpere, yana nzute agbamume na oge nọkọ ị dere, ya na ihe unu mere, ma unu riri nri na ego ole ọ ruru.
+1083	Ndị ị bubatara site na ekwentị gị ma hazie na Mmadụ, Ndị na-eso ụzọ ma ọ bụ ndepụta ekpere gị: aha na nọmba ha.
+1084	Kọntaktị ekwentị ị bubatara mana ị hazibeghị, na onye ọ bụla ị tinyere na Ọzọ. A naghị ebugo ha n'ịntanetị. A naghị edobe onye ị wụfere ma ọlị.

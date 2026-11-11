@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Encourage
+945	Spend time with your brodas and sistas for faith.
+946	Your big events, like Network Events, EMC and GMC. Invite pipul, then tick who come.
+947	Put every big event here, like <b>Network Event</b>, <b>EMC</b> or <b>GMC</b>. Tick <b>Notify me</b> and pick weekly or monthly countdown so you no go miss any one.
+948	Money dey show for <b>{0}</b>. You fit change di currency for Settings.
+949	Change currency
+950	Currency for Encourage money
+951	Cost ({0})
+952	Meet when I dey share faith
+953	Kingdom
+954	Family
+955	Friends
+956	Na only dis phone
+957	E no go save
+958	Sort your contacts
+959	{0} contacts to sort. Tap where each person belong.
+960	{0} contacts to sort. Tap where each person belong.
+961	We comot {0} pipul wey don already dey Shepherd.
+962	We comot {0} pipul wey don already dey Shepherd.
+963	Na only you fit see their names and numbers. Nobody else wey dey use Shepherd fit see am.
+964	I go only add pipul wey happy make I keep their details and make we dey in touch.
+965	Tick di box first. Only add pipul wey agree.
+966	Start to sort
+967	Later
+968	{0} remain
+969	Sort di rest later
+970	{0} contacts remain to sort. Continue from Pipul anytime.
+971	{0} contacts remain to sort. Continue from Pipul anytime.
+972	Everything don sort
+973	Nobody add.
+974	New pipul go show for Today small small every day, so e no go too much for you.
+975	Use <b>Quick add</b> for top of Pipul to find anybody quick, message dem, plan date or add dem to list.
+976	Open Pipul
+977	Bring your contacts
+978	Pick everybody wey you don share your faith with for di last 6 months, all disciples (brodas and sistas for faith), and family & friends wey you wan check up on or even pray for.
+979	Shepherd go bring their names and numbers. Na only you fit see am: nobody else wey dey use Shepherd fit see am, to keep you and dem safe.
+980	Pick pipul: put two fingers for di list and drag am down over di names wey you want. To take everybody, tap <b>Lists</b> and press <b>All Contacts</b> hold am.
+981	Press one name wey you pick hold am, tap <b>Export</b>, then <b>Save to Files</b>.
+982	Tap <b>Pick from my contacts</b> for up and tick di pipul wey you want.
+983	Or, for di <b>Contacts</b> app, press one name hold am, tick di others, then tap <b>Share</b> and save di file.
+984	Then sort each person with one tap: Meet when I dey share faith, Kingdom, Family, Friends or Oda one. Anybody wey you skip, e no go save.
+985	Everybody wey you pick don already dey Shepherd
+986	Add from your phone contacts
+987	Quick add
+988	Who
+989	Person
+990	Wetin to do
+991	{0} ({1})
+992	Tap to see everybody, or type name
+993	Open their page
+994	Plan encouragement date
+995	Add to Pipul (follow up)
+996	Add to Disciples
+997	Add their number
+998	Go
+999	Bring contacts from your phone
+1000	Bring pipul from your phone and sort dem with one tap. Then find anybody here and message dem, plan date or add dem to list.
+1001	{0} contacts remain to sort
+1002	{0} contacts remain to sort
+1003	Pick one person first.
+1004	No WhatsApp number dey for {0}
+1005	{0} dey only for dis phone. Add am to list to open di page.
+1006	{0} don already dey Pipul
+1007	{0} don already dey Disciples
+1008	{0} don enter Disciples
+1009	Add to Pipul
+1010	Shepherd go remind you to check up on dem.
+1011	{0} don enter Pipul
+1012	Type their number.
+1013	Save number
+1014	Number don save for {0}
+1015	Number don add
+1016	Who you go encourage dis week?
+1017	Plan coffee, waka or food with one broda or sista.
+1018	Log hangout
+1019	Last month
+1020	Next month
+1021	{0} plans
+1022	{0} plans
+1023	Nothing dey planned for dis day.
+1024	Plan for dis day
+1025	Show everything
+1026	No date yet
+1027	Coffee, waka, food. Time together dey build each other up. Plan di first one.
+1028	Money wey you spend
+1029	Dis month
+1030	Encouragement dates ({0})
+1031	Hangouts ({0})
+1032	Food for {0} out of {1} dis month.
+1033	Follow up: <b>{0} out of {1}</b>
+1034	Encouraged
+1035	Encouragement date
+1036	Hangout
+1037	Food
+1038	Broda or sista
+1039	Type name
+1040	like Coffee and waka
+1041	Una dey go chop?
+1042	Type
+1043	Type di cost as number, like 12.50.
+1044	Delete
+1045	Tap again to delete
+1046	E don delete
+1047	Hangout don save
+1048	Encouragement date don save
+1049	Encouraging today
+1050	Encouragement date with {0}
+1051	Hangout with {0}
+1052	Notify me about dis event
+1053	Countdown
+1054	None
+1055	Weekly
+1056	Monthly
+1057	Weekly: reminder every week for di 8 weeks before. Monthly: one every month for di 6 months before. We go still remind you di day before and one hour before.
+1058	Weekly countdown
+1059	Monthly countdown
+1060	Plan encouragement date or hangout with one broda or sista.
+1061	{0} in {1}
+1062	{0} weeks
+1063	{0} weeks
+1064	{0} months
+1065	{0} months
+1066	Small push every week to encourage somebody, and reminders before each date
+1067	Wetin Shepherd dey do and why, with di Bible verses wey dey back am.
+1068	Read About Shepherd
+1069	Bring pipul from your phone and sort dem with one tap. Di names and numbers wey you sort go save for your private list. Anybody wey you skip no go save, and pipul for Oda one go stay only for dis phone.
+1070	Bring contacts
+1071	Bring your phone contacts and sort dem with one tap, then use Quick add to reach anybody quick.
+1072	<b>Calenda</b> dey keep big events like Network Events, EMC and GMC, with weekly or monthly countdown, invites (wey you send for WhatsApp) and who come, and e connect to your phone calendar.
+1073	Encourage one another
+1074	<b>Encourage</b> dey plan encouragement dates and hangouts with brodas and sistas, with small push every week, and e dey show wetin you spend every week and month.
+1075	E still dey show how faithfully you follow up every week.
+1076	About dey explain everything wey Shepherd fit do, with di Bible verses wey dey back am. E dey for top of Settings. Read am now or come back anytime.
+1077	Bring pipul from your phone, then sort each one with one tap: Meet when I dey share faith, Kingdom, Family, Friends or Oda one. Quick add go then find anybody quick, so you fit message dem, plan date or add dem to list.
+1078	Put big events like Network Events, EMC or GMC, and pick weekly or monthly countdown. Invite pipul and tick who come. Connect Shepherd to your phone calendar so your studies and events go show there by themself.
+1079	Plan encouragement dates and hangouts with brodas and sistas, tick if una dey go chop, and see wetin you spend every week and month. Shepherd go push you every week. Your weekly follow-up numbers dey here too.
+1080	Pick your language (Bible verses go stay for English, NIV) and your currency, read About Shepherd, set PIN, export backup, and read Privacy and how to use am well.
+1081	Your name, email, WhatsApp number, country and settings (like language, currency, time zone and notification times).
+1082	Your events, disciples and prayer list, and di encouragement dates and hangouts wey you log, with di activity, whether una chop and how much e cost.
+1083	Pipul wey you bring from your phone and sort into Pipul, Disciples or your prayer list: their name and number.
+1084	Phone contacts wey you bring but never sort, and anybody wey you put for Oda one. Dem no dey upload am. Anybody wey you skip, we no keep am at all.

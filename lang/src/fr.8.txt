@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Encourager
+945	Passez du temps avec vos frères et sœurs dans la foi.
+946	Vos événements clés, comme les Network Events, l'EMC et le GMC. Invitez des gens, puis cochez qui est venu.
+947	Notez ici chaque événement clé, comme un <b>Network Event</b>, l'<b>EMC</b> ou le <b>GMC</b>. Cochez <b>M'avertir</b> et choisissez un compte à rebours hebdomadaire ou mensuel pour ne jamais en manquer un.
+948	Les dépenses sont affichées en <b>{0}</b>. Vous pouvez changer la devise dans Réglages.
+949	Changer de devise
+950	Devise pour les dépenses d'Encourager
+951	Coût ({0})
+952	Rencontré en partageant la foi
+953	Royaume
+954	Famille
+955	Amis
+956	Sur ce téléphone seulement
+957	Non enregistré
+958	Triez vos contacts
+959	§one={0} contact à trier. Touchez la place de chaque personne.|other={0} contacts à trier. Touchez la place de chaque personne.
+960	§one={0} contact à trier. Touchez la place de chaque personne.|other={0} contacts à trier. Touchez la place de chaque personne.
+961	§one={0} personne déjà dans Shepherd a été laissée de côté.|other={0} personnes déjà dans Shepherd ont été laissées de côté.
+962	§one={0} personne déjà dans Shepherd a été laissée de côté.|other={0} personnes déjà dans Shepherd ont été laissées de côté.
+963	Leurs noms et numéros restent privés. Personne d'autre utilisant Shepherd ne peut les voir.
+964	Je n'ajouterai que des personnes d'accord pour que je garde leurs coordonnées et que nous restions en contact.
+965	Cochez d'abord la case. N'ajoutez que des personnes qui sont d'accord.
+966	Commencer le tri
+967	Plus tard
+968	Encore {0}
+969	Trier le reste plus tard
+970	§one=Encore {0} contact à trier. Reprenez depuis Personnes quand vous voulez.|other=Encore {0} contacts à trier. Reprenez depuis Personnes quand vous voulez.
+971	§one=Encore {0} contact à trier. Reprenez depuis Personnes quand vous voulez.|other=Encore {0} contacts à trier. Reprenez depuis Personnes quand vous voulez.
+972	Tout est trié
+973	Personne n'a été ajouté.
+974	Les nouvelles personnes arrivent dans Aujourd'hui quelques-unes par jour, pour ne pas vous submerger.
+975	Utilisez <b>Ajout rapide</b> en haut de Personnes pour trouver n'importe qui en un instant, lui écrire, prévoir un rendez-vous ou l'ajouter à une liste.
+976	Ouvrir Personnes
+977	Importez vos contacts
+978	Choisissez toutes les personnes avec qui vous avez partagé votre foi ces 6 derniers mois, tous les disciples (frères et sœurs dans la foi), et la famille et les amis que vous voulez suivre ou pour qui vous voulez prier.
+979	Shepherd importe leurs noms et numéros. Ils restent privés : personne d'autre utilisant Shepherd ne peut les voir, pour votre sécurité et la leur.
+980	Choisissez des personnes : posez deux doigts sur la liste et faites-les glisser vers le bas sur les noms voulus. Pour tout le monde, touchez <b>Listes</b> et maintenez <b>Tous les contacts</b>.
+981	Maintenez un nom choisi, touchez <b>Exporter</b>, puis <b>Enregistrer dans Fichiers</b>.
+982	Touchez <b>Choisir dans mes contacts</b> ci-dessus et cochez les personnes voulues.
+983	Ou, dans l'app <b>Contacts</b>, maintenez un nom, cochez les autres, touchez <b>Partager</b> et enregistrez le fichier.
+984	Puis triez chaque personne d'un geste : Rencontré en partageant la foi, Royaume, Famille, Amis ou Autre. Les personnes passées ne sont pas enregistrées.
+985	Toutes les personnes choisies sont déjà dans Shepherd
+986	Ajouté depuis les contacts de votre téléphone
+987	Ajout rapide
+988	Qui
+989	Personne
+990	Action
+991	{0} ({1})
+992	Touchez pour voir tout le monde ou tapez un nom
+993	Ouvrir sa page
+994	Prévoir un rendez-vous d'encouragement
+995	Ajouter à Personnes (suivi)
+996	Ajouter aux Disciples
+997	Ajouter son numéro
+998	Valider
+999	Importer des contacts de votre téléphone
+1000	Importez des personnes de votre téléphone et triez-les d'un geste. Puis retrouvez ici n'importe qui pour lui écrire, prévoir un rendez-vous ou l'ajouter à une liste.
+1001	§one=Encore {0} contact à trier|other=Encore {0} contacts à trier
+1002	§one=Encore {0} contact à trier|other=Encore {0} contacts à trier
+1003	Choisissez d'abord une personne.
+1004	Aucun numéro WhatsApp enregistré pour {0}
+1005	{0} est gardé sur ce téléphone seulement. Ajoutez cette personne à une liste pour ouvrir sa page.
+1006	{0} est déjà dans Personnes
+1007	{0} est déjà dans Disciples
+1008	{0} ajouté aux Disciples
+1009	Ajouter à Personnes
+1010	Shepherd vous rappellera de prendre de ses nouvelles.
+1011	{0} ajouté à Personnes
+1012	Tapez son numéro.
+1013	Enregistrer le numéro
+1014	Numéro enregistré pour {0}
+1015	Numéro ajouté
+1016	Qui allez-vous encourager cette semaine ?
+1017	Prévoyez un café, une balade ou un repas avec un frère ou une sœur.
+1018	Noter un moment ensemble
+1019	Mois précédent
+1020	Mois suivant
+1021	§one={0} prévu|other={0} prévus
+1022	§one={0} prévu|other={0} prévus
+1023	Rien de prévu ce jour-là.
+1024	Prévoir pour ce jour
+1025	Tout afficher
+1026	Pas encore de rendez-vous
+1027	Un café, une balade, un repas. Le temps passé ensemble nous édifie les uns les autres. Prévoyez le premier.
+1028	Dépenses
+1029	Ce mois-ci
+1030	Rendez-vous d'encouragement ({0})
+1031	Moments ensemble ({0})
+1032	Repas {0} fois sur {1} ce mois-ci.
+1033	Suivi : <b>{0} sur {1}</b>
+1034	Encouragés
+1035	Rendez-vous d'encouragement
+1036	Moment ensemble
+1037	Repas
+1038	Frère ou sœur
+1039	Tapez un nom
+1040	ex. Café et balade
+1041	Vous allez manger ?
+1042	Type
+1043	Écrivez le coût en chiffres, par exemple 12.50.
+1044	Supprimer
+1045	Touchez encore pour supprimer
+1046	Supprimé
+1047	Moment ensemble enregistré
+1048	Rendez-vous d'encouragement enregistré
+1049	Encouragements du jour
+1050	Rendez-vous d'encouragement avec {0}
+1051	Moment ensemble avec {0}
+1052	M'avertir de cet événement
+1053	Compte à rebours
+1054	Aucun
+1055	Hebdomadaire
+1056	Mensuel
+1057	Hebdomadaire : un rappel chaque semaine pendant les 8 semaines avant. Mensuel : un rappel chaque mois pendant les 6 mois avant. Vous êtes aussi averti la veille et une heure avant.
+1058	Compte à rebours hebdomadaire
+1059	Compte à rebours mensuel
+1060	Prévoyez un rendez-vous d'encouragement ou un moment ensemble avec un frère ou une sœur.
+1061	{0} dans {1}
+1062	§one={0} semaine|other={0} semaines
+1063	§one={0} semaine|other={0} semaines
+1064	§one={0} mois|other={0} mois
+1065	§one={0} mois|other={0} mois
+1066	Un rappel chaque semaine pour encourager quelqu'un, et des rappels avant chaque rendez-vous
+1067	Ce que fait Shepherd et pourquoi, avec les versets bibliques qui le fondent.
+1068	Lire À propos de Shepherd
+1069	Importez des personnes de votre téléphone et triez-les d'un geste. Les noms et numéros triés sont enregistrés dans votre liste privée. Les personnes passées ne sont pas enregistrées, et celles dans Autre restent sur ce téléphone seulement.
+1070	Importer des contacts
+1071	Importez les contacts de votre téléphone et triez-les d'un geste, puis utilisez Ajout rapide pour joindre n'importe qui en un instant.
+1072	<b>Calendrier</b> garde les événements clés comme les Network Events, l'EMC et le GMC, avec des comptes à rebours hebdomadaires ou mensuels, les invitations (envoyées par WhatsApp) et qui est venu, et se relie au calendrier de votre téléphone.
+1073	Encouragez-vous les uns les autres
+1074	<b>Encourager</b> prévoit des rendez-vous d'encouragement et des moments ensemble avec des frères et sœurs, avec un rappel chaque semaine, et montre ce que vous dépensez chaque semaine et chaque mois.
+1075	Il montre aussi avec quelle fidélité vous avez suivi les gens chaque semaine.
+1076	À propos explique tout ce que fait Shepherd, avec les versets bibliques qui le fondent. Il se trouve en haut des Réglages. Lisez-le maintenant ou revenez quand vous voulez.
+1077	Importez des personnes de votre téléphone, puis triez chacune d'un geste : Rencontré en partageant la foi, Royaume, Famille, Amis ou Autre. Ajout rapide retrouve ensuite n'importe qui pour lui écrire, prévoir un rendez-vous ou l'ajouter à une liste.
+1078	Notez les événements clés comme les Network Events, l'EMC ou le GMC, et choisissez un compte à rebours hebdomadaire ou mensuel. Invitez des gens et cochez qui est venu. Reliez Shepherd au calendrier de votre téléphone pour que vos études et événements y apparaissent tout seuls.
+1079	Prévoyez des rendez-vous d'encouragement et des moments ensemble avec des frères et sœurs, cochez si vous allez manger, et voyez ce que vous dépensez chaque semaine et chaque mois. Shepherd vous le rappelle chaque semaine. Vos chiffres de suivi de la semaine sont aussi ici.
+1080	Choisissez votre langue (les versets bibliques restent en anglais, NIV) et votre devise, lisez À propos de Shepherd, définissez un code PIN, exportez une sauvegarde et lisez Confidentialité et bon usage.
+1081	Votre nom, e-mail, numéro WhatsApp, pays et réglages (comme la langue, la devise, le fuseau horaire et les heures des notifications).
+1082	Vos événements, disciples et liste de prière, et les rendez-vous d'encouragement et moments ensemble que vous notez, avec l'activité, si vous avez mangé ensemble et le coût.
+1083	Les personnes que vous importez de votre téléphone et triez dans Personnes, Disciples ou votre liste de prière : leur nom et leur numéro.
+1084	Les contacts du téléphone importés mais pas encore triés, et les personnes que vous mettez dans Autre. Ils ne sont jamais envoyés en ligne. Les personnes passées ne sont pas gardées du tout.

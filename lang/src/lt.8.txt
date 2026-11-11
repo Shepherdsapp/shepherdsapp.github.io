@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Padrąsinti
+945	Leiskite laiką su broliais ir seserimis tikėjime.
+946	Jūsų svarbūs renginiai, pvz., Network Events, EMC ir GMC. Pakvieskite žmones, tada pažymėkite, kas atėjo.
+947	Įrašykite čia kiekvieną svarbų renginį, pvz., <b>Network Event</b>, <b>EMC</b> ar <b>GMC</b>. Pažymėkite <b>Priminti man</b> ir pasirinkite savaitinį ar mėnesinį atgalinį skaičiavimą, kad nė vieno nepraleistumėte.
+948	Išlaidos rodomos valiuta <b>{0}</b>. Valiutą galite pakeisti Nustatymuose.
+949	Keisti valiutą
+950	Valiuta skiltyje Padrąsinti
+951	Kaina ({0})
+952	Sutikti dalijantis tikėjimu
+953	Karalystė
+954	Šeima
+955	Draugai
+956	Tik šiame telefone
+957	Neišsaugoma
+958	Surūšiuokite kontaktus
+959	§one={0} kontaktas rūšiuoti. Bakstelėkite, kur priklauso kiekvienas.|few={0} kontaktai rūšiuoti. Bakstelėkite, kur priklauso kiekvienas.|many={0} kontakto rūšiuoti. Bakstelėkite, kur priklauso kiekvienas.|other={0} kontaktų rūšiuoti. Bakstelėkite, kur priklauso kiekvienas.
+960	§one={0} kontaktas rūšiuoti. Bakstelėkite, kur priklauso kiekvienas.|few={0} kontaktai rūšiuoti. Bakstelėkite, kur priklauso kiekvienas.|many={0} kontakto rūšiuoti. Bakstelėkite, kur priklauso kiekvienas.|other={0} kontaktų rūšiuoti. Bakstelėkite, kur priklauso kiekvienas.
+961	§one={0} žmogus jau yra Shepherd, jis praleistas.|few={0} žmonės jau yra Shepherd, jie praleisti.|many={0} žmogaus jau yra Shepherd, jie praleisti.|other={0} žmonių jau yra Shepherd, jie praleisti.
+962	§one={0} žmogus jau yra Shepherd, jis praleistas.|few={0} žmonės jau yra Shepherd, jie praleisti.|many={0} žmogaus jau yra Shepherd, jie praleisti.|other={0} žmonių jau yra Shepherd, jie praleisti.
+963	Jų vardai ir numeriai matomi tik jums. Niekas kitas, naudojantis Shepherd, jų nemato.
+964	Pridėsiu tik tuos, kurie sutinka, kad saugočiau jų duomenis ir palaikytume ryšį.
+965	Pirmiausia pažymėkite langelį. Pridėkite tik sutikusius žmones.
+966	Pradėti rūšiuoti
+967	Vėliau
+968	Liko {0}
+969	Likusius surūšiuoti vėliau
+970	§one=Liko {0} kontaktas. Tęskite skiltyje Žmonės, kada norite.|few=Liko {0} kontaktai. Tęskite skiltyje Žmonės, kada norite.|many=Liko {0} kontakto. Tęskite skiltyje Žmonės, kada norite.|other=Liko {0} kontaktų. Tęskite skiltyje Žmonės, kada norite.
+971	§one=Liko {0} kontaktas. Tęskite skiltyje Žmonės, kada norite.|few=Liko {0} kontaktai. Tęskite skiltyje Žmonės, kada norite.|many=Liko {0} kontakto. Tęskite skiltyje Žmonės, kada norite.|other=Liko {0} kontaktų. Tęskite skiltyje Žmonės, kada norite.
+972	Viskas surūšiuota
+973	Niekas nepridėtas.
+974	Nauji žmonės skiltyje Šiandien atsiranda po kelis per dieną, kad neapsunktumėte.
+975	Naudokite <b>Greitą pridėjimą</b> skilties Žmonės viršuje, kad greitai rastumėte bet ką, parašytumėte, suplanuotumėte susitikimą ar pridėtumėte į sąrašą.
+976	Atidaryti Žmones
+977	Įkelkite savo kontaktus
+978	Pasirinkite visus, su kuriais per pastaruosius 6 mėnesius dalijotės tikėjimu, visus mokinius (brolius ir seseris tikėjime), taip pat šeimą ir draugus, kuriais norite rūpintis arba už kuriuos norite melstis.
+979	Shepherd įkelia jų vardus ir numerius. Jie matomi tik jums: niekas kitas, naudojantis Shepherd, jų nemato, kad būtumėte saugūs jūs ir jie.
+980	Pasirinkite žmones: uždėkite du pirštus ant sąrašo ir braukite žemyn per norimus vardus. Norėdami visų, bakstelėkite <b>Sąrašai</b> ir palaikykite <b>Visi kontaktai</b>.
+981	Palaikykite pasirinktą vardą, bakstelėkite <b>Eksportuoti</b>, tada <b>Išsaugoti „Failuose“</b>.
+982	Bakstelėkite <b>Pasirinkti iš mano kontaktų</b> viršuje ir pažymėkite norimus žmones.
+983	Arba programėlėje <b>Kontaktai</b> palaikykite vardą, pažymėkite kitus, bakstelėkite <b>Bendrinti</b> ir išsaugokite failą.
+984	Tada surūšiuokite kiekvieną vienu bakstelėjimu: Sutikti dalijantis tikėjimu, Karalystė, Šeima, Draugai ar Kita. Praleisti žmonės neišsaugomi.
+985	Visi pasirinkti žmonės jau yra Shepherd
+986	Pridėta iš telefono kontaktų
+987	Greitas pridėjimas
+988	Kas
+989	Žmogus
+990	Veiksmas
+991	{0} ({1})
+992	Bakstelėkite, kad matytumėte visus, arba įveskite vardą
+993	Atidaryti puslapį
+994	Suplanuoti padrąsinimo susitikimą
+995	Pridėti į Žmones (palaikyti ryšį)
+996	Pridėti į Mokinius
+997	Pridėti numerį
+998	Vykdyti
+999	Įkelti kontaktus iš telefono
+1000	Įkelkite žmones iš telefono ir surūšiuokite vienu bakstelėjimu. Tada čia rasite bet ką, kad parašytumėte, suplanuotumėte susitikimą ar pridėtumėte į sąrašą.
+1001	§one=Liko {0} kontaktas|few=Liko {0} kontaktai|many=Liko {0} kontakto|other=Liko {0} kontaktų
+1002	§one=Liko {0} kontaktas|few=Liko {0} kontaktai|many=Liko {0} kontakto|other=Liko {0} kontaktų
+1003	Pirmiausia pasirinkite žmogų.
+1004	Neišsaugotas WhatsApp numeris: {0}
+1005	{0} saugomas tik šiame telefone. Pridėkite į sąrašą, kad atidarytumėte puslapį.
+1006	{0} jau yra Žmonėse
+1007	{0} jau yra Mokiniuose
+1008	{0} pridėtas į Mokinius
+1009	Pridėti į Žmones
+1010	Shepherd primins jums susisiekti.
+1011	{0} pridėtas į Žmones
+1012	Įveskite numerį.
+1013	Išsaugoti numerį
+1014	Numeris išsaugotas: {0}
+1015	Numeris pridėtas
+1016	Ką padrąsinsite šią savaitę?
+1017	Suplanuokite kavą, pasivaikščiojimą ar valgį su broliu ar seserimi.
+1018	Įrašyti susitikimą
+1019	Ankstesnis mėnuo
+1020	Kitas mėnuo
+1021	§one={0} planas|few={0} planai|many={0} plano|other={0} planų
+1022	§one={0} planas|few={0} planai|many={0} plano|other={0} planų
+1023	Šiai dienai nieko nesuplanuota.
+1024	Suplanuoti šiai dienai
+1025	Rodyti viską
+1026	Susitikimų dar nėra
+1027	Kava, pasivaikščiojimas, valgis. Laikas kartu ugdo vieni kitus. Suplanuokite pirmąjį.
+1028	Išlaidos
+1029	Šį mėnesį
+1030	Padrąsinimo susitikimai ({0})
+1031	Susitikimai ({0})
+1032	Su maistu: {0} iš {1} šį mėnesį.
+1033	Palaikytas ryšys: <b>{0} iš {1}</b>
+1034	Padrąsinta
+1035	Padrąsinimo susitikimas
+1036	Susitikimas
+1037	Maistas
+1038	Brolis ar sesuo
+1039	Įveskite vardą
+1040	pvz., kava ir pasivaikščiojimas
+1041	Eisite pavalgyti?
+1042	Tipas
+1043	Įveskite kainą skaičiumi, pvz., 12.50.
+1044	Ištrinti
+1045	Bakstelėkite dar kartą, kad ištrintumėte
+1046	Ištrinta
+1047	Susitikimas išsaugotas
+1048	Padrąsinimo susitikimas išsaugotas
+1049	Šiandien padrąsinate
+1050	Padrąsinimo susitikimas: {0}
+1051	Susitikimas: {0}
+1052	Priminti man apie šį renginį
+1053	Atgalinis skaičiavimas
+1054	Nėra
+1055	Kas savaitę
+1056	Kas mėnesį
+1057	Kas savaitę: priminimas kiekvieną savaitę 8 savaites prieš. Kas mėnesį: vienas kiekvieną mėnesį 6 mėnesius prieš. Taip pat priminsime dieną prieš ir valandą prieš.
+1058	Savaitinis atgalinis skaičiavimas
+1059	Mėnesinis atgalinis skaičiavimas
+1060	Suplanuokite padrąsinimo susitikimą ar tiesiog susitikimą su broliu ar seserimi.
+1061	{0} po {1}
+1062	§one={0} savaitės|few={0} savaičių|many={0} savaitės|other={0} savaičių
+1063	§one={0} savaitės|few={0} savaičių|many={0} savaitės|other={0} savaičių
+1064	§one={0} mėnesio|few={0} mėnesių|many={0} mėnesio|other={0} mėnesių
+1065	§one={0} mėnesio|few={0} mėnesių|many={0} mėnesio|other={0} mėnesių
+1066	Kas savaitę priminimas ką nors padrąsinti ir priminimai prieš kiekvieną susitikimą
+1067	Ką Shepherd daro ir kodėl, su Biblijos eilutėmis.
+1068	Skaityti „Apie Shepherd“
+1069	Įkelkite žmones iš telefono ir surūšiuokite vienu bakstelėjimu. Surūšiuoti vardai ir numeriai išsaugomi jūsų privačiame sąraše. Praleisti žmonės neišsaugomi, o esantys skiltyje Kita lieka tik šiame telefone.
+1070	Įkelti kontaktus
+1071	Įkelkite telefono kontaktus ir surūšiuokite vienu bakstelėjimu, tada su Greitu pridėjimu greitai pasiekite bet ką.
+1072	<b>Kalendorius</b> saugo svarbius renginius, pvz., Network Events, EMC ir GMC, su savaitiniu ar mėnesiniu atgaliniu skaičiavimu, kvietimais (per WhatsApp) ir tuo, kas atėjo, ir jungiasi prie telefono kalendoriaus.
+1073	Drąsinkite vieni kitus
+1074	<b>Padrąsinti</b> padeda planuoti susitikimus su broliais ir seserimis, kas savaitę primena ir rodo, kiek išleidžiate per savaitę ir per mėnesį.
+1075	Taip pat rodo, kaip ištikimai kas savaitę palaikėte ryšį.
+1076	„Apie“ paaiškina viską, ką gali Shepherd, su Biblijos eilutėmis. Tai rasite Nustatymų viršuje. Perskaitykite dabar arba grįžkite bet kada.
+1077	Įkelkite žmones iš telefono ir surūšiuokite kiekvieną vienu bakstelėjimu: Sutikti dalijantis tikėjimu, Karalystė, Šeima, Draugai ar Kita. Greitas pridėjimas paskui greitai ras bet ką, kad parašytumėte, suplanuotumėte susitikimą ar pridėtumėte į sąrašą.
+1078	Įrašykite svarbius renginius, pvz., Network Events, EMC ar GMC, ir pasirinkite savaitinį ar mėnesinį atgalinį skaičiavimą. Pakvieskite žmones ir pažymėkite, kas atėjo. Prijunkite Shepherd prie telefono kalendoriaus, kad jūsų studijos ir renginiai ten atsirastų patys.
+1079	Planuokite susitikimus su broliais ir seserimis, pažymėkite, ar eisite pavalgyti, ir matykite, kiek išleidžiate per savaitę ir per mėnesį. Shepherd primena kas savaitę. Čia ir jūsų savaitinė ryšio statistika.
+1080	Pasirinkite kalbą (Biblijos eilutės lieka anglų kalba, NIV) ir valiutą, perskaitykite „Apie Shepherd“, nustatykite PIN, eksportuokite atsarginę kopiją ir perskaitykite „Privatumas ir atsakingas naudojimas“.
+1081	Tavo vardas, el. paštas, WhatsApp numeris, šalis ir nustatymai (pvz., kalba, valiuta, laiko juosta ir pranešimų laikas).
+1082	Jūsų renginiai, mokiniai ir maldos sąrašas, taip pat įrašyti padrąsinimo susitikimai ir susitikimai: veikla, ar valgėte kartu ir kiek kainavo.
+1083	Žmonės, kuriuos įkėlėte iš telefono ir surūšiavote į Žmones, Mokinius ar maldos sąrašą: jų vardas ir numeris.
+1084	Įkelti, bet dar nesurūšiuoti telefono kontaktai ir visi, kuriuos priskyrėte Kita. Jie niekada neįkeliami į internetą. Praleisti žmonės visai nesaugomi.

@@ -22,7 +22,7 @@
     ['ja', '日本語', 'ja'], ['de', 'Deutsch', 'de'], ['ru', 'Русский', 'ru'], ['lt', 'Lietuvių', 'lt']
   ];
   var CODES = LANGS.map(function (l) { return l[0]; });
-  var PACK_VER = '0bacd4d9c1';
+  var PACK_VER = 'c468a172a0';
   var lang = 'en', dict = null, tpls = [], cache = new Map(), outs = new WeakMap(), plural = null;
   var collect = typeof window !== 'undefined' && window.__i18nCollect ? window.__i18nCollect : null;
   var INLINE = { B: 1, STRONG: 1, I: 1, EM: 1, BR: 1, U: 1, SMALL: 1, CODE: 1 };
@@ -242,13 +242,13 @@
    Written in English; the language files translate it on screen. */
 (function () {
   var USE_VERSION = 1; // raise this when the acceptable use statement changes, so everyone agrees to the new one
-  var UPDATED = '2026-10-29';
+  var UPDATED = '2026-11-11';
   function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || 'lostshepherdapp@gmail.com' }; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
   function when() {
     var d = new Date(UPDATED + 'T12:00:00');
     try { var loc = window.I18N && I18N.lang !== 'en' ? I18N.locale() : 'en-GB'; if (Intl.DateTimeFormat.supportedLocalesOf([loc]).length) return new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'long', year: 'numeric' }).format(d); } catch (e) {}
-    return '29 October 2026';
+    return '11 November 2026';
   }
   function sec(title, body) { return '<section class="card pv"><h3>' + title + '</h3>' + body + '</section>'; }
   function ul(items) { return '<ul class="steps">' + items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; }
@@ -280,9 +280,9 @@
       sec('Acceptable use', '<p class="note">Everyone who uses Shepherd agrees to this:</p>' + rules()) +
       sec('What Shepherd keeps, and why',
         '<p class="note"><b>Data linked to you</b>, saved to your own private account so your list is on every phone you sign in on and isn\'t lost:</p>' +
-        ul(['Your name, email, WhatsApp number, home country and settings (such as language, time zone and notification times).', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list.', 'For each phone you\'re signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.']) +
+        ul(['Your name, email, WhatsApp number, home country and settings (such as language, currency, time zone and notification times).', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list, and the encouragement dates and hangouts you log, with the activity, whether you went for food and what it cost.', 'People you bring in from your phone and sort into People, Disciples or your prayer list: their name and number.', 'For each phone you\'re signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.']) +
         '<p class="note"><b>Kept only on this phone</b>:</p>' +
-        ul(['Contacts you import from your phone, used to suggest names as you type. They are never uploaded.', 'A copy of your list, so Shepherd works without signal.']) +
+        ul(['Phone contacts you bring in but haven\'t sorted yet, and anyone you sort into Other. They are never uploaded. Anyone you skip isn\'t kept at all.', 'A copy of your list, so Shepherd works without signal.']) +
         '<p class="note"><b>Never collected</b>:</p>' +
         ul(['Your location.', 'Your WhatsApp, text or iMessage conversations.', 'Your whole address book (only the contacts you choose).', 'Anything for adverts or tracking.']) +
         '<p class="note"><b>When someone scans your QR code</b>: they choose to type their name (and number if they want) and tick that they\'re happy to be added. It goes only into your list, and they then message you on WhatsApp themselves.</p>' +

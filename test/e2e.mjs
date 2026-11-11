@@ -114,18 +114,45 @@ try {
   { const ag = JSON.parse(db("SELECT data FROM docs WHERE path = 'profile'")[0][0]).agreed; ok(ag && ag.v === 1 && ag.at > 0, 'the agreement is saved with the account (version and time)'); }
   ok(await A.p.locator('#installCard').isVisible(), 'iPhone in Safari is shown how to put Shepherd on the Home Screen');
 
-  current = 'About tab';
-  await A.p.click('.tab[data-v="about"]'); await wait(400);
+  current = 'Tabs and About';
+  await A.p.click('[data-act="settings"]'); await wait(300);
+  await A.p.click('#aboutCard [data-v="about"]'); await wait(400);
   { const at = await A.p.textContent('#main');
-    ok(/About Shepherd/.test(at) && /Luke 15:4 \(NIV\)/.test(at) && /Feed my sheep/.test(at) && (await A.p.$$('.tab')).length === 6, 'the About tab opens with the verses, and there are 6 tabs');
+    ok(/About Shepherd/.test(at) && /Luke 15:4 \(NIV\)/.test(at) && /Feed my sheep/.test(at) && (await A.p.$$('.tab')).length === 5, 'About opens from Settings with the verses, and there are 5 tabs');
     ok(await A.p.locator('#aboutHelp a[href^="mailto:lostshepherdapp@gmail.com"]').count() === 1, 'About has the email link'); }
   await A.p.click('.tab[data-v="today"]'); await wait(300);
+
+  current = 'Bring in contacts and Encourage';
+  {
+    const me = "(SELECT id FROM users WHERE email = 'pavi@church.test')";
+    await A.p.click('.tab[data-v="people"]'); await wait(300);
+    await A.p.click('#qaCard [data-act="importguide"]'); await wait(400);
+    const vcfPath = path.join(OUT, 'contacts-test.vcf');
+    fs.writeFileSync(vcfPath, 'BEGIN:VCARD\r\nVERSION:3.0\r\nFN:Esther Import\r\nTEL;TYPE=HOME:020 7946 0001\r\nTEL;TYPE=CELL:07700 900801\r\nEND:VCARD\r\nBEGIN:VCARD\r\nVERSION:3.0\r\nFN:Mordecai Import\r\nTEL;TYPE=CELL:07700 900802\r\nEND:VCARD\r\nBEGIN:VCARD\r\nVERSION:3.0\r\nFN:Haman Skip\r\nTEL:07700 900803\r\nEND:VCARD\r\n');
+    await A.p.setInputFiles('#impFile', vcfPath); await wait(700);
+    ok(/3 contacts to sort/.test(await A.p.textContent('#sheetBody')), 'a contacts file is read on the phone');
+    await A.p.check('#sAgree'); await A.p.click('#sGo'); await wait(300);
+    await A.p.click('[data-sort="sharing"]'); await wait(300); await A.p.click('[data-sort="kingdom"]'); await wait(300); await A.p.click('[data-sort="skip"]'); await wait(600);
+    ok((await A.p.textContent('#sheetTitle')) === 'All sorted', 'sorted one tap each');
+    await A.p.evaluate(() => document.querySelector('#sheet [data-act="closesheet"]').click()); await wait(2500);
+    const docs = db('SELECT path, data FROM docs WHERE uid = ' + me), dj = JSON.stringify(docs);
+    ok(docs.some(r => r[0].startsWith('profile/contacts/') && /Esther Import/.test(r[1]) && /07700 900801/.test(r[1])) && docs.some(r => r[0].startsWith('profile/disciples/') && /Mordecai Import/.test(r[1]) && /07700 900802/.test(r[1])), 'sorted people are saved to the server with their mobile number');
+    ok(!/Haman Skip/.test(dj), 'a skipped person never reaches the server');
+    await A.p.click('.tab[data-v="encourage"]'); await wait(400);
+    await A.p.click('[data-act="newenc"][data-t="date"]'); await wait(400);
+    await A.p.fill('#enWho', 'Mordecai Import'); await A.p.fill('#enTime', '18:30'); await A.p.fill('#enAct', 'Coffee'); await A.p.check('#enFood'); await A.p.fill('#enCost', '9.5');
+    await A.p.click('#enForm button[type="submit"]'); await wait(2500);
+    const enc = db("SELECT data FROM docs WHERE path LIKE 'profile/events/%' AND uid = " + me).map(r => JSON.parse(r[0])).find(x => x.kind === 'enc');
+    ok(enc && enc.who === 'Mordecai Import' && enc.food === true && enc.cost === 9.5 && enc.name === 'Encouragement date with Mordecai Import', 'an encouragement date is saved to the server');
+    ok(/£9\.50/.test(await A.p.textContent('#encSpend')), 'spending shows straight away');
+    await A.p.click('.tab[data-v="today"]'); await wait(300);
+  }
 
   current = 'Saving to the server';
   await addContact(A.p, 'Daniel Mensah', '07700900111');
   await addContact(A.p, 'Grace Owusu', '07700900222');
   ok(await waitSaved(A.p), 'top bar says Saved');
-  const names = db("SELECT data FROM docs WHERE path LIKE 'profile/contacts/%'").map(r => JSON.parse(r[0]).name).sort();
+  const names = db("SELECT data FROM docs WHERE path LIKE 'profile/contacts/%'").map(r => JSON.parse(r[0]).name).filter(n => !/Import$/.test(n)).sort();
   ok(names.join() === 'Daniel Mensah,Grace Owusu', 'both contacts are on the server');
   const prof = db("SELECT data FROM docs WHERE path = 'profile'");
   ok(prof.length && JSON.parse(prof[0][0]).name === 'Pavi', 'the name from sign-up is on the profile');
@@ -209,7 +236,13 @@ try {
   for (const [wd, ht] of [[320, 568], [375, 667], [390, 844], [430, 932]]) {
     await A.p.setViewportSize({ width: wd, height: ht });
     const bad = [];
-    for (const v of ['today', 'people', 'disciples', 'events', 'week', 'about']) { await A.p.click('.tab[data-v="' + v + '"]'); await wait(250); if (await overflow(A.p) > 0) bad.push(v); }
+    for (const v of ['today', 'people', 'disciples', 'events', 'encourage']) { await A.p.click('.tab[data-v="' + v + '"]'); await wait(250); if (await overflow(A.p) > 0) bad.push(v); }
+    await A.p.click('[data-act="newenc"][data-t="date"]'); await wait(450); if (await overflow(A.p) > 0) bad.push('encourage form');
+    if (wd === 320 || wd === 390) await A.p.screenshot({ path: path.join(OUT, 'encform-' + wd + '.png') });
+    await A.p.evaluate(() => document.querySelector('#sheet [data-act="closesheet"]').click()); await wait(400);
+    await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.click('#qaCard [data-act="importguide"]'); await wait(450); if (await overflow(A.p) > 0) bad.push('import guide');
+    await A.p.evaluate(() => document.querySelector('#sheet [data-act="closesheet"]').click()); await wait(400);
+    await A.p.click('[data-act="settings"]'); await wait(250); await A.p.click('#aboutCard [data-v="about"]'); await wait(300); if (await overflow(A.p) > 0) bad.push('about');
     await A.p.click('[data-act="settings"]'); await wait(300); if (await overflow(A.p) > 0) bad.push('settings');
     await A.p.click('#notifCard [data-act="notifguide"]'); await wait(500); if (await overflow(A.p) > 0) bad.push('notifguide');
     if (wd === 320 || wd === 430) await A.p.screenshot({ path: path.join(OUT, 'notif-' + wd + '.png') });
@@ -312,7 +345,7 @@ try {
       }
       await T.p.click('#tourNext'); await wait(300);
     }
-    ok(steps === 17 && !bad.length, wd + 'x' + ht + ': all 17 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
+    ok(steps === 18 && !bad.length, wd + 'x' + ht + ': all 18 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
     if (n === 1) {
       ok(numberSaved, 'typing your number and tapping Continue tour saves it');
       ok(calOk, 'after connecting the calendar, closing the guide goes back to the tour');
@@ -330,7 +363,7 @@ try {
     await Promise.all([A.p.waitForNavigation({ timeout: 8000 }).catch(() => null), A.p.selectOption('#pLang', 'es')]);
     await wait(1800);
     const tabs = await A.p.$$eval('.tab', t => t.map(x => x.textContent.trim().replace(/\d+$/, '')).join('|'));
-    ok(/^Hoy\|Personas\|Discípulos\|Calendario\|Semana/.test(tabs), 'choosing Español turns the app Spanish: ' + tabs);
+    ok(/^Hoy\|Personas\|Discípulos\|Calendario\|Ánimo$/.test(tabs), 'choosing Español turns the app Spanish: ' + tabs);
     ok(await A.p.evaluate(() => document.documentElement.lang === 'es' && !!localStorage.getItem('shepherd:langpack:es')), 'the Spanish words were fetched once and kept on the phone');
     ok(JSON.parse(db("SELECT data FROM docs WHERE path = 'profile'")[0][0]).lang === 'es', 'the choice is saved to the account');
     await A.p.screenshot({ path: path.join(OUT, 'today-es.png') });

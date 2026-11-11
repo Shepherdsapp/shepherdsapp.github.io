@@ -197,7 +197,7 @@ select.inp{appearance:none;-webkit-appearance:none;background-image:linear-gradi
 
 /* dock */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-.dock-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));height:var(--dock)}
+.dock-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:var(--dock)}
 .tab{background:none;border:0;display:grid;justify-items:center;align-content:center;gap:3px;font-size:12px;font-weight:600;color:var(--muted);position:relative}
 .tab svg{width:23px;height:23px}
 .tab[aria-current="page"]{color:var(--accent)}
@@ -406,6 +406,85 @@ body{overflow-x:clip}
 .tick1{display:flex;gap:12px;align-items:center;min-height:48px;cursor:pointer}.agreetick{align-items:flex-start;font-size:15px;line-height:1.4}.agreetick input{margin-top:2px}.tick1 input{width:22px;height:22px;accent-color:var(--accent);flex:none}
 @media (max-width:374px){.jsum{grid-template-columns:repeat(3,minmax(0,1fr))}.jstep span{font-size:10px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* each tab has its own colour: a tinted header band, the tab's icon and a few accents */
+body{--tint:var(--accent);--tint-soft:var(--accent-soft)}
+body[data-view="today"]{--tint:#7A4F0E;--tint-soft:#F6E5BC}
+body[data-view="people"],body[data-view="contact"],body[data-view="archive"]{--tint:#2F6440;--tint-soft:#D7EAD6}
+body[data-view="disciples"]{--tint:#94402F;--tint-soft:#F6DCD3}
+body[data-view="events"]{--tint:#245A78;--tint-soft:#D5E6F0}
+body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
+.vhead{position:relative;overflow:hidden;border-radius:var(--r);padding:16px 16px 14px;background:linear-gradient(135deg,var(--tint-soft) 0%,color-mix(in srgb,var(--tint-soft) 45%,var(--bg)) 100%);display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center}
+.vhead::after{content:"";position:absolute;right:-34px;top:-40px;width:130px;height:130px;border-radius:50%;background:color-mix(in srgb,var(--tint) 10%,transparent);pointer-events:none}
+.vhead .vicon{grid-row:span 2;width:46px;height:46px;border-radius:14px;background:var(--tint);color:#fff;display:grid;place-items:center;box-shadow:0 8px 18px -10px var(--tint)}
+.vhead .vicon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.vhead .h1{margin:0;color:var(--fg)} .vhead .lede{margin:0;color:var(--fg);font-size:15px}
+.vhead .eyebrow{margin:0;color:var(--tint);font-weight:700}
+.vhead>*{position:relative;z-index:1}
+.tab[aria-current="page"]{color:var(--tint)}
+.tab[aria-current="page"]::before{background:var(--tint)}
+.tab[aria-current="page"] svg{background:var(--tint-soft)}
+.sec-h .count{background:var(--tint-soft);color:var(--tint)}
+.stat b{color:var(--tint)}
+.verse{border-left:4px solid color-mix(in srgb,var(--tint) 55%,var(--gold))}
+/* categories for imported contacts */
+.cat{display:inline-flex;align-items:center;gap:6px;min-height:24px;padding:1px 10px;border-radius:99px;font-size:13px;font-weight:700}
+.cat-sharing{background:#D7EAD6;color:#2F6440} .cat-kingdom{background:#F6DCD3;color:#94402F} .cat-family{background:#D5E6F0;color:#245A78} .cat-friends{background:#F6E5BC;color:#7A4F0E} .cat-other{background:var(--idle-soft);color:var(--idle)} .cat-prayer{background:#E7DDF1;color:#5B3A7A}
+.sortcard{display:grid;gap:14px;text-align:center}
+.sortcard .who{font-family:var(--display);font-size:26px;font-weight:600;overflow-wrap:anywhere;margin:0}
+.sortcard .num{color:var(--muted);margin:0;font-variant-numeric:tabular-nums}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sortbtns button{min-height:58px;border-radius:14px;border:1.5px solid transparent;font-weight:700;font-size:15.5px;padding:6px 10px;line-height:1.2}
+.sortbtns .s-sharing{background:#D7EAD6;color:#2F6440;border-color:#B9D6B7}
+.sortbtns .s-kingdom{background:#F6DCD3;color:#94402F;border-color:#E9BFB1}
+.sortbtns .s-family{background:#D5E6F0;color:#245A78;border-color:#B5D0E0}
+.sortbtns .s-friends{background:#F6E5BC;color:#7A4F0E;border-color:#E8CF92}
+.sortbtns .s-other{background:var(--idle-soft);color:var(--idle);border-color:var(--line)}
+.sortbtns .s-skip{background:var(--surface);color:var(--muted);border-color:var(--line)}
+.sortbtns small{display:block;font-weight:500;font-size:12.5px;margin-top:2px}
+.progress{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden} .progress span{display:block;height:100%;background:var(--accent);border-radius:99px}
+.qa-grid{display:grid;gap:10px}
+.qacard{border-color:color-mix(in srgb,var(--tint) 35%,var(--line))}
+.acl .cat{justify-self:start;margin-top:2px}
+/* Encourage */
+.encbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.encbtns .btn{min-height:52px}
+.btn.tint{background:var(--tint);border-color:var(--tint);color:#fff}
+.btn.tint-soft{background:var(--tint-soft);border-color:transparent;color:var(--tint)}
+.nudge{background:linear-gradient(135deg,#F6D9E4,#F6E5BC);border-color:transparent}
+.nudge .q{margin:0;font-family:var(--display);font-size:20px;font-weight:600}
+.mcal{display:grid;gap:8px}
+.mcal-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mcal-h b{font-family:var(--display);font-size:18px}
+.mcal-h button{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);font-size:20px}
+.mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center}
+.mgrid .wd{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:2px 0;overflow:hidden}
+.mgrid button{position:relative;aspect-ratio:1/1;min-height:36px;border-radius:10px;border:0;background:transparent;font-variant-numeric:tabular-nums;font-size:15px;color:var(--fg);padding:0}
+.mgrid button.out{color:var(--muted)}
+.mgrid button.today{box-shadow:inset 0 0 0 2px var(--tint);font-weight:700}
+.mgrid button.has{background:var(--tint-soft);color:var(--tint);font-weight:700}
+.mgrid button.has::after{content:"";position:absolute;left:50%;bottom:4px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--tint)}
+.mgrid button[aria-pressed="true"]{background:var(--tint);color:#fff}
+.mgrid button[aria-pressed="true"]::after{background:#fff}
+.enc{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center;text-align:left;width:100%;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r);padding:12px 14px;min-height:64px;box-shadow:var(--card-shadow)}
+.enc .calbox{background:var(--tint-soft);color:var(--tint)}
+.enc.hangout .calbox{background:#F6E5BC;color:#7A4F0E}
+.enc.past .calbox{background:var(--surface-2);color:var(--muted)}
+.enc .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.etag{display:inline-flex;align-items:center;gap:4px;min-height:24px;padding:1px 9px;border-radius:99px;font-size:12.5px;font-weight:700;background:var(--surface-2);color:var(--fg)}
+.etag.date{background:#F6D9E4;color:#8E3456} .etag.hangout{background:#F6E5BC;color:#7A4F0E} .etag.food{background:#D7EAD6;color:#2F6440}
+.spend{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.spend .stat b{font-size:26px}
+.breakdown{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.breakdown li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;align-items:center}
+.breakdown .bt{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden;grid-column:1/-1} .breakdown .bt span{display:block;height:100%;border-radius:99px}
+.wkline{margin:0;font-size:16px} .wkline b{color:var(--tint)}
+.minibars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:end;height:78px}
+.minibars div{display:grid;gap:4px;justify-items:center;align-self:end;font-size:12px;color:var(--muted)}
+.minibars i{display:block;width:100%;max-width:44px;border-radius:6px 6px 2px 2px;background:color-mix(in srgb,var(--tint) 35%,var(--surface-2))}
+.minibars .now i{background:var(--tint)}
+.chip.cd{background:#D5E6F0;color:#245A78;font-weight:700}
+.aboutcard{background:linear-gradient(135deg,var(--gold-soft),var(--surface))}
+@media (max-width:374px){ .encbtns,.sortbtns{grid-template-columns:1fr} .mgrid button{min-height:32px;font-size:14px} .vhead{padding:14px} .vhead .vicon{width:40px;height:40px} }
 </style>
 <script>/* src/i18n.js */
 /* Shepherd languages. The app is written in English; this swaps each piece of text on screen for the chosen language
@@ -419,7 +498,7 @@ body{overflow-x:clip}
     ['ja', '日本語', 'ja'], ['de', 'Deutsch', 'de'], ['ru', 'Русский', 'ru'], ['lt', 'Lietuvių', 'lt']
   ];
   var CODES = LANGS.map(function (l) { return l[0]; });
-  var PACK_VER = '0bacd4d9c1';
+  var PACK_VER = 'c468a172a0';
   var lang = 'en', dict = null, tpls = [], cache = new Map(), outs = new WeakMap(), plural = null;
   var collect = typeof window !== 'undefined' && window.__i18nCollect ? window.__i18nCollect : null;
   var INLINE = { B: 1, STRONG: 1, I: 1, EM: 1, BR: 1, U: 1, SMALL: 1, CODE: 1 };
@@ -639,13 +718,13 @@ body{overflow-x:clip}
    Written in English; the language files translate it on screen. */
 (function () {
   var USE_VERSION = 1; // raise this when the acceptable use statement changes, so everyone agrees to the new one
-  var UPDATED = '2026-10-29';
+  var UPDATED = '2026-11-11';
   function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || 'lostshepherdapp@gmail.com' }; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
   function when() {
     var d = new Date(UPDATED + 'T12:00:00');
     try { var loc = window.I18N && I18N.lang !== 'en' ? I18N.locale() : 'en-GB'; if (Intl.DateTimeFormat.supportedLocalesOf([loc]).length) return new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'long', year: 'numeric' }).format(d); } catch (e) {}
-    return '29 October 2026';
+    return '11 November 2026';
   }
   function sec(title, body) { return '<section class="card pv"><h3>' + title + '</h3>' + body + '</section>'; }
   function ul(items) { return '<ul class="steps">' + items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; }
@@ -677,9 +756,9 @@ body{overflow-x:clip}
       sec('Acceptable use', '<p class="note">Everyone who uses Shepherd agrees to this:</p>' + rules()) +
       sec('What Shepherd keeps, and why',
         '<p class="note"><b>Data linked to you</b>, saved to your own private account so your list is on every phone you sign in on and isn\'t lost:</p>' +
-        ul(['Your name, email, WhatsApp number, home country and settings (such as language, time zone and notification times).', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list.', 'For each phone you\'re signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.']) +
+        ul(['Your name, email, WhatsApp number, home country and settings (such as language, currency, time zone and notification times).', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list, and the encouragement dates and hangouts you log, with the activity, whether you went for food and what it cost.', 'People you bring in from your phone and sort into People, Disciples or your prayer list: their name and number.', 'For each phone you\'re signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.']) +
         '<p class="note"><b>Kept only on this phone</b>:</p>' +
-        ul(['Contacts you import from your phone, used to suggest names as you type. They are never uploaded.', 'A copy of your list, so Shepherd works without signal.']) +
+        ul(['Phone contacts you bring in but haven\'t sorted yet, and anyone you sort into Other. They are never uploaded. Anyone you skip isn\'t kept at all.', 'A copy of your list, so Shepherd works without signal.']) +
         '<p class="note"><b>Never collected</b>:</p>' +
         ul(['Your location.', 'Your WhatsApp, text or iMessage conversations.', 'Your whole address book (only the contacts you choose).', 'Anything for adverts or tracking.']) +
         '<p class="note"><b>When someone scans your QR code</b>: they choose to type their name (and number if they want) and tick that they\'re happy to be added. It goes only into your list, and they then message you on WhatsApp themselves.</p>' +
@@ -1054,8 +1133,7 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
     <button class="tab" data-act="tab" data-v="people"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.8c1.6.8 2.7 2.5 3 5.2"/></svg><span class="tl">People</span></button>
     <button class="tab" data-act="tab" data-v="disciples"><svg class="i" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="tl">Disciples</span></button>
     <button class="tab" data-act="tab" data-v="events"><svg class="i" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m12 13 1 2 2.2.3-1.6 1.5.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.5L11 15z"/></svg><span class="tl">Calendar</span></button>
-    <button class="tab" data-act="tab" data-v="week"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="tl">Week</span></button>
-    <button class="tab" data-act="tab" data-v="about"><svg class="i" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7.5 4.5 3.5 4.8v13.7c4-.3 6.5.2 8.5 1.7 2-1.5 4.5-2 8.5-1.7V4.8c-4-.3-6.5.2-8.5 1.7z"/><path d="M12 6.5v13.7"/></svg><span class="tl">About</span></button>
+    <button class="tab" data-act="tab" data-v="encourage"><svg class="i" viewBox="0 0 24 24"><path d="M7.5 11.5 4 15a2 2 0 0 0 0 2.8l2.2 2.2a2 2 0 0 0 2.8 0l1.5-1.5"/><path d="M16.5 11.5 20 15a2 2 0 0 1 0 2.8l-2.2 2.2a2 2 0 0 1-2.8 0L12 17"/><path d="M12 9.5S8.5 7.4 8.5 5.3A1.9 1.9 0 0 1 12 4.4a1.9 1.9 0 0 1 3.5.9c0 2.1-3.5 4.2-3.5 4.2z"/><path d="M7.5 11.5 12 16l4.5-4.5"/></svg><span class="tl">Encourage</span></button>
   </div>
 </nav>
 
@@ -1156,19 +1234,20 @@ var NOTIFY = [
   ['disciples', 'Disciples', 'Who you still need to check in with this week'],
   ['studies', 'Bible studies today', 'Studies booked for today, with times'],
   ['events', 'Calendar events', 'Events today and tomorrow, including your calendar'],
-  ['weekly', 'Weekly summary', 'On Sundays, how many people you followed up with']
+  ['weekly', 'Weekly summary', 'On Sundays, how many people you followed up with'],
+  ['encourage', 'Encourage', 'A weekly nudge to encourage someone, and reminders before each date']
 ];
 var PRESETS = [
-  ['All', { chase: true, replies: true, catchup: true, disciples: true, studies: true, events: true, weekly: true }],
-  ['People to chase and events', { chase: true, replies: true, catchup: true, disciples: true, studies: false, events: true, weekly: false }],
-  ['Events only', { chase: false, replies: false, catchup: false, disciples: false, studies: false, events: true, weekly: false }],
-  ['Off', { chase: false, replies: false, catchup: false, disciples: false, studies: false, events: false, weekly: false }]
+  ['All', { chase: true, replies: true, catchup: true, disciples: true, studies: true, events: true, weekly: true, encourage: true }],
+  ['People to chase and events', { chase: true, replies: true, catchup: true, disciples: true, studies: false, events: true, weekly: false, encourage: true }],
+  ['Events only', { chase: false, replies: false, catchup: false, disciples: false, studies: false, events: true, weekly: false, encourage: false }],
+  ['Off', { chase: false, replies: false, catchup: false, disciples: false, studies: false, events: false, weekly: false, encourage: false }]
 ];
 
 var DEFAULT_INTRO = 'Hi, nice to meet you, I got your contact from Shepherd! Hoping to hear from you soon.';
 var OLD_INTRO = "Hi! It was great meeting you today. Here's my number so we can keep in touch about studying the Bible.";
 function defaultProfile() {
-  return { name: '', phone: '', intro: DEFAULT_INTRO, defaultEvery: 3, pinHash: '', alertTime: '08:00', prayerOn: false, prayerTime: '07:30', prayerCount: 3, lang: '', notify: { chase: true, replies: true, catchup: true, disciples: true, studies: true, events: true, weekly: true }, log: [] };
+  return { name: '', phone: '', intro: DEFAULT_INTRO, defaultEvery: 3, pinHash: '', alertTime: '08:00', prayerOn: false, prayerTime: '07:30', prayerCount: 3, lang: '', currency: 'GBP', notify: { chase: true, replies: true, catchup: true, disciples: true, studies: true, events: true, weekly: true, encourage: true }, log: [] };
 }
 
 /* ---------- state ---------- */
@@ -1299,9 +1378,10 @@ function dropContact(id) { delete S.contacts[id]; put(cPath(id), null); }
 /* the You form in Settings: saved when you tap Save, when you leave a box, and when the tour carries on */
 function saveProfileForm(andRender) {
   var n = $('#pName'), ph = $('#pPhone'), it = $('#pIntro'), ev = $('#pEvery'); if (!n || !ph) return false;
-  var co = $('#pCountry'), next = { name: n.value.trim().slice(0, 80), phone: ph.value.trim(), intro: it.value.trim().slice(0, 500) || defaultProfile().intro, defaultEvery: Number(ev.value) || 3, country: co ? co.value : (S.profile.country || 'GB') };
+  var co = $('#pCountry'), cu = $('#pCur'), next = { name: n.value.trim().slice(0, 80), phone: ph.value.trim(), intro: it.value.trim().slice(0, 500) || defaultProfile().intro, defaultEvery: Number(ev.value) || 3, country: co ? co.value : (S.profile.country || 'GB'), currency: cu && CURRENCIES.indexOf(cu.value) >= 0 ? cu.value : curCode() };
   var p = S.profile;
-  if (p.name === next.name && p.phone === next.phone && p.intro === next.intro && Number(p.defaultEvery) === next.defaultEvery && (p.country || 'GB') === next.country) { if (andRender) render(); return false; }
+  if (p.name === next.name && p.phone === next.phone && p.intro === next.intro && Number(p.defaultEvery) === next.defaultEvery && (p.country || 'GB') === next.country && curCode() === next.currency) { if (andRender) render(); return false; }
+  if (curCode() !== next.currency) next.curSeen = true;
   Object.assign(S.profile, next);
   if (andRender) saveProfile(); else put(basePath(), S.profile);
   return true;
@@ -1316,7 +1396,7 @@ function backFromPause(c) { return c.status === 'paused' && eff(c) === 'active';
 function dueDay(c) {
   // a pause that has ended brings them back on its end date, unless you've been in touch since pausing
   if (backFromPause(c) && !(c.lastContact && c.lastContact > (c.pausedAt || 0))) return parseYmd(c.pauseUntil);
-  if (!c.lastContact) return startOf(c.createdAt || Date.now());
+  if (!c.lastContact) return c.firstDue ? parseYmd(c.firstDue) : startOf(c.createdAt || Date.now());
   return addDays(c.lastContact, Number(c.everyDays) || 3);
 }
 function state(c) {
@@ -1479,7 +1559,7 @@ function parseVCF(text) {
     if (/ENCODING=QUOTED-PRINTABLE/i.test(head)) val = qpDecode(val);
     if (prop === 'FN') cur.n = vUnesc(val);
     else if (prop === 'N') { var parts = val.split(';').map(vUnesc); cur.nAlt = [parts[3], parts[1], parts[2], parts[0], parts[4]].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim(); }
-    else if (prop === 'TEL') { var tel = val.replace(/^tel:/i, '').trim(); if (tel) cur.p.push(tel); }
+    else if (prop === 'TEL') { var tel = val.replace(/^tel:/i, '').trim(); if (tel) { if (/CELL|MOBILE|IPHONE/i.test(head)) cur.p.unshift(tel); else cur.p.push(tel); } }
   });
   return out.filter(function (x) { return x.n || x.p.length; });
 }
@@ -1501,11 +1581,10 @@ function suggest(q) {
   return starts.concat(has).slice(0, 6);
 }
 function phoneBookCard() {
-  var pb = phoneBook();
-  return '<section class="card" id="pbCard"><h2 class="h3">Phone contacts</h2><p class="note">' + (pb.list.length ? plural(pb.list.length, 'contact') + ' on this phone. When you add someone, matching names come up as you type.' : 'Bring in your phone contacts, and when you add someone their name and number come up as you type.') + ' They stay on this phone only and are never uploaded.</p>' +
-    '<div class="row">' + (canPickContacts() ? '<button class="btn primary grow" data-act="pbpick">Choose from my contacts</button>' : '') + '<label class="btn grow' + (canPickContacts() ? '' : ' primary') + '" for="pbFile" style="cursor:pointer">Import a contacts file</label><input type="file" id="pbFile" accept=".vcf,text/vcard,text/x-vcard" class="sr"></div>' +
-    '<button class="btn ghost" data-act="pbhow">How to get a contacts file</button>' +
-    (pb.list.length ? '<button class="btn ghost" data-act="pbclear">Remove them from this phone</button>' : '') + '</section>';
+  var pb = phoneBook(), left = sortQueue().length;
+  return '<section class="card" id="pbCard"><h2 class="h3">Phone contacts</h2><p class="note">Bring in people from your phone and sort them in a tap. The names and numbers you sort are saved to your private list. Anyone you skip isn\'t saved, and people in Other stay on this phone only.</p>' +
+    '<button class="btn primary" data-act="importguide">Bring in contacts</button>' + (left ? '<button class="btn soft" data-act="sortgo">' + plural(left, 'contact') + ' left to sort</button>' : '') +
+    (pb.list.length || left ? '<button class="btn ghost" data-act="pbclear">Remove them from this phone</button>' : '') + '</section>';
 }
 function pbHowSheet() {
   openSheet('Get a contacts file',
@@ -1559,7 +1638,7 @@ function section(title, items, note, cap) {
   return '<section class="sec"><div class="sec-h"><h2 class="h2">' + title + '</h2><span class="count">' + items.length + '</span></div>' + (note ? '<p class="note">' + note + '</p>' : '') + '<ul class="list">' + shown.map(row).join('') + '</ul>' + (more ? '<button class="btn ghost" data-act="showall">Show ' + more + ' more</button>' : '') + '</section>';
 }
 function greeting() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening'; }
-function evList() { return Object.keys(S.events).map(function (k) { return S.events[k]; }).filter(function (x) { return x && x.name && x.date; }); }
+function evList() { return Object.keys(S.events).map(function (k) { return S.events[k]; }).filter(function (x) { return x && x.name && x.date && x.kind !== 'enc'; }); }
 /* ---------- disciples: people you check in with once a week ---------- */
 function dList() { return Object.keys(S.disciples).map(function (k) { return S.disciples[k]; }).filter(function (d) { return d && d.name; }); }
 function checkedThisWeek(d) { return !!d.lastCheck && d.lastCheck >= weekStart(Date.now()); }
@@ -1585,7 +1664,7 @@ function dRow(d) {
 }
 function viewDisciples() {
   var all = dList(), todo = discipleToDo(), done = all.filter(checkedThisWeek).sort(function (a, b) { return b.lastCheck - a.lastCheck; });
-  var h = '<div><h1 class="h1">Disciples</h1><p class="lede">Check in with each person once a week and keep building the friendship.</p></div>';
+  var h = vhead('disciples', 'Disciples', 'Check in with each person once a week and keep building the friendship.');
   h += '<figure class="verse" data-noi18n><p>“Therefore encourage one another and build each other up, just as in fact you are doing.”</p><cite>1 Thessalonians 5:11 (NIV)</cite></figure>';
   if (all.length) { var pct = Math.round(done.length / all.length * 100); h += '<div class="meter"><div class="track"><span style="width:' + pct + '%"></span></div><span>' + done.length + ' of ' + all.length + ' this week</span></div>'; }
   h += '<form class="card" id="dForm" novalidate><h2 class="h3">Add someone to check on weekly</h2><div class="grid2"><label class="field" for="dName">Name<input class="inp" id="dName" autocomplete="off" placeholder="Name"></label><label class="field" for="dPhone">WhatsApp (optional)<input class="inp" id="dPhone" type="tel" autocomplete="off" placeholder="07…"></label></div><p class="note" id="dErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">Add</button></form>';
@@ -1698,14 +1777,388 @@ function editPrayerSheet(id) {
       $('#peDel', root).addEventListener('click', function () { dropPrayer(x.id); toast(firstName(x.name) + ' removed from your prayer list'); prayerSheet(); });
     });
 }
+/* ---------- coloured header band at the top of each tab ---------- */
+var VICON = {
+  today: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  people: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.8c1.6.8 2.7 2.5 3 5.2"/>',
+  disciples: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+  events: '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  encourage: '<path d="M7.5 11.5 4 15a2 2 0 0 0 0 2.8l2.2 2.2a2 2 0 0 0 2.8 0l1.5-1.5"/><path d="M16.5 11.5 20 15a2 2 0 0 1 0 2.8l-2.2 2.2a2 2 0 0 1-2.8 0L12 17"/><path d="M12 9.5S8.5 7.4 8.5 5.3A1.9 1.9 0 0 1 12 4.4a1.9 1.9 0 0 1 3.5.9c0 2.1-3.5 4.2-3.5 4.2z"/><path d="M7.5 11.5 12 16l4.5-4.5"/>'
+};
+function vhead(v, title, lede, eyebrow) {
+  return '<header class="vhead"><span class="vicon" aria-hidden="true"><svg viewBox="0 0 24 24">' + VICON[v] + '</svg></span><div>' + (eyebrow ? '<p class="eyebrow">' + eyebrow + '</p>' : '') + '<h1 class="h1">' + title + '</h1>' + (lede ? '<p class="lede">' + lede + '</p>' : '') + '</div></header>';
+}
+
+/* ---------- money: Encourage costs, in the currency chosen in Settings (pounds unless changed) ---------- */
+var CURRENCIES = ['GBP', 'EUR', 'USD', 'NGN', 'GHS', 'KES', 'ZAR', 'CAD', 'AUD', 'NZD', 'INR', 'CNY', 'JPY', 'PLN', 'CHF', 'SEK', 'NOK', 'DKK', 'BRL', 'RUB'];
+function curCode() { var c = S.profile.currency; return CURRENCIES.indexOf(c) >= 0 ? c : 'GBP'; }
+function money(n) {
+  n = Math.round((Number(n) || 0) * 100) / 100; var fd = n % 1 ? 2 : 0;
+  try { return new Intl.NumberFormat(LOC || 'en-GB', { style: 'currency', currency: curCode(), minimumFractionDigits: fd, maximumFractionDigits: fd }).format(n); } catch (e) { return curCode() + ' ' + n.toFixed(fd); }
+}
+function curName(code) { try { var n = new Intl.DisplayNames([LOC || 'en-GB'], { type: 'currency' }).of(code); if (n && n !== code) return n + ' (' + code + ')'; } catch (e) {} return code; }
+
+/* ---------- bring in phone contacts and sort each one in a tap ---------- */
+var CATS = [['sharing', 'Met through sharing', 'People'], ['kingdom', 'Kingdom', 'Disciples'], ['family', 'Family', 'Prayer list'], ['friends', 'Friends', 'Prayer list'], ['other', 'Other', 'This phone only']];
+function catLabel(k) { var c = CATS.filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : k === 'prayer' ? 'Prayer list' : ''; }
+function sortQKey() { return 'shepherd:sortq:' + (S.uid || 'local'); }
+function sortQueue() { try { var o = JSON.parse(lsGet(sortQKey()) || 'null'); return Array.isArray(o) ? o : []; } catch (e) { return []; } }
+function setSortQueue(q) { lsSet(sortQKey(), q.length ? JSON.stringify(q) : ''); }
+function normName(n) { return String(n || '').trim().toLowerCase().replace(/\s+/g, ' '); }
+function digitsOf(p) { return String(p || '').replace(/\D/g, '').slice(-9); }
+// everyone already in Shepherd, so an import doesn't add them twice
+function knownPeople() {
+  var k = {}, add = function (n, p) { if (n) k['n:' + normName(n)] = 1; if (digitsOf(p).length >= 6) k['p:' + digitsOf(p)] = 1; };
+  list().forEach(function (c) { add(c.name, c.phone); }); dList().forEach(function (d) { add(d.name, d.phone); }); prList().forEach(function (x) { add(x.name, x.phone); });
+  phoneBook().list.forEach(function (x) { if (x.cat) add(x.n, x.p[0]); });
+  return k;
+}
+function pbSetCat(n, p, cat) {
+  var pb = phoneBook(), hit = pb.list.filter(function (x) { return normName(x.n) === normName(n); })[0];
+  if (hit) { if (cat) hit.cat = cat; else delete hit.cat; if (p && hit.p.indexOf(p) < 0) hit.p.unshift(p); }
+  else if (cat) pb.list.push({ n: String(n).slice(0, 80), p: p ? [p] : [], cat: cat });
+  lsSet(pbKey(), JSON.stringify(pb));
+}
+var SORT = { done: { sharing: 0, kingdom: 0, family: 0, friends: 0, other: 0, skip: 0 }, last: null, agreed: false };
+function startImport(items) {
+  var k = knownPeople(), q = sortQueue(), seen = {}, fresh = [];
+  q.forEach(function (x) { seen['n:' + normName(x.n)] = 1; });
+  (items || []).forEach(function (x) {
+    var n = String(x.n || '').trim().slice(0, 80), p = String((x.p || [])[0] || '').trim().slice(0, 30);
+    if (!n) return; var nk = 'n:' + normName(n);
+    if (k[nk] || seen[nk] || (digitsOf(p).length >= 6 && k['p:' + digitsOf(p)])) return;
+    seen[nk] = 1; fresh.push({ n: n, p: p });
+  });
+  var dupes = (items || []).length - fresh.length;
+  if (!fresh.length) { toast((items || []).length ? 'Everyone you chose is already in Shepherd' : 'No contacts found in that file'); return 0; }
+  SORT.last = null; setSortQueue(q.concat(fresh)); render(); sortSheet(dupes);
+  return fresh.length;
+}
+// a sorted contact is saved where it belongs; the number never leaves your private list
+function fileImported(x, cat) {
+  var t = Date.now();
+  if (cat === 'sharing') {
+    // new people come due a few a day, so a big import doesn't land all at once tomorrow
+    var waiting = list().filter(function (c) { return c.source === 'import' && !c.lastContact && c.firstDue && c.firstDue >= ymd(today()); }).length;
+    var c = { id: newId(), name: x.n, phone: x.p, notes: '', consent: true, createdAt: t, status: 'active', stage: 'First contact', everyDays: Number(S.profile.defaultEvery) || 3, metOn: '', replyState: 'none', studies: [], log: [], source: 'import', firstDue: ymd(addDays(today(), Math.floor(waiting / 3))) };
+    logTo(c, 'change', 'Added from your phone contacts'); saveContact(c); return { t: 'c', id: c.id };
+  }
+  if (cat === 'kingdom') { var d = { id: newId(), name: x.n, phone: x.p, notes: '', log: [], createdAt: t, source: 'import' }; saveDisciple(d); return { t: 'd', id: d.id }; }
+  if (cat === 'family' || cat === 'friends') { var pr = { id: newId(), name: x.n, phone: x.p, notes: '', cat: cat, createdAt: t, source: 'import' }; savePrayer(pr); return { t: 'p', id: pr.id }; }
+  var existed = phoneBook().list.some(function (y) { return normName(y.n) === normName(x.n); });
+  pbSetCat(x.n, x.p, 'other'); return { t: 'o', existed: existed };
+}
+function pbRemove(n) { var pb = phoneBook(); pb.list = pb.list.filter(function (y) { return normName(y.n) !== normName(n); }); lsSet(pbKey(), JSON.stringify(pb)); }
+function sortOne(cat) {
+  var q = sortQueue(), x = q.shift(); if (!x) return;
+  var made = cat === 'skip' ? null : fileImported(x, cat);
+  setSortQueue(q); SORT.done[cat] = (SORT.done[cat] || 0) + 1; SORT.last = { n: x.n, p: x.p, cat: cat, made: made };
+  render(); sortSheet();
+}
+function undoSort() {
+  var u = SORT.last; if (!u) return; SORT.last = null; var m = u.made;
+  if (m && m.t === 'c') dropContact(m.id);
+  if (m && m.t === 'd') { delete S.disciples[m.id]; put(dPath(m.id), null); }
+  if (m && m.t === 'p') { delete S.prayers[m.id]; put(prPath(m.id), null); }
+  if (m && m.t === 'o') { if (m.existed) pbSetCat(u.n, '', ''); else pbRemove(u.n); } // undo leaves nothing behind that wasn't there before
+  SORT.done[u.cat] = Math.max(0, (SORT.done[u.cat] || 0) - 1);
+  setSortQueue([{ n: u.n, p: u.p }].concat(sortQueue())); render(); sortSheet();
+}
+function sortSheet(dupes) {
+  var q = sortQueue();
+  if (!q.length) return sortDone();
+  if (!SORT.agreed) {
+    openSheet('Sort your contacts',
+      '<p style="margin:0">' + plural(q.length, 'contact') + ' to sort. Tap where each person belongs.</p>' + (dupes ? '<p class="note" style="margin:0">' + plural(dupes, 'person', 'people') + ' already in Shepherd left out.</p>' : '') +
+      '<ul class="breakdown">' + CATS.map(function (c) { return '<li><span class="cat cat-' + c[0] + '">' + c[1] + '</span><span class="small muted">' + c[2] + '</span></li>'; }).join('') + '<li><span class="cat cat-other">Skip</span><span class="small muted">Not saved</span></li></ul>' +
+      '<p class="banner"><span>Their names and numbers stay private to you. Nobody else using Shepherd can see them.</span></p>' +
+      '<label class="tick1 agreetick" for="sAgree"><input type="checkbox" id="sAgree"><span>I\'ll only add people who are happy for me to keep their details and stay in touch.</span></label>' +
+      '<p class="small" id="sErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" id="sGo">Start sorting</button><button class="btn ghost" data-act="closesheet">Later</button>',
+      function (root) { $('#sGo', root).addEventListener('click', function () { if (!$('#sAgree', root).checked) { var er = $('#sErr', root); er.hidden = false; er.textContent = 'Tick the box first. Only add people who agreed.'; return; } SORT.agreed = true; sortSheet(); }); });
+    return;
+  }
+  var x = q[0], doneN = 0; Object.keys(SORT.done).forEach(function (k2) { doneN += SORT.done[k2]; });
+  var pct = Math.round(doneN / (doneN + q.length) * 100);
+  openSheet('Sort your contacts',
+    '<div class="sortcard"><p class="note" style="margin:0">' + q.length + ' left</p><div class="progress" aria-hidden="true"><span style="width:' + pct + '%"></span></div><p class="who" data-noi18n>' + esc(x.n) + '</p><p class="num">' + (x.p ? '<span data-noi18n>' + esc(x.p) + '</span>' : 'No number') + '</p></div>' +
+    '<div class="sortbtns">' + CATS.map(function (c) { return '<button type="button" class="s-' + c[0] + '" data-sort="' + c[0] + '">' + c[1] + '<span class="sl" style="display:block;font-weight:500;font-size:12.5px;margin-top:2px">' + c[2] + '</span></button>'; }).join('') +
+    '<button type="button" class="s-skip" data-sort="skip">Skip<span class="sl" style="display:block;font-weight:500;font-size:12.5px;margin-top:2px">Not saved</span></button></div>' +
+    (SORT.last ? '<button class="btn ghost" id="sUndo">Undo</button>' : '') + '<button class="btn ghost" id="sLater">Sort the rest later</button>',
+    function (root) {
+      var busy = false; // one tap files one person
+      root.querySelectorAll('[data-sort]').forEach(function (b) { b.addEventListener('click', function () { if (busy) return; busy = true; sortOne(b.dataset.sort); }); });
+      var u = $('#sUndo', root); if (u) u.addEventListener('click', undoSort);
+      $('#sLater', root).addEventListener('click', function () { closeSheet(); toast(plural(sortQueue().length, 'contact') + ' left to sort. Carry on from People any time.'); });
+    });
+}
+function sortDone() {
+  var D = SORT.done, any = D.sharing + D.kingdom + D.family + D.friends + D.other;
+  var lines = [];
+  if (D.sharing) lines.push('<li><span class="cat cat-sharing">People</span><b>' + D.sharing + '</b></li>');
+  if (D.kingdom) lines.push('<li><span class="cat cat-kingdom">Disciples</span><b>' + D.kingdom + '</b></li>');
+  if (D.family + D.friends) lines.push('<li><span class="cat cat-family">Prayer list</span><b>' + (D.family + D.friends) + '</b></li>');
+  if (D.other) lines.push('<li><span class="cat cat-other">This phone only</span><b>' + D.other + '</b></li>');
+  SORT.done = { sharing: 0, kingdom: 0, family: 0, friends: 0, other: 0, skip: 0 };
+  openSheet('All sorted',
+    (any ? '<ul class="breakdown">' + lines.join('') + '</ul>' : '<p style="margin:0">Nobody was added.</p>') +
+    (D.sharing ? '<p class="note">New people come up a few a day in Today, so you\'re not swamped.</p>' : '') +
+    '<p class="note">Use <b>Quick add</b> at the top of People to find anyone fast, message them, plan a date or add them to a list.</p>' +
+    '<button class="btn primary" data-act="tab" data-v="people">Open People</button>' + (SORT.last ? '<button class="btn ghost" id="sUndo">Undo</button>' : '') + '<button class="btn ghost" data-act="closesheet">Done</button>',
+    function (root) { var u = $('#sUndo', root); if (u) u.addEventListener('click', undoSort); });
+}
+function importGuide(fromTour) {
+  var pick = canPickContacts();
+  openSheet('Bring in your contacts',
+    '<p style="margin:0">Pick everyone you\'ve shared your faith with in the last 6 months, all disciples (brothers and sisters in faith), and family &amp; friends you want to check up on or even pray for.</p>' +
+    '<p class="banner"><span>Shepherd brings in their names and numbers. They stay private to you: nobody else using Shepherd can see them, to keep you and them safe.</span></p>' +
+    '<div class="row">' + (pick ? '<button class="btn primary grow" data-act="impick">Choose from my contacts</button>' : '') + '<label class="btn grow' + (pick ? '' : ' primary') + '" for="impFile" style="cursor:pointer">Import a contacts file</label><input type="file" id="impFile" accept=".vcf,text/vcard,text/x-vcard" class="sr"></div>' +
+    osSteps(['Open the <b>Contacts</b> app.', 'Choose people: put two fingers on the list and drag down over the names you want. To take everyone, tap <b>Lists</b> and touch and hold <b>All Contacts</b>.', 'Touch and hold a chosen name, tap <b>Export</b>, then <b>Save to Files</b>.', 'Back in Shepherd, tap <b>Import a contacts file</b> and choose it.'],
+            [pick ? 'Tap <b>Choose from my contacts</b> above and tick the people you want.' : 'Open the <b>Contacts</b> app.', 'Or, in the <b>Contacts</b> app, touch and hold a name, tick the others, then tap <b>Share</b> and save the file.', 'Back in Shepherd, tap <b>Import a contacts file</b> and choose it.']) +
+    '<p class="note">Then sort each person in a tap: Met through sharing, Kingdom, Family, Friends or Other. Anyone you skip isn\'t saved.</p>' +
+    '<button class="btn ghost" data-act="closesheet">' + (fromTour ? 'Back to the tour' : 'Not now') + '</button>',
+    function (root) {
+      var f = $('#impFile', root);
+      f.addEventListener('change', function () { var file = f.files && f.files[0]; if (!file) return; var r = new FileReader(); r.onload = function () { startImport(parseVCF(String(r.result))); }; r.readAsText(file); f.value = ''; });
+    }, fromTour ? resumeTour : null);
+}
+
+/* ---------- Quick add: find anyone in a category and do something in two taps ---------- */
+var QA_ACTS = [['msg', 'Message on WhatsApp'], ['open', 'Open their page'], ['enc', 'Plan an encouragement date'], ['follow', 'Add to People (follow up)'], ['disciple', 'Add to Disciples'], ['pray', 'Add to prayer list'], ['num', 'Add their number']];
+function qaPeople() {
+  var out = [];
+  list().filter(function (c) { return eff(c) !== 'archived'; }).forEach(function (c) { out.push({ k: 'c:' + c.id, n: c.name, p: c.phone || '', cat: 'sharing', t: 'c', id: c.id }); });
+  dList().forEach(function (d) { out.push({ k: 'd:' + d.id, n: d.name, p: d.phone || '', cat: 'kingdom', t: 'd', id: d.id }); });
+  prList().forEach(function (x) { if (x.contactId && S.contacts[x.contactId]) return; out.push({ k: 'p:' + x.id, n: x.name, p: x.phone || '', cat: x.cat === 'family' || x.cat === 'friends' ? x.cat : 'prayer', t: 'p', id: x.id }); });
+  phoneBook().list.forEach(function (x) { if (x.cat === 'other') out.push({ k: 'o:' + normName(x.n), n: x.n, p: x.p[0] || '', cat: 'other', t: 'o' }); });
+  return out.sort(function (a, b) { return a.n.localeCompare(b.n); });
+}
+function quickPanel() {
+  var all = qaPeople(), cnt = { all: all.length }, left = sortQueue().length, Q = S.qa || (S.qa = { cat: 'all', sel: '' });
+  all.forEach(function (x) { cnt[x.cat] = (cnt[x.cat] || 0) + 1; });
+  var cats = [['all', 'Everyone']].concat(CATS.map(function (c) { return [c[0], c[1]]; })).concat(cnt.prayer ? [['prayer', 'Prayer list']] : []);
+  var sel = all.filter(function (x) { return x.k === Q.sel; })[0];
+  return '<section class="card qacard" id="qaCard"><div class="sec-h"><h2 class="h3">Quick add</h2></div>' +
+    (left ? '<button class="btn tint-soft" data-act="sortgo">' + plural(left, 'contact') + ' left to sort</button>' : '') +
+    (all.length ? '<div class="qa-grid"><label class="field" for="qaCat">Who<select class="inp" id="qaCat">' + cats.map(function (c) { return '<option value="' + c[0] + '"' + (Q.cat === c[0] ? ' selected' : '') + '>' + c[1] + ' (' + (cnt[c[0]] || 0) + ')</option>'; }).join('') + '</select></label>' +
+      '<div class="field acwrap"><label for="qaName">Person</label><input class="inp" id="qaName" autocomplete="off" value="' + esc(sel ? sel.n : (Q.q || '')) + '" placeholder="Tap to see everyone, or type a name" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="qaSug"><ul class="acl" id="qaSug" role="listbox" hidden></ul></div>' +
+      '<label class="field" for="qaAct">Action<select class="inp" id="qaAct">' + QA_ACTS.map(function (a) { return '<option value="' + a[0] + '"' + (Q.act === a[0] ? ' selected' : '') + '>' + a[1] + '</option>'; }).join('') + '</select></label></div>' +
+      '<p class="small" id="qaErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" id="qaGo">Go</button>'
+      : '<p class="note">Bring in people from your phone and sort them in a tap. Then find anyone here and message them, plan a date or add them to a list.</p>') +
+    '<button class="btn ' + (all.length ? 'ghost' : 'primary') + '" data-act="importguide">' + ICON.person + 'Bring in contacts from your phone</button></section>';
+}
+function bindQuick() {
+  var card = $('#qaCard'); if (!card || !$('#qaName')) return;
+  var Q = S.qa, inp = $('#qaName'), ul = $('#qaSug'), catSel = $('#qaCat'), actSel = $('#qaAct');
+  var pool = function () { return qaPeople().filter(function (x) { return Q.cat === 'all' || x.cat === Q.cat; }); };
+  var close = function () { ul.hidden = true; inp.setAttribute('aria-expanded', 'false'); };
+  var show = function (all) {
+    var q = normName(inp.value), m = pool();
+    if (q && !all) m = m.filter(function (x) { var n = normName(x.n); return n.indexOf(q) === 0 || n.split(' ').some(function (w) { return w.indexOf(q) === 0; }); }).concat(m.filter(function (x) { var n = normName(x.n); return n.indexOf(q) > 0 && !n.split(' ').some(function (w) { return w.indexOf(q) === 0; }); }));
+    m = m.slice(0, 200);
+    if (!m.length) { ul.innerHTML = '<li class="small muted" style="padding:10px 12px">No one matches that.</li>'; ul.hidden = false; return; }
+    ul.innerHTML = m.map(function (x, i) { return '<li role="option"><button type="button" data-i="' + i + '"><b data-noi18n>' + esc(x.n) + '</b><span class="cat cat-' + x.cat + '">' + catLabel(x.cat) + '</span></button></li>'; }).join('');
+    ul.hidden = false; inp.setAttribute('aria-expanded', 'true');
+    ul.querySelectorAll('button').forEach(function (b) { b.addEventListener('mousedown', function (e) { e.preventDefault(); }); b.addEventListener('click', function () { var x = m[Number(b.dataset.i)]; Q.sel = x.k; Q.q = ''; inp.value = x.n; close(); $('#qaErr').hidden = true; }); });
+  };
+  inp.addEventListener('focus', function () { show(!!Q.sel); });
+  inp.addEventListener('click', function () { show(!!Q.sel); });
+  inp.addEventListener('input', function () { Q.sel = ''; Q.q = inp.value; show(false); });
+  inp.addEventListener('blur', function () { setTimeout(close, 150); });
+  catSel.addEventListener('change', function () { Q.cat = catSel.value; var still = pool().some(function (x) { return x.k === Q.sel; }); if (!still) { Q.sel = ''; inp.value = ''; } });
+  actSel.addEventListener('change', function () { Q.act = actSel.value; });
+  $('#qaGo').addEventListener('click', function () {
+    var x = qaPeople().filter(function (p) { return p.k === Q.sel; })[0], er = $('#qaErr');
+    if (!x) { er.hidden = false; er.textContent = 'Choose a person first.'; inp.focus(); return; }
+    er.hidden = true; qaRun(x, actSel.value);
+  });
+}
+function sameName(arr, n) { return arr.filter(function (y) { return normName(y.name) === normName(n); })[0]; }
+function qaRun(x, act) {
+  var fn = firstName(x.n);
+  if (act === 'msg') {
+    var n = waNum(x.p); if (!n) { toast('No WhatsApp number saved for ' + fn); return qaNumber(x); }
+    try { window.open(waUrl(n), '_blank', 'noopener'); } catch (e) {}
+    if (x.t === 'c' && S.contacts[x.id] && eff(S.contacts[x.id]) === 'active') markContacted(S.contacts[x.id], 'Messaged on WhatsApp', true);
+    if (x.t === 'd' && S.disciples[x.id] && !checkedThisWeek(S.disciples[x.id])) checkIn(S.disciples[x.id], 'Messaged on WhatsApp');
+    return;
+  }
+  if (act === 'open') {
+    if (x.t === 'c') return go('contact', x.id);
+    if (x.t === 'd') return discipleSheet(x.id);
+    if (x.t === 'p') return editPrayerSheet(x.id);
+    return toast(fn + ' is kept on this phone only. Add them to a list to open their page.');
+  }
+  if (act === 'enc') return encSheet(null, { who: x.n, type: 'date' });
+  if (act === 'num') return qaNumber(x);
+  if (act === 'follow') {
+    if (x.t === 'c') { toast(fn + ' is already in People'); return go('contact', x.id); }
+    var ex = sameName(list(), x.n); if (ex) { toast(fn + ' is already in People'); return go('contact', ex.id); }
+    return qaFollow(x);
+  }
+  if (act === 'disciple') {
+    if (x.t === 'd' || sameName(dList(), x.n)) return toast(fn + ' is already in Disciples');
+    saveDisciple({ id: newId(), name: x.n, phone: x.p, notes: '', log: [], createdAt: Date.now() });
+    if (x.t === 'o') pbSetCat(x.n, '', '');
+    return toast(fn + ' added to Disciples');
+  }
+  if (act === 'pray') {
+    if (x.t === 'p' || sameName(prList(), x.n)) return toast(fn + ' is already on your prayer list');
+    savePrayer({ id: newId(), name: x.n, phone: x.p, notes: '', contactId: x.t === 'c' ? x.id : undefined, cat: x.cat === 'other' ? '' : x.cat, createdAt: Date.now() });
+    if (x.t === 'o') pbSetCat(x.n, '', '');
+    return toast(fn + ' added to your prayer list');
+  }
+}
+function qaFollow(x) {
+  openSheet('Add to People',
+    '<p style="margin:0"><b data-noi18n>' + esc(x.n) + '</b>' + (x.p ? ' · <span data-noi18n>' + esc(x.p) + '</span>' : '') + '</p><p class="note">Shepherd will remind you to check in with them.</p>' +
+    '<label class="tick1 agreetick" for="qfOk"><input type="checkbox" id="qfOk"><span>They\'re happy for us to keep their details and stay in touch.</span></label><p class="small" id="qfErr" role="alert" style="margin:0;color:var(--bad)" hidden></p>' +
+    '<button class="btn primary" id="qfGo">Add to People</button><button class="btn ghost" data-act="closesheet">Cancel</button>',
+    function (root) {
+      var added = false;
+      $('#qfGo', root).addEventListener('click', function () {
+        if (!$('#qfOk', root).checked) { var er = $('#qfErr', root); er.hidden = false; er.textContent = 'Tick that they\'re happy for you to keep their details. Only add people who agreed.'; return; }
+        if (added) return; added = true;
+        var c = { id: newId(), name: x.n, phone: x.p, notes: '', consent: true, createdAt: Date.now(), status: 'active', stage: 'First contact', everyDays: Number(S.profile.defaultEvery) || 3, metOn: ymd(Date.now()), replyState: 'none', studies: [], log: [] };
+        logTo(c, 'change', 'Added'); saveContact(c); if (x.t === 'o') pbSetCat(x.n, '', '');
+        closeSheet(); toast(firstName(x.n) + ' added to People');
+      });
+    });
+}
+function qaNumber(x) {
+  openSheet('Add their number',
+    '<form id="qnForm" class="sec" style="gap:12px" novalidate><p style="margin:0"><b data-noi18n>' + esc(x.n) + '</b></p><label class="field" for="qaNum">WhatsApp number<input class="inp" id="qaNum" type="tel" value="' + esc(x.p) + '" placeholder="' + esc(phoneHint()) + '" autocomplete="off"></label>' +
+    '<p class="small" id="qnErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" type="submit">Save number</button></form>',
+    function (root) {
+      $('#qnForm', root).addEventListener('submit', function (e) {
+        e.preventDefault(); var v = $('#qaNum', root).value.trim(), msg = !v ? 'Type their number.' : phoneProblem(v), er = $('#qnErr', root);
+        er.hidden = !msg; er.textContent = msg || ''; if (msg) return;
+        if (x.t === 'c' && S.contacts[x.id]) { var c = S.contacts[x.id]; c.phone = v; logTo(c, 'change', 'Number added'); saveContact(c); }
+        else if (x.t === 'd' && S.disciples[x.id]) { var d = S.disciples[x.id]; d.phone = v; saveDisciple(d); }
+        else if (x.t === 'p' && S.prayers[x.id]) { var p = S.prayers[x.id]; p.phone = v; savePrayer(p); }
+        else if (x.t === 'o') pbSetCat(x.n, v, 'other');
+        closeSheet(); render(); toast('Number saved for ' + firstName(x.n));
+      });
+    });
+}
+
+/* ---------- Encourage: encouragement dates and hangouts with brothers and sisters ---------- */
+// saved alongside calendar events (kind "enc"), so they also reach your phone calendar, but the Calendar tab doesn't list them
+function encList() { return Object.keys(S.events).map(function (k) { return S.events[k]; }).filter(function (x) { return x && x.kind === 'enc' && x.date && x.who; }); }
+function encTitle(x) { return x.type === 'hangout' ? L('Hangout with {0}', x.who) : L('Encouragement date with {0}', x.who); }
+function encIn(from, to) { return encList().filter(function (x) { var t = parseYmd(x.date); return t >= from && t < to; }); }
+function spendIn(from, to) {
+  var r = { total: 0, date: 0, hangout: 0, nDate: 0, nHangout: 0, food: 0, n: 0 };
+  encIn(from, to).forEach(function (x) { var c = Math.max(0, Number(x.cost) || 0), k = x.type === 'hangout' ? 'hangout' : 'date'; r[k] += c; r.total += c; r[k === 'date' ? 'nDate' : 'nHangout']++; r.n++; if (x.food) r.food++; });
+  return r;
+}
+function monthBounds(t) { var d = new Date(startOf(t)); d.setDate(1); var a = startOf(d.getTime()); d.setMonth(d.getMonth() + 1); return [a, startOf(d.getTime())]; }
+function encCard(x, isPast) {
+  var d = new Date(parseYmd(x.date)), hang = x.type === 'hangout';
+  return '<button class="enc' + (hang ? ' hangout' : '') + (isPast ? ' past' : '') + '" data-act="openenc" data-id="' + x.id + '"><span class="calbox"><span>' + MON[d.getMonth()] + '</span><b>' + d.getDate() + '</b></span><span class="pm"><span class="pn" data-noi18n>' + esc(x.who) + '</span><span class="ps">' + esc(fmtDate(x.date)) + (x.time ? ', ' + esc(fmtClock(x.time)) : '') + '</span>' + (x.activity ? '<span class="ps" data-noi18n>' + esc(x.activity) + '</span>' : '') +
+    '<span class="tags"><span class="etag ' + (hang ? 'hangout">Hangout' : 'date">Encouragement date') + '</span>' + (x.food ? '<span class="etag food">Food</span>' : '') + (Number(x.cost) > 0 ? '<span class="etag cost">' + esc(money(x.cost)) + '</span>' : '') + '</span></span></button>';
+}
+function encMonthHtml(all) {
+  var base = S.encMonth || ymd(today()).slice(0, 7), y = Number(base.slice(0, 4)), m = Number(base.slice(5, 7)) - 1;
+  var first = new Date(y, m, 1), lead = (first.getDay() + 6) % 7, days = new Date(y, m + 1, 0).getDate(), td = ymd(Date.now()), has = {};
+  all.forEach(function (x) { has[x.date] = (has[x.date] || 0) + 1; });
+  var title = LOC ? intl(first, { month: 'long', year: 'numeric' }) : MON[m] + ' ' + y;
+  var h = '<section class="card mcal" id="encCal"><div class="mcal-h"><button type="button" data-act="encmonth" data-d="-1" aria-label="Previous month">‹</button><b data-noi18n>' + esc(title) + '</b><button type="button" data-act="encmonth" data-d="1" aria-label="Next month">›</button></div><div class="mgrid">';
+  [1, 2, 3, 4, 5, 6, 0].forEach(function (i) { h += '<span class="wd" data-noi18n>' + esc(WD[i]) + '</span>'; });
+  for (var i = 0; i < lead; i++) h += '<span></span>';
+  for (var dd = 1; dd <= days; dd++) {
+    var ds = y + '-' + pad(m + 1) + '-' + pad(dd), n = has[ds] || 0;
+    h += '<button type="button" class="' + (n ? 'has' : '') + (ds === td ? ' today' : '') + '" data-act="encday" data-d="' + ds + '" aria-pressed="' + (S.encDay === ds) + '" aria-label="' + esc(fmtDate(ds)) + (n ? ': ' + plural(n, 'plan') : '') + '">' + dd + '</button>';
+  }
+  return h + '</div></section>';
+}
+function viewEncourage() {
+  var ws = weekStart(Date.now()), td = ymd(Date.now()), all = encList(), mb = monthBounds(Date.now());
+  var h = vhead('encourage', 'Encourage', 'Spend time with your brothers and sisters in faith.');
+  h += '<figure class="verse" data-noi18n><p>“And let us consider how we may spur one another on toward love and good deeds, not giving up meeting together… but encouraging one another.”</p><cite>Hebrews 10:24–25 (NIV)</cite></figure>';
+  if (!encIn(ws, addDays(ws, 7)).length) h += '<section class="card nudge" id="encNudge"><p class="q">Who will you encourage this week?</p><p class="note" style="margin:0;color:var(--fg)">Plan a coffee, a walk or a meal with a brother or sister.</p></section>';
+  h += '<div class="encbtns"><button class="btn tint" data-act="newenc" data-t="date">Plan an encouragement date</button><button class="btn tint-soft" data-act="newenc" data-t="hangout">Log a hangout</button></div>';
+  if (!S.profile.curSeen) h += '<section class="card" id="curNote" style="background:var(--gold-soft);border-color:transparent"><p style="margin:0">Costs show in <b>' + esc(curName(curCode())) + '</b>. You can change the currency in Settings.</p><div class="row"><button class="btn small primary" data-act="curok">OK</button><button class="btn small" data-act="curchange">Change currency</button></div></section>';
+  h += encMonthHtml(all);
+  if (S.encDay) {
+    var onDay = all.filter(function (x) { return x.date === S.encDay; }).sort(evSort);
+    h += '<section class="sec"><div class="sec-h"><h2 class="h2">' + esc(fmtDate(S.encDay)) + '</h2><span class="count">' + onDay.length + '</span></div>' + (onDay.length ? onDay.map(function (x) { return encCard(x, x.date < td); }).join('') : '<p class="note">Nothing planned on this day.</p>') +
+      '<div class="row"><button class="btn tint-soft grow" data-act="newenc" data-t="date" data-d="' + S.encDay + '">Plan for this day</button><button class="btn ghost grow" data-act="encall">Show everything</button></div></section>';
+  } else if (!all.length) {
+    h += '<div class="empty"><svg viewBox="0 0 24 24" aria-hidden="true">' + VICON.encourage + '</svg><h2 class="h2">No dates yet</h2><p>Coffee, a walk, a meal. Time together builds each other up. Plan your first one.</p></div>';
+  } else {
+    var up = all.filter(function (x) { return x.date >= td; }).sort(evSort), past = all.filter(function (x) { return x.date < td; }).sort(function (a, b) { return b.date.localeCompare(a.date); }).slice(0, 10);
+    if (up.length) h += '<section class="sec"><div class="sec-h"><h2 class="h2">Coming up</h2><span class="count">' + up.length + '</span></div>' + up.slice(0, 12).map(function (x) { return encCard(x, false); }).join('') + '</section>';
+    if (past.length) h += '<section class="sec"><h2 class="h2">Past</h2>' + past.map(function (x) { return encCard(x, true); }).join('') + '</section>';
+  }
+  var wk = spendIn(ws, addDays(ws, 7)), mo = spendIn(mb[0], mb[1]), max = Math.max(mo.date, mo.hangout, 1);
+  h += '<section class="card" id="encSpend"><div class="sec-h"><h2 class="h3">Spending</h2></div><div class="spend"><div class="stat"><span>This week</span><b data-noi18n>' + esc(money(wk.total)) + '</b></div><div class="stat"><span>This month</span><b data-noi18n>' + esc(money(mo.total)) + '</b></div></div>' +
+    '<ul class="breakdown"><li><span>Encouragement dates (' + mo.nDate + ')</span><b data-noi18n>' + esc(money(mo.date)) + '</b><span class="bt"><span style="width:' + Math.round(mo.date / max * 100) + '%;background:#8E3456"></span></span></li>' +
+    '<li><span>Hangouts (' + mo.nHangout + ')</span><b data-noi18n>' + esc(money(mo.hangout)) + '</b><span class="bt"><span style="width:' + Math.round(mo.hangout / max * 100) + '%;background:#B07A1C"></span></span></li></ul>' +
+    (mo.n ? '<p class="note" style="margin:0">Food on ' + mo.food + ' of ' + mo.n + ' this month.</p>' : '') + '</section>';
+  // the short weekly summary that used to be the Week tab
+  var cur = weekStats(ws), studies = 0, added = 0;
+  list().forEach(function (c) { (c.studies || []).forEach(function (s) { var t = parseYmd(s.date); if (t >= ws && t < cur.we) studies++; }); if ((c.createdAt || 0) >= ws && c.createdAt < cur.we) added++; });
+  var weeks = []; for (var i = 3; i >= 0; i--) weeks.push(weekStats(addDays(ws, -7 * i)));
+  h += '<section class="card" id="weekCard"><div class="sec-h"><h2 class="h3">Your week</h2></div>' +
+    (cur.pool.length ? '<p class="wkline">Followed up: <b>' + cur.done.length + ' of ' + cur.pool.length + '</b></p>' : '<p class="note" style="margin:0">Your weekly summary will appear once you add contacts.</p>') +
+    '<div class="stats"><div class="stat"><span>Studies</span><b>' + studies + '</b></div><div class="stat"><span>New contacts</span><b>' + added + '</b></div><div class="stat"><span>Encouraged</span><b>' + encIn(ws, cur.we).length + '</b></div></div>' +
+    '<div class="minibars" aria-label="Follow-up rate, last 4 weeks">' + weeks.map(function (w, idx) { var pct = w.pool.length ? Math.round(w.done.length / w.pool.length * 100) : 0; return '<div class="' + (idx === 3 ? 'now' : '') + '"><span>' + (w.pool.length ? pct + '%' : '–') + '</span><i style="height:' + Math.max(4, Math.round(pct * 0.42)) + 'px"></i><span>' + (idx === 3 ? 'This week' : esc(fmtDay(w.ws))) + '</span></div>'; }).join('') + '</div></section>';
+  return h;
+}
+function encSheet(id, preset) {
+  var isNew = !id, x = isNew ? Object.assign({ id: newId(), kind: 'enc', type: 'date', who: '', date: ymd(Date.now()), time: '', activity: '', food: false, cost: '', createdAt: Date.now() }, preset || {}) : S.events[id];
+  if (!x) return;
+  var names = []; qaPeople().forEach(function (p) { if (names.indexOf(p.n) < 0) names.push(p.n); });
+  openSheet(isNew ? (x.type === 'hangout' ? 'Log a hangout' : 'Plan an encouragement date') : 'Edit',
+    '<form id="enForm" class="sec" style="gap:14px" novalidate>' +
+    '<div class="field"><span>Type</span>' + pickHtml('enType', ['date', 'hangout'], x.type === 'hangout' ? 'hangout' : 'date', ['Encouragement date', 'Hangout']) + '</div>' +
+    '<div class="field acwrap"><label for="enWho">Brother or sister</label><input class="inp" id="enWho" value="' + esc(x.who) + '" autocomplete="off" placeholder="Type a name" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="enSug"><ul class="acl" id="enSug" role="listbox" hidden></ul></div>' +
+    '<div class="grid2"><label class="field" for="enDate">Date<input class="inp" id="enDate" type="date" value="' + esc(x.date) + '"></label><label class="field" for="enTime">Time<input class="inp" id="enTime" type="time" value="' + esc(x.time) + '"></label></div>' +
+    '<label class="field" for="enAct">Activity<input class="inp" id="enAct" value="' + esc(x.activity) + '" placeholder="e.g. Coffee and a walk" autocomplete="off"></label>' +
+    '<label class="tick1" for="enFood"><input type="checkbox" id="enFood"' + (x.food ? ' checked' : '') + '><span><b>Going for food?</b></span></label>' +
+    '<label class="field" for="enCost">Cost (' + esc(curCode()) + ')<input class="inp" id="enCost" type="number" inputmode="decimal" min="0" step="0.01" value="' + esc(x.cost === '' || x.cost == null ? '' : x.cost) + '" placeholder="0"></label>' +
+    '<p class="note" id="enErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">' + (isNew ? 'Save' : 'Save changes') + '</button></form>' +
+    (isNew ? '' : addCalHtml('event', x.id, 'btn') + '<button class="btn danger" id="enDel">Delete</button>'),
+    function (root) {
+      bindPick(root, 'enType', null, true);
+      var inp = $('#enWho', root), ul = $('#enSug', root);
+      var show = function () {
+        var q = normName(inp.value); if (!q) { ul.hidden = true; return; }
+        var m = names.filter(function (n) { return normName(n).split(' ').some(function (w) { return w.indexOf(q) === 0; }) || normName(n).indexOf(q) === 0; }).slice(0, 6);
+        if (!m.length) { ul.hidden = true; inp.setAttribute('aria-expanded', 'false'); return; }
+        ul.innerHTML = m.map(function (n, i) { return '<li role="option"><button type="button" data-i="' + i + '"><b data-noi18n>' + esc(n) + '</b></button></li>'; }).join(''); ul.hidden = false; inp.setAttribute('aria-expanded', 'true');
+        ul.querySelectorAll('button').forEach(function (b) { b.addEventListener('mousedown', function (e) { e.preventDefault(); }); b.addEventListener('click', function () { inp.value = m[Number(b.dataset.i)]; ul.hidden = true; inp.setAttribute('aria-expanded', 'false'); }); });
+      };
+      inp.addEventListener('input', show); inp.addEventListener('blur', function () { setTimeout(function () { ul.hidden = true; }, 150); });
+      $('#enForm', root).addEventListener('submit', function (e) {
+        e.preventDefault();
+        var who = inp.value.trim(), dt = $('#enDate', root).value, cost = $('#enCost', root).value, er = $('#enErr', root);
+        var msg = !who ? 'Add their name.' : !dt ? 'Pick a date.' : cost !== '' && !(Number(cost) >= 0) ? 'Type the cost as a number, like 12.50.' : '';
+        er.hidden = !msg; er.textContent = msg; if (msg) return;
+        var f = $('#enForm', root); if (isNew && f.dataset.done) return; f.dataset.done = '1';
+        x.type = pickVal(root, 'enType') || 'date'; x.who = who.slice(0, 80); x.date = dt; x.time = $('#enTime', root).value; x.activity = $('#enAct', root).value.trim().slice(0, 120);
+        x.food = $('#enFood', root).checked; x.cost = cost === '' ? '' : Math.round(Number(cost) * 100) / 100; x.name = encTitle(x); x.place = '';
+        saveEvent(x); closeSheet(); toast(isNew ? (x.type === 'hangout' ? 'Hangout saved' : 'Encouragement date saved') : 'Saved');
+        tourEvent('enc');
+      });
+      var del = $('#enDel', root), armed = false;
+      if (del) del.addEventListener('click', function () { if (!armed) { armed = true; del.textContent = 'Tap again to delete'; return; } delete S.events[x.id]; put(ePath(x.id), null); closeSheet(); render(); toast('Deleted'); });
+    });
+}
+function encToday() {
+  var td = ymd(Date.now()), items = encList().filter(function (x) { return x.date === td; }).sort(evSort);
+  if (!items.length) return '';
+  return '<section class="sec" id="encToday"><div class="sec-h"><h2 class="h2">Encouraging today</h2><span class="count">' + items.length + '</span></div>' + items.map(function (x) { return encCard(x, false); }).join('') + '</section>';
+}
+
 function viewToday() {
   var all = list();
   var name = S.profile.name ? ', ' + esc(firstName(S.profile.name)) : '';
   var now = new Date();
-  var h = '<div><p class="eyebrow">' + (LOC ? intl(now, { weekday: 'long', day: 'numeric', month: 'long' }) : WD[now.getDay()] + ' ' + now.getDate() + ' ' + MON[now.getMonth()]) + '</p><h1 class="h1">' + greeting() + name + '</h1>';
+  var h = vhead('today', greeting() + name, '', LOC ? intl(now, { weekday: 'long', day: 'numeric', month: 'long' }) : WD[now.getDay()] + ' ' + now.getDate() + ' ' + MON[now.getMonth()]) + '<div>';
   var L = todayLists();
   if (!all.length) {
-    h += '</div>' + installCard() + emptyState() + disciplesCard() + eventsMini(L.events) + prayCard();
+    h += '</div>' + installCard() + emptyState() + disciplesCard() + eventsMini(L.events) + encToday() + prayCard();
     return h;
   }
   var td = ymd(Date.now());
@@ -1730,6 +2183,7 @@ function viewToday() {
       L.studies.map(function (c) { return '<li class="prow st-ok"><button class="prow-main" data-act="open" data-id="' + c.id + '"><span class="dot" aria-hidden="true"></span><span class="pm"><span class="pn">' + esc(c.name) + '</span><span class="ps"><b>' + esc(c.nextStudy.time ? fmtClock(c.nextStudy.time) : 'Time not set') + '</b>' + (c.nextStudy.topic ? ' · ' + esc(c.nextStudy.topic) : '') + '</span></span></button>' + chBtn(c) + '</li>'; }).join('') + '</ul></section>';
   }
   h += eventsMini(L.events);
+  h += encToday();
   h += prayCard();
   return h;
 }
@@ -1826,7 +2280,8 @@ function journeyBoard() {
 function viewPeople() {
   var archived = list().filter(function (c) { return eff(c) === 'archived'; }).length;
   var F = [['all', 'Everyone'], ['late', 'Overdue'], ['due', 'Due today'], ['reply', 'Need reply'], ['waiting', 'Waiting on them'], ['ok', 'On track'], ['paused', 'Paused']];
-  var h = '<div><h1 class="h1">People</h1><p class="lede">' + plural(list().filter(function (c) { return eff(c) !== 'archived'; }).length, 'person', 'people') + ' you\'re following up with</p></div>';
+  var h = vhead('people', 'People', plural(list().filter(function (c) { return eff(c) !== 'archived'; }).length, 'person', 'people') + ' you\'re following up with');
+  h += quickPanel();
   var mode = S.peopleMode || lsGet('shepherd:peopleMode') || 'list';
   h += '<div class="seg" style="grid-template-columns:1fr 1fr" role="group" aria-label="View"><button data-act="pmode" data-m="list" aria-pressed="' + (mode === 'list') + '">List</button><button data-act="pmode" data-m="journey" aria-pressed="' + (mode === 'journey') + '">Journey</button></div>';
   if (mode === 'journey') { h += journeyBoard(); if (archived) h += '<button class="linkrow" data-act="archive-list">No longer contacting (' + archived + ')</button>'; return h; }
@@ -1924,13 +2379,14 @@ function viewContact() {
 function evCard(x, isPast) {
   var d = new Date(parseYmd(x.date));
   var inv = (x.invited || []).length, came = (x.came || []).length;
-  return '<button class="ev' + (isPast ? ' past' : '') + (x.source === 'calendar' ? ' fromcal' : '') + '" data-act="openevent" data-id="' + x.id + '"><span class="calbox"><span>' + MON[d.getMonth()] + '</span><b>' + d.getDate() + '</b></span><span class="pm"><span class="pn">' + esc(x.name) + '</span><span class="ps">' + esc(fmtDate(x.date)) + (x.time ? ', ' + esc(fmtClock(x.time)) : '') + (x.place ? ' · ' + esc(x.place) : '') + '</span><span class="ps">' + (x.source === 'calendar' ? 'From your calendar · ' : '') + plural(inv, 'invite') + (isPast || came ? ' · ' + came + ' came' : '') + '</span></span></button>';
+  return '<button class="ev' + (isPast ? ' past' : '') + (x.source === 'calendar' ? ' fromcal' : '') + '" data-act="openevent" data-id="' + x.id + '"><span class="calbox"><span>' + MON[d.getMonth()] + '</span><b>' + d.getDate() + '</b></span><span class="pm"><span class="pn">' + esc(x.name) + '</span><span class="ps">' + esc(fmtDate(x.date)) + (x.time ? ', ' + esc(fmtClock(x.time)) : '') + (x.place ? ' · ' + esc(x.place) : '') + '</span><span class="ps">' + (x.source === 'calendar' ? 'From your calendar · ' : '') + plural(inv, 'invite') + (isPast || came ? ' · ' + came + ' came' : '') + '</span>' + (!isPast && x.source !== 'calendar' && x.notify !== false && x.countdown ? '<span class="tags" style="display:flex;margin-top:4px"><span class="chip cd">' + (x.countdown === 'monthly' ? 'Monthly countdown' : 'Weekly countdown') + '</span></span>' : '') + '</span></button>';
 }
 function viewEvents() {
   var evs = evList(), td = ymd(Date.now());
   var up = evs.filter(function (x) { return x.date >= td; }).sort(evSort);
   var past = evs.filter(function (x) { return x.date < td; }).sort(function (a, b) { return b.date.localeCompare(a.date); }).slice(0, 30);
-  var h = '<div><h1 class="h1">Calendar</h1><p class="lede">Your services and events. Invite people, then tick who came.</p></div>';
+  var h = vhead('events', 'Calendar', 'Your key events, like Network Events, EMC and GMC. Invite people, then tick who came.');
+  if (!evs.some(function (x) { return x.date >= td && x.source !== 'calendar'; })) h += '<p class="banner"><span>Log every key event here, like a <b>Network Event</b>, <b>EMC</b> or <b>GMC</b>. Tick <b>Notify me</b> and choose a weekly or monthly countdown so you never miss one.</span></p>';
   h += '<div class="row"><button class="btn primary grow" data-act="newevent">New event</button><button class="btn grow" data-act="calimport">' + ICON.cal + 'Add from a calendar file</button></div>';
   h += '<button class="btn soft" data-act="calguide">' + ICON.cal + 'How to link your phone calendar</button>';
   if (S.profile.calImportedAt) h += '<p class="note">Calendar events last brought in ' + esc(fmtStamp(S.profile.calImportedAt)) + '.</p>';
@@ -1953,13 +2409,12 @@ function weekStats(ws) {
   var done = pool.filter(function (c) { return followedIn(c, ws, we); });
   return { ws: ws, we: we, pool: pool, done: done };
 }
-function weekWord(n, d) { var r = d ? n / d : 0; return !d ? '' : r >= 0.9 ? 'great week' : r >= 0.6 ? 'good going' : n > 0 ? 'keep going' : 'start with today\'s list'; }
 // About: what Shepherd does and why. Bible verses stay in English (NIV) in every language.
 function viewAbout() {
   var helpMail = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy && window.SHEPHERD_CONFIG.privacy.contact) || 'lostshepherdapp@gmail.com';
   var vl = function (text, ref) { return '<p class="about-v" data-noi18n>“' + text + '” <cite>' + ref + ' (NIV)</cite></p>'; };
   var sec = function (title, verses, items) { return '<section class="card"><h2 class="h3">' + title + '</h2>' + verses + '<ul class="about-ul">' + items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></section>'; };
-  return '<header class="hd"><h1 class="h1">About Shepherd</h1></header>' +
+  return '<div><button class="ghost-btn" data-act="tab" data-v="settings">' + ICON.back + 'Settings</button><h1 class="h1">About Shepherd</h1></div>' +
     '<figure class="verse" data-noi18n><p>“Suppose one of you has a hundred sheep and loses one of them. Doesn\'t he leave the ninety-nine in the open country and go after the lost sheep until he finds it?”</p><cite>Luke 15:4 (NIV)</cite></figure>' +
     '<p class="lede">Shepherd helps you care for the people God puts in your path, so nobody slips through the cracks.</p>' +
     sec('Know your flock', vl('Be sure you know the condition of your flocks', 'Proverbs 27:23'), [
@@ -1969,7 +2424,7 @@ function viewAbout() {
     sec('Reach out', vl('Make the most of every opportunity', 'Colossians 4:5'), [
       'Message on WhatsApp in one tap.',
       'Share your QR code and new people add themselves.',
-      'Bring in your phone contacts, or save someone to your phone.',
+      'Bring in your phone contacts and sort them in a tap, then use Quick add to reach anyone fast.',
       'Phone notifications tell you by name who to reach out to.']) +
     sec('Open the Word together', vl('…examined the Scriptures every day', 'Acts 17:11'), [
       'Log Bible studies, plan the next one, and get a reminder an hour before.']) +
@@ -1978,8 +2433,10 @@ function viewAbout() {
     sec('Pray for one another', vl('…pray for each other', 'James 5:16'), [
       'A daily prayer list of 1 to 15 people, with gentle reminders.']) +
     sec('Gather together', vl('…not giving up meeting together… but encouraging one another', 'Hebrews 10:25'), [
-      '<b>Calendar</b> keeps church events, invites (sent on WhatsApp) and who came, and links to your phone calendar.',
-      '<b>Week</b> shows how faithfully you followed up.']) +
+      '<b>Calendar</b> keeps key events like Network Events, EMC and GMC, with weekly or monthly countdowns, invites (sent on WhatsApp) and who came, and links to your phone calendar.']) +
+    sec('Encourage one another', vl('And let us consider how we may spur one another on toward love and good deeds', 'Hebrews 10:24'), [
+      '<b>Encourage</b> plans encouragement dates and hangouts with brothers and sisters, with a weekly nudge, and shows what you spend each week and month.',
+      'It also shows how faithfully you followed up each week.']) +
     sec('Every nation and language', vl('…from every nation, tribe, people and language', 'Revelation 7:9'), [
       '15 languages, iPhone and Android, works without signal.']) +
     sec('Treat people as you\'d want to be treated', vl('Do to others as you would have them do to you.', 'Luke 6:31'), [
@@ -1988,29 +2445,6 @@ function viewAbout() {
     '<figure class="verse" data-noi18n><p>“Feed my sheep.”</p><cite>John 21:17 (NIV)</cite></figure>' +
     '<section class="card" id="aboutHelp"><p class="note">New here? Take the tour, or read how your data is kept.</p><div class="row"><button class="btn grow" data-act="tour">Show me around</button><button class="btn grow" data-act="yourdata">Privacy and safe use</button></div>' +
     '<p class="note">Questions, problems or ideas? Email ' + esc(helpMail) + '.</p><a class="btn" href="mailto:' + esc(helpMail) + '?subject=Shepherd">Email Shepherd</a></section>';
-}
-function viewWeek() {
-  var ws = weekStart(Date.now()), cur = weekStats(ws);
-  var studies = 0, added = 0, came = 0;
-  list().forEach(function (c) {
-    (c.studies || []).forEach(function (s) { var t = parseYmd(s.date); if (t >= ws && t < cur.we) studies++; });
-    if ((c.createdAt || 0) >= ws && c.createdAt < cur.we) added++;
-  });
-  evList().forEach(function (x) { var t = parseYmd(x.date); if (t >= ws && t < cur.we) came += (x.came || []).length; });
-  var n = cur.done.length, d = cur.pool.length;
-  var h = '<div><p class="eyebrow">Week of ' + fmtDay(ws) + '</p><h1 class="sr">Your week</h1>';
-  h += d ? '<p class="bigline">You followed up with <em>' + n + ' of ' + d + '</em> — ' + weekWord(n, d) + '.</p>' : '<p class="bigline">Your weekly summary will appear once you add contacts.</p>';
-  h += '</div><div class="stats"><div class="stat"><span>Studies</span><b>' + studies + '</b></div><div class="stat"><span>New contacts</span><b>' + added + '</b></div><div class="stat"><span>Came to events</span><b>' + came + '</b></div></div>';
-  var weeks = [];
-  for (var i = 3; i >= 0; i--) weeks.push(weekStats(addDays(ws, -7 * i)));
-  h += '<section class="card"><h2 class="h3">Follow-up rate, last 4 weeks</h2><div class="bars">' + weeks.map(function (w, idx) {
-    var pct = w.pool.length ? Math.round(w.done.length / w.pool.length * 100) : 0;
-    var dd = new Date(w.ws);
-    return '<div class="bar' + (idx === 3 ? ' now' : '') + '"><span>' + (w.pool.length ? pct + '%' : '–') + '</span><div class="track"><div class="fill" style="height:' + pct + '%"></div></div><span>' + (idx === 3 ? 'This week' : fmtDay(dd)) + '</span></div>';
-  }).join('') + '</div><p class="note">Share of the people you were following up with who got a message, a call or a study that week.</p></section>';
-  var notYet = cur.pool.filter(function (c) { return cur.done.indexOf(c) < 0 && eff(c) === 'active'; }).sort(byDue);
-  h += section('Not reached yet this week', notYet);
-  return h;
 }
 
 /* the same summary the daily phone alert sends */
@@ -2035,11 +2469,13 @@ function digest(p) {
 function viewSettings() {
   var p = S.profile, N = p.notify || {};
   var h = '<div><button class="ghost-btn" data-act="tab" data-v="today">' + ICON.back + 'Today</button><h1 class="h1">Settings</h1></div>';
+  h += '<section class="card aboutcard" id="aboutCard"><h2 class="h3">About Shepherd</h2><p class="note">What Shepherd does and why, with the Bible verses behind it.</p><button class="btn" data-act="tab" data-v="about">Read About Shepherd</button></section>';
   if (window.I18N) h += '<section class="card" id="langCard"><label class="field" for="pLang"><span class="langh"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>Language</span><select class="inp" id="pLang" data-noi18n>' + I18N.LANGS.map(function (l) { return '<option value="' + l[0] + '"' + (l[0] === I18N.lang ? ' selected' : '') + '>' + l[1] + '</option>'; }).join('') + '</select></label><p class="note">Bible verses stay in English (NIV).</p></section>';
   h += '<form class="card" id="profForm"><h2 class="h3">You</h2>' +
     '<label class="field" for="pName">Your name<input class="inp" id="pName" value="' + esc(p.name) + '" autocomplete="name"></label>' +
     '<label class="field" for="pPhone">Your WhatsApp number<input class="inp" id="pPhone" type="tel" value="' + esc(p.phone) + '" placeholder="' + esc(phoneHint()) + '" autocomplete="tel"></label>' +
     '<label class="field" for="pCountry">Home country (for phone numbers)<select class="inp" id="pCountry" data-noi18n>' + COUNTRIES.map(function (k) { return '<option value="' + k[0] + '"' + (k[0] === homeCountry()[0] ? ' selected' : '') + '>' + esc(countryName(k)) + ' (+' + k[2] + ')</option>'; }).join('') + '</select></label><p class="note" style="margin:-6px 0 0">Numbers starting with 0 get this country\'s code. Numbers starting with + are used as typed.</p>' +
+    '<label class="field" for="pCur">Currency for Encourage costs<select class="inp" id="pCur" data-noi18n>' + CURRENCIES.map(function (k) { return '<option value="' + k + '"' + (k === curCode() ? ' selected' : '') + '>' + esc(curName(k)) + '</option>'; }).join('') + '</select></label>' +
     '<label class="field" for="pIntro">Message people send you from your QR code<textarea class="inp" id="pIntro">' + esc(introText(p)) + '</textarea></label>' +
     '<label class="field" for="pEvery">New contacts: check in every<select class="inp" id="pEvery">' + [1, 2, 3, 4, 5, 7].map(function (o) { return '<option value="' + o + '"' + (Number(p.defaultEvery) === o ? ' selected' : '') + '>' + (o === 1 ? 'Day' : o === 7 ? 'Week' : o + ' days') + '</option>'; }).join('') + '</select></label>' +
     '<button class="btn primary" type="submit">Save</button></form>';
@@ -2085,16 +2521,17 @@ function render() {
   else if (v === 'archive') html = viewArchive();
   else if (v === 'events') html = viewEvents();
   else if (v === 'disciples') html = viewDisciples();
-  else if (v === 'week') html = viewWeek();
+  else if (v === 'encourage') html = viewEncourage();
   else if (v === 'about') html = viewAbout();
   else if (v === 'settings') html = viewSettings();
   else html = viewToday();
   main.innerHTML = '<div class="view">' + html + '</div>';
+  document.body.dataset.view = v;
   var tabV = S.view === 'contact' || S.view === 'archive' ? 'people' : S.view;
   document.querySelectorAll('.tab').forEach(function (t) { if (t.dataset.v === tabV) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
   var owed = active().filter(function (c) { return c.replyState === 'me' || dayDiff(dueDay(c), today()) < 0; }).length;
   var b = $('#badge'); b.hidden = !owed; b.textContent = owed > 99 ? '99+' : owed;
-  $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events' || S.view === 'about'; // Today has its own Add someone box; About is for reading
+  $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events' || S.view === 'about' || S.view === 'encourage'; // Today has its own Add someone box; About is for reading; Encourage has its own buttons
   if (keep) { var el = document.getElementById(keep); if (el) { el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   bindView();
   if (TOUR_I >= 0) placeTour();
@@ -2114,9 +2551,10 @@ function fitTabs(force) {
   });
 }
 window.addEventListener('resize', function () { fitTabs(); });
-function go(v, id) { if (v !== S.view) S.showAll = false; if (S.view === 'settings' && v !== 'settings') saveProfileForm(false); S.view = v; if (id) S.contactId = id; render(); try { window.scrollTo(0, 0); } catch (e) {} }
+function go(v, id) { if (v === 'week') v = 'encourage'; if (v !== S.view) S.showAll = false; if (S.view === 'settings' && v !== 'settings') saveProfileForm(false); S.view = v; if (id) S.contactId = id; render(); try { window.scrollTo(0, 0); } catch (e) {} }
 
 function bindView() {
+  bindQuick();
   var q = $('#q');
   if (q) q.addEventListener('input', function () { S.search = q.value; $('#plist').innerHTML = peopleList(); });
   var every = $('#every');
@@ -2158,7 +2596,7 @@ function bindView() {
 
 /* ---------- sheets ---------- */
 var sheetAfter = null;
-var MAXLEN = { cName: 80, cPhone: 30, cSh: 60, cMet: 120, cNotes: 4000, cPrayer: 2000, prName: 80, prNotes: 2000, peName: 80, peNotes: 2000, dName: 80, dPhone: 30, deName: 80, dePhone: 30, deNotes: 2000, eName: 120, ePlace: 120, sTopic: 200, sNotes: 4000, pName: 80, pPhone: 30, pIntro: 500, qPhone: 30, aNote: 500 };
+var MAXLEN = { cName: 80, cPhone: 30, cSh: 60, cMet: 120, cNotes: 4000, cPrayer: 2000, prName: 80, prNotes: 2000, peName: 80, peNotes: 2000, dName: 80, dPhone: 30, deName: 80, dePhone: 30, deNotes: 2000, eName: 120, ePlace: 120, sTopic: 200, sNotes: 4000, pName: 80, pPhone: 30, pIntro: 500, qPhone: 30, aNote: 500, enWho: 80, enAct: 120, qaNum: 30, qaName: 80 };
 function capLengths(root) { Object.keys(MAXLEN).forEach(function (id) { var el = root && root.querySelector('#' + id); if (el && !(el.maxLength > 0)) el.maxLength = MAXLEN[id]; }); }
 function openSheet(title, body, mount, after) {
   // opening one sheet over another keeps the first one's "when closed" step (e.g. going back to the tour)
@@ -2463,18 +2901,24 @@ function qrSheet() {
 function eventSheet(id) {
   var isNew = !id;
   var nextSunday = ymd(addDays(Date.now(), (7 - new Date().getDay()) % 7 || 7));
-  var x = isNew ? { id: newId(), name: '', date: nextSunday, time: '', place: '', invited: [], came: [], createdAt: Date.now() } : S.events[id];
+  var x = isNew ? { id: newId(), name: '', date: nextSunday, time: '', place: '', invited: [], came: [], notify: true, countdown: '', createdAt: Date.now() } : S.events[id];
   if (!x) return;
   openSheet(isNew ? 'New event' : 'Edit event',
     '<form id="eForm" class="sec" style="gap:14px" novalidate><label class="field" for="eName">Event<input class="inp" id="eName" value="' + esc(x.name) + '" placeholder="e.g. Sunday service" autocomplete="off"></label>' +
     '<div class="grid2"><label class="field" for="eDate">Date<input class="inp" id="eDate" type="date" value="' + esc(x.date) + '"></label><label class="field" for="eTime">Time<input class="inp" id="eTime" type="time" value="' + esc(x.time) + '"></label></div>' +
-    '<label class="field" for="ePlace">Where<input class="inp" id="ePlace" value="' + esc(x.place) + '" autocomplete="off"></label><p class="note" id="eErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">' + (isNew ? 'Create event' : 'Save') + '</button></form>',
+    '<label class="field" for="ePlace">Where<input class="inp" id="ePlace" value="' + esc(x.place) + '" autocomplete="off"></label>' +
+    '<label class="tick1" for="eNotify"><input type="checkbox" id="eNotify"' + (x.notify !== false ? ' checked' : '') + '><span><b>Notify me about this event</b></span></label>' +
+    '<div class="field" id="eCdWrap"' + (x.notify !== false ? '' : ' hidden') + '><span>Countdown</span>' + pickHtml('eCd', ['none', 'weekly', 'monthly'], x.countdown || 'none', ['None', 'Weekly', 'Monthly']) + '<p class="note" style="margin:0">Weekly: a reminder each week for the 8 weeks before. Monthly: one each month for the 6 months before. You\'re also reminded the day before and an hour before.</p></div>' +
+    '<p class="note" id="eErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">' + (isNew ? 'Create event' : 'Save') + '</button></form>',
     function (root) {
+      bindPick(root, 'eCd', null, true);
+      $('#eNotify', root).addEventListener('change', function () { $('#eCdWrap', root).hidden = !$('#eNotify', root).checked; });
       $('#eForm', root).addEventListener('submit', function (e) {
         e.preventDefault();
         var nm = $('#eName', root).value.trim(), dt = $('#eDate', root).value, er = $('#eErr', root);
         if (!nm || !dt) { er.hidden = false; er.textContent = !nm ? 'Give the event a name.' : 'Pick a date.'; return; }
         x.name = nm; x.date = dt; x.time = $('#eTime', root).value; x.place = $('#ePlace', root).value.trim();
+        x.notify = $('#eNotify', root).checked; var cd = pickVal(root, 'eCd'); x.countdown = x.notify && cd !== 'none' ? cd : '';
         saveEvent(x); openEvent(x.id);
       });
     });
@@ -2627,7 +3071,7 @@ function calSheet() {
    while you do it, then carries on by itself (or when you tap Continue tour). */
 var TOUR = [
   { title: 'Welcome to Shepherd', text: 'Shepherd reminds you who to check in with, so no one you\'re checking up on slips through. This tour walks through every part of the app and lets you set it up as you go. It takes about three minutes.' },
-  { view: 'about', target: '.tab[data-v="about"]', title: 'Read what Shepherd does and why', text: 'About explains everything Shepherd can do, with the Bible verses behind it. Read it now or come back any time.' },
+  { view: 'settings', target: '#aboutCard', title: 'Read what Shepherd does and why', text: 'About explains everything Shepherd can do, with the Bible verses behind it. It\'s at the top of Settings. Read it now or come back any time.' },
   { view: 'settings', target: '#profForm', title: 'Start in Settings', text: 'First, open Settings and add your WhatsApp number and the first message that will be sent automatically when they scan your QR code.',
     doIt: { label: 'Add my number now', note: 'Add your number and message, then tap Save.', waitFor: 'profile', run: function () { var p = $('#pPhone'); if (p) p.focus(); } } },
   { view: 'settings', target: '#notifCard', title: 'Turn on notifications', text: 'Most people use Shepherd on their phone, so turn on notifications. Shepherd tells you by name who to message, who to reply to and who to check on, and opens that person when you tap.',
@@ -2635,6 +3079,8 @@ var TOUR = [
   { view: 'today', target: function () { return $('#addCard') || $('#main .empty'); }, title: 'Add someone', text: 'After you meet someone, tap Add someone. Type their name and WhatsApp number (names from your phone contacts come up as you type), and tick that they\'re happy for you to keep their details.',
     doIt: { label: 'Add my first person', note: 'Fill in their details and tap Save contact.', waitFor: 'contact', run: function () { quickAdd(); } } },
   { view: 'today', target: '#main [data-act="qr"]', title: 'Or show your QR code', text: 'Tap My QR code and let them scan it with their phone camera. They type their name, they\'re added to your list by themselves, and WhatsApp opens with your message ready for them to send.' },
+  { view: 'people', target: '#qaCard', title: 'Bring in your contacts', text: 'Bring in people from your phone, then sort each one in a tap: Met through sharing, Kingdom, Family, Friends or Other. Quick add then finds anyone fast, so you can message them, plan a date or add them to a list.',
+    doIt: { label: 'Show me how', guide: true, run: function () { importGuide(true); } } },
   { view: 'today', target: '.tab[data-v="today"]', title: 'Start each day here', text: 'Today is a quick look at your day: who to reply to, who to message, disciples to check on, events today and who to pray for. Green is on track, amber is due today, red is overdue.' },
   { view: 'today', target: function () { return $('#main .prow .ch'); }, title: 'Message in one tap', text: 'The chat button opens WhatsApp or Instagram. Shepherd logs it and waits for their reply.' },
   { view: 'today', target: function () { return $('#catchCard') || $('#main .rep'); }, title: 'When they reply', text: 'Tap Replied and they move to your Reply to list. Each day Shepherd also asks about anyone it\'s unsure of.' },
@@ -2643,10 +3089,10 @@ var TOUR = [
   { view: 'disciples', target: '#dForm', title: 'Disciples', text: 'Add the people that are already disciples. Shepherd reminds you to check in with those people every week. It\'s biblical to encourage one another! 1 Thessalonians 5:11 ‘Therefore encourage one another and build each other up, just as in fact you are doing.’ Let\'s make this a habit each week!',
     doIt: { label: 'Add a disciple', note: 'Type their name and tap Add.', waitFor: 'disciple', run: function () { var n = $('#dName'); if (n) n.focus(); } } },
   { view: 'today', target: '#prayCard', title: 'Pray for people', text: 'Add anyone you want to pray for, with notes if you like. Each day Shepherd shows 1 to 15 of them (you choose how many), taking turns, and can remind you at a time you choose in Settings.' },
-  { view: 'events', target: '.tab[data-v="events"]', title: 'Your calendar', text: 'Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.',
+  { view: 'events', target: '.tab[data-v="events"]', title: 'Your calendar', text: 'Log key events like Network Events, EMC or GMC, and choose a weekly or monthly countdown. Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.',
     doIt: { label: 'Show me how to link my calendar', guide: true, run: function () { calGuide(true); } } },
-  { view: 'week', target: '.tab[data-v="week"]', title: 'Your week', text: 'Week shows how many people you followed up with, your studies, new contacts and who came to events, with the last four weeks side by side.' },
-  { view: 'settings', target: '#langCard', title: 'Settings has the rest', text: 'Choose your language (Bible verses stay in English, NIV), bring in your phone contacts, set a PIN, export a backup, and read Privacy and safe use.' },
+  { view: 'encourage', target: '.tab[data-v="encourage"]', title: 'Encourage one another', text: 'Plan encouragement dates and hangouts with brothers and sisters, tick if you\'re going for food, and see what you spend each week and month. Shepherd nudges you each week. Your weekly follow-up stats are here too.' },
+  { view: 'settings', target: '#langCard', title: 'Settings has the rest', text: 'Choose your language (Bible verses stay in English, NIV) and your currency, read About Shepherd, set a PIN, export a backup, and read Privacy and safe use.' },
   { view: 'today', target: '[data-act="settings"]', title: 'You\'re all set', text: 'You are responsible for the people you contact, so only message people who are happy to hear from you, and stop if they ask. Replay this tour from Settings any time.' }
 ];
 var TOUR_I = -1, TOUR_PAUSED = false;
@@ -2684,7 +3130,7 @@ function showTourStep(i) {
   if (i >= steps) return endTour();
   if (i < 0) i = 0;
   TOUR_I = i; TOUR_PAUSED = false; $('#tourPill').hidden = true;
-  lsSet('shepherd:tourStep:' + (S.uid || 'local'), 'v2:' + i); // v2 = the 17-step tour with About as step 2
+  lsSet('shepherd:tourStep:' + (S.uid || 'local'), 'v3:' + i); // v3 = the 18-step tour with Bring in your contacts as step 7
   var st = TOUR[i];
   if (st.view && S.view !== st.view) go(st.view);
   $('#tourTitle').textContent = st.title; $('#tourText').textContent = st.text;
@@ -2714,12 +3160,13 @@ function tourEvent(kind) {
   var st = TOUR[TOUR_I];
   if (st.doIt && st.doIt.waitFor === kind) setTimeout(function () { if (TOUR_PAUSED) resumeTour(true); }, 900);
 }
-// where to pick the tour up again; someone halfway through the old 16-step tour moves along one, because About was added as step 2
+// where to pick the tour up again on the same step, whichever version of the tour it was saved by:
+// v2 (17 steps) had no "Bring in your contacts" step 7; the first tour (16 steps) also had no About step 2
 function tourResumeAt(raw) {
   raw = String(raw || '');
-  if (raw.indexOf('v2:') === 0) return Number(raw.slice(3)) || 0;
-  var old = Number(raw) || 0;
-  return old >= 1 ? old + 1 : old;
+  if (raw.indexOf('v3:') === 0) return Number(raw.slice(3)) || 0;
+  var v2 = raw.indexOf('v2:') === 0 ? Number(raw.slice(3)) || 0 : (function (old) { return old >= 1 ? old + 1 : old; })(Number(raw) || 0);
+  return v2 >= 6 ? v2 + 1 : v2;
 }
 function startTour() { if (!$('#sheet').hidden) closeSheet(); TOUR_I = 0; showTourStep(0); }
 function endTour() {
@@ -2821,7 +3268,7 @@ function atTime(D, hm) { var p = String(hm || '08:00').split(':').map(Number); v
 function effOn(c, D) { if (c.status === 'paused') return c.pauseUntil && parseYmd(c.pauseUntil) <= D ? 'active' : 'paused'; return c.status || 'active'; }
 function dueOn(c, D) {
   if (c.status === 'paused' && effOn(c, D) === 'active' && !(c.lastContact && c.lastContact > (c.pausedAt || 0))) return parseYmd(c.pauseUntil);
-  if (!c.lastContact) return startOf(c.createdAt || Date.now());
+  if (!c.lastContact) return c.firstDue ? parseYmd(c.firstDue) : startOf(c.createdAt || Date.now());
   return addDays(c.lastContact, Number(c.everyDays) || 3);
 }
 /* Everything Shepherd will tell you over the next two weeks if nothing changes. Any change you make works it out again. */
@@ -2859,12 +3306,28 @@ function buildSchedule(days) {
         : { at: morning + 10000, title: 'Bible study with ' + fn + ' today', body: 'No time set yet.', tag: 's-' + c.id + '-' + dy, url: './?open=' + c.id });
     });
     if (N.events) evList().forEach(function (x) {
+      if (x.notify === false) return;
       if (x.date === ymd(addDays(D, 1))) out.push({ at: morning + 11000, title: 'Tomorrow: ' + x.name, body: (x.time ? fmtClock(x.time) : 'All day') + (x.place ? ' · ' + x.place : '') + ((x.invited || []).length ? ' · ' + plural(x.invited.length, 'person', 'people') + ' invited' : ''), tag: 'e1-' + x.id, url: './?view=events' });
       if (x.date === dy && x.time) out.push({ at: atTime(D, x.time) - 3600e3, title: x.name + ' at ' + fmtClock(x.time), body: 'Starts in one hour' + (x.place ? ' · ' + x.place : '') + '.', tag: 'e0-' + x.id, url: './?view=events' });
     });
     if (S.profile.prayerOn) { var pk = prayerPicks(D); if (pk.length) out.push({ at: atTime(D, S.profile.prayerTime || '07:30'), title: 'Pray for ' + (pk.length > 3 ? pk.slice(0, 2).map(function (x) { return firstName(x.name); }).join(', ') + ' and ' + (pk.length - 2) + ' more' : joinNames(pk)), body: 'Open Shepherd to see today\'s prayer list.', tag: 'pr-' + dy, url: './?view=today' }); }
-    if (N.weekly && wd === 0) { var w = weekStats(weekStart(D)); if (w.pool.length) out.push({ at: morning + 12000, title: 'Your week', body: 'This week you followed up with ' + w.done.length + ' of ' + plural(w.pool.length, 'person', 'people') + '.', tag: 'wk-' + dy, url: './?view=week' }); }
+    if (N.weekly && wd === 0) { var w = weekStats(weekStart(D)); if (w.pool.length) out.push({ at: morning + 12000, title: 'Your week', body: 'This week you followed up with ' + w.done.length + ' of ' + plural(w.pool.length, 'person', 'people') + '.', tag: 'wk-' + dy, url: './?view=encourage' }); }
+    if (N.encourage) {
+      if (wd === 1 && !encIn(weekStart(D), addDays(weekStart(D), 7)).length) out.push({ at: morning + 14000, title: 'Who will you encourage this week?', body: 'Plan an encouragement date or a hangout with a brother or sister.', tag: 'en-' + dy, url: './?view=encourage' });
+      encList().forEach(function (x) {
+        if (x.date === ymd(addDays(D, 1))) out.push({ at: morning + 15000, title: 'Tomorrow: ' + encTitle(x), body: x.time ? fmtClock(x.time) : 'All day', tag: 'q1-' + x.id, url: './?view=encourage' });
+        if (x.date === dy && x.time) out.push({ at: atTime(D, x.time) - 3600e3, title: encTitle(x) + ' at ' + fmtClock(x.time), body: 'In one hour.', tag: 'q0-' + x.id, url: './?view=encourage' });
+      });
+    }
   }
+  // countdowns for key events you asked to be reminded about: each week or each month before
+  if (N.events) evList().forEach(function (x) {
+    if (x.notify === false || !x.countdown || x.source === 'calendar') return;
+    var evT = parseYmd(x.date), body = fmtDate(x.date) + (x.time ? ', ' + fmtClock(x.time) : '') + (x.place ? ' · ' + x.place : '');
+    var add = function (D, title, tag) { var at = atTime(D, alert) + 13000; if (at > nowT + 30000 && at < nowT + 62 * DAY) out.push({ at: at, title: title, body: body, tag: tag, url: './?view=events' }); };
+    if (x.countdown === 'weekly') for (var cw = 1; cw <= 8; cw++) add(addDays(evT, -7 * cw), x.name + ' in ' + plural(cw, 'week'), 'cw' + cw + '-' + x.id);
+    if (x.countdown === 'monthly') for (var cm = 1; cm <= 6; cm++) { var md = new Date(evT); md.setMonth(md.getMonth() - cm); add(startOf(md.getTime()), x.name + ' in ' + plural(cm, 'month'), 'cm' + cm + '-' + x.id); }
+  });
   out = out.filter(function (x) { return x.at > nowT + 30000; }).sort(function (a, b) { return a.at - b.at; }).slice(0, 400);
   if (window.I18N && I18N.lang !== 'en') out.forEach(function (x) { x.title = I18N.tr(x.title); x.body = I18N.tr(x.body); });
   return out;
@@ -3061,8 +3524,18 @@ document.addEventListener('click', function (e) {
     case 'editintro': closeSheet(); go('settings'); setTimeout(function () { var it = $('#pIntro'); if (it) { it.scrollIntoView({ block: 'center' }); it.focus(); } }, 80); break;
     case 'pbpick': pickContacts(true).then(function (got) { var n = mergePhoneBook(got); render(); if (got.length) toast(plural(n, 'contact') + ' added to this phone\'s list'); }); break;
     case 'pbhow': pbHowSheet(); break;
-    case 'pbhowadd': closeSheet(); setTimeout(pbHowSheet, 360); break;
-    case 'pbclear': lsSet(pbKey(), ''); render(); toast('Phone contacts removed from Shepherd on this phone'); break;
+    case 'pbhowadd': closeSheet(); setTimeout(function () { importGuide(false); }, 360); break;
+    case 'pbclear': lsSet(pbKey(), ''); setSortQueue([]); render(); toast('Phone contacts removed from Shepherd on this phone'); break;
+    case 'importguide': importGuide(false); break;
+    case 'impick': pickContacts(true).then(function (got) { if (got.length) startImport(got); }); break;
+    case 'sortgo': sortSheet(); break;
+    case 'newenc': encSheet(null, { type: b.dataset.t === 'hangout' ? 'hangout' : 'date', date: b.dataset.d || ymd(Date.now()) }); break;
+    case 'openenc': encSheet(id); break;
+    case 'encmonth': (function () { var base = S.encMonth || ymd(today()).slice(0, 7), md = new Date(Number(base.slice(0, 4)), Number(base.slice(5, 7)) - 1 + Number(b.dataset.d), 1); S.encMonth = md.getFullYear() + '-' + pad(md.getMonth() + 1); render(); })(); break;
+    case 'encday': S.encDay = S.encDay === b.dataset.d ? '' : b.dataset.d; render(); break;
+    case 'encall': S.encDay = ''; render(); break;
+    case 'curok': S.profile.curSeen = true; saveProfile(); break;
+    case 'curchange': S.profile.curSeen = true; saveProfile(); go('settings'); setTimeout(function () { var pc = $('#pCur'); if (pc) { pc.scrollIntoView({ block: 'center' }); pc.focus(); } }, 80); break;
     case 'reply': if (c) setReplyState(c, b.dataset.r); break;
     case 'logstudy': logStudy(id); break;
     case 'copyttev': if (S.events[id]) copyText(evText(S.events[id]), 'Copied. Open TimeTree and paste it into a new event.'); break;
@@ -3135,7 +3608,7 @@ function delAcctSheet() {
 /* a tapped notification opens the person it was about */
 function openFromLink(id, view) {
   if (id && S.contacts[id]) { if (!$('#sheet').hidden) closeSheet(); go('contact', id); return true; }
-  if (view && /^(today|people|disciples|events|week)$/.test(view)) { go(view); return true; }
+  if (view && /^(today|people|disciples|events|week|encourage|about|settings)$/.test(view)) { go(view); return true; }
   return false;
 }
 function handleLaunch() {
@@ -3149,7 +3622,7 @@ if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFul
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; openFromLink(q.get('open'), q.get('view')); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
-window.__shepherd = { tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
+window.__shepherd = { startImport: startImport, sortQueue: sortQueue, sortOne: sortOne, undoSort: undoSort, SORT: SORT, qaPeople: qaPeople, qaRun: qaRun, encList: encList, spendIn: spendIn, money: money, encSheet: encSheet, encTitle: encTitle, knownPeople: knownPeople, evList: evList, tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
 
 /* ---------- boot ---------- */
 async function boot() {

@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Bemoedigen
+945	Breng tijd door met je broers en zussen in het geloof.
+946	Je belangrijke evenementen, zoals Network Events, EMC en GMC. Nodig mensen uit en vink daarna aan wie er kwam.
+947	Zet hier elk belangrijk evenement, zoals een <b>Network Event</b>, <b>EMC</b> of <b>GMC</b>. Vink <b>Laat het me weten</b> aan en kies een wekelijks of maandelijks aftellen, zodat je er nooit een mist.
+948	Kosten worden getoond in <b>{0}</b>. Je kunt de munteenheid wijzigen in Instellingen.
+949	Munteenheid wijzigen
+950	Munteenheid voor kosten bij Bemoedigen
+951	Kosten ({0})
+952	Ontmoet bij het delen van het geloof
+953	Koninkrijk
+954	Familie
+955	Vrienden
+956	Alleen op deze telefoon
+957	Niet bewaard
+958	Sorteer je contacten
+959	§one={0} contact om te sorteren. Tik waar iedereen bij hoort.|other={0} contacten om te sorteren. Tik waar iedereen bij hoort.
+960	§one={0} contact om te sorteren. Tik waar iedereen bij hoort.|other={0} contacten om te sorteren. Tik waar iedereen bij hoort.
+961	§one={0} persoon die al in Shepherd staat is weggelaten.|other={0} mensen die al in Shepherd staan zijn weggelaten.
+962	§one={0} persoon die al in Shepherd staat is weggelaten.|other={0} mensen die al in Shepherd staan zijn weggelaten.
+963	Hun namen en nummers blijven privé voor jou. Niemand anders die Shepherd gebruikt kan ze zien.
+964	Ik voeg alleen mensen toe die het goed vinden dat ik hun gegevens bewaar en dat we contact houden.
+965	Vink eerst het vakje aan. Voeg alleen mensen toe die akkoord zijn.
+966	Begin met sorteren
+967	Later
+968	Nog {0}
+969	De rest later sorteren
+970	§one=Nog {0} contact om te sorteren. Ga verder vanuit Mensen wanneer je wilt.|other=Nog {0} contacten om te sorteren. Ga verder vanuit Mensen wanneer je wilt.
+971	§one=Nog {0} contact om te sorteren. Ga verder vanuit Mensen wanneer je wilt.|other=Nog {0} contacten om te sorteren. Ga verder vanuit Mensen wanneer je wilt.
+972	Alles gesorteerd
+973	Er is niemand toegevoegd.
+974	Nieuwe mensen komen een paar per dag in Vandaag, zodat het niet te veel wordt.
+975	Gebruik <b>Snel toevoegen</b> bovenaan Mensen om iedereen snel te vinden, een bericht te sturen, een afspraak te plannen of aan een lijst toe te voegen.
+976	Mensen openen
+977	Haal je contacten binnen
+978	Kies iedereen met wie je de afgelopen 6 maanden je geloof hebt gedeeld, alle discipelen (broers en zussen in het geloof), en familie en vrienden die je wilt opvolgen of voor wie je wilt bidden.
+979	Shepherd haalt hun namen en nummers binnen. Ze blijven privé voor jou: niemand anders die Shepherd gebruikt kan ze zien, voor jouw en hun veiligheid.
+980	Kies mensen: zet twee vingers op de lijst en sleep omlaag over de namen die je wilt. Wil je iedereen, tik dan op <b>Lijsten</b> en houd <b>Alle contacten</b> ingedrukt.
+981	Houd een gekozen naam ingedrukt, tik op <b>Exporteer</b> en daarna op <b>Bewaar in Bestanden</b>.
+982	Tik hierboven op <b>Kies uit mijn contacten</b> en vink de mensen aan die je wilt.
+983	Of houd in de app <b>Contacten</b> een naam ingedrukt, vink de anderen aan, tik op <b>Deel</b> en bewaar het bestand.
+984	Sorteer daarna iedereen met één tik: Ontmoet bij het delen van het geloof, Koninkrijk, Familie, Vrienden of Anders. Wie je overslaat wordt niet bewaard.
+985	Iedereen die je koos staat al in Shepherd
+986	Toegevoegd uit de contacten op je telefoon
+987	Snel toevoegen
+988	Wie
+989	Persoon
+990	Actie
+991	{0} ({1})
+992	Tik om iedereen te zien, of typ een naam
+993	Hun pagina openen
+994	Een bemoedigingsafspraak plannen
+995	Toevoegen aan Mensen (opvolgen)
+996	Toevoegen aan Discipelen
+997	Hun nummer toevoegen
+998	Ga
+999	Contacten van je telefoon binnenhalen
+1000	Haal mensen van je telefoon binnen en sorteer ze met één tik. Vind hier daarna iedereen om een bericht te sturen, een afspraak te plannen of aan een lijst toe te voegen.
+1001	§one=Nog {0} contact om te sorteren|other=Nog {0} contacten om te sorteren
+1002	§one=Nog {0} contact om te sorteren|other=Nog {0} contacten om te sorteren
+1003	Kies eerst een persoon.
+1004	Geen WhatsApp-nummer bewaard voor {0}
+1005	{0} staat alleen op deze telefoon. Voeg deze persoon aan een lijst toe om de pagina te openen.
+1006	{0} staat al in Mensen
+1007	{0} staat al in Discipelen
+1008	{0} toegevoegd aan Discipelen
+1009	Toevoegen aan Mensen
+1010	Shepherd herinnert je eraan om contact op te nemen.
+1011	{0} toegevoegd aan Mensen
+1012	Typ hun nummer.
+1013	Nummer bewaren
+1014	Nummer bewaard voor {0}
+1015	Nummer toegevoegd
+1016	Wie ga je deze week bemoedigen?
+1017	Plan een koffie, een wandeling of een maaltijd met een broer of zus.
+1018	Samen iets doen vastleggen
+1019	Vorige maand
+1020	Volgende maand
+1021	§one={0} plan|other={0} plannen
+1022	§one={0} plan|other={0} plannen
+1023	Niets gepland op deze dag.
+1024	Plannen voor deze dag
+1025	Alles tonen
+1026	Nog geen afspraken
+1027	Koffie, een wandeling, een maaltijd. Tijd samen bouwt elkaar op. Plan de eerste.
+1028	Uitgaven
+1029	Deze maand
+1030	Bemoedigingsafspraken ({0})
+1031	Samen iets doen ({0})
+1032	Eten bij {0} van de {1} deze maand.
+1033	Opgevolgd: <b>{0} van {1}</b>
+1034	Bemoedigd
+1035	Bemoedigingsafspraak
+1036	Samen iets doen
+1037	Eten
+1038	Broer of zus
+1039	Typ een naam
+1040	bijv. Koffie en een wandeling
+1041	Gaan jullie eten?
+1042	Soort
+1043	Typ de kosten als getal, bijvoorbeeld 12.50.
+1044	Verwijderen
+1045	Tik nog eens om te verwijderen
+1046	Verwijderd
+1047	Samen iets doen bewaard
+1048	Bemoedigingsafspraak bewaard
+1049	Vandaag bemoedigen
+1050	Bemoedigingsafspraak met {0}
+1051	Samen iets doen met {0}
+1052	Laat het me weten voor dit evenement
+1053	Aftellen
+1054	Geen
+1055	Wekelijks
+1056	Maandelijks
+1057	Wekelijks: elke week een herinnering in de 8 weken ervoor. Maandelijks: elke maand een in de 6 maanden ervoor. Je krijgt ook een herinnering de dag ervoor en een uur ervoor.
+1058	Wekelijks aftellen
+1059	Maandelijks aftellen
+1060	Plan een bemoedigingsafspraak of iets samen doen met een broer of zus.
+1061	{0} over {1}
+1062	§one={0} week|other={0} weken
+1063	§one={0} week|other={0} weken
+1064	§one={0} maand|other={0} maanden
+1065	§one={0} maand|other={0} maanden
+1066	Elke week een duwtje om iemand te bemoedigen, en herinneringen voor elke afspraak
+1067	Wat Shepherd doet en waarom, met de Bijbelverzen erachter.
+1068	Over Shepherd lezen
+1069	Haal mensen van je telefoon binnen en sorteer ze met één tik. De namen en nummers die je sorteert worden in je privélijst bewaard. Wie je overslaat wordt niet bewaard, en mensen bij Anders blijven alleen op deze telefoon.
+1070	Contacten binnenhalen
+1071	Haal je telefooncontacten binnen en sorteer ze met één tik; gebruik daarna Snel toevoegen om iedereen snel te bereiken.
+1072	<b>Agenda</b> bewaart belangrijke evenementen zoals Network Events, EMC en GMC, met wekelijks of maandelijks aftellen, uitnodigingen (via WhatsApp) en wie er kwam, en koppelt aan de agenda van je telefoon.
+1073	Bemoedig elkaar
+1074	<b>Bemoedigen</b> plant bemoedigingsafspraken en samen iets doen met broers en zussen, met elke week een duwtje, en laat zien wat je per week en per maand uitgeeft.
+1075	Het laat ook zien hoe trouw je elke week mensen hebt opgevolgd.
+1076	Over legt alles uit wat Shepherd kan, met de Bijbelverzen erachter. Je vindt het bovenaan Instellingen. Lees het nu of kom later terug.
+1077	Haal mensen van je telefoon binnen en sorteer iedereen met één tik: Ontmoet bij het delen van het geloof, Koninkrijk, Familie, Vrienden of Anders. Snel toevoegen vindt daarna iedereen snel, zodat je een bericht stuurt, een afspraak plant of iemand aan een lijst toevoegt.
+1078	Zet belangrijke evenementen zoals Network Events, EMC of GMC erin en kies wekelijks of maandelijks aftellen. Nodig mensen uit en vink aan wie er kwam. Koppel Shepherd aan de agenda van je telefoon, zodat je studies en evenementen daar vanzelf verschijnen.
+1079	Plan bemoedigingsafspraken en samen iets doen met broers en zussen, vink aan of jullie gaan eten, en zie wat je per week en per maand uitgeeft. Shepherd geeft je elke week een duwtje. Je wekelijkse opvolgcijfers staan hier ook.
+1080	Kies je taal (Bijbelverzen blijven in het Engels, NIV) en je munteenheid, lees Over Shepherd, stel een pincode in, exporteer een back-up en lees Privacy en verantwoord gebruik.
+1081	Je naam, e-mail, WhatsApp-nummer, land en instellingen (zoals taal, munteenheid, tijdzone en meldingstijden).
+1082	Je activiteiten, discipelen en gebedslijst, en de bemoedigingsafspraken en momenten samen die je vastlegt, met de activiteit, of jullie gingen eten en wat het kostte.
+1083	Mensen die je van je telefoon binnenhaalt en sorteert in Mensen, Discipelen of je gebedslijst: hun naam en nummer.
+1084	Telefooncontacten die je binnenhaalt maar nog niet hebt gesorteerd, en wie je bij Anders zet. Ze worden nooit geüpload. Wie je overslaat wordt helemaal niet bewaard.

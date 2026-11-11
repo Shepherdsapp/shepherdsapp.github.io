@@ -4,6 +4,12 @@ A church follow-up app for disciples sharing their faith (Matthew 28:19). It rem
 reply, who has gone quiet, your Bible studies, your disciples (1 Thessalonians 5:11) and your events. It sends **phone
 notifications that name people**, like "Reply to Grace", "Message Daniel" or "Did Sam reply?". Each one opens that person.
 
+Five tabs: **Today**, **People** (with **Quick add**: bring in phone contacts, sort each one into Met through sharing,
+Kingdom, Family, Friends or Other, then find anyone and act in two taps), **Disciples**, **Calendar** (key events such as
+Network Events, EMC and GMC, with weekly or monthly countdowns) and **Encourage** (encouragement dates and hangouts, food,
+costs per week and month in the currency chosen in Settings, a weekly nudge, and the weekly follow-up stats). **About**
+is at the top of Settings. Encouragement dates are saved as events with `kind: "enc"`, so no server change was needed.
+
 It's a website you install on your phone like an app. No App Store, no Google Play and no Claude. Everyone signs in with
 their own email and password, and each person's list is theirs alone.
 

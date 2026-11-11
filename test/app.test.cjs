@@ -100,11 +100,11 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
 
   current = 'Tour for new users';
   ok(!$('#tour').hidden, 'tour starts by itself the first time someone opens Shepherd');
-  ok($('#tourStep').textContent === '1 of 17' && /Welcome/.test($('#tourTitle').textContent), 'starts at step 1 of 17');
+  ok($('#tourStep').textContent === '1 of 18' && /Welcome/.test($('#tourTitle').textContent), 'starts at step 1 of 18');
   ok(/no one you're checking up on slips through/.test($('#tourText').textContent), 'welcome uses the new wording');
   const titles = [$('#tourTitle').textContent];
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(S().view === 'about' && $('#tourStep').textContent === '2 of 17' && /About explains everything Shepherd can do/.test($('#tourText').textContent) && /Luke 15:4/.test($('#main').textContent), 'step 2 opens the new About tab');
+  ok(S().view === 'settings' && $('#tourStep').textContent === '2 of 18' && /About explains everything Shepherd can do/.test($('#tourText').textContent) && /top of Settings/.test($('#tourText').textContent) && $('#aboutCard'), 'step 2 points to About, now at the top of Settings');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'settings' && $('#tourText').textContent === 'First, open Settings and add your WhatsApp number and the first message that will be sent automatically when they scan your QR code.', 'opens Settings by itself, with the new wording');
   ok($('#tourMore').textContent === 'Add my number now' && $('#tourNext').textContent === 'Skip this step', 'offers to do it now, or skip');
@@ -122,19 +122,26 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok($$('#sheetBody .osb[data-os="ios"]').length === 1 && $$('#sheetBody .osb[data-os="android"]').length === 1, 'install steps for iPhone and Android');
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
   ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Turn on notifications', 'returns to the tour after the guide');
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 8; i++) {
     click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
     if (i === 0) ok(S().view === 'today' && /Add someone/.test($('#tourText').textContent), 'goes to Today by itself, to Add someone');
     if (i === 1) ok(/QR code/.test($('#tourText').textContent), 'shows the QR code');
-    if (i === 5) ok(S().view === 'people' && /log a Bible study/i.test($('#tourText').textContent) && /No longer contact/.test($('#tourText').textContent), 'explains a person\'s page');
-    if (i === 6) ok(/Journey/.test($('#tourText').textContent), 'explains List and Journey');
+    if (i === 2) {
+      ok(S().view === 'people' && $('#tourStep').textContent === '7 of 18' && /sort each one in a tap/.test($('#tourText').textContent) && $('#tourMore').textContent === 'Show me how', 'step 7: bring in your contacts, with a guide');
+      click('#tourMore'); await wait(60);
+      ok($('#tour').hidden && $('#sheetTitle').textContent === 'Bring in your contacts' && /last 6 months/.test($('#sheetBody').textContent) && /names and numbers/.test($('#sheetBody').textContent) && $$('#sheetBody .osb').length === 2, 'the import guide opens, with the 6-month prompt, privacy line and iPhone and Android steps');
+      click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
+      ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Bring in your contacts', 'closing the guide returns to the tour');
+    }
+    if (i === 6) ok(S().view === 'people' && /log a Bible study/i.test($('#tourText').textContent) && /No longer contact/.test($('#tourText').textContent), 'explains a person\'s page');
+    if (i === 7) ok(/Journey/.test($('#tourText').textContent), 'explains List and Journey');
   }
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'disciples' && /already disciples/.test($('#tourText').textContent) && /1 Thessalonians 5:11/.test($('#tourText').textContent) && $('#tourMore').textContent === 'Add a disciple', 'opens Disciples by itself with the verse');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'today' && /pray for/.test($('#tourText').textContent), 'explains the prayer list');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(S().view === 'events' && $('#tourText').textContent === 'Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.', 'opens Calendar by itself, with the new wording');
+  ok(S().view === 'events' && /Network Events, EMC or GMC/.test($('#tourText').textContent) && /weekly or monthly countdown/.test($('#tourText').textContent) && /phone\'s calendar/.test($('#tourText').textContent), 'opens Calendar by itself, with key events and countdowns');
   ok(/link my calendar/.test($('#tourMore').textContent), 'Calendar step offers the step-by-step guide');
   click('#tourMore'); await wait(60);
   ok($('#tour').hidden && $('#sheetTitle').textContent === 'Link your calendar', 'calendar guide opens');
@@ -145,36 +152,39 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
   ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Your calendar', 'closing the guide returns to the tour');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(S().view === 'week', 'shows the Week tab');
+  ok(S().view === 'encourage' && /encouragement dates and hangouts/.test($('#tourText').textContent) && /food/.test($('#tourText').textContent), 'shows the Encourage tab');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(S().view === 'settings' && /language/.test($('#tourText').textContent) && /PIN/.test($('#tourText').textContent) && /Privacy and safe use/.test($('#tourText').textContent), 'points out language, contacts, PIN, backups and privacy in Settings');
+  ok(S().view === 'settings' && /language/.test($('#tourText').textContent) && /currency/.test($('#tourText').textContent) && /PIN/.test($('#tourText').textContent) && /Privacy and safe use/.test($('#tourText').textContent), 'points out language, currency, About, PIN, backups and privacy in Settings');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(/responsible for the people you contact/.test($('#tourText').textContent), 'ends with the reminder that you are responsible for who you contact');
-  ok(titles.join('|') === "Welcome to Shepherd|Read what Shepherd does and why|Start in Settings|Turn on notifications|Add someone|Or show your QR code|Start each day here|Message in one tap|When they reply|Everyone's page|List or Journey|Disciples|Pray for people|Your calendar|Your week|Settings has the rest|You're all set", 'all 16 steps in order: ' + titles.join(' / '));
+  ok(titles.join('|') === "Welcome to Shepherd|Read what Shepherd does and why|Start in Settings|Turn on notifications|Add someone|Or show your QR code|Bring in your contacts|Start each day here|Message in one tap|When they reply|Everyone's page|List or Journey|Disciples|Pray for people|Your calendar|Encourage one another|Settings has the rest|You're all set", 'all 18 steps in order: ' + titles.join(' / '));
   ok($('#tourNext').textContent === 'Done', 'last step says Done');
   click('#tourNext'); await wait(60);
   ok($('#tour').hidden && S().view === 'today', 'finishing goes back to Today');
   ok(store.docs.get('data/users/u_test/profile').tourDone === true && store.docs.get('data/users/u_test/profile').phone === '07700 900111', 'tour marked done, and the number you added is saved');
 
-  current = 'About tab';
+  current = 'Tabs and About';
   {
     const tabs = $$('.tab').map(t => t.dataset.v).join(',');
-    ok(tabs === 'today,people,disciples,events,week,about', 'there are 6 tabs and the last one is About');
-    click('.tab[data-v="about"]'); await wait(30);
+    ok(tabs === 'today,people,disciples,events,encourage', 'there are 5 tabs: Today, People, Disciples, Calendar, Encourage');
+    click('[data-act="settings"]'); await wait(30);
+    ok($('#aboutCard') && $('#main .card').id === 'aboutCard', 'About is the first card in Settings');
+    click('#aboutCard [data-v="about"]'); await wait(30);
     const at = $('#main').textContent;
-    ok(S().view === 'about' && /About Shepherd/.test(at) && $('.tab[data-v="about"]').getAttribute('aria-current') === 'page', 'About opens and is marked as the current tab');
-    const verses = ['Luke 15:4', 'Proverbs 27:23', 'Colossians 4:5', 'Acts 17:11', 'Matthew 28:19', '2 Timothy 2:2', 'James 5:16', 'Hebrews 10:25', 'Revelation 7:9', 'Luke 6:31', 'John 21:17'];
-    ok(verses.every(v => at.includes(v + ' (NIV)')), 'all 11 verses are there, marked NIV');
+    ok(S().view === 'about' && /About Shepherd/.test(at) && $('#main [data-act="tab"][data-v="settings"]'), 'About opens from Settings, with a way back to Settings');
+    const verses = ['Luke 15:4', 'Proverbs 27:23', 'Colossians 4:5', 'Acts 17:11', 'Matthew 28:19', '2 Timothy 2:2', 'James 5:16', 'Hebrews 10:25', 'Hebrews 10:24', 'Revelation 7:9', 'Luke 6:31', 'John 21:17'];
+    ok(verses.every(v => at.includes(v + ' (NIV)')), 'all 12 verses are there, marked NIV');
+    ok(/Encourage/.test(at) && /countdowns/.test(at) && /Quick add/.test(at) && !/Week<\/b> shows/.test($('#main').innerHTML), 'About covers Encourage, countdowns and Quick add, and no longer mentions the Week tab');
     ok(/Doesn't he leave the ninety-nine in the open country and go after the lost sheep until he finds it\?/.test(at) && /Be sure you know the condition of your flocks/.test(at) && /entrust to reliable people who will also be qualified to teach others/.test(at) && /Do to others as you would have them do to you\./.test(at), 'verses are word for word NIV');
     ok(/Journey/.test(at) && /QR code/.test(at) && /phone contacts/.test(at) && /PIN/.test(at) && /backup/.test(at) && /prayer list of 1 to 15/.test(at) && /15 languages/.test(at), 'About covers every part of the app');
-    ok($$('#main [data-noi18n] cite').length === 11, 'every verse is kept out of translation, so it stays English NIV');
+    ok($$('#main [data-noi18n] cite').length === 12, 'every verse is kept out of translation, so it stays English NIV');
     ok($('#fab').hidden, 'the floating Add contact button stays out of the way on About');
     const mail = $('#aboutHelp a[href^="mailto:lostshepherdapp@gmail.com"]');
     ok(mail && $('#aboutHelp [data-act="tour"]') && $('#aboutHelp [data-act="yourdata"]'), 'About has the tour, privacy and email buttons');
     const T = w.__shepherd.TOUR;
-    ok(T.length === 17 && T[1].view === 'about', 'the tour has 17 steps and step 2 is About');
+    ok(T.length === 18 && T[1].target === '#aboutCard' && T[6].title === 'Bring in your contacts' && T[15].view === 'encourage', 'the tour has 18 steps: About is step 2, contacts step 7, Encourage step 16');
     const R = w.__shepherd.tourResumeAt;
-    ok(R('') === 0 && R('0') === 0 && R('1') === 2 && R('15') === 16 && R('v2:1') === 1 && R('v2:16') === 16, 'someone halfway through the old 16-step tour carries on at the same place');
+    ok(R('') === 0 && R('0') === 0 && R('1') === 2 && R('15') === 17 && R('v2:1') === 1 && R('v2:5') === 5 && R('v2:6') === 7 && R('v2:16') === 17 && R('v3:6') === 6 && R('v3:17') === 17, 'someone halfway through an older tour carries on at the same step');
     click('.tab[data-v="today"]'); await wait(30);
   }
 
@@ -493,8 +503,8 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   current = 'Replay the tour';
   click('[data-act="settings"]'); await wait();
   click('[data-act="tour"]'); await wait(40);
-  ok(!$('#tour').hidden && $('#tourStep').textContent === '1 of 17', 'Show me around replays the tour');
-  for (let i = 0; i < 7; i++) { click('#tourNext'); await wait(20); }
+  ok(!$('#tour').hidden && $('#tourStep').textContent === '1 of 18', 'Show me around replays the tour');
+  for (let i = 0; i < 8; i++) { click('#tourNext'); await wait(20); }
   ok($('#tourTitle').textContent === 'Message in one tap' && S().view === 'today' && $('#main .prow .ch'), 'Message step shows Today with a real message button to point at');
   click('#tourSkip'); await wait(40);
   ok($('#tour').hidden, 'Skip closes it');
@@ -502,7 +512,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   current = 'Notification settings';
   click('[data-act="settings"]'); await wait();
   ok(!/Groups/.test($('#main').textContent), 'no groups in settings');
-  ok($$('#notifCard input[type="checkbox"]').length === 7, 'seven alert tickboxes, including Catch-up and Disciples');
+  ok($$('#notifCard input[type="checkbox"]').length === 8 && $('#n-encourage') && $('#n-encourage').checked, 'eight alert tickboxes, including Catch-up, Disciples and Encourage (on by default)');
   ok($('#pAlert').value === '08:00', 'reminder time starts at 8am');
   setVal('#pAlert', '07:15'); $('#pAlert').dispatchEvent(new w.Event('change', { bubbles: true })); await wait(60);
   ok(S().profile.alertTime === '07:15' && store.docs.get('data/users/u_test/profile').alertTime === '07:15', 'changing the reminder time is saved');
@@ -574,10 +584,10 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok($$('#plist .prow').every(r => r.classList.contains('st-ok')), 'On track filter');
   click('[data-act="filter"][data-f="all"]'); await wait();
 
-  current = 'Week summary';
-  click('[data-act="tab"][data-v="week"]'); await wait();
-  ok(/You followed up with 1 of 3/.test($('.bigline').textContent), 'weekly line counts follow-ups (' + $('.bigline').textContent + ')');
-  ok($$('.bar').length === 4 && $$('.bar .fill').every(f => /^\d+%$/.test(f.style.height)), 'four weekly bars drawn to scale');
+  current = 'Week summary (now in Encourage)';
+  click('[data-act="tab"][data-v="encourage"]'); await wait();
+  ok(/Followed up: 1 of 3/.test($('#weekCard .wkline').textContent), 'weekly line counts follow-ups (' + $('#weekCard').textContent.slice(0, 80) + ')');
+  ok($$('#weekCard .minibars > div').length === 4 && $$('#weekCard .minibars i').every(f => /^\d+px$/.test(f.style.height)), 'four weekly bars, kept short');
 
   current = 'Examples (older accounts)';
   click('[data-act="tab"][data-v="today"]'); await wait();
@@ -627,7 +637,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok($('#sheetTitle').textContent === 'Add a contact' && $('#tour').hidden, 'opens Add a contact for you');
   setVal('#cName', 'Tour Tess'); submit('#cForm'); await wait(1300);
   ok(Object.values(S().contacts).some(x => x.name === 'Tour Tess') && !$('#tour').hidden && $('#tourTitle').textContent === 'Or show your QR code', 'after saving, the tour carries on');
-  for (let i = 0; i < 6; i++) { click('#tourNext'); await wait(30); }
+  for (let i = 0; i < 7; i++) { click('#tourNext'); await wait(30); }
   click('#tourMore'); await wait(40);
   ok(!$('#tourPill').hidden, 'Continue tour bar while adding a disciple');
   setVal('#dName', 'Tour Dee'); submit('#dForm'); await wait(1300);
@@ -861,14 +871,183 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     ok(A.$('#cSug').hidden, 'no matches, no list');
     A.click('#sheet [data-act="closesheet"]'); await wait(400);
     A.click('[data-act="settings"]'); await wait();
-    ok(/4 contacts on this phone/.test(A.$('#pbCard').textContent) && A.$('#pbFile'), 'Settings shows how many are on this phone, with an import button');
-    A.click('[data-act="pbhow"]'); await wait();
-    ok(A.$$('#sheetBody .osb').length === 2 && /Export/.test(A.$('#sheetBody').textContent), 'how to get a contacts file, on iPhone and Android');
+    ok(A.$('#pbCard [data-act="importguide"]') && /Anyone you skip isn't saved/.test(A.$('#pbCard').textContent) && /stay on this phone only/.test(A.$('#pbCard').textContent), 'Settings has Bring in contacts, and says what is kept where');
+    A.click('#pbCard [data-act="importguide"]'); await wait();
+    const ig = A.$('#sheetBody').textContent;
+    ok(A.$$('#sheetBody .osb').length === 2 && /Export/.test(ig) && /last 6 months/.test(ig) && /disciples \(brothers and sisters in faith\)/.test(ig) && /family & friends/.test(ig) && /names and numbers/.test(ig) && /nobody else using Shepherd can see them/.test(ig) && A.$('#impFile'), 'the guide: iPhone and Android steps, the 6-month prompt, privacy line and a file button');
     A.click('#sheet [data-act="closesheet"]'); await wait(400);
     A.click('[data-act="pbclear"]'); await wait();
-    ok(!/contacts on this phone/.test(A.$('#pbCard').textContent), 'can remove them from this phone');
+    ok(!A.$('#pbCard [data-act="pbclear"]'), 'can remove them from this phone');
     const card = W.vcard({ name: 'Sam Lee', phone: '07700 900123', instagram: 'sam.t' });
     ok(/FN:Sam Lee/.test(card) && /TEL;TYPE=CELL:\+447700900123/.test(card) && /instagram\.com\/sam\.t/.test(card) && W.parseVCF(card)[0].n === 'Sam Lee', 'save-to-phone makes a proper contact card');
+  }
+
+  current = 'Import and sort contacts';
+  {
+    const W = A.w.__shepherd, S2 = () => A.S();
+    const two = W.parseVCF('BEGIN:VCARD\r\nFN:Home First\r\nTEL;TYPE=HOME:020 7946 0001\r\nTEL;TYPE=CELL:07700 900555\r\nEND:VCARD\r\n');
+    ok(two[0].p[0] === '07700 900555', 'a mobile number is used before a home number');
+    const pick = [{ n: 'Ruth Imported', p: ['07700 900601'] }, { n: 'Boaz Kingdom', p: ['07700 900602'] }, { n: 'Naomi Family', p: ['07700 900603'] }, { n: 'Orpah Friend', p: ['+44 7700 900604'] }, { n: 'Elimelech Other', p: ['07700 900605'] }, { n: 'Skip Me', p: ['07700 900606'] }, { n: 'Sam Test', p: ['07700 900777'] }, { n: 'Later Lou', p: ['07700 900608'] }];
+    W.startImport(pick); await wait(60);
+    ok(A.$('#sheetTitle').textContent === 'Sort your contacts' && /7 contacts to sort/.test(A.$('#sheetBody').textContent) && /1 person already in Shepherd/.test(A.$('#sheetBody').textContent), 'someone already in Shepherd (Sam Test) is left out');
+    A.click('#sGo'); await wait(30);
+    ok(!A.$('#sErr').hidden && !A.$('[data-sort]'), 'sorting needs the agreement tick first');
+    A.$('#sAgree').checked = true; A.click('#sGo'); await wait(30);
+    ok(/Ruth Imported/.test(A.$('.sortcard').textContent) && /07700 900601/.test(A.$('.sortcard').textContent) && A.$$('[data-sort]').length === 6, 'one person at a time, with their number and six choices');
+    for (const c of ['sharing', 'kingdom', 'family', 'friends', 'other', 'skip']) { A.click('[data-sort="' + c + '"]'); await wait(40); }
+    A.click('#sUndo'); await wait(40);
+    ok(/Skip Me/.test(A.$('.sortcard').textContent), 'Undo brings back the last person');
+    A.click('[data-sort="skip"]'); await wait(40);
+    A.click('#sLater'); await wait(400);
+    ok(W.sortQueue().length === 1 && W.sortQueue()[0].n === 'Later Lou', 'Sort the rest later keeps the rest on this phone');
+    await wait(300);
+    const docs = [...store.docs.entries()], all = JSON.stringify(docs);
+    const ruth = contactDocs(store).find(x => x.name === 'Ruth Imported');
+    ok(ruth && ruth.phone === '07700 900601' && ruth.consent === true && ruth.source === 'import' && /^\d{4}-\d\d-\d\d$/.test(ruth.firstDue), 'Met through sharing goes to People, with their number');
+    ok(docs.some(([k, v]) => k.includes('/disciples/') && v.name === 'Boaz Kingdom' && v.phone === '07700 900602'), 'Kingdom goes to Disciples, with their number');
+    ok(docs.some(([k, v]) => k.includes('/prayers/') && v.name === 'Naomi Family' && v.cat === 'family') && docs.some(([k, v]) => k.includes('/prayers/') && v.name === 'Orpah Friend' && v.cat === 'friends'), 'Family and Friends go to the prayer list');
+    ok(!all.includes('Elimelech') && !all.includes('Skip Me') && !all.includes('Later Lou'), 'Other, skipped and unsorted people are never uploaded');
+    const lsAll = Object.keys(A.w.localStorage).map(k => A.w.localStorage.getItem(k)).join(' ');
+    ok(/Elimelech Other/.test(lsAll) && !/Skip Me/.test(lsAll), 'Other stays on this phone only; a skipped person is not kept anywhere');
+    A.click('[data-act="tab"][data-v="people"]'); await wait();
+    ok(/1 contact left to sort/.test(A.$('#qaCard').textContent), 'People shows how many are left to sort');
+    const many = []; for (let i = 0; i < 7; i++) many.push({ n: 'Bulk ' + i, p: ['0770090070' + i] });
+    W.startImport(many); await wait(40);
+    for (let i = 0; i < 9 && A.$('[data-sort]'); i++) { A.click(/Later Lou/.test(A.$('.sortcard').textContent) ? '[data-sort="skip"]' : '[data-sort="sharing"]'); await wait(30); }
+    await wait(300);
+    ok(A.$('#sheetTitle').textContent === 'All sorted' && /People/.test(A.$('#sheetBody').textContent), 'a summary when everyone is sorted');
+    const bulk = contactDocs(store).filter(x => /^Bulk /.test(x.name)).map(x => x.firstDue).sort();
+    const perDay = {}; bulk.forEach(d => { perDay[d] = (perDay[d] || 0) + 1; });
+    ok(bulk.length === 7 && Object.keys(perDay).length >= 3 && Object.values(perDay).every(n => n <= 3), 'a big import comes due a few a day, not all at once: ' + JSON.stringify(perDay));
+    const later = Object.values(S2().contacts).find(x => x.name === 'Bulk 6');
+    ok(later && W.state(later) === 'ok' && W.dueDay(later) > Date.now(), 'people due later are On track until their day');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+    W.startImport([{ n: 'Undo Other', p: ['07700 900999'] }]); await wait(40);
+    A.click('[data-sort="other"]'); await wait(40); A.click('#sUndo'); await wait(40); A.click('[data-sort="skip"]'); await wait(300);
+    { const ls2 = Object.keys(A.w.localStorage).map(k => A.w.localStorage.getItem(k)).join(' '); ok(!/Undo Other/.test(ls2), 'Other, then Undo, then Skip leaves nothing behind on the phone'); }
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+    W.startImport([{ n: 'ruth imported', p: ['07700 900601'] }]); await wait(40);
+    ok(/already in Shepherd/.test(A.$('#toast').textContent), 'importing the same person again is ignored');
+  }
+
+  current = 'Quick add';
+  {
+    const W = A.w.__shepherd, S2 = () => A.S(), ev = (el, t) => A.$(el).dispatchEvent(new A.w.Event(t, { bubbles: true }));
+    A.click('[data-act="tab"][data-v="people"]'); await wait();
+    ok(A.$('#qaCard') && A.$('#qaCat') && A.$('#qaName') && A.$('#qaAct') && A.$('#qaCard [data-act="importguide"]'), 'People has Quick add: three dropdowns and a way to bring in contacts');
+    const opts = A.$$('#qaCat option').map(o => o.textContent);
+    ok(/^Everyone \(\d+\)$/.test(opts[0]) && opts.some(o => /^Kingdom \(\d+\)$/.test(o)) && opts.includes('Family (1)') && opts.includes('Friends (1)') && opts.includes('Other (1)'), 'categories show how many are in each: ' + opts.join(', '));
+    A.setVal('#qaCat', 'kingdom'); ev('#qaName', 'focus'); await wait();
+    ok(!A.$('#qaSug').hidden && A.$$('#qaSug .cat').length >= 1 && A.$$('#qaSug .cat').every(c => c.classList.contains('cat-kingdom')) && /Boaz Kingdom/.test(A.$('#qaSug').textContent), 'tapping the box shows everyone in that category');
+    A.setVal('#qaCat', 'all'); A.setVal('#qaName', 'nao'); await wait();
+    ok(A.$$('#qaSug button').length === 1 && /Naomi Family/.test(A.$('#qaSug').textContent), 'typing finds the name fast');
+    A.click(A.$$('#qaSug button')[0]); await wait();
+    A.setVal('#qaAct', 'disciple'); A.click('#qaGo'); await wait(300);
+    ok(Object.values(S2().disciples).some(d => d.name === 'Naomi Family' && d.phone === '07700 900603'), 'Add to Disciples from Quick add keeps their number');
+    let opened = ''; A.w.open = u => { opened = u; };
+    A.setVal('#qaName', 'boaz'); await wait(); A.click(A.$$('#qaSug button')[0]); A.setVal('#qaAct', 'msg'); A.click('#qaGo'); await wait(200);
+    ok(/wa\.me\/447700900602/.test(opened), 'Message on WhatsApp opens their chat (' + opened + ')');
+    W.qaRun({ k: 'o:none', n: 'No Number', p: '', cat: 'other', t: 'o' }, 'msg'); await wait();
+    ok(A.$('#sheetTitle').textContent === 'Add their number' && A.$('#qaNum'), 'no number saved: Shepherd asks for it');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+    A.setVal('#qaName', 'elim'); await wait(); A.click(A.$$('#qaSug button')[0]); A.setVal('#qaAct', 'follow'); A.click('#qaGo'); await wait();
+    ok(A.$('#sheetTitle').textContent === 'Add to People', 'Add to People asks for their agreement first');
+    A.click('#qfGo'); await wait();
+    ok(!A.$('#qfErr').hidden && !contactDocs(store).some(x => x.name === 'Elimelech Other'), 'not added without the tick');
+    A.$('#qfOk').checked = true; A.click('#qfGo'); await wait(300);
+    ok(contactDocs(store).some(x => x.name === 'Elimelech Other' && x.phone === '07700 900605') && !W.qaPeople().some(x => x.cat === 'other' && x.n === 'Elimelech Other'), 'added to People with their number, and no longer in Other');
+    A.click('[data-act="tab"][data-v="people"]'); await wait();
+    A.setVal('#qaName', ''); A.click('#qaGo'); await wait();
+    ok(!A.$('#qaErr').hidden && /Choose a person/.test(A.$('#qaErr').textContent), 'Go without a person asks you to choose one');
+  }
+
+  current = 'Encourage';
+  {
+    const W = A.w.__shepherd, S2 = () => A.S(), td = ymd(Date.now());
+    A.click('[data-act="tab"][data-v="encourage"]'); await wait();
+    const m = A.$('#main').textContent;
+    ok(A.d.body.dataset.view === 'encourage' && A.$('.vhead') && /Hebrews 10:24–25 \(NIV\)/.test(m) && /spur one another on toward love and good deeds/.test(m), 'Encourage has its own coloured header and the Hebrews verse (NIV)');
+    ok(A.$('#encNudge') && /Who will you encourage this week/.test(m), 'a nudge when nothing is planned this week');
+    ok(A.$('#curNote') && /British pound/i.test(A.$('#curNote').textContent) && /change the currency in Settings/.test(A.$('#curNote').textContent), 'people are told costs show in pounds, and where to change it');
+    ok(A.$$('#encCal .mgrid button').length >= 28 && A.$('#encCal .mgrid button.today'), 'a month calendar, with today marked');
+    A.click('[data-act="newenc"][data-t="date"]'); await wait();
+    ok(A.$('#sheetTitle').textContent === 'Plan an encouragement date' && A.$('#enWho') && A.$('#enDate').value === td && A.$('#enTime') && A.$('#enAct') && A.$('#enFood') && A.$('#enCost'), 'the log form: name, date, time, activity, food and cost');
+    A.submit('#enForm'); await wait();
+    ok(!A.$('#enErr').hidden && /name/.test(A.$('#enErr').textContent), 'a name is needed');
+    A.setVal('#enWho', 'boa'); await wait();
+    ok(!A.$('#enSug').hidden && /Boaz Kingdom/.test(A.$('#enSug').textContent), 'typing a name finds people and disciples');
+    A.click(A.$$('#enSug button')[0]); A.setVal('#enTime', '18:30'); A.setVal('#enAct', 'Coffee and a walk'); A.$('#enFood').checked = true; A.setVal('#enCost', '-5'); A.submit('#enForm'); await wait();
+    ok(!A.$('#enErr').hidden && /number/.test(A.$('#enErr').textContent), 'a cost that isn\'t a number is caught');
+    A.setVal('#enCost', '12.50'); A.submit('#enForm'); await wait(300);
+    const e1 = [...store.docs.entries()].find(([k, v]) => k.includes('/events/') && v.kind === 'enc');
+    ok(e1 && e1[1].who === 'Boaz Kingdom' && e1[1].type === 'date' && e1[1].food === true && e1[1].cost === 12.5 && e1[1].activity === 'Coffee and a walk' && e1[1].time === '18:30' && e1[1].name === 'Encouragement date with Boaz Kingdom', 'saved with everything filled in');
+    A.click('[data-act="newenc"][data-t="hangout"]'); await wait();
+    ok(A.$('#sheetTitle').textContent === 'Log a hangout' && A.$('#enType [data-v="hangout"]').getAttribute('aria-pressed') === 'true', 'Log a hangout starts as a hangout');
+    A.setVal('#enWho', 'Mary Hangout'); A.setVal('#enCost', '8'); A.submit('#enForm'); await wait(300);
+    const sp = A.$('#encSpend').textContent;
+    ok(/Thisweek£20\.50/.test(sp.replace(/\s/g, '')) && /Thismonth£20\.50/.test(sp.replace(/\s/g, '')), 'spending this week and this month: ' + sp.replace(/\s+/g, ' ').slice(0, 80));
+    ok(/Encouragement dates \(1\)/.test(sp) && /Hangouts \(1\)/.test(sp) && /Food on 1 of 2 this month/.test(sp), 'broken down by type, with how often you went for food');
+    ok(!A.$('#encNudge'), 'the nudge goes once something is planned this week');
+    ok(A.$$('#main .enc').length === 2 && /Boaz Kingdom/.test(A.$('#main').textContent) && /£12\.50/.test(A.$('#main').textContent), 'both show in the list, with cost and a food tag');
+    A.click('[data-act="encday"][data-d="' + td + '"]'); await wait();
+    ok(A.$('[data-act="encday"][data-d="' + td + '"]').getAttribute('aria-pressed') === 'true' && A.$$('#main .enc').length === 2 && A.$('[data-act="encall"]'), 'tapping a day shows that day');
+    A.click('[data-act="encall"]'); await wait();
+    A.click('[data-act="encmonth"][data-d="1"]'); await wait();
+    ok(S2().encMonth !== td.slice(0, 7), 'the calendar moves to the next month');
+    A.click('[data-act="encmonth"][data-d="-1"]'); await wait();
+    A.click('[data-act="tab"][data-v="events"]'); await wait();
+    ok(!/Boaz Kingdom/.test(A.$('#main').textContent) && !/Mary Hangout/.test(A.$('#main').textContent), 'the Calendar tab keeps key events separate from encouragement dates');
+    A.click('[data-act="tab"][data-v="today"]'); await wait();
+    ok(A.$('#encToday') && /Boaz Kingdom/.test(A.$('#encToday').textContent), 'Today shows who you\'re encouraging today');
+    A.click('[data-act="tab"][data-v="encourage"]'); await wait();
+    A.click('[data-act="curok"]'); await wait(100);
+    ok(!A.$('#curNote') && S2().profile.curSeen === true, 'the currency note goes once read');
+    S2().profile.currency = 'EUR'; ok(/€/.test(W.money(12.5)) && /12[.,]50/.test(W.money(12.5)), 'other currencies work (' + W.money(12.5) + ')'); S2().profile.currency = 'GBP';
+    A.click('[data-act="settings"]'); await wait();
+    ok(A.$('#pCur') && A.$('#pCur').value === 'GBP' && A.$$('#pCur option').length >= 15, 'Settings has a currency choice, pounds to start with');
+    A.setVal('#pCur', 'USD'); await wait(200);
+    ok(store.docs.get('data/users/u_test/profile').currency === 'USD', 'a new currency is saved');
+    A.click('[data-act="tab"][data-v="encourage"]'); await wait();
+    ok(/\$20\.50/.test(A.$('#encSpend').textContent), 'costs show in the new currency');
+    A.click('[data-act="settings"]'); await wait(); A.setVal('#pCur', 'GBP'); await wait(200);
+    A.click('[data-act="tab"][data-v="encourage"]'); await wait();
+    A.click(A.$$('#main .enc').find(b => /Mary Hangout/.test(b.textContent))); await wait();
+    ok(A.$('#sheetTitle').textContent === 'Edit' && A.$('#enDel'), 'tapping one opens it to edit or delete');
+    A.click('#enDel'); A.click('#enDel'); await wait(300);
+    ok(!encDocs().some(v => v.who === 'Mary Hangout'), 'deleting takes two taps');
+    function encDocs() { return [...store.docs.entries()].filter(([k, v]) => k.includes('/events/') && v.kind === 'enc').map(([k, v]) => v); }
+  }
+
+  current = 'Key events: countdowns and Encourage reminders';
+  {
+    const W = A.w.__shepherd, S2 = () => A.S();
+    A.click('[data-act="tab"][data-v="events"]'); await wait();
+    A.click('[data-act="newevent"]'); await wait();
+    ok(A.$('#eNotify') && A.$('#eNotify').checked && A.$('#eCd [data-v="none"]').getAttribute('aria-pressed') === 'true', 'new events: Notify me ticked, no countdown to start with');
+    A.setVal('#eName', 'GMC'); A.setVal('#eDate', ymd(Date.now() + 40 * 864e5)); A.click('#eCd [data-v="weekly"]'); A.submit('#eForm'); await wait(200);
+    const g = Object.values(S2().events).find(x => x.name === 'GMC');
+    ok(g && g.notify === true && g.countdown === 'weekly', 'saved with a weekly countdown');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+    ok(/Weekly countdown/.test(A.$('#main').textContent), 'the event shows its countdown');
+    let sch = W.buildSchedule();
+    const gt = sch.filter(x => /^GMC in /.test(x.title)).map(x => x.title);
+    ok(gt.includes('GMC in 1 week') && gt.includes('GMC in 5 weeks') && !gt.includes('GMC in 6 weeks') && sch.every(x => !/^GMC in/.test(x.title) || x.url === './?view=events'), 'a reminder each week before it: ' + gt.join(', '));
+    g.countdown = 'monthly'; W.saveContact && null; S2().events[g.id] = g;
+    sch = W.buildSchedule();
+    ok(sch.some(x => x.title === 'GMC in 1 month') && !sch.some(x => /^GMC in \d+ weeks?$/.test(x.title)), 'or a reminder each month before it');
+    g.notify = false; sch = W.buildSchedule();
+    ok(!sch.some(x => /GMC/.test(x.title)), 'untick Notify me and there are no reminders for it');
+    g.notify = true; g.countdown = '';
+    const tm = ymd(Date.now() + 2 * 864e5);
+    W.encSheet(null, { who: 'Tom Tomorrow', date: tm, type: 'date' }); await wait();
+    A.setVal('#enTime', '19:00'); A.submit('#enForm'); await wait(200);
+    sch = W.buildSchedule();
+    ok(sch.some(x => x.title === 'Tomorrow: Encouragement date with Tom Tomorrow' && x.url === './?view=encourage') && sch.some(x => /^Encouragement date with Tom Tomorrow at /.test(x.title) && x.body === 'In one hour.'), 'reminders the day before and an hour before a date');
+    ok(sch.some(x => x.title === 'Who will you encourage this week?' && x.url === './?view=encourage'), 'a weekly nudge to encourage someone');
+    S2().profile.notify.encourage = false; sch = W.buildSchedule();
+    ok(!sch.some(x => /encourage|Encouragement/.test(x.title)), 'turning Encourage off in Settings stops them');
+    S2().profile.notify.encourage = true;
+    ok(sch.every(x => x.url !== './?view=week'), 'nothing points to the old Week tab');
   }
 
   current = 'QR code and your data';
@@ -902,7 +1081,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     st.docs.set('data/users/u_test/profile/events/v1', { id: 'v1', name: 'Sunday service', date: ymd(Date.now() + 864e5), time: '10:30', place: 'Main hall', invited: [], came: [] });
     const E = await open(st, { localStorage: { 'shepherd:lang': 'es' } }); await wait(200);
     const tabs = E.$$('.tab').map(t => t.textContent.trim());
-    ok(/^Hoy\d*\|Personas\|Discípulos\|Calendario\|Semana/.test(tabs.join('|')), 'the tabs are in Spanish: ' + tabs.join(', '));
+    ok(/^Hoy\d*\|Personas\|Discípulos\|Calendario\|Ánimo$/.test(tabs.join('|')), 'the tabs are in Spanish: ' + tabs.join(', '));
     ok(E.d.documentElement.lang === 'es', 'the page says it is in Spanish');
     ok(/Buen(os|as) (días|tardes|noches), Pavi/.test(E.$('.h1').textContent), 'greeting in Spanish, name untouched');
     ok(/^(lunes|martes|miércoles|jueves|viernes|sábado|domingo)/.test(E.$('.eyebrow').textContent), 'today\'s date written the Spanish way: ' + E.$('.eyebrow').textContent);
@@ -919,7 +1098,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     E.click('[data-act="edit"]'); await wait(80);
     { const ta = E.$('#cNotes'); ok(ta && ta.getAttribute('placeholder') && ta.getAttribute('placeholder') !== 'Anything to remember', 'the hint inside the Notes box is in Spanish too: ' + (ta && ta.getAttribute('placeholder'))); }
     E.click('#sheet [data-act="closesheet"]'); await wait(400);
-    E.click('[data-act="tab"][data-v="about"]'); await wait();
+    E.click('[data-act="settings"]'); await wait(); E.click('#aboutCard [data-v="about"]'); await wait();
     { const at = E.$('#main').textContent; ok(/Acerca de Shepherd/.test(at) && /Conoce a tu rebaño/.test(at) && /Be sure you know the condition of your flocks/.test(at) && /Luke 15:4 \(NIV\)/.test(at), 'About is in Spanish, with the verses kept in English NIV'); }
     E.click('[data-act="tab"][data-v="events"]'); await wait();
     E.click('[data-act="openevent"][data-id="v1"]'); await wait();
@@ -1027,9 +1206,9 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
       ok(X.$('#fab').hidden, '26: the Add contact button is hidden on Calendar');
     })().catch(e => ok(false, '26: no "Add contact" button on Calendar — crashed: ' + e.message));
     await (async () => {
-      // 17: headings never skip a level, Week has a main heading, coloured text is dark enough
-      X.click('[data-act="tab"][data-v="week"]'); await wait();
-      ok(X.$('#main h1'), '17: Week has a main heading');
+      // 17: headings never skip a level, Encourage has a main heading, coloured text is dark enough
+      X.click('[data-act="tab"][data-v="encourage"]'); await wait();
+      ok(X.$('#main h1'), '17: Encourage has a main heading');
       const appSrc = require('fs').readFileSync(require('path').join(__dirname, '..', 'src', 'app.html'), 'utf8');
       ok(!/<h3>/.test(appSrc), '17: card headings are level 2 (no skipped heading levels)');
       const L = h => { const c = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255).map(v => v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
@@ -1037,7 +1216,12 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
       const v = n => (appSrc.match(new RegExp('--' + n + ':(#[0-9A-Fa-f]{6})')) || [])[1];
       const pairs = [['gold', 'bg'], ['gold', 'gold-soft'], ['warn', 'warn-soft'], ['warn', 'surface'], ['bad', 'bad-soft'], ['ok', 'ok-soft'], ['idle', 'idle-soft']].map(([f, b]) => [f + ' on ' + b, ratio(v(f), v(b))]);
       ok(pairs.every(p => p[1] >= 4.5), '17: coloured text meets 4.5:1 contrast: ' + pairs.map(p => p[0] + ' ' + p[1].toFixed(2)).join(', '));
-    })().catch(e => ok(false, '17: headings never skip a level, Week has a main heading, co — crashed: ' + e.message));
+      // each tab's colour: its text on its soft colour, and white on buttons in its colour
+      const tints = [...appSrc.matchAll(/--tint:(#[0-9A-Fa-f]{6});--tint-soft:(#[0-9A-Fa-f]{6})/g)].map(m => [m[1], m[2]]);
+      const cats = [['#2F6440', '#D7EAD6'], ['#94402F', '#F6DCD3'], ['#245A78', '#D5E6F0'], ['#7A4F0E', '#F6E5BC'], ['#5B3A7A', '#E7DDF1'], ['#8E3456', '#F6D9E4']];
+      const tc = tints.concat(cats).map(([f, b]) => ratio(f, b)).concat(tints.map(([f]) => ratio(f, '#FFFFFF')));
+      ok(tints.length === 5 && tc.every(r => r >= 4.5), '17: every tab colour is dark enough on its own background and under white text: ' + tc.map(r => r.toFixed(1)).join(', '));
+    })().catch(e => ok(false, '17: headings never skip a level, Encourage has a main heading, co — crashed: ' + e.message));
     await (async () => {
       // 11: PIN waits after 5 wrong tries, and has a "Forgot" way out
       XS().profile.pinHash = await X.w.eval('(async () => 0)()') || ''; // set below through the app

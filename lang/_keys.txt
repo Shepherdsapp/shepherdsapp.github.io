@@ -993,3 +993,144 @@ Lock Shepherd with a PIN and export a backup any time.
 New here? Take the tour, or read how your data is kept.
 Read what Shepherd does and why
 About explains everything Shepherd can do, with the Bible verses behind it. Read it now or come back any time.
+Encourage
+Spend time with your brothers and sisters in faith.
+Your key events, like Network Events, EMC and GMC. Invite people, then tick who came.
+Log every key event here, like a <b>Network Event</b>, <b>EMC</b> or <b>GMC</b>. Tick <b>Notify me</b> and choose a weekly or monthly countdown so you never miss one.
+Costs show in <b>{0}</b>. You can change the currency in Settings.
+Change currency
+Currency for Encourage costs
+Cost ({0})
+Met through sharing
+Kingdom
+Family
+Friends
+This phone only
+Not saved
+Sort your contacts
+{0} contacts to sort. Tap where each person belongs.
+{0} contact to sort. Tap where each person belongs.
+{0} people already in Shepherd left out.
+{0} person already in Shepherd left out.
+Their names and numbers stay private to you. Nobody else using Shepherd can see them.
+I'll only add people who are happy for me to keep their details and stay in touch.
+Tick the box first. Only add people who agreed.
+Start sorting
+Later
+{0} left
+Sort the rest later
+{0} contacts left to sort. Carry on from People any time.
+{0} contact left to sort. Carry on from People any time.
+All sorted
+Nobody was added.
+New people come up a few a day in Today, so you're not swamped.
+Use <b>Quick add</b> at the top of People to find anyone fast, message them, plan a date or add them to a list.
+Open People
+Bring in your contacts
+Pick everyone you've shared your faith with in the last 6 months, all disciples (brothers and sisters in faith), and family & friends you want to check up on or even pray for.
+Shepherd brings in their names and numbers. They stay private to you: nobody else using Shepherd can see them, to keep you and them safe.
+Choose people: put two fingers on the list and drag down over the names you want. To take everyone, tap <b>Lists</b> and touch and hold <b>All Contacts</b>.
+Touch and hold a chosen name, tap <b>Export</b>, then <b>Save to Files</b>.
+Tap <b>Choose from my contacts</b> above and tick the people you want.
+Or, in the <b>Contacts</b> app, touch and hold a name, tick the others, then tap <b>Share</b> and save the file.
+Then sort each person in a tap: Met through sharing, Kingdom, Family, Friends or Other. Anyone you skip isn't saved.
+Everyone you chose is already in Shepherd
+Added from your phone contacts
+Quick add
+Who
+Person
+Action
+{0} ({1})
+Tap to see everyone, or type a name
+Open their page
+Plan an encouragement date
+Add to People (follow up)
+Add to Disciples
+Add their number
+Go
+Bring in contacts from your phone
+Bring in people from your phone and sort them in a tap. Then find anyone here and message them, plan a date or add them to a list.
+{0} contacts left to sort
+{0} contact left to sort
+Choose a person first.
+No WhatsApp number saved for {0}
+{0} is kept on this phone only. Add them to a list to open their page.
+{0} is already in People
+{0} is already in Disciples
+{0} added to Disciples
+Add to People
+Shepherd will remind you to check in with them.
+{0} added to People
+Type their number.
+Save number
+Number saved for {0}
+Number added
+Who will you encourage this week?
+Plan a coffee, a walk or a meal with a brother or sister.
+Log a hangout
+Previous month
+Next month
+{0} plans
+{0} plan
+Nothing planned on this day.
+Plan for this day
+Show everything
+No dates yet
+Coffee, a walk, a meal. Time together builds each other up. Plan your first one.
+Spending
+This month
+Encouragement dates ({0})
+Hangouts ({0})
+Food on {0} of {1} this month.
+Followed up: <b>{0} of {1}</b>
+Encouraged
+Encouragement date
+Hangout
+Food
+Brother or sister
+Type a name
+e.g. Coffee and a walk
+Going for food?
+Type
+Type the cost as a number, like 12.50.
+Delete
+Tap again to delete
+Deleted
+Hangout saved
+Encouragement date saved
+Encouraging today
+Encouragement date with {0}
+Hangout with {0}
+Notify me about this event
+Countdown
+None
+Weekly
+Monthly
+Weekly: a reminder each week for the 8 weeks before. Monthly: one each month for the 6 months before. You're also reminded the day before and an hour before.
+Weekly countdown
+Monthly countdown
+Plan an encouragement date or a hangout with a brother or sister.
+{0} in {1}
+{0} weeks
+{0} week
+{0} months
+{0} month
+A weekly nudge to encourage someone, and reminders before each date
+What Shepherd does and why, with the Bible verses behind it.
+Read About Shepherd
+Bring in people from your phone and sort them in a tap. The names and numbers you sort are saved to your private list. Anyone you skip isn't saved, and people in Other stay on this phone only.
+Bring in contacts
+Bring in your phone contacts and sort them in a tap, then use Quick add to reach anyone fast.
+<b>Calendar</b> keeps key events like Network Events, EMC and GMC, with weekly or monthly countdowns, invites (sent on WhatsApp) and who came, and links to your phone calendar.
+Encourage one another
+<b>Encourage</b> plans encouragement dates and hangouts with brothers and sisters, with a weekly nudge, and shows what you spend each week and month.
+It also shows how faithfully you followed up each week.
+About explains everything Shepherd can do, with the Bible verses behind it. It's at the top of Settings. Read it now or come back any time.
+Bring in people from your phone, then sort each one in a tap: Met through sharing, Kingdom, Family, Friends or Other. Quick add then finds anyone fast, so you can message them, plan a date or add them to a list.
+Log key events like Network Events, EMC or GMC, and choose a weekly or monthly countdown. Invite people and tick who came. Connect Shepherd to your phone's calendar so your studies and events show there by themselves.
+Plan encouragement dates and hangouts with brothers and sisters, tick if you're going for food, and see what you spend each week and month. Shepherd nudges you each week. Your weekly follow-up stats are here too.
+Choose your language (Bible verses stay in English, NIV) and your currency, read About Shepherd, set a PIN, export a backup, and read Privacy and safe use.
+Your name, email, WhatsApp number, home country and settings (such as language, currency, time zone and notification times).
+Your events, disciples and prayer list, and the encouragement dates and hangouts you log, with the activity, whether you went for food and what it cost.
+People you bring in from your phone and sort into People, Disciples or your prayer list: their name and number.
+Phone contacts you bring in but haven't sorted yet, and anyone you sort into Other. They are never uploaded. Anyone you skip isn't kept at all.

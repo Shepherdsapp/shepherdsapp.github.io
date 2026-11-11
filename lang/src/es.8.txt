@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Ánimo
+945	Pasa tiempo con tus hermanos y hermanas en la fe.
+946	Tus eventos clave, como Network Events, EMC y GMC. Invita a gente y luego marca quién vino.
+947	Apunta aquí cada evento clave, como un <b>Network Event</b>, <b>EMC</b> o <b>GMC</b>. Marca <b>Avisarme</b> y elige una cuenta atrás semanal o mensual para no perderte ninguno.
+948	Los gastos se muestran en <b>{0}</b>. Puedes cambiar la moneda en Ajustes.
+949	Cambiar moneda
+950	Moneda para los gastos de Ánimo
+951	Coste ({0})
+952	Conocido al compartir la fe
+953	Reino
+954	Familia
+955	Amigos
+956	Solo en este teléfono
+957	No se guarda
+958	Ordena tus contactos
+959	§one={0} contacto por ordenar. Toca dónde va cada persona.|other={0} contactos por ordenar. Toca dónde va cada persona.
+960	§one={0} contacto por ordenar. Toca dónde va cada persona.|other={0} contactos por ordenar. Toca dónde va cada persona.
+961	§one={0} persona que ya está en Shepherd se ha dejado fuera.|other={0} personas que ya están en Shepherd se han dejado fuera.
+962	§one={0} persona que ya está en Shepherd se ha dejado fuera.|other={0} personas que ya están en Shepherd se han dejado fuera.
+963	Sus nombres y números son privados para ti. Nadie más que use Shepherd puede verlos.
+964	Solo añadiré a personas que estén contentas de que guarde sus datos y sigamos en contacto.
+965	Marca la casilla primero. Añade solo a personas que estén de acuerdo.
+966	Empezar a ordenar
+967	Más tarde
+968	Quedan {0}
+969	Ordenar el resto más tarde
+970	§one=Queda {0} contacto por ordenar. Sigue desde Personas cuando quieras.|other=Quedan {0} contactos por ordenar. Sigue desde Personas cuando quieras.
+971	§one=Queda {0} contacto por ordenar. Sigue desde Personas cuando quieras.|other=Quedan {0} contactos por ordenar. Sigue desde Personas cuando quieras.
+972	Todo ordenado
+973	No se añadió a nadie.
+974	Las personas nuevas aparecen en Hoy unas pocas cada día, para que no te agobies.
+975	Usa <b>Añadir rápido</b> arriba en Personas para encontrar a cualquiera enseguida, escribirle, planear una cita o añadirle a una lista.
+976	Abrir Personas
+977	Trae tus contactos
+978	Elige a todas las personas con las que has compartido tu fe en los últimos 6 meses, a todos los discípulos (hermanos y hermanas en la fe) y a la familia y amigos a los que quieras acompañar o por los que quieras orar.
+979	Shepherd trae sus nombres y números. Son privados para ti: nadie más que use Shepherd puede verlos, para protegerte a ti y a ellos.
+980	Elige personas: pon dos dedos sobre la lista y arrastra hacia abajo por los nombres que quieras. Para elegir a todos, toca <b>Listas</b> y mantén pulsado <b>Todos los contactos</b>.
+981	Mantén pulsado un nombre elegido, toca <b>Exportar</b> y luego <b>Guardar en Archivos</b>.
+982	Toca <b>Elegir de mis contactos</b> arriba y marca a las personas que quieras.
+983	O bien, en la app <b>Contactos</b>, mantén pulsado un nombre, marca los demás, toca <b>Compartir</b> y guarda el archivo.
+984	Después ordena a cada persona con un toque: Conocido al compartir la fe, Reino, Familia, Amigos u Otro. A quien omitas no se guarda.
+985	Todas las personas que elegiste ya están en Shepherd
+986	Añadido desde los contactos de tu teléfono
+987	Añadir rápido
+988	Quién
+989	Persona
+990	Acción
+991	{0} ({1})
+992	Toca para ver a todos o escribe un nombre
+993	Abrir su página
+994	Planear una cita de ánimo
+995	Añadir a Personas (seguimiento)
+996	Añadir a Discípulos
+997	Añadir su número
+998	Ir
+999	Traer contactos de tu teléfono
+1000	Trae personas de tu teléfono y ordénalas con un toque. Luego encuentra aquí a cualquiera y escríbele, planea una cita o añádele a una lista.
+1001	§one=Queda {0} contacto por ordenar|other=Quedan {0} contactos por ordenar
+1002	§one=Queda {0} contacto por ordenar|other=Quedan {0} contactos por ordenar
+1003	Elige primero a una persona.
+1004	No hay número de WhatsApp guardado para {0}
+1005	{0} se guarda solo en este teléfono. Añádele a una lista para abrir su página.
+1006	{0} ya está en Personas
+1007	{0} ya está en Discípulos
+1008	{0} añadido a Discípulos
+1009	Añadir a Personas
+1010	Shepherd te recordará que hables con esta persona.
+1011	{0} añadido a Personas
+1012	Escribe su número.
+1013	Guardar número
+1014	Número guardado para {0}
+1015	Número añadido
+1016	¿A quién vas a animar esta semana?
+1017	Planea un café, un paseo o una comida con un hermano o una hermana.
+1018	Apuntar un rato juntos
+1019	Mes anterior
+1020	Mes siguiente
+1021	§one={0} plan|other={0} planes
+1022	§one={0} plan|other={0} planes
+1023	No hay nada planeado este día.
+1024	Planear para este día
+1025	Mostrar todo
+1026	Aún no hay citas
+1027	Un café, un paseo, una comida. El tiempo juntos nos edifica unos a otros. Planea la primera.
+1028	Gastos
+1029	Este mes
+1030	Citas de ánimo ({0})
+1031	Ratos juntos ({0})
+1032	Con comida {0} de {1} este mes.
+1033	Seguimiento: <b>{0} de {1}</b>
+1034	Animados
+1035	Cita de ánimo
+1036	Rato juntos
+1037	Comida
+1038	Hermano o hermana
+1039	Escribe un nombre
+1040	p. ej., café y un paseo
+1041	¿Vais a comer algo?
+1042	Tipo
+1043	Escribe el coste como un número, por ejemplo 12.50.
+1044	Eliminar
+1045	Toca otra vez para eliminar
+1046	Eliminado
+1047	Rato juntos guardado
+1048	Cita de ánimo guardada
+1049	Animando hoy
+1050	Cita de ánimo con {0}
+1051	Rato juntos con {0}
+1052	Avisarme de este evento
+1053	Cuenta atrás
+1054	Ninguna
+1055	Semanal
+1056	Mensual
+1057	Semanal: un aviso cada semana durante las 8 semanas anteriores. Mensual: uno cada mes durante los 6 meses anteriores. También te avisa el día antes y una hora antes.
+1058	Cuenta atrás semanal
+1059	Cuenta atrás mensual
+1060	Planea una cita de ánimo o un rato juntos con un hermano o una hermana.
+1061	{0} en {1}
+1062	§one={0} semana|other={0} semanas
+1063	§one={0} semana|other={0} semanas
+1064	§one={0} mes|other={0} meses
+1065	§one={0} mes|other={0} meses
+1066	Un recordatorio semanal para animar a alguien, y avisos antes de cada cita
+1067	Qué hace Shepherd y por qué, con los versículos bíblicos que lo respaldan.
+1068	Leer Acerca de Shepherd
+1069	Trae personas de tu teléfono y ordénalas con un toque. Los nombres y números que ordenes se guardan en tu lista privada. A quien omitas no se guarda, y quienes estén en Otro se quedan solo en este teléfono.
+1070	Traer contactos
+1071	Trae los contactos de tu teléfono y ordénalos con un toque; luego usa Añadir rápido para llegar a cualquiera enseguida.
+1072	<b>Calendario</b> guarda eventos clave como Network Events, EMC y GMC, con cuentas atrás semanales o mensuales, invitaciones (enviadas por WhatsApp) y quién vino, y se conecta con el calendario de tu teléfono.
+1073	Anímense unos a otros
+1074	<b>Ánimo</b> te ayuda a planear citas de ánimo y ratos juntos con hermanos y hermanas, con un recordatorio semanal, y muestra lo que gastas cada semana y cada mes.
+1075	También muestra con qué constancia hiciste seguimiento cada semana.
+1076	Acerca de explica todo lo que hace Shepherd, con los versículos bíblicos que lo respaldan. Está arriba en Ajustes. Léelo ahora o vuelve cuando quieras.
+1077	Trae personas de tu teléfono y ordena a cada una con un toque: Conocido al compartir la fe, Reino, Familia, Amigos u Otro. Luego Añadir rápido encuentra a cualquiera enseguida para escribirle, planear una cita o añadirle a una lista.
+1078	Apunta eventos clave como Network Events, EMC o GMC y elige una cuenta atrás semanal o mensual. Invita a gente y marca quién vino. Conecta Shepherd con el calendario de tu teléfono para que tus estudios y eventos aparezcan allí solos.
+1079	Planea citas de ánimo y ratos juntos con hermanos y hermanas, marca si vais a comer algo y mira lo que gastas cada semana y cada mes. Shepherd te lo recuerda cada semana. Aquí también están tus datos semanales de seguimiento.
+1080	Elige tu idioma (los versículos bíblicos se quedan en inglés, NIV) y tu moneda, lee Acerca de Shepherd, pon un PIN, exporta una copia de seguridad y lee Privacidad y uso responsable.
+1081	Tu nombre, correo, número de WhatsApp, país y ajustes (como idioma, moneda, zona horaria y horas de las notificaciones).
+1082	Tus eventos, discípulos y lista de oración, y las citas de ánimo y ratos juntos que apuntas, con la actividad, si fuisteis a comer y cuánto costó.
+1083	Las personas que traes de tu teléfono y ordenas en Personas, Discípulos o tu lista de oración: su nombre y número.
+1084	Los contactos del teléfono que traes pero aún no has ordenado, y quienes pongas en Otro. Nunca se suben. A quien omitas no se guarda en absoluto.

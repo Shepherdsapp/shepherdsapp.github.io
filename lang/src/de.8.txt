@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Ermutigen
+945	Verbringe Zeit mit deinen Brüdern und Schwestern im Glauben.
+946	Deine wichtigen Termine wie Network Events, EMC und GMC. Lade Leute ein und hake danach ab, wer gekommen ist.
+947	Trag hier jeden wichtigen Termin ein, etwa ein <b>Network Event</b>, die <b>EMC</b> oder die <b>GMC</b>. Hake <b>Benachrichtige mich</b> an und wähle einen wöchentlichen oder monatlichen Countdown, damit du keinen verpasst.
+948	Kosten werden in <b>{0}</b> angezeigt. Die Währung kannst du in den Einstellungen ändern.
+949	Währung ändern
+950	Währung für Kosten bei Ermutigen
+951	Kosten ({0})
+952	Beim Teilen des Glaubens kennengelernt
+953	Reich Gottes
+954	Familie
+955	Freunde
+956	Nur auf diesem Handy
+957	Wird nicht gespeichert
+958	Kontakte sortieren
+959	§one={0} Kontakt zu sortieren. Tippe, wohin jede Person gehört.|other={0} Kontakte zu sortieren. Tippe, wohin jede Person gehört.
+960	§one={0} Kontakt zu sortieren. Tippe, wohin jede Person gehört.|other={0} Kontakte zu sortieren. Tippe, wohin jede Person gehört.
+961	§one={0} Person, die schon in Shepherd ist, wurde ausgelassen.|other={0} Personen, die schon in Shepherd sind, wurden ausgelassen.
+962	§one={0} Person, die schon in Shepherd ist, wurde ausgelassen.|other={0} Personen, die schon in Shepherd sind, wurden ausgelassen.
+963	Ihre Namen und Nummern siehst nur du. Niemand sonst, der Shepherd nutzt, kann sie sehen.
+964	Ich füge nur Menschen hinzu, die einverstanden sind, dass ich ihre Daten speichere und wir in Kontakt bleiben.
+965	Hake zuerst das Kästchen an. Füge nur Menschen hinzu, die einverstanden sind.
+966	Sortieren starten
+967	Später
+968	Noch {0}
+969	Den Rest später sortieren
+970	§one=Noch {0} Kontakt zu sortieren. Mach jederzeit unter Menschen weiter.|other=Noch {0} Kontakte zu sortieren. Mach jederzeit unter Menschen weiter.
+971	§one=Noch {0} Kontakt zu sortieren. Mach jederzeit unter Menschen weiter.|other=Noch {0} Kontakte zu sortieren. Mach jederzeit unter Menschen weiter.
+972	Alles sortiert
+973	Niemand wurde hinzugefügt.
+974	Neue Menschen erscheinen unter Heute nur ein paar pro Tag, damit es nicht zu viel wird.
+975	Nutze <b>Schnell hinzufügen</b> oben unter Menschen, um jeden schnell zu finden, zu schreiben, ein Treffen zu planen oder zu einer Liste hinzuzufügen.
+976	Menschen öffnen
+977	Hol deine Kontakte rein
+978	Wähle alle, mit denen du in den letzten 6 Monaten deinen Glauben geteilt hast, alle Jünger (Brüder und Schwestern im Glauben) und Familie und Freunde, nach denen du schauen oder für die du beten willst.
+979	Shepherd holt ihre Namen und Nummern rein. Sie bleiben privat: Niemand sonst, der Shepherd nutzt, kann sie sehen – zu deinem und ihrem Schutz.
+980	Personen wählen: Leg zwei Finger auf die Liste und zieh nach unten über die gewünschten Namen. Für alle tippe auf <b>Listen</b> und halte <b>Alle Kontakte</b> gedrückt.
+981	Halte einen gewählten Namen gedrückt, tippe auf <b>Exportieren</b> und dann auf <b>In „Dateien“ sichern</b>.
+982	Tippe oben auf <b>Aus meinen Kontakten wählen</b> und hake die gewünschten Personen an.
+983	Oder halte in der App <b>Kontakte</b> einen Namen gedrückt, hake die anderen an, tippe auf <b>Teilen</b> und speichere die Datei.
+984	Dann sortierst du jede Person mit einem Tipp: Beim Teilen des Glaubens kennengelernt, Reich Gottes, Familie, Freunde oder Andere. Wen du überspringst, wird nicht gespeichert.
+985	Alle, die du gewählt hast, sind schon in Shepherd
+986	Aus den Kontakten deines Handys hinzugefügt
+987	Schnell hinzufügen
+988	Wer
+989	Person
+990	Aktion
+991	{0} ({1})
+992	Tippe, um alle zu sehen, oder gib einen Namen ein
+993	Seite öffnen
+994	Ermutigungstreffen planen
+995	Zu Menschen hinzufügen (nachfassen)
+996	Zu Jüngern hinzufügen
+997	Nummer hinzufügen
+998	Los
+999	Kontakte vom Handy reinholen
+1000	Hol Menschen von deinem Handy rein und sortiere sie mit einem Tipp. Dann findest du hier jeden, um zu schreiben, ein Treffen zu planen oder zu einer Liste hinzuzufügen.
+1001	§one=Noch {0} Kontakt zu sortieren|other=Noch {0} Kontakte zu sortieren
+1002	§one=Noch {0} Kontakt zu sortieren|other=Noch {0} Kontakte zu sortieren
+1003	Wähle zuerst eine Person.
+1004	Keine WhatsApp-Nummer gespeichert für {0}
+1005	{0} ist nur auf diesem Handy gespeichert. Füg die Person zu einer Liste hinzu, um ihre Seite zu öffnen.
+1006	{0} ist schon unter Menschen
+1007	{0} ist schon unter Jünger
+1008	{0} zu Jüngern hinzugefügt
+1009	Zu Menschen hinzufügen
+1010	Shepherd erinnert dich daran, dich zu melden.
+1011	{0} zu Menschen hinzugefügt
+1012	Gib die Nummer ein.
+1013	Nummer speichern
+1014	Nummer gespeichert für {0}
+1015	Nummer hinzugefügt
+1016	Wen ermutigst du diese Woche?
+1017	Plane einen Kaffee, einen Spaziergang oder ein Essen mit einem Bruder oder einer Schwester.
+1018	Treffen eintragen
+1019	Vorheriger Monat
+1020	Nächster Monat
+1021	§one={0} Plan|other={0} Pläne
+1022	§one={0} Plan|other={0} Pläne
+1023	An diesem Tag ist nichts geplant.
+1024	Für diesen Tag planen
+1025	Alles zeigen
+1026	Noch keine Treffen
+1027	Ein Kaffee, ein Spaziergang, ein Essen. Gemeinsame Zeit baut einander auf. Plane das erste.
+1028	Ausgaben
+1029	Diesen Monat
+1030	Ermutigungstreffen ({0})
+1031	Treffen ({0})
+1032	Mit Essen bei {0} von {1} in diesem Monat.
+1033	Nachgefasst: <b>{0} von {1}</b>
+1034	Ermutigt
+1035	Ermutigungstreffen
+1036	Treffen
+1037	Essen
+1038	Bruder oder Schwester
+1039	Gib einen Namen ein
+1040	z. B. Kaffee und Spaziergang
+1041	Geht ihr essen?
+1042	Art
+1043	Gib die Kosten als Zahl ein, zum Beispiel 12.50.
+1044	Löschen
+1045	Zum Löschen noch einmal tippen
+1046	Gelöscht
+1047	Treffen gespeichert
+1048	Ermutigungstreffen gespeichert
+1049	Heute ermutigen
+1050	Ermutigungstreffen mit {0}
+1051	Treffen mit {0}
+1052	Benachrichtige mich zu diesem Termin
+1053	Countdown
+1054	Keiner
+1055	Wöchentlich
+1056	Monatlich
+1057	Wöchentlich: jede Woche eine Erinnerung in den 8 Wochen davor. Monatlich: eine pro Monat in den 6 Monaten davor. Außerdem wirst du am Tag davor und eine Stunde vorher erinnert.
+1058	Wöchentlicher Countdown
+1059	Monatlicher Countdown
+1060	Plane ein Ermutigungstreffen oder ein Treffen mit einem Bruder oder einer Schwester.
+1061	{0} in {1}
+1062	§one={0} Woche|other={0} Wochen
+1063	§one={0} Woche|other={0} Wochen
+1064	§one={0} Monat|other={0} Monaten
+1065	§one={0} Monat|other={0} Monaten
+1066	Jede Woche ein Anstoß, jemanden zu ermutigen, und Erinnerungen vor jedem Treffen
+1067	Was Shepherd macht und warum – mit den Bibelversen dahinter.
+1068	Über Shepherd lesen
+1069	Hol Menschen von deinem Handy rein und sortiere sie mit einem Tipp. Die sortierten Namen und Nummern werden in deiner privaten Liste gespeichert. Wen du überspringst, wird nicht gespeichert, und Menschen unter Andere bleiben nur auf diesem Handy.
+1070	Kontakte reinholen
+1071	Hol deine Handykontakte rein und sortiere sie mit einem Tipp; mit Schnell hinzufügen erreichst du dann jeden schnell.
+1072	<b>Kalender</b> speichert wichtige Termine wie Network Events, EMC und GMC mit wöchentlichem oder monatlichem Countdown, Einladungen (per WhatsApp) und wer gekommen ist, und verbindet sich mit dem Kalender deines Handys.
+1073	Ermutigt einander
+1074	<b>Ermutigen</b> plant Ermutigungstreffen und Treffen mit Brüdern und Schwestern, mit einem wöchentlichen Anstoß, und zeigt, was du pro Woche und Monat ausgibst.
+1075	Es zeigt auch, wie treu du jede Woche nachgefasst hast.
+1076	Über erklärt alles, was Shepherd kann – mit den Bibelversen dahinter. Du findest es oben in den Einstellungen. Lies es jetzt oder komm später zurück.
+1077	Hol Menschen von deinem Handy rein und sortiere jede Person mit einem Tipp: Beim Teilen des Glaubens kennengelernt, Reich Gottes, Familie, Freunde oder Andere. Schnell hinzufügen findet dann jeden schnell, damit du schreibst, ein Treffen planst oder sie zu einer Liste hinzufügst.
+1078	Trag wichtige Termine wie Network Events, EMC oder GMC ein und wähle einen wöchentlichen oder monatlichen Countdown. Lade Leute ein und hake ab, wer gekommen ist. Verbinde Shepherd mit dem Kalender deines Handys, damit deine Studien und Termine dort von selbst erscheinen.
+1079	Plane Ermutigungstreffen und Treffen mit Brüdern und Schwestern, hake an, ob ihr essen geht, und sieh, was du pro Woche und Monat ausgibst. Shepherd erinnert dich jede Woche. Deine wöchentlichen Nachfass-Zahlen sind auch hier.
+1080	Wähle deine Sprache (Bibelverse bleiben auf Englisch, NIV) und deine Währung, lies Über Shepherd, leg eine PIN fest, exportiere ein Backup und lies Datenschutz und verantwortungsvolle Nutzung.
+1081	Dein Name, deine E-Mail, WhatsApp-Nummer, dein Land und deine Einstellungen (etwa Sprache, Währung, Zeitzone und Benachrichtigungszeiten).
+1082	Deine Termine, Jünger und Gebetsliste sowie die Ermutigungstreffen und Treffen, die du einträgst, mit Aktivität, ob ihr essen wart und was es gekostet hat.
+1083	Menschen, die du von deinem Handy reinholst und unter Menschen, Jünger oder deiner Gebetsliste einsortierst: ihr Name und ihre Nummer.
+1084	Handykontakte, die du reingeholt, aber noch nicht sortiert hast, und alle unter Andere. Sie werden nie hochgeladen. Wen du überspringst, wird gar nicht gespeichert.

@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Zachęta
+945	Spędzaj czas z braćmi i siostrami w wierze.
+946	Twoje kluczowe wydarzenia, takie jak Network Events, EMC i GMC. Zaproś ludzi, a potem zaznacz, kto przyszedł.
+947	Zapisuj tu każde kluczowe wydarzenie, np. <b>Network Event</b>, <b>EMC</b> lub <b>GMC</b>. Zaznacz <b>Powiadom mnie</b> i wybierz odliczanie co tydzień lub co miesiąc, żeby żadnego nie przegapić.
+948	Koszty są pokazywane w <b>{0}</b>. Walutę możesz zmienić w Ustawieniach.
+949	Zmień walutę
+950	Waluta kosztów w Zachęcie
+951	Koszt ({0})
+952	Poznani przy dzieleniu się wiarą
+953	Królestwo
+954	Rodzina
+955	Przyjaciele
+956	Tylko na tym telefonie
+957	Nie zapisano
+958	Posortuj kontakty
+959	§one={0} kontakt do posortowania. Dotknij, gdzie pasuje każda osoba.|few={0} kontakty do posortowania. Dotknij, gdzie pasuje każda osoba.|many={0} kontaktów do posortowania. Dotknij, gdzie pasuje każda osoba.|other={0} kontaktu do posortowania. Dotknij, gdzie pasuje każda osoba.
+960	§one={0} kontakt do posortowania. Dotknij, gdzie pasuje każda osoba.|few={0} kontakty do posortowania. Dotknij, gdzie pasuje każda osoba.|many={0} kontaktów do posortowania. Dotknij, gdzie pasuje każda osoba.|other={0} kontaktu do posortowania. Dotknij, gdzie pasuje każda osoba.
+961	§one={0} osoba, która już jest w Shepherd, została pominięta.|few={0} osoby, które już są w Shepherd, zostały pominięte.|many={0} osób, które już są w Shepherd, zostało pominiętych.|other={0} osoby, które już są w Shepherd, zostały pominięte.
+962	§one={0} osoba, która już jest w Shepherd, została pominięta.|few={0} osoby, które już są w Shepherd, zostały pominięte.|many={0} osób, które już są w Shepherd, zostało pominiętych.|other={0} osoby, które już są w Shepherd, zostały pominięte.
+963	Ich imiona i numery widzisz tylko ty. Nikt inny korzystający z Shepherd ich nie widzi.
+964	Dodam tylko osoby, które zgadzają się, żebym przechowywał ich dane i był z nimi w kontakcie.
+965	Najpierw zaznacz pole. Dodawaj tylko osoby, które się zgodziły.
+966	Zacznij sortować
+967	Później
+968	Zostało {0}
+969	Resztę posortuj później
+970	§one=Został {0} kontakt do posortowania. Wróć do tego w Ludziach, kiedy chcesz.|few=Zostały {0} kontakty do posortowania. Wróć do tego w Ludziach, kiedy chcesz.|many=Zostało {0} kontaktów do posortowania. Wróć do tego w Ludziach, kiedy chcesz.|other=Zostało {0} kontaktu do posortowania. Wróć do tego w Ludziach, kiedy chcesz.
+971	§one=Został {0} kontakt do posortowania. Wróć do tego w Ludziach, kiedy chcesz.|few=Zostały {0} kontakty do posortowania. Wróć do tego w Ludziach, kiedy chcesz.|many=Zostało {0} kontaktów do posortowania. Wróć do tego w Ludziach, kiedy chcesz.|other=Zostało {0} kontaktu do posortowania. Wróć do tego w Ludziach, kiedy chcesz.
+972	Wszystko posortowane
+973	Nikogo nie dodano.
+974	Nowe osoby pojawiają się w Dziś po kilka dziennie, żeby cię nie przytłoczyć.
+975	Użyj <b>Szybkiego dodawania</b> na górze Ludzi, aby szybko znaleźć każdego, napisać, zaplanować spotkanie lub dodać do listy.
+976	Otwórz Ludzi
+977	Dodaj swoje kontakty
+978	Wybierz wszystkich, z którymi dzieliłeś się wiarą w ostatnich 6 miesiącach, wszystkich uczniów (braci i siostry w wierze) oraz rodzinę i przyjaciół, z którymi chcesz być w kontakcie lub za których chcesz się modlić.
+979	Shepherd pobiera ich imiona i numery. Widzisz je tylko ty: nikt inny korzystający z Shepherd ich nie widzi, dla bezpieczeństwa twojego i ich.
+980	Wybierz osoby: połóż dwa palce na liście i przeciągnij w dół po imionach, które chcesz. Aby wybrać wszystkich, dotknij <b>Listy</b> i przytrzymaj <b>Wszystkie kontakty</b>.
+981	Przytrzymaj wybrane imię, dotknij <b>Eksportuj</b>, a potem <b>Zachowaj w Plikach</b>.
+982	Dotknij <b>Wybierz z moich kontaktów</b> powyżej i zaznacz osoby, które chcesz.
+983	Albo w aplikacji <b>Kontakty</b> przytrzymaj imię, zaznacz pozostałe, dotknij <b>Udostępnij</b> i zapisz plik.
+984	Potem posortuj każdą osobę jednym dotknięciem: Poznani przy dzieleniu się wiarą, Królestwo, Rodzina, Przyjaciele lub Inne. Pominięte osoby nie są zapisywane.
+985	Wszystkie wybrane osoby są już w Shepherd
+986	Dodano z kontaktów w telefonie
+987	Szybkie dodawanie
+988	Kto
+989	Osoba
+990	Działanie
+991	{0} ({1})
+992	Dotknij, aby zobaczyć wszystkich, lub wpisz imię
+993	Otwórz ich stronę
+994	Zaplanuj spotkanie zachęty
+995	Dodaj do Ludzi (kontakt)
+996	Dodaj do Uczniów
+997	Dodaj ich numer
+998	Dalej
+999	Dodaj kontakty z telefonu
+1000	Dodaj osoby z telefonu i posortuj je jednym dotknięciem. Potem znajdziesz tu każdego, by napisać, zaplanować spotkanie lub dodać do listy.
+1001	§one=Został {0} kontakt do posortowania|few=Zostały {0} kontakty do posortowania|many=Zostało {0} kontaktów do posortowania|other=Zostało {0} kontaktu do posortowania
+1002	§one=Został {0} kontakt do posortowania|few=Zostały {0} kontakty do posortowania|many=Zostało {0} kontaktów do posortowania|other=Zostało {0} kontaktu do posortowania
+1003	Najpierw wybierz osobę.
+1004	Brak zapisanego numeru WhatsApp dla: {0}
+1005	{0} jest zapisany tylko na tym telefonie. Dodaj tę osobę do listy, aby otworzyć jej stronę.
+1006	{0} jest już w Ludziach
+1007	{0} jest już w Uczniach
+1008	{0} dodano do Uczniów
+1009	Dodaj do Ludzi
+1010	Shepherd przypomni ci, żeby się odezwać.
+1011	{0} dodano do Ludzi
+1012	Wpisz numer.
+1013	Zapisz numer
+1014	Zapisano numer dla: {0}
+1015	Dodano numer
+1016	Kogo zachęcisz w tym tygodniu?
+1017	Zaplanuj kawę, spacer lub posiłek z bratem lub siostrą.
+1018	Zapisz wspólne wyjście
+1019	Poprzedni miesiąc
+1020	Następny miesiąc
+1021	§one={0} plan|few={0} plany|many={0} planów|other={0} planu
+1022	§one={0} plan|few={0} plany|many={0} planów|other={0} planu
+1023	Nic nie zaplanowano na ten dzień.
+1024	Zaplanuj na ten dzień
+1025	Pokaż wszystko
+1026	Brak spotkań
+1027	Kawa, spacer, posiłek. Wspólny czas buduje nas nawzajem. Zaplanuj pierwsze.
+1028	Wydatki
+1029	Ten miesiąc
+1030	Spotkania zachęty ({0})
+1031	Wspólne wyjścia ({0})
+1032	Z jedzeniem: {0} z {1} w tym miesiącu.
+1033	Kontakt: <b>{0} z {1}</b>
+1034	Zachęceni
+1035	Spotkanie zachęty
+1036	Wspólne wyjście
+1037	Jedzenie
+1038	Brat lub siostra
+1039	Wpisz imię
+1040	np. kawa i spacer
+1041	Idziecie coś zjeść?
+1042	Rodzaj
+1043	Wpisz koszt jako liczbę, np. 12.50.
+1044	Usuń
+1045	Dotknij ponownie, aby usunąć
+1046	Usunięto
+1047	Zapisano wspólne wyjście
+1048	Zapisano spotkanie zachęty
+1049	Zachęcasz dziś
+1050	Spotkanie zachęty z: {0}
+1051	Wspólne wyjście z: {0}
+1052	Powiadom mnie o tym wydarzeniu
+1053	Odliczanie
+1054	Brak
+1055	Co tydzień
+1056	Co miesiąc
+1057	Co tydzień: przypomnienie w każdym z 8 tygodni przed. Co miesiąc: jedno w każdym z 6 miesięcy przed. Dostaniesz też przypomnienie dzień przed i godzinę przed.
+1058	Odliczanie co tydzień
+1059	Odliczanie co miesiąc
+1060	Zaplanuj spotkanie zachęty lub wspólne wyjście z bratem lub siostrą.
+1061	{0} za {1}
+1062	§one={0} tydzień|few={0} tygodnie|many={0} tygodni|other={0} tygodnia
+1063	§one={0} tydzień|few={0} tygodnie|many={0} tygodni|other={0} tygodnia
+1064	§one={0} miesiąc|few={0} miesiące|many={0} miesięcy|other={0} miesiąca
+1065	§one={0} miesiąc|few={0} miesiące|many={0} miesięcy|other={0} miesiąca
+1066	Cotygodniowe przypomnienie, by kogoś zachęcić, i przypomnienia przed każdym spotkaniem
+1067	Co robi Shepherd i dlaczego, z wersetami biblijnymi, na których się opiera.
+1068	Przeczytaj O Shepherd
+1069	Dodaj osoby z telefonu i posortuj je jednym dotknięciem. Posortowane imiona i numery są zapisywane na twojej prywatnej liście. Pominięte osoby nie są zapisywane, a osoby w Inne zostają tylko na tym telefonie.
+1070	Dodaj kontakty
+1071	Dodaj kontakty z telefonu i posortuj je jednym dotknięciem, a potem użyj Szybkiego dodawania, by szybko dotrzeć do każdego.
+1072	<b>Kalendarz</b> przechowuje kluczowe wydarzenia, takie jak Network Events, EMC i GMC, z odliczaniem co tydzień lub co miesiąc, zaproszeniami (wysyłanymi przez WhatsApp) i tym, kto przyszedł, i łączy się z kalendarzem w telefonie.
+1073	Zachęcajcie się nawzajem
+1074	<b>Zachęta</b> planuje spotkania zachęty i wspólne wyjścia z braćmi i siostrami, z cotygodniowym przypomnieniem, i pokazuje, ile wydajesz w tygodniu i w miesiącu.
+1075	Pokazuje też, jak wiernie utrzymywałeś kontakt w każdym tygodniu.
+1076	O aplikacji wyjaśnia wszystko, co potrafi Shepherd, z wersetami biblijnymi, na których się opiera. Znajdziesz to na górze Ustawień. Przeczytaj teraz albo wróć kiedy chcesz.
+1077	Dodaj osoby z telefonu i posortuj każdą jednym dotknięciem: Poznani przy dzieleniu się wiarą, Królestwo, Rodzina, Przyjaciele lub Inne. Szybkie dodawanie szybko znajdzie potem każdego, by napisać, zaplanować spotkanie lub dodać do listy.
+1078	Zapisuj kluczowe wydarzenia, takie jak Network Events, EMC lub GMC, i wybierz odliczanie co tydzień lub co miesiąc. Zaproś ludzi i zaznacz, kto przyszedł. Połącz Shepherd z kalendarzem w telefonie, aby twoje studia i wydarzenia same się tam pojawiały.
+1079	Planuj spotkania zachęty i wspólne wyjścia z braćmi i siostrami, zaznacz, czy idziecie coś zjeść, i zobacz, ile wydajesz w tygodniu i w miesiącu. Shepherd przypomina ci co tydzień. Tu są też twoje cotygodniowe statystyki kontaktu.
+1080	Wybierz język (wersety biblijne pozostają po angielsku, NIV) i walutę, przeczytaj O Shepherd, ustaw PIN, wyeksportuj kopię zapasową i przeczytaj Prywatność i odpowiedzialne korzystanie.
+1081	Twoje imię, e-mail, numer WhatsApp, kraj i ustawienia (np. język, waluta, strefa czasowa i godziny powiadomień).
+1082	Twoje wydarzenia, uczniowie i lista modlitewna, a także zapisane spotkania zachęty i wspólne wyjścia z rodzajem aktywności, informacją, czy było jedzenie, i kosztem.
+1083	Osoby dodane z telefonu i posortowane do Ludzi, Uczniów lub listy modlitewnej: ich imię i numer.
+1084	Kontakty z telefonu dodane, ale jeszcze nieposortowane, oraz osoby w Inne. Nigdy nie są wysyłane. Pominięte osoby w ogóle nie są przechowywane.

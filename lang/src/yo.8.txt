@@ -1,0 +1,142 @@
+# 2026-11-11: contact import, Quick add, Encourage, key event countdowns, currency
+944	Ìgbaniníyànjú
+945	Lo àkókò pẹ̀lú àwọn arákùnrin àti arábìnrin rẹ nínú ìgbàgbọ́.
+946	Àwọn ìṣẹ̀lẹ̀ pàtàkì rẹ, bí Network Events, EMC àti GMC. Pe àwọn ènìyàn, lẹ́yìn náà sàmì sí àwọn tó wá.
+947	Kọ gbogbo ìṣẹ̀lẹ̀ pàtàkì síbí, bí <b>Network Event</b>, <b>EMC</b> tàbí <b>GMC</b>. Sàmì sí <b>Rán mi létí</b> kí o sì yan kíkà sẹ́yìn ọ̀sẹ̀-ọ̀sẹ̀ tàbí oṣù-oṣù, kí o má bàa pàdánù ọ̀kankan.
+948	Owó ń hàn ní <b>{0}</b>. O lè yí owó padà nínú Ètò.
+949	Yí owó padà
+950	Owó fún ìnáwó Ìgbaniníyànjú
+951	Iye owó ({0})
+952	Mo pàdé nígbà tí mo ń pín ìgbàgbọ́
+953	Ìjọba Ọlọ́run
+954	Ẹbí
+955	Ọ̀rẹ́
+956	Lórí fóònù yìí nìkan
+957	A kò ní fi pamọ́
+958	Ṣètò àwọn olùbásọ̀rọ̀ rẹ
+959	Olùbásọ̀rọ̀ {0} ló kù láti ṣètò. Tẹ ibi tí ẹnì kọ̀ọ̀kan wà.
+960	Olùbásọ̀rọ̀ {0} ló kù láti ṣètò. Tẹ ibi tí ẹnì kọ̀ọ̀kan wà.
+961	A fi ènìyàn {0} tó ti wà nínú Shepherd sílẹ̀.
+962	A fi ènìyàn {0} tó ti wà nínú Shepherd sílẹ̀.
+963	Ìwọ nìkan ló lè rí orúkọ àti nọ́ńbà wọn. Kò sí ẹlòmíràn tó ń lo Shepherd tó lè rí wọn.
+964	Àwọn tí inú wọn dùn pé kí n tọ́jú àlàyé wọn kí a sì máa bá ara wa sọ̀rọ̀ nìkan ni màá fi kún un.
+965	Kọ́kọ́ sàmì sí àpótí náà. Fi àwọn tó gbà nìkan kún un.
+966	Bẹ̀rẹ̀ ìṣètò
+967	Nígbà míì
+968	{0} ló kù
+969	Ṣètò ìyókù nígbà míì
+970	Olùbásọ̀rọ̀ {0} ló kù láti ṣètò. Tẹ̀síwájú láti Ènìyàn nígbàkígbà.
+971	Olùbásọ̀rọ̀ {0} ló kù láti ṣètò. Tẹ̀síwájú láti Ènìyàn nígbàkígbà.
+972	Gbogbo rẹ̀ ti ṣètò
+973	A kò fi ẹnikẹ́ni kún un.
+974	Àwọn ènìyàn tuntun máa ń hàn nínú Òní díẹ̀díẹ̀ lójoojúmọ́, kí ó má bàa pọ̀ jù fún ọ.
+975	Lo <b>Ìfikún kíákíá</b> lókè Ènìyàn láti rí ẹnikẹ́ni kíákíá, kọ̀wé sí wọn, ṣètò ìpàdé tàbí fi wọ́n kún àtòjọ.
+976	Ṣí Ènìyàn
+977	Mú àwọn olùbásọ̀rọ̀ rẹ wọlé
+978	Yan gbogbo ẹni tí o ti pín ìgbàgbọ́ rẹ pẹ̀lú ní oṣù 6 sẹ́yìn, gbogbo ọmọ-ẹ̀yìn (arákùnrin àti arábìnrin nínú ìgbàgbọ́), àti ẹbí & ọ̀rẹ́ tí o fẹ́ máa béèrè àlàáfíà wọn tàbí gbàdúrà fún.
+979	Shepherd máa mú orúkọ àti nọ́ńbà wọn wọlé. Ìwọ nìkan ló lè rí wọn: kò sí ẹlòmíràn tó ń lo Shepherd tó lè rí wọn, kí ìwọ àti àwọn wà láìléwu.
+980	Yan ènìyàn: fi ìka méjì sórí àtòjọ kí o sì fà á sísàlẹ̀ lórí àwọn orúkọ tí o fẹ́. Láti mú gbogbo wọn, tẹ <b>Lists</b> kí o sì tẹ <b>All Contacts</b> mọ́lẹ̀.
+981	Tẹ orúkọ kan tí o yàn mọ́lẹ̀, tẹ <b>Export</b>, lẹ́yìn náà <b>Save to Files</b>.
+982	Tẹ <b>Yan láti inú àwọn olùbásọ̀rọ̀ mi</b> lókè kí o sì sàmì sí àwọn tí o fẹ́.
+983	Tàbí, nínú áàpù <b>Contacts</b>, tẹ orúkọ kan mọ́lẹ̀, sàmì sí àwọn yòókù, lẹ́yìn náà tẹ <b>Share</b> kí o sì fi fáìlì náà pamọ́.
+984	Lẹ́yìn náà ṣètò ẹnì kọ̀ọ̀kan pẹ̀lú ìtẹ̀ kan: Mo pàdé nígbà tí mo ń pín ìgbàgbọ́, Ìjọba Ọlọ́run, Ẹbí, Ọ̀rẹ́ tàbí Òmíràn. Ẹni tí o fò kò ní wà ní ìpamọ́.
+985	Gbogbo ẹni tí o yàn ti wà nínú Shepherd
+986	A fi kún un láti inú olùbásọ̀rọ̀ fóònù rẹ
+987	Ìfikún kíákíá
+988	Ta ni
+989	Ènìyàn
+990	Ìgbésẹ̀
+991	{0} ({1})
+992	Tẹ̀ ẹ́ láti rí gbogbo ènìyàn, tàbí tẹ orúkọ
+993	Ṣí ojú-ìwé wọn
+994	Ṣètò ìpàdé ìgbaniníyànjú
+995	Fi kún Ènìyàn (máa tẹ̀lé e)
+996	Fi kún Ọmọ-ẹ̀yìn
+997	Fi nọ́ńbà wọn kún un
+998	Lọ
+999	Mú olùbásọ̀rọ̀ wọlé láti fóònù rẹ
+1000	Mú àwọn ènìyàn wọlé láti fóònù rẹ kí o sì ṣètò wọn pẹ̀lú ìtẹ̀ kan. Lẹ́yìn náà rí ẹnikẹ́ni níbí kí o kọ̀wé sí wọn, ṣètò ìpàdé tàbí fi wọ́n kún àtòjọ.
+1001	Olùbásọ̀rọ̀ {0} ló kù láti ṣètò
+1002	Olùbásọ̀rọ̀ {0} ló kù láti ṣètò
+1003	Kọ́kọ́ yan ènìyàn kan.
+1004	Kò sí nọ́ńbà WhatsApp fún {0}
+1005	Fóònù yìí nìkan ni {0} wà. Fi wọ́n kún àtòjọ kan láti ṣí ojú-ìwé wọn.
+1006	{0} ti wà nínú Ènìyàn
+1007	{0} ti wà nínú Ọmọ-ẹ̀yìn
+1008	A ti fi {0} kún Ọmọ-ẹ̀yìn
+1009	Fi kún Ènìyàn
+1010	Shepherd máa rán ọ létí láti béèrè àlàáfíà wọn.
+1011	A ti fi {0} kún Ènìyàn
+1012	Tẹ nọ́ńbà wọn.
+1013	Fi nọ́ńbà pamọ́
+1014	A ti fi nọ́ńbà pamọ́ fún {0}
+1015	A ti fi nọ́ńbà kún un
+1016	Ta ni wàá gbà níyànjú lọ́sẹ̀ yìí?
+1017	Ṣètò kọfí, ìrìn tàbí oúnjẹ pẹ̀lú arákùnrin tàbí arábìnrin kan.
+1018	Kọ àkókò ìbáṣepọ̀ sílẹ̀
+1019	Oṣù tó kọjá
+1020	Oṣù tó ń bọ̀
+1021	Ètò {0}
+1022	Ètò {0}
+1023	Kò sí ohun tí a ṣètò fún ọjọ́ yìí.
+1024	Ṣètò fún ọjọ́ yìí
+1025	Fi gbogbo rẹ̀ hàn
+1026	Kò sí ìpàdé síbẹ̀
+1027	Kọfí, ìrìn, oúnjẹ. Àkókò papọ̀ ń gbé ara wa ró. Ṣètò àkọ́kọ́.
+1028	Ìnáwó
+1029	Oṣù yìí
+1030	Ìpàdé ìgbaniníyànjú ({0})
+1031	Àkókò ìbáṣepọ̀ ({0})
+1032	Oúnjẹ wà nínú {0} nínú {1} lóṣù yìí.
+1033	Ìtẹ̀lé: <b>{0} nínú {1}</b>
+1034	Ẹni tí a gbà níyànjú
+1035	Ìpàdé ìgbaniníyànjú
+1036	Àkókò ìbáṣepọ̀
+1037	Oúnjẹ
+1038	Arákùnrin tàbí arábìnrin
+1039	Tẹ orúkọ
+1040	bí àpẹẹrẹ: Kọfí àti ìrìn
+1041	Ṣé ẹ ó jẹun?
+1042	Irú
+1043	Tẹ iye owó bí nọ́ńbà, bí 12.50.
+1044	Pa á rẹ́
+1045	Tẹ̀ ẹ́ lẹ́ẹ̀kan sí i láti pa á rẹ́
+1046	A ti pa á rẹ́
+1047	A ti fi àkókò ìbáṣepọ̀ pamọ́
+1048	A ti fi ìpàdé ìgbaniníyànjú pamọ́
+1049	Ìgbaniníyànjú òní
+1050	Ìpàdé ìgbaniníyànjú pẹ̀lú {0}
+1051	Àkókò ìbáṣepọ̀ pẹ̀lú {0}
+1052	Rán mi létí nípa ìṣẹ̀lẹ̀ yìí
+1053	Kíkà sẹ́yìn
+1054	Kò sí
+1055	Lọ́sọ̀ọ̀sẹ̀
+1056	Lóṣooṣù
+1057	Lọ́sọ̀ọ̀sẹ̀: ìránnilétí lọ́sẹ̀ kọ̀ọ̀kan fún ọ̀sẹ̀ 8 ṣáájú. Lóṣooṣù: ọ̀kan lóṣù kọ̀ọ̀kan fún oṣù 6 ṣáájú. A ó tún rán ọ létí ní ọjọ́ kan ṣáájú àti wákàtí kan ṣáájú.
+1058	Kíkà sẹ́yìn lọ́sọ̀ọ̀sẹ̀
+1059	Kíkà sẹ́yìn lóṣooṣù
+1060	Ṣètò ìpàdé ìgbaniníyànjú tàbí àkókò ìbáṣepọ̀ pẹ̀lú arákùnrin tàbí arábìnrin kan.
+1061	{0} ní {1}
+1062	ọ̀sẹ̀ {0}
+1063	ọ̀sẹ̀ {0}
+1064	oṣù {0}
+1065	oṣù {0}
+1066	Ìránnilétí lọ́sọ̀ọ̀sẹ̀ láti gba ẹnìkan níyànjú, àti ìránnilétí ṣáájú ìpàdé kọ̀ọ̀kan
+1067	Ohun tí Shepherd ń ṣe àti ìdí rẹ̀, pẹ̀lú àwọn ẹsẹ Bíbélì tó wà lẹ́yìn rẹ̀.
+1068	Ka Nípa Shepherd
+1069	Mú àwọn ènìyàn wọlé láti fóònù rẹ kí o sì ṣètò wọn pẹ̀lú ìtẹ̀ kan. Orúkọ àti nọ́ńbà tí o ṣètò máa wà nínú àtòjọ àṣírí rẹ. Ẹni tí o fò kò ní wà ní ìpamọ́, àwọn tó wà nínú Òmíràn sì máa wà lórí fóònù yìí nìkan.
+1070	Mú olùbásọ̀rọ̀ wọlé
+1071	Mú àwọn olùbásọ̀rọ̀ fóònù rẹ wọlé kí o sì ṣètò wọn pẹ̀lú ìtẹ̀ kan, lẹ́yìn náà lo Ìfikún kíákíá láti dé ọ̀dọ̀ ẹnikẹ́ni kíákíá.
+1072	<b>Kàlẹ́ńdà</b> ń tọ́jú àwọn ìṣẹ̀lẹ̀ pàtàkì bí Network Events, EMC àti GMC, pẹ̀lú kíkà sẹ́yìn lọ́sọ̀ọ̀sẹ̀ tàbí lóṣooṣù, ìpè (tí a fi ránṣẹ́ lórí WhatsApp) àti àwọn tó wá, ó sì so mọ́ kàlẹ́ńdà fóònù rẹ.
+1073	Ẹ máa gba ara yín níyànjú
+1074	<b>Ìgbaniníyànjú</b> ń ṣètò ìpàdé ìgbaniníyànjú àti àkókò ìbáṣepọ̀ pẹ̀lú àwọn arákùnrin àti arábìnrin, pẹ̀lú ìránnilétí lọ́sọ̀ọ̀sẹ̀, ó sì ń fi ohun tí o ná lọ́sẹ̀ àti lóṣù hàn.
+1075	Ó tún ń fi bí o ṣe ń tẹ̀lé àwọn ènìyàn lọ́sọ̀ọ̀sẹ̀ hàn.
+1076	Nípa ń ṣàlàyé gbogbo ohun tí Shepherd lè ṣe, pẹ̀lú àwọn ẹsẹ Bíbélì tó wà lẹ́yìn rẹ̀. Ó wà lókè Ètò. Kà á báyìí tàbí padà wá nígbàkígbà.
+1077	Mú àwọn ènìyàn wọlé láti fóònù rẹ, lẹ́yìn náà ṣètò ẹnì kọ̀ọ̀kan pẹ̀lú ìtẹ̀ kan: Mo pàdé nígbà tí mo ń pín ìgbàgbọ́, Ìjọba Ọlọ́run, Ẹbí, Ọ̀rẹ́ tàbí Òmíràn. Ìfikún kíákíá yóò wá rí ẹnikẹ́ni kíákíá, kí o lè kọ̀wé sí wọn, ṣètò ìpàdé tàbí fi wọ́n kún àtòjọ.
+1078	Kọ àwọn ìṣẹ̀lẹ̀ pàtàkì bí Network Events, EMC tàbí GMC sílẹ̀, kí o sì yan kíkà sẹ́yìn lọ́sọ̀ọ̀sẹ̀ tàbí lóṣooṣù. Pe àwọn ènìyàn kí o sì sàmì sí àwọn tó wá. So Shepherd mọ́ kàlẹ́ńdà fóònù rẹ kí ẹ̀kọ́ àti ìṣẹ̀lẹ̀ rẹ lè máa hàn níbẹ̀ fúnra wọn.
+1079	Ṣètò ìpàdé ìgbaniníyànjú àti àkókò ìbáṣepọ̀ pẹ̀lú àwọn arákùnrin àti arábìnrin, sàmì sí bóyá ẹ ó jẹun, kí o sì rí ohun tí o ná lọ́sẹ̀ àti lóṣù. Shepherd máa rán ọ létí lọ́sọ̀ọ̀sẹ̀. Àkọsílẹ̀ ìtẹ̀lé rẹ lọ́sọ̀ọ̀sẹ̀ náà wà níbí.
+1080	Yan èdè rẹ (àwọn ẹsẹ Bíbélì máa wà ní Gẹ̀ẹ́sì, NIV) àti owó rẹ, ka Nípa Shepherd, ṣètò PIN, gbé ẹ̀dà ìpamọ́ jáde, kí o sì ka Àṣírí àti lílò tó yẹ.
+1081	Orúkọ rẹ, ímeèlì, nọ́ńbà WhatsApp, orílẹ̀-èdè àti ètò rẹ (bí èdè, owó, agbègbè àkókò àti àkókò ìfitónilétí).
+1082	Àwọn ìṣẹ̀lẹ̀ rẹ, ọmọ-ẹ̀yìn àti àtòjọ àdúrà, àti àwọn ìpàdé ìgbaniníyànjú àti àkókò ìbáṣepọ̀ tí o kọ sílẹ̀, pẹ̀lú ohun tí ẹ ṣe, bóyá ẹ jẹun àti iye tó ná.
+1083	Àwọn ènìyàn tí o mú wọlé láti fóònù rẹ tí o sì ṣètò sí Ènìyàn, Ọmọ-ẹ̀yìn tàbí àtòjọ àdúrà rẹ: orúkọ àti nọ́ńbà wọn.
+1084	Àwọn olùbásọ̀rọ̀ fóònù tí o mú wọlé ṣùgbọ́n tí o kò tíì ṣètò, àti ẹnikẹ́ni tí o fi sí Òmíràn. A kì í gbé wọn sókè rárá. A kì í tọ́jú ẹni tí o fò rárá.

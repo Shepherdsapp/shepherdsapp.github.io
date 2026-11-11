@@ -87,7 +87,9 @@ async function waitSaved(p) { for (let i = 0; i < 40; i++) { if (/Saved/.test(aw
 const LANGS = process.env.LANGS ? process.env.LANGS.split(',') : ['en', 'es', 'fr', 'pt', 'nl', 'pl', 'pcm', 'yo', 'ig', 'zh-Hans', 'zh-Hant', 'ja', 'de', 'ru', 'lt'];
 const SHOT_LANGS = ['en', 'de', 'ru', 'yo', 'ja'];
 const WIDTHS = process.env.ONLY320 ? [[320, 568]] : process.env.QUICK ? [[390, 844]] : [[320, 568], [360, 740], [390, 844], [430, 932]];
-const VIEWS = ['today', 'people', 'disciples', 'events', 'week', 'about'];
+const VIEWS = ['today', 'people', 'disciples', 'events', 'encourage', 'about'];
+// About is no longer a tab: it opens from the top of Settings
+async function gotoView(p, v) { if (v === 'about') { await p.click('[data-act="settings"]'); await wait(250); await p.click('#aboutCard [data-v="about"]'); } else await p.click('.tab[data-v="' + v + '"]'); }
 const KEYS = Object.values(JSON.parse(fs.readFileSync(path.join(ROOT, 'lang', 'keys.json'), 'utf8')));
 const normT = s => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const PACKS = {}; for (const c of ['es', 'fr', 'pt', 'nl', 'pl', 'pcm', 'yo', 'ig', 'zh-Hans', 'zh-Hant', 'ja', 'de', 'ru', 'lt']) PACKS[c] = JSON.parse(fs.readFileSync(path.join(ROOT, 'lang', c + '.json'), 'utf8'));
@@ -137,6 +139,18 @@ try {
     names.forEach((n, i) => window.__shepherd.saveContact({ id: 'a' + i, name: n, phone: '07700 900' + String(100 + i), consent: i !== 3, status: 'active', stage: stages[i % 6], everyDays: 3, createdAt: t - 30 * 864e5, lastContact: t - (i + 1) * 864e5, replyState: ['me', 'them', 'none'][i % 3], meSince: t - 864e5, notes: 'Met at Sunday service', log: [{ t: t - 2 * 864e5, k: 'contact', text: 'Messaged on WhatsApp' }], studies: [{ t: t - 864e5, topic: 'Who is Jesus' }], nextStudy: i < 3 ? { date: d(i), time: '19:00', topic: 'Prayer' } : null, instagram: i === 1 ? 'dan.m' : '' }));
   });
   await addContact(A.p, 'Typed Person', '0244123456'); await wait(500);
+  // imported people in every category, encouragement dates and a key event with a countdown
+  await A.p.evaluate(() => {
+    const W = window.__shepherd, t = Date.now(), d = n => { const x = new Date(t + n * 864e5); return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
+    W.SORT.agreed = true;
+    W.startImport([{ n: 'Abimbola Fashola-Adeyemi', p: ['07700 900801'] }, { n: 'Mariana Constantinescu', p: ['07700 900802'] }, { n: 'Joseph Kowalczyk', p: ['07700 900803'] }, { n: 'Esther Nakamura', p: ['07700 900804'] }, { n: 'Benedikt Großmann', p: ['07700 900805'] }, { n: 'Ruth Ade', p: ['07700 900806'] }]);
+    ['sharing', 'kingdom', 'family', 'friends', 'other'].forEach(c => W.sortOne(c));
+    W.S.events.enc1 = { id: 'enc1', kind: 'enc', type: 'date', who: 'Mariana Constantinescu', date: d(0), time: '18:30', activity: 'Coffee and a long walk by the river', food: true, cost: 14.5, name: 'Encouragement date with Mariana Constantinescu', createdAt: t };
+    W.S.events.enc2 = { id: 'enc2', kind: 'enc', type: 'hangout', who: 'Joseph Kowalczyk', date: d(3), time: '', activity: 'Football', food: false, cost: 6, name: 'Hangout with Joseph Kowalczyk', createdAt: t };
+    W.S.events.enc3 = { id: 'enc3', kind: 'enc', type: 'date', who: 'Grace Owusu', date: d(-5), time: '12:00', activity: 'Lunch', food: true, cost: 22, name: 'Encouragement date with Grace Owusu', createdAt: t };
+    W.S.events.gmc = { id: 'gmc', name: 'GMC', date: d(40), time: '10:00', place: 'Central Hall Westminster', invited: [], came: [], notify: true, countdown: 'monthly', createdAt: t };
+  });
+  await wait(600); await A.p.evaluate(() => { const sh = document.querySelector('#sheet [data-act="closesheet"]'); if (sh) sh.click(); }); await wait(600);
   await A.p.evaluate(() => { const S = window.__shepherd.S; S.profile.prayerOn = true; });
   await wait(1500);
 
@@ -145,7 +159,7 @@ try {
     for (const [wd, ht] of WIDTHS) {
       await A.p.setViewportSize({ width: wd, height: ht }); await wait(250);
       for (const v of VIEWS) {
-        await A.p.click('.tab[data-v="' + v + '"]'); await wait(300);
+        await gotoView(A.p, v); await wait(300);
         const bad = await layoutProblems(A.p); if (bad.length) report.layout.push(code + ' ' + wd + ' ' + v + ': ' + bad.join(' | '));
         if (code !== 'en' && wd === 390) addMiss(code, untranslated(code, await screenText(A.p)));
         if (SHOT_LANGS.includes(code) && (wd === 320 || wd === 390)) await A.p.screenshot({ path: path.join(OUT, code + '-' + wd + '-' + v + '.png') });
@@ -166,6 +180,13 @@ try {
       for (const [act, name] of [['yourdata', 'privacy sheet'], ['notifguide', 'notifications guide']]) {
         const b = A.p.locator('#main [data-act="' + act + '"]').first();
         if (await b.count()) { await b.click(); await wait(400); const bad = await layoutProblems(A.p); if (bad.length) report.layout.push(code + ' ' + wd + ' ' + name + ': ' + bad.join(' | ')); if (code !== 'en' && wd === 390) addMiss(code, untranslated(code, await screenText(A.p))); await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c) c.click(); }); await wait(300); }
+      }
+      for (const [open, name] of [[async () => { await A.p.click('.tab[data-v="encourage"]'); await wait(250); await A.p.click('[data-act="newenc"][data-t="date"]'); }, 'encourage form'], [async () => { await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.click('#qaCard [data-act="importguide"]'); }, 'import guide'], [async () => { await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.click('#qaCard [data-act="sortgo"]'); }, 'sort sheet'], [async () => { await A.p.click('.tab[data-v="events"]'); await wait(250); await A.p.click('[data-act="newevent"]'); }, 'event form'], [async () => { await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.click('#qaName'); }, 'quick add list']]) {
+        await open(); await wait(450);
+        const bad = await layoutProblems(A.p); if (bad.length) report.layout.push(code + ' ' + wd + ' ' + name + ': ' + bad.join(' | '));
+        if (code !== 'en' && wd === 390) addMiss(code, untranslated(code, await screenText(A.p)));
+        if (SHOT_LANGS.includes(code) && (wd === 320 || wd === 390)) await A.p.screenshot({ path: path.join(OUT, code + '-' + wd + '-' + name.replace(/ /g, '-') + '.png') });
+        await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c) c.click(); if (document.activeElement) document.activeElement.blur(); }); await wait(350);
       }
       await A.p.click('.tab[data-v="events"]'); await wait(250);
       { const b = A.p.locator('[data-act="calguide"]').first(); if (await b.count()) { await b.click(); await wait(400); const bad = await layoutProblems(A.p); if (bad.length) report.layout.push(code + ' ' + wd + ' calendar guide: ' + bad.join(' | ')); await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c) c.click(); }); await wait(300); } }
@@ -196,7 +217,10 @@ try {
     if (code !== 'en') await setLang(A.p, code);
     await A.p.addScriptTag({ content: axeSrc });
     const run = () => A.p.evaluate(async () => (await axe.run(document, { resultTypes: ['violations'] })).violations.filter(v => v.impact === 'serious' || v.impact === 'critical').map(v => v.id + 'x' + v.nodes.length + ': ' + v.nodes.slice(0, 2).map(n => n.target.join(' ')).join(', ')));
-    for (const v of VIEWS) { await A.p.click('.tab[data-v="' + v + '"]'); await wait(350); report.axe[code + ' ' + v] = await run(); }
+    for (const v of VIEWS) { await gotoView(A.p, v); await wait(350); report.axe[code + ' ' + v] = await run(); }
+    for (const [open, name] of [[async () => { await A.p.click('.tab[data-v="encourage"]'); await wait(250); await A.p.click('[data-act="newenc"][data-t="date"]'); }, 'encourage form'], [async () => { await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.click('#qaCard [data-act="importguide"]'); }, 'import guide'], [async () => { await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.click('#qaCard [data-act="sortgo"]'); }, 'sort sheet'], [async () => { await A.p.click('.tab[data-v="events"]'); await wait(250); await A.p.click('[data-act="newevent"]'); }, 'event form']]) {
+      await open(); await wait(450); report.axe[code + ' ' + name] = await run(); await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c) c.click(); }); await wait(350);
+    }
     await A.p.click('[data-act="settings"]'); await wait(350); report.axe[code + ' settings'] = await run();
     await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.locator('#main [data-act="open"]').first().click(); await wait(350); report.axe[code + ' person'] = await run();
   }
@@ -205,7 +229,7 @@ try {
   // text made 160% bigger still fits
   await A.p.setViewportSize({ width: 390, height: 844 });
   await A.p.evaluate(() => { document.documentElement.style.fontSize = '160%'; document.body.style.zoom = ''; });
-  for (const v of VIEWS) { await A.p.click('.tab[data-v="' + v + '"]'); await wait(300); report.big[v] = await overflow(A.p); }
+  for (const v of VIEWS) { await gotoView(A.p, v); await wait(300); report.big[v] = await overflow(A.p); }
   await A.p.evaluate(() => { document.documentElement.style.fontSize = ''; });
 
   // speed and phone storage with 500 people
@@ -213,7 +237,7 @@ try {
     const S = window.__shepherd.S, t = Date.now();
     for (let i = 0; i < 500; i++) S.contacts['big' + i] = { id: 'big' + i, name: 'Person ' + i + ' Example', phone: '07700 9' + String(10000 + i).slice(-5), consent: true, status: 'active', stage: 'Interested', everyDays: 3, createdAt: t - 9e9, lastContact: t - (i % 20) * 864e5, replyState: i % 7 ? 'none' : 'me', log: Array.from({ length: 12 }, (_, j) => ({ t: t - j * 864e5, k: 'contact', text: 'Messaged on WhatsApp' })), studies: [] };
     const out = {};
-    for (const v of ['today', 'people', 'disciples', 'events', 'week', 'about']) { const t0 = performance.now(); document.querySelector('.tab[data-v="' + v + '"]').click(); await new Promise(r => setTimeout(r, 0)); out[v] = Math.round(performance.now() - t0) + 'ms'; }
+    for (const v of ['today', 'people', 'disciples', 'events', 'encourage']) { const t0 = performance.now(); document.querySelector('.tab[data-v="' + v + '"]').click(); await new Promise(r => setTimeout(r, 0)); out[v] = Math.round(performance.now() - t0) + 'ms'; }
     let bytes = 0; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); bytes += (k.length + (localStorage.getItem(k) || '').length) * 2; }
     out.phoneStorageKB = Math.round(bytes / 1024) + ' KB (of ~5000 KB)';
     for (let i = 0; i < 500; i++) delete S.contacts['big' + i];
