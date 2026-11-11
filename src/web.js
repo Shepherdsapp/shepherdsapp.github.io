@@ -148,6 +148,8 @@ function authHtml(mode, msg) {
     '<label class="field" for="aEmail">Email<input class="inp" id="aEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" value="' + esc(lsGet('shepherd:email') || '') + '"' + (code ? ' readonly' : '') + '></label>' +
     (code ? '<label class="field" for="aCode">6-digit code<input class="inp" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label>' : '') +
     (forgot ? '' : '<label class="field" for="aPw">' + (code ? 'New password' : 'Password') + '<span class="pwrow"><input class="inp" id="aPw" type="password" autocomplete="' + (create || code ? 'new-password' : 'current-password') + '" minlength="8"><button type="button" class="btn ghost small" id="aShow">Show</button></span></label>') +
+    (create ? '<div id="aChurchBox" hidden><label class="field" for="aChurch">Your church<select class="inp" id="aChurch"><option value="">Choose later</option></select></label>' +
+      '<label class="tick1 agreetick" for="aMinor" style="margin-top:8px"><input type="checkbox" id="aMinor"><span>I\'m under 18. <span class="small muted">You must be 13 or older to use Shepherd.</span></span></label></div>' : '') +
     (create ? '<label class="tick1 agreetick" for="aAgree"><input type="checkbox" id="aAgree"><span>I agree to use Shepherd responsibly, as set out in the privacy notice and acceptable use statement.</span></label>' : '') +
     '<p class="small" id="aErr" role="alert" style="margin:0;color:var(--bad)" hidden></p>' +
     '<button class="btn primary block" type="submit" id="aGo">' + (create ? 'Create my account' : forgot ? 'Get a reset code' : code ? 'Save new password' : 'Sign in') + '</button>' +
@@ -163,6 +165,12 @@ function showAuth(mode, msg) {
   authEl.innerHTML = authHtml(mode || 'signin', msg); authEl.dataset.mode = mode || 'signin';
   bindAuth();
   if (mode === 'create') inviteNeeded().then(function (on) { var b = authEl && authEl.querySelector('#aInviteBox'); if (b) b.hidden = !on; });
+  // the church list comes from the server; on an older server the box just stays hidden
+  if (mode === 'create') churchNames().then(function (list) {
+    var box = authEl && authEl.querySelector('#aChurchBox'), sel = authEl && authEl.querySelector('#aChurch'); if (!box || !sel || !list.length) return;
+    list.forEach(function (c) { var o = document.createElement('option'); o.value = c.id; o.textContent = c.name; o.setAttribute('data-noi18n', ''); sel.appendChild(o); });
+    box.hidden = false;
+  });
   setTimeout(function () { var f = authEl.querySelector(mode === 'code' ? '#aCode' : '#aEmail'); if (f && !f.value) try { f.focus(); } catch (e) {} }, 60);
 }
 // the invite code field only shows when the church has set a code on the server
@@ -170,6 +178,11 @@ var inviteP = null;
 function inviteNeeded() {
   if (!inviteP) inviteP = api('GET', '/api/signup/options').then(function (r) { return !!(r && r.invite); }, function () { inviteP = null; return false; });
   return inviteP;
+}
+var churchP = null;
+function churchNames() {
+  if (!churchP) churchP = api('GET', '/api/churches').then(function (r) { return (r && r.churches) || []; }, function () { churchP = null; return []; });
+  return churchP;
 }
 function hideAuth() { if (authEl) { authEl.hidden = true; authEl.innerHTML = ''; } document.body.classList.remove('noscroll'); }
 function bindAuth() {
@@ -201,6 +214,7 @@ function bindAuth() {
       else if (mode === 'code') r = await api('POST', '/api/reset/confirm', { email: email, code: authEl.querySelector('#aCode').value, key: key });
       else r = await api('POST', '/api/login', { email: email, key: key });
       if (mode === 'create') W.agreedAt = Date.now(); // agreed to the acceptable use statement when creating the account
+      if (mode === 'create') { var ach = authEl.querySelector('#aChurch'), ami = authEl.querySelector('#aMinor'); if (ach && (ach.value || (ami && ami.checked))) lsSet('shepherd:pendingSocial', JSON.stringify({ church: ach.value || '', minor: !!(ami && ami.checked) })); }
       finishSignIn(r.token, r.user);
       if (mode === 'create' && r.user.name) W.newName = r.user.name;
     } catch (x) {

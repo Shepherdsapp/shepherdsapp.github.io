@@ -507,6 +507,165 @@ try {
   delete env.GMAIL_USER; delete env.GMAIL_APP_PASSWORD; delete env.__connect;
 } catch (e) { delete env.GMAIL_USER; delete env.GMAIL_APP_PASSWORD; delete env.__connect; ok(false, 'crashed: ' + e.message); }
 
+current = 'Friends, churches and shared plans';
+try {
+  const q = sql => { const x = env.DB.raw.exec(sql)[0]; return x ? x.values : []; };
+  const ip = { 'CF-Connecting-IP': '9.9.9.9' };
+  const mk = async (email, name) => { const x = await call('POST', '/api/signup', { email, key: key('pw-' + email), name }, null, ip); return { t: x.data.token, id: x.data.user.id, email }; };
+  const A = await mk('hashir@church.test', 'Hashir Khan'), B = await mk('kaps@church.test', 'Kaps Mensah'), C = await mk('qasim@church.test', 'Qasim Ali'), D = await mk('stranger@else.test', 'Dodgy Stranger');
+  const K = await mk('kid@church.test', 'Timothy Young'), K2 = await mk('kid2@church.test', 'Lois Young');
+  const out = (uid) => q("SELECT title, body, url, at FROM outbox WHERE uid = '" + uid + "' ORDER BY id");
+  const docs = (t, ops) => call('POST', '/api/docs', { ops }, t);
+  const day = n => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10);
+  r = await call('GET', '/health'); ok(r.data.version === 4, 'the server says it is version 4');
+  r = await call('GET', '/api/churches'); ok(r.status === 200 && r.data.churches[0].name === 'London ICC' && r.data.churches[0].id === 'c_london_icc', 'London ICC is the first church on the list, before anyone signs in');
+  r = await call('GET', '/api/social/me', undefined, A.t);
+  ok(r.status === 200 && r.data.on === true && r.data.church === null && r.data.minor === false && r.data.approved === true && /^[A-Z2-9]{8}$/.test(r.data.code) && r.data.owner === false && r.data.friends.length === 0, 'everyone starts as an adult with a friend code, no church and no friends');
+  const codeA = r.data.code;
+  r = await call('GET', '/api/social/me'); ok(r.status === 401, 'friends need you to be signed in');
+  for (const u of [A, B, C]) await call('POST', '/api/social/profile', { church: 'c_london_icc' }, u.t);
+  r = await call('GET', '/api/social/me', undefined, B.t); ok(r.data.church && r.data.church.name === 'London ICC', 'choosing a church is saved');
+  r = await call('POST', '/api/social/profile', { church: 'c_nope' }, B.t); ok(r.status === 400, 'a church that is not on the list is refused');
+  // adding another church: close matches become the same church
+  r = await call('POST', '/api/social/profile', { newChurch: 'Grace Community Church' }, D.t); const gc = r.data.church;
+  ok(r.status === 200 && gc && gc.name === 'Grace Community Church', 'someone can add another church');
+  r = await call('POST', '/api/social/profile', { newChurch: '  the grace  community church ' }, C.t); ok(r.data.church.id === gc.id, 'the same church typed differently is not added twice');
+  r = await call('POST', '/api/social/profile', { newChurch: 'London International Christian Church' }, C.t); ok(r.data.church.id === 'c_london_icc', '"London International Christian Church" is London ICC');
+  r = await call('POST', '/api/social/profile', { newChurch: 'ICC, London' }, C.t); ok(r.data.church.id === 'c_london_icc' && q('SELECT COUNT(*) FROM churches')[0][0] === 2, '"ICC, London" is London ICC too: still two churches');
+  r = await call('POST', '/api/social/profile', { newChurch: 'ab' }, C.t); ok(r.status === 400, 'a church name needs to be a real name');
+  // people from my church
+  r = await call('GET', '/api/social/people', undefined, A.t);
+  ok(r.data.people.length === 2 && r.data.people.map(x => x.name).join() === 'Kaps M.,Qasim A.' && !JSON.stringify(r.data).includes('@'), 'People from my church: first name and initial only, no emails, not people from other churches');
+  // friend requests
+  r = await call('POST', '/api/social/friend', { to: B.id }, A.t); ok(r.data.state === 'sent', 'a friend request is sent');
+  ok(out(B.id).some(x => x[0] === 'Friend request from Hashir K.' && /friends=1/.test(x[2]) && x[3] <= Date.now()), 'they are told straight away, with first name and initial');
+  r = await call('GET', '/api/social/me', undefined, B.t); ok(r.data.incoming.length === 1 && r.data.incoming[0].name === 'Hashir K.' && r.data.friends.length === 0, 'the request is waiting for them');
+  r = await call('GET', '/api/social/feed', undefined, B.t); ok(r.data.plans.length === 0, 'nothing is shared before they accept');
+  await call('POST', '/api/social/friend', { to: B.id }, A.t); ok(out(B.id).filter(x => /Friend request/.test(x[0])).length === 1, 'asking twice does not notify twice');
+  r = await call('POST', '/api/social/friend/answer', { id: A.id, accept: true }, B.t);
+  r = await call('GET', '/api/social/me', undefined, A.t); ok(r.data.friends.length === 1 && r.data.friends[0].name === 'Kaps Mensah' && r.data.friends[0].church === 'London ICC', 'accepting makes you friends, and friends see full names');
+  ok(out(A.id).some(x => x[0] === 'Kaps Mensah accepted your friend request'), 'the person who asked is told');
+  r = await call('POST', '/api/social/friend', { to: 'QASIM@church.test' }, A.t); const r2 = await call('POST', '/api/social/friend', { to: 'nobody@nowhere.test' }, A.t);
+  ok(r.data.state === 'sent' && r2.data.state === 'sent' && JSON.stringify(r.data) === JSON.stringify(r2.data), 'adding by email answers the same whether or not the account exists');
+  r = await call('POST', '/api/social/friend', { to: A.id }, C.t); ok(r.data.state === 'friends', 'asking someone who already asked you accepts their request');
+  r = await call('POST', '/api/social/friend', { to: codeA.toLowerCase() }, D.t); await call('POST', '/api/social/friend/answer', { id: D.id, accept: false }, A.t);
+  r = await call('GET', '/api/social/me', undefined, A.t); ok(r.data.friends.length === 2 && r.data.incoming.length === 0, 'a friend code works, and a request can be declined');
+  r = await call('POST', '/api/social/friend', { to: B.id }, D.t); r = await call('GET', '/api/social/me', undefined, B.t); ok(r.data.incoming.length === 0, 'someone from another church cannot add you from the list');
+  // sharing a plan
+  env.SENT = 0;
+  r = await docs(A.t, [{ p: 'profile', d: { name: 'Hashir Khan', lang: 'en', currency: 'GBP', notify: {} }, t: Date.now() },
+    { p: 'profile/contacts/secret1', d: { name: 'Private Person', phone: '07700 900123', notes: 'private note' }, t: Date.now() },
+    { p: 'profile/events/priv', d: { kind: 'enc', type: 'date', who: 'Private Friend', date: day(2), time: '12:00', activity: 'Lunch', cost: 30 }, t: Date.now() },
+    { p: 'profile/events/foot', d: { kind: 'enc', type: 'hangout', who: 'Secret Name', share: 'friends', date: day(3), time: '18:30', activity: 'Football', place: 'Regent\'s Park', food: true, cost: 24, pay: 'split' }, t: Date.now() }]);
+  ok(out(B.id).some(x => x[0] === 'New hangout from Hashir Khan' && /^Football · /.test(x[1])) && out(C.id).some(x => x[0] === 'New hangout from Hashir Khan') && !out(D.id).some(x => /New hangout/.test(x[0])), 'friends are told about a newly shared plan; nobody else is');
+  await docs(A.t, [{ p: 'profile/events/foot', d: { kind: 'enc', type: 'hangout', who: 'Secret Name', share: 'friends', date: day(3), time: '18:30', activity: 'Football', place: 'Regent\'s Park', food: true, cost: 24, pay: 'split', note: 'x' }, t: Date.now() + 5 }]);
+  ok(out(B.id).filter(x => /New hangout/.test(x[0])).length === 1, 'saving it again does not tell them again');
+  r = await call('GET', '/api/social/feed', undefined, B.t); const fb = JSON.stringify(r.data);
+  const pl = r.data.plans[0];
+  ok(r.data.plans.length === 1 && pl.title === 'Football' && pl.hostName === 'Hashir Khan' && pl.date === day(3) && pl.time === '18:30' && pl.place === 'Regent\'s Park' && pl.food === true && pl.cost === 24 && pl.pay === 'split' && pl.cur === 'GBP' && pl.band === 'h' && pl.joined === false && pl.going.length === 0, 'a friend sees the whole shared plan: what, when, where, food, cost and who pays');
+  ok(!/Private|secret1|07700|Lunch|Secret Name|private note/.test(fb), 'a friend never sees private plans, contacts, numbers, notes or the name typed on the plan');
+  r = await call('GET', '/api/social/feed', undefined, D.t); ok(r.data.plans.length === 0, 'someone who is not a friend sees nothing');
+  r = await call('POST', '/api/social/join', { host: A.id, plan: 'foot' }, D.t); ok(r.status === 403, 'and cannot join');
+  r = await call('POST', '/api/social/join', { host: A.id, plan: 'priv' }, B.t); ok(r.status === 404, 'a private plan cannot be joined even by a friend');
+  r = await call('POST', '/api/social/join', { host: A.id, plan: 'foot' }, B.t);
+  ok(r.data.joined === true && out(A.id).some(x => x[0] === 'Kaps Mensah is going to Football'), 'one tap joins, and the host is told');
+  await call('POST', '/api/social/join', { host: A.id, plan: 'foot' }, B.t); ok(out(A.id).filter(x => /is going to/.test(x[0])).length === 1, 'joining twice counts once');
+  await call('POST', '/api/social/join', { host: A.id, plan: 'foot' }, C.t);
+  ok(out(B.id).some(x => x[0] === 'Qasim A. is going to Football') && out(A.id).some(x => x[0] === 'Qasim Ali is going to Football') && !out(C.id).some(x => /is going to/.test(x[0])), 'when someone else joins, the host and the people going are told, not the person who joined');
+  r = await call('GET', '/api/social/feed', undefined, C.t); const pc = r.data.plans[0];
+  ok(pc.joined && pc.going.length === 2 && pc.going.find(g => g.me).name === 'Qasim Ali' && pc.going.find(g => !g.me).name === 'Kaps M.' && pc.band === 'm', 'the plan shows who is going (people you are not friends with by first name and initial), and the split price updates');
+  r = await call('GET', '/api/social/feed', undefined, A.t); ok(r.data.plans.length === 1 && r.data.plans[0].mine === true && r.data.plans[0].going.length === 2, 'the host sees who is going to their own plan');
+  // change, leave, cancel
+  await docs(A.t, [{ p: 'profile/events/foot', d: { kind: 'enc', type: 'hangout', share: 'friends', date: day(4), time: '19:00', activity: 'Football', place: 'Regent\'s Park', food: true, cost: 24, pay: 'split' }, t: Date.now() + 10 }]);
+  ok(out(B.id).some(x => x[0] === 'Hashir K. changed Football') && out(C.id).some(x => /changed Football/.test(x[0])), 'the people going are told when the day or time changes');
+  r = await call('POST', '/api/social/join', { host: A.id, plan: 'foot', on: false }, C.t);
+  ok(r.data.joined === false && out(A.id).some(x => x[0] === 'Qasim Ali can no longer make Football'), 'leaving tells the host');
+  await docs(A.t, [{ p: 'profile/events/foot', d: null, t: Date.now() + 20 }]);
+  ok(out(B.id).some(x => x[0] === 'Hashir K. cancelled Football') && q("SELECT COUNT(*) FROM joins WHERE plan = 'foot'")[0][0] === 0, 'deleting a plan tells the people going and clears who was going');
+  r = await call('GET', '/api/social/feed', undefined, B.t); ok(r.data.plans.length === 0, 'a deleted plan is gone for friends');
+  // the app's own schedule never removes these
+  const before = q("SELECT COUNT(*) FROM outbox WHERE uid = '" + B.id + "' AND sent = 0")[0][0];
+  await call('POST', '/api/schedule', { items: [{ at: Date.now() + 3600e3, title: 'Message Sam', body: 'x', tag: 't', url: './' }] }, B.t);
+  ok(q("SELECT COUNT(*) FROM outbox WHERE uid = '" + B.id + "' AND sent = 0")[0][0] === before + 1, 'the phone\'s own schedule does not wipe friend notifications');
+  // languages and quiet
+  await docs(B.t, [{ p: 'profile', d: { name: 'Kaps Mensah', lang: 'es', notify: {} }, t: Date.now() }]);
+  await docs(C.t, [{ p: 'profile', d: { name: 'Qasim Ali', lang: 'en', notify: { encourage: false } }, t: Date.now() }]);
+  const nC = out(C.id).length;
+  await docs(A.t, [{ p: 'profile/events/cof', d: { kind: 'enc', type: 'date', share: 'friends', date: day(5), time: '10:00', activity: 'Coffee', cost: 0, pay: 'own' }, t: Date.now() }]);
+  ok(out(B.id).some(x => x[0] === 'Nueva cita de ánimo de Hashir Khan'), 'notifications arrive in each person\'s own language');
+  ok(out(C.id).length === nC, 'someone who turned Encourage notifications off is not told about plans');
+  r = await call('GET', '/api/social/feed', undefined, B.t); ok(r.data.plans[0].band === 'free', 'a plan that costs nothing is tagged free');
+  // unshare
+  await call('POST', '/api/social/join', { host: A.id, plan: 'cof' }, B.t);
+  await docs(A.t, [{ p: 'profile/events/cof', d: { kind: 'enc', type: 'date', share: 'me', date: day(5), time: '10:00', activity: 'Coffee', cost: 0 }, t: Date.now() + 30 }]);
+  r = await call('GET', '/api/social/feed', undefined, B.t); ok(r.data.plans.length === 0 && q("SELECT COUNT(*) FROM joins WHERE plan = 'cof'")[0][0] === 0, 'switching a plan back to Just me takes it away from friends');
+  // remove, block, report
+  await docs(A.t, [{ p: 'profile/events/walk', d: { kind: 'enc', type: 'hangout', share: 'friends', date: day(6), activity: 'Walk', cost: '' }, t: Date.now() }]);
+  await call('POST', '/api/social/join', { host: A.id, plan: 'walk' }, C.t);
+  r = await call('GET', '/api/social/feed', undefined, C.t); ok(r.data.plans[0].band === '' && r.data.plans[0].cost === null, 'a plan with no cost typed has no price tag');
+  await call('POST', '/api/social/friend/remove', { id: A.id }, C.t);
+  r = await call('GET', '/api/social/feed', undefined, C.t); ok(r.data.plans.length === 0 && q("SELECT COUNT(*) FROM joins WHERE uid = '" + C.id + "'")[0][0] === 0, 'removing a friend stops sharing both ways and takes you off their plans');
+  await call('POST', '/api/social/block', { id: A.id }, C.t); await call('POST', '/api/social/friend', { to: C.id }, A.t);
+  r = await call('GET', '/api/social/me', undefined, C.t); ok(r.data.incoming.length === 0 && r.data.blocked.length === 1 && r.data.blocked[0].name === 'Hashir K.', 'a blocked person cannot send you requests');
+  r = await call('GET', '/api/social/people', undefined, C.t); ok(!r.data.people.some(x => x.id === A.id), 'and is hidden from your church list');
+  await call('POST', '/api/social/unblock', { id: A.id }, C.t); r = await call('GET', '/api/social/me', undefined, C.t); ok(r.data.blocked.length === 0, 'you can unblock someone');
+  r = await call('POST', '/api/social/report', { id: A.id, plan: 'walk', text: 'Something felt wrong' }, C.t); ok(r.status === 200 && q('SELECT text FROM reports')[0][0] === 'Something felt wrong', 'a report is recorded');
+  // under-18s (CAMPUS)
+  const mails = []; env.GMAIL_USER = 'lostshepherdapp@gmail.com'; env.GMAIL_APP_PASSWORD = 'x';
+  env.__connect = () => { let sendTo; const lines = ['220 hi']; const dec = new TextDecoder(), encd = new TextEncoder(); let data = false, buf = '';
+    const readable = new ReadableStream({ pull(c) { return new Promise(res => { const tick = () => { if (lines.length) { c.enqueue(encd.encode(lines.shift() + '\r\n')); res(); } else setTimeout(tick, 1); }; tick(); }); } });
+    const writable = new WritableStream({ write(chunk) { buf += dec.decode(chunk); if (data) { if (buf.endsWith('\r\n.\r\n')) { mails.push(buf); data = false; buf = ''; lines.push('250 ok'); } return; } const ln = buf.trim(); buf = ''; if (/^EHLO/.test(ln)) lines.push('250 ok'); else if (/^AUTH/.test(ln)) lines.push('235 ok'); else if (/^MAIL|^RCPT/.test(ln)) lines.push('250 ok'); else if (/^DATA/.test(ln)) { data = true; lines.push('354 go'); } } });
+    return { readable, writable, close: async () => {} }; };
+  env.OWNER_EMAIL = 'Hashir@church.test';
+  await call('POST', '/api/social/friend', { to: K.id }, A.t); await call('POST', '/api/social/friend/answer', { id: A.id, accept: true }, K.t); // friends while K still counted as an adult
+  r = await call('POST', '/api/social/profile', { church: 'c_london_icc', minor: true }, K.t);
+  ok(r.data.minor === true && r.data.approved === false && r.data.friends.length === 0, 'ticking under 18 puts the account on hold and clears its friends');
+  const mailText = mails.map(m => Buffer.from((m.split('\r\n\r\n')[1] || '').replace(/\s/g, ''), 'base64').toString('utf8')).join('\n');
+  ok(mails.length === 1 && /To: <lostshepherdapp@gmail.com>/.test(mails[0]) && /Timothy Young/.test(mailText) && /kid@church.test/.test(mailText) && /London ICC \(CAMPUS\)/.test(mailText), 'the owner is emailed that a CAMPUS member is waiting');
+  ok(out(A.id).some(x => x[0] === 'A CAMPUS member is waiting for approval'), 'and gets a notification');
+  r = await call('POST', '/api/social/friend', { to: 'kaps@church.test' }, K.t); ok(r.status === 403 && r.data.error === 'not_approved', 'before approval an under-18 cannot add friends');
+  r = await call('GET', '/api/social/feed', undefined, K.t); ok(r.data.plans.length === 0, 'or see plans');
+  r = await call('POST', '/api/social/profile', { minor: false }, K.t); ok(r.status === 403 && r.data.error === 'ask_owner', 'and cannot switch themselves back to adult');
+  r = await call('GET', '/api/social/admin', undefined, B.t); ok(r.status === 403, 'only the owner can open approvals');
+  r = await call('GET', '/api/social/me', undefined, A.t); ok(r.data.owner === true && r.data.waiting === 1, 'the owner sees one person waiting');
+  r = await call('GET', '/api/social/admin', undefined, A.t); ok(r.data.waiting.length === 1 && r.data.waiting[0].name === 'Timothy Young' && r.data.waiting[0].church === 'London ICC' && r.data.reports.length === 1 && r.data.churches.find(c => c.id === 'c_london_icc').n >= 3, 'approvals list who is waiting, with reports and churches');
+  await call('POST', '/api/social/admin/approve', { id: K.id }, A.t);
+  r = await call('GET', '/api/social/me', undefined, K.t); ok(r.data.approved === true && r.data.minor === true && out(K.id).some(x => x[0] === 'You\'re approved'), 'once approved they are told and can take part');
+  r = await call('GET', '/api/social/people', undefined, B.t); ok(!r.data.people.some(x => x.id === K.id), 'under-18s never appear in the church list');
+  r = await call('GET', '/api/social/people', undefined, K.t); ok(r.data.people.length === 0, 'and do not browse it');
+  await call('POST', '/api/social/friend', { to: 'kid@church.test' }, B.t); await call('POST', '/api/social/friend', { to: K.id }, B.t);
+  r = await call('GET', '/api/social/me', undefined, K.t); ok(r.data.incoming.length === 0, 'an adult cannot send an under-18 a friend request, by email or from a list');
+  await call('POST', '/api/social/friend', { to: 'kaps@church.test' }, K.t); await call('POST', '/api/social/friend/answer', { id: K.id, accept: true }, B.t);
+  r = await call('GET', '/api/social/me', undefined, B.t); ok(r.data.friends.some(f => f.id === K.id && f.church === 'London ICC (CAMPUS)'), 'an under-18 can add an adult they know by email, and shows as London ICC (CAMPUS)');
+  await call('POST', '/api/social/profile', { church: 'c_london_icc', minor: true }, K2.t); await call('POST', '/api/social/admin/approve', { id: K2.id }, A.t);
+  await call('POST', '/api/social/friend', { to: 'kaps@church.test' }, K2.t); await call('POST', '/api/social/friend/answer', { id: K2.id, accept: true }, B.t);
+  await docs(B.t, [{ p: 'profile/events/bowl', d: { kind: 'enc', type: 'hangout', share: 'friends', date: day(7), time: '15:00', activity: 'Bowling', cost: 12, pay: 'own' }, t: Date.now() }]);
+  r = await call('GET', '/api/social/feed', undefined, K.t); const pk = r.data.plans.find(x => x.id === 'bowl');
+  ok(pk && pk.band === 'm' && pk.cost === undefined && pk.pay === undefined && pk.needGroup === true, 'an under-18 sees a price tag only, and that the plan needs a group');
+  r = await call('POST', '/api/social/join', { host: B.id, plan: 'bowl' }, K.t); ok(r.status === 403 && r.data.error === 'need_group', 'an under-18 cannot be alone on a plan with an adult');
+  await call('POST', '/api/social/join', { host: B.id, plan: 'bowl' }, A.t);
+  r = await call('POST', '/api/social/join', { host: B.id, plan: 'bowl' }, K.t); ok(r.data.joined === true, 'once someone else is going (3 or more people) they can join');
+  await call('POST', '/api/social/join', { host: B.id, plan: 'bowl', on: false }, A.t);
+  ok(q("SELECT COUNT(*) FROM joins WHERE plan = 'bowl'")[0][0] === 0 && out(K.id).some(x => x[0] === 'Bowling needs 3 or more people'), 'if that leaves just an adult and an under-18, the under-18 is taken off and told why');
+  await call('POST', '/api/social/admin/approve', { id: K2.id, ok: false }, A.t);
+  r = await call('GET', '/api/social/me', undefined, K2.t); ok(r.data.approved === false && r.data.declined === true, 'the owner can decline someone');
+  r = await call('GET', '/api/social/me', undefined, B.t); ok(!r.data.friends.some(f => f.id === K2.id), 'and they drop out of friends lists');
+  // merging duplicate churches
+  await call('POST', '/api/social/profile', { newChurch: 'Grace Comunity Chapel' }, D.t); const dup = (await call('GET', '/api/social/me', undefined, D.t)).data.church;
+  r = await call('POST', '/api/social/admin/merge', { from: dup.id, to: gc.id }, A.t);
+  ok(r.status === 200 && (await call('GET', '/api/social/me', undefined, D.t)).data.church.id === gc.id && q('SELECT COUNT(*) FROM churches')[0][0] === 2, 'the owner can merge a duplicate church into the right one');
+  r = await call('POST', '/api/social/admin/merge', { from: 'c_london_icc', to: gc.id }, A.t); ok(r.status === 400, 'London ICC cannot be merged away');
+  // admin page fallback
+  const fd = new URLSearchParams({ do: 'approve', admin: 'admin-secret-123', email: 'kid2@church.test' });
+  const ar = await worker.fetch(new Request('https://shepherd.test.workers.dev/admin', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'CF-Connecting-IP': '8.8.8.8' }, body: fd.toString() }), env);
+  ok(/is approved/.test(await ar.text()) && (await call('GET', '/api/social/me', undefined, K2.t)).data.approved === true, 'the admin page can approve a CAMPUS member too');
+  // deleting an account removes every trace
+  await call('POST', '/api/account/delete', { key: key('pw-kaps@church.test') }, B.t);
+  ok(['social WHERE uid', 'friends WHERE a', 'friends WHERE b', 'joins WHERE uid', 'joins WHERE host', 'blocks WHERE a', 'announced WHERE host'].every(w => q('SELECT COUNT(*) FROM ' + w + " = '" + B.id + "'")[0][0] === 0), 'deleting an account removes its friends, joins and plans');
+  r = await call('GET', '/api/social/me', undefined, A.t); ok(!r.data.friends.some(f => f.id === B.id), 'and it disappears from friends\' lists');
+  delete env.GMAIL_USER; delete env.GMAIL_APP_PASSWORD; delete env.__connect; delete env.OWNER_EMAIL;
+} catch (e) { delete env.GMAIL_USER; delete env.GMAIL_APP_PASSWORD; delete env.__connect; delete env.OWNER_EMAIL; ok(false, 'crashed: ' + (e.stack || e.message)); }
+
 current = 'Browser access';
 r = await call('GET', '/api/push/key', undefined, null, { Origin: 'https://evil.example.com' });
 ok(!r.headers.get('Access-Control-Allow-Origin'), 'other websites can\'t use the server');

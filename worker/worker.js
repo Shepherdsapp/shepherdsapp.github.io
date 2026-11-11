@@ -20,6 +20,7 @@
         ALLOWED_ORIGINS  Text    where the app lives. Default https://shepherdsapp.github.io
         APP_URL          Text    the app's address. Default https://shepherdsapp.github.io/
         ADMIN_KEY        Secret  a long passcode you make up; lets you give someone a password reset code
+        OWNER_EMAIL      Text    your own Shepherd sign-in email: lets you approve CAMPUS (under-18) members, merge duplicate churches and see reports inside the app
         GMAIL_USER       Text    a Gmail address to email reset codes from (free), e.g. lostshepherdapp@gmail.com
         GMAIL_APP_PASSWORD Secret an App Password made in that Google account (Security → App passwords)
         RESEND_API_KEY   Secret  from resend.com, to email reset codes (needs your own domain on Resend)
@@ -31,13 +32,13 @@
    Open https://<this worker>/health to check: you should see "db":true.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-export const VERSION = 3;
+export const VERSION = 4;
 const DEFAULT_ORIGINS = 'https://shepherdsapp.github.io';
 const DEFAULT_APP_URL = 'https://shepherdsapp.github.io/';
 const MAX_DOC = 256 * 1024;
 const MAX_OPS = 200;
 const SESSION_DAYS = 180;
-const SCHEMA_VERSION = '3';
+const SCHEMA_VERSION = '4';
 const PATH_RE = /^profile(\/(contacts|events|disciples|prayers)\/[A-Za-z0-9_-]{1,80})?$/;
 const PUSH_HOSTS = /(^|\.)(push\.apple\.com|fcm\.googleapis\.com|push\.services\.mozilla\.com|notify\.windows\.com|push\.api\.chromium\.org)$/;
 
@@ -88,6 +89,17 @@ const SCHEMA = [
   'CREATE TABLE IF NOT EXISTS tries (k TEXT PRIMARY KEY, n INTEGER, since INTEGER)',
   'CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)',
   'CREATE TABLE IF NOT EXISTS qrcodes (code TEXT PRIMARY KEY, uid TEXT UNIQUE NOT NULL, created INTEGER)',
+  'CREATE TABLE IF NOT EXISTS churches (id TEXT PRIMARY KEY, name TEXT NOT NULL, norm TEXT UNIQUE NOT NULL, maker TEXT, t INTEGER)',
+  'CREATE TABLE IF NOT EXISTS social (uid TEXT PRIMARY KEY, church TEXT, minor INTEGER DEFAULT 0, ok INTEGER DEFAULT 1, code TEXT UNIQUE, t INTEGER)',
+  'CREATE INDEX IF NOT EXISTS social_church ON social(church)',
+  'CREATE TABLE IF NOT EXISTS friends (a TEXT NOT NULL, b TEXT NOT NULL, st INTEGER DEFAULT 0, t INTEGER, PRIMARY KEY (a, b))',
+  'CREATE INDEX IF NOT EXISTS friends_b ON friends(b)',
+  'CREATE TABLE IF NOT EXISTS blocks (a TEXT NOT NULL, b TEXT NOT NULL, t INTEGER, PRIMARY KEY (a, b))',
+  'CREATE TABLE IF NOT EXISTS joins (host TEXT NOT NULL, plan TEXT NOT NULL, uid TEXT NOT NULL, t INTEGER, PRIMARY KEY (host, plan, uid))',
+  'CREATE INDEX IF NOT EXISTS joins_uid ON joins(uid)',
+  'CREATE TABLE IF NOT EXISTS announced (host TEXT NOT NULL, plan TEXT NOT NULL, t INTEGER, PRIMARY KEY (host, plan))',
+  'CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY AUTOINCREMENT, who TEXT, about TEXT, plan TEXT, text TEXT, t INTEGER)',
+  "INSERT OR IGNORE INTO churches (id, name, norm, maker, t) VALUES ('c_london_icc', 'London ICC', 'icc london', '', 0)",
   "INSERT OR IGNORE INTO meta (k, v) VALUES ('seq', '0')",
   "INSERT OR REPLACE INTO meta (k, v) VALUES ('schema', '" + SCHEMA_VERSION + "')"
 ];
@@ -282,7 +294,10 @@ async function deleteAccount(req, env, me) {
   const b = await body(req);
   const u = await one(env, 'SELECT * FROM users WHERE id = ?', me.uid);
   if (!okKey(b.key) || !same(await sha256(u.salt + b.key), u.pw)) fail(401, 'wrong_password', 'Your password isn\'t right.');
-  await env.DB.batch(['docs', 'hist', 'subs', 'outbox', 'resets', 'sessions', 'qrcodes'].map(t => env.DB.prepare('DELETE FROM ' + t + ' WHERE uid = ?').bind(me.uid)).concat([env.DB.prepare('DELETE FROM users WHERE id = ?').bind(me.uid)]));
+  await env.DB.batch(['docs', 'hist', 'subs', 'outbox', 'resets', 'sessions', 'qrcodes', 'social'].map(t => env.DB.prepare('DELETE FROM ' + t + ' WHERE uid = ?').bind(me.uid)).concat([
+    env.DB.prepare('DELETE FROM friends WHERE a = ? OR b = ?').bind(me.uid, me.uid), env.DB.prepare('DELETE FROM blocks WHERE a = ? OR b = ?').bind(me.uid, me.uid),
+    env.DB.prepare('DELETE FROM joins WHERE uid = ? OR host = ?').bind(me.uid, me.uid), env.DB.prepare('DELETE FROM announced WHERE host = ?').bind(me.uid), env.DB.prepare('DELETE FROM reports WHERE who = ?').bind(me.uid),
+    env.DB.prepare('DELETE FROM users WHERE id = ?').bind(me.uid)]));
   return json({ ok: true });
 }
 
@@ -332,7 +347,7 @@ export function mergeDoc(base, theirs, mine, mineNewer) {
   });
   return out;
 }
-async function push(req, env, me) {
+async function push(req, env, me, ctx) {
   const b = await body(req); const ops = Array.isArray(b.ops) ? b.ops : [];
   if (!ops.length) return json({ ok: true, kept: [] });
   if (ops.length > MAX_OPS) fail(413, 'too_many', 'Too many changes at once.');
@@ -393,6 +408,7 @@ async function push(req, env, me) {
         .bind(me.uid, op.p, op.data, op.del ? 1 : 0, op.t, first + i));
     });
     for (let i = 0; i < stmts.length; i += 90) await env.DB.batch(stmts.slice(i, i + 90));
+    try { await socialAfterSave(env, ctx, me, apply); } catch (e) { console.error(e && e.stack || e); } // telling friends never gets in the way of saving
   }
   return json({ ok: true, kept, saved: apply.length });
 }
@@ -737,7 +753,9 @@ function adminPage(msg) {
     '<style>body{font:17px system-ui;background:#FAF3DF;color:#241F18;max-width:440px;margin:40px auto;padding:0 16px}input,button{font:inherit;width:100%;padding:12px;margin:6px 0;border-radius:12px;border:1.5px solid #D8C8A2;box-sizing:border-box}button{background:#4E5A33;color:#fff;border:0;font-weight:700}.m{background:#fff;padding:14px;border-radius:12px;border:1.5px solid #D8C8A2}</style>' +
     '<h1>Shepherd: reset a password</h1>' + (msg ? '<p class="m">' + msg + '</p>' : '') +
     '<p>Make a one-hour reset code for someone who forgot their password. Give it to them in person or by message. In Shepherd they tap <b>Forgot password?</b> and enter it. Nobody here can see their contacts.</p>' +
-    '<form method="post"><input name="admin" type="password" placeholder="Admin key" required><input name="email" type="email" placeholder="Their email" required><button>Make a reset code</button></form>', { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Frame-Options': 'DENY' } });
+    '<form method="post"><input name="admin" type="password" placeholder="Admin key" required><input name="email" type="email" placeholder="Their email" required><button>Make a reset code</button></form>' +
+    '<h1>Approve a CAMPUS (under-18) member</h1><p>They can\'t add friends or see or join plans until you approve them. You can also do this inside Shepherd, under Settings, if your email is set as OWNER_EMAIL on this Worker.</p>' +
+    '<form method="post"><input type="hidden" name="do" value="approve"><input name="admin" type="password" placeholder="Admin key" required><input name="email" type="email" placeholder="Their email" required><button>Approve</button></form>', { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Frame-Options': 'DENY' } });
 }
 async function admin(req, env) {
   if (!env.ADMIN_KEY) return adminPage('Add a secret called ADMIN_KEY to this Worker first (Settings → Variables and Secrets).');
@@ -748,11 +766,353 @@ async function admin(req, env) {
   const email = cleanEmail(f.get('email'));
   const u = await one(env, 'SELECT id FROM users WHERE email = ?', email);
   if (!u) return adminPage('No Shepherd account uses ' + email.replace(/[<>&"]/g, '') + '.');
+  if (f.get('do') === 'approve') {
+    const r = await one(env, 'SELECT minor, ok FROM social WHERE uid = ?', u.id);
+    if (!r || !r.minor) return adminPage(email.replace(/[<>&"]/g, '') + ' isn\'t a CAMPUS member.');
+    await run(env, 'UPDATE social SET ok = 1, t = ? WHERE uid = ?', now(), u.id);
+    await tell(env, null, [u.id], x => ({ title: st(x.lang, 'ok'), body: st(x.lang, 'okB'), tag: 'ok-' + u.id }), true);
+    return adminPage(email.replace(/[<>&"]/g, '') + ' is approved.');
+  }
   return adminPage('Reset code for ' + email.replace(/[<>&"]/g, '') + ': <b style="font-size:28px;letter-spacing:.1em">' + await makeResetCode(env, u.id) + '</b><br>It works for one hour.');
 }
 
+/* ---------- friends, churches and shared Encourage plans ----------
+   Friends see one thing: the Encourage plans you chose to share (what, when, where, food, cost, who's going).
+   Never your People, Disciples, prayer list, notes, phone numbers or budget.
+   Under-18s (CAMPUS): approved by the owner first, never listed, adults can't send them requests, and a plan
+   between an adult and an under-18 needs 3 or more people. */
+export const churchNorm = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/int['’]l/g, 'international').replace(/&/g, ' and ')
+  .replace(/[^a-z0-9\u00c0-\uffff]+/g, ' ').replace(/\bint(ernationa)?l\b/g, 'international').replace(/\binternational christian church(es)?\b/g, 'icc').replace(/\b(the|of)\b/g, ' ')
+  .trim().split(/\s+/).filter(Boolean).sort().join(' ');
+const shortName = n => { const p = String(n || '').trim().split(/\s+/).filter(Boolean); return p.length > 1 ? p[0] + ' ' + Array.from(p[p.length - 1])[0].toUpperCase() + '.' : (p[0] || 'Someone'); };
+const isOwner = (env, me) => String(env.OWNER_EMAIL || '').split(',').map(cleanEmail).filter(Boolean).includes(cleanEmail(me.email));
+const friendCode = () => { const A = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; return [...rand(8)].map(x => A[x % A.length]).join(''); };
+const active = s => !!s && !(s.minor && s.ok !== 1); // an under-18 takes part only once approved
+const dayCutoff = () => new Date(now() - 864e5).toISOString().slice(0, 10);
+async function soc(env, uid) {
+  let r = await one(env, 'SELECT * FROM social WHERE uid = ?', uid);
+  if (!r) { await run(env, 'INSERT OR IGNORE INTO social (uid, church, minor, ok, code, t) VALUES (?, NULL, 0, 1, ?, ?)', uid, friendCode(), now()); r = await one(env, 'SELECT * FROM social WHERE uid = ?', uid); }
+  return r;
+}
+async function people(env, ids) {
+  const out = new Map(); ids = [...new Set(ids)].filter(Boolean);
+  for (let i = 0; i < ids.length; i += 80) {
+    const c = ids.slice(i, i + 80);
+    const rows = await all(env, "SELECT u.id, u.name, u.email, d.data, s.church, s.minor, s.ok FROM users u LEFT JOIN docs d ON d.uid = u.id AND d.path = 'profile' AND d.del = 0 LEFT JOIN social s ON s.uid = u.id WHERE u.id IN (" + c.map(() => '?').join(',') + ')', ...c);
+    rows.forEach(r => {
+      let p = {}; try { p = r.data ? JSON.parse(r.data) || {} : {}; } catch (e) {}
+      out.set(r.id, { id: r.id, name: str(String(p.name || r.name || '').trim(), 80) || 'Someone', email: r.email, lang: p.lang || 'en', cur: /^[A-Z]{3}$/.test(p.currency || '') ? p.currency : 'GBP', quiet: !!(p.notify && p.notify.encourage === false), church: r.church || null, minor: r.minor ? 1 : 0, ok: r.ok == null ? 1 : r.ok });
+    });
+  }
+  return out;
+}
+async function friendIds(env, uid) {
+  const rows = await all(env, 'SELECT a, b FROM friends WHERE st = 1 AND (a = ? OR b = ?)', uid, uid);
+  return [...new Set(rows.map(r => r.a === uid ? r.b : r.a))];
+}
+const isBlocked = async (env, a, b) => !!(await one(env, 'SELECT 1 AS x FROM blocks WHERE (a = ? AND b = ?) OR (a = ? AND b = ?)', a, b, b, a));
+const areFriends = async (env, a, b) => !!(await one(env, 'SELECT 1 AS x FROM friends WHERE st = 1 AND ((a = ? AND b = ?) OR (a = ? AND b = ?))', a, b, b, a));
+async function unfriend(env, a, b) {
+  await env.DB.batch([
+    env.DB.prepare('DELETE FROM friends WHERE (a = ? AND b = ?) OR (a = ? AND b = ?)').bind(a, b, b, a),
+    env.DB.prepare('DELETE FROM joins WHERE (host = ? AND uid = ?) OR (host = ? AND uid = ?)').bind(a, b, b, a)
+  ]);
+}
+// notification words, in the language each person uses Shepherd in
+const ST_KEYS = ['fr', 'frB', 'ac', 'acB', 'nh', 'nd', 'go', 'lv', 'ca', 'ch', 'ok', 'okB', 'gr', 'grB'];
+const ST = {
+  en: ['Friend request from {0}', 'Open Shepherd to answer.', '{0} accepted your friend request', 'You can now see the plans they share.', 'New hangout from {0}', 'New encouragement date from {0}', '{0} is going to {1}', '{0} can no longer make {1}', '{0} cancelled {1}', '{0} changed {1}', 'You\'re approved', 'You can now add friends and join plans.', '{0} needs 3 or more people', 'You were taken off this plan because someone left. Join again when more people are going.'],
+  es: ['Solicitud de amistad de {0}', 'Abre Shepherd para responder.', '{0} aceptó tu solicitud de amistad', 'Ya puedes ver los planes que comparte.', 'Nuevo rato juntos de {0}', 'Nueva cita de ánimo de {0}', '{0} va a {1}', '{0} ya no puede ir a {1}', '{0} canceló {1}', '{0} cambió {1}', 'Tu cuenta está aprobada', 'Ya puedes añadir amigos y unirte a planes.', '{0} necesita 3 o más personas', 'Se te quitó de este plan porque alguien se fue. Únete de nuevo cuando vaya más gente.'],
+  fr: ['Demande d\'ami de {0}', 'Ouvrez Shepherd pour répondre.', '{0} a accepté votre demande d\'ami', 'Vous voyez maintenant les projets que cette personne partage.', 'Nouveau moment ensemble de {0}', 'Nouveau rendez-vous d\'encouragement de {0}', '{0} vient à {1}', '{0} ne peut plus venir à {1}', '{0} a annulé {1}', '{0} a modifié {1}', 'Votre compte est approuvé', 'Vous pouvez maintenant ajouter des amis et rejoindre des projets.', '{0} demande 3 personnes ou plus', 'Vous avez été retiré de ce projet car quelqu\'un est parti. Rejoignez-le quand plus de monde vient.'],
+  pt: ['Pedido de amizade de {0}', 'Abra o Shepherd para responder.', '{0} aceitou seu pedido de amizade', 'Agora você vê os planos que essa pessoa compartilha.', 'Novo encontro de {0}', 'Novo encontro de encorajamento de {0}', '{0} vai a {1}', '{0} não pode mais ir a {1}', '{0} cancelou {1}', '{0} alterou {1}', 'Sua conta foi aprovada', 'Agora você pode adicionar amigos e participar de planos.', '{0} precisa de 3 ou mais pessoas', 'Você saiu deste plano porque alguém desistiu. Participe de novo quando mais pessoas forem.'],
+  nl: ['Vriendschapsverzoek van {0}', 'Open Shepherd om te antwoorden.', '{0} heeft je vriendschapsverzoek geaccepteerd', 'Je ziet nu de plannen die deze persoon deelt.', 'Nieuw moment samen van {0}', 'Nieuwe bemoedigingsafspraak van {0}', '{0} gaat naar {1}', '{0} kan niet meer naar {1}', '{0} heeft {1} geannuleerd', '{0} heeft {1} gewijzigd', 'Je account is goedgekeurd', 'Je kunt nu vrienden toevoegen en meedoen met plannen.', '{0} heeft 3 of meer mensen nodig', 'Je bent van dit plan gehaald omdat iemand afhaakte. Doe weer mee als er meer mensen gaan.'],
+  pl: ['Zaproszenie do znajomych od: {0}', 'Otwórz Shepherd, aby odpowiedzieć.', '{0} przyjął(-ęła) twoje zaproszenie', 'Widzisz teraz plany, które ta osoba udostępnia.', 'Nowe wspólne wyjście: {0}', 'Nowe spotkanie zachęty: {0}', '{0} idzie na: {1}', '{0} nie może przyjść na: {1}', '{0} odwołał(a): {1}', '{0} zmienił(a): {1}', 'Twoje konto zostało zatwierdzone', 'Możesz teraz dodawać znajomych i dołączać do planów.', '{0}: potrzeba 3 lub więcej osób', 'Usunięto cię z tego planu, bo ktoś zrezygnował. Dołącz ponownie, gdy będzie więcej osób.'],
+  pcm: ['Friend request from {0}', 'Open Shepherd to answer.', '{0} don accept your friend request', 'You fit now see di plans wey dem share.', 'New hangout from {0}', 'New encouragement date from {0}', '{0} dey go {1}', '{0} no fit make {1} again', '{0} don cancel {1}', '{0} don change {1}', 'Dem don approve you', 'You fit now add friends and join plans.', '{0} need 3 or more pipul', 'We comot you from dis plan because somebody leave. Join again when more pipul dey go.'],
+  yo: ['Ìbéèrè ọ̀rẹ́ láti ọ̀dọ̀ {0}', 'Ṣí Shepherd láti dáhùn.', '{0} ti gba ìbéèrè ọ̀rẹ́ rẹ', 'O lè rí àwọn ètò tí wọ́n pín báyìí.', 'Àkókò ìbáṣepọ̀ tuntun láti ọ̀dọ̀ {0}', 'Ìpàdé ìgbaniníyànjú tuntun láti ọ̀dọ̀ {0}', '{0} ń lọ sí {1}', '{0} kò lè wá sí {1} mọ́', '{0} ti fagi lé {1}', '{0} ti yí {1} padà', 'A ti fọwọ́ sí ọ', 'O lè fi ọ̀rẹ́ kún un kí o sì darapọ̀ mọ́ àwọn ètò báyìí.', '{0} nílò ènìyàn 3 tàbí jù bẹ́ẹ̀ lọ', 'A yọ ọ́ kúrò nínú ètò yìí nítorí ẹnìkan kúrò. Darapọ̀ lẹ́ẹ̀kan sí i nígbà tí ènìyàn bá pọ̀ sí i.'],
+  ig: ['Arịrịọ enyi sitere n\'aka {0}', 'Mepee Shepherd ka ị zaa.', '{0} nabatara arịrịọ enyi gị', 'Ị nwere ike ịhụ atụmatụ ha na-ekesa ugbu a.', 'Oge nọkọ ọhụrụ sitere n\'aka {0}', 'Nzute agbamume ọhụrụ sitere n\'aka {0}', '{0} na-aga {1}', '{0} agaghịzi abịa {1}', '{0} kagburu {1}', '{0} gbanwere {1}', 'Anabatala gị', 'Ị nwere ike itinye ndị enyi ma sonye n\'atụmatụ ugbu a.', '{0} chọrọ mmadụ 3 ma ọ bụ karịa', 'E wepụrụ gị n\'atụmatụ a n\'ihi na mmadụ pụrụ. Sonye ọzọ mgbe ndị mmadụ karịrị.'],
+  'zh-Hans': ['{0} 发来好友请求', '打开 Shepherd 回应。', '{0} 接受了你的好友请求', '你现在可以看到对方分享的安排。', '{0} 发起了新的相聚', '{0} 发起了新的鼓励约会', '{0} 要参加{1}', '{0} 不能参加{1}了', '{0} 取消了{1}', '{0} 更改了{1}', '你已通过审核', '你现在可以添加好友并参加安排。', '{0}需要 3 人或以上', '因为有人退出，你已被移出这个安排。人多一些时再参加吧。'],
+  'zh-Hant': ['{0} 傳來好友邀請', '開啟 Shepherd 回應。', '{0} 接受了你的好友邀請', '你現在可以看到對方分享的安排。', '{0} 發起了新的相聚', '{0} 發起了新的鼓勵約會', '{0} 要參加{1}', '{0} 不能參加{1}了', '{0} 取消了{1}', '{0} 更改了{1}', '你已通過審核', '你現在可以加入好友並參加安排。', '{0}需要 3 人或以上', '因為有人退出，你已被移出這個安排。人多一些時再參加吧。'],
+  ja: ['{0} さんから友達リクエスト', 'Shepherd を開いて返事をしましょう。', '{0} さんが友達リクエストを承認しました', '相手が共有する予定が見られるようになりました。', '{0} さんの新しい予定（一緒に過ごす時間）', '{0} さんの新しい励ましの予定', '{0} さんが「{1}」に参加します', '{0} さんは「{1}」に参加できなくなりました', '{0} さんが「{1}」を中止しました', '{0} さんが「{1}」を変更しました', '承認されました', '友達を追加したり、予定に参加したりできるようになりました。', '「{0}」は 3 人以上が必要です', '参加者が減ったため、この予定から外れました。人数が増えたらまた参加してください。'],
+  de: ['Freundschaftsanfrage von {0}', 'Öffne Shepherd, um zu antworten.', '{0} hat deine Freundschaftsanfrage angenommen', 'Du siehst jetzt die Pläne, die diese Person teilt.', 'Neues Treffen von {0}', 'Neues Ermutigungstreffen von {0}', '{0} kommt zu {1}', '{0} kann nicht mehr zu {1} kommen', '{0} hat {1} abgesagt', '{0} hat {1} geändert', 'Du bist freigeschaltet', 'Du kannst jetzt Freunde hinzufügen und bei Plänen mitmachen.', '{0} braucht 3 oder mehr Personen', 'Du wurdest von diesem Plan entfernt, weil jemand abgesprungen ist. Mach wieder mit, wenn mehr Leute kommen.'],
+  ru: ['Запрос в друзья от {0}', 'Открой Shepherd, чтобы ответить.', '{0} принял(а) твой запрос в друзья', 'Теперь ты видишь планы, которыми делится этот человек.', 'Новая встреча от {0}', 'Новая встреча для ободрения от {0}', '{0} идёт на «{1}»', '{0} больше не сможет прийти на «{1}»', '{0} отменил(а) «{1}»', '{0} изменил(а) «{1}»', 'Твой аккаунт одобрен', 'Теперь можно добавлять друзей и присоединяться к планам.', '«{0}»: нужно 3 человека или больше', 'Тебя убрали из этого плана, потому что кто-то отказался. Присоединяйся снова, когда людей станет больше.'],
+  lt: ['Draugystės kvietimas nuo {0}', 'Atidarykite Shepherd ir atsakykite.', '{0} priėmė jūsų draugystės kvietimą', 'Dabar matote planus, kuriais šis žmogus dalijasi.', 'Naujas susitikimas: {0}', 'Naujas padrąsinimo susitikimas: {0}', '{0} eina į „{1}“', '{0} nebegali ateiti į „{1}“', '{0} atšaukė „{1}“', '{0} pakeitė „{1}“', 'Jūsų paskyra patvirtinta', 'Dabar galite pridėti draugų ir prisijungti prie planų.', '„{0}“ reikia 3 ar daugiau žmonių', 'Buvote pašalinti iš šio plano, nes kažkas pasitraukė. Prisijunkite vėl, kai eis daugiau žmonių.']
+};
+export function st(lang, key, ...args) { const t = (ST[lang] || ST.en)[ST_KEYS.indexOf(key)] || ST.en[ST_KEYS.indexOf(key)] || ''; return t.replace(/\{(\d)\}/g, (_, j) => args[+j] == null ? '' : String(args[+j])); }
+function whenText(lang, date, time) {
+  let d = date; try { d = new Intl.DateTimeFormat(lang === 'pcm' ? 'en-NG' : lang, { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }).format(new Date(date + 'T12:00:00Z')); } catch (e) {}
+  return d + (time ? ', ' + time : '');
+}
+// make(person) gives { title, body, tag, url }. Sent straight away; the app's own schedule never touches these.
+async function tell(env, ctx, to, make, always) {
+  const P = await people(env, to); const stmts = [];
+  for (const u of P.values()) {
+    if (!active(u) || (u.quiet && !always)) continue;
+    const m = make(u);
+    stmts.push(env.DB.prepare('INSERT INTO outbox (uid, at, title, body, tag, url, badge, sent) VALUES (?, ?, ?, ?, ?, ?, NULL, 0)').bind(u.id, now() - 1, str(m.title, 120), str(m.body, 300), str(m.tag, 80), str(m.url || './?view=encourage', 200)));
+  }
+  for (let i = 0; i < stmts.length; i += 90) await env.DB.batch(stmts.slice(i, i + 90));
+  if (stmts.length && ctx && ctx.waitUntil) ctx.waitUntil(sendDue(env, 40).catch(() => {}));
+  return stmts.length;
+}
+function sharedPlan(data) { let d; try { d = JSON.parse(data); } catch (e) { return null; } return d && d.kind === 'enc' && d.share === 'friends' && /^\d{4}-\d\d-\d\d$/.test(d.date || '') ? d : null; }
+const planTitle = d => str(String(d.activity || '').trim() || (d.type === 'hangout' ? 'Hangout' : 'Encouragement date'), 120);
+export function priceBand(cost, pay, people2) {
+  if (pay === 'host') return 'free';
+  if (cost === '' || cost == null || !(Number(cost) >= 0)) return '';
+  const each = pay === 'split' ? Number(cost) / Math.max(1, people2) : Number(cost);
+  return each <= 0 ? 'free' : each < 5 ? 'u5' : each <= 15 ? 'm' : 'h';
+}
+// after a save: tell friends about a newly shared plan, and the people going when it changes or is cancelled
+async function socialAfterSave(env, ctx, me, apply) {
+  const mark = '"share":"friends"';
+  const touched = apply.filter(x => x.op.p.indexOf('profile/events/') === 0 && ((x.op.data && x.op.data.indexOf(mark) >= 0) || (x.ex && x.ex.data && x.ex.data.indexOf(mark) >= 0)));
+  if (!touched.length) return;
+  const s = await soc(env, me.uid); if (!active(s)) return;
+  const mine = (await people(env, [me.uid])).get(me.uid); const cutoff = dayCutoff();
+  for (const { op, ex } of touched) {
+    const id = op.p.split('/').pop(); const was = ex && !ex.del ? sharedPlan(ex.data) : null; const is = op.del ? null : sharedPlan(op.data);
+    if (is && is.date >= cutoff) {
+      const seen = await one(env, 'SELECT 1 AS x FROM announced WHERE host = ? AND plan = ?', me.uid, id);
+      if (!seen) {
+        await run(env, 'INSERT OR IGNORE INTO announced (host, plan, t) VALUES (?, ?, ?)', me.uid, id, now());
+        await tell(env, ctx, await friendIds(env, me.uid), u => ({ title: st(u.lang, is.type === 'hangout' ? 'nh' : 'nd', mine.name), body: planTitle(is) + ' · ' + whenText(u.lang, is.date, is.time), tag: 'np-' + id }));
+      } else if (was && (was.date !== is.date || (was.time || '') !== (is.time || '') || (was.place || '') !== (is.place || ''))) {
+        const goers = (await all(env, 'SELECT uid FROM joins WHERE host = ? AND plan = ?', me.uid, id)).map(r => r.uid);
+        await tell(env, ctx, goers, u => ({ title: st(u.lang, 'ch', shortName(mine.name), planTitle(is)), body: whenText(u.lang, is.date, is.time) + (is.place ? ' · ' + str(is.place, 120) : ''), tag: 'pc-' + id }));
+      }
+    } else if (was && !is) {
+      const goers = (await all(env, 'SELECT uid FROM joins WHERE host = ? AND plan = ?', me.uid, id)).map(r => r.uid);
+      await env.DB.batch([env.DB.prepare('DELETE FROM joins WHERE host = ? AND plan = ?').bind(me.uid, id), env.DB.prepare('DELETE FROM announced WHERE host = ? AND plan = ?').bind(me.uid, id)]);
+      if (was.date >= cutoff) await tell(env, ctx, goers, u => ({ title: st(u.lang, 'ca', shortName(mine.name), planTitle(was)), body: whenText(u.lang, was.date, was.time), tag: 'pc-' + id }));
+    }
+  }
+}
+async function churchList(env) {
+  const rows = await all(env, 'SELECT id, name FROM churches ORDER BY t, name LIMIT 500');
+  return rows.map(r => ({ id: r.id, name: r.name }));
+}
+async function socialMe(env, me) {
+  const s = await soc(env, me.uid);
+  const rows = await all(env, 'SELECT a, b, st FROM friends WHERE a = ? OR b = ?', me.uid, me.uid);
+  const P = await people(env, rows.map(r => r.a === me.uid ? r.b : r.a));
+  const ch = new Map((await churchList(env)).map(c => [c.id, c.name]));
+  const card = (id, full) => { const u = P.get(id); return u ? { id, name: full ? u.name : shortName(u.name), church: u.church && ch.get(u.church) ? ch.get(u.church) + (u.minor ? ' (CAMPUS)' : '') : '' } : null; };
+  const friends = [], incoming = [], outgoing = [];
+  rows.forEach(r => {
+    const other = r.a === me.uid ? r.b : r.a; const u = P.get(other); if (!u || !active(u)) return;
+    if (r.st === 1) { const c = card(other, true); if (c) friends.push(c); }
+    else if (r.b === me.uid) { const c = card(other, false); if (c) incoming.push(c); }
+    else { const c = card(other, false); if (c) outgoing.push(c); }
+  });
+  friends.sort((x, y) => x.name.localeCompare(y.name));
+  const bl = (await all(env, 'SELECT b FROM blocks WHERE a = ?', me.uid)).map(r => r.b); const BP = await people(env, bl);
+  const blocked = bl.filter(id => BP.get(id)).map(id => ({ id, name: shortName(BP.get(id).name) }));
+  const owner = isOwner(env, me);
+  return json({ on: true, v: 1, church: s.church && ch.get(s.church) ? { id: s.church, name: ch.get(s.church) } : null, minor: !!s.minor, approved: active(s), declined: s.ok === -1, code: s.code, owner,
+    waiting: owner ? (await one(env, 'SELECT COUNT(*) AS n FROM social WHERE minor = 1 AND ok = 0')).n : 0, friends, incoming, outgoing, blocked });
+}
+async function socialProfile(req, env, me, ctx) {
+  const b = await body(req); const s = await soc(env, me.uid);
+  let church = s.church;
+  if (typeof b.newChurch === 'string' && b.newChurch.trim()) {
+    const name = str(b.newChurch.trim().replace(/\s+/g, ' '), 60), norm = churchNorm(name);
+    if (name.length < 3 || !norm) fail(400, 'bad_church', 'Type the name of your church.');
+    let c = await one(env, 'SELECT id FROM churches WHERE norm = ?', norm);
+    if (!c) {
+      await rateLimit(env, 'church:' + me.uid, 5, 864e5);
+      c = { id: 'c_' + b64u(rand(9)) };
+      await run(env, 'INSERT OR IGNORE INTO churches (id, name, norm, maker, t) VALUES (?, ?, ?, ?, ?)', c.id, name, norm, me.uid, now());
+      c = await one(env, 'SELECT id FROM churches WHERE norm = ?', norm);
+    }
+    church = c.id;
+  } else if (typeof b.church === 'string') {
+    if (b.church === '') church = null;
+    else { const c = await one(env, 'SELECT id FROM churches WHERE id = ?', str(b.church, 40)); if (!c) fail(400, 'bad_church', 'Choose a church from the list.'); church = c.id; }
+  }
+  let minor = s.minor, ok = s.ok, asked = false;
+  if (b.minor === true && !s.minor) {
+    minor = 1; ok = 0; asked = true;
+    // an under-18 starts with no friends: from here only people they add themselves
+    await env.DB.batch([env.DB.prepare('DELETE FROM friends WHERE a = ? OR b = ?').bind(me.uid, me.uid), env.DB.prepare('DELETE FROM joins WHERE uid = ? OR host = ?').bind(me.uid, me.uid)]);
+  } else if (b.minor === false && s.minor) fail(403, 'ask_owner', 'To change this, email ' + (env.GMAIL_USER || CONTACT) + '.');
+  await run(env, 'UPDATE social SET church = ?, minor = ?, ok = ?, t = ? WHERE uid = ?', church, minor, ok, now(), me.uid);
+  if (asked) {
+    const cn = church ? (await one(env, 'SELECT name FROM churches WHERE id = ?', church) || {}).name : '';
+    const text = 'A CAMPUS (under-18) member is waiting for your approval in Shepherd.\r\n\r\nName: ' + me.name + '\r\nEmail: ' + me.email + '\r\nChurch: ' + (cn || 'not chosen') + ' (CAMPUS)\r\n\r\nApprove or decline them in Shepherd under Settings, Approvals. Until then they can\'t add friends or see or join plans.';
+    const mail = (async () => { if (env.GMAIL_USER && env.GMAIL_APP_PASSWORD) await gmailSend(env, env.GMAIL_USER, 'Shepherd: a CAMPUS member is waiting for approval', text); })().catch(e => console.error(e && e.message || e));
+    if (ctx && ctx.waitUntil) ctx.waitUntil(mail); else await mail;
+    const owners = String(env.OWNER_EMAIL || '').split(',').map(cleanEmail).filter(Boolean);
+    for (const em of owners) { const o = await one(env, 'SELECT id FROM users WHERE email = ?', em); if (o) await tell(env, ctx, [o.id], () => ({ title: 'A CAMPUS member is waiting for approval', body: shortName(me.name) + (cn ? ' · ' + cn + ' (CAMPUS)' : ''), tag: 'ap-' + me.uid, url: './?view=settings' }), true); }
+  }
+  return socialMe(env, me);
+}
+async function socialPeople(env, me) {
+  const s = await soc(env, me.uid);
+  if (!s.church || s.minor) return json({ people: [] }); // under-18s aren't listed and don't browse the list
+  const rows = await all(env, "SELECT u.id FROM social s JOIN users u ON u.id = s.uid WHERE s.church = ? AND s.minor = 0 AND s.uid != ? LIMIT 300", s.church, me.uid);
+  const P = await people(env, rows.map(r => r.id));
+  const fr = await all(env, 'SELECT a, b, st FROM friends WHERE a = ? OR b = ?', me.uid, me.uid);
+  const state = new Map(); fr.forEach(r => state.set(r.a === me.uid ? r.b : r.a, r.st === 1 ? 'friend' : r.a === me.uid ? 'sent' : 'asked'));
+  const bl = new Set((await all(env, 'SELECT a, b FROM blocks WHERE a = ? OR b = ?', me.uid, me.uid)).map(r => r.a === me.uid ? r.b : r.a));
+  const out = [...P.values()].filter(u => !bl.has(u.id)).map(u => ({ id: u.id, name: shortName(u.name), state: state.get(u.id) || '' })).sort((x, y) => x.name.localeCompare(y.name));
+  return json({ people: out });
+}
+async function socialFriend(req, env, me, ctx) {
+  const b = await body(req); const to = str(b.to, 200).trim(); const s = await soc(env, me.uid);
+  if (!active(s)) fail(403, 'not_approved', 'Your account is waiting for approval.');
+  if (!to) fail(400, 'bad_friend', 'Type their email or friend code.');
+  await rateLimit(env, 'friend:' + me.uid, 40, 864e5);
+  const sent = () => json({ ok: true, state: 'sent' }); // the same answer whether or not anyone was found, so emails can't be checked
+  let target = null, byId = false;
+  if (/^u_[A-Za-z0-9_-]{6,40}$/.test(to)) { target = await one(env, 'SELECT id FROM users WHERE id = ?', to); byId = true; }
+  else if (to.indexOf('@') > 0) target = await one(env, 'SELECT id FROM users WHERE email = ?', cleanEmail(to));
+  else target = await one(env, 'SELECT uid AS id FROM social WHERE code = ?', to.toUpperCase().replace(/[^A-Z0-9]/g, ''));
+  if (!target || target.id === me.uid) return sent();
+  const T = (await people(env, [target.id])).get(target.id); if (!T || !active(T)) return sent();
+  if (await isBlocked(env, me.uid, T.id)) return sent();
+  if (await areFriends(env, me.uid, T.id)) return json({ ok: true, state: 'friends' });
+  const back = await one(env, 'SELECT st FROM friends WHERE a = ? AND b = ?', T.id, me.uid);
+  const mine = (await people(env, [me.uid])).get(me.uid);
+  if (back) { // they already asked: this accepts
+    await run(env, 'UPDATE friends SET st = 1, t = ? WHERE a = ? AND b = ?', now(), T.id, me.uid);
+    await tell(env, ctx, [T.id], u => ({ title: st(u.lang, 'ac', mine.name), body: st(u.lang, 'acB'), tag: 'fa-' + me.uid, url: './?view=encourage&friends=1' }), true);
+    return json({ ok: true, state: 'friends' });
+  }
+  if (T.minor && !s.minor) return sent(); // adults can't send requests to under-18s
+  if (byId && !(s.church && s.church === T.church && !s.minor && !T.minor)) return sent(); // by name only within your own church list
+  const had = await one(env, 'SELECT 1 AS x FROM friends WHERE a = ? AND b = ?', me.uid, T.id);
+  if (!had) {
+    await run(env, 'INSERT OR IGNORE INTO friends (a, b, st, t) VALUES (?, ?, 0, ?)', me.uid, T.id, now());
+    await tell(env, ctx, [T.id], u => ({ title: st(u.lang, 'fr', shortName(mine.name)), body: st(u.lang, 'frB'), tag: 'fr-' + me.uid, url: './?view=encourage&friends=1' }), true);
+  }
+  return sent();
+}
+async function socialAnswer(req, env, me, ctx) {
+  const b = await body(req); const id = str(b.id, 40);
+  const row = await one(env, 'SELECT st FROM friends WHERE a = ? AND b = ? AND st = 0', id, me.uid);
+  if (!row) return json({ ok: true });
+  if (b.accept) {
+    const s = await soc(env, me.uid); if (!active(s)) fail(403, 'not_approved', 'Your account is waiting for approval.');
+    await run(env, 'UPDATE friends SET st = 1, t = ? WHERE a = ? AND b = ?', now(), id, me.uid);
+    const mine = (await people(env, [me.uid])).get(me.uid);
+    await tell(env, ctx, [id], u => ({ title: st(u.lang, 'ac', mine.name), body: st(u.lang, 'acB'), tag: 'fa-' + me.uid, url: './?view=encourage&friends=1' }), true);
+  } else await run(env, 'DELETE FROM friends WHERE a = ? AND b = ?', id, me.uid);
+  return json({ ok: true });
+}
+async function socialFeed(env, me) {
+  const s = await soc(env, me.uid); if (!active(s)) return json({ plans: [] });
+  const fr = await friendIds(env, me.uid); const ids = [me.uid].concat(fr); const cutoff = dayCutoff();
+  const rows = [], js = [];
+  for (let i = 0; i < ids.length; i += 80) {
+    const c = ids.slice(i, i + 80), q = c.map(() => '?').join(',');
+    rows.push(...await all(env, "SELECT uid, path, data FROM docs WHERE del = 0 AND uid IN (" + q + ") AND path LIKE 'profile/events/%' AND data LIKE '%\"share\":\"friends\"%'", ...c));
+    js.push(...await all(env, 'SELECT host, plan, uid FROM joins WHERE host IN (' + q + ') ORDER BY t', ...c));
+  }
+  const going = new Map(); js.forEach(j => { const k = j.host + '/' + j.plan; if (!going.has(k)) going.set(k, []); going.get(k).push(j.uid); });
+  const P = await people(env, ids.concat(js.map(j => j.uid))); const friendSet = new Set(fr);
+  const plans = [];
+  for (const r of rows) {
+    const d = sharedPlan(r.data); if (!d || d.date < cutoff) continue;
+    const h = P.get(r.uid); if (!h || !active(h)) continue;
+    const id = r.path.split('/').pop(), g = (going.get(r.uid + '/' + id) || []).filter(u => P.get(u) && active(P.get(u)));
+    const cost = d.cost === '' || d.cost == null || !(Number(d.cost) >= 0) ? null : Math.round(Number(d.cost) * 100) / 100;
+    const pay = d.pay === 'split' || d.pay === 'host' ? d.pay : 'own';
+    const p = { host: r.uid, hostName: h.name, mine: r.uid === me.uid, id, type: d.type === 'hangout' ? 'hangout' : 'date', title: planTitle(d), date: d.date, time: /^\d\d:\d\d$/.test(d.time || '') ? d.time : '', place: str(d.place, 120), food: !!d.food,
+      band: priceBand(cost, pay, g.length + 1), going: g.map(u => ({ id: u, name: u === me.uid || friendSet.has(u) ? P.get(u).name : shortName(P.get(u).name), me: u === me.uid })), joined: g.includes(me.uid) };
+    if (!s.minor) { p.cost = cost; p.pay = pay; p.cur = h.cur; } // under-18s see a price tag only
+    if (!p.mine && !p.joined && !!h.minor !== !!s.minor && g.length < 1) p.needGroup = true;
+    plans.push(p);
+  }
+  plans.sort((a, b2) => (a.date + (a.time || '')).localeCompare(b2.date + (b2.time || '')));
+  return json({ plans });
+}
+async function socialJoin(req, env, me, ctx) {
+  const b = await body(req); const host = str(b.host, 40), plan = str(b.plan, 80), on = b.on !== false;
+  const s = await soc(env, me.uid); if (!active(s)) fail(403, 'not_approved', 'Your account is waiting for approval.');
+  if (host === me.uid) fail(400, 'own_plan', 'This is your own plan.');
+  const row = await one(env, 'SELECT data FROM docs WHERE uid = ? AND path = ? AND del = 0', host, 'profile/events/' + plan); const d = row && sharedPlan(row.data);
+  const P = await people(env, [host, me.uid]); const H = P.get(host), M = P.get(me.uid);
+  const others = (await all(env, 'SELECT uid FROM joins WHERE host = ? AND plan = ? ORDER BY t', host, plan)).map(r => r.uid).filter(u => u !== me.uid);
+  if (!on) {
+    const was = await one(env, 'SELECT 1 AS x FROM joins WHERE host = ? AND plan = ? AND uid = ?', host, plan, me.uid);
+    await run(env, 'DELETE FROM joins WHERE host = ? AND plan = ? AND uid = ?', host, plan, me.uid);
+    if (was && d && H) {
+      await tell(env, ctx, [host], u => ({ title: st(u.lang, 'lv', M.name, planTitle(d)), body: whenText(u.lang, d.date, d.time), tag: 'jl-' + plan + '-' + me.uid }));
+      if (others.length === 1) { // an adult and an under-18 are never left as a pair
+        const L = (await people(env, others)).get(others[0]);
+        if (L && !!L.minor !== !!H.minor) {
+          await run(env, 'DELETE FROM joins WHERE host = ? AND plan = ? AND uid = ?', host, plan, L.id);
+          await tell(env, ctx, [L.id], u => ({ title: st(u.lang, 'gr', planTitle(d)), body: st(u.lang, 'grB'), tag: 'jg-' + plan }), true);
+        }
+      }
+    }
+    return json({ ok: true, joined: false });
+  }
+  if (!(await areFriends(env, me.uid, host))) fail(403, 'not_friends', 'You can only join plans from your friends.');
+  if (!d || d.date < dayCutoff() || !H || !active(H)) fail(404, 'no_plan', 'That plan is no longer open.');
+  if (!!H.minor !== !!s.minor && others.length < 1) fail(403, 'need_group', 'This plan opens to you once someone else has joined, so there are 3 or more people.');
+  await rateLimit(env, 'join:' + me.uid, 120, 3600e3);
+  const had = await one(env, 'SELECT 1 AS x FROM joins WHERE host = ? AND plan = ? AND uid = ?', host, plan, me.uid);
+  if (!had) {
+    await run(env, 'INSERT OR IGNORE INTO joins (host, plan, uid, t) VALUES (?, ?, ?, ?)', host, plan, me.uid, now());
+    await tell(env, ctx, [host], u => ({ title: st(u.lang, 'go', M.name, planTitle(d)), body: whenText(u.lang, d.date, d.time), tag: 'jn-' + plan + '-' + me.uid }));
+    await tell(env, ctx, others, u => ({ title: st(u.lang, 'go', shortName(M.name), planTitle(d)), body: whenText(u.lang, d.date, d.time), tag: 'jn-' + plan + '-' + me.uid }));
+  }
+  return json({ ok: true, joined: true });
+}
+async function socialReport(req, env, me, ctx) {
+  const b = await body(req); await rateLimit(env, 'report:' + me.uid, 10, 864e5);
+  const about = str(b.id, 40), plan = str(b.plan, 80), text = str(b.text, 1000).trim();
+  await run(env, 'INSERT INTO reports (who, about, plan, text, t) VALUES (?, ?, ?, ?, ?)', me.uid, about, plan, text, now());
+  const A = about ? (await people(env, [about])).get(about) : null;
+  const mail = (async () => { if (env.GMAIL_USER && env.GMAIL_APP_PASSWORD) await gmailSend(env, env.GMAIL_USER, 'Shepherd: someone was reported', 'Reported by: ' + me.name + ' <' + me.email + '>\r\nAbout: ' + (A ? A.name + ' <' + A.email + '>' + (A.minor ? ' (CAMPUS)' : '') : 'not given') + (plan ? '\r\nPlan: ' + plan : '') + '\r\n\r\n' + (text || '(no message)')); })().catch(e => console.error(e && e.message || e));
+  if (ctx && ctx.waitUntil) ctx.waitUntil(mail); else await mail;
+  return json({ ok: true });
+}
+/* the owner (the email in OWNER_EMAIL) approves under-18s, tidies duplicate churches and sees reports */
+async function socialAdmin(req, env, me, ctx, p) {
+  if (!isOwner(env, me)) fail(403, 'not_owner', 'Only the person who runs Shepherd can do this.');
+  if (req.method === 'GET') {
+    const w = await all(env, 'SELECT s.uid, s.church, u.name, u.email FROM social s JOIN users u ON u.id = s.uid WHERE s.minor = 1 AND s.ok = 0 ORDER BY s.t LIMIT 200');
+    const ch = await all(env, 'SELECT c.id, c.name, (SELECT COUNT(*) FROM social s WHERE s.church = c.id) AS n FROM churches c ORDER BY c.t, c.name LIMIT 500');
+    const names = new Map(ch.map(c => [c.id, c.name]));
+    const rp = await all(env, 'SELECT r.id, r.text, r.plan, r.t, a.name AS who, a.email AS whoEmail, x.name AS about, x.email AS aboutEmail FROM reports r LEFT JOIN users a ON a.id = r.who LEFT JOIN users x ON x.id = r.about ORDER BY r.t DESC LIMIT 20');
+    return json({ waiting: w.map(r => ({ id: r.uid, name: r.name || '', email: r.email, church: names.get(r.church) || '' })), churches: ch, reports: rp });
+  }
+  const b = await body(req);
+  if (p === 'social/admin/approve') {
+    const id = str(b.id, 40); const r = await one(env, 'SELECT minor FROM social WHERE uid = ?', id); if (!r || !r.minor) fail(404, 'no_one', 'No one is waiting with that name.');
+    await run(env, 'UPDATE social SET ok = ?, t = ? WHERE uid = ?', b.ok === false ? -1 : 1, now(), id);
+    if (b.ok !== false) await tell(env, ctx, [id], u => ({ title: st(u.lang, 'ok'), body: st(u.lang, 'okB'), tag: 'ok-' + id }), true);
+    return json({ ok: true });
+  }
+  if (p === 'social/admin/adult') { await run(env, 'UPDATE social SET minor = 0, ok = 1, t = ? WHERE uid = ?', now(), str(b.id, 40)); return json({ ok: true }); }
+  if (p === 'social/admin/merge') {
+    const from = str(b.from, 40), to = str(b.to, 40);
+    if (from === to || from === 'c_london_icc' || !(await one(env, 'SELECT id FROM churches WHERE id = ?', to)) || !(await one(env, 'SELECT id FROM churches WHERE id = ?', from))) fail(400, 'bad_church', 'Choose two different churches.');
+    await env.DB.batch([env.DB.prepare('UPDATE social SET church = ? WHERE church = ?').bind(to, from), env.DB.prepare('DELETE FROM churches WHERE id = ?').bind(from)]);
+    return json({ ok: true });
+  }
+  return json({ error: 'not_found' }, 404);
+}
+async function socialRoute(req, env, me, ctx, m, p) {
+  if (m === 'GET' && p === 'social/me') return socialMe(env, me);
+  if (m === 'POST' && p === 'social/profile') return socialProfile(req, env, me, ctx);
+  if (m === 'GET' && p === 'social/people') return socialPeople(env, me);
+  if (m === 'GET' && p === 'social/feed') return socialFeed(env, me);
+  if (m === 'POST' && p === 'social/friend') return socialFriend(req, env, me, ctx);
+  if (m === 'POST' && p === 'social/friend/answer') return socialAnswer(req, env, me, ctx);
+  if (m === 'POST' && p === 'social/friend/remove') { const b = await body(req); await unfriend(env, me.uid, str(b.id, 40)); return json({ ok: true }); }
+  if (m === 'POST' && p === 'social/block') { const b = await body(req); const id = str(b.id, 40); if (id && id !== me.uid) { await run(env, 'INSERT OR IGNORE INTO blocks (a, b, t) VALUES (?, ?, ?)', me.uid, id, now()); await unfriend(env, me.uid, id); } return json({ ok: true }); }
+  if (m === 'POST' && p === 'social/unblock') { const b = await body(req); await run(env, 'DELETE FROM blocks WHERE a = ? AND b = ?', me.uid, str(b.id, 40)); return json({ ok: true }); }
+  if (m === 'POST' && p === 'social/join') return socialJoin(req, env, me, ctx);
+  if (m === 'POST' && p === 'social/report') return socialReport(req, env, me, ctx);
+  if (p.indexOf('social/admin') === 0) return socialAdmin(req, env, me, ctx, p);
+  return json({ error: 'not_found' }, 404);
+}
+
 /* ---------- routes ---------- */
-async function route(req, env) {
+async function route(req, env, ctx) {
   const url = new URL(req.url); const parts = url.pathname.split('/').filter(Boolean); const m = req.method;
   if (url.pathname === '/' || url.pathname === '/health') {
     let db = false; try { await ready(env); db = true; } catch (e) {}
@@ -769,6 +1129,7 @@ async function route(req, env) {
   if (m === 'POST' && p === 'reset/request') return resetRequest(req, env);
   if (m === 'POST' && p === 'reset/confirm') return resetConfirm(req, env);
   if (m === 'GET' && p === 'push/key') return json({ key: (await vapid(env)).pub });
+  if (m === 'GET' && p === 'churches') return json({ churches: await churchList(env) }); // names only, for the sign-up screen
   if (m === 'GET' && p === 'signup/options') return json({ invite: !!env.INVITE_CODE }); // whether sign-up asks for the church invite code
   const me = await auth(req, env);
   if (m === 'GET' && p === 'me') return json({ user: pub(me), devices: (await one(env, 'SELECT COUNT(*) AS n FROM subs WHERE uid = ?', me.uid)).n });
@@ -777,7 +1138,8 @@ async function route(req, env) {
   if (m === 'POST' && p === 'password') return changePassword(req, env, me);
   if (m === 'POST' && p === 'account/delete') return deleteAccount(req, env, me);
   if (m === 'GET' && p === 'docs') return pull(req, env, me);
-  if (m === 'POST' && p === 'docs') return push(req, env, me);
+  if (m === 'POST' && p === 'docs') return push(req, env, me, ctx);
+  if (p.indexOf('social/') === 0) return socialRoute(req, env, me, ctx, m, p);
   if (m === 'GET' && p === 'history') return history(req, env, me);
   if (m === 'POST' && p === 'push/sub') return subscribe(req, env, me);
   if (m === 'POST' && p === 'push/unsub') return unsubscribe(req, env, me);
@@ -790,11 +1152,11 @@ async function route(req, env) {
 }
 
 export default {
-  async fetch(req, env) {
+  async fetch(req, env, ctx) {
     const c = cors(req, env);
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: c });
     let res;
-    try { res = await route(req, env); }
+    try { res = await route(req, env, ctx); }
     catch (e) {
       if (e instanceof HttpError) res = json({ error: e.code, message: e.message }, e.status);
       else { console.error(e && e.stack || e); res = json({ error: 'server', message: 'Something went wrong on the Shepherd server. Your changes are kept on your phone.' }, 500); }
