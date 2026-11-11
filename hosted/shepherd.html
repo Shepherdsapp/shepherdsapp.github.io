@@ -1732,7 +1732,8 @@ function encMonthHtml(all) {
   all.forEach(function (x) { has[x.date] = (has[x.date] || 0) + 1; });
   var title = LOC ? intl(first, { month: 'long', year: 'numeric' }) : MON[m] + ' ' + y;
   var h = '<section class="card mcal" id="encCal"><div class="mcal-h"><button type="button" data-act="encmonth" data-d="-1" aria-label="Previous month">‹</button><b data-noi18n>' + esc(title) + '</b><button type="button" data-act="encmonth" data-d="1" aria-label="Next month">›</button></div><div class="mgrid">';
-  [1, 2, 3, 4, 5, 6, 0].forEach(function (i) { h += '<span class="wd" data-noi18n>' + esc(WD[i]) + '</span>'; });
+  // short weekday letters, so they fit seven across on the smallest phone in every language
+  [1, 2, 3, 4, 5, 6, 0].forEach(function (i) { var w = LOC ? intl(new Date(2026, 0, 4 + i), { weekday: 'narrow' }) : WD[i]; if (!LOC && window.I18N && I18N.lang !== 'en') w = Array.from(String(w).normalize('NFC')).slice(0, 2).join(''); h += '<span class="wd" data-noi18n title="' + esc(WD[i]) + '">' + esc(w || WD[i]) + '</span>'; });
   for (var i = 0; i < lead; i++) h += '<span></span>';
   for (var dd = 1; dd <= days; dd++) {
     var ds = y + '-' + pad(m + 1) + '-' + pad(dd), n = has[ds] || 0;
