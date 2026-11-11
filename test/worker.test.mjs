@@ -170,6 +170,20 @@ ok(got[0].title === 'Reply to Grace' && got[0].body === 'Grace is waiting on you
 out = await sendDue(env);
 ok(out.sent === 0, 'never sent twice');
 Date.now = realNow;
+// two sends overlapping (the 5-minute timer and a friend's join at the same moment) must not double up
+r = await call('POST', '/api/schedule', { items: [{ at: soon + 2000, title: 'Only once', body: '', tag: 'once' }] }, T1);
+sentPushes.length = 0; Date.now = () => realNow() + 5 * 60e3;
+{ const both = await Promise.all([sendDue(env), sendDue(env), sendDue(env)]);
+  ok(sentPushes.length === 1 && both.reduce((n, x) => n + x.sent, 0) === 1, 'three sends running at the same moment still deliver a notification once (' + sentPushes.length + ')'); }
+// a send that was cut off half-way is picked up again a few minutes later, not lost
+Date.now = realNow;
+r = await call('POST', '/api/schedule', { items: [{ at: soon + 3000, title: 'Cut off', body: '', tag: 'cut' }] }, T1);
+env.DB.raw.run("UPDATE outbox SET sent = ? WHERE title = 'Cut off'", [Math.floor((realNow() + 5 * 60e3) / 1000) - 30]);
+sentPushes.length = 0; Date.now = () => realNow() + 5 * 60e3; out = await sendDue(env);
+ok(sentPushes.length === 0 && env.DB.raw.exec("SELECT COUNT(*) FROM outbox WHERE title = 'Cut off'")[0].values[0][0] === 1, 'an item another send is working on is left alone');
+Date.now = () => realNow() + 9 * 60e3; out = await sendDue(env);
+ok(sentPushes.length === 1 && decrypt(sentPushes[0]).title === 'Cut off', 'but if that send never finished, it goes out on a later run');
+Date.now = realNow;
 r = await call('POST', '/api/schedule', { items: [{ at: soon, title: 'Old' }] }, T1);
 r = await call('POST', '/api/schedule', { items: [{ at: soon + 5000, title: 'New' }] }, T1);
 const left = env.DB.raw.exec("SELECT title FROM outbox WHERE sent = 0")[0].values.map(v => v[0]);
@@ -562,7 +576,7 @@ try {
   ok(out(B.id).filter(x => /New hangout/.test(x[0])).length === 1, 'saving it again does not tell them again');
   r = await call('GET', '/api/social/feed', undefined, B.t); const fb = JSON.stringify(r.data);
   const pl = r.data.plans[0];
-  ok(r.data.plans.length === 1 && pl.title === 'Football' && pl.hostName === 'Hashir Khan' && pl.date === day(3) && pl.time === '18:30' && pl.place === 'Regent\'s Park' && pl.food === true && pl.cost === 24 && pl.pay === 'split' && pl.cur === 'GBP' && pl.band === 'h' && pl.joined === false && pl.going.length === 0, 'a friend sees the whole shared plan: what, when, where, food, cost and who pays');
+  ok(r.data.plans.length === 1 && pl.title === 'Football' && pl.hostName === 'Hashir Khan' && pl.date === day(3) && pl.time === '18:30' && pl.place === 'Regent\'s Park' && pl.food === true && pl.cost === 24 && pl.pay === 'split' && pl.cur === 'GBP' && pl.band === 'm' && pl.joined === false && pl.going.length === 0, 'a friend sees the whole shared plan: what, when, where, food, cost and who pays');
   ok(!/Private|secret1|07700|Lunch|Secret Name|private note/.test(fb), 'a friend never sees private plans, contacts, numbers, notes or the name typed on the plan');
   r = await call('GET', '/api/social/feed', undefined, D.t); ok(r.data.plans.length === 0, 'someone who is not a friend sees nothing');
   r = await call('POST', '/api/social/join', { host: A.id, plan: 'foot' }, D.t); ok(r.status === 403, 'and cannot join');

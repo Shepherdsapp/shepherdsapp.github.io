@@ -1510,7 +1510,8 @@ function myShare(cost, pay, going, mine) {
 function payLine(p) {
   if (p.cost == null) return p.pay === 'host' ? (p.mine ? L('You\'re paying') : L('{0} is paying', firstName(p.hostName))) : (p.band ? bandLabel(p.band, p.cur) : L('Cost not set'));
   if (p.pay === 'host') return p.mine ? L('You\'re paying') : L('{0} is paying', firstName(p.hostName));
-  if (p.pay === 'split') return L('{0} split equally: about {1} each', curMoney(p.cost, p.cur), curMoney(p.cost / (p.going.length + 1), p.cur));
+  if (p.pay === 'split') return p.mine || p.joined ? L('{0} split equally: about {1} each', curMoney(p.cost, p.cur), curMoney(p.cost / (p.going.length + 1), p.cur))
+    : L('{0} split equally: about {1} each if you join', curMoney(p.cost, p.cur), curMoney(p.cost / (p.going.length + 2), p.cur));
   return p.cost > 0 ? L('About {0} each', curMoney(p.cost, p.cur)) : L('Free');
 }
 

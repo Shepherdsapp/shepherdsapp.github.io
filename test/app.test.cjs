@@ -91,12 +91,13 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   await wait(400);
   ok($('#agree') && !$('#agree').hidden && /Before you start/.test($('#agree').textContent), 'a new user is asked to agree to the acceptable use statement first');
   const rules = $$('#agree .agree-in > .steps li').map(li => li.textContent);
-  ok(rules.length === 6 && /responsible for the people you choose to contact/.test(rules[0]) && /got fairly/.test(rules[1]) && /stop/.test(rules[2]) && /share anyone's contact details/.test(rules[3]) && /spam, bulk messages, harassment/.test(rules[4]) && /data protection and privacy law/.test(rules[5]), 'it covers the six points from the data protection team');
+  ok(rules.length === 8 && /responsible for the people you choose to contact/.test(rules[0]) && /got fairly/.test(rules[1]) && /stop/.test(rules[2]) && /share anyone's contact details/.test(rules[3]) && /spam, bulk messages, harassment/.test(rules[4]) && /data protection and privacy law/.test(rules[7]), 'it covers the six points from the data protection team');
+  ok(/13 or older/.test(rules[5]) && /under 18/.test(rules[5]) && /approved/.test(rules[5]) && /Only add friends you know/.test(rules[6]) && /public places/.test(rules[6]), 'and the two new ones: the age rule, and sharing plans with friends safely');
   ok($('#tour').hidden, 'the tour waits until they agree');
   click('#agreeMore'); await wait();
   ok(!$('#agreeFull').hidden && /Who is responsible/.test($('#agreeFull').textContent) && /Pavi/.test($('#agreeFull').textContent), 'the full privacy notice can be read right there');
   click('#agreeGo'); await wait(500);
-  ok($('#agree').hidden && store.docs.get('data/users/u_test/profile').agreed.v === 1 && store.docs.get('data/users/u_test/profile').agreed.at > 0, 'agreeing is recorded on their account, with the date');
+  ok($('#agree').hidden && store.docs.get('data/users/u_test/profile').agreed.v === 2 && store.docs.get('data/users/u_test/profile').agreed.at > 0, 'agreeing is recorded on their account, with the date');
 
   current = 'Tour for new users';
   ok(!$('#tour').hidden, 'tour starts by itself the first time someone opens Shepherd');
@@ -152,7 +153,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
   ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Your calendar', 'closing the guide returns to the tour');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(S().view === 'encourage' && /encouragement dates and hangouts/.test($('#tourText').textContent) && /food/.test($('#tourText').textContent), 'shows the Encourage tab');
+  ok(S().view === 'encourage' && /encouragement dates and hangouts/.test($('#tourText').textContent) && /share them with friends/.test($('#tourText').textContent) && /budget tank/.test($('#tourText').textContent), 'shows the Encourage tab');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'settings' && /language/.test($('#tourText').textContent) && /currency/.test($('#tourText').textContent) && /PIN/.test($('#tourText').textContent) && /Privacy and safe use/.test($('#tourText').textContent), 'points out language, currency, About, PIN, backups and privacy in Settings');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
@@ -1058,7 +1059,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     A.click('[data-act="yourdata"]'); await wait();
     const yd = A.$('#sheetBody').textContent;
     ok(/Data linked to you/.test(yd) && /Kept only on this phone/.test(yd) && /Never collected/.test(yd) && /location/.test(yd), 'Your data explains what is saved, where, and what is never collected');
-    ok(A.$('#sheetTitle').textContent === 'Privacy and safe use' && A.$$('#sheetBody .pv h3').map(h => h.textContent).join('|') === "Who is responsible|Your responsibility|Acceptable use|What Shepherd keeps, and why|How it's protected|Keep your phone safe|How long it's kept, and your choices", 'the privacy notice has every section the data protection team asked for');
+    ok(A.$('#sheetTitle').textContent === 'Privacy and safe use' && A.$$('#sheetBody .pv h3').map(h => h.textContent).join('|') === "Who is responsible|Your responsibility|Acceptable use|Friends and shared plans|What Shepherd keeps, and why|How it's protected|Keep your phone safe|How long it's kept, and your choices", 'the privacy notice has every section the data protection team asked for');
     ok(/run by Pavi/.test(yd) && /data controller/.test(yd), 'names Pavi as responsible for it');
     ok(/email lostshepherdapp@gmail\.com/.test(yd) && !/through your church/.test(yd), 'gives the email to write to about privacy: lostshepherdapp@gmail.com');
     ok(/password reset code by email/.test(yd) && /from lostshepherdapp@gmail\.com through Google's Gmail/.test(yd), 'says reset codes are emailed from the Shepherd Gmail');

@@ -111,7 +111,7 @@ try {
   ok(db("SELECT email FROM users")[0][0] === 'pavi@church.test' && !/correct horse/.test(JSON.stringify(db('SELECT * FROM users'))), 'account saved on the server without the password itself');
   ok(!(await A.p.locator('#agree').isVisible()), 'agreeing on sign-up is enough, no second agreement screen');
   ok(await skipTour(A.p), 'the tour starts by itself for a new account');
-  { const ag = JSON.parse(db("SELECT data FROM docs WHERE path = 'profile'")[0][0]).agreed; ok(ag && ag.v === 1 && ag.at > 0, 'the agreement is saved with the account (version and time)'); }
+  { const ag = JSON.parse(db("SELECT data FROM docs WHERE path = 'profile'")[0][0]).agreed; ok(ag && ag.v === 2 && ag.at > 0, 'the agreement is saved with the account (version and time)'); }
   ok(await A.p.locator('#installCard').isVisible(), 'iPhone in Safari is shown how to put Shepherd on the Home Screen');
 
   current = 'Tabs and About';
@@ -290,7 +290,7 @@ try {
     await P.p.goto(APP + 'privacy.html'); await wait(900);
     const hs = await P.p.$$eval('#pv h3', h => h.length);
     const txt = await P.p.textContent('body');
-    ok(hs === 7 && /Acceptable use/.test(txt) && /responsible for the people/.test(txt) && /passcode/.test(txt) && /email lostshepherdapp@gmail\.com/.test(txt), 'privacy.html opens on its own with all 7 sections');
+    ok(hs === 8 && /Friends and shared plans/.test(txt) && /Acceptable use/.test(txt) && /responsible for the people/.test(txt) && /passcode/.test(txt) && /email lostshepherdapp@gmail\.com/.test(txt), 'privacy.html opens on its own with all 8 sections');
     ok(await overflow(P.p) <= 0, 'privacy page fits a small phone');
     await P.p.screenshot({ path: path.join(OUT, 'privacy-320.png'), fullPage: true });
     await P.p.evaluate(() => localStorage.setItem('shepherd:lang', 'es')); await P.p.reload(); await wait(1500);

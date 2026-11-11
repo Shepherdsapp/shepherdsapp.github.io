@@ -241,14 +241,14 @@
    one-time "Before you start" agreement) and on its own page, privacy.html, so anyone can read it before signing up.
    Written in English; the language files translate it on screen. */
 (function () {
-  var USE_VERSION = 1; // raise this when the acceptable use statement changes, so everyone agrees to the new one
-  var UPDATED = '2026-11-11';
+  var USE_VERSION = 2; // raise this when the acceptable use statement changes, so everyone agrees to the new one
+  var UPDATED = '2026-11-12';
   function cfg() { var c = (window.SHEPHERD_CONFIG && window.SHEPHERD_CONFIG.privacy) || {}; return { controller: c.controller || 'Pavi', contact: c.contact || 'lostshepherdapp@gmail.com' }; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; }); }
   function when() {
     var d = new Date(UPDATED + 'T12:00:00');
     try { var loc = window.I18N && I18N.lang !== 'en' ? I18N.locale() : 'en-GB'; if (Intl.DateTimeFormat.supportedLocalesOf([loc]).length) return new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'long', year: 'numeric' }).format(d); } catch (e) {}
-    return '11 November 2026';
+    return '12 November 2026';
   }
   function sec(title, body) { return '<section class="card pv"><h3>' + title + '</h3>' + body + '</section>'; }
   function ul(items) { return '<ul class="steps">' + items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; }
@@ -259,6 +259,8 @@
       'If someone asks you to stop messaging them, stop. Mark them <b>No longer contact</b>, and delete their details if they ask.',
       'Don\'t share anyone\'s contact details without a good reason and their agreement.',
       'Never use Shepherd for spam, bulk messages, harassment or anything unlawful.',
+      'You must be 13 or older. If you are under 18, say so: your account is approved before you can add friends or join plans.',
+      'Only add friends you know, and only share plans you are happy for them to see. Meet in public places, and treat everyone with respect.',
       'You remain responsible for following data protection and privacy law when you use Shepherd.'
     ]);
   }
@@ -278,9 +280,17 @@
         '<p class="note">You decide who to add and what to write about them. You are responsible for the people you contact through Shepherd and for the information you keep about them.</p>' +
         '<p class="note">Only write what you would be comfortable for that person to read. Don\'t record health or other sensitive details unless they are happy for you to keep them.</p>') +
       sec('Acceptable use', '<p class="note">Everyone who uses Shepherd agrees to this:</p>' + rules()) +
+      sec('Friends and shared plans',
+        '<p class="note">Adding friends is optional. Friends see one thing only: the Encourage plans you choose to share.</p>' +
+        ul(['A shared plan shows what it is, the day and time, the place, whether there is food, the cost and who pays, your name and who is going.',
+          'Friends never see your People, Disciples, prayer list, notes, phone numbers, private plans or budget.',
+          'If you choose a church, adults from that church can find you by your first name and the first letter of your surname, to send a friend request. Under-18s are never listed.',
+          'Under-18 accounts show as their church with (CAMPUS). The person who runs Shepherd is emailed their name and email address and approves them first. Adults cannot send them friend requests, and a plan between an adult and an under-18 needs 3 or more people.',
+          'You can remove or block a friend, or report a person or plan, at any time. A report goes to the person who runs Shepherd with your name and email address.',
+          'Friendships, who is going to a plan and reports are deleted when you delete your account.']) ) +
       sec('What Shepherd keeps, and why',
         '<p class="note"><b>Data linked to you</b>, saved to your own private account so your list is on every phone you sign in on and isn\'t lost:</p>' +
-        ul(['Your name, email, WhatsApp number, home country and settings (such as language, currency, time zone and notification times).', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list, and the encouragement dates and hangouts you log, with the activity, whether you went for food and what it cost.', 'People you bring in from your phone and sort into People, Disciples or your prayer list: their name and number.', 'For each phone you\'re signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.']) +
+        ul(['Your name, email, WhatsApp number, home country and settings (such as language, currency, time zone and notification times).', 'The people you add: their names, phone numbers, social handles, notes, prayer points and Bible studies, and whether they agreed to be added.', 'Your events, disciples and prayer list, and the encouragement dates and hangouts you log, with the activity, whether you went for food and what it cost.', 'Your church, your friends, your friend code, the plans you join and your monthly budget.', 'People you bring in from your phone and sort into People, Disciples or your prayer list: their name and number.', 'For each phone you\'re signed in on: when it signed in and was last used, and what kind of browser it is, so it stays signed in.', 'The notifications planned for the next two weeks. Once sent, only the time is kept, for 3 days.']) +
         '<p class="note"><b>Kept only on this phone</b>:</p>' +
         ul(['Phone contacts you bring in but haven\'t sorted yet, and anyone you sort into Other. They are never uploaded. Anyone you skip isn\'t kept at all.', 'A copy of your list, so Shepherd works without signal.']) +
         '<p class="note"><b>Never collected</b>:</p>' +

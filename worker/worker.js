@@ -516,12 +516,18 @@ async function schedule(req, env, me) {
 export async function sendDue(env, limit) {
   await ready(env);
   const t = now();
-  const due = await all(env, 'SELECT * FROM outbox WHERE sent = 0 AND at <= ? AND at > ? ORDER BY at LIMIT ?', t, t - 3 * 3600e3, limit || 40);
+  // "sent" is 0 (waiting), 1 (sent) or the second a run started on it. Each run claims an item before sending, so two runs
+  // at the same moment (the 5-minute timer, and a friend joining a plan) never send it twice; a claim that is over
+  // 3 minutes old was cut off, and is picked up again.
+  const due = await all(env, 'SELECT * FROM outbox WHERE (sent = 0 OR (sent > 1 AND sent < ?)) AND at <= ? AND at > ? ORDER BY at LIMIT ?', Math.floor(t / 1000) - 180, t, t - 3 * 3600e3, limit || 40);
   if (!due.length) return { sent: 0 };
   const subs = {};
   for (const u of [...new Set(due.map(d => d.uid))]) subs[u] = await all(env, 'SELECT * FROM subs WHERE uid = ?', u);
   const v = await vapid(env), cache = {}; let sent = 0, retry = 0;
   for (const d of due) {
+    const claim = Math.floor(now() / 1000);
+    const c = await run(env, 'UPDATE outbox SET sent = ? WHERE id = ? AND sent = ?', claim, d.id, d.sent);
+    if (c && c.meta && c.meta.changes === 0) continue; // another run is already sending this one
     let good = 0, later = 0;
     const list = subs[d.uid] || [];
     for (const s of list) {
@@ -530,7 +536,7 @@ export async function sendDue(env, limit) {
       if (st >= 200 && st < 300) good++; else if (!st || st === 429 || st >= 500) later++;
     }
     sent += good;
-    if (list.length && !good && later === list.length) { retry++; continue; } // phones unreachable right now: try next run
+    if (list.length && !good && later === list.length) { retry++; await run(env, 'UPDATE outbox SET sent = 0 WHERE id = ? AND sent = ?', d.id, claim); continue; } // phones unreachable right now: try next run
     await run(env, "UPDATE outbox SET sent = 1, title = '', body = '', url = '' WHERE id = ?", d.id); // once sent, only the time is kept (for 3 days)
   }
   return { sent, items: due.length, retry };
@@ -1017,8 +1023,9 @@ async function socialFeed(env, me) {
     const id = r.path.split('/').pop(), g = (going.get(r.uid + '/' + id) || []).filter(u => P.get(u) && active(P.get(u)));
     const cost = d.cost === '' || d.cost == null || !(Number(d.cost) >= 0) ? null : Math.round(Number(d.cost) * 100) / 100;
     const pay = d.pay === 'split' || d.pay === 'host' ? d.pay : 'own';
+    // a split plan's price tag is what it would cost you if you joined
     const p = { host: r.uid, hostName: h.name, mine: r.uid === me.uid, id, type: d.type === 'hangout' ? 'hangout' : 'date', title: planTitle(d), date: d.date, time: /^\d\d:\d\d$/.test(d.time || '') ? d.time : '', place: str(d.place, 120), food: !!d.food,
-      band: priceBand(cost, pay, g.length + 1), going: g.map(u => ({ id: u, name: u === me.uid || friendSet.has(u) ? P.get(u).name : shortName(P.get(u).name), me: u === me.uid })), joined: g.includes(me.uid) };
+      band: priceBand(cost, pay, g.length + 1 + (r.uid === me.uid || g.includes(me.uid) ? 0 : 1)), going: g.map(u => ({ id: u, name: u === me.uid || friendSet.has(u) ? P.get(u).name : shortName(P.get(u).name), me: u === me.uid })), joined: g.includes(me.uid) };
     if (!s.minor) { p.cost = cost; p.pay = pay; p.cur = h.cur; } // under-18s see a price tag only
     if (!p.mine && !p.joined && !!h.minor !== !!s.minor && g.length < 1) p.needGroup = true;
     plans.push(p);
