@@ -32,7 +32,7 @@
    Open https://<this worker>/health to check: you should see "db":true.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-export const VERSION = 4;
+export const VERSION = 5;
 const DEFAULT_ORIGINS = 'https://shepherdsapp.github.io';
 const DEFAULT_APP_URL = 'https://shepherdsapp.github.io/';
 const MAX_DOC = 256 * 1024;
@@ -861,6 +861,8 @@ async function tell(env, ctx, to, make, always) {
   return stmts.length;
 }
 function sharedPlan(data) { let d; try { d = JSON.parse(data); } catch (e) { return null; } return d && d.kind === 'enc' && d.share === 'friends' && /^\d{4}-\d\d-\d\d$/.test(d.date || '') ? d : null; }
+// the host can limit how many others may join: 1 to 14, or 0 for no limit
+export const planCap = d => { const n = Math.floor(Number(d && d.cap)); return n >= 1 && n <= 14 ? n : 0; };
 const planTitle = d => str(String(d.activity || '').trim() || (d.type === 'hangout' ? 'Hangout' : 'Encouragement date'), 120);
 // Price tags are "under 5", "5 to 15" and "over 15" in pounds, euros and dollars; other currencies use amounts that
 // mean about the same there (the app holds the same table to write the label).
@@ -1031,6 +1033,7 @@ async function socialFeed(env, me) {
     // a split plan's price tag is what it would cost you if you joined
     const p = { host: r.uid, hostName: h.name, mine: r.uid === me.uid, id, type: d.type === 'hangout' ? 'hangout' : 'date', title: planTitle(d), date: d.date, time: /^\d\d:\d\d$/.test(d.time || '') ? d.time : '', place: str(d.place, 120), food: !!d.food,
       band: priceBand(cost, pay, g.length + 1 + (r.uid === me.uid || g.includes(me.uid) ? 0 : 1), h.cur), cur: h.cur, going: g.map(u => ({ id: u, name: u === me.uid || friendSet.has(u) ? P.get(u).name : shortName(P.get(u).name), me: u === me.uid })), joined: g.includes(me.uid) };
+    const cap = planCap(d); if (cap) { p.cap = cap; if (g.length >= cap) p.full = true; }
     if (past) p.past = true;
     if (!s.minor) { p.cost = cost; p.pay = pay; } // under-18s see a price tag only (in the host's currency)
     if (!p.mine && !p.joined && !!h.minor !== !!s.minor && g.length < 1) p.needGroup = true;
@@ -1067,7 +1070,11 @@ async function socialJoin(req, env, me, ctx) {
   await rateLimit(env, 'join:' + me.uid, 120, 3600e3);
   const had = await one(env, 'SELECT 1 AS x FROM joins WHERE host = ? AND plan = ? AND uid = ?', host, plan, me.uid);
   if (!had) {
-    await run(env, 'INSERT OR IGNORE INTO joins (host, plan, uid, t) VALUES (?, ?, ?, ?)', host, plan, me.uid, now());
+    const cap = planCap(d);
+    if (cap) { // one statement, so two people tapping Join at the same moment can't both take the last place
+      const r = await run(env, 'INSERT INTO joins (host, plan, uid, t) SELECT ?, ?, ?, ? WHERE (SELECT COUNT(*) FROM joins WHERE host = ? AND plan = ?) < ?', host, plan, me.uid, now(), host, plan, cap);
+      if (r && r.meta && r.meta.changes === 0) fail(409, 'full', 'This plan is full.');
+    } else await run(env, 'INSERT OR IGNORE INTO joins (host, plan, uid, t) VALUES (?, ?, ?, ?)', host, plan, me.uid, now());
     await tell(env, ctx, [host], u => ({ title: st(u.lang, 'go', M.name, planTitle(d)), body: whenText(u.lang, d.date, d.time), tag: 'jn-' + plan + '-' + me.uid }));
     await tell(env, ctx, others, u => ({ title: st(u.lang, 'go', shortName(M.name), planTitle(d)), body: whenText(u.lang, d.date, d.time), tag: 'jn-' + plan + '-' + me.uid }));
   }

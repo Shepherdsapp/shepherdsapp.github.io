@@ -29,7 +29,7 @@ const snap = () => JSON.stringify([q('SELECT id, email, name FROM users ORDER BY
 const before = snap();
 
 // 2. the new server takes over the same database
-r = await neu('GET', '/health'); ok(r.data.version === 4 && r.data.db === true, 'the new server (version 4) starts on that database');
+r = await neu('GET', '/health'); ok(r.data.version === 5 && r.data.db === true, 'the new server (version 5) starts on that database');
 ok(snap() === before, 'accounts, people, plans and waiting notifications are exactly as they were');
 ok(q("SELECT v FROM meta WHERE k = 'schema'")[0][0] === '4' && q("SELECT name FROM churches")[0][0] === 'London ICC' && ['social', 'friends', 'blocks', 'joins', 'announced', 'reports'].every(t => q("SELECT COUNT(*) FROM " + t)[0][0] === 0), 'the new tables are added, empty, with London ICC ready');
 r = await neu('GET', '/api/me', undefined, T); ok(r.status === 200, 'the phone stays signed in (no need to log in again)');

@@ -536,7 +536,7 @@ try {
   const out = (uid) => q("SELECT title, body, url, at FROM outbox WHERE uid = '" + uid + "' ORDER BY id");
   const docs = (t, ops) => call('POST', '/api/docs', { ops }, t);
   const day = n => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10);
-  r = await call('GET', '/health'); ok(r.data.version === 4, 'the server says it is version 4');
+  r = await call('GET', '/health'); ok(r.data.version === 5, 'the server says it is version 5');
   r = await call('GET', '/api/churches'); ok(r.status === 200 && r.data.churches[0].name === 'London ICC' && r.data.churches[0].id === 'c_london_icc', 'London ICC is the first church on the list, before anyone signs in');
   r = await call('GET', '/api/social/me', undefined, A.t);
   ok(r.status === 200 && r.data.on === true && r.data.church === null && r.data.minor === false && r.data.approved === true && /^[A-Z2-9]{8}$/.test(r.data.code) && r.data.owner === false && r.data.friends.length === 0, 'everyone starts as an adult with a friend code, no church and no friends');
@@ -630,6 +630,22 @@ try {
     await docs(A.t, pl(-70, 60));
     fb = (await call('GET', '/api/social/feed', undefined, B.t)).data.plans.find(x => x.id === 'past1'); ok(!fb, 'after about two months it drops away');
     await docs(A.t, [{ p: 'profile/events/past1', d: null, t: Date.now() + 70 }]); }
+  // a limit on how many can join
+  { const pl = (cap, tt) => [{ p: 'profile/events/cap1', d: { kind: 'enc', type: 'hangout', share: 'friends', date: day(4), time: '18:00', activity: 'Board games', cost: 0, pay: 'own', cap }, t: Date.now() + tt }];
+    await docs(A.t, pl(1, 80));
+    let f = (await call('GET', '/api/social/feed', undefined, B.t)).data.plans.find(x => x.id === 'cap1');
+    ok(f && f.cap === 1 && !f.full, 'a plan can say how many others may join');
+    const both = await Promise.all([call('POST', '/api/social/join', { host: A.id, plan: 'cap1' }, B.t), call('POST', '/api/social/join', { host: A.id, plan: 'cap1' }, C.t)]);
+    ok(both.filter(x => x.status === 200).length === 1 && both.filter(x => x.status === 409 && x.data.error === 'full').length === 1, 'two people joining at the same moment: one gets the last place, the other is told it is full');
+    f = (await call('GET', '/api/social/feed', undefined, C.t)).data.plans.find(x => x.id === 'cap1');
+    ok(f.full === true && f.going.length === 1, 'a full plan is marked full for everyone');
+    const inId = both[0].status === 200 ? B : C, outId = inId === B ? C : B;
+    r = await call('POST', '/api/social/join', { host: A.id, plan: 'cap1' }, inId.t); ok(r.status === 200, 'someone already going can tap Join again without an error');
+    await call('POST', '/api/social/join', { host: A.id, plan: 'cap1', on: false }, inId.t);
+    r = await call('POST', '/api/social/join', { host: A.id, plan: 'cap1' }, outId.t); ok(r.status === 200, 'when someone leaves, the place opens up again');
+    await docs(A.t, pl(0, 90)); f = (await call('GET', '/api/social/feed', undefined, B.t)).data.plans.find(x => x.id === 'cap1'); ok(f.cap === undefined && !f.full, 'no limit means no cap');
+    await docs(A.t, pl(99, 95)); f = (await call('GET', '/api/social/feed', undefined, B.t)).data.plans.find(x => x.id === 'cap1'); ok(f.cap === undefined, 'a limit outside 1 to 14 is ignored');
+    await docs(A.t, [{ p: 'profile/events/cap1', d: null, t: Date.now() + 99 }]); }
   // remove, block, report
   await docs(A.t, [{ p: 'profile/events/walk', d: { kind: 'enc', type: 'hangout', share: 'friends', date: day(6), activity: 'Walk', cost: '' }, t: Date.now() }]);
   await call('POST', '/api/social/join', { host: A.id, plan: 'walk' }, C.t);
