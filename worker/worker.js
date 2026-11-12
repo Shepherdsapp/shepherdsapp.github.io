@@ -862,11 +862,14 @@ async function tell(env, ctx, to, make, always) {
 }
 function sharedPlan(data) { let d; try { d = JSON.parse(data); } catch (e) { return null; } return d && d.kind === 'enc' && d.share === 'friends' && /^\d{4}-\d\d-\d\d$/.test(d.date || '') ? d : null; }
 const planTitle = d => str(String(d.activity || '').trim() || (d.type === 'hangout' ? 'Hangout' : 'Encouragement date'), 120);
-export function priceBand(cost, pay, people2) {
+// Price tags are "under 5", "5 to 15" and "over 15" in pounds, euros and dollars; other currencies use amounts that
+// mean about the same there (the app holds the same table to write the label).
+const BANDS = { NGN: [5000, 15000], GHS: [50, 150], KES: [500, 1500], ZAR: [100, 300], INR: [500, 1500], CNY: [50, 150], JPY: [1000, 3000], PLN: [25, 75], SEK: [50, 150], NOK: [50, 150], DKK: [50, 150], BRL: [25, 75], RUB: [500, 1500] };
+export function priceBand(cost, pay, people2, cur) {
   if (pay === 'host') return 'free';
   if (cost === '' || cost == null || !(Number(cost) >= 0)) return '';
-  const each = pay === 'split' ? Number(cost) / Math.max(1, people2) : Number(cost);
-  return each <= 0 ? 'free' : each < 5 ? 'u5' : each <= 15 ? 'm' : 'h';
+  const each = pay === 'split' ? Number(cost) / Math.max(1, people2) : Number(cost), b = BANDS[cur] || [5, 15];
+  return each <= 0 ? 'free' : each < b[0] ? 'u5' : each <= b[1] ? 'm' : 'h';
 }
 // after a save: tell friends about a newly shared plan, and the people going when it changes or is cancelled
 async function socialAfterSave(env, ctx, me, apply) {
@@ -1025,8 +1028,8 @@ async function socialFeed(env, me) {
     const pay = d.pay === 'split' || d.pay === 'host' ? d.pay : 'own';
     // a split plan's price tag is what it would cost you if you joined
     const p = { host: r.uid, hostName: h.name, mine: r.uid === me.uid, id, type: d.type === 'hangout' ? 'hangout' : 'date', title: planTitle(d), date: d.date, time: /^\d\d:\d\d$/.test(d.time || '') ? d.time : '', place: str(d.place, 120), food: !!d.food,
-      band: priceBand(cost, pay, g.length + 1 + (r.uid === me.uid || g.includes(me.uid) ? 0 : 1)), going: g.map(u => ({ id: u, name: u === me.uid || friendSet.has(u) ? P.get(u).name : shortName(P.get(u).name), me: u === me.uid })), joined: g.includes(me.uid) };
-    if (!s.minor) { p.cost = cost; p.pay = pay; p.cur = h.cur; } // under-18s see a price tag only
+      band: priceBand(cost, pay, g.length + 1 + (r.uid === me.uid || g.includes(me.uid) ? 0 : 1), h.cur), cur: h.cur, going: g.map(u => ({ id: u, name: u === me.uid || friendSet.has(u) ? P.get(u).name : shortName(P.get(u).name), me: u === me.uid })), joined: g.includes(me.uid) };
+    if (!s.minor) { p.cost = cost; p.pay = pay; } // under-18s see a price tag only (in the host's currency)
     if (!p.mine && !p.joined && !!h.minor !== !!s.minor && g.length < 1) p.needGroup = true;
     plans.push(p);
   }

@@ -1134,3 +1134,163 @@ Your name, email, WhatsApp number, home country and settings (such as language, 
 Your events, disciples and prayer list, and the encouragement dates and hangouts you log, with the activity, whether you went for food and what it cost.
 People you bring in from your phone and sort into People, Disciples or your prayer list: their name and number.
 Phone contacts you bring in but haven't sorted yet, and anyone you sort into Other. They are never uploaded. Anyone you skip isn't kept at all.
+Free
+Under {0}
+You're paying
+{0} is paying
+Cost not set
+{0} split equally: about {1} each
+{0} split equally: about {1} each if you join
+About {0} each
+{0} going
+With {0}
+Leave {0}
+Join {0}
+{0}% of your budget left
+{0} spent of {1}
+You've used {0}% of this month's budget.
+Your budget tank is empty for this month.
+{0} friend sees the plans you share
+{0} friends see the plans you share
+Add friends to share plans and join theirs
+Going: {0}
+This takes you {0} over your budget for that month.
+This leaves {0} in your budget for that month.
+Choose your church
+Add another church…
+Nobody else from {0} is on Shepherd yet. Share the app with them.
+Options for {0}
+No connection. Try again when you have signal.
+Report sent. Thank you.
+Budget saved
+Budget removed
+Shared with your friends. They can join in one tap.
+Saved. You'll be told when you're approved.
+Church saved
+You're now friends
+If they use Shepherd, they'll get your request.
+Tank filled. It drains as you spend.
+Request sent
+Unblocked
+Blocked
+Type your monthly budget as a number, like 40.
+Brother or sister (optional)
+Tap again to delete. The people going will be told.
+Type the name of your church.
+Type their email or friend code.
+Shared with friends
+Not set yet
+Yes, going for food
+No food planned
+Nobody yet
+This plan opens to you once someone else has joined, so there are 3 or more people.
+Edit plan
+You're going. It's in your Encourage calendar, and Shepherd will remind you.
+I can't make it
+Report a problem with this plan
+You're going. Shepherd will remind you.
+You're no longer going.
+Report a problem
+Tell us what happened. Your report goes privately to the person who runs Shepherd, who can remove accounts.
+What happened?
+If someone is in danger, call the emergency services first.
+Send report
+Budget tank
+Only you see this
+Set a monthly budget for encouragement dates and hangouts. Your tank shows how much is left.
+Fill the tank
+over budget this month
+left this month
+Your tank is empty. Try something free, like a walk.
+Change budget
+Your budget is private. Friends never see it.
+Remove budget
+Your account wasn't approved
+Waiting for approval
+You can keep using Shepherd on your own. For questions, email the person who runs Shepherd.
+The person who runs Shepherd approves every under-18 account. Until then you can use Shepherd on your own, but can't add friends or join plans.
+Friends' plans
+All plans
+Free only
+No free plans right now.
+No plans from friends yet. When a friend shares one, it shows here and you can join in one tap.
+Who can see this
+Just me
+Friends see what it is, when, where, food, cost and who's going, and can join in one tap. They never see anything else in Shepherd.
+Where (optional)
+Who pays
+Everyone pays their own
+Split equally
+I'm paying
+Say what the plan is, so friends know.
+Your church
+Choose your church to find friends from it quickly.
+Under-18 account, approved.
+Under-18 account, not approved.
+Under-18 account, waiting for approval.
+Change church
+Church name
+I'm under 18
+You'll show as your church with (CAMPUS) after it. The person who runs Shepherd approves you before you can add friends or join plans. Your friends list starts empty, and only people you add yourself, with their email or friend code, can be your friends.
+Did you mean:
+Friends only see the plans you share: what it is, when, where, food, cost and who's going. They never see your People, Disciples, prayer list, notes, phone numbers or budget.
+Your account wasn't approved, so you can't add friends.
+You can add friends once your account is approved.
+Friend requests
+Add a friend
+Their email or friend code
+Send request
+Your friend code:
+Copy my code
+People from my church
+Choose your church to see people from it here.
+Add friend
+Your friends
+No friends yet. Add someone by their email or friend code.
+No friends yet. Add someone by their email or friend code, or from your church.
+Requests you sent
+Friend code copied
+Removing or blocking is private. They aren't told.
+Remove friend
+Back to friends
+Join
+What
+When
+Cost
+Host
+Going
+Block
+Accept
+Church
+Report
+Decline
+Unblock
+Choose later
+I'm under 18.
+Anything that worried you
+You must be 13 or older to use Shepherd.
+A private budget tank shows how much you have left to spend this month.
+Your church, your friends, your friend code, the plans you join and your monthly budget.
+Friendships, who is going to a plan and reports are deleted when you delete your account.
+Adding friends is optional. Friends see one thing only: the Encourage plans you choose to share.
+Friends never see your People, Disciples, prayer list, notes, phone numbers, private plans or budget.
+You must be 13 or older. If you are under 18, say so: your account is approved before you can add friends or join plans.
+A shared plan shows what it is, the day and time, the place, whether there is food, the cost and who pays, your name and who is going.
+Under-18 accounts show as their church with (CAMPUS). The person who runs Shepherd is emailed their name and email address and approves them first. Adults cannot send them friend requests, and a plan between an adult and an under-18 needs 3 or more people.
+Monthly budget ({0})
+You show as <b>{0}</b>.
+Friends and shared plans
+If you choose a church, adults from that church can find you by your first name and the first letter of your surname, to send a friend request. Under-18s are never listed.
+You can remove or block a friend, or report a person or plan, at any time. A report goes to the person who runs Shepherd with your name and email address.
+Only add friends you know, and only share plans you are happy for them to see. Meet in public places, and treat everyone with respect.
+Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.
+A weekly nudge, reminders before each date, and news about friends' plans
+Add friends and share a plan with them. Friends only see the plans you share, never your People, Disciples, prayer list, notes or budget. They join in one tap, and everyone going is told.
+Choose a church from the list.
+That plan is no longer open.
+This is your own plan.
+To change this, email {0}.
+You can only join plans from your friends.
+Your account is waiting for approval.
+Type the name of your church
+Removed

@@ -170,6 +170,11 @@ ok(got[0].title === 'Reply to Grace' && got[0].body === 'Grace is waiting on you
 out = await sendDue(env);
 ok(out.sent === 0, 'never sent twice');
 Date.now = realNow;
+// price tags follow the host's currency: £5 and ¥5 are not the same amount
+{ const { priceBand } = mod;
+  ok(priceBand(4, 'own', 1, 'GBP') === 'u5' && priceBand(12, 'own', 1) === 'm' && priceBand(16, 'own', 1, 'EUR') === 'h' && priceBand(0, 'own', 1, 'JPY') === 'free', 'price tags in pounds and euros: under 5, 5 to 15, over 15');
+  ok(priceBand(800, 'own', 1, 'JPY') === 'u5' && priceBand(2000, 'own', 1, 'JPY') === 'm' && priceBand(4000, 'own', 1, 'JPY') === 'h', 'in yen the same tags mean under ¥1,000, ¥1,000 to ¥3,000, and more');
+  ok(priceBand(3000, 'own', 1, 'NGN') === 'u5' && priceBand(24000, 'split', 2, 'NGN') === 'm' && priceBand(99999, 'host', 3, 'NGN') === 'free' && priceBand(20, 'own', 1, 'XXX') === 'h', 'and in naira under ₦5,000, ₦5,000 to ₦15,000, and more (an unknown currency is treated like pounds)'); }
 // two sends overlapping (the 5-minute timer and a friend's join at the same moment) must not double up
 r = await call('POST', '/api/schedule', { items: [{ at: soon + 2000, title: 'Only once', body: '', tag: 'once' }] }, T1);
 sentPushes.length = 0; Date.now = () => realNow() + 5 * 60e3;

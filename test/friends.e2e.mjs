@@ -84,10 +84,11 @@ const pushStub = sub => {
 const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
 const ANDROID = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Mobile Safari/537.36';
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
-const errors = [];
+const errors = []; const I18N_SINK = new Set();
 async function phone(who, uaStr, w, h) {
   const ctx = await browser.newContext({ viewport: { width: w || 390, height: h || 844 }, userAgent: uaStr || ANDROID, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
   await ctx.addInitScript(pushStub, subFor(who));
+  if (process.env.I18N_COLLECT) { await ctx.exposeBinding('__i18nPush', (src, k) => I18N_SINK.add(k)); await ctx.addInitScript(() => { window.__i18nCollect = k => { try { window.__i18nPush(k); } catch (e) {} }; }); }
   const p = await ctx.newPage();
   p.on('pageerror', e => errors.push(who + ': ' + e.message));
   p.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|fonts\.g|cdnjs|ERR_|net::/.test(m.text())) errors.push(who + ' console: ' + m.text()); });
@@ -365,6 +366,8 @@ try {
     ok(f && f.needGroup === true && await T.p.locator('#feedSec .jbtn', { hasText: 'Join' }).first().isDisabled(), 'and can\'t join a plan with just one adult'); }
   await T.p.locator('#feedSec .pcard-main', { hasText: 'Pizza' }).click(); await wait(500);
   ok(/opens to you once someone else has joined, so there are 3 or more people/.test(await text(T.p, '#sheetBody')), 'the plan explains: 3 or more people');
+  { const f = await T.p.evaluate(() => { const u = document.querySelector('#sheetBody .facts'), l = u.lastElementChild.getBoundingClientRect(), b = u.getBoundingClientRect(); return { rows: u.children.length, inside: l.bottom <= b.bottom + 1, last: u.lastElementChild.textContent }; });
+    ok(f.rows === 7 && f.inside && /Going/.test(f.last), 'every row of the plan shows on the smallest iPhone, down to who\'s going'); }
   await shot(T, 'campus-plan');
   await closeSheet(T.p);
   await refresh(B.p); await tab(B.p, 'encourage');
@@ -444,6 +447,7 @@ try {
   current = 'Script errors';
   ok(errors.length === 0, 'no script errors on any phone' + (errors.length ? ': ' + errors.slice(0, 5).join(' / ') : ''));
 } catch (e) { console.log('CRASH', e && e.stack || e); results.push({ ok: false, m: 'crash' }); }
+if (process.env.I18N_COLLECT) fs.writeFileSync(process.env.I18N_COLLECT + '.friends.json', JSON.stringify([...I18N_SINK], null, 1));
 await browser.close(); site.close(); api.close();
 const pass = results.filter(r => r.ok).length;
 console.log('\nFriends end-to-end: ' + pass + ' passed, ' + (results.length - pass) + ' failed');

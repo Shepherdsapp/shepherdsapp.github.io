@@ -508,12 +508,15 @@ body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
 .frow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:56px}
 .frbtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .code{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--fg);font-size:17px}
-.facts{flex:none;list-style:none;margin:0;padding:0;display:grid;gap:0;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:0;border:1.5px solid var(--line);border-radius:14px;background:var(--surface)}
 .facts li{display:grid;grid-template-columns:84px minmax(0,1fr);gap:10px;padding:11px 14px;border-bottom:1px solid var(--line)} .facts li:last-child{border-bottom:0}
 .facts .k{color:var(--muted);font-weight:600;font-size:14.5px} .facts .v{overflow-wrap:anywhere}
 .chip.priv{background:#E7DDF1;color:#5B3A7A;font-weight:700;font-size:13px;min-height:26px}
 .leaves{margin:0;padding:8px 12px;border-radius:10px;background:var(--ok-soft);color:var(--ok);font-weight:600} .leaves.over{background:var(--bad-soft);color:var(--bad)}
 /* the budget tank */
+.tankpill{justify-self:start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 16px 6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font:inherit;font-size:15px;color:var(--fg);cursor:pointer;box-shadow:var(--shadow-sm,none)}
+.tankpill b{font-weight:800;color:var(--ok)} .tankpill.mid b{color:var(--warn)} .tankpill.low b{color:var(--bad)}
+.tp{width:14px;height:22px;border:2px solid var(--muted);border-radius:4px;display:flex;align-items:flex-end;overflow:hidden;flex:none} .tp i{display:block;width:100%;background:#3E7B4F;transition:height .6s ease} .tankpill.mid .tp i{background:#C58A17} .tankpill.low .tp i{background:#B5473C}
 .tankrow{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:center}
 .tankside{display:grid;gap:10px;min-width:0}
 .tank{width:112px;height:140px;display:block}
@@ -1497,13 +1500,16 @@ function goingTo(id) { var p = socOn() ? SOC.feed.filter(function (q) { return q
 function campusName() { var m = SOC.me; return m && m.church ? m.church.name + (m.minor ? ' (CAMPUS)' : '') : ''; }
 
 /* ---------- money on plans ---------- */
-function bandOf(cost, pay, people) {
+// "under 5", "5 to 15" and "over 15" in pounds, euros and dollars; other currencies use amounts that mean about the same there
+var BANDS = { NGN: [5000, 15000], GHS: [50, 150], KES: [500, 1500], ZAR: [100, 300], INR: [500, 1500], CNY: [50, 150], JPY: [1000, 3000], PLN: [25, 75], SEK: [50, 150], NOK: [50, 150], DKK: [50, 150], BRL: [25, 75], RUB: [500, 1500] };
+function bandEdges(cur) { return BANDS[cur || curCode()] || [5, 15]; }
+function bandOf(cost, pay, people, cur) {
   if (pay === 'host') return 'free';
   if (cost === '' || cost == null || !(Number(cost) >= 0)) return '';
-  var each = pay === 'split' ? Number(cost) / Math.max(1, people) : Number(cost);
-  return each <= 0 ? 'free' : each < 5 ? 'u5' : each <= 15 ? 'm' : 'h';
+  var each = pay === 'split' ? Number(cost) / Math.max(1, people) : Number(cost), e = bandEdges(cur);
+  return each <= 0 ? 'free' : each < e[0] ? 'u5' : each <= e[1] ? 'm' : 'h';
 }
-function bandLabel(b, cur) { return b === 'free' ? L('Free') : b === 'u5' ? L('Under {0}', curMoney(5, cur)) : b === 'm' ? curMoney(5, cur) + '–' + curMoney(15, cur) : b === 'h' ? curMoney(15, cur) + '+' : ''; }
+function bandLabel(b, cur) { var e = bandEdges(cur); return b === 'free' ? L('Free') : b === 'u5' ? L('Under {0}', curMoney(e[0], cur)) : b === 'm' ? curMoney(e[0], cur) + '–' + curMoney(e[1], cur) : b === 'h' ? curMoney(e[1], cur) + '+' : ''; }
 function bandTag(b, cur) { return b ? '<span class="etag band-' + b + '" data-noi18n>' + esc(bandLabel(b, cur)) + '</span>' : ''; }
 // what a plan costs me: my own share when it's split, nothing when the host pays
 function myShare(cost, pay, going, mine) {
@@ -1553,7 +1559,7 @@ function planSheet(host, id) {
   var p = SOC.feed.filter(function (q) { return q.host === host && q.id === id; })[0]; if (!p) return;
   var past = p.date < ymd(Date.now()), row = function (k, v) { return '<li><span class="k">' + k + '</span><span class="v">' + v + '</span></li>'; };
   openSheet(p.title,
-    '<ul class="facts">' + row('What', '<span data-noi18n>' + esc(p.title) + '</span> · ' + (p.type === 'hangout' ? 'Hangout' : 'Encouragement date')) +
+    '<ul class="facts">' + row('What', '<span data-noi18n>' + esc(p.title) + '</span> · <span>' + (p.type === 'hangout' ? 'Hangout' : 'Encouragement date') + '</span>') +
       row('When', esc(fmtDate(p.date)) + (p.time ? ', ' + esc(fmtClock(p.time)) : '')) +
       row('Where', p.place ? '<span data-noi18n>' + esc(p.place) + '</span>' : 'Not set yet') +
       row('Food', p.food ? 'Yes, going for food' : 'No food planned') +
@@ -1674,9 +1680,16 @@ function feedSection() {
   h += list.length ? list.map(function (p) { return planCard(p, false); }).join('') : '<p class="note">' + (all.length ? 'No free plans right now.' : 'No plans from friends yet. When a friend shares one, it shows here and you can join in one tap.') + '</p>';
   return h + '</section>';
 }
+/* a glance at the tank from the top of the tab; a tap scrolls down to it */
+function tankPill() {
+  var st = budgetState(); if (!st.budget) return '';
+  var over = st.left < 0, cls = over || st.level <= 0.2 ? ' low' : st.level <= 0.5 ? ' mid' : '';
+  return '<button class="tankpill' + cls + '" id="tankPill" data-act="totank"><span class="tp" aria-hidden="true"><i style="height:' + Math.round(st.level * 100) + '%"></i></span><b data-noi18n>' + esc(money(Math.abs(st.left))) + '</b> <span>' + (over ? 'over budget this month' : 'left this month') + '</span></button>';
+}
 function viewEncourage() {
   var ws = weekStart(Date.now()), td = ymd(Date.now()), items = myPlanItems(), mb = monthBounds(Date.now());
   var h = vhead('encourage', 'Encourage', 'Spend time with your brothers and sisters in faith.');
+  h += tankPill();
   h += '<figure class="verse" data-noi18n><p>“And let us consider how we may spur one another on toward love and good deeds, not giving up meeting together… but encouraging one another.”</p><cite>Hebrews 10:24–25 (NIV)</cite></figure>';
   if (!items.some(function (it) { var t = parseYmd(it.date); return t >= ws && t < addDays(ws, 7); })) h += '<section class="card nudge" id="encNudge"><p class="q">Who will you encourage this week?</p><p class="note" style="margin:0;color:var(--fg)">Plan a coffee, a walk or a meal with a brother or sister.</p></section>';
   h += '<div class="encbtns"><button class="btn tint" data-act="newenc" data-t="date">Plan an encouragement date</button><button class="btn tint-soft" data-act="newenc" data-t="hangout">Log a hangout</button></div>';
@@ -1804,7 +1817,7 @@ function churchCard() {
   return '<section class="card" id="churchCard"><h2 class="h3">Your church</h2><p class="note" style="margin:0">' + (m.church ? '<b style="color:var(--fg)" data-noi18n>' + esc(campusName()) + '</b>' : 'Choose your church to find friends from it quickly.') + '</p>' +
     (m.minor ? '<p class="note" style="margin:0">' + (m.approved ? 'Under-18 account, approved.' : m.declined ? 'Under-18 account, not approved.' : 'Under-18 account, waiting for approval.') + '</p>' : '') +
     '<div class="row"><button class="btn grow" data-act="church">' + (m.church ? 'Change church' : 'Choose your church') + '</button><button class="btn soft grow" data-act="friends">Friends</button></div></section>' +
-    (m.owner ? '<section class="card" id="ownerCard"><h2 class="h3">Approvals</h2><p class="note" style="margin:0" data-noi18n>' + esc(m.waiting ? L('{0} waiting for approval', m.waiting) : L('Nobody is waiting.')) + '</p><button class="btn' + (m.waiting ? ' primary' : '') + '" data-act="approvals">Open approvals</button></section>' : '');
+    (m.owner ? '<section class="card" id="ownerCard" data-noi18n><h2 class="h3">Approvals</h2><p class="note" style="margin:0" data-noi18n>' + esc(m.waiting ? L('{0} waiting for approval', m.waiting) : L('Nobody is waiting.')) + '</p><button class="btn' + (m.waiting ? ' primary' : '') + '" data-act="approvals">Open approvals</button></section>' : '');
 }
 async function churchSheet() {
   var churches = []; try { churches = (await WEB.api('GET', '/api/churches')).churches || []; } catch (e) { toast('No connection. Try again when you have signal.'); return; }
@@ -1812,7 +1825,7 @@ async function churchSheet() {
   openSheet('Your church',
     '<form id="chForm" class="sec" style="gap:12px" novalidate><label class="field" for="chSel">Church<select class="inp" id="chSel" data-noi18n><option value="">' + esc(L('Choose your church')) + '</option>' + churches.map(function (c) { return '<option value="' + esc(c.id) + '"' + (c.id === cur ? ' selected' : '') + '>' + esc(c.name) + '</option>'; }).join('') + '<option value="+">' + esc(L('Add another church…')) + '</option></select></label>' +
     '<div id="chNewBox" hidden><label class="field" for="chNew">Church name<input class="inp" id="chNew" maxlength="60" autocomplete="off" placeholder="Type the name of your church"></label><div id="chSug"></div></div>' +
-    (m.minor ? '<p class="note">You show as <b data-noi18n>' + esc(campusName() || 'CAMPUS') + '</b>.</p>'
+    (m.minor ? '<p class="note">You show as <b>' + esc(campusName() || 'CAMPUS') + '</b>.</p>'
       : '<label class="tick1 agreetick" for="chMinor"><input type="checkbox" id="chMinor"><span><b>I\'m under 18</b></span></label><p class="note" id="chMinorNote" hidden>You\'ll show as your church with (CAMPUS) after it. The person who runs Shepherd approves you before you can add friends or join plans. Your friends list starts empty, and only people you add yourself, with their email or friend code, can be your friends.</p>') +
     '<p class="small" id="chErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" type="submit">Save</button></form>',
     function (root) {
@@ -1850,7 +1863,7 @@ async function friendsSheet() {
     if (!m.minor) h += '<section class="sec"><h2 class="h3">People from my church</h2>' + (!m.church ? '<p class="note">Choose your church to see people from it here.</p><button class="btn" data-act="church">Choose your church</button>'
       : people.length ? '<label class="sr" for="frQ">Search</label><input class="inp" id="frQ" type="search" placeholder="Type a name" autocomplete="off"><ul class="flist" id="frPeople">' + people.map(function (f) { return '<li class="frow" data-n="' + esc(f.name.toLowerCase()) + '"><span class="pm"><span class="pn" data-noi18n>' + esc(f.name) + '</span></span><span class="frbtns">' + (f.state === 'friend' ? '<span class="chip st-ok">Friends</span>' : f.state === 'sent' ? '<span class="chip">Request sent</span>' : f.state === 'asked' ? '<button class="btn small primary" data-fr="accept" data-id="' + esc(f.id) + '">Accept</button>' : '<button class="btn small soft" data-fr="add" data-id="' + esc(f.id) + '">Add friend</button>') + '</span></li>'; }).join('') + '</ul>'
       : '<p class="note" data-noi18n>' + esc(L('Nobody else from {0} is on Shepherd yet. Share the app with them.', m.church.name)) + '</p>') + '</section>';
-    h += '<section class="sec"><h2 class="h3">Your friends</h2>' + ((m.friends || []).length ? '<ul class="flist">' + m.friends.map(function (f) { return li(f.name, f.church, '<button class="btn small ghost" data-fr="more" data-id="' + esc(f.id) + '" data-name="' + esc(f.name) + '" aria-label="' + esc(L('Options for {0}', f.name)) + '">⋯</button>'); }).join('') + '</ul>' : '<p class="note">No friends yet. Add someone by their email or friend code' + (m.minor ? '.' : ', or from your church.') + '</p>') + '</section>';
+    h += '<section class="sec"><h2 class="h3">Your friends</h2>' + ((m.friends || []).length ? '<ul class="flist">' + m.friends.map(function (f) { return li(f.name, f.church, '<button class="btn small ghost" data-fr="more" data-id="' + esc(f.id) + '" data-name="' + esc(f.name) + '" aria-label="' + esc(L('Options for {0}', f.name)) + '">⋯</button>'); }).join('') + '</ul>' : '<p class="note">' + (m.minor ? 'No friends yet. Add someone by their email or friend code.' : 'No friends yet. Add someone by their email or friend code, or from your church.') + '</p>') + '</section>';
     if ((m.outgoing || []).length) h += '<section class="sec"><h2 class="h3">Requests you sent</h2><ul class="flist">' + m.outgoing.map(function (f) { return li(f.name, f.church, '<button class="btn small" data-fr="remove" data-id="' + esc(f.id) + '">Cancel</button>'); }).join('') + '</ul></section>';
     if ((m.blocked || []).length) h += '<section class="sec"><h2 class="h3">Blocked</h2><ul class="flist">' + m.blocked.map(function (f) { return li(f.name, '', '<button class="btn small" data-fr="unblock" data-id="' + esc(f.id) + '">Unblock</button>'); }).join('') + '</ul></section>';
   }
@@ -1892,11 +1905,12 @@ async function approvalsSheet() {
   var d; try { d = await WEB.api('GET', '/api/social/admin'); } catch (e) { toast((e && e.message) || 'Something went wrong. Try again.'); return; }
   var opt = function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.name) + ' (' + c.n + ')</option>'; };
   var opts = d.churches.map(opt).join(''), optsFrom = d.churches.filter(function (c) { return c.id !== 'c_london_icc'; }).map(opt).join('');
+  // only the person who runs Shepherd sees this screen, so it stays in English
   openSheet('Approvals',
-    '<section class="sec"><h2 class="h3">Under-18s waiting</h2>' + (d.waiting.length ? '<ul class="flist">' + d.waiting.map(function (w) { return '<li class="frow tall"><span class="pm"><span class="pn" data-noi18n>' + esc(w.name) + '</span><span class="ps" data-noi18n>' + esc(w.email) + '</span>' + (w.church ? '<span class="ps" data-noi18n>' + esc(w.church + ' (CAMPUS)') + '</span>' : '') + '</span><span class="frbtns"><button class="btn small primary" data-ap="1" data-id="' + esc(w.id) + '">Approve</button><button class="btn small" data-ap="0" data-id="' + esc(w.id) + '">Decline</button></span></li>'; }).join('') + '</ul>' : '<p class="note">Nobody is waiting.</p>') + '</section>' +
+    '<div data-noi18n style="display:grid;gap:14px"><section class="sec"><h2 class="h3">Under-18s waiting</h2>' + (d.waiting.length ? '<ul class="flist">' + d.waiting.map(function (w) { return '<li class="frow tall"><span class="pm"><span class="pn" data-noi18n>' + esc(w.name) + '</span><span class="ps" data-noi18n>' + esc(w.email) + '</span>' + (w.church ? '<span class="ps" data-noi18n>' + esc(w.church + ' (CAMPUS)') + '</span>' : '') + '</span><span class="frbtns"><button class="btn small primary" data-ap="1" data-id="' + esc(w.id) + '">Approve</button><button class="btn small" data-ap="0" data-id="' + esc(w.id) + '">Decline</button></span></li>'; }).join('') + '</ul>' : '<p class="note">Nobody is waiting.</p>') + '</section>' +
     (d.churches.length > 1 ? '<section class="sec"><h2 class="h3">Merge duplicate churches</h2><p class="note" style="margin:0">Everyone in the first church moves to the second, and the first is removed.</p><label class="field" for="mgFrom">Remove<select class="inp" id="mgFrom" data-noi18n>' + optsFrom + '</select></label><label class="field" for="mgTo">Keep<select class="inp" id="mgTo" data-noi18n>' + opts + '</select></label><p class="small" id="mgErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn" id="mgGo">Merge</button></section>' : '') +
     '<section class="sec"><h2 class="h3">Reports</h2>' + (d.reports.length ? '<ul class="timeline">' + d.reports.map(function (r) { return '<li data-noi18n><time>' + esc(fmtStamp(r.t)) + '</time><span>' + esc((r.who || '?') + ' → ' + (r.about || '?') + (r.aboutEmail ? ' <' + r.aboutEmail + '>' : '') + (r.text ? ': ' + r.text : '')) + '</span></li>'; }).join('') + '</ul>' : '<p class="note">No reports.</p>') + '</section>' +
-    '<button class="btn ghost" data-act="closesheet">Done</button>',
+    '<button class="btn ghost" data-act="closesheet">Done</button></div>',
     function (root) {
       root.addEventListener('click', async function (e) {
         var b = e.target.closest('[data-ap]'); if (!b) return;
@@ -3327,6 +3341,7 @@ document.addEventListener('click', function (e) {
     case 'reportplan': reportSheet(b.dataset.host, id); break;
     case 'feedfilter': S.feedFree = b.dataset.f === 'free'; render(); break;
     case 'budgetedit': budgetSheet(); break;
+    case 'totank': var tc = $('#tankCard'); if (tc) tc.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); break;
     case 'curok': S.profile.curSeen = true; saveProfile(); break;
     case 'curchange': S.profile.curSeen = true; saveProfile(); go('settings'); setTimeout(function () { var pc = $('#pCur'); if (pc) { pc.scrollIntoView({ block: 'center' }); pc.focus(); } }, 80); break;
     case 'reply': if (c) setReplyState(c, b.dataset.r); break;
@@ -3416,7 +3431,7 @@ if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFul
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; SOC.at = 0; if (!openFromLink(q.get('open'), q.get('view'), q.get('friends'))) socLoad(true); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
-window.__shepherd = { render: function () { render(); }, SOC: SOC, socLoad: socLoad, budgetState: budgetState, bandOf: bandOf, myShare: myShare, churchMatches: churchMatches, churchNormC: churchNormC, payLine: payLine, startImport: startImport, sortQueue: sortQueue, sortOne: sortOne, undoSort: undoSort, SORT: SORT, qaPeople: qaPeople, qaRun: qaRun, encList: encList, spendIn: spendIn, money: money, encSheet: encSheet, encTitle: encTitle, knownPeople: knownPeople, evList: evList, tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
+window.__shepherd = { render: function () { render(); }, SOC: SOC, socLoad: socLoad, budgetState: budgetState, bandOf: bandOf, bandLabel: bandLabel, myShare: myShare, churchMatches: churchMatches, churchNormC: churchNormC, payLine: payLine, startImport: startImport, sortQueue: sortQueue, sortOne: sortOne, undoSort: undoSort, SORT: SORT, qaPeople: qaPeople, qaRun: qaRun, encList: encList, spendIn: spendIn, money: money, encSheet: encSheet, encTitle: encTitle, knownPeople: knownPeople, evList: evList, tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
 
 /* ---------- boot ---------- */
 async function boot() {
