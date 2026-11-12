@@ -405,6 +405,20 @@ body[data-view="disciples"]{--tint:#94402F;--tint-soft:#F6DCD3}
 body[data-view="events"]{--tint:#245A78;--tint-soft:#D5E6F0}
 body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
 body[data-view="friends"]{--tint:#1D6464;--tint-soft:#D2EAE7}
+/* every tab except Today sits on a pastel of its own colour, with frosted-glass cards and bars on top */
+body{transition:background-color .35s ease}
+body.glass{--bg:color-mix(in srgb,var(--tint-soft) 58%,#fff);--glass:rgba(255,255,255,.6);--glass-line:rgba(255,255,255,.85);--glass-shadow:0 10px 30px -18px color-mix(in srgb,var(--tint) 55%,transparent),inset 0 1px 0 rgba(255,255,255,.75);
+  background:radial-gradient(120% 60% at 0% 0%,color-mix(in srgb,var(--tint) 20%,#fff) 0%,transparent 60%),radial-gradient(90% 50% at 100% 22%,color-mix(in srgb,var(--tint-soft) 85%,#fff) 0%,transparent 65%),radial-gradient(100% 50% at 20% 100%,color-mix(in srgb,var(--tint) 14%,#fff) 0%,transparent 60%),var(--bg);background-attachment:fixed}
+body.glass .top{background:color-mix(in srgb,var(--bg) 30%,transparent);margin-inline:-16px;padding-inline:16px;-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%)}
+body.glass .dock{background:color-mix(in srgb,var(--bg) 62%,rgba(255,255,255,.55));-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border-top-color:var(--glass-line)}
+body.glass .card,body.glass .vhead{background:var(--glass);border-color:var(--glass-line);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%)}
+body.glass .vhead{background:linear-gradient(135deg,color-mix(in srgb,var(--tint-soft) 70%,rgba(255,255,255,.5)) 0%,rgba(255,255,255,.5) 100%);border:1.5px solid var(--glass-line)}
+/* long lists get the glass look without the blur, so scrolling hundreds of people stays fast */
+body.glass .prow,body.glass .ev,body.glass .enc,body.glass .pcard,body.glass .frow,body.glass .stat,body.glass .facts{background:rgba(255,255,255,.66);border-color:var(--glass-line);box-shadow:var(--glass-shadow)}
+body.glass .card .frow,body.glass .card .stat{box-shadow:none}
+body.glass .banner{background:rgba(255,255,255,.5);border-color:var(--glass-line)}
+body.glass .newcard,body.glass #socWait{background:var(--glass)!important}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){body.glass .card,body.glass .vhead{background:rgba(255,255,255,.82)} body.glass .top,body.glass .dock{background:var(--bg)}}
 .vhead{position:relative;overflow:hidden;border-radius:var(--r);padding:16px 16px 14px;background:linear-gradient(135deg,var(--tint-soft) 0%,color-mix(in srgb,var(--tint-soft) 45%,var(--bg)) 100%);display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center}
 .vhead::after{content:"";position:absolute;right:-34px;top:-40px;width:130px;height:130px;border-radius:50%;background:color-mix(in srgb,var(--tint) 10%,transparent);pointer-events:none}
 .vhead .vicon{grid-row:span 2;width:46px;height:46px;border-radius:14px;background:var(--tint);color:#fff;display:grid;place-items:center;box-shadow:0 8px 18px -10px var(--tint)}
@@ -2709,6 +2723,7 @@ function render() {
   else html = viewToday();
   main.innerHTML = '<div class="view' + (v !== lastView ? ' enter' : '') + '">' + html + '</div>';
   lastView = v; document.body.dataset.view = v;
+  document.body.classList.toggle('glass', ['people', 'contact', 'archive', 'disciples', 'events', 'encourage', 'friends'].indexOf(v) >= 0);
   var tabV = S.view === 'contact' || S.view === 'archive' ? 'people' : S.view;
   document.querySelectorAll('.tab').forEach(function (t) { if (t.dataset.v === tabV) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
   var owed = active().filter(function (c) { return c.replyState === 'me' || dayDiff(dueDay(c), today()) < 0; }).length;
