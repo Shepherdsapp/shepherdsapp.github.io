@@ -562,7 +562,7 @@ body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
     ['ja', '日本語', 'ja'], ['de', 'Deutsch', 'de'], ['ru', 'Русский', 'ru'], ['lt', 'Lietuvių', 'lt']
   ];
   var CODES = LANGS.map(function (l) { return l[0]; });
-  var PACK_VER = 'c468a172a0';
+  var PACK_VER = 'af005f25aa';
   var lang = 'en', dict = null, tpls = [], cache = new Map(), outs = new WeakMap(), plural = null;
   var collect = typeof window !== 'undefined' && window.__i18nCollect ? window.__i18nCollect : null;
   var INLINE = { B: 1, STRONG: 1, I: 1, EM: 1, BR: 1, U: 1, SMALL: 1, CODE: 1 };
@@ -2230,7 +2230,7 @@ function planSheet(host, id) {
       row('Food', p.food ? 'Yes, going for food' : 'No food planned') +
       row('Cost', '<span data-noi18n>' + esc(payLine(p)) + '</span>') +
       row('Host', '<span data-noi18n>' + esc(p.mine ? L('You') : p.hostName) + '</span>') +
-      row('Going', p.going.length ? '<span data-noi18n>' + esc(p.going.map(function (g) { return g.me ? L('You') : g.name; }).join(', ')) + '</span>' : 'Nobody yet') + '</ul>' +
+      row('Who\'s going', p.going.length ? '<span data-noi18n>' + esc(p.going.map(function (g) { return g.me ? L('You') : g.name; }).join(', ')) + '</span>' : 'Nobody yet') + '</ul>' +
     (p.needGroup ? '<p class="banner"><span>This plan opens to you once someone else has joined, so there are 3 or more people.</span></p>' : '') +
     (p.mine ? '<button class="btn primary" data-act="openenc" data-id="' + esc(p.id) + '">Edit plan</button>'
       : past ? '' : p.joined ? '<p class="note okline">' + ICON.check + '<span>You\'re going. It\'s in your Encourage calendar, and Shepherd will remind you.</span></p><button class="btn" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="0">I can\'t make it</button>'
@@ -2482,7 +2482,7 @@ function churchCard() {
   return '<section class="card" id="churchCard"><h2 class="h3">Your church</h2><p class="note" style="margin:0">' + (m.church ? '<b style="color:var(--fg)" data-noi18n>' + esc(campusName()) + '</b>' : 'Choose your church to find friends from it quickly.') + '</p>' +
     (m.minor ? '<p class="note" style="margin:0">' + (m.approved ? 'Under-18 account, approved.' : m.declined ? 'Under-18 account, not approved.' : 'Under-18 account, waiting for approval.') + '</p>' : '') +
     '<div class="row"><button class="btn grow" data-act="church">' + (m.church ? 'Change church' : 'Choose your church') + '</button><button class="btn soft grow" data-act="friends">Friends</button></div></section>' +
-    (m.owner ? '<section class="card" id="ownerCard"><h2 class="h3">Approvals</h2><p class="note" style="margin:0" data-noi18n>' + esc(m.waiting ? L('{0} waiting for approval', m.waiting) : L('Nobody is waiting.')) + '</p><button class="btn' + (m.waiting ? ' primary' : '') + '" data-act="approvals">Open approvals</button></section>' : '');
+    (m.owner ? '<section class="card" id="ownerCard" data-noi18n><h2 class="h3">Approvals</h2><p class="note" style="margin:0" data-noi18n>' + esc(m.waiting ? L('{0} waiting for approval', m.waiting) : L('Nobody is waiting.')) + '</p><button class="btn' + (m.waiting ? ' primary' : '') + '" data-act="approvals">Open approvals</button></section>' : '');
 }
 async function churchSheet() {
   var churches = []; try { churches = (await WEB.api('GET', '/api/churches')).churches || []; } catch (e) { toast('No connection. Try again when you have signal.'); return; }
@@ -2570,11 +2570,12 @@ async function approvalsSheet() {
   var d; try { d = await WEB.api('GET', '/api/social/admin'); } catch (e) { toast((e && e.message) || 'Something went wrong. Try again.'); return; }
   var opt = function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.name) + ' (' + c.n + ')</option>'; };
   var opts = d.churches.map(opt).join(''), optsFrom = d.churches.filter(function (c) { return c.id !== 'c_london_icc'; }).map(opt).join('');
+  // only the person who runs Shepherd sees this screen, so it stays in English
   openSheet('Approvals',
-    '<section class="sec"><h2 class="h3">Under-18s waiting</h2>' + (d.waiting.length ? '<ul class="flist">' + d.waiting.map(function (w) { return '<li class="frow tall"><span class="pm"><span class="pn" data-noi18n>' + esc(w.name) + '</span><span class="ps" data-noi18n>' + esc(w.email) + '</span>' + (w.church ? '<span class="ps" data-noi18n>' + esc(w.church + ' (CAMPUS)') + '</span>' : '') + '</span><span class="frbtns"><button class="btn small primary" data-ap="1" data-id="' + esc(w.id) + '">Approve</button><button class="btn small" data-ap="0" data-id="' + esc(w.id) + '">Decline</button></span></li>'; }).join('') + '</ul>' : '<p class="note">Nobody is waiting.</p>') + '</section>' +
+    '<div data-noi18n style="display:grid;gap:14px"><section class="sec"><h2 class="h3">Under-18s waiting</h2>' + (d.waiting.length ? '<ul class="flist">' + d.waiting.map(function (w) { return '<li class="frow tall"><span class="pm"><span class="pn" data-noi18n>' + esc(w.name) + '</span><span class="ps" data-noi18n>' + esc(w.email) + '</span>' + (w.church ? '<span class="ps" data-noi18n>' + esc(w.church + ' (CAMPUS)') + '</span>' : '') + '</span><span class="frbtns"><button class="btn small primary" data-ap="1" data-id="' + esc(w.id) + '">Approve</button><button class="btn small" data-ap="0" data-id="' + esc(w.id) + '">Decline</button></span></li>'; }).join('') + '</ul>' : '<p class="note">Nobody is waiting.</p>') + '</section>' +
     (d.churches.length > 1 ? '<section class="sec"><h2 class="h3">Merge duplicate churches</h2><p class="note" style="margin:0">Everyone in the first church moves to the second, and the first is removed.</p><label class="field" for="mgFrom">Remove<select class="inp" id="mgFrom" data-noi18n>' + optsFrom + '</select></label><label class="field" for="mgTo">Keep<select class="inp" id="mgTo" data-noi18n>' + opts + '</select></label><p class="small" id="mgErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn" id="mgGo">Merge</button></section>' : '') +
     '<section class="sec"><h2 class="h3">Reports</h2>' + (d.reports.length ? '<ul class="timeline">' + d.reports.map(function (r) { return '<li data-noi18n><time>' + esc(fmtStamp(r.t)) + '</time><span>' + esc((r.who || '?') + ' → ' + (r.about || '?') + (r.aboutEmail ? ' <' + r.aboutEmail + '>' : '') + (r.text ? ': ' + r.text : '')) + '</span></li>'; }).join('') + '</ul>' : '<p class="note">No reports.</p>') + '</section>' +
-    '<button class="btn ghost" data-act="closesheet">Done</button>',
+    '<button class="btn ghost" data-act="closesheet">Done</button></div>',
     function (root) {
       root.addEventListener('click', async function (e) {
         var b = e.target.closest('[data-ap]'); if (!b) return;

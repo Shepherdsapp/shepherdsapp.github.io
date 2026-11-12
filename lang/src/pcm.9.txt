@@ -1,0 +1,161 @@
+1085	Free
+1086	Under {0}
+1087	Na you dey pay
+1088	{0} dey pay
+1089	Dem never put cost
+1090	{0} share equal: about {1} each
+1091	{0} share equal: about {1} each if you join
+1092	About {0} each
+1093	{0} dey go
+1094	With {0}
+1095	Comot from {0}
+1096	Join {0}
+1097	{0}% of your budget remain
+1098	{0} don spend out of {1}
+1099	You don use {0}% of dis month budget.
+1100	Your budget tank don empty for dis month.
+1101	§one={0} friend dey see di plans wey you share|other={0} friends dey see di plans wey you share
+1102	§one={0} friend dey see di plans wey you share|other={0} friends dey see di plans wey you share
+1103	Add friends to share plans and join their own
+1104	Who dey go: {0}
+1105	Dis one go carry you pass your budget for dat month with {0}.
+1106	Dis one go leave {0} for your budget for dat month.
+1107	Choose your church
+1108	Add anoda church…
+1109	Nobody else from {0} dey Shepherd yet. Share di app with dem.
+1110	Options for {0}
+1111	No connection. Try again when you get network.
+1112	Report don send. Thank you.
+1113	Budget don save
+1114	Budget don comot
+1115	E don share with your friends. Dem fit join with one tap.
+1116	E don save. We go tell you when dem approve you.
+1117	Church don save
+1118	Una don be friends now
+1119	If dem dey use Shepherd, dem go get your request.
+1120	Tank don full. E go dey reduce as you dey spend.
+1121	Request don send
+1122	Unblocked
+1123	Blocked
+1124	Type your monthly budget as number, like 40.
+1125	Broda or sista (optional)
+1126	Tap again to delete. We go tell di pipul wey dey go.
+1127	Type di name of your church.
+1128	Type their email or friend code.
+1129	Shared with friends
+1130	E never set
+1131	Yes, we go chop
+1132	No food plan
+1133	Nobody yet
+1134	Dis plan go open for you when anoda person join, so una go be 3 or more.
+1135	Edit plan
+1136	You dey go. E dey your Encourage calendar, and Shepherd go remind you.
+1137	I no fit make am
+1138	Report problem with dis plan
+1139	You dey go. Shepherd go remind you.
+1140	You no dey go again.
+1141	Report problem
+1142	Tell us wetin happen. Your report go reach di person wey dey run Shepherd for private, and dem fit remove accounts.
+1143	Wetin happen?
+1144	If person dey for danger, call emergency first.
+1145	Send report
+1146	Budget tank
+1147	Na only you dey see dis
+1148	Set monthly budget for encouragement dates and hangouts. Your tank dey show how much remain.
+1149	Fill di tank
+1150	pass budget dis month
+1151	remain dis month
+1152	Your tank don empty. Try something wey free, like to waka.
+1153	Change budget
+1154	Your budget na private. Friends no dey ever see am.
+1155	Remove budget
+1156	Dem no approve your account
+1157	E dey wait for approval
+1158	You fit continue to use Shepherd on your own. If you get question, email di person wey dey run Shepherd.
+1159	Di person wey dey run Shepherd dey approve every under-18 account. Before then you fit use Shepherd on your own, but you no fit add friends or join plans.
+1160	Friends' plans
+1161	All plans
+1162	Free only
+1163	No free plans for now.
+1164	No plans from friends yet. When friend share one, e go show here and you fit join with one tap.
+1165	Who fit see dis
+1166	Only me
+1167	Friends dey see wetin e be, when, where, food, cost and who dey go, and dem fit join with one tap. Dem no dey ever see any oda thing for Shepherd.
+1168	Where (optional)
+1169	Who dey pay
+1170	Everybody dey pay their own
+1171	Share equal
+1172	Na me dey pay
+1173	Talk wetin di plan be, so friends go know.
+1174	Your church
+1175	Choose your church to find friends from there quick.
+1176	Under-18 account, dem don approve am.
+1177	Under-18 account, dem no approve am.
+1178	Under-18 account, e dey wait for approval.
+1179	Change church
+1180	Church name
+1181	I never reach 18
+1182	You go show as your church with (CAMPUS) for back. Di person wey dey run Shepherd go approve you before you fit add friends or join plans. Your friends list go start empty, and na only pipul wey you add yourself, with their email or friend code, fit be your friends.
+1183	You mean:
+1184	Friends dey only see di plans wey you share: wetin e be, when, where, food, cost and who dey go. Dem no dey ever see your Pipul, Disciples, prayer list, notes, phone numbers or budget.
+1185	Dem no approve your account, so you no fit add friends.
+1186	You fit add friends once dem approve your account.
+1187	Friend requests
+1188	Add friend
+1189	Their email or friend code
+1190	Send request
+1191	Your friend code:
+1192	Copy my code
+1193	Pipul from my church
+1194	Choose your church to see pipul from there here.
+1195	Add friend
+1196	Your friends
+1197	No friends yet. Add person with their email or friend code.
+1198	No friends yet. Add person with their email or friend code, or from your church.
+1199	Requests wey you send
+1200	Friend code don copy
+1201	To remove or block na private. Dem no go tell dem.
+1202	Remove friend
+1203	Back to friends
+1204	Join
+1205	Wetin
+1206	When
+1207	Cost
+1208	Host
+1209	I dey go
+1210	Block
+1211	Accept
+1212	Church
+1213	Report
+1214	Decline
+1215	Unblock
+1216	Choose later
+1217	I never reach 18.
+1218	Anything wey worry you
+1219	You must be 13 or older to use Shepherd.
+1220	Private budget tank dey show how much you get remain to spend dis month.
+1221	Your church, your friends, your friend code, di plans wey you join and your monthly budget.
+1222	Friendships, who dey go plan and reports dey delete when you delete your account.
+1223	To add friends na optional. Friends dey see only one thing: di Encourage plans wey you choose to share.
+1224	Friends no dey ever see your Pipul, Disciples, prayer list, notes, phone numbers, private plans or budget.
+1225	You must be 13 or older. If you never reach 18, talk am: dem go approve your account before you fit add friends or join plans.
+1226	Plan wey you share dey show wetin e be, di day and time, di place, whether food dey, di cost and who dey pay, your name and who dey go.
+1227	Under-18 accounts dey show as their church with (CAMPUS). Dem dey email di person wey dey run Shepherd their name and email address, and di person go approve dem first. Adults no fit send dem friend requests, and plan between adult and under-18 need 3 or more pipul.
+1228	Monthly budget ({0})
+1229	You dey show as <b>{0}</b>.
+1230	Friends and shared plans
+1231	If you choose church, adults from dat church fit find you with your first name and di first letter of your surname, to send friend request. Under-18s no dey ever show for di list.
+1232	You fit remove or block friend, or report person or plan, any time. Report dey go di person wey dey run Shepherd with your name and email address.
+1233	Only add friends wey you know, and only share plans wey you happy make dem see. Meet for public places, and treat everybody with respect.
+1234	Plan encouragement dates and hangouts, and share dem with friends, wey fit join with one tap. Your private budget tank dey show wetin you get remain to spend dis month. Shepherd dey remind you every week, and your weekly follow-up stats dey here too.
+1235	Weekly reminder, reminders before each date, and news about friends' plans
+1236	Add friends and share plan with dem. Friends dey only see di plans wey you share, dem no dey ever see your Pipul, Disciples, prayer list, notes or budget. Dem dey join with one tap, and we dey tell everybody wey dey go.
+1237	Choose church from di list.
+1238	Dat plan no dey open again.
+1239	Dis na your own plan.
+1240	To change dis, email {0}.
+1241	You fit only join plans from your friends.
+1242	Your account dey wait for approval.
+1243	Type di name of your church
+1244	E don comot
+1245	Who dey go

@@ -1,0 +1,161 @@
+1085	Ọ̀fẹ́
+1086	Kò tó {0}
+1087	Ìwọ ni yóò sanwó
+1088	{0} ni yóò sanwó
+1089	A kò tíì kọ iye owó
+1090	{0} pín dọ́gba: nǹkan bí {1} fún ẹnì kọ̀ọ̀kan
+1091	{0} pín dọ́gba: nǹkan bí {1} fún ẹnì kọ̀ọ̀kan tí o bá darapọ̀
+1092	Nǹkan bí {0} fún ẹnì kọ̀ọ̀kan
+1093	Ènìyàn {0} ń lọ
+1094	Pẹ̀lú {0}
+1095	Kúrò nínú {0}
+1096	Darapọ̀ mọ́ {0}
+1097	Ó ku {0}% nínú ìṣúnà rẹ
+1098	A ti ná {0} nínú {1}
+1099	O ti lo {0}% nínú ìṣúnà oṣù yìí.
+1100	Táǹkì ìṣúnà rẹ ti ṣófo fún oṣù yìí.
+1101	Ọ̀rẹ́ {0} ń rí àwọn ètò tí o pín
+1102	Ọ̀rẹ́ {0} ń rí àwọn ètò tí o pín
+1103	Fi ọ̀rẹ́ kún un láti pín ètò àti láti darapọ̀ mọ́ tiwọn
+1104	Àwọn tó ń lọ: {0}
+1105	Èyí yóò mú kí o kọjá ìṣúnà oṣù yẹn pẹ̀lú {0}.
+1106	Èyí yóò ṣẹ́ {0} kù nínú ìṣúnà oṣù yẹn.
+1107	Yan ìjọ rẹ
+1108	Fi ìjọ míràn kún un…
+1109	Kò tíì sí ẹlòmíràn láti {0} lórí Shepherd. Pín áàpù náà pẹ̀lú wọn.
+1110	Àwọn àṣàyàn fún {0}
+1111	Kò sí ìsopọ̀. Gbìyànjú lẹ́ẹ̀kan sí i nígbà tí nẹ́tíwọ́ọ̀kì bá wà.
+1112	A ti fi ìròyìn ránṣẹ́. O ṣeun.
+1113	A ti tọ́jú ìṣúnà
+1114	A ti yọ ìṣúnà kúrò
+1115	A ti pín in pẹ̀lú àwọn ọ̀rẹ́ rẹ. Wọ́n lè darapọ̀ pẹ̀lú ìtẹ̀ kan.
+1116	A ti tọ́jú rẹ̀. A ó sọ fún ọ nígbà tí wọ́n bá fọwọ́ sí ọ.
+1117	A ti tọ́jú ìjọ
+1118	Ẹ ti di ọ̀rẹ́ báyìí
+1119	Tí wọ́n bá ń lo Shepherd, wọn yóò rí ìbéèrè rẹ.
+1120	Táǹkì ti kún. Yóò máa dín kù bí o ṣe ń náwó.
+1121	A ti fi ìbéèrè ránṣẹ́
+1122	A ti ṣí ìdènà
+1123	A ti dènà
+1124	Kọ ìṣúnà oṣooṣù rẹ bí nọ́ńbà, bí àpẹẹrẹ 40.
+1125	Arákùnrin tàbí arábìnrin (kò pọn dandan)
+1126	Tẹ̀ ẹ́ lẹ́ẹ̀kan sí i láti pa á rẹ́. A ó sọ fún àwọn tó ń lọ.
+1127	Kọ orúkọ ìjọ rẹ.
+1128	Kọ ímeèlì tàbí kóòdù ọ̀rẹ́ wọn.
+1129	A pín in pẹ̀lú àwọn ọ̀rẹ́
+1130	A kò tíì ṣètò rẹ̀
+1131	Bẹ́ẹ̀ ni, a ó jẹun
+1132	Kò sí ètò oúnjẹ
+1133	Kò tíì sí ẹnikẹ́ni
+1134	Ètò yìí yóò ṣí fún ọ nígbà tí ẹlòmíràn bá darapọ̀, kí ẹ lè jẹ́ ènìyàn 3 tàbí jù bẹ́ẹ̀ lọ.
+1135	Ṣàtúnṣe ètò
+1136	O ń lọ. Ó wà nínú kàlẹ́ńdà Ìgbaniníyànjú rẹ, Shepherd yóò sì rán ọ létí.
+1137	Mi ò ní lè wá
+1138	Ròyìn ìṣòro nípa ètò yìí
+1139	O ń lọ. Shepherd yóò rán ọ létí.
+1140	O kò lọ mọ́.
+1141	Ròyìn ìṣòro
+1142	Sọ ohun tó ṣẹlẹ̀ fún wa. Ìròyìn rẹ yóò dé ọ̀dọ̀ ẹni tí ó ń bójú tó Shepherd ní ìkọ̀kọ̀, ẹni tó lè yọ àkáǹtì kúrò.
+1143	Kí ló ṣẹlẹ̀?
+1144	Tí ẹnikẹ́ni bá wà nínú ewu, kọ́kọ́ pe àwọn òṣìṣẹ́ pàjáwìrì.
+1145	Fi ìròyìn ránṣẹ́
+1146	Táǹkì ìṣúnà
+1147	Ìwọ nìkan ló ń rí èyí
+1148	Ṣètò ìṣúnà oṣooṣù fún ìpàdé ìgbaniníyànjú àti àkókò ìbáṣepọ̀. Táǹkì rẹ ń fi iye tó kù hàn.
+1149	Kún táǹkì
+1150	kọjá ìṣúnà lóṣù yìí
+1151	ló kù lóṣù yìí
+1152	Táǹkì rẹ ti ṣófo. Gbìyànjú ohun ọ̀fẹ́, bí ìrìn ẹsẹ̀.
+1153	Yí ìṣúnà padà
+1154	Ìṣúnà rẹ jẹ́ ti ìkọ̀kọ̀. Àwọn ọ̀rẹ́ kì í rí i láé.
+1155	Yọ ìṣúnà kúrò
+1156	A kò fọwọ́ sí àkáǹtì rẹ
+1157	Ó ń dúró de ìfọwọ́sí
+1158	O lè máa lo Shepherd fúnra rẹ. Tí o bá ní ìbéèrè, fi ímeèlì ránṣẹ́ sí ẹni tí ó ń bójú tó Shepherd.
+1159	Ẹni tí ó ń bójú tó Shepherd ló ń fọwọ́ sí gbogbo àkáǹtì àwọn tí kò tíì pé ọdún 18. Títí di ìgbà náà o lè lo Shepherd fúnra rẹ, ṣùgbọ́n o kò lè fi ọ̀rẹ́ kún un tàbí darapọ̀ mọ́ ètò.
+1160	Ètò àwọn ọ̀rẹ́
+1161	Gbogbo ètò
+1162	Ọ̀fẹ́ nìkan
+1163	Kò sí ètò ọ̀fẹ́ báyìí.
+1164	Kò tíì sí ètò láti ọ̀dọ̀ àwọn ọ̀rẹ́. Nígbà tí ọ̀rẹ́ kan bá pín ọ̀kan, yóò hàn níbí, o sì lè darapọ̀ pẹ̀lú ìtẹ̀ kan.
+1165	Ta ló lè rí èyí
+1166	Èmi nìkan
+1167	Àwọn ọ̀rẹ́ ń rí ohun tó jẹ́, ìgbà, ibi, oúnjẹ, iye owó àti àwọn tó ń lọ, wọ́n sì lè darapọ̀ pẹ̀lú ìtẹ̀ kan. Wọn kì í rí ohun míràn nínú Shepherd láé.
+1168	Ibo (kò pọn dandan)
+1169	Ta ni yóò sanwó
+1170	Olúkúlùkù ń san tirẹ̀
+1171	Pín in dọ́gba
+1172	Èmi ni màá sanwó
+1173	Sọ ohun tí ètò náà jẹ́, kí àwọn ọ̀rẹ́ lè mọ̀.
+1174	Ìjọ rẹ
+1175	Yan ìjọ rẹ láti tètè rí àwọn ọ̀rẹ́ láti inú rẹ̀.
+1176	Àkáǹtì ẹni tí kò tíì pé ọdún 18, a ti fọwọ́ sí i.
+1177	Àkáǹtì ẹni tí kò tíì pé ọdún 18, a kò fọwọ́ sí i.
+1178	Àkáǹtì ẹni tí kò tíì pé ọdún 18, ó ń dúró de ìfọwọ́sí.
+1179	Yí ìjọ padà
+1180	Orúkọ ìjọ
+1181	Mi ò tíì pé ọdún 18
+1182	Wàá hàn bí ìjọ rẹ pẹ̀lú (CAMPUS) lẹ́yìn rẹ̀. Ẹni tí ó ń bójú tó Shepherd yóò fọwọ́ sí ọ kí o tó lè fi ọ̀rẹ́ kún un tàbí darapọ̀ mọ́ ètò. Àtòjọ ọ̀rẹ́ rẹ yóò bẹ̀rẹ̀ lófo, àwọn tí o fi kún un fúnra rẹ nìkan, pẹ̀lú ímeèlì tàbí kóòdù ọ̀rẹ́ wọn, ló lè jẹ́ ọ̀rẹ́ rẹ.
+1183	Ṣé o ní lọ́kàn:
+1184	Àwọn ètò tí o pín nìkan ni àwọn ọ̀rẹ́ ń rí: ohun tó jẹ́, ìgbà, ibi, oúnjẹ, iye owó àti àwọn tó ń lọ. Wọn kì í rí Ènìyàn rẹ, Ọmọ-ẹ̀yìn, àtòjọ àdúrà, àkọsílẹ̀, nọ́ńbà fóònù tàbí ìṣúnà rẹ láé.
+1185	A kò fọwọ́ sí àkáǹtì rẹ, nítorí náà o kò lè fi ọ̀rẹ́ kún un.
+1186	O lè fi ọ̀rẹ́ kún un nígbà tí a bá fọwọ́ sí àkáǹtì rẹ.
+1187	Ìbéèrè ọ̀rẹ́
+1188	Fi ọ̀rẹ́ kan kún un
+1189	Ímeèlì tàbí kóòdù ọ̀rẹ́ wọn
+1190	Fi ìbéèrè ránṣẹ́
+1191	Kóòdù ọ̀rẹ́ rẹ:
+1192	Ṣe ẹ̀dà kóòdù mi
+1193	Àwọn ènìyàn láti ìjọ mi
+1194	Yan ìjọ rẹ láti rí àwọn ènìyàn láti inú rẹ̀ níbí.
+1195	Fi kún ọ̀rẹ́
+1196	Àwọn ọ̀rẹ́ rẹ
+1197	Kò tíì sí ọ̀rẹ́. Fi ẹnì kan kún un pẹ̀lú ímeèlì tàbí kóòdù ọ̀rẹ́ wọn.
+1198	Kò tíì sí ọ̀rẹ́. Fi ẹnì kan kún un pẹ̀lú ímeèlì tàbí kóòdù ọ̀rẹ́ wọn, tàbí láti inú ìjọ rẹ.
+1199	Àwọn ìbéèrè tí o fi ránṣẹ́
+1200	A ti ṣe ẹ̀dà kóòdù ọ̀rẹ́
+1201	Yíyọ kúrò tàbí dídènà jẹ́ ti ìkọ̀kọ̀. A kì í sọ fún wọn.
+1202	Yọ ọ̀rẹ́ kúrò
+1203	Padà sí àwọn ọ̀rẹ́
+1204	Darapọ̀
+1205	Kí ni
+1206	Ìgbà wo
+1207	Iye owó
+1208	Olùgbàlejò
+1209	Mò ń lọ
+1210	Dènà
+1211	Gbà
+1212	Ìjọ
+1213	Ròyìn
+1214	Kọ̀
+1215	Ṣí ìdènà
+1216	Yan nígbà míràn
+1217	Mi ò tíì pé ọdún 18.
+1218	Ohunkóhun tó dà ọ́ láàmú
+1219	O gbọ́dọ̀ jẹ́ ọmọ ọdún 13 tàbí jù bẹ́ẹ̀ lọ láti lo Shepherd.
+1220	Táǹkì ìṣúnà ìkọ̀kọ̀ ń fi iye tó kù fún ọ láti ná lóṣù yìí hàn.
+1221	Ìjọ rẹ, àwọn ọ̀rẹ́ rẹ, kóòdù ọ̀rẹ́ rẹ, àwọn ètò tí o darapọ̀ mọ́ àti ìṣúnà oṣooṣù rẹ.
+1222	Ìbáṣepọ̀ ọ̀rẹ́, àwọn tó ń lọ sí ètò àti àwọn ìròyìn yóò parẹ́ nígbà tí o bá pa àkáǹtì rẹ rẹ́.
+1223	Fífi ọ̀rẹ́ kún un kò pọn dandan. Ohun kan ṣoṣo ni àwọn ọ̀rẹ́ ń rí: àwọn ètò Ìgbaniníyànjú tí o yàn láti pín.
+1224	Àwọn ọ̀rẹ́ kì í rí Ènìyàn rẹ, Ọmọ-ẹ̀yìn, àtòjọ àdúrà, àkọsílẹ̀, nọ́ńbà fóònù, ètò ìkọ̀kọ̀ tàbí ìṣúnà rẹ láé.
+1225	O gbọ́dọ̀ jẹ́ ọmọ ọdún 13 tàbí jù bẹ́ẹ̀ lọ. Tí o kò bá tíì pé ọdún 18, sọ bẹ́ẹ̀: a ó fọwọ́ sí àkáǹtì rẹ kí o tó lè fi ọ̀rẹ́ kún un tàbí darapọ̀ mọ́ ètò.
+1226	Ètò tí a pín ń fi ohun tó jẹ́, ọjọ́ àti àkókò, ibi, bóyá oúnjẹ wà, iye owó àti ẹni tí yóò sanwó, orúkọ rẹ àti àwọn tó ń lọ hàn.
+1227	Àkáǹtì àwọn tí kò tíì pé ọdún 18 ń hàn bí ìjọ wọn pẹ̀lú (CAMPUS). A ó fi orúkọ àti àdírẹ́sì ímeèlì wọn ránṣẹ́ sí ẹni tí ó ń bójú tó Shepherd, ẹni náà yóò sì kọ́kọ́ fọwọ́ sí wọn. Àwọn àgbàlagbà kò lè fi ìbéèrè ọ̀rẹ́ ránṣẹ́ sí wọn, ètò láàárín àgbàlagbà àti ẹni tí kò tíì pé ọdún 18 sì nílò ènìyàn 3 tàbí jù bẹ́ẹ̀ lọ.
+1228	Ìṣúnà oṣooṣù ({0})
+1229	O ń hàn bí <b>{0}</b>.
+1230	Àwọn ọ̀rẹ́ àti àwọn ètò tí a pín
+1231	Tí o bá yan ìjọ kan, àwọn àgbàlagbà láti ìjọ náà lè rí ọ nípa orúkọ àkọ́kọ́ rẹ àti lẹ́tà àkọ́kọ́ orúkọ ìdílé rẹ, láti fi ìbéèrè ọ̀rẹ́ ránṣẹ́. A kì í ṣàfihàn àwọn tí kò tíì pé ọdún 18 nínú àtòjọ láé.
+1232	O lè yọ ọ̀rẹ́ kúrò tàbí dènà rẹ̀, tàbí ròyìn ènìyàn tàbí ètò kan, nígbàkúgbà. Ìròyìn náà yóò lọ sọ́dọ̀ ẹni tí ó ń bójú tó Shepherd pẹ̀lú orúkọ àti àdírẹ́sì ímeèlì rẹ.
+1233	Àwọn ọ̀rẹ́ tí o mọ̀ nìkan ni kí o fi kún un, àwọn ètò tí inú rẹ dùn kí wọ́n rí nìkan ni kí o pín. Ẹ pàdé ní ibi gbangba, kí ẹ sì bọ̀wọ̀ fún gbogbo ènìyàn.
+1234	Ṣètò ìpàdé ìgbaniníyànjú àti àkókò ìbáṣepọ̀, kí o sì pín wọn pẹ̀lú àwọn ọ̀rẹ́, tí wọ́n lè darapọ̀ pẹ̀lú ìtẹ̀ kan. Táǹkì ìṣúnà ìkọ̀kọ̀ rẹ ń fi iye tó kù fún ọ láti ná lóṣù yìí hàn. Shepherd ń rán ọ létí lọ́sọ̀ọ̀sẹ̀, ìṣirò ìtẹ̀lé rẹ ti ọ̀sẹ̀ sì wà níbí pẹ̀lú.
+1235	Ìránnilétí ọ̀sọ̀ọ̀sẹ̀, ìránnilétí ṣáájú ìpàdé kọ̀ọ̀kan, àti ìròyìn nípa ètò àwọn ọ̀rẹ́
+1236	Fi ọ̀rẹ́ kún un kí o sì pín ètò pẹ̀lú wọn. Àwọn ètò tí o pín nìkan ni àwọn ọ̀rẹ́ ń rí, wọn kì í rí Ènìyàn rẹ, Ọmọ-ẹ̀yìn, àtòjọ àdúrà, àkọsílẹ̀ tàbí ìṣúnà rẹ láé. Wọ́n ń darapọ̀ pẹ̀lú ìtẹ̀ kan, a sì ń sọ fún gbogbo àwọn tó ń lọ.
+1237	Yan ìjọ kan láti inú àtòjọ.
+1238	Ètò yẹn kò ṣí mọ́.
+1239	Ètò tìrẹ ni èyí.
+1240	Láti yí èyí padà, fi ímeèlì ránṣẹ́ sí {0}.
+1241	Àwọn ètò àwọn ọ̀rẹ́ rẹ nìkan ni o lè darapọ̀ mọ́.
+1242	Àkáǹtì rẹ ń dúró de ìfọwọ́sí.
+1243	Kọ orúkọ ìjọ rẹ
+1244	A ti yọ ọ́ kúrò
+1245	Àwọn tó ń lọ

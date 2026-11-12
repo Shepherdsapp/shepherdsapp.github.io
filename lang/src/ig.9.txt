@@ -1,0 +1,161 @@
+1085	N'efu
+1086	Ihe na-erughị {0}
+1087	Ọ bụ gị na-akwụ
+1088	{0} na-akwụ
+1089	Edebeghị ọnụ ego
+1090	{0} kee nhata: ihe dị ka {1} onye ọ bụla
+1091	{0} kee nhata: ihe dị ka {1} onye ọ bụla ma ọ bụrụ na i sonye
+1092	Ihe dị ka {0} onye ọ bụla
+1093	Mmadụ {0} na-aga
+1094	Gị na {0}
+1095	Hapụ {0}
+1096	Sonye na {0}
+1097	{0}% nke mmefu ego gị fọdụrụ
+1098	E mefuola {0} n'ime {1}
+1099	I jirila {0}% nke mmefu ego ọnwa a.
+1100	Tankị mmefu ego gị agwụla maka ọnwa a.
+1101	Ndị enyi {0} na-ahụ atụmatụ ndị ị na-ekerịta
+1102	Ndị enyi {0} na-ahụ atụmatụ ndị ị na-ekerịta
+1103	Tinye ndị enyi ka unu kerịta atụmatụ ma sonye na nke ha
+1104	Ndị na-aga: {0}
+1105	Nke a ga-eme ka ị gafee mmefu ego ọnwa ahụ site na {0}.
+1106	Nke a ga-ahapụ {0} na mmefu ego ọnwa ahụ.
+1107	Họrọ chọọchị gị
+1108	Tinye chọọchị ọzọ…
+1109	Ọ nweghị onye ọzọ si {0} nọ na Shepherd ugbu a. Kesaara ha ngwa a.
+1110	Nhọrọ maka {0}
+1111	Enweghị njikọ. Nwaa ọzọ mgbe i nwere netwọk.
+1112	E zigala akụkọ. Daalụ.
+1113	E chekwala mmefu ego
+1114	E wepụla mmefu ego
+1115	E kesaara ya ndị enyi gị. Ha nwere ike isonye n'otu mpịa.
+1116	E chekwala. A ga-agwa gị mgbe a kwadoro gị.
+1117	E chekwala chọọchị
+1118	Unu bụzi ndị enyi
+1119	Ọ bụrụ na ha na-eji Shepherd, ha ga-enweta arịrịọ gị.
+1120	Tankị ejula. Ọ na-ebelata ka ị na-emefu ego.
+1121	E zigala arịrịọ
+1122	E wepụla mgbochi
+1123	E gbochiela
+1124	Dee mmefu ego gị kwa ọnwa dị ka nọmba, dị ka 40.
+1125	Nwanne nwoke ma ọ bụ nwanne nwanyị (ọ bụghị iwu)
+1126	Pịa ọzọ iji hichapụ. A ga-agwa ndị na-aga.
+1127	Dee aha chọọchị gị.
+1128	Dee email ha ma ọ bụ koodu enyi ha.
+1129	E kesaara ndị enyi
+1130	Edobeghị ya
+1131	Ee, anyị ga-eri nri
+1132	Enweghị atụmatụ nri
+1133	Ọ nweghị onye ugbu a
+1134	Atụmatụ a ga-emeghere gị mgbe onye ọzọ sonyere, ka unu wee bụrụ mmadụ 3 ma ọ bụ karịa.
+1135	Dezie atụmatụ
+1136	Ị na-aga. Ọ dị na kalenda Agbamume gị, Shepherd ga-echetara gị.
+1137	Agaghị m enwe ike ịbịa
+1138	Kọọ nsogbu gbasara atụmatụ a
+1139	Ị na-aga. Shepherd ga-echetara gị.
+1140	Ị naghịzi aga.
+1141	Kọọ nsogbu
+1142	Gwa anyị ihe mere. Akụkọ gị ga-eru onye na-ahụ maka Shepherd na nzuzo, onye nwere ike iwepụ akaụntụ.
+1143	Gịnị mere?
+1144	Ọ bụrụ na mmadụ nọ n'ihe egwu, buru ụzọ kpọọ ndị ọrụ mberede.
+1145	Zipu akụkọ
+1146	Tankị mmefu ego
+1147	Naanị gị na-ahụ nke a
+1148	Tọọ mmefu ego kwa ọnwa maka nzute agbamume na oge nọkọ. Tankị gị na-egosi ego fọdụrụ.
+1149	Jujuo tankị
+1150	gafere mmefu ego n'ọnwa a
+1151	fọdụrụ n'ọnwa a
+1152	Tankị gị agwụla. Nwaa ihe n'efu, dị ka ije ije.
+1153	Gbanwee mmefu ego
+1154	Mmefu ego gị bụ nke nzuzo. Ndị enyi anaghị ahụ ya ma ọlị.
+1155	Wepụ mmefu ego
+1156	A kwadoghị akaụntụ gị
+1157	Na-eche nkwado
+1158	I nwere ike ịga n'ihu na-eji Shepherd n'onwe gị. Ọ bụrụ na i nwere ajụjụ, zigara onye na-ahụ maka Shepherd email.
+1159	Onye na-ahụ maka Shepherd na-akwado akaụntụ ọ bụla nke onye na-erubeghị afọ 18. Tupu mgbe ahụ i nwere ike iji Shepherd n'onwe gị, mana ị gaghị enwe ike itinye ndị enyi ma ọ bụ isonye na atụmatụ.
+1160	Atụmatụ ndị enyi
+1161	Atụmatụ niile
+1162	Naanị nke n'efu
+1163	Enweghị atụmatụ n'efu ugbu a.
+1164	Enwebeghị atụmatụ si n'aka ndị enyi. Mgbe enyi kesara otu, ọ ga-egosi ebe a, i nwekwara ike isonye n'otu mpịa.
+1165	Onye nwere ike ịhụ nke a
+1166	Naanị m
+1167	Ndị enyi na-ahụ ihe ọ bụ, mgbe, ebe, nri, ọnụ ego na ndị na-aga, ha nwekwara ike isonye n'otu mpịa. Ha anaghị ahụ ihe ọ bụla ọzọ na Shepherd.
+1168	Ebee (ọ bụghị iwu)
+1169	Onye na-akwụ ụgwọ
+1170	Onye ọ bụla na-akwụ nke ya
+1171	Kee nhata
+1172	Ọ bụ m na-akwụ
+1173	Kwuo ihe atụmatụ ahụ bụ, ka ndị enyi mara.
+1174	Chọọchị gị
+1175	Họrọ chọọchị gị ka ị chọta ndị enyi si na ya ngwa ngwa.
+1176	Akaụntụ onye na-erubeghị afọ 18, a kwadoro ya.
+1177	Akaụntụ onye na-erubeghị afọ 18, a kwadoghị ya.
+1178	Akaụntụ onye na-erubeghị afọ 18, na-eche nkwado.
+1179	Gbanwee chọọchị
+1180	Aha chọọchị
+1181	Erubeghị m afọ 18
+1182	Ị ga-egosi dị ka chọọchị gị nwere (CAMPUS) n'azụ ya. Onye na-ahụ maka Shepherd ga-akwado gị tupu i nwee ike itinye ndị enyi ma ọ bụ isonye na atụmatụ. Ndepụta ndị enyi gị na-amalite n'efu, ọ bụkwa naanị ndị i tinyere n'onwe gị, jiri email ha ma ọ bụ koodu enyi ha, nwere ike ịbụ ndị enyi gị.
+1183	Ị pụtara:
+1184	Ndị enyi na-ahụ naanị atụmatụ ndị ị na-ekerịta: ihe ọ bụ, mgbe, ebe, nri, ọnụ ego na ndị na-aga. Ha anaghị ahụ Mmadụ gị, Ndị na-eso ụzọ, ndepụta ekpere, ndetu, nọmba ekwentị ma ọ bụ mmefu ego gị.
+1185	A kwadoghị akaụntụ gị, ya mere ị gaghị enwe ike itinye ndị enyi.
+1186	I nwere ike itinye ndị enyi ozugbo a kwadoro akaụntụ gị.
+1187	Arịrịọ enyi
+1188	Tinye enyi
+1189	Email ha ma ọ bụ koodu enyi ha
+1190	Zipu arịrịọ
+1191	Koodu enyi gị:
+1192	Detuo koodu m
+1193	Ndị si chọọchị m
+1194	Họrọ chọọchị gị ka ị hụ ndị si na ya ebe a.
+1195	Tinye dị ka enyi
+1196	Ndị enyi gị
+1197	Enweghị ndị enyi ugbu a. Tinye mmadụ site na email ha ma ọ bụ koodu enyi ha.
+1198	Enweghị ndị enyi ugbu a. Tinye mmadụ site na email ha ma ọ bụ koodu enyi ha, ma ọ bụ site na chọọchị gị.
+1199	Arịrịọ ndị i zigara
+1200	E detuola koodu enyi
+1201	Iwepụ ma ọ bụ igbochi bụ nke nzuzo. A naghị agwa ha.
+1202	Wepụ enyi
+1203	Laghachi na ndị enyi
+1204	Sonye
+1205	Gịnị
+1206	Mgbe
+1207	Ọnụ ego
+1208	Onye nnabata
+1209	Ana m aga
+1210	Gbochie
+1211	Nabata
+1212	Chọọchị
+1213	Kọọ
+1214	Jụ
+1215	Wepụ mgbochi
+1216	Họrọ ma emechaa
+1217	Erubeghị m afọ 18.
+1218	Ihe ọ bụla nyere gị nsogbu n'obi
+1219	Ị ga-adịrịrị afọ 13 ma ọ bụ karịa iji jiri Shepherd.
+1220	Tankị mmefu ego nzuzo na-egosi ego fọdụụrụ gị imefu n'ọnwa a.
+1221	Chọọchị gị, ndị enyi gị, koodu enyi gị, atụmatụ ndị i sonyere na mmefu ego gị kwa ọnwa.
+1222	A na-ehichapụ ọbụbụenyi, ndị na-aga atụmatụ na akụkọ mgbe ị hichapụrụ akaụntụ gị.
+1223	Itinye ndị enyi abụghị iwu. Ndị enyi na-ahụ naanị otu ihe: atụmatụ Agbamume ndị ị họọrọ ikesa.
+1224	Ndị enyi anaghị ahụ Mmadụ gị, Ndị na-eso ụzọ, ndepụta ekpere, ndetu, nọmba ekwentị, atụmatụ nzuzo ma ọ bụ mmefu ego gị.
+1225	Ị ga-adịrịrị afọ 13 ma ọ bụ karịa. Ọ bụrụ na i rubeghị afọ 18, kwuo ya: a ga-akwado akaụntụ gị tupu i nwee ike itinye ndị enyi ma ọ bụ isonye na atụmatụ.
+1226	Atụmatụ e kesara na-egosi ihe ọ bụ, ụbọchị na oge, ebe, ma nri ọ̀ dị, ọnụ ego na onye na-akwụ, aha gị na ndị na-aga.
+1227	Akaụntụ ndị na-erubeghị afọ 18 na-egosi dị ka chọọchị ha nwere (CAMPUS). A na-ezigara onye na-ahụ maka Shepherd aha ha na adreesị email ha, onye ahụ na-ebukwa ụzọ kwado ha. Ndị okenye enweghị ike izigara ha arịrịọ enyi, atụmatụ dị n'etiti okenye na onye na-erubeghị afọ 18 chọkwara mmadụ 3 ma ọ bụ karịa.
+1228	Mmefu ego kwa ọnwa ({0})
+1229	Ị na-egosi dị ka <b>{0}</b>.
+1230	Ndị enyi na atụmatụ e kesara
+1231	Ọ bụrụ na ị họrọ chọọchị, ndị okenye si na chọọchị ahụ nwere ike ịchọta gị site n'aha mbụ gị na mkpụrụedemede mbụ nke aha nna gị, iji zigara gị arịrịọ enyi. A naghị edepụta ndị na-erubeghị afọ 18 ma ọlị.
+1232	I nwere ike iwepụ ma ọ bụ gbochie enyi, ma ọ bụ kọọ maka mmadụ ma ọ bụ atụmatụ, n'oge ọ bụla. Akụkọ ahụ na-aga n'aka onye na-ahụ maka Shepherd ya na aha gị na adreesị email gị.
+1233	Tinye naanị ndị enyi ị maara, kesaakwa naanị atụmatụ ndị obi dị gị mma ka ha hụ. Zukọọnụ n'ebe ọha na eze, ma na-akwanyere onye ọ bụla ùgwù.
+1234	Hazie nzute agbamume na oge nọkọ, ma kesaara ha ndị enyi, ndị nwere ike isonye n'otu mpịa. Tankị mmefu ego nzuzo gị na-egosi ego fọdụụrụ gị imefu n'ọnwa a. Shepherd na-echetara gị kwa izu, ọnụ ọgụgụ nsochi gị kwa izu dịkwa ebe a.
+1235	Ncheta kwa izu, ncheta tupu nzute ọ bụla, na akụkọ gbasara atụmatụ ndị enyi
+1236	Tinye ndị enyi ma kesaara ha atụmatụ. Ndị enyi na-ahụ naanị atụmatụ ndị ị na-ekerịta, ha anaghị ahụ Mmadụ gị, Ndị na-eso ụzọ, ndepụta ekpere, ndetu ma ọ bụ mmefu ego gị. Ha na-esonye n'otu mpịa, a na-agwakwa onye ọ bụla na-aga.
+1237	Họrọ chọọchị site na ndepụta.
+1238	Atụmatụ ahụ emechiela.
+1239	Nke a bụ atụmatụ nke gị.
+1240	Iji gbanwee nke a, zigara {0} email.
+1241	I nwere ike isonye naanị na atụmatụ ndị enyi gị.
+1242	Akaụntụ gị na-eche nkwado.
+1243	Dee aha chọọchị gị
+1244	E wepụla ya
+1245	Ndị na-aga
