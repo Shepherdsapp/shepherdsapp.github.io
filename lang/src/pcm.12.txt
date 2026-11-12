@@ -1,0 +1,32 @@
+1249	Friends dey only see di plans wey you share. Nothing else.
+1250	§one={0} plan for Encourage|other={0} plans for Encourage
+1251	§one={0} plan for Encourage|other={0} plans for Encourage
+1252	{0} out of {1} dey go
+1253	E don full
+1254	§one={0} more person fit join|other=Up to {0} more pipul fit join
+1255	§one={0} more person fit join|other=Up to {0} more pipul fit join
+1256	How many oda pipul fit join
+1257	No limit
+1258	If space dey for only 1, friend wey never reach 18 no fit join: plan with adult and under-18 need 3 or more pipul.
+1259	From your friends
+1260	None of your friends get plan wey dey come. Be di first: plan encouragement date or hangout and share am.
+1261	Add friends to see wetin dem dey plan, then plan encouragement date or hangout to share.
+1262	Plan date
+1263	Add friends
+1264	See all for Encourage
+1265	And {0} more for di next two weeks.
+1266	Wetin dey new for Shepherd
+1267	Friends don get im own tab. Add friends, answer requests and see who get plans.
+1268	Share plan from Encourage and friends go join with one tap. Na you go choose how many fit join.
+1269	Private budget tank dey show how much you get remain to spend dis month.
+1270	Today dey show wetin dey come and wetin your friends don plan.
+1271	I don get am
+1272	Friends get im own tab. Add friends with their email or friend code, or from your church, and answer requests here. Number wey dey near friend mean say dem don share plan: you go see am for Encourage, where you fit join with one tap. Friends dey only see di plans wey you share.
+1273	Friends don get im own tab
+1274	Add friends with their email or friend code, or from your church, and answer requests here. Number wey dey near friend mean say dem don share plan. Friends dey only see di plans wey you share.
+1275	Your budget tank
+1276	Set monthly budget and di tank go show wetin remain. E dey reduce as you dey plan and spend. Na only you dey see am.
+1277	Share plan
+1278	Plan date or hangout, choose Friends under "Who fit see dis", and talk how many fit join. Friends dey join with one tap, and plans wey dem share go show for dis tab and for Today.
+1279	Dis plan don full.
+1280	Plan encouragement dates and hangouts, and share dem with friends, wey fit join with one tap. Friends dey only see di plans wey you share, nothing else. Na you go choose how many fit join. Your private budget tank dey show wetin you get remain to spend dis month. Shepherd dey remind you every week, and your weekly follow-up stats dey here too.

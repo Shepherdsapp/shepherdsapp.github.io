@@ -1,0 +1,32 @@
+1249	Vos amis ne voient que les projets que vous partagez. Rien d'autre.
+1250	§one={0} projet dans Encourager|other={0} projets dans Encourager
+1251	§one={0} projet dans Encourager|other={0} projets dans Encourager
+1252	{0} sur {1} participants
+1253	Complet
+1254	§one={0} autre personne peut participer|other=Jusqu'à {0} autres personnes peuvent participer
+1255	§one={0} autre personne peut participer|other=Jusqu'à {0} autres personnes peuvent participer
+1256	Combien d'autres personnes peuvent participer
+1257	Sans limite
+1258	Avec une seule place, un ami de moins de 18 ans ne peut pas participer : un projet entre un adulte et un moins de 18 ans nécessite 3 personnes ou plus.
+1259	De vos amis
+1260	Aucun de vos amis n'a de projet à venir. Soyez le premier : prévoyez un rendez-vous d'encouragement ou un moment ensemble et partagez-le.
+1261	Ajoutez des amis pour voir ce qu'ils prévoient, puis prévoyez un rendez-vous d'encouragement ou un moment ensemble à partager.
+1262	Prévoir un rendez-vous
+1263	Ajouter des amis
+1264	Tout voir dans Encourager
+1265	Et {0} de plus dans les deux prochaines semaines.
+1266	Nouveautés de Shepherd
+1267	Les amis ont leur propre onglet. Ajoutez des amis, répondez aux demandes et voyez qui a des projets.
+1268	Partagez un projet depuis Encourager et vos amis participent en un geste. Vous choisissez combien peuvent participer.
+1269	Un réservoir de budget privé montre ce qu'il vous reste à dépenser ce mois-ci.
+1270	Aujourd'hui montre ce qui arrive et ce que vos amis ont prévu.
+1271	Compris
+1272	Les amis ont leur propre onglet. Ajoutez des amis avec leur e-mail ou leur code ami, ou depuis votre église, et répondez ici aux demandes. Un chiffre à côté d'un ami signifie qu'il a partagé un projet : vous le trouverez dans Encourager, où vous participez en un geste. Les amis ne voient que les projets que vous partagez.
+1273	Les amis ont leur propre onglet
+1274	Ajoutez des amis avec leur e-mail ou leur code ami, ou depuis votre église, et répondez ici aux demandes. Un chiffre à côté d'un ami signifie qu'il a partagé un projet. Les amis ne voient que les projets que vous partagez.
+1275	Votre réservoir de budget
+1276	Fixez un budget mensuel et le réservoir montre ce qu'il vous reste. Il se vide à mesure que vous prévoyez et dépensez. Vous seul le voyez.
+1277	Partager un projet
+1278	Prévoyez un rendez-vous ou un moment ensemble, choisissez Amis sous « Qui peut voir ceci » et indiquez combien peuvent participer. Vos amis participent en un geste, et les projets qu'ils partagent apparaissent dans cet onglet et dans Aujourd'hui.
+1279	Ce projet est complet.
+1280	Prévoyez des rendez-vous d'encouragement et des moments ensemble, et partagez-les avec vos amis, qui peuvent participer en un geste. Vos amis ne voient que les projets que vous partagez, rien d'autre. Vous choisissez combien peuvent participer. Votre réservoir de budget privé montre ce qu'il vous reste à dépenser ce mois-ci. Shepherd vous le rappelle chaque semaine, et vos statistiques hebdomadaires de suivi sont ici aussi.

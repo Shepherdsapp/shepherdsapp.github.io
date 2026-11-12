@@ -1,0 +1,32 @@
+1249	Los amigos solo ven los planes que compartes. Nada más.
+1250	§one={0} plan en Ánimo|other={0} planes en Ánimo
+1251	§one={0} plan en Ánimo|other={0} planes en Ánimo
+1252	Van {0} de {1}
+1253	Completo
+1254	§one=Puede apuntarse {0} persona más|other=Pueden apuntarse hasta {0} personas más
+1255	§one=Puede apuntarse {0} persona más|other=Pueden apuntarse hasta {0} personas más
+1256	Cuántas personas más pueden apuntarse
+1257	Sin límite
+1258	Con sitio solo para 1, un amigo menor de 18 no puede apuntarse: un plan con un adulto y un menor de 18 necesita 3 personas o más.
+1259	De tus amigos
+1260	Ninguno de tus amigos tiene un plan próximo. Sé el primero: planea una cita de ánimo o un rato juntos y compártelo.
+1261	Añade amigos para ver qué están planeando, y luego planea una cita de ánimo o un rato juntos para compartir.
+1262	Planear una cita
+1263	Añadir amigos
+1264	Ver todo en Ánimo
+1265	Y {0} más en las próximas dos semanas.
+1266	Novedades en Shepherd
+1267	Amigos tiene su propia pestaña. Añade amigos, responde solicitudes y mira quién tiene planes.
+1268	Comparte un plan desde Ánimo y tus amigos se apuntan con un toque. Tú eliges cuántos pueden apuntarse.
+1269	Un depósito de presupuesto privado muestra cuánto te queda por gastar este mes.
+1270	Hoy muestra lo que viene y lo que han planeado tus amigos.
+1271	Entendido
+1272	Amigos tiene su propia pestaña. Añade amigos con su correo o código de amigo, o desde tu iglesia, y responde aquí a las solicitudes. Un número junto a un amigo significa que ha compartido un plan: lo encontrarás en Ánimo, donde te apuntas con un toque. Los amigos solo ven los planes que compartes.
+1273	Amigos tiene su propia pestaña
+1274	Añade amigos con su correo o código de amigo, o desde tu iglesia, y responde aquí a las solicitudes. Un número junto a un amigo significa que ha compartido un plan. Los amigos solo ven los planes que compartes.
+1275	Tu depósito de presupuesto
+1276	Pon un presupuesto mensual y el depósito muestra cuánto te queda. Se vacía a medida que planeas y gastas. Solo lo ves tú.
+1277	Compartir un plan
+1278	Planea una cita o un rato juntos, elige Amigos en «Quién puede verlo» y di cuántos pueden apuntarse. Tus amigos se apuntan con un toque, y los planes que comparten aparecen en esta pestaña y en Hoy.
+1279	Este plan está completo.
+1280	Planea citas de ánimo y ratos juntos, y compártelos con amigos, que pueden apuntarse con un toque. Los amigos solo ven los planes que compartes, nada más. Tú eliges cuántos pueden apuntarse. Tu depósito de presupuesto privado muestra cuánto te queda por gastar este mes. Shepherd te avisa cada semana, y aquí están también tus datos semanales de seguimiento.

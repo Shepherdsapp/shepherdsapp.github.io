@@ -1,0 +1,32 @@
+1249	Os amigos só veem os planos que você compartilha. Nada mais.
+1250	§one={0} plano em Encorajar|other={0} planos em Encorajar
+1251	§one={0} plano em Encorajar|other={0} planos em Encorajar
+1252	{0} de {1} vão
+1253	Lotado
+1254	§one=Mais {0} pessoa pode participar|other=Até {0} outras pessoas podem participar
+1255	§one=Mais {0} pessoa pode participar|other=Até {0} outras pessoas podem participar
+1256	Quantas outras pessoas podem participar
+1257	Sem limite
+1258	Com vaga para só 1, um amigo menor de 18 anos não pode participar: um plano com um adulto e um menor de 18 anos precisa de 3 pessoas ou mais.
+1259	Dos seus amigos
+1260	Nenhum dos seus amigos tem um plano chegando. Seja o primeiro: planeje um encontro de encorajamento ou um encontro e compartilhe.
+1261	Adicione amigos para ver o que eles estão planejando, depois planeje um encontro de encorajamento ou um encontro para compartilhar.
+1262	Planejar um encontro
+1263	Adicionar amigos
+1264	Ver tudo em Encorajar
+1265	E mais {0} nas próximas duas semanas.
+1266	Novidades no Shepherd
+1267	Amigos tem sua própria aba. Adicione amigos, responda pedidos e veja quem tem planos.
+1268	Compartilhe um plano em Encorajar e os amigos participam com um toque. Você escolhe quantos podem participar.
+1269	Um tanque de orçamento particular mostra quanto você ainda tem para gastar neste mês.
+1270	Hoje mostra o que vem por aí e o que seus amigos planejaram.
+1271	Entendi
+1272	Amigos tem sua própria aba. Adicione amigos pelo e-mail ou código de amigo, ou pela sua igreja, e responda aos pedidos aqui. Um número ao lado de um amigo significa que ele compartilhou um plano: você o encontra em Encorajar, onde participa com um toque. Os amigos só veem os planos que você compartilha.
+1273	Amigos tem sua própria aba
+1274	Adicione amigos pelo e-mail ou código de amigo, ou pela sua igreja, e responda aos pedidos aqui. Um número ao lado de um amigo significa que ele compartilhou um plano. Os amigos só veem os planos que você compartilha.
+1275	Seu tanque de orçamento
+1276	Defina um orçamento mensal e o tanque mostra quanto resta. Ele esvazia conforme você planeja e gasta. Só você vê.
+1277	Compartilhar um plano
+1278	Planeje um encontro, escolha Amigos em "Quem pode ver isto" e diga quantos podem participar. Os amigos participam com um toque, e os planos que eles compartilham aparecem nesta aba e em Hoje.
+1279	Este plano está lotado.
+1280	Planeje encontros de encorajamento e encontros, e compartilhe-os com amigos, que podem participar com um toque. Os amigos só veem os planos que você compartilha, nada mais. Você escolhe quantos podem participar. Seu tanque de orçamento particular mostra quanto você ainda tem para gastar neste mês. O Shepherd lembra você toda semana, e suas estatísticas semanais de acompanhamento também estão aqui.

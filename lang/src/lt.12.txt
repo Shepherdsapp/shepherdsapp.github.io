@@ -1,0 +1,32 @@
+1249	Draugai mato tik planus, kuriais dalijatės. Daugiau nieko.
+1250	§one={0} planas Padrąsinime|few={0} planai Padrąsinime|many={0} plano Padrąsinime|other={0} planų Padrąsinime
+1251	§one={0} planas Padrąsinime|few={0} planai Padrąsinime|many={0} plano Padrąsinime|other={0} planų Padrąsinime
+1252	Dalyvauja {0} iš {1}
+1253	Vietų nebėra
+1254	§one=Gali prisijungti dar {0} žmogus|few=Gali prisijungti dar {0} žmonės|many=Gali prisijungti dar {0} žmogaus|other=Gali prisijungti dar {0} žmonių
+1255	§one=Gali prisijungti dar {0} žmogus|few=Gali prisijungti dar {0} žmonės|many=Gali prisijungti dar {0} žmogaus|other=Gali prisijungti dar {0} žmonių
+1256	Kiek dar žmonių gali prisijungti
+1257	Be apribojimo
+1258	Kai vieta tik 1, jaunesnis nei 18 metų draugas negali prisijungti: planui tarp suaugusiojo ir jaunesnio nei 18 metų asmens reikia 3 ar daugiau žmonių.
+1259	Iš jūsų draugų
+1260	Nė vienas jūsų draugas artimiausiu metu neturi plano. Būkite pirmi: suplanuokite padrąsinimo susitikimą ar susitikimą ir pasidalykite juo.
+1261	Pridėkite draugų, kad matytumėte, ką jie planuoja, tada suplanuokite padrąsinimo susitikimą ar susitikimą, kuriuo pasidalysite.
+1262	Planuoti susitikimą
+1263	Pridėti draugų
+1264	Žiūrėti viską Padrąsinime
+1265	Ir dar {0} per artimiausias dvi savaites.
+1266	Kas naujo Shepherd
+1267	Draugai turi savo skirtuką. Pridėkite draugų, atsakykite į kvietimus ir matykite, kas turi planų.
+1268	Pasidalykite planu iš Padrąsinimo, ir draugai prisijungs vienu bakstelėjimu. Jūs pasirenkate, kiek žmonių gali prisijungti.
+1269	Privatus biudžeto bakas rodo, kiek dar galite išleisti šį mėnesį.
+1270	Šiandien rodo, kas artėja ir ką suplanavo jūsų draugai.
+1271	Supratau
+1272	Draugai turi savo skirtuką. Pridėkite draugų nurodę el. paštą arba draugo kodą, arba iš savo bažnyčios, ir čia atsakykite į kvietimus. Skaičius šalia draugo reiškia, kad jis pasidalijo planu: rasite jį Padrąsinime, kur prisijungsite vienu bakstelėjimu. Draugai mato tik planus, kuriais dalijatės.
+1273	Draugai turi savo skirtuką
+1274	Pridėkite draugų nurodę el. paštą arba draugo kodą, arba iš savo bažnyčios, ir čia atsakykite į kvietimus. Skaičius šalia draugo reiškia, kad jis pasidalijo planu. Draugai mato tik planus, kuriais dalijatės.
+1275	Jūsų biudžeto bakas
+1276	Nustatykite mėnesio biudžetą, ir bakas rodys, kiek liko. Jis tuštėja, kai planuojate ir leidžiate pinigus. Jį matote tik jūs.
+1277	Pasidalyti planu
+1278	Suplanuokite susitikimą, pasirinkite Draugai ties „Kas gali tai matyti“ ir nurodykite, kiek žmonių gali prisijungti. Draugai prisijungia vienu bakstelėjimu, o planai, kuriais jie dalijasi, atsiranda šiame skirtuke ir Šiandien.
+1279	Šiame plane vietų nebėra.
+1280	Planuokite padrąsinimo susitikimus ir susitikimus ir dalykitės jais su draugais, kurie gali prisijungti vienu bakstelėjimu. Draugai mato tik planus, kuriais dalijatės, ir nieko daugiau. Jūs pasirenkate, kiek žmonių gali prisijungti. Privatus biudžeto bakas rodo, kiek dar galite išleisti šį mėnesį. Shepherd primena kiekvieną savaitę, o jūsų savaitės bendravimo statistika taip pat yra čia.

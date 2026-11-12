@@ -1,0 +1,32 @@
+1249	Ndị enyi na-ahụ naanị atụmatụ ndị ị na-ekerịta. Ọ dịghị ihe ọzọ.
+1250	Atụmatụ {0} na Agbamume
+1251	Atụmatụ {0} na Agbamume
+1252	{0} n'ime {1} na-aga
+1253	O juola
+1254	Mmadụ {0} ọzọ nwere ike isonye
+1255	Mmadụ {0} ọzọ nwere ike isonye
+1256	Mmadụ ole ọzọ nwere ike isonye
+1257	Enweghị oke
+1258	Ọ bụrụ na ohere dị naanị maka 1, enyi na-erubeghị afọ 18 agaghị enwe ike isonye: atụmatụ dị n'etiti okenye na onye na-erubeghị afọ 18 chọrọ mmadụ 3 ma ọ bụ karịa.
+1259	Site n'aka ndị enyi gị
+1260	Ọ dịghị enyi gị nwere atụmatụ na-abịa. Bụrụ onye mbụ: hazie nzute agbamume ma ọ bụ oge nọkọ ma kesaa ya.
+1261	Tinye ndị enyi ka ị hụ ihe ha na-ahazi, wee hazie nzute agbamume ma ọ bụ oge nọkọ ị ga-ekesa.
+1262	Hazie nzute
+1263	Tinye ndị enyi
+1264	Lee ha niile na Agbamume
+1265	Na {0} ọzọ n'ime izu abụọ na-abịa.
+1266	Ihe ọhụrụ na Shepherd
+1267	Ndị enyi nwere taabụ nke ha. Tinye ndị enyi, zaa arịrịọ ma hụ onye nwere atụmatụ.
+1268	Kesaa atụmatụ site na Agbamume, ndị enyi ga-esonye n'otu mpịa. Ọ bụ gị ga-ahọrọ mmadụ ole nwere ike isonye.
+1269	Tankị mmefu ego nzuzo na-egosi ego fọdụụrụ gị imefu n'ọnwa a.
+1270	Taa na-egosi ihe na-abịa na ihe ndị enyi gị haziri.
+1271	Aghọtara m
+1272	Ndị enyi nwere taabụ nke ha. Tinye ndị enyi site na email ha ma ọ bụ koodu enyi ha, ma ọ bụ site na chọọchị gị, ma zaa arịrịọ ebe a. Nọmba dị n'akụkụ enyi pụtara na o kesara atụmatụ: ị ga-ahụ ya na Agbamume, ebe ị na-esonye n'otu mpịa. Ndị enyi na-ahụ naanị atụmatụ ndị ị na-ekerịta.
+1273	Ndị enyi nwere taabụ nke ha
+1274	Tinye ndị enyi site na email ha ma ọ bụ koodu enyi ha, ma ọ bụ site na chọọchị gị, ma zaa arịrịọ ebe a. Nọmba dị n'akụkụ enyi pụtara na o kesara atụmatụ. Ndị enyi na-ahụ naanị atụmatụ ndị ị na-ekerịta.
+1275	Tankị mmefu ego gị
+1276	Tọọ mmefu ego kwa ọnwa, tankị ga-egosi ego fọdụrụ. Ọ na-ebelata ka ị na-ahazi ma na-emefu ego. Naanị gị na-ahụ ya.
+1277	Kesaa atụmatụ
+1278	Hazie nzute ma ọ bụ oge nọkọ, họrọ Ndị enyi n'okpuru "Onye nwere ike ịhụ nke a", ma kwuo mmadụ ole nwere ike isonye. Ndị enyi na-esonye n'otu mpịa, atụmatụ ndị ha kesara na-egosikwa na taabụ a na na Taa.
+1279	Atụmatụ a ejuola.
+1280	Hazie nzute agbamume na oge nọkọ, ma kesaara ha ndị enyi, ndị nwere ike isonye n'otu mpịa. Ndị enyi na-ahụ naanị atụmatụ ndị ị na-ekerịta, ọ dịghị ihe ọzọ. Ọ bụ gị ga-ahọrọ mmadụ ole nwere ike isonye. Tankị mmefu ego nzuzo gị na-egosi ego fọdụụrụ gị imefu n'ọnwa a. Shepherd na-echetara gị kwa izu, ọnụ ọgụgụ nsochi gị kwa izu dịkwa ebe a.

@@ -1,0 +1,32 @@
+1249	Freunde sehen nur die Pläne, die du teilst. Sonst nichts.
+1250	§one={0} Plan in Ermutigen|other={0} Pläne in Ermutigen
+1251	§one={0} Plan in Ermutigen|other={0} Pläne in Ermutigen
+1252	{0} von {1} dabei
+1253	Voll
+1254	§one={0} weitere Person kann mitmachen|other=Bis zu {0} weitere können mitmachen
+1255	§one={0} weitere Person kann mitmachen|other=Bis zu {0} weitere können mitmachen
+1256	Wie viele weitere mitmachen können
+1257	Keine Grenze
+1258	Bei nur 1 Platz kann ein Freund unter 18 nicht mitmachen: Ein Plan mit einem Erwachsenen und einem unter 18-Jährigen braucht 3 oder mehr Personen.
+1259	Von deinen Freunden
+1260	Keiner deiner Freunde hat gerade einen Plan. Mach den Anfang: Plane ein Ermutigungstreffen oder ein Treffen und teile es.
+1261	Füge Freunde hinzu, um zu sehen, was sie planen, und plane dann ein Ermutigungstreffen oder ein Treffen zum Teilen.
+1262	Treffen planen
+1263	Freunde hinzufügen
+1264	Alle in Ermutigen ansehen
+1265	Und {0} weitere in den nächsten zwei Wochen.
+1266	Neu in Shepherd
+1267	Freunde haben jetzt einen eigenen Tab. Füge Freunde hinzu, beantworte Anfragen und sieh, wer Pläne hat.
+1268	Teile einen Plan in Ermutigen, und Freunde machen mit einem Tipp mit. Du bestimmst, wie viele mitmachen können.
+1269	Ein privater Budgettank zeigt, wie viel du diesen Monat noch ausgeben kannst.
+1270	Heute zeigt, was ansteht und was deine Freunde geplant haben.
+1271	Verstanden
+1272	Freunde haben einen eigenen Tab. Füge Freunde per E-Mail-Adresse oder Freundescode hinzu, oder aus deiner Gemeinde, und beantworte hier Anfragen. Eine Zahl neben einem Freund bedeutet, dass er einen Plan geteilt hat: Du findest ihn in Ermutigen, wo du mit einem Tipp mitmachst. Freunde sehen nur die Pläne, die du teilst.
+1273	Freunde haben einen eigenen Tab
+1274	Füge Freunde per E-Mail-Adresse oder Freundescode hinzu, oder aus deiner Gemeinde, und beantworte hier Anfragen. Eine Zahl neben einem Freund bedeutet, dass er einen Plan geteilt hat. Freunde sehen nur die Pläne, die du teilst.
+1275	Dein Budgettank
+1276	Lege ein Monatsbudget fest, und der Tank zeigt, was übrig ist. Er leert sich, wenn du planst und Geld ausgibst. Nur du siehst ihn.
+1277	Einen Plan teilen
+1278	Plane ein Treffen, wähle Freunde unter „Wer das sehen kann“ und lege fest, wie viele mitmachen können. Freunde machen mit einem Tipp mit, und Pläne, die sie teilen, erscheinen in diesem Tab und in Heute.
+1279	Dieser Plan ist voll.
+1280	Plane Ermutigungstreffen und Treffen und teile sie mit Freunden, die mit einem Tipp mitmachen können. Freunde sehen nur die Pläne, die du teilst, sonst nichts. Du bestimmst, wie viele mitmachen können. Dein privater Budgettank zeigt, was du diesen Monat noch ausgeben kannst. Shepherd erinnert dich jede Woche, und deine wöchentliche Nachfass-Statistik ist auch hier.

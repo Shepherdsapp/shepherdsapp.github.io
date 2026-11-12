@@ -1296,4 +1296,35 @@ Removed
 Who's going
 Updated rules
 Shepherd now has friends and shared plans, so two rules are new. Please read them and agree to carry on. Nothing in your account has changed.
-Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.
+Friends only see the plans you share. Nothing else.
+{0} plan in Encourage
+{0} plans in Encourage
+{0} of {1} going
+Full
+Up to {0} other can join
+Up to {0} others can join
+How many others can join
+No limit
+With room for only 1, an under-18 friend can't join: a plan with an adult and an under-18 needs 3 or more people.
+From your friends
+None of your friends has a plan coming up. Be the first: plan an encouragement date or a hangout and share it.
+Add friends to see what they are planning, then plan an encouragement date or a hangout to share.
+Plan a date
+Add friends
+See all in Encourage
+And {0} more in the next two weeks.
+What's new in Shepherd
+Friends has its own tab. Add friends, answer requests and see who has plans.
+Share a plan from Encourage and friends join in one tap. You choose how many can join.
+A private budget tank shows what you have left to spend this month.
+Today shows what's coming up and what your friends have planned.
+Got it
+Friends has its own tab. Add friends by email or friend code, or from your church, and answer requests here. A number next to a friend means they have shared a plan: you'll find it in Encourage, where you join in one tap. Friends only see the plans you share.
+Friends has its own tab
+Add friends by email or friend code, or from your church, and answer requests here. A number next to a friend means they have shared a plan. Friends only see the plans you share.
+Your budget tank
+Set a monthly budget and the tank shows what you have left. It drains as you plan and spend. Only you see it.
+Share a plan
+Plan a date or a hangout, choose Friends under "Who can see this", and say how many can join. Friends join in one tap, and plans they share appear on this tab and on Today.
+This plan is full.
+Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else, and you choose how many can join. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.

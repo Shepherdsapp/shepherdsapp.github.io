@@ -118,7 +118,7 @@ async function pushOn(P) {
   await closeSheet(P.p); await P.p.click('[data-act="settings"]'); await wait(600);
   await P.p.click('#notifCard [data-act="pushon"]'); await wait(1300);
 }
-async function openFriends(p) { await tab(p, 'encourage'); await p.click('#frBar'); await wait(700); }
+async function openFriends(p) { await tab(p, 'friends'); await wait(700); }
 async function newPlan(p, f) {
   await tab(p, 'encourage'); await p.click('[data-act="newenc"][data-t="' + (f.type || 'hangout') + '"]'); await wait(450);
   if (f.share) { await p.click('#enShare [data-v="friends"]'); await wait(150); }
@@ -152,14 +152,14 @@ try {
   const PA = uidOf('pavi@church.test'), GB = uidOf('grace@church.test');
   ok(db("SELECT church, minor, ok FROM social WHERE uid = '" + PA + "'")[0].join() === 'c_london_icc,0,1', 'the church chosen at sign-up is saved with the account');
   await tab(A.p, 'encourage'); await wait(500);
-  ok(await A.p.locator('#frBar').isVisible() && /Add friends to share plans/.test(await text(A.p, '#frBar')), 'Encourage shows a Friends bar');
+  ok(await A.p.locator('#tabFriends').isVisible(), 'there is a Friends tab');
   ok(await A.p.locator('#tankCard').isVisible() && /Only you see this/.test(await text(A.p, '#tankCard')), 'and a private budget tank');
   ok(await overflow(A.p) <= 0 && await overflow(B.p) <= 0, 'Encourage fits both phones');
   await shot(A, 'encourage-empty');
-  await A.p.click('[data-act="settings"]'); await wait(600);
+  await tab(A.p, 'friends'); await wait(600);
   ok(/London ICC/.test(await text(A.p, '#churchCard')) && !/CAMPUS/.test(await text(A.p, '#churchCard')), 'Settings shows "Your church: London ICC"');
   ok(await A.p.locator('#ownerCard').isVisible() && /Nobody is waiting/.test(await text(A.p, '#ownerCard')), 'the person who runs Shepherd also sees Approvals');
-  await B.p.click('[data-act="settings"]'); await wait(600);
+  await tab(B.p, 'friends'); await wait(600);
   ok(await B.p.locator('#churchCard').isVisible() && !(await B.p.locator('#ownerCard').count()), 'nobody else sees Approvals');
   await pushOn(A); await pushOn(B);
   ok(db('SELECT COUNT(*) FROM subs')[0][0] === 2, 'both phones have notifications on');
@@ -167,7 +167,7 @@ try {
   /* ============ friend request ============ */
   current = 'Adding a friend';
   await openFriends(A.p);
-  { const t = await text(A.p, '#sheetBody');
+  { const t = await text(A.p, '#main');
     ok(/Friends only see the plans you share/.test(t) && /never see your People, Disciples, prayer list, notes, phone numbers or budget/.test(t), 'the Friends screen says exactly what friends can and can\'t see');
     ok(/People from my church/.test(t) && /Grace O\./.test(t) && !/Owusu/.test(t) && !/grace@church/.test(t), 'people from my church show as first name and initial only: "Grace O."');
     ok(/Your friend code/.test(t) && (await soc(A.p)).me.code.length >= 6, 'and my own friend code is there to share'); }
@@ -178,15 +178,15 @@ try {
   ok(/Request sent/.test(await text(A.p, '#frPeople')), 'one tap on Add friend sends a request');
   ok(told('grace').length === 1 && /Friend request from Pavi K\./.test(told('grace')[0]) && told('pavi').length === 0, 'Grace gets one notification about it: ' + told('grace')[0]);
   await refresh(B.p); await tab(B.p, 'encourage');
-  ok(/1/.test(await text(B.p, '#frBar .badge2')), 'Grace sees a badge on her Friends bar');
-  await B.p.click('#frBar'); await wait(700);
-  ok(/Friend requests/.test(await text(B.p, '#sheetBody')) && /Pavi K\./.test(await text(B.p, '#sheetBody')), 'and the request, with Accept and Decline');
+  ok(/1/.test(await text(B.p, '#frBadge')), 'Grace sees a badge on her Friends tab');
+  await tab(B.p, 'friends'); await wait(700);
+  ok(/Friend requests/.test(await text(B.p, '#main')) && /Pavi K\./.test(await text(B.p, '#main')), 'and the request, with Accept and Decline');
   delivered.length = 0;
   await B.p.click('[data-fr="accept"]'); await wait(900); await settle();
-  ok(/Your friends/.test(await text(B.p, '#sheetBody')) && (await soc(B.p)).me.friends.length === 1 && (await soc(B.p)).me.friends[0].name === 'Pavi Kumar', 'Accept makes them friends');
+  ok(/Your friends/.test(await text(B.p, '#main')) && (await soc(B.p)).me.friends.length === 1 && (await soc(B.p)).me.friends[0].name === 'Pavi Kumar', 'Accept makes them friends');
   ok(told('pavi').length === 1 && /Grace Owusu accepted/.test(told('pavi')[0]), 'and Pavi is told: ' + told('pavi')[0]);
   await refresh(A.p); await closeSheet(A.p); await closeSheet(B.p);
-  ok(/1 friends? see/.test(await text(A.p, '#frBar')) || (await soc(A.p)).me.friends.length === 1, 'Pavi\'s Friends bar now counts Grace');
+  ok((await soc(A.p)).me.friends.length === 1, 'Pavi now has Grace as a friend');
 
   /* ============ budget tank ============ */
   current = 'Budget tank';
@@ -267,7 +267,7 @@ try {
   ok((await soc(C.p)).me.church === null && await C.p.locator('.tab[data-v="encourage"]').count() === 1, 'someone who picks "Choose later" still gets an account');
   await pushOn(C);
   await openFriends(C.p);
-  ok(/Choose your church to see people from it/.test(await text(C.p, '#sheetBody')), 'with no church, the Friends screen offers to choose one');
+  ok(/Choose your church to see people from it/.test(await text(C.p, '#main')), 'with no church, the Friends screen offers to choose one');
   await C.p.fill('#frTo', 'PAVI@church.test'); await C.p.$eval('#frForm', f => f.requestSubmit()); await wait(900);
   ok(/If they use Shepherd/.test(await text(C.p, '#toastMsg')), 'adding by email gives the same answer whether or not the person exists');
   await C.p.fill('#frTo', 'nobody@nowhere.test'); await C.p.$eval('#frForm', f => f.requestSubmit()); await wait(900);
@@ -338,15 +338,15 @@ try {
   await T.p.click('[data-act="newenc"][data-t="date"]'); await wait(450);
   ok(!(await T.p.locator('#enShare').count()), 'and can\'t share a plan');
   await closeSheet(T.p);
-  await T.p.click('[data-act="settings"]'); await wait(600);
+  await tab(T.p, 'friends'); await wait(600);
   ok(/London ICC \(CAMPUS\)/.test(await text(T.p, '#churchCard')) && /waiting for approval/.test(await text(T.p, '#churchCard')), 'Settings shows "London ICC (CAMPUS)"');
   await refresh(B.p); await openFriends(B.p);
-  ok(!/Sam/.test(await text(B.p, '#sheetBody')), 'under-18s are never listed under "People from my church"');
+  ok(!/Sam/.test(await text(B.p, '#main')), 'under-18s are never listed under "People from my church"');
   await B.p.fill('#frTo', 'sam@church.test'); await B.p.$eval('#frForm', f => f.requestSubmit()); await wait(900);
   ok(db("SELECT COUNT(*) FROM friends WHERE a = '" + ST + "' OR b = '" + ST + "'")[0][0] === 0, 'an adult\'s friend request to an under-18 goes nowhere');
   await closeSheet(B.p);
   // the owner approves
-  await refresh(A.p); await closeSheet(A.p); await A.p.click('[data-act="settings"]'); await wait(600);
+  await refresh(A.p); await closeSheet(A.p); await tab(A.p, 'friends'); await wait(600);
   ok(/1 waiting for approval/.test(await text(A.p, '#ownerCard')), 'the owner\'s Settings shows 1 waiting');
   await A.p.click('[data-act="approvals"]'); await wait(800);
   ok(/Sam Teen/.test(await text(A.p, '#sheetBody')) && /sam@church\.test/.test(await text(A.p, '#sheetBody')) && /London ICC \(CAMPUS\)/.test(await text(A.p, '#sheetBody')), 'Approvals lists Sam with email and church');
@@ -354,18 +354,18 @@ try {
   ok(await overflow(A.p) <= 0, 'the Approvals screen fits the phone');
   delivered.length = 0;
   await pushOn(T);
-  await closeSheet(A.p); await A.p.click('[data-act="settings"]'); await wait(500); await A.p.click('[data-act="approvals"]'); await wait(800);
+  await closeSheet(A.p); await tab(A.p, 'friends'); await wait(500); await A.p.click('[data-act="approvals"]'); await wait(800);
   await A.p.click('[data-ap="1"]'); await wait(1200); await settle();
   ok(db("SELECT ok FROM social WHERE uid = '" + ST + "'")[0][0] === 1 && /Nobody is waiting/.test(await text(A.p, '#sheetBody')), 'one tap approves');
   ok(told('sam').length === 1, 'and Sam is told: ' + told('sam')[0]);
   await closeSheet(A.p);
   await refresh(T.p); await tab(T.p, 'encourage');
-  ok(await T.p.locator('#frBar').isVisible(), 'once approved, Sam gets the Friends bar');
-  await T.p.click('#frBar'); await wait(700);
-  ok(!/People from my church/.test(await text(T.p, '#sheetBody')) && /Add a friend/.test(await text(T.p, '#sheetBody')), 'but no church list: only people Sam adds by email or friend code');
+  ok(await T.p.locator('#tabFriends').isVisible() && !(await T.p.locator('#socWait').count()), 'once approved, the waiting notice goes');
+  await tab(T.p, 'friends'); await wait(700);
+  ok(!/People from my church/.test(await text(T.p, '#main')) && /Add a friend/.test(await text(T.p, '#main')), 'but no church list: only people Sam adds by email or friend code');
   await T.p.fill('#frTo', 'pavi@church.test'); await T.p.$eval('#frForm', f => f.requestSubmit()); await wait(900);
   await refresh(A.p); await openFriends(A.p);
-  ok(/Sam T\./.test(await text(A.p, '#sheetBody')) && /London ICC \(CAMPUS\)/.test(await text(A.p, '#sheetBody')), 'the adult sees the request marked "London ICC (CAMPUS)"');
+  ok(/Sam T\./.test(await text(A.p, '#main')) && /London ICC \(CAMPUS\)/.test(await text(A.p, '#main')), 'the adult sees the request marked "London ICC (CAMPUS)"');
   await A.p.click('[data-fr="accept"]'); await wait(900); await closeSheet(A.p); await closeSheet(T.p);
   await newPlan(A.p, { type: 'hangout', share: true, date: soon, activity: 'Pizza after church', place: 'Franco Manca', cost: 12, pay: 'own' }); await wait(2800); await settle();
   await refresh(T.p); await tab(T.p, 'encourage');
@@ -390,7 +390,7 @@ try {
 
   /* ============ another church, and near-duplicates ============ */
   current = 'Adding a church';
-  await closeSheet(C.p); await C.p.click('[data-act="settings"]'); await wait(600);
+  await closeSheet(C.p); await tab(C.p, 'friends'); await wait(600);
   await C.p.click('#churchCard [data-act="church"]'); await wait(800);
   await C.p.selectOption('#chSel', '+'); await wait(200);
   await C.p.fill('#chNew', 'london icc'); await wait(300);
@@ -422,7 +422,7 @@ try {
   await B.p.locator('[data-fr="more"][data-name="Tobi Adeyemi"]').click(); await wait(500);
   ok(/Removing or blocking is private/.test(await text(B.p, '#sheetBody')), 'each friend has Remove, Block and Report');
   await B.p.click('#faBlock'); await wait(1300);
-  ok((await soc(B.p)).me.friends.length === 1 && (await soc(B.p)).me.blocked.length === 1 && /Blocked/.test(await text(B.p, '#sheetBody')), 'blocking removes the friendship and lists them under Blocked');
+  ok((await soc(B.p)).me.friends.length === 1 && (await soc(B.p)).me.blocked.length === 1 && /Blocked/.test(await text(B.p, '#main')), 'blocking removes the friendship and lists them under Blocked');
   await refresh(C.p);
   ok((await soc(C.p)).me.friends.every(f => f.name !== 'Grace Owusu'), 'and the other person just sees one friend fewer');
   await B.p.click('[data-fr="unblock"]'); await wait(1200);
@@ -434,7 +434,7 @@ try {
   await refresh(B.p);
   await B.p.route('**/api/social/**', r => r.abort());
   await B.p.reload(); await wait(2800); await tab(B.p, 'encourage'); await wait(400);
-  ok(await B.p.locator('#frBar').isVisible() && /Pizza after church/.test(await text(B.p, '#main')), 'with no signal, friends and their plans still show from the last time');
+  ok(await B.p.locator('#tabFriends').isVisible() && /Pizza after church/.test(await text(B.p, '#main')), 'with no signal, friends and their plans still show from the last time');
   await B.p.locator('#feedSec .pcard', { hasText: 'Walk in Greenwich' }).locator('.jbtn').click(); await wait(1200);
   ok(/No connection|Couldn't reach|signal/i.test(await text(B.p, '#toastMsg')) && (await soc(B.p)).feed.find(x => /Walk/.test(x.title)).joined === false, 'joining without signal says so plainly and changes nothing: "' + (await text(B.p, '#toastMsg')) + '"');
   await B.p.unroute('**/api/social/**'); await refresh(B.p);

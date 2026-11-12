@@ -176,6 +176,15 @@ Add services and events on Shepherd's Calendar tab so you can invite people and 
   `https://<worker address>/admin` with the email address and `ADMIN_KEY`). They are never listed, adults can't send
   them requests, they only ever get a price tag (not the exact cost), and a plan between an adult and an under-18 needs
   3 or more people.
+- **Friends tab**: once friends are switched on there is a sixth tab, Friends, holding requests, your friends (a number
+  next to a friend counts the plans they have shared), add a friend, your friend code, people from my church, your
+  church and Approvals. Friends' plans themselves stay on Encourage. Under 390px the tab labels may use two lines.
+- **Join limit**: the host can allow "No limit" or 1 to 14 others. The server enforces it in a single statement, so two
+  people can't take the last place. Cards show "3 of 8 going", then "Full".
+- **Today** shows one "Coming up" card (Calendar and Encourage together, next two weeks) and "From your friends"
+  (up to 5 friends with a plan, or a nudge to plan one).
+- **What's new**: people who already had an account see a one-time card on Today with a short 3-step tour; new
+  accounts get a Friends step in the main tour.
 - **Budget tank** (Encourage): a private monthly budget shown as a fuel tank. Only you see it; it is never sent to friends.
 - An app that is newer than the server simply hides the friends features until the Worker is updated.
 
@@ -234,6 +243,7 @@ changes, paste it into the Worker again and **Deploy**.
 | `node test/worker.test.mjs` | 225 checks of the server: the QR hello page (adds the person, opens WhatsApp in your language, slows down spam), accounts, saving (newer copies always win), history, deleting, notifications (encrypted and signed exactly as Apple and Google require, then decrypted the way a phone does), the calendar link, password resets, privacy between accounts |
 | `node test/app.test.cjs` | 467 checks of the app: every screen, the 16-card tour, the acceptable use agreement, the privacy page, guides, the journey, the prayer list and its reminders, reading contacts files from iPhone and Android, the notification schedule (names, times, pauses, caps), and the app in Spanish (Bible verses stay English) |
 | `node test/upgrade.test.mjs` | 17 checks that the database made by the previous server (kept in `test/fixtures/worker-v3.js`) carries over to the new one with nothing changed, and that rolling back and going forward again loses nothing |
+| `node test/tab.e2e.mjs` | a quick check (32) of the Friends tab, the join limit, the Today cards, the What's new card, and the six-tab bar in all 15 languages at 320, 360 and 390px |
 | `node test/friends.e2e.mjs` | 113 checks with several phones at once against the real server code: church at sign-up, friend requests, sharing a plan, one-tap join, exactly who gets notified, changes and cancellations, the under-18 (CAMPUS) safeguards, adding and matching churches, remove/block/report, the budget tank, no signal, and an app running against a server that hasn't been updated yet |
 | `node test/e2e.mjs` | 93 checks of the built website in Chromium at iPhone and Android sizes (320 to 430px wide), talking to the real server code: sign up (no account without agreeing), privacy.html on its own and in Spanish, two phones in sync, notifications from schedule to delivery, tapping one, the calendar link, password reset, sign out, offline, every tour card fully on screen at four phone sizes, and switching language (a second phone follows, works offline) |
 | `node lang/check.mjs` | every language has every line, with the same `{0}` gaps and bold words |

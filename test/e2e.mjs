@@ -118,7 +118,7 @@ try {
   await A.p.click('[data-act="settings"]'); await wait(300);
   await A.p.click('#aboutCard [data-v="about"]'); await wait(400);
   { const at = await A.p.textContent('#main');
-    ok(/About Shepherd/.test(at) && /Luke 15:4 \(NIV\)/.test(at) && /Feed my sheep/.test(at) && (await A.p.$$('.tab')).length === 5, 'About opens from Settings with the verses, and there are 5 tabs');
+    ok(/About Shepherd/.test(at) && /Luke 15:4 \(NIV\)/.test(at) && /Feed my sheep/.test(at) && (await A.p.$$('.tab:not([hidden])')).length === 6, 'About opens from Settings with the verses, and there are 6 tabs');
     ok(await A.p.locator('#aboutHelp a[href^="mailto:lostshepherdapp@gmail.com"]').count() === 1, 'About has the email link'); }
   await A.p.click('.tab[data-v="today"]'); await wait(300);
 
@@ -345,7 +345,7 @@ try {
       }
       await T.p.click('#tourNext'); await wait(300);
     }
-    ok(steps === 18 && !bad.length, wd + 'x' + ht + ': all 18 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
+    ok(steps === 19 && !bad.length, wd + 'x' + ht + ': all 19 tour cards sit fully on screen with room to spare' + (bad.length ? ': ' + bad.join(', ') : ' (' + steps + ' steps)'));
     if (n === 1) {
       ok(numberSaved, 'typing your number and tapping Continue tour saves it');
       ok(calOk, 'after connecting the calendar, closing the guide goes back to the tour');
@@ -363,7 +363,7 @@ try {
     await Promise.all([A.p.waitForNavigation({ timeout: 8000 }).catch(() => null), A.p.selectOption('#pLang', 'es')]);
     await wait(1800);
     const tabs = await A.p.$$eval('.tab', t => t.map(x => x.textContent.trim().replace(/\d+$/, '')).join('|'));
-    ok(/^Hoy\|Personas\|Discípulos\|Calendario\|Ánimo$/.test(tabs), 'choosing Español turns the app Spanish: ' + tabs);
+    ok(/^Hoy\|Personas\|Discípulos\|Calendario\|Ánimo\|Amigos$/.test(tabs), 'choosing Español turns the app Spanish: ' + tabs);
     ok(await A.p.evaluate(() => document.documentElement.lang === 'es' && !!localStorage.getItem('shepherd:langpack:es')), 'the Spanish words were fetched once and kept on the phone');
     ok(JSON.parse(db("SELECT data FROM docs WHERE path = 'profile'")[0][0]).lang === 'es', 'the choice is saved to the account');
     await A.p.screenshot({ path: path.join(OUT, 'today-es.png') });

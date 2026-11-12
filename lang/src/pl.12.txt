@@ -1,0 +1,32 @@
+1249	Przyjaciele widzą tylko plany, które udostępniasz. Nic więcej.
+1250	§one={0} plan w Zachęcie|few={0} plany w Zachęcie|many={0} planów w Zachęcie|other={0} planu w Zachęcie
+1251	§one={0} plan w Zachęcie|few={0} plany w Zachęcie|many={0} planów w Zachęcie|other={0} planu w Zachęcie
+1252	Idzie {0} z {1}
+1253	Komplet
+1254	§one=Może dołączyć jeszcze {0} osoba|few=Mogą dołączyć jeszcze {0} osoby|many=Może dołączyć jeszcze {0} osób|other=Może dołączyć jeszcze {0} osoby
+1255	§one=Może dołączyć jeszcze {0} osoba|few=Mogą dołączyć jeszcze {0} osoby|many=Może dołączyć jeszcze {0} osób|other=Może dołączyć jeszcze {0} osoby
+1256	Ile innych osób może dołączyć
+1257	Bez limitu
+1258	Przy miejscu tylko dla 1 osoby przyjaciel poniżej 18 lat nie może dołączyć: plan dorosłego z osobą poniżej 18 lat wymaga 3 lub więcej osób.
+1259	Od twoich przyjaciół
+1260	Żaden z twoich przyjaciół nie ma teraz planu. Zacznij pierwszy: zaplanuj spotkanie zachęty lub wspólne wyjście i udostępnij je.
+1261	Dodaj przyjaciół, aby zobaczyć, co planują, a potem zaplanuj spotkanie zachęty lub wspólne wyjście do udostępnienia.
+1262	Zaplanuj spotkanie
+1263	Dodaj przyjaciół
+1264	Zobacz wszystko w Zachęcie
+1265	I jeszcze {0} w ciągu najbliższych dwóch tygodni.
+1266	Co nowego w Shepherd
+1267	Przyjaciele mają własną kartę. Dodawaj przyjaciół, odpowiadaj na zaproszenia i zobacz, kto ma plany.
+1268	Udostępnij plan w Zachęcie, a przyjaciele dołączą jednym dotknięciem. Ty wybierasz, ile osób może dołączyć.
+1269	Prywatny zbiornik budżetu pokazuje, ile zostało ci do wydania w tym miesiącu.
+1270	Dziś pokazuje, co się zbliża i co zaplanowali twoi przyjaciele.
+1271	Rozumiem
+1272	Przyjaciele mają własną kartę. Dodawaj przyjaciół, podając e-mail lub kod przyjaciela, albo ze swojego kościoła, i odpowiadaj tutaj na zaproszenia. Liczba obok przyjaciela oznacza, że udostępnił plan: znajdziesz go w Zachęcie, gdzie dołączasz jednym dotknięciem. Przyjaciele widzą tylko plany, które udostępniasz.
+1273	Przyjaciele mają własną kartę
+1274	Dodawaj przyjaciół, podając e-mail lub kod przyjaciela, albo ze swojego kościoła, i odpowiadaj tutaj na zaproszenia. Liczba obok przyjaciela oznacza, że udostępnił plan. Przyjaciele widzą tylko plany, które udostępniasz.
+1275	Twój zbiornik budżetu
+1276	Ustaw miesięczny budżet, a zbiornik pokaże, ile zostało. Opróżnia się, gdy planujesz i wydajesz. Widzisz go tylko ty.
+1277	Udostępnij plan
+1278	Zaplanuj spotkanie lub wspólne wyjście, wybierz Przyjaciele w polu „Kto może to zobaczyć” i podaj, ile osób może dołączyć. Przyjaciele dołączają jednym dotknięciem, a plany, które udostępniają, pojawiają się na tej karcie i w Dziś.
+1279	Ten plan ma już komplet.
+1280	Planuj spotkania zachęty i wspólne wyjścia i udostępniaj je przyjaciołom, którzy mogą dołączyć jednym dotknięciem. Przyjaciele widzą tylko plany, które udostępniasz, nic więcej. Ty wybierasz, ile osób może dołączyć. Twój prywatny zbiornik budżetu pokazuje, ile zostało ci do wydania w tym miesiącu. Shepherd przypomina ci co tydzień, a twoje tygodniowe statystyki kontaktów też są tutaj.

@@ -1,0 +1,32 @@
+1249	Àwọn ètò tí o pín nìkan ni àwọn ọ̀rẹ́ ń rí. Kò sí ohun míràn.
+1250	Ètò {0} nínú Ìgbaniníyànjú
+1251	Ètò {0} nínú Ìgbaniníyànjú
+1252	{0} nínú {1} ń lọ
+1253	Ó ti kún
+1254	Ènìyàn {0} míràn ló lè darapọ̀
+1255	Ènìyàn {0} míràn ló lè darapọ̀
+1256	Ènìyàn mélòó míràn ló lè darapọ̀
+1257	Kò sí òpin
+1258	Tí àyè bá wà fún ẹnì 1 péré, ọ̀rẹ́ tí kò tíì pé ọdún 18 kò lè darapọ̀: ètò láàárín àgbàlagbà àti ẹni tí kò tíì pé ọdún 18 nílò ènìyàn 3 tàbí jù bẹ́ẹ̀ lọ.
+1259	Láti ọ̀dọ̀ àwọn ọ̀rẹ́ rẹ
+1260	Kò sí ọ̀rẹ́ rẹ tó ní ètò tó ń bọ̀. Jẹ́ ẹni àkọ́kọ́: ṣètò ìpàdé ìgbaniníyànjú tàbí àkókò ìbáṣepọ̀ kí o sì pín in.
+1261	Fi ọ̀rẹ́ kún un láti rí ohun tí wọ́n ń ṣètò, lẹ́yìn náà ṣètò ìpàdé ìgbaniníyànjú tàbí àkókò ìbáṣepọ̀ láti pín.
+1262	Ṣètò ìpàdé
+1263	Fi ọ̀rẹ́ kún un
+1264	Wo gbogbo rẹ̀ nínú Ìgbaniníyànjú
+1265	Àti {0} míràn láàárín ọ̀sẹ̀ méjì tó ń bọ̀.
+1266	Ohun tuntun nínú Shepherd
+1267	Àwọn ọ̀rẹ́ ti ní ojú-ìwé tiwọn. Fi ọ̀rẹ́ kún un, dáhùn ìbéèrè, kí o sì rí ẹni tó ní ètò.
+1268	Pín ètò láti Ìgbaniníyànjú, àwọn ọ̀rẹ́ yóò sì darapọ̀ pẹ̀lú ìtẹ̀ kan. Ìwọ lo máa yan iye ènìyàn tó lè darapọ̀.
+1269	Táǹkì ìṣúnà ìkọ̀kọ̀ ń fi iye tó kù fún ọ láti ná lóṣù yìí hàn.
+1270	Òní ń fi ohun tó ń bọ̀ àti ohun tí àwọn ọ̀rẹ́ rẹ ti ṣètò hàn.
+1271	Ó yé mi
+1272	Àwọn ọ̀rẹ́ ní ojú-ìwé tiwọn. Fi ọ̀rẹ́ kún un pẹ̀lú ímeèlì tàbí kóòdù ọ̀rẹ́ wọn, tàbí láti inú ìjọ rẹ, kí o sì dáhùn ìbéèrè níbí. Nọ́ńbà tó wà lẹ́gbẹ̀ẹ́ ọ̀rẹ́ túmọ̀ sí pé ó ti pín ètò kan: wàá rí i nínú Ìgbaniníyànjú, níbi tí o ti lè darapọ̀ pẹ̀lú ìtẹ̀ kan. Àwọn ètò tí o pín nìkan ni àwọn ọ̀rẹ́ ń rí.
+1273	Àwọn ọ̀rẹ́ ti ní ojú-ìwé tiwọn
+1274	Fi ọ̀rẹ́ kún un pẹ̀lú ímeèlì tàbí kóòdù ọ̀rẹ́ wọn, tàbí láti inú ìjọ rẹ, kí o sì dáhùn ìbéèrè níbí. Nọ́ńbà tó wà lẹ́gbẹ̀ẹ́ ọ̀rẹ́ túmọ̀ sí pé ó ti pín ètò kan. Àwọn ètò tí o pín nìkan ni àwọn ọ̀rẹ́ ń rí.
+1275	Táǹkì ìṣúnà rẹ
+1276	Ṣètò ìṣúnà oṣooṣù, táǹkì yóò sì fi iye tó kù hàn. Ó ń dín kù bí o ṣe ń ṣètò tí o sì ń náwó. Ìwọ nìkan ló ń rí i.
+1277	Pín ètò kan
+1278	Ṣètò ìpàdé tàbí àkókò ìbáṣepọ̀, yan Àwọn ọ̀rẹ́ lábẹ́ "Ta ló lè rí èyí", kí o sì sọ iye ènìyàn tó lè darapọ̀. Àwọn ọ̀rẹ́ ń darapọ̀ pẹ̀lú ìtẹ̀ kan, àwọn ètò tí wọ́n pín yóò sì hàn ní ojú-ìwé yìí àti ní Òní.
+1279	Ètò yìí ti kún.
+1280	Ṣètò ìpàdé ìgbaniníyànjú àti àkókò ìbáṣepọ̀, kí o sì pín wọn pẹ̀lú àwọn ọ̀rẹ́, tí wọ́n lè darapọ̀ pẹ̀lú ìtẹ̀ kan. Àwọn ètò tí o pín nìkan ni àwọn ọ̀rẹ́ ń rí, kò sí ohun míràn. Ìwọ lo máa yan iye ènìyàn tó lè darapọ̀. Táǹkì ìṣúnà ìkọ̀kọ̀ rẹ ń fi iye tó kù fún ọ láti ná lóṣù yìí hàn. Shepherd ń rán ọ létí lọ́sọ̀ọ̀sẹ̀, ìṣirò ìtẹ̀lé rẹ ti ọ̀sẹ̀ sì wà níbí pẹ̀lú.

@@ -1,0 +1,32 @@
+1249	Vrienden zien alleen de plannen die je deelt. Verder niets.
+1250	§one={0} plan in Bemoedigen|other={0} plannen in Bemoedigen
+1251	§one={0} plan in Bemoedigen|other={0} plannen in Bemoedigen
+1252	{0} van {1} gaan mee
+1253	Vol
+1254	§one=Er kan nog {0} ander meedoen|other=Er kunnen maximaal {0} anderen meedoen
+1255	§one=Er kan nog {0} ander meedoen|other=Er kunnen maximaal {0} anderen meedoen
+1256	Hoeveel anderen kunnen meedoen
+1257	Geen limiet
+1258	Met plek voor maar 1 kan een vriend onder de 18 niet meedoen: voor een plan met een volwassene en iemand onder de 18 zijn 3 of meer mensen nodig.
+1259	Van je vrienden
+1260	Geen van je vrienden heeft binnenkort een plan. Wees de eerste: plan een bemoedigingsafspraak of iets samen en deel het.
+1261	Voeg vrienden toe om te zien wat ze plannen, en plan dan een bemoedigingsafspraak of iets samen om te delen.
+1262	Een afspraak plannen
+1263	Vrienden toevoegen
+1264	Alles bekijken in Bemoedigen
+1265	En nog {0} in de komende twee weken.
+1266	Nieuw in Shepherd
+1267	Vrienden heeft een eigen tabblad. Voeg vrienden toe, beantwoord verzoeken en zie wie plannen heeft.
+1268	Deel een plan vanuit Bemoedigen en vrienden doen met één tik mee. Jij kiest hoeveel er kunnen meedoen.
+1269	Een privé budgettank laat zien hoeveel je deze maand nog kunt uitgeven.
+1270	Vandaag laat zien wat eraan komt en wat je vrienden hebben gepland.
+1271	Begrepen
+1272	Vrienden heeft een eigen tabblad. Voeg vrienden toe met hun e-mailadres of vriendcode, of vanuit je kerk, en beantwoord hier verzoeken. Een getal naast een vriend betekent dat die een plan heeft gedeeld: je vindt het in Bemoedigen, waar je met één tik meedoet. Vrienden zien alleen de plannen die je deelt.
+1273	Vrienden heeft een eigen tabblad
+1274	Voeg vrienden toe met hun e-mailadres of vriendcode, of vanuit je kerk, en beantwoord hier verzoeken. Een getal naast een vriend betekent dat die een plan heeft gedeeld. Vrienden zien alleen de plannen die je deelt.
+1275	Je budgettank
+1276	Stel een maandbudget in en de tank laat zien wat je over hebt. Hij loopt leeg naarmate je plant en uitgeeft. Alleen jij ziet hem.
+1277	Een plan delen
+1278	Plan een afspraak of iets samen, kies Vrienden bij 'Wie kan dit zien' en zeg hoeveel er kunnen meedoen. Vrienden doen met één tik mee, en plannen die zij delen verschijnen op dit tabblad en bij Vandaag.
+1279	Dit plan is vol.
+1280	Plan bemoedigingsafspraken en samen iets doen, en deel ze met vrienden, die met één tik kunnen meedoen. Vrienden zien alleen de plannen die je deelt, verder niets. Jij kiest hoeveel er kunnen meedoen. Je privé budgettank laat zien wat je deze maand nog kunt uitgeven. Shepherd herinnert je er elke week aan, en je wekelijkse opvolgcijfers staan hier ook.
