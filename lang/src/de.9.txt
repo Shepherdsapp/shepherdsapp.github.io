@@ -1,0 +1,161 @@
+1085	Kostenlos
+1086	Unter {0}
+1087	Du zahlst
+1088	{0} zahlt
+1089	Kosten nicht angegeben
+1090	{0} gleichmäßig geteilt: etwa {1} pro Person
+1091	{0} gleichmäßig geteilt: etwa {1} pro Person, wenn du mitmachst
+1092	Etwa {0} pro Person
+1093	§one={0} kommt|other={0} kommen
+1094	Mit {0}
+1095	{0} verlassen
+1096	Bei {0} mitmachen
+1097	Noch {0} % deines Budgets übrig
+1098	{0} von {1} ausgegeben
+1099	Du hast {0} % des Budgets für diesen Monat verbraucht.
+1100	Dein Budgettank ist für diesen Monat leer.
+1101	§one={0} Freund sieht die Pläne, die du teilst|other={0} Freunde sehen die Pläne, die du teilst
+1102	§one={0} Freund sieht die Pläne, die du teilst|other={0} Freunde sehen die Pläne, die du teilst
+1103	Füge Freunde hinzu, um Pläne zu teilen und bei ihren mitzumachen
+1104	Dabei: {0}
+1105	Damit liegst du {0} über deinem Budget für diesen Monat.
+1106	Danach bleiben dir {0} in deinem Budget für diesen Monat.
+1107	Wähle deine Gemeinde
+1108	Andere Gemeinde hinzufügen…
+1109	Sonst ist noch niemand aus {0} bei Shepherd. Teile die App mit ihnen.
+1110	Optionen für {0}
+1111	Keine Verbindung. Versuch es noch einmal, wenn du Empfang hast.
+1112	Meldung gesendet. Danke.
+1113	Budget gespeichert
+1114	Budget entfernt
+1115	Mit deinen Freunden geteilt. Sie können mit einem Tipp mitmachen.
+1116	Gespeichert. Du bekommst Bescheid, sobald du freigegeben bist.
+1117	Gemeinde gespeichert
+1118	Ihr seid jetzt Freunde
+1119	Wenn die Person Shepherd nutzt, bekommt sie deine Anfrage.
+1120	Tank gefüllt. Er leert sich, wenn du Geld ausgibst.
+1121	Anfrage gesendet
+1122	Blockierung aufgehoben
+1123	Blockiert
+1124	Gib dein Monatsbudget als Zahl ein, zum Beispiel 40.
+1125	Bruder oder Schwester (optional)
+1126	Zum Löschen noch einmal tippen. Wer dabei ist, wird benachrichtigt.
+1127	Gib den Namen deiner Gemeinde ein.
+1128	Gib die E-Mail-Adresse oder den Freundescode ein.
+1129	Mit Freunden geteilt
+1130	Noch nicht festgelegt
+1131	Ja, wir gehen essen
+1132	Kein Essen geplant
+1133	Noch niemand
+1134	Dieser Plan öffnet sich für dich, sobald noch jemand mitmacht, damit ihr 3 oder mehr seid.
+1135	Plan bearbeiten
+1136	Du bist dabei. Der Plan steht in deinem Ermutigen-Kalender, und Shepherd erinnert dich.
+1137	Ich kann doch nicht
+1138	Problem mit diesem Plan melden
+1139	Du bist dabei. Shepherd erinnert dich.
+1140	Du bist nicht mehr dabei.
+1141	Problem melden
+1142	Erzähl uns, was passiert ist. Deine Meldung geht vertraulich an die Person, die Shepherd betreibt und Konten entfernen kann.
+1143	Was ist passiert?
+1144	Wenn jemand in Gefahr ist, ruf zuerst den Notruf.
+1145	Meldung senden
+1146	Budgettank
+1147	Das siehst nur du
+1148	Lege ein Monatsbudget für Ermutigungstreffen und Treffen fest. Dein Tank zeigt, wie viel übrig ist.
+1149	Tank füllen
+1150	über dem Budget in diesem Monat
+1151	übrig in diesem Monat
+1152	Dein Tank ist leer. Probier etwas Kostenloses, zum Beispiel einen Spaziergang.
+1153	Budget ändern
+1154	Dein Budget ist privat. Freunde sehen es nie.
+1155	Budget entfernen
+1156	Dein Konto wurde nicht freigegeben
+1157	Wartet auf Freigabe
+1158	Du kannst Shepherd weiter für dich allein nutzen. Bei Fragen schreib der Person, die Shepherd betreibt.
+1159	Die Person, die Shepherd betreibt, gibt jedes Konto von unter 18-Jährigen frei. Bis dahin kannst du Shepherd für dich allein nutzen, aber keine Freunde hinzufügen und bei keinen Plänen mitmachen.
+1160	Pläne von Freunden
+1161	Alle Pläne
+1162	Nur kostenlose
+1163	Gerade gibt es keine kostenlosen Pläne.
+1164	Noch keine Pläne von Freunden. Wenn ein Freund einen teilt, erscheint er hier und du kannst mit einem Tipp mitmachen.
+1165	Wer das sehen kann
+1166	Nur ich
+1167	Freunde sehen, was es ist, wann, wo, ob es Essen gibt, die Kosten und wer dabei ist, und können mit einem Tipp mitmachen. Sonst sehen sie nie etwas in Shepherd.
+1168	Ort (optional)
+1169	Wer zahlt
+1170	Jeder zahlt selbst
+1171	Gleichmäßig teilen
+1172	Ich zahle
+1173	Sag, was der Plan ist, damit Freunde Bescheid wissen.
+1174	Deine Gemeinde
+1175	Wähle deine Gemeinde, um dort schnell Freunde zu finden.
+1176	Konto für unter 18-Jährige, freigegeben.
+1177	Konto für unter 18-Jährige, nicht freigegeben.
+1178	Konto für unter 18-Jährige, wartet auf Freigabe.
+1179	Gemeinde ändern
+1180	Name der Gemeinde
+1181	Ich bin unter 18
+1182	Du erscheinst als deine Gemeinde mit (CAMPUS) dahinter. Die Person, die Shepherd betreibt, gibt dich frei, bevor du Freunde hinzufügen oder bei Plänen mitmachen kannst. Deine Freundesliste ist anfangs leer, und nur Menschen, die du selbst mit ihrer E-Mail-Adresse oder ihrem Freundescode hinzufügst, können deine Freunde sein.
+1183	Meintest du:
+1184	Freunde sehen nur die Pläne, die du teilst: was es ist, wann, wo, Essen, Kosten und wer dabei ist. Sie sehen nie deine Menschen, Jünger, Gebetsliste, Notizen, Telefonnummern oder dein Budget.
+1185	Dein Konto wurde nicht freigegeben, deshalb kannst du keine Freunde hinzufügen.
+1186	Du kannst Freunde hinzufügen, sobald dein Konto freigegeben ist.
+1187	Freundschaftsanfragen
+1188	Freund hinzufügen
+1189	E-Mail-Adresse oder Freundescode
+1190	Anfrage senden
+1191	Dein Freundescode:
+1192	Meinen Code kopieren
+1193	Menschen aus meiner Gemeinde
+1194	Wähle deine Gemeinde, um hier Menschen daraus zu sehen.
+1195	Als Freund hinzufügen
+1196	Deine Freunde
+1197	Noch keine Freunde. Füge jemanden per E-Mail-Adresse oder Freundescode hinzu.
+1198	Noch keine Freunde. Füge jemanden per E-Mail-Adresse oder Freundescode hinzu, oder aus deiner Gemeinde.
+1199	Anfragen, die du gesendet hast
+1200	Freundescode kopiert
+1201	Entfernen oder Blockieren ist privat. Die Person erfährt es nicht.
+1202	Freund entfernen
+1203	Zurück zu Freunden
+1204	Mitmachen
+1205	Was
+1206	Wann
+1207	Kosten
+1208	Gastgeber
+1209	Bin dabei
+1210	Blockieren
+1211	Annehmen
+1212	Gemeinde
+1213	Melden
+1214	Ablehnen
+1215	Blockierung aufheben
+1216	Später wählen
+1217	Ich bin unter 18.
+1218	Alles, was dir Sorgen gemacht hat
+1219	Du musst 13 Jahre oder älter sein, um Shepherd zu nutzen.
+1220	Ein privater Budgettank zeigt, wie viel du diesen Monat noch ausgeben kannst.
+1221	Deine Gemeinde, deine Freunde, dein Freundescode, die Pläne, bei denen du mitmachst, und dein Monatsbudget.
+1222	Freundschaften, wer bei einem Plan dabei ist, und Meldungen werden gelöscht, wenn du dein Konto löschst.
+1223	Freunde hinzuzufügen ist freiwillig. Freunde sehen nur eines: die Ermutigen-Pläne, die du teilen möchtest.
+1224	Freunde sehen nie deine Menschen, Jünger, Gebetsliste, Notizen, Telefonnummern, privaten Pläne oder dein Budget.
+1225	Du musst 13 Jahre oder älter sein. Wenn du unter 18 bist, gib das an: Dein Konto wird freigegeben, bevor du Freunde hinzufügen oder bei Plänen mitmachen kannst.
+1226	Ein geteilter Plan zeigt, was es ist, Tag und Uhrzeit, den Ort, ob es Essen gibt, die Kosten und wer zahlt, deinen Namen und wer dabei ist.
+1227	Konten von unter 18-Jährigen erscheinen als ihre Gemeinde mit (CAMPUS). Die Person, die Shepherd betreibt, bekommt ihren Namen und ihre E-Mail-Adresse per E-Mail und gibt sie zuerst frei. Erwachsene können ihnen keine Freundschaftsanfragen senden, und ein Plan zwischen einem Erwachsenen und einem unter 18-Jährigen braucht 3 oder mehr Personen.
+1228	Monatsbudget ({0})
+1229	Du erscheinst als <b>{0}</b>.
+1230	Freunde und geteilte Pläne
+1231	Wenn du eine Gemeinde wählst, können Erwachsene aus dieser Gemeinde dich über deinen Vornamen und den ersten Buchstaben deines Nachnamens finden, um eine Freundschaftsanfrage zu senden. Unter 18-Jährige werden nie aufgelistet.
+1232	Du kannst jederzeit einen Freund entfernen oder blockieren oder eine Person oder einen Plan melden. Eine Meldung geht mit deinem Namen und deiner E-Mail-Adresse an die Person, die Shepherd betreibt.
+1233	Füge nur Freunde hinzu, die du kennst, und teile nur Pläne, die sie sehen dürfen. Trefft euch an öffentlichen Orten und behandelt alle mit Respekt.
+1234	Plane Ermutigungstreffen und Treffen und teile sie mit Freunden, die mit einem Tipp mitmachen können. Dein privater Budgettank zeigt, was du diesen Monat noch ausgeben kannst. Shepherd erinnert dich jede Woche, und deine wöchentliche Nachfass-Statistik ist auch hier.
+1235	Eine wöchentliche Erinnerung, Erinnerungen vor jedem Treffen und Neuigkeiten zu Plänen von Freunden
+1236	Füge Freunde hinzu und teile einen Plan mit ihnen. Freunde sehen nur die Pläne, die du teilst, nie deine Menschen, Jünger, Gebetsliste, Notizen oder dein Budget. Sie machen mit einem Tipp mit, und alle, die dabei sind, werden benachrichtigt.
+1237	Wähle eine Gemeinde aus der Liste.
+1238	Dieser Plan ist nicht mehr offen.
+1239	Das ist dein eigener Plan.
+1240	Um das zu ändern, schreib an {0}.
+1241	Du kannst nur bei Plänen deiner Freunde mitmachen.
+1242	Dein Konto wartet auf Freigabe.
+1243	Gib den Namen deiner Gemeinde ein
+1244	Entfernt
+1245	Wer dabei ist

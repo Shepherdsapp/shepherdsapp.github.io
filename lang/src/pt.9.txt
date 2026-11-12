@@ -1,0 +1,161 @@
+1085	Grátis
+1086	Menos de {0}
+1087	Você paga
+1088	{0} paga
+1089	Custo não informado
+1090	{0} dividido igualmente: cerca de {1} para cada um
+1091	{0} dividido igualmente: cerca de {1} para cada um se você participar
+1092	Cerca de {0} para cada um
+1093	§one={0} vai|other={0} vão
+1094	Com {0}
+1095	Sair de {0}
+1096	Participar de {0}
+1097	Resta {0}% do seu orçamento
+1098	{0} gastos de {1}
+1099	Você usou {0}% do orçamento deste mês.
+1100	Seu tanque de orçamento está vazio neste mês.
+1101	§one={0} amigo vê os planos que você compartilha|other={0} amigos veem os planos que você compartilha
+1102	§one={0} amigo vê os planos que você compartilha|other={0} amigos veem os planos que você compartilha
+1103	Adicione amigos para compartilhar planos e participar dos deles
+1104	Vão: {0}
+1105	Com isso você passa {0} do orçamento daquele mês.
+1106	Com isso sobram {0} no orçamento daquele mês.
+1107	Escolha sua igreja
+1108	Adicionar outra igreja…
+1109	Ninguém mais de {0} está no Shepherd ainda. Compartilhe o app com eles.
+1110	Opções de {0}
+1111	Sem conexão. Tente de novo quando tiver sinal.
+1112	Denúncia enviada. Obrigado.
+1113	Orçamento salvo
+1114	Orçamento removido
+1115	Compartilhado com seus amigos. Eles podem participar com um toque.
+1116	Salvo. Você será avisado quando for aprovado.
+1117	Igreja salva
+1118	Agora vocês são amigos
+1119	Se a pessoa usa o Shepherd, vai receber seu pedido.
+1120	Tanque cheio. Ele esvazia conforme você gasta.
+1121	Pedido enviado
+1122	Desbloqueado
+1123	Bloqueado
+1124	Digite seu orçamento mensal como um número, por exemplo 40.
+1125	Irmão ou irmã (opcional)
+1126	Toque de novo para excluir. Quem vai será avisado.
+1127	Digite o nome da sua igreja.
+1128	Digite o e-mail ou o código de amigo da pessoa.
+1129	Compartilhado com amigos
+1130	Ainda não definido
+1131	Sim, vamos comer
+1132	Sem comida planejada
+1133	Ninguém ainda
+1134	Este plano abre para você quando mais alguém participar, para que sejam 3 pessoas ou mais.
+1135	Editar plano
+1136	Você vai. Está no seu calendário de Encorajar, e o Shepherd vai lembrar você.
+1137	Não vou poder ir
+1138	Denunciar um problema com este plano
+1139	Você vai. O Shepherd vai lembrar você.
+1140	Você não vai mais.
+1141	Denunciar um problema
+1142	Conte o que aconteceu. Sua denúncia vai em particular para a pessoa que cuida do Shepherd, que pode remover contas.
+1143	O que aconteceu?
+1144	Se alguém estiver em perigo, ligue primeiro para a emergência.
+1145	Enviar denúncia
+1146	Tanque de orçamento
+1147	Só você vê isto
+1148	Defina um orçamento mensal para encontros de encorajamento e encontros. Seu tanque mostra quanto resta.
+1149	Encher o tanque
+1150	acima do orçamento neste mês
+1151	restantes neste mês
+1152	Seu tanque está vazio. Tente algo grátis, como uma caminhada.
+1153	Alterar orçamento
+1154	Seu orçamento é particular. Seus amigos nunca o veem.
+1155	Remover orçamento
+1156	Sua conta não foi aprovada
+1157	Aguardando aprovação
+1158	Você pode continuar usando o Shepherd sozinho. Em caso de dúvidas, escreva para a pessoa que cuida do Shepherd.
+1159	A pessoa que cuida do Shepherd aprova cada conta de menor de 18 anos. Até lá você pode usar o Shepherd sozinho, mas não pode adicionar amigos nem participar de planos.
+1160	Planos de amigos
+1161	Todos os planos
+1162	Só grátis
+1163	Nenhum plano grátis no momento.
+1164	Ainda não há planos de amigos. Quando um amigo compartilhar um, ele aparece aqui e você pode participar com um toque.
+1165	Quem pode ver isto
+1166	Só eu
+1167	Seus amigos veem o que é, quando, onde, se tem comida, o custo e quem vai, e podem participar com um toque. Eles nunca veem mais nada no Shepherd.
+1168	Onde (opcional)
+1169	Quem paga
+1170	Cada um paga o seu
+1171	Dividir igualmente
+1172	Eu pago
+1173	Diga qual é o plano, para seus amigos saberem.
+1174	Sua igreja
+1175	Escolha sua igreja para encontrar amigos dela rapidamente.
+1176	Conta de menor de 18 anos, aprovada.
+1177	Conta de menor de 18 anos, não aprovada.
+1178	Conta de menor de 18 anos, aguardando aprovação.
+1179	Trocar de igreja
+1180	Nome da igreja
+1181	Tenho menos de 18 anos
+1182	Você vai aparecer como sua igreja seguida de (CAMPUS). A pessoa que cuida do Shepherd aprova você antes de você poder adicionar amigos ou participar de planos. Sua lista de amigos começa vazia, e só as pessoas que você mesmo adicionar, com o e-mail ou o código de amigo delas, podem ser seus amigos.
+1183	Você quis dizer:
+1184	Seus amigos só veem os planos que você compartilha: o que é, quando, onde, comida, custo e quem vai. Eles nunca veem suas Pessoas, Discípulos, lista de oração, notas, números de telefone nem orçamento.
+1185	Sua conta não foi aprovada, então você não pode adicionar amigos.
+1186	Você poderá adicionar amigos quando sua conta for aprovada.
+1187	Pedidos de amizade
+1188	Adicionar um amigo
+1189	E-mail ou código de amigo da pessoa
+1190	Enviar pedido
+1191	Seu código de amigo:
+1192	Copiar meu código
+1193	Pessoas da minha igreja
+1194	Escolha sua igreja para ver aqui as pessoas dela.
+1195	Adicionar amigo
+1196	Seus amigos
+1197	Nenhum amigo ainda. Adicione alguém pelo e-mail ou código de amigo.
+1198	Nenhum amigo ainda. Adicione alguém pelo e-mail ou código de amigo, ou pela sua igreja.
+1199	Pedidos que você enviou
+1200	Código de amigo copiado
+1201	Remover ou bloquear é particular. A pessoa não é avisada.
+1202	Remover amigo
+1203	Voltar para amigos
+1204	Participar
+1205	O quê
+1206	Quando
+1207	Custo
+1208	Anfitrião
+1209	Vou
+1210	Bloquear
+1211	Aceitar
+1212	Igreja
+1213	Denunciar
+1214	Recusar
+1215	Desbloquear
+1216	Escolher depois
+1217	Tenho menos de 18 anos.
+1218	O que preocupou você
+1219	Você precisa ter 13 anos ou mais para usar o Shepherd.
+1220	Um tanque de orçamento particular mostra quanto você ainda tem para gastar neste mês.
+1221	Sua igreja, seus amigos, seu código de amigo, os planos de que você participa e seu orçamento mensal.
+1222	Amizades, quem vai a um plano e denúncias são excluídos quando você exclui sua conta.
+1223	Adicionar amigos é opcional. Os amigos veem uma coisa só: os planos de Encorajar que você escolhe compartilhar.
+1224	Os amigos nunca veem suas Pessoas, Discípulos, lista de oração, notas, números de telefone, planos particulares nem orçamento.
+1225	Você precisa ter 13 anos ou mais. Se tiver menos de 18, diga: sua conta é aprovada antes de você poder adicionar amigos ou participar de planos.
+1226	Um plano compartilhado mostra o que é, o dia e a hora, o lugar, se tem comida, o custo e quem paga, seu nome e quem vai.
+1227	As contas de menores de 18 anos aparecem como a igreja deles com (CAMPUS). A pessoa que cuida do Shepherd recebe por e-mail o nome e o endereço de e-mail deles e os aprova primeiro. Adultos não podem enviar pedidos de amizade a eles, e um plano entre um adulto e um menor de 18 anos precisa de 3 pessoas ou mais.
+1228	Orçamento mensal ({0})
+1229	Você aparece como <b>{0}</b>.
+1230	Amigos e planos compartilhados
+1231	Se você escolher uma igreja, os adultos dessa igreja podem encontrar você pelo primeiro nome e pela inicial do sobrenome, para enviar um pedido de amizade. Menores de 18 anos nunca são listados.
+1232	Você pode remover ou bloquear um amigo, ou denunciar uma pessoa ou um plano, a qualquer momento. A denúncia vai para a pessoa que cuida do Shepherd com seu nome e endereço de e-mail.
+1233	Adicione só amigos que você conhece e compartilhe só os planos que você aceita que eles vejam. Encontrem-se em lugares públicos e tratem todos com respeito.
+1234	Planeje encontros de encorajamento e encontros, e compartilhe-os com amigos, que podem participar com um toque. Seu tanque de orçamento particular mostra quanto você ainda tem para gastar neste mês. O Shepherd lembra você toda semana, e suas estatísticas semanais de acompanhamento também estão aqui.
+1235	Um lembrete semanal, lembretes antes de cada encontro e novidades dos planos dos amigos
+1236	Adicione amigos e compartilhe um plano com eles. Os amigos só veem os planos que você compartilha, nunca suas Pessoas, Discípulos, lista de oração, notas nem orçamento. Eles participam com um toque, e todos os que vão são avisados.
+1237	Escolha uma igreja da lista.
+1238	Esse plano não está mais aberto.
+1239	Este é o seu próprio plano.
+1240	Para mudar isso, escreva para {0}.
+1241	Você só pode participar de planos dos seus amigos.
+1242	Sua conta está aguardando aprovação.
+1243	Digite o nome da sua igreja
+1244	Removido
+1245	Quem vai

@@ -1,0 +1,161 @@
+1085	Gratis
+1086	Minder dan {0}
+1087	Jij betaalt
+1088	{0} betaalt
+1089	Kosten niet ingevuld
+1090	{0} gelijk verdeeld: ongeveer {1} per persoon
+1091	{0} gelijk verdeeld: ongeveer {1} per persoon als je meedoet
+1092	Ongeveer {0} per persoon
+1093	§one={0} gaat|other={0} gaan
+1094	Met {0}
+1095	{0} verlaten
+1096	Meedoen met {0}
+1097	Nog {0}% van je budget over
+1098	{0} uitgegeven van {1}
+1099	Je hebt {0}% van het budget van deze maand gebruikt.
+1100	Je budgettank is leeg voor deze maand.
+1101	§one={0} vriend ziet de plannen die je deelt|other={0} vrienden zien de plannen die je deelt
+1102	§one={0} vriend ziet de plannen die je deelt|other={0} vrienden zien de plannen die je deelt
+1103	Voeg vrienden toe om plannen te delen en met die van hen mee te doen
+1104	Gaan mee: {0}
+1105	Hiermee ga je {0} over je budget voor die maand.
+1106	Hierna houd je {0} over in je budget voor die maand.
+1107	Kies je kerk
+1108	Een andere kerk toevoegen…
+1109	Verder zit er nog niemand van {0} op Shepherd. Deel de app met hen.
+1110	Opties voor {0}
+1111	Geen verbinding. Probeer het opnieuw als je bereik hebt.
+1112	Melding verstuurd. Dank je wel.
+1113	Budget opgeslagen
+1114	Budget verwijderd
+1115	Gedeeld met je vrienden. Ze kunnen met één tik meedoen.
+1116	Opgeslagen. Je krijgt bericht zodra je bent goedgekeurd.
+1117	Kerk opgeslagen
+1118	Jullie zijn nu vrienden
+1119	Als diegene Shepherd gebruikt, krijgt die je verzoek.
+1120	Tank gevuld. Hij loopt leeg naarmate je uitgeeft.
+1121	Verzoek verstuurd
+1122	Deblokkeerd
+1123	Geblokkeerd
+1124	Typ je maandbudget als getal, bijvoorbeeld 40.
+1125	Broer of zus (optioneel)
+1126	Tik nog eens om te verwijderen. Wie meegaat krijgt bericht.
+1127	Typ de naam van je kerk.
+1128	Typ het e-mailadres of de vriendcode.
+1129	Gedeeld met vrienden
+1130	Nog niet ingevuld
+1131	Ja, we gaan eten
+1132	Geen eten gepland
+1133	Nog niemand
+1134	Dit plan gaat voor jou open zodra er nog iemand meedoet, zodat jullie met 3 of meer zijn.
+1135	Plan bewerken
+1136	Je gaat mee. Het staat in je Bemoedigen-kalender en Shepherd herinnert je eraan.
+1137	Ik kan toch niet
+1138	Een probleem met dit plan melden
+1139	Je gaat mee. Shepherd herinnert je eraan.
+1140	Je gaat niet meer mee.
+1141	Een probleem melden
+1142	Vertel wat er is gebeurd. Je melding gaat privé naar de persoon die Shepherd beheert, die accounts kan verwijderen.
+1143	Wat is er gebeurd?
+1144	Is iemand in gevaar, bel dan eerst de hulpdiensten.
+1145	Melding versturen
+1146	Budgettank
+1147	Alleen jij ziet dit
+1148	Stel een maandbudget in voor bemoedigingsafspraken en samen iets doen. Je tank laat zien hoeveel er over is.
+1149	De tank vullen
+1150	over het budget deze maand
+1151	over deze maand
+1152	Je tank is leeg. Probeer iets gratis, zoals een wandeling.
+1153	Budget wijzigen
+1154	Je budget is privé. Vrienden zien het nooit.
+1155	Budget verwijderen
+1156	Je account is niet goedgekeurd
+1157	Wacht op goedkeuring
+1158	Je kunt Shepherd zelf blijven gebruiken. Heb je vragen, mail dan de persoon die Shepherd beheert.
+1159	De persoon die Shepherd beheert keurt elk account van iemand onder de 18 goed. Tot die tijd kun je Shepherd zelf gebruiken, maar geen vrienden toevoegen of met plannen meedoen.
+1160	Plannen van vrienden
+1161	Alle plannen
+1162	Alleen gratis
+1163	Op dit moment geen gratis plannen.
+1164	Nog geen plannen van vrienden. Als een vriend er een deelt, verschijnt het hier en kun je met één tik meedoen.
+1165	Wie kan dit zien
+1166	Alleen ik
+1167	Vrienden zien wat het is, wanneer, waar, of er eten is, de kosten en wie er meegaat, en kunnen met één tik meedoen. Ze zien nooit iets anders in Shepherd.
+1168	Waar (optioneel)
+1169	Wie betaalt
+1170	Ieder betaalt voor zichzelf
+1171	Gelijk verdelen
+1172	Ik betaal
+1173	Zeg wat het plan is, zodat vrienden het weten.
+1174	Je kerk
+1175	Kies je kerk om er snel vrienden uit te vinden.
+1176	Account van iemand onder de 18, goedgekeurd.
+1177	Account van iemand onder de 18, niet goedgekeurd.
+1178	Account van iemand onder de 18, wacht op goedkeuring.
+1179	Andere kerk kiezen
+1180	Naam van de kerk
+1181	Ik ben jonger dan 18
+1182	Je wordt getoond als je kerk met (CAMPUS) erachter. De persoon die Shepherd beheert keurt je goed voordat je vrienden kunt toevoegen of met plannen kunt meedoen. Je vriendenlijst begint leeg, en alleen mensen die je zelf toevoegt, met hun e-mailadres of vriendcode, kunnen je vrienden zijn.
+1183	Bedoelde je:
+1184	Vrienden zien alleen de plannen die je deelt: wat het is, wanneer, waar, eten, kosten en wie er meegaat. Ze zien nooit je Mensen, Discipelen, gebedslijst, notities, telefoonnummers of budget.
+1185	Je account is niet goedgekeurd, dus je kunt geen vrienden toevoegen.
+1186	Je kunt vrienden toevoegen zodra je account is goedgekeurd.
+1187	Vriendschapsverzoeken
+1188	Een vriend toevoegen
+1189	Hun e-mailadres of vriendcode
+1190	Verzoek versturen
+1191	Je vriendcode:
+1192	Mijn code kopiëren
+1193	Mensen uit mijn kerk
+1194	Kies je kerk om hier de mensen ervan te zien.
+1195	Vriend toevoegen
+1196	Je vrienden
+1197	Nog geen vrienden. Voeg iemand toe met een e-mailadres of vriendcode.
+1198	Nog geen vrienden. Voeg iemand toe met een e-mailadres of vriendcode, of vanuit je kerk.
+1199	Verzoeken die je hebt verstuurd
+1200	Vriendcode gekopieerd
+1201	Verwijderen of blokkeren is privé. De ander krijgt geen bericht.
+1202	Vriend verwijderen
+1203	Terug naar vrienden
+1204	Meedoen
+1205	Wat
+1206	Wanneer
+1207	Kosten
+1208	Organisator
+1209	Ik ga mee
+1210	Blokkeren
+1211	Accepteren
+1212	Kerk
+1213	Melden
+1214	Afwijzen
+1215	Deblokkeren
+1216	Later kiezen
+1217	Ik ben jonger dan 18.
+1218	Wat je zorgen baarde
+1219	Je moet 13 jaar of ouder zijn om Shepherd te gebruiken.
+1220	Een privé budgettank laat zien hoeveel je deze maand nog kunt uitgeven.
+1221	Je kerk, je vrienden, je vriendcode, de plannen waaraan je meedoet en je maandbudget.
+1222	Vriendschappen, wie er met een plan meegaat en meldingen worden verwijderd wanneer je je account verwijdert.
+1223	Vrienden toevoegen is optioneel. Vrienden zien maar één ding: de Bemoedigen-plannen die je ervoor kiest te delen.
+1224	Vrienden zien nooit je Mensen, Discipelen, gebedslijst, notities, telefoonnummers, privéplannen of budget.
+1225	Je moet 13 jaar of ouder zijn. Ben je jonger dan 18, zeg dat dan: je account wordt goedgekeurd voordat je vrienden kunt toevoegen of met plannen kunt meedoen.
+1226	Een gedeeld plan laat zien wat het is, de dag en tijd, de plek, of er eten is, de kosten en wie betaalt, je naam en wie er meegaat.
+1227	Accounts van mensen onder de 18 worden getoond als hun kerk met (CAMPUS). De persoon die Shepherd beheert krijgt hun naam en e-mailadres gemaild en keurt hen eerst goed. Volwassenen kunnen hun geen vriendschapsverzoeken sturen, en voor een plan tussen een volwassene en iemand onder de 18 zijn 3 of meer mensen nodig.
+1228	Maandbudget ({0})
+1229	Je wordt getoond als <b>{0}</b>.
+1230	Vrienden en gedeelde plannen
+1231	Als je een kerk kiest, kunnen volwassenen uit die kerk je vinden op je voornaam en de eerste letter van je achternaam, om een vriendschapsverzoek te sturen. Mensen onder de 18 staan nooit in de lijst.
+1232	Je kunt op elk moment een vriend verwijderen of blokkeren, of een persoon of plan melden. Een melding gaat naar de persoon die Shepherd beheert, met je naam en e-mailadres.
+1233	Voeg alleen vrienden toe die je kent en deel alleen plannen die zij mogen zien. Spreek af op openbare plekken en behandel iedereen met respect.
+1234	Plan bemoedigingsafspraken en samen iets doen, en deel ze met vrienden, die met één tik kunnen meedoen. Je privé budgettank laat zien wat je deze maand nog kunt uitgeven. Shepherd herinnert je er elke week aan, en je wekelijkse opvolgcijfers staan hier ook.
+1235	Een wekelijkse herinnering, herinneringen voor elke afspraak en nieuws over plannen van vrienden
+1236	Voeg vrienden toe en deel een plan met hen. Vrienden zien alleen de plannen die je deelt, nooit je Mensen, Discipelen, gebedslijst, notities of budget. Ze doen met één tik mee, en iedereen die meegaat krijgt bericht.
+1237	Kies een kerk uit de lijst.
+1238	Dat plan is niet meer open.
+1239	Dit is je eigen plan.
+1240	Mail {0} om dit te wijzigen.
+1241	Je kunt alleen meedoen met plannen van je vrienden.
+1242	Je account wacht op goedkeuring.
+1243	Typ de naam van je kerk
+1244	Verwijderd
+1245	Wie gaat er mee

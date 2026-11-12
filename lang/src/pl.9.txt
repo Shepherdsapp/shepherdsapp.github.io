@@ -1,0 +1,161 @@
+1085	Za darmo
+1086	Poniżej {0}
+1087	Ty płacisz
+1088	Płaci {0}
+1089	Koszt nie podany
+1090	{0} po równo: około {1} na osobę
+1091	{0} po równo: około {1} na osobę, jeśli dołączysz
+1092	Około {0} na osobę
+1093	§one={0} osoba idzie|few={0} osoby idą|many={0} osób idzie|other={0} osoby idzie
+1094	Z: {0}
+1095	Opuść: {0}
+1096	Dołącz: {0}
+1097	Zostało {0}% twojego budżetu
+1098	Wydano {0} z {1}
+1099	Wykorzystano {0}% budżetu na ten miesiąc.
+1100	Twój zbiornik budżetu jest pusty w tym miesiącu.
+1101	§one={0} przyjaciel widzi plany, które udostępniasz|few={0} przyjaciele widzą plany, które udostępniasz|many={0} przyjaciół widzi plany, które udostępniasz|other={0} przyjaciela widzi plany, które udostępniasz
+1102	§one={0} przyjaciel widzi plany, które udostępniasz|few={0} przyjaciele widzą plany, które udostępniasz|many={0} przyjaciół widzi plany, które udostępniasz|other={0} przyjaciela widzi plany, które udostępniasz
+1103	Dodaj przyjaciół, aby udostępniać plany i dołączać do ich planów
+1104	Idą: {0}
+1105	To przekracza twój budżet na ten miesiąc o {0}.
+1106	Po tym zostanie ci {0} w budżecie na ten miesiąc.
+1107	Wybierz swój kościół
+1108	Dodaj inny kościół…
+1109	Nikt inny z {0} nie korzysta jeszcze z Shepherd. Udostępnij im aplikację.
+1110	Opcje: {0}
+1111	Brak połączenia. Spróbuj ponownie, gdy będziesz mieć zasięg.
+1112	Zgłoszenie wysłane. Dziękujemy.
+1113	Budżet zapisany
+1114	Budżet usunięty
+1115	Udostępniono przyjaciołom. Mogą dołączyć jednym dotknięciem.
+1116	Zapisano. Damy ci znać, gdy konto zostanie zatwierdzone.
+1117	Kościół zapisany
+1118	Jesteście teraz przyjaciółmi
+1119	Jeśli ta osoba korzysta z Shepherd, dostanie twoje zaproszenie.
+1120	Zbiornik napełniony. Opróżnia się, gdy wydajesz.
+1121	Zaproszenie wysłane
+1122	Odblokowano
+1123	Zablokowano
+1124	Wpisz miesięczny budżet jako liczbę, na przykład 40.
+1125	Brat lub siostra (opcjonalnie)
+1126	Dotknij ponownie, aby usunąć. Osoby, które idą, zostaną powiadomione.
+1127	Wpisz nazwę swojego kościoła.
+1128	Wpisz e-mail lub kod przyjaciela tej osoby.
+1129	Udostępnione przyjaciołom
+1130	Jeszcze nie ustalono
+1131	Tak, idziemy coś zjeść
+1132	Bez jedzenia
+1133	Jeszcze nikt
+1134	Ten plan otworzy się dla ciebie, gdy dołączy ktoś jeszcze, tak aby były 3 osoby lub więcej.
+1135	Edytuj plan
+1136	Idziesz. Plan jest w twoim kalendarzu Zachęty, a Shepherd ci przypomni.
+1137	Nie dam rady
+1138	Zgłoś problem z tym planem
+1139	Idziesz. Shepherd ci przypomni.
+1140	Już nie idziesz.
+1141	Zgłoś problem
+1142	Napisz, co się stało. Twoje zgłoszenie trafi prywatnie do osoby, która prowadzi Shepherd i może usuwać konta.
+1143	Co się stało?
+1144	Jeśli komuś grozi niebezpieczeństwo, najpierw zadzwoń na numer alarmowy.
+1145	Wyślij zgłoszenie
+1146	Zbiornik budżetu
+1147	Widzisz to tylko ty
+1148	Ustaw miesięczny budżet na spotkania zachęty i wspólne wyjścia. Zbiornik pokazuje, ile zostało.
+1149	Napełnij zbiornik
+1150	ponad budżet w tym miesiącu
+1151	zostało w tym miesiącu
+1152	Twój zbiornik jest pusty. Spróbuj czegoś za darmo, na przykład spaceru.
+1153	Zmień budżet
+1154	Twój budżet jest prywatny. Przyjaciele nigdy go nie widzą.
+1155	Usuń budżet
+1156	Twoje konto nie zostało zatwierdzone
+1157	Czeka na zatwierdzenie
+1158	Możesz dalej korzystać z Shepherd samodzielnie. W razie pytań napisz do osoby, która prowadzi Shepherd.
+1159	Osoba, która prowadzi Shepherd, zatwierdza każde konto osoby poniżej 18 lat. Do tego czasu możesz korzystać z Shepherd samodzielnie, ale nie możesz dodawać przyjaciół ani dołączać do planów.
+1160	Plany przyjaciół
+1161	Wszystkie plany
+1162	Tylko darmowe
+1163	Teraz nie ma darmowych planów.
+1164	Nie ma jeszcze planów od przyjaciół. Gdy przyjaciel udostępni plan, pojawi się tutaj i dołączysz jednym dotknięciem.
+1165	Kto może to zobaczyć
+1166	Tylko ja
+1167	Przyjaciele widzą, co to jest, kiedy, gdzie, czy będzie jedzenie, koszt i kto idzie, i mogą dołączyć jednym dotknięciem. Nigdy nie widzą niczego innego w Shepherd.
+1168	Gdzie (opcjonalnie)
+1169	Kto płaci
+1170	Każdy płaci za siebie
+1171	Po równo
+1172	Ja płacę
+1173	Napisz, jaki to plan, żeby przyjaciele wiedzieli.
+1174	Twój kościół
+1175	Wybierz swój kościół, aby szybko znaleźć w nim przyjaciół.
+1176	Konto osoby poniżej 18 lat, zatwierdzone.
+1177	Konto osoby poniżej 18 lat, niezatwierdzone.
+1178	Konto osoby poniżej 18 lat, czeka na zatwierdzenie.
+1179	Zmień kościół
+1180	Nazwa kościoła
+1181	Mam mniej niż 18 lat
+1182	Będziesz widoczny jako twój kościół z dopiskiem (CAMPUS). Osoba, która prowadzi Shepherd, zatwierdza cię, zanim będziesz mógł dodawać przyjaciół lub dołączać do planów. Twoja lista przyjaciół zaczyna się pusta, a twoimi przyjaciółmi mogą być tylko osoby, które dodasz samodzielnie, podając ich e-mail lub kod przyjaciela.
+1183	Czy chodziło ci o:
+1184	Przyjaciele widzą tylko plany, które udostępniasz: co to jest, kiedy, gdzie, jedzenie, koszt i kto idzie. Nigdy nie widzą twoich Ludzi, Uczniów, listy modlitewnej, notatek, numerów telefonów ani budżetu.
+1185	Twoje konto nie zostało zatwierdzone, więc nie możesz dodawać przyjaciół.
+1186	Możesz dodawać przyjaciół, gdy twoje konto zostanie zatwierdzone.
+1187	Zaproszenia do przyjaciół
+1188	Dodaj przyjaciela
+1189	E-mail lub kod przyjaciela tej osoby
+1190	Wyślij zaproszenie
+1191	Twój kod przyjaciela:
+1192	Skopiuj mój kod
+1193	Ludzie z mojego kościoła
+1194	Wybierz swój kościół, aby zobaczyć tutaj osoby z niego.
+1195	Dodaj do przyjaciół
+1196	Twoi przyjaciele
+1197	Nie masz jeszcze przyjaciół. Dodaj kogoś, podając e-mail lub kod przyjaciela.
+1198	Nie masz jeszcze przyjaciół. Dodaj kogoś, podając e-mail lub kod przyjaciela, albo ze swojego kościoła.
+1199	Wysłane zaproszenia
+1200	Skopiowano kod przyjaciela
+1201	Usunięcie lub zablokowanie jest prywatne. Ta osoba nie dostaje powiadomienia.
+1202	Usuń przyjaciela
+1203	Wróć do przyjaciół
+1204	Dołącz
+1205	Co
+1206	Kiedy
+1207	Koszt
+1208	Organizator
+1209	Idę
+1210	Zablokuj
+1211	Akceptuj
+1212	Kościół
+1213	Zgłoś
+1214	Odrzuć
+1215	Odblokuj
+1216	Wybiorę później
+1217	Mam mniej niż 18 lat.
+1218	Wszystko, co cię zaniepokoiło
+1219	Aby korzystać z Shepherd, musisz mieć co najmniej 13 lat.
+1220	Prywatny zbiornik budżetu pokazuje, ile zostało ci do wydania w tym miesiącu.
+1221	Twój kościół, twoi przyjaciele, twój kod przyjaciela, plany, do których dołączasz, i twój miesięczny budżet.
+1222	Znajomości, informacje o tym, kto idzie na plan, oraz zgłoszenia są usuwane, gdy usuwasz konto.
+1223	Dodawanie przyjaciół jest opcjonalne. Przyjaciele widzą tylko jedno: plany Zachęty, które zdecydujesz się udostępnić.
+1224	Przyjaciele nigdy nie widzą twoich Ludzi, Uczniów, listy modlitewnej, notatek, numerów telefonów, prywatnych planów ani budżetu.
+1225	Musisz mieć co najmniej 13 lat. Jeśli masz mniej niż 18 lat, zaznacz to: twoje konto zostanie zatwierdzone, zanim będziesz mógł dodawać przyjaciół lub dołączać do planów.
+1226	Udostępniony plan pokazuje, co to jest, dzień i godzinę, miejsce, czy będzie jedzenie, koszt i kto płaci, twoje imię i nazwisko oraz kto idzie.
+1227	Konta osób poniżej 18 lat są widoczne jako ich kościół z dopiskiem (CAMPUS). Osoba, która prowadzi Shepherd, dostaje e-mailem ich imię i nazwisko oraz adres e-mail i najpierw je zatwierdza. Dorośli nie mogą wysyłać im zaproszeń do przyjaciół, a plan między dorosłym a osobą poniżej 18 lat wymaga 3 lub więcej osób.
+1228	Miesięczny budżet ({0})
+1229	Jesteś widoczny jako <b>{0}</b>.
+1230	Przyjaciele i udostępnione plany
+1231	Jeśli wybierzesz kościół, dorośli z tego kościoła mogą cię znaleźć po imieniu i pierwszej literze nazwiska, aby wysłać zaproszenie do przyjaciół. Osoby poniżej 18 lat nigdy nie są na liście.
+1232	W każdej chwili możesz usunąć lub zablokować przyjaciela albo zgłosić osobę lub plan. Zgłoszenie trafia do osoby, która prowadzi Shepherd, z twoim imieniem i nazwiskiem oraz adresem e-mail.
+1233	Dodawaj tylko przyjaciół, których znasz, i udostępniaj tylko te plany, które mogą zobaczyć. Spotykajcie się w miejscach publicznych i traktujcie wszystkich z szacunkiem.
+1234	Planuj spotkania zachęty i wspólne wyjścia i udostępniaj je przyjaciołom, którzy mogą dołączyć jednym dotknięciem. Twój prywatny zbiornik budżetu pokazuje, ile zostało ci do wydania w tym miesiącu. Shepherd przypomina ci co tydzień, a twoje tygodniowe statystyki kontaktów też są tutaj.
+1235	Cotygodniowe przypomnienie, przypomnienia przed każdym spotkaniem i wieści o planach przyjaciół
+1236	Dodaj przyjaciół i udostępnij im plan. Przyjaciele widzą tylko plany, które udostępniasz, nigdy twoich Ludzi, Uczniów, listy modlitewnej, notatek ani budżetu. Dołączają jednym dotknięciem, a wszyscy, którzy idą, dostają powiadomienie.
+1237	Wybierz kościół z listy.
+1238	Ten plan nie jest już otwarty.
+1239	To twój własny plan.
+1240	Aby to zmienić, napisz na {0}.
+1241	Możesz dołączać tylko do planów swoich przyjaciół.
+1242	Twoje konto czeka na zatwierdzenie.
+1243	Wpisz nazwę swojego kościoła
+1244	Usunięto
+1245	Kto idzie
