@@ -166,8 +166,9 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
 
   current = 'Tabs and About';
   {
-    const tabs = $$('.tab').map(t => t.dataset.v).join(',');
+    const tabs = $$('.tab').filter(t => !t.hidden).map(t => t.dataset.v).join(',');
     ok(tabs === 'today,people,disciples,events,encourage', 'there are 5 tabs: Today, People, Disciples, Calendar, Encourage');
+    ok($('#tabFriends') && $('#tabFriends').hidden && !$('.dock-in').classList.contains('six') && !w.document.body.classList.contains('six'), 'the Friends tab is there but hidden when friends aren\'t switched on (the Claude copy)');
     click('[data-act="settings"]'); await wait(30);
     ok($('#aboutCard') && $('#main .card').id === 'aboutCard', 'About is the first card in Settings');
     click('#aboutCard [data-v="about"]'); await wait(30);
@@ -183,7 +184,9 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     const mail = $('#aboutHelp a[href^="mailto:lostshepherdapp@gmail.com"]');
     ok(mail && $('#aboutHelp [data-act="tour"]') && $('#aboutHelp [data-act="yourdata"]'), 'About has the tour, privacy and email buttons');
     const T = w.__shepherd.TOUR;
-    ok(T.length === 18 && T[1].target === '#aboutCard' && T[6].title === 'Bring in your contacts' && T[15].view === 'encourage', 'the tour has 18 steps: About is step 2, contacts step 7, Encourage step 16');
+    ok(T.length === 19 && T[1].target === '#aboutCard' && T[6].title === 'Bring in your contacts' && T[15].view === 'encourage' && T[16].view === 'friends' && typeof T[16].only === 'function', 'the tour has 19 steps: About is step 2, contacts step 7, Encourage step 16, Friends step 17');
+    ok(w.__shepherd.tourList().length === 18 && w.__shepherd.tourList().every(x => x.view !== 'friends'), 'the Friends step is left out when friends aren\'t switched on');
+    ok(/how many can join/.test(T[15].text) && /A number next to a friend means they have shared a plan/.test(T[16].text) && /Friends only see the plans you share/.test(T[16].text), 'the tour explains the Friends tab and the limit on who can join');
     const R = w.__shepherd.tourResumeAt;
     ok(R('') === 0 && R('0') === 0 && R('1') === 2 && R('15') === 17 && R('v2:1') === 1 && R('v2:5') === 5 && R('v2:6') === 7 && R('v2:16') === 17 && R('v3:6') === 6 && R('v3:17') === 17, 'someone halfway through an older tour carries on at the same step');
     click('.tab[data-v="today"]'); await wait(30);
@@ -416,7 +419,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   ok(!$$('#main .ev').some(b => b.textContent.includes('Sunday service')), 'tomorrow\'s event stays off Today (Today is just today)');
   S().events.todayEv = { id: 'todayEv', name: 'Prayer meeting', date: ymd(Date.now()), time: '23:59', invited: [], came: [] };
   click('[data-act="tab"][data-v="people"]'); await wait(); click('[data-act="tab"][data-v="today"]'); await wait();
-  ok(byText('.sec h2', 'Events today') && $$('#evToday .ev').some(b => b.textContent.includes('Prayer meeting')), 'an event today shows on Today');
+  ok($('#comingCard') && /Coming up/.test($('#comingCard').textContent) && $$('#comingCard .comeup li').some(b => b.textContent.includes('Prayer meeting') && b.querySelector('.cu-k.cal')), 'an event today shows on Today, in Coming up, marked Calendar');
   delete S().events.todayEv;
 
   current = 'Invite an Instagram-only contact';
@@ -999,7 +1002,8 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     A.click('[data-act="tab"][data-v="events"]'); await wait();
     ok(!/Boaz Kingdom/.test(A.$('#main').textContent) && !/Mary Hangout/.test(A.$('#main').textContent), 'the Calendar tab keeps key events separate from encouragement dates');
     A.click('[data-act="tab"][data-v="today"]'); await wait();
-    ok(A.$('#encToday') && /Boaz Kingdom/.test(A.$('#encToday').textContent), 'Today shows who you\'re encouraging today');
+    ok(A.$('#comingCard') && A.$$('#comingCard .comeup li').some(l => /Boaz Kingdom/.test(l.textContent) && l.querySelector('.cu-k.enc')), 'Today shows who you\'re encouraging, in Coming up, marked Encourage');
+    ok(A.$$('#comingCard .comeup li').length <= 4 && !A.$('#frToday') && !A.$('#newsCard'), 'Coming up stays short (4 lines at most), and there is no friends card or What\'s new card without friends');
     A.click('[data-act="tab"][data-v="encourage"]'); await wait();
     A.click('[data-act="curok"]'); await wait(100);
     ok(!A.$('#curNote') && S2().profile.curSeen === true, 'the currency note goes once read');
@@ -1167,7 +1171,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     st.docs.set('data/users/u_test/profile/contacts/k2', { id: 'k2', name: 'Efua Asante', phone: '07700 900556', status: 'active', stage: 'First contact', everyDays: 3, replyState: 'me', meSince: t0, createdAt: t0, updatedAt: t0, studies: [], log: [] });
     st.docs.set('data/users/u_test/profile/events/v1', { id: 'v1', name: 'Sunday service', date: ymd(Date.now() + 864e5), time: '10:30', place: 'Main hall', invited: [], came: [] });
     const E = await open(st, { localStorage: { 'shepherd:lang': 'es' } }); await wait(200);
-    const tabs = E.$$('.tab').map(t => t.textContent.trim());
+    const tabs = E.$$('.tab').filter(t => !t.hidden).map(t => t.textContent.trim());
     ok(/^Hoy\d*\|Personas\|Discípulos\|Calendario\|Ánimo$/.test(tabs.join('|')), 'the tabs are in Spanish: ' + tabs.join(', '));
     ok(E.d.documentElement.lang === 'es', 'the page says it is in Spanish');
     ok(/Buen(os|as) (días|tardes|noches), Pavi/.test(E.$('.h1').textContent), 'greeting in Spanish, name untouched');
@@ -1329,7 +1333,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
       const tints = [...appSrc.matchAll(/--tint:(#[0-9A-Fa-f]{6});--tint-soft:(#[0-9A-Fa-f]{6})/g)].map(m => [m[1], m[2]]);
       const cats = [['#2F6440', '#D7EAD6'], ['#94402F', '#F6DCD3'], ['#245A78', '#D5E6F0'], ['#7A4F0E', '#F6E5BC'], ['#5B3A7A', '#E7DDF1'], ['#8E3456', '#F6D9E4']];
       const tc = tints.concat(cats).map(([f, b]) => ratio(f, b)).concat(tints.map(([f]) => ratio(f, '#FFFFFF')));
-      ok(tints.length === 5 && tc.every(r => r >= 4.5), '17: every tab colour is dark enough on its own background and under white text: ' + tc.map(r => r.toFixed(1)).join(', '));
+      ok(tints.length === 6 && tints.some(t => t[0] === '#1D6464') && tc.every(r => r >= 4.5), '17: every tab colour is dark enough on its own background and under white text: ' + tc.map(r => r.toFixed(1)).join(', '));
     })().catch(e => ok(false, '17: headings never skip a level, Encourage has a main heading, co — crashed: ' + e.message));
     await (async () => {
       // 11: PIN waits after 5 wrong tries, and has a "Forgot" way out

@@ -404,6 +404,7 @@ body[data-view="people"],body[data-view="contact"],body[data-view="archive"]{--t
 body[data-view="disciples"]{--tint:#94402F;--tint-soft:#F6DCD3}
 body[data-view="events"]{--tint:#245A78;--tint-soft:#D5E6F0}
 body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
+body[data-view="friends"]{--tint:#1D6464;--tint-soft:#D2EAE7}
 .vhead{position:relative;overflow:hidden;border-radius:var(--r);padding:16px 16px 14px;background:linear-gradient(135deg,var(--tint-soft) 0%,color-mix(in srgb,var(--tint-soft) 45%,var(--bg)) 100%);display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center}
 .vhead::after{content:"";position:absolute;right:-34px;top:-40px;width:130px;height:130px;border-radius:50%;background:color-mix(in srgb,var(--tint) 10%,transparent);pointer-events:none}
 .vhead .vicon{grid-row:span 2;width:46px;height:46px;border-radius:14px;background:var(--tint);color:#fff;display:grid;place-items:center;box-shadow:0 8px 18px -10px var(--tint)}
@@ -502,6 +503,24 @@ body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
 .badge2{min-width:26px;height:26px;padding:0 8px;border-radius:99px;background:var(--bad);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center}
 .chev{font-size:24px;color:var(--muted);line-height:1}
 .flist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+/* six tabs once friends are on; under 390px the labels may use two lines, in a slightly taller bar, so every word stays whole */
+.dock-in.six{grid-template-columns:repeat(6,minmax(0,1fr))}
+.tab .fbadge{position:absolute;top:8px;left:calc(50% + 8px);min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--bad);color:var(--surface);font-size:11px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+@media (max-width:389px){
+  body.six{--dock:72px}
+  .dock-in.six .tab{gap:2px;padding:0}
+  .dock-in.six .tab .tl{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.08;text-overflow:clip}
+}
+.etag.full{background:var(--bad-soft);color:var(--bad)}
+.plnum{flex:none;min-width:26px;height:26px;padding:0 8px;border-radius:99px;border:0;background:var(--tint);color:#fff;font-weight:800;font-size:13.5px;display:inline-grid;place-items:center;font-variant-numeric:tabular-nums}
+.comeup{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.comeup li+li{border-top:1px solid var(--line)}
+.comeup button{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 2px;background:none;border:0;text-align:left;min-height:48px}
+.comeup .cu-d{font-weight:800;font-size:13.5px;color:var(--tint);min-width:58px}
+.comeup .cu-t{font-weight:600;overflow-wrap:anywhere}
+.comeup .cu-k{font-size:12.5px;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.cu-k.cal{background:#D5E6F0;color:#1D4C66} .cu-k.enc{background:#F6D9E4;color:#7A2A48} .cu-k.fr{background:#D2EAE7;color:#175252}
+.newcard{background:var(--tint-soft);border-color:transparent} .newcard ul{margin:0;padding-left:20px;display:grid;gap:6px}
 .sheet .sec>.h3{margin:0;font-size:17.5px;font-weight:800;color:var(--fg)}
 .frow .ps,.pcard .ps,.frbar .ps{white-space:normal;overflow:visible;overflow-wrap:anywhere}
 .frow.tall .pm{flex-basis:100%} .frow.tall .frbtns{margin-left:0}
@@ -558,6 +577,7 @@ body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
     <button class="tab" data-act="tab" data-v="disciples"><svg class="i" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="tl">Disciples</span></button>
     <button class="tab" data-act="tab" data-v="events"><svg class="i" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m12 13 1 2 2.2.3-1.6 1.5.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.5L11 15z"/></svg><span class="tl">Calendar</span></button>
     <button class="tab" data-act="tab" data-v="encourage"><svg class="i" viewBox="0 0 24 24"><path d="M7.5 11.5 4 15a2 2 0 0 0 0 2.8l2.2 2.2a2 2 0 0 0 2.8 0l1.5-1.5"/><path d="M16.5 11.5 20 15a2 2 0 0 1 0 2.8l-2.2 2.2a2 2 0 0 1-2.8 0L12 17"/><path d="M12 9.5S8.5 7.4 8.5 5.3A1.9 1.9 0 0 1 12 4.4a1.9 1.9 0 0 1 3.5.9c0 2.1-3.5 4.2-3.5 4.2z"/><path d="M7.5 11.5 12 16l4.5-4.5"/></svg><span class="tl">Encourage</span></button>
+    <button class="tab" data-act="tab" data-v="friends" id="tabFriends" hidden><svg class="i" viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M1.500 19c.5-3 2.600-4.500 5.500-4.500 1.500 0 2.800.4 3.800 1.200M11.100 19c.5-3 2.600-4.500 5.500-4.500s5 1.500 5.500 4.500"/></svg><span class="tl">Friends</span><span class="fbadge" id="frBadge" data-noi18n hidden></span></button>
   </div>
 </nav>
 
@@ -1207,6 +1227,7 @@ var VICON = {
   people: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.8c1.6.8 2.7 2.5 3 5.2"/>',
   disciples: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
   events: '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  friends: '<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M1.500 19c.5-3 2.600-4.500 5.500-4.500 1.500 0 2.800.4 3.800 1.200M11.100 19c.5-3 2.600-4.500 5.500-4.500s5 1.500 5.500 4.500"/>',
   encourage: '<path d="M7.5 11.5 4 15a2 2 0 0 0 0 2.8l2.2 2.2a2 2 0 0 0 2.8 0l1.5-1.5"/><path d="M16.5 11.5 20 15a2 2 0 0 1 0 2.8l-2.2 2.2a2 2 0 0 1-2.8 0L12 17"/><path d="M12 9.5S8.5 7.4 8.5 5.3A1.9 1.9 0 0 1 12 4.4a1.9 1.9 0 0 1 3.5.9c0 2.1-3.5 4.2-3.5 4.2z"/><path d="M7.5 11.5 12 16l4.5-4.5"/>'
 };
 function vhead(v, title, lede, eyebrow) {
@@ -1491,7 +1512,7 @@ async function socLoad(force) {
     var before = JSON.stringify([SOC.me, SOC.feed]);
     SOC.me = me; SOC.feed = feed; SOC.at = Date.now();
     lsSet(socKey(), JSON.stringify({ me: me, feed: feed }));
-    if (JSON.stringify([me, feed]) !== before) { socRender(); if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Friends') friendsSheet(); }
+    if (JSON.stringify([me, feed]) !== before) { if (S.view === 'friends') loadPeople(true); socRender(); }
   } catch (e) {
     if (e && (e.status === 404 || e.code === 'not_found')) { SOC.me = null; SOC.feed = []; lsSet(socKey(), ''); } // an older server: friends stay hidden
     if (pend && e && e.status === 400) lsSet('shepherd:pendingSocial', '');
@@ -1501,6 +1522,18 @@ async function socDo(path, body, okMsg) {
   try { var r = await WEB.api('POST', '/api/social/' + path, body || {}); if (okMsg) toast(okMsg); SOC.at = 0; await socLoad(true); return r || {}; }
   catch (e) { toast(e && e.code === 'unavailable' ? 'No connection. Try again when you have signal.' : (e && e.message) || 'Something went wrong. Try again.'); return null; }
 }
+/* people from my church (adults only), fetched when the Friends tab opens */
+async function loadPeople(force) {
+  var m = SOC.me; if (!socOn() || !m.approved || !m.church || m.minor) { SOC.people = []; return; }
+  if (!force && SOC.people && Date.now() - (SOC.peopleAt || 0) < 60000) return;
+  try { var p = (await WEB.api('GET', '/api/social/people')).people || []; var ch = JSON.stringify(p) !== JSON.stringify(SOC.people || null); SOC.people = p; SOC.peopleAt = Date.now(); if (ch && S.view === 'friends') socRender(); } catch (e) {}
+}
+/* which shared plans have been looked at, so the Friends tab can count the new ones */
+function upcomingFriendPlans() { var td = ymd(Date.now()); return friendPlans().filter(function (p) { return p.date >= td; }); }
+function seenPlans() { try { return JSON.parse(lsGet('shepherd:seenplans:' + (S.uid || 'local')) || '[]'); } catch (e) { return []; } }
+function seenPlansMark() { var k = upcomingFriendPlans().map(function (p) { return p.host + '/' + p.id; }); if (k.join() !== seenPlans().join()) lsSet('shepherd:seenplans:' + (S.uid || 'local'), JSON.stringify(k)); }
+function friendNews() { if (!socOn()) return 0; var seen = seenPlans(); return ((SOC.me.incoming || []).length) + upcomingFriendPlans().filter(function (p) { return seen.indexOf(p.host + '/' + p.id) < 0; }).length; }
+function plansBy(id) { return upcomingFriendPlans().filter(function (p) { return p.host === id; }).length; }
 function friendPlans() { return socCan() ? SOC.feed.filter(function (p) { return !p.mine; }) : []; }
 function joinedPlans() { return friendPlans().filter(function (p) { return p.joined; }); }
 function goingTo(id) { var p = socOn() ? SOC.feed.filter(function (q) { return q.mine && q.id === id; })[0] : null; return p ? p.going : []; }
@@ -1551,16 +1584,18 @@ function encCard(x, isPast) {
   var d = new Date(parseYmd(x.date)), hang = x.type === 'hangout', shared = x.share === 'friends' && socOn(), g = shared ? goingTo(x.id).length : 0;
   return '<button class="enc' + (hang ? ' hangout' : '') + (isPast ? ' past' : '') + '" data-act="openenc" data-id="' + x.id + '"><span class="calbox"><span>' + MON[d.getMonth()] + '</span><b>' + d.getDate() + '</b></span><span class="pm"><span class="pn" data-noi18n>' + esc(x.who || x.activity || '') + '</span><span class="ps">' + esc(fmtDate(x.date)) + (x.time ? ', ' + esc(fmtClock(x.time)) : '') + (x.place ? ' · <span data-noi18n>' + esc(x.place) + '</span>' : '') + '</span>' + (x.who && x.activity ? '<span class="ps" data-noi18n>' + esc(x.activity) + '</span>' : '') +
     '<span class="tags"><span class="etag ' + (hang ? 'hangout">Hangout' : 'date">Encouragement date') + '</span>' + (x.food ? '<span class="etag food">Food</span>' : '') + (Number(x.cost) > 0 ? '<span class="etag cost" data-noi18n>' + esc(money(x.cost)) + '</span>' : '') +
-    (shared ? '<span class="etag shared">Shared with friends</span>' + (g ? '<span class="etag going" data-noi18n>' + esc(L('{0} going', g)) + '</span>' : '') : '') + '</span></span></button>';
+    (shared ? '<span class="etag shared">Shared with friends</span>' + (g || capOf(x) ? '<span class="etag going" data-noi18n>' + esc(goingText(g, capOf(x))) + '</span>' : '') : '') + '</span></span></button>';
 }
 // a friend's plan: everything you need to decide, and one tap to join
+function goingText(n, cap) { return cap ? L('{0} of {1} going', n, cap) : L('{0} going', n); }
+function capOf(x) { var n = Math.floor(Number(x && x.cap)); return n >= 1 && n <= 14 ? n : 0; }
 function planCard(p, isPast) {
   var d = new Date(parseYmd(p.date)), hang = p.type === 'hangout';
   return '<div class="pcard' + (hang ? ' hangout' : '') + (p.joined ? ' joined' : '') + '"><button class="pcard-main" data-act="openplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '"><span class="calbox"><span>' + MON[d.getMonth()] + '</span><b>' + d.getDate() + '</b></span><span class="pm"><span class="pn" data-noi18n>' + esc(p.title) + '</span>' +
     '<span class="ps">' + esc(fmtDate(p.date)) + (p.time ? ', ' + esc(fmtClock(p.time)) : '') + (p.place ? ' · <span data-noi18n>' + esc(p.place) + '</span>' : '') + '</span><span class="ps" data-noi18n>' + esc(L('With {0}', p.hostName)) + '</span>' +
-    '<span class="tags"><span class="etag ' + (hang ? 'hangout">Hangout' : 'date">Encouragement date') + '</span>' + (p.food ? '<span class="etag food">Food</span>' : '') + bandTag(p.band, p.cur) + (p.going.length ? '<span class="etag going" data-noi18n>' + esc(L('{0} going', p.going.length)) + '</span>' : '') + '</span></span></button>' +
+    '<span class="tags"><span class="etag ' + (hang ? 'hangout">Hangout' : 'date">Encouragement date') + '</span>' + (p.food ? '<span class="etag food">Food</span>' : '') + bandTag(p.band, p.cur) + (p.going.length || p.cap ? '<span class="etag going" data-noi18n>' + esc(goingText(p.going.length, p.cap)) + '</span>' : '') + (p.full && !isPast ? '<span class="etag full">Full</span>' : '') + '</span></span></button>' +
     (isPast ? '' : p.joined ? '<button class="jbtn on" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="0" aria-pressed="true" aria-label="' + esc(L('Going') + ', ' + p.title) + '">' + ICON.check + '<span>Going</span></button>'
-      : '<button class="jbtn" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="1"' + (p.needGroup ? ' disabled' : '') + ' aria-label="' + esc(L('Join {0}', p.title)) + '"><span>Join</span></button>') + '</div>';
+      : '<button class="jbtn" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="1"' + (p.needGroup || p.full ? ' disabled' : '') + ' aria-label="' + esc(L('Join {0}', p.title)) + '"><span>' + (p.full ? 'Full' : 'Join') + '</span></button>') + '</div>';
 }
 function planSheet(host, id) {
   var p = SOC.feed.filter(function (q) { return q.host === host && q.id === id; })[0]; if (!p) return;
@@ -1572,7 +1607,7 @@ function planSheet(host, id) {
       row('Food', p.food ? 'Yes, going for food' : 'No food planned') +
       row('Cost', '<span data-noi18n>' + esc(payLine(p)) + '</span>') +
       row('Host', '<span data-noi18n>' + esc(p.mine ? L('You') : p.hostName) + '</span>') +
-      row('Who\'s going', p.going.length ? '<span data-noi18n>' + esc(p.going.map(function (g) { return g.me ? L('You') : g.name; }).join(', ')) + '</span>' : 'Nobody yet') + '</ul>' +
+      row('Who\'s going', (p.going.length ? '<span data-noi18n>' + esc(p.going.map(function (g) { return g.me ? L('You') : g.name; }).join(', ')) + '</span>' : 'Nobody yet') + (p.cap ? '<br><span class="muted" data-noi18n>' + esc(L(p.cap === 1 ? 'Up to {0} other can join' : 'Up to {0} others can join', p.cap)) + (p.full ? ' · ' + esc(L('Full')) : '') + '</span>' : '')) + '</ul>' +
     (p.needGroup ? '<p class="banner"><span>This plan opens to you once someone else has joined, so there are 3 or more people.</span></p>' : '') +
     (p.mine ? '<button class="btn primary" data-act="openenc" data-id="' + esc(p.id) + '">Edit plan</button>'
       : past ? '' : p.joined ? '<p class="note okline">' + ICON.check + '<span>You\'re going. It\'s in your Encourage calendar, and Shepherd will remind you.</span></p><button class="btn" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="0">I can\'t make it</button>'
@@ -1676,7 +1711,7 @@ function friendsBar() {
   if (!socOn()) return '';
   var m = SOC.me, req = (m.incoming || []).length;
   if (m.minor && !m.approved) return '<section class="card" id="socWait" style="background:var(--gold-soft);border-color:transparent"><h2 class="h3">' + (m.declined ? 'Your account wasn\'t approved' : 'Waiting for approval') + '</h2><p class="note" style="margin:0;color:var(--fg)">' + (m.declined ? 'You can keep using Shepherd on your own. For questions, email the person who runs Shepherd.' : 'The person who runs Shepherd approves every under-18 account. Until then you can use Shepherd on your own, but can\'t add friends or join plans.') + '</p></section>';
-  return '<button class="frbar" id="frBar" data-act="friends"><span class="frav" aria-hidden="true"><svg viewBox="0 0 24 24">' + VICON.people + '</svg></span><span class="pm"><span class="pn">Friends</span><span class="ps" data-noi18n>' + esc((m.friends || []).length ? L(m.friends.length === 1 ? '{0} friend sees the plans you share' : '{0} friends see the plans you share', m.friends.length) : L('Add friends to share plans and join theirs')) + '</span></span>' + (req ? '<span class="badge2" data-noi18n>' + req + '</span>' : '<span class="chev" aria-hidden="true">›</span>') + '</button>';
+  return '';
 }
 function feedSection() {
   if (!socCan()) return '';
@@ -1748,6 +1783,7 @@ function encSheet(id, preset) {
     '<label class="tick1" for="enFood"><input type="checkbox" id="enFood"' + (x.food ? ' checked' : '') + '><span><b>Going for food?</b></span></label>' +
     '<label class="field" for="enCost">Cost (' + esc(curCode()) + ')<input class="inp" id="enCost" type="number" inputmode="decimal" min="0" step="0.01" value="' + esc(x.cost === '' || x.cost == null ? '' : x.cost) + '" placeholder="0"></label>' +
     (canShare && !minor ? '<div class="field" id="enPayWrap"' + (shared ? '' : ' hidden') + '><span>Who pays</span>' + pickHtml('enPay', ['own', 'split', 'host'], x.pay === 'split' || x.pay === 'host' ? x.pay : 'own', ['Everyone pays their own', 'Split equally', 'I\'m paying']) + '</div>' : '') +
+    (canShare ? '<div id="enCapWrap"' + (shared ? '' : ' hidden') + '><label class="field" for="enCap">How many others can join<select class="inp" id="enCap"><option value="0">No limit</option>' + [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(function (n) { return '<option value="' + n + '"' + (capOf(x) === n ? ' selected' : '') + ' data-noi18n>' + n + '</option>'; }).join('') + '</select></label><p class="note" id="enCapNote" style="margin:6px 0 0" hidden>With room for only 1, an under-18 friend can\'t join: a plan with an adult and an under-18 needs 3 or more people.</p></div>' : '') +
     '<p class="note leaves" id="enLeaves" data-noi18n hidden></p>' +
     '<p class="note" id="enErr" role="alert" style="color:var(--bad)" hidden></p><button class="btn primary" type="submit">' + (isNew ? 'Save' : 'Save changes') + '</button></form>' +
     (isNew ? '' : (shared && nGoing ? '<p class="note" data-noi18n>' + esc(L('Going: {0}', goingTo(x.id).map(function (g) { return g.name; }).join(', '))) + '</p>' : '') + addCalHtml('event', x.id, 'btn') + '<button class="btn danger" id="enDel">Delete</button>'),
@@ -1764,8 +1800,10 @@ function encSheet(id, preset) {
         el.hidden = false; el.className = 'note leaves' + (rest < 0 ? ' over' : '');
         el.textContent = rest < 0 ? L('This takes you {0} over your budget for that month.', money(-rest)) : L('This leaves {0} in your budget for that month.', money(rest));
       };
-      bindPick(root, 'enShare', function () { var on = isShared(); $('#enShareNote', root).hidden = !on; var pw = $('#enPayWrap', root); if (pw) pw.hidden = !on; $('#enWhoL', root).textContent = on ? 'Brother or sister (optional)' : 'Brother or sister'; if (window.I18N) I18N.apply($('#enWhoL', root)); leaves(); }, true);
+      bindPick(root, 'enShare', function () { var on = isShared(); $('#enShareNote', root).hidden = !on; var pw = $('#enPayWrap', root); if (pw) pw.hidden = !on; var cw = $('#enCapWrap', root); if (cw) cw.hidden = !on; $('#enWhoL', root).textContent = on ? 'Brother or sister (optional)' : 'Brother or sister'; if (window.I18N) I18N.apply($('#enWhoL', root)); leaves(); }, true);
       bindPick(root, 'enPay', leaves, true);
+      var capEl = $('#enCap', root), capNote = function () { var n = $('#enCapNote', root); if (n) n.hidden = !(capEl.value === '1' && !minor); };
+      if (capEl) { capEl.addEventListener('change', capNote); capNote(); }
       cost.addEventListener('input', leaves); dateEl.addEventListener('change', leaves); leaves();
       var show = function () {
         var q = normName(inp.value); if (!q) { ul.hidden = true; return; }
@@ -1783,7 +1821,7 @@ function encSheet(id, preset) {
         var f = $('#enForm', root); if (isNew && f.dataset.done) return; f.dataset.done = '1';
         var wasShared = x.share === 'friends';
         x.type = pickVal(root, 'enType') || 'date'; x.who = who.slice(0, 80); x.date = dt; x.time = $('#enTime', root).value; x.activity = act.slice(0, 120); x.place = $('#enPlace', root).value.trim().slice(0, 120);
-        x.food = $('#enFood', root).checked; x.cost = cv === '' ? '' : Math.round(Number(cv) * 100) / 100; x.share = sh ? 'friends' : 'me'; x.pay = payNow(); x.name = encTitle(x);
+        x.food = $('#enFood', root).checked; x.cost = cv === '' ? '' : Math.round(Number(cv) * 100) / 100; x.share = sh ? 'friends' : 'me'; x.pay = payNow(); x.cap = sh && capEl ? Number(capEl.value) || 0 : 0; x.name = encTitle(x);
         saveEvent(x); closeSheet();
         toast(sh && !wasShared ? 'Shared with your friends. They can join in one tap.' : isNew ? (x.type === 'hangout' ? 'Hangout saved' : 'Encouragement date saved') : 'Saved');
         tourEvent('enc'); budgetNudge();
@@ -1823,7 +1861,7 @@ function churchCard() {
   var m = SOC.me;
   return '<section class="card" id="churchCard"><h2 class="h3">Your church</h2><p class="note" style="margin:0">' + (m.church ? '<b style="color:var(--fg)" data-noi18n>' + esc(campusName()) + '</b>' : 'Choose your church to find friends from it quickly.') + '</p>' +
     (m.minor ? '<p class="note" style="margin:0">' + (m.approved ? 'Under-18 account, approved.' : m.declined ? 'Under-18 account, not approved.' : 'Under-18 account, waiting for approval.') + '</p>' : '') +
-    '<div class="row"><button class="btn grow" data-act="church">' + (m.church ? 'Change church' : 'Choose your church') + '</button><button class="btn soft grow" data-act="friends">Friends</button></div></section>' +
+    '<button class="btn" data-act="church">' + (m.church ? 'Change church' : 'Choose your church') + '</button></section>' +
     (m.owner ? '<section class="card" id="ownerCard" data-noi18n><h2 class="h3">Approvals</h2><p class="note" style="margin:0" data-noi18n>' + esc(m.waiting ? L('{0} waiting for approval', m.waiting) : L('Nobody is waiting.')) + '</p><button class="btn' + (m.waiting ? ' primary' : '') + '" data-act="approvals">Open approvals</button></section>' : '');
 }
 async function churchSheet() {
@@ -1856,55 +1894,61 @@ async function churchSheet() {
       });
     });
 }
-async function friendsSheet() {
-  if (!socOn()) return;
-  var m = SOC.me, people = [];
-  if (m.approved && m.church && !m.minor) { try { people = (await WEB.api('GET', '/api/social/people')).people || []; } catch (e) {} }
+function viewFriends() {
+  var m = SOC.me, people = SOC.people || [];
   var li = function (name, sub, btns) { return '<li class="frow"><span class="pm"><span class="pn" data-noi18n>' + esc(name) + '</span>' + (sub ? '<span class="ps" data-noi18n>' + esc(sub) + '</span>' : '') + '</span><span class="frbtns">' + btns + '</span></li>'; };
-  var h = '<p class="banner"><span>Friends only see the plans you share: what it is, when, where, food, cost and who\'s going. They never see your People, Disciples, prayer list, notes, phone numbers or budget.</span></p>';
+  var h = vhead('friends', 'Friends', 'Friends only see the plans you share. Nothing else.');
+  h += friendsBar(); // the waiting notice for an under-18 account that isn't approved yet
+  h += '<p class="banner"><span>Friends only see the plans you share: what it is, when, where, food, cost and who\'s going. They never see your People, Disciples, prayer list, notes, phone numbers or budget.</span></p>';
   if (!m.approved) h += '<p class="note">' + (m.declined ? 'Your account wasn\'t approved, so you can\'t add friends.' : 'You can add friends once your account is approved.') + '</p>';
   else {
-    if ((m.incoming || []).length) h += '<section class="sec"><h2 class="h3">Friend requests</h2><ul class="flist">' + m.incoming.map(function (f) { return li(f.name, f.church, '<button class="btn small primary" data-fr="accept" data-id="' + esc(f.id) + '">Accept</button><button class="btn small" data-fr="decline" data-id="' + esc(f.id) + '">Decline</button>'); }).join('') + '</ul></section>';
-    h += '<form class="card" id="frForm" style="background:var(--bg)" novalidate><h2 class="h3">Add a friend</h2><label class="field" for="frTo">Their email or friend code<input class="inp" id="frTo" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200"></label><p class="small" id="frErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" type="submit">Send request</button>' +
+    if ((m.incoming || []).length) h += '<section class="sec" id="frReq"><div class="sec-h"><h2 class="h2">Friend requests</h2><span class="count">' + m.incoming.length + '</span></div><ul class="flist">' + m.incoming.map(function (f) { return li(f.name, f.church, '<button class="btn small primary" data-fr="accept" data-id="' + esc(f.id) + '">Accept</button><button class="btn small" data-fr="decline" data-id="' + esc(f.id) + '">Decline</button>'); }).join('') + '</ul></section>';
+    h += '<section class="sec" id="frMine"><div class="sec-h"><h2 class="h2">Your friends</h2><span class="count">' + (m.friends || []).length + '</span></div>' + ((m.friends || []).length ? '<ul class="flist">' + m.friends.map(function (f) {
+      var n = plansBy(f.id), lab = n ? L(n === 1 ? '{0} plan in Encourage' : '{0} plans in Encourage', n) : '';
+      return li(f.name, n ? lab : f.church, (n ? '<button class="plnum" data-act="frplans" data-noi18n aria-label="' + esc(n + ', ' + lab + ', ' + f.name) + '">' + n + '</button>' : '') + '<button class="btn small ghost" data-fr="more" data-id="' + esc(f.id) + '" data-name="' + esc(f.name) + '" aria-label="' + esc(L('Options for {0}', f.name)) + '">⋯</button>');
+    }).join('') + '</ul>' : '<p class="note">' + (m.minor ? 'No friends yet. Add someone by their email or friend code.' : 'No friends yet. Add someone by their email or friend code, or from your church.') + '</p>') + '</section>';
+    h += '<form class="card" id="frForm" novalidate><h2 class="h3">Add a friend</h2><label class="field" for="frTo">Their email or friend code<input class="inp" id="frTo" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200"></label><p class="small" id="frErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" type="submit">Send request</button>' +
       '<p class="note" style="margin:0">Your friend code: <b class="code" data-noi18n>' + esc(m.code) + '</b></p><button class="btn ghost small" type="button" id="frCopy">' + ICON.copy + 'Copy my code</button></form>';
-    if (!m.minor) h += '<section class="sec"><h2 class="h3">People from my church</h2>' + (!m.church ? '<p class="note">Choose your church to see people from it here.</p><button class="btn" data-act="church">Choose your church</button>'
+    if (!m.minor) h += '<section class="sec"><div class="sec-h"><h2 class="h2">People from my church</h2></div>' + (!m.church ? '<p class="note">Choose your church to see people from it here.</p>'
       : people.length ? '<label class="sr" for="frQ">Search</label><input class="inp" id="frQ" type="search" placeholder="Type a name" autocomplete="off"><ul class="flist" id="frPeople">' + people.map(function (f) { return '<li class="frow" data-n="' + esc(f.name.toLowerCase()) + '"><span class="pm"><span class="pn" data-noi18n>' + esc(f.name) + '</span></span><span class="frbtns">' + (f.state === 'friend' ? '<span class="chip st-ok">Friends</span>' : f.state === 'sent' ? '<span class="chip">Request sent</span>' : f.state === 'asked' ? '<button class="btn small primary" data-fr="accept" data-id="' + esc(f.id) + '">Accept</button>' : '<button class="btn small soft" data-fr="add" data-id="' + esc(f.id) + '">Add friend</button>') + '</span></li>'; }).join('') + '</ul>'
       : '<p class="note" data-noi18n>' + esc(L('Nobody else from {0} is on Shepherd yet. Share the app with them.', m.church.name)) + '</p>') + '</section>';
-    h += '<section class="sec"><h2 class="h3">Your friends</h2>' + ((m.friends || []).length ? '<ul class="flist">' + m.friends.map(function (f) { return li(f.name, f.church, '<button class="btn small ghost" data-fr="more" data-id="' + esc(f.id) + '" data-name="' + esc(f.name) + '" aria-label="' + esc(L('Options for {0}', f.name)) + '">⋯</button>'); }).join('') + '</ul>' : '<p class="note">' + (m.minor ? 'No friends yet. Add someone by their email or friend code.' : 'No friends yet. Add someone by their email or friend code, or from your church.') + '</p>') + '</section>';
-    if ((m.outgoing || []).length) h += '<section class="sec"><h2 class="h3">Requests you sent</h2><ul class="flist">' + m.outgoing.map(function (f) { return li(f.name, f.church, '<button class="btn small" data-fr="remove" data-id="' + esc(f.id) + '">Cancel</button>'); }).join('') + '</ul></section>';
-    if ((m.blocked || []).length) h += '<section class="sec"><h2 class="h3">Blocked</h2><ul class="flist">' + m.blocked.map(function (f) { return li(f.name, '', '<button class="btn small" data-fr="unblock" data-id="' + esc(f.id) + '">Unblock</button>'); }).join('') + '</ul></section>';
+    if ((m.outgoing || []).length) h += '<section class="sec"><div class="sec-h"><h2 class="h2">Requests you sent</h2></div><ul class="flist">' + m.outgoing.map(function (f) { return li(f.name, f.church, '<button class="btn small" data-fr="remove" data-id="' + esc(f.id) + '">Cancel</button>'); }).join('') + '</ul></section>';
+    if ((m.blocked || []).length) h += '<section class="sec"><div class="sec-h"><h2 class="h2">Blocked</h2></div><ul class="flist">' + m.blocked.map(function (f) { return li(f.name, '', '<button class="btn small" data-fr="unblock" data-id="' + esc(f.id) + '">Unblock</button>'); }).join('') + '</ul></section>';
   }
-  h += '<button class="btn ghost" data-act="closesheet">Done</button>';
-  openSheet('Friends', h, function (root) {
-    var busy = false;
-    root.addEventListener('click', async function (e) {
-      var b = e.target.closest('[data-fr]'); if (!b || busy) return; var id = b.dataset.id, k = b.dataset.fr;
-      if (k === 'more') return friendActions(id, b.dataset.name);
-      busy = true; var r = null;
-      if (k === 'accept') r = await socDo('friend/answer', { id: id, accept: true }, 'You\'re now friends');
-      if (k === 'decline') r = await socDo('friend/answer', { id: id, accept: false });
-      if (k === 'add') r = await socDo('friend', { to: id }, 'Request sent');
-      if (k === 'remove') r = await socDo('friend/remove', { id: id });
-      if (k === 'unblock') r = await socDo('unblock', { id: id }, 'Unblocked');
-      busy = false; if (r) friendsSheet();
-    });
-    var f = $('#frForm', root);
-    if (f) f.addEventListener('submit', async function (e) {
-      e.preventDefault(); var v = $('#frTo', root).value.trim(), er = $('#frErr', root);
-      if (!v) { er.hidden = false; er.textContent = 'Type their email or friend code.'; return; }
-      if (busy) return; busy = true; var r = await socDo('friend', { to: v }); busy = false;
-      if (r) { toast(r.state === 'friends' ? 'You\'re now friends' : 'If they use Shepherd, they\'ll get your request.'); friendsSheet(); }
-    });
-    var cp = $('#frCopy', root); if (cp) cp.addEventListener('click', function () { copyText(m.code, 'Friend code copied'); });
-    var q = $('#frQ', root); if (q) q.addEventListener('input', function () { var v = q.value.trim().toLowerCase(); root.querySelectorAll('#frPeople .frow').forEach(function (r) { r.hidden = !!v && r.dataset.n.indexOf(v) < 0; }); });
-  });
+  h += churchCard();
+  return h;
 }
+function bindFriends() {
+  var root = $('#main .view'); if (!root || S.view !== 'friends') return;
+  var busy = false;
+  root.addEventListener('click', async function (e) {
+    var b = e.target.closest('[data-fr]'); if (!b || busy) return; var id = b.dataset.id, k = b.dataset.fr;
+    if (k === 'more') return friendActions(id, b.dataset.name);
+    busy = true; var r = null;
+    if (k === 'accept') r = await socDo('friend/answer', { id: id, accept: true }, 'You\'re now friends');
+    if (k === 'decline') r = await socDo('friend/answer', { id: id, accept: false });
+    if (k === 'add') r = await socDo('friend', { to: id }, 'Request sent');
+    if (k === 'remove') r = await socDo('friend/remove', { id: id });
+    if (k === 'unblock') r = await socDo('unblock', { id: id }, 'Unblocked');
+    busy = false; if (r) friendsRefresh();
+  });
+  var f = $('#frForm', root);
+  if (f) f.addEventListener('submit', async function (e) {
+    e.preventDefault(); var v = $('#frTo', root).value.trim(), er = $('#frErr', root);
+    if (!v) { er.hidden = false; er.textContent = 'Type their email or friend code.'; return; }
+    if (busy) return; busy = true; var r = await socDo('friend', { to: v }); busy = false;
+    if (r) { toast(r.state === 'friends' ? 'You\'re now friends' : 'If they use Shepherd, they\'ll get your request.'); var t = $('#frTo'); if (t) { t.value = ''; t.blur(); } friendsRefresh(); }
+  });
+  var cp = $('#frCopy', root); if (cp) cp.addEventListener('click', function () { copyText(SOC.me.code, 'Friend code copied'); });
+  var q = $('#frQ', root); if (q) q.addEventListener('input', function () { var v = q.value.trim().toLowerCase(); root.querySelectorAll('#frPeople .frow').forEach(function (r) { r.hidden = !!v && r.dataset.n.indexOf(v) < 0; }); });
+}
+async function friendsRefresh() { await loadPeople(true); if (S.view === 'friends') render(); }
 function friendActions(id, name) {
   openSheet(name,
-    '<p class="note" style="margin:0">Removing or blocking is private. They aren\'t told.</p><button class="btn" id="faRemove">Remove friend</button><button class="btn danger" id="faBlock">Block</button><button class="btn" id="faReport">Report</button><button class="btn ghost" data-act="friends">Back to friends</button>',
+    '<p class="note" style="margin:0">Removing or blocking is private. They aren\'t told.</p><button class="btn" id="faRemove">Remove friend</button><button class="btn danger" id="faBlock">Block</button><button class="btn" id="faReport">Report</button><button class="btn ghost" data-act="closesheet">Back to friends</button>',
     function (root) {
-      $('#faRemove', root).addEventListener('click', async function () { if (await socDo('friend/remove', { id: id }, 'Removed')) friendsSheet(); });
-      $('#faBlock', root).addEventListener('click', async function () { if (await socDo('block', { id: id }, 'Blocked')) friendsSheet(); });
+      $('#faRemove', root).addEventListener('click', async function () { if (await socDo('friend/remove', { id: id }, 'Removed')) { closeSheet(); friendsRefresh(); } });
+      $('#faBlock', root).addEventListener('click', async function () { if (await socDo('block', { id: id }, 'Blocked')) { closeSheet(); friendsRefresh(); } });
       $('#faReport', root).addEventListener('click', function () { reportSheet(id, ''); });
     });
 }
@@ -1941,7 +1985,7 @@ function viewToday() {
   var h = vhead('today', greeting() + name, '', LOC ? intl(now, { weekday: 'long', day: 'numeric', month: 'long' }) : WD[now.getDay()] + ' ' + now.getDate() + ' ' + MON[now.getMonth()]) + '<div>';
   var L = todayLists();
   if (!all.length) {
-    h += '</div>' + installCard() + emptyState() + disciplesCard() + eventsMini(L.events) + encToday() + prayCard();
+    h += '</div>' + installCard() + newsCard() + emptyState() + disciplesCard() + comingUp() + friendsToday() + prayCard();
     return h;
   }
   var td = ymd(Date.now());
@@ -1952,7 +1996,7 @@ function viewToday() {
   if (L.studies.length) h += '<span class="pill okp">' + plural(L.studies.length, 'study', 'studies') + ' today</span>';
   h += '</div></div>';
   if (all.some(function (c) { return c.example; })) h += '<p class="banner"><span>You\'re looking at example contacts. <b>Remove them</b> from Settings whenever you\'re ready.</span></p>';
-  h += installCard();
+  h += installCard(); h += newsCard();
   if (S.readonly) h += '<p class="banner"><span>Your changes are kept on this phone but can\'t be saved online. Ask whoever shared Shepherd with you for <b>Contributor</b> access.</span></p>';
   // Today is a quick look: add someone, who to chase, disciples to check on, what's on today, who to pray for
   h += addCard();
@@ -1965,8 +2009,8 @@ function viewToday() {
     h += '<section class="sec"><div class="sec-h"><h2 class="h2">Studies today</h2><span class="count">' + L.studies.length + '</span></div><ul class="list">' +
       L.studies.map(function (c) { return '<li class="prow st-ok"><button class="prow-main" data-act="open" data-id="' + c.id + '"><span class="dot" aria-hidden="true"></span><span class="pm"><span class="pn">' + esc(c.name) + '</span><span class="ps"><b>' + esc(c.nextStudy.time ? fmtClock(c.nextStudy.time) : 'Time not set') + '</b>' + (c.nextStudy.topic ? ' · ' + esc(c.nextStudy.topic) : '') + '</span></span></button>' + chBtn(c) + '</li>'; }).join('') + '</ul></section>';
   }
-  h += eventsMini(L.events);
-  h += encToday();
+  h += comingUp();
+  h += friendsToday();
   h += prayCard();
   return h;
 }
@@ -1999,6 +2043,37 @@ function disciplesCard() {
   return '<section class="card dsum" id="dSum">' + head + '<div class="dchips">' + todo.slice(0, 6).map(function (d) { return '<button class="dchip" data-act="tab" data-v="disciples">' + esc(firstName(d.name)) + '</button>'; }).join('') + (todo.length > 6 ? '<span class="dchip more">+' + (todo.length - 6) + '</span>' : '') + '</div>' +
     '<button class="btn soft small" data-act="tab" data-v="disciples">Open Disciples</button></section>';
 }
+/* up to 5 friends who have a plan coming, soonest first; with none, a nudge to plan something yourself */
+function friendsToday() {
+  if (!socCan()) return '';
+  var by = {}, order = [];
+  upcomingFriendPlans().slice().sort(function (a, b) { return (a.date + (a.time || '')).localeCompare(b.date + (b.time || '')); }).forEach(function (p) { if (!by[p.host]) { by[p.host] = []; order.push(p.host); } by[p.host].push(p); });
+  if (!order.length) return '<section class="card" id="frToday"><div class="sec-h"><h2 class="h3">From your friends</h2></div><p class="note" style="margin:0">' + ((SOC.me.friends || []).length ? 'None of your friends has a plan coming up. Be the first: plan an encouragement date or a hangout and share it.' : 'Add friends to see what they are planning, then plan an encouragement date or a hangout to share.') + '</p>' +
+    '<div class="row"><button class="btn primary grow" data-act="newenc" data-t="date">Plan a date</button><button class="btn grow" data-act="newenc" data-t="hangout">Log a hangout</button></div>' + ((SOC.me.friends || []).length ? '' : '<button class="btn soft" data-act="friends">Add friends</button>') + '</section>';
+  return '<section class="card" id="frToday"><div class="sec-h"><h2 class="h3">From your friends</h2><span class="count">' + order.length + '</span></div><ul class="comeup">' + order.slice(0, 5).map(function (h) {
+    var ps = by[h], p = ps[0];
+    return '<li><button data-act="openplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '"><span class="cu-d">' + esc(fmtDate(p.date)) + '</span><span class="cu-t"><span data-noi18n>' + esc(p.hostName) + '</span><br><span class="muted" style="font-weight:500" data-noi18n>' + esc(p.title) + '</span></span>' + (ps.length > 1 ? '<span class="plnum" data-noi18n aria-label="' + esc(L('{0} plans in Encourage', ps.length)) + '">' + ps.length + '</span>' : p.joined ? '<span class="cu-k fr">Going</span>' : '<span class="cu-k fr">' + (p.type === 'hangout' ? 'Hangout' : 'Encouragement date') + '</span>') + '</button></li>';
+  }).join('') + '</ul><button class="btn soft" data-act="frplans">See all in Encourage</button></section>';
+}
+/* one short list of what's next across Calendar and Encourage (the next two weeks, at most 4 lines) */
+function comingUp() {
+  var td = ymd(Date.now()), end = ymd(addDays(today(), 14)), items = [];
+  evList().forEach(function (x) { if (x.date >= td && x.date <= end) items.push({ d: x.date, t: x.time || '', title: x.name, k: 'cal', act: 'data-act="openevent" data-id="' + esc(x.id) + '"' }); });
+  myPlanItems().forEach(function (it) { if (it.date < td || it.date > end) return; if (it.plan) items.push({ d: it.date, t: it.plan.time || '', title: it.plan.title, k: 'enc', act: 'data-act="openplan" data-host="' + esc(it.plan.host) + '" data-id="' + esc(it.plan.id) + '"' }); else items.push({ d: it.date, t: it.enc.time || '', title: encTitle(it.enc), k: 'enc', act: 'data-act="openenc" data-id="' + esc(it.enc.id) + '"' }); });
+  if (!items.length) return '';
+  items.sort(function (a, b) { return (a.d + a.t).localeCompare(b.d + b.t); });
+  return '<section class="card" id="comingCard"><div class="sec-h"><h2 class="h3">Coming up</h2><span class="count">' + items.length + '</span></div><ul class="comeup">' + items.slice(0, 4).map(function (x) {
+    return '<li><button ' + x.act + '><span class="cu-d">' + esc(fmtDate(x.d)) + (x.t ? '<br><span class="muted" style="font-weight:600">' + esc(fmtClock(x.t)) + '</span>' : '') + '</span><span class="cu-t" data-noi18n>' + esc(x.title) + '</span><span class="cu-k ' + x.k + '">' + (x.k === 'cal' ? 'Calendar' : 'Encourage') + '</span></button></li>';
+  }).join('') + '</ul>' + (items.length > 4 ? '<p class="note" style="margin:0" data-noi18n>' + esc(L('And {0} more in the next two weeks.', items.length - 4)) + '</p>' : '') + '</section>';
+}
+/* shown once to people who already had an account when friends arrived */
+var NEWS_V = 3;
+function newsCard() {
+  if (!socOn() || !S.profile.tourDone || (Number(S.profile.seenNew) || 0) >= NEWS_V || TOUR_I >= 0) return '';
+  return '<section class="card newcard" id="newsCard"><div class="sec-h"><h2 class="h3">What\'s new in Shepherd</h2></div><ul><li>Friends has its own tab. Add friends, answer requests and see who has plans.</li><li>Share a plan from Encourage and friends join in one tap. You choose how many can join.</li><li>A private budget tank shows what you have left to spend this month.</li><li>Today shows what\'s coming up and what your friends have planned.</li></ul>' +
+    '<div class="row"><button class="btn primary grow" data-act="newsgo">Show me</button><button class="btn grow" data-act="newsok">Got it</button></div></section>';
+}
+function newsDone() { if ((Number(S.profile.seenNew) || 0) < NEWS_V) { S.profile.seenNew = NEWS_V; saveProfile(); } }
 function eventsMini(evs) {
   var td = ymd(Date.now()); evs = evs.filter(function (x) { return x.date === td; });
   if (!evs.length) return '';
@@ -2255,7 +2330,6 @@ function viewSettings() {
   var p = S.profile, N = p.notify || {};
   var h = '<div><button class="ghost-btn" data-act="tab" data-v="today">' + ICON.back + 'Today</button><h1 class="h1">Settings</h1></div>';
   h += '<section class="card aboutcard" id="aboutCard"><h2 class="h3">About Shepherd</h2><p class="note">What Shepherd does and why, with the Bible verses behind it.</p><button class="btn" data-act="tab" data-v="about">Read About Shepherd</button></section>';
-  h += churchCard();
   if (window.I18N) h += '<section class="card" id="langCard"><label class="field" for="pLang"><span class="langh"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>Language</span><select class="inp" id="pLang" data-noi18n>' + I18N.LANGS.map(function (l) { return '<option value="' + l[0] + '"' + (l[0] === I18N.lang ? ' selected' : '') + '>' + l[1] + '</option>'; }).join('') + '</select></label><p class="note">Bible verses stay in English (NIV).</p></section>';
   h += '<form class="card" id="profForm"><h2 class="h3">You</h2>' +
     '<label class="field" for="pName">Your name<input class="inp" id="pName" value="' + esc(p.name) + '" autocomplete="name"></label>' +
@@ -2300,6 +2374,7 @@ function render() {
   var main = $('#main'); if (!main) return;
   var ae = document.activeElement, keep = ae && ae.id && main.contains(ae) ? ae.id : null, sel = null;
   try { sel = keep ? ae.selectionStart : null; } catch (e) {}
+  if (S.view === 'friends' && !socOn()) S.view = 'today';
   var v = S.view, html; setTimeout(function () { capLengths($('#main')); }, 0);
   if (S.mode === 'loading' && !list().length && !lsGet(key())) html = '<p class="muted" style="padding:40px 0;text-align:center">Opening Shepherd…</p>';
   else if (v === 'people') html = viewPeople();
@@ -2308,6 +2383,7 @@ function render() {
   else if (v === 'events') html = viewEvents();
   else if (v === 'disciples') html = viewDisciples();
   else if (v === 'encourage') html = viewEncourage();
+  else if (v === 'friends') html = viewFriends();
   else if (v === 'about') html = viewAbout();
   else if (v === 'settings') html = viewSettings();
   else html = viewToday();
@@ -2317,7 +2393,12 @@ function render() {
   document.querySelectorAll('.tab').forEach(function (t) { if (t.dataset.v === tabV) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
   var owed = active().filter(function (c) { return c.replyState === 'me' || dayDiff(dueDay(c), today()) < 0; }).length;
   var b = $('#badge'); b.hidden = !owed; b.textContent = owed > 99 ? '99+' : owed;
-  $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events' || S.view === 'about' || S.view === 'encourage'; // Today has its own Add someone box; About is for reading; Encourage has its own buttons
+  // the Friends tab is there once friends are switched on; its badge counts requests and plans not looked at yet
+  var six = socOn(), ft = $('#tabFriends'), wasSix = !ft.hidden;
+  ft.hidden = !six; ft.parentNode.classList.toggle('six', six); document.body.classList.toggle('six', six); if (six !== wasSix) fitKey = '';
+  if (six && S.view === 'friends') seenPlansMark();
+  var fb = $('#frBadge'), fn = six ? friendNews() : 0; fb.hidden = !fn; fb.textContent = fn > 99 ? '99+' : fn;
+  $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events' || S.view === 'about' || S.view === 'encourage' || S.view === 'friends'; // Today has its own Add someone box; About is for reading; Encourage has its own buttons
   if (keep) { var el = document.getElementById(keep); if (el) { el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   bindView();
   if (TOUR_I >= 0) placeTour();
@@ -2329,19 +2410,19 @@ var fitKey = '';
 var lastView = '';
 // only re-measures when the screen width or the language changes (cheap on every render)
 function fitTabs(force) {
-  var k = innerWidth + '|' + document.documentElement.lang + '|' + ((document.querySelector('.tab .tl') || {}).textContent || '');
+  var k = innerWidth + '|' + document.documentElement.lang + '|' + ((document.querySelector('.tab .tl') || {}).textContent || '') + '|' + document.body.classList.contains('six');
   if (!force && k === fitKey) return; fitKey = k;
   document.querySelectorAll('.tab .tl').forEach(function (l) {
     l.style.fontSize = '';
     var size = parseFloat(getComputedStyle(l).fontSize) || 12;
-    while (l.scrollWidth > l.clientWidth + 0.5 && size > 8.5) { size -= 0.5; l.style.fontSize = size + 'px'; }
+    while ((l.scrollWidth > l.clientWidth + 0.5 || l.scrollHeight > l.clientHeight + 1.5) && size > 8.5) { size -= 0.5; l.style.fontSize = size + 'px'; }
   });
 }
 window.addEventListener('resize', function () { fitTabs(); });
-function go(v, id) { if (v === 'week') v = 'encourage'; if (v === 'encourage' || v === 'settings') socLoad(false); if (v !== S.view) S.showAll = false; if (S.view === 'settings' && v !== 'settings') saveProfileForm(false); S.view = v; if (id) S.contactId = id; render(); try { window.scrollTo(0, 0); } catch (e) {} }
+function go(v, id) { if (v === 'week') v = 'encourage'; if (v === 'encourage' || v === 'settings' || v === 'friends' || v === 'today') socLoad(false); if (v === 'friends') loadPeople(false); if (v !== S.view) S.showAll = false; if (S.view === 'settings' && v !== 'settings') saveProfileForm(false); S.view = v; if (id) S.contactId = id; render(); try { window.scrollTo(0, 0); } catch (e) {} }
 
 function bindView() {
-  bindQuick();
+  bindQuick(); bindFriends();
   var fuel = $('#tankFuel');
   if (tankSeen) { tankSeen.disconnect(); tankSeen = null; }
   if (fuel) { // the fuel moves from where it was to where it is now, once the tank is on screen so you see it happen
@@ -2892,10 +2973,20 @@ var TOUR = [
   { view: 'today', target: '#prayCard', title: 'Pray for people', text: 'Add anyone you want to pray for, with notes if you like. Each day Shepherd shows 1 to 15 of them (you choose how many), taking turns, and can remind you at a time you choose in Settings.' },
   { view: 'events', target: '.tab[data-v="events"]', title: 'Your calendar', text: 'Log key events like Network Events, EMC or GMC, and choose a weekly or monthly countdown. Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.',
     doIt: { label: 'Show me how to link my calendar', guide: true, run: function () { calGuide(true); } } },
-  { view: 'encourage', target: '.tab[data-v="encourage"]', title: 'Encourage one another', text: 'Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.' },
+  { view: 'encourage', target: '.tab[data-v="encourage"]', title: 'Encourage one another', text: 'Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else, and you choose how many can join. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.' },
+  { only: function () { return socOn(); }, view: 'friends', target: '#tabFriends', title: 'Friends', text: 'Friends has its own tab. Add friends by email or friend code, or from your church, and answer requests here. A number next to a friend means they have shared a plan: you\'ll find it in Encourage, where you join in one tap. Friends only see the plans you share.' },
   { view: 'settings', target: '#langCard', title: 'Settings has the rest', text: 'Choose your language (Bible verses stay in English, NIV) and your currency, read About Shepherd, set a PIN, export a backup, and read Privacy and safe use.' },
   { view: 'today', target: '[data-act="settings"]', title: 'You\'re all set', text: 'You are responsible for the people you contact, so only message people who are happy to hear from you, and stop if they ask. Replay this tour from Settings any time.' }
 ];
+var TOUR_ALL = TOUR, TOUR_MINI = false;
+/* the short tour for people who already had an account: only what's new */
+var MINI = [
+  { view: 'friends', target: '#tabFriends', title: 'Friends has its own tab', text: 'Add friends by email or friend code, or from your church, and answer requests here. A number next to a friend means they have shared a plan. Friends only see the plans you share.' },
+  { view: 'encourage', target: '#tankCard', title: 'Your budget tank', text: 'Set a monthly budget and the tank shows what you have left. It drains as you plan and spend. Only you see it.' },
+  { view: 'encourage', target: '[data-act="newenc"]', title: 'Share a plan', text: 'Plan a date or a hangout, choose Friends under "Who can see this", and say how many can join. Friends join in one tap, and plans they share appear on this tab and on Today.' }
+];
+function tourList() { return TOUR_ALL.filter(function (st) { return !st.only || st.only(); }); }
+function startMini() { if (!$('#sheet').hidden) closeSheet(); TOUR_MINI = true; TOUR = MINI; TOUR_I = 0; showTourStep(0); }
 var TOUR_I = -1, TOUR_PAUSED = false;
 function tourTarget(st) { if (!st.target) return null; var el = typeof st.target === 'function' ? st.target() : $(st.target); return el && el.getClientRects().length ? el : null; }
 function safeInsets() {
@@ -2927,11 +3018,12 @@ function placeTour() {
   card.style.top = Math.round(Math.max(topM, Math.min(top, vh - botM - ch))) + 'px';
 }
 function showTourStep(i) {
+  if (!TOUR_MINI) TOUR = tourList(); // the Friends step is only there once friends are switched on
   var steps = TOUR.length;
   if (i >= steps) return endTour();
   if (i < 0) i = 0;
   TOUR_I = i; TOUR_PAUSED = false; $('#tourPill').hidden = true;
-  lsSet('shepherd:tourStep:' + (S.uid || 'local'), 'v3:' + i); // v3 = the 18-step tour with Bring in your contacts as step 7
+  if (!TOUR_MINI) lsSet('shepherd:tourStep:' + (S.uid || 'local'), 'v3:' + i); // v3 = the tour with Bring in your contacts as step 7
   var st = TOUR[i];
   if (st.view && S.view !== st.view) go(st.view);
   $('#tourTitle').textContent = st.title; $('#tourText').textContent = st.text;
@@ -2969,9 +3061,11 @@ function tourResumeAt(raw) {
   var v2 = raw.indexOf('v2:') === 0 ? Number(raw.slice(3)) || 0 : (function (old) { return old >= 1 ? old + 1 : old; })(Number(raw) || 0);
   return v2 >= 6 ? v2 + 1 : v2;
 }
-function startTour() { if (!$('#sheet').hidden) closeSheet(); TOUR_I = 0; showTourStep(0); }
+function startTour() { if (!$('#sheet').hidden) closeSheet(); TOUR_MINI = false; TOUR = tourList(); TOUR_I = 0; showTourStep(0); }
 function endTour() {
   TOUR_I = -1; TOUR_PAUSED = false; $('#tour').hidden = true; $('#tourPill').hidden = true;
+  if (TOUR_MINI) { TOUR_MINI = false; TOUR = tourList(); newsDone(); go('today'); return; }
+  S.profile.seenNew = NEWS_V; // someone who has just taken the whole tour has seen what's new
   lsSet('shepherd:tourStep:' + (S.uid || 'local'), '');
   if (!S.profile.tourDone) { S.profile.tourDone = true; saveProfile(); }
   lsSet('shepherd:tourDone:' + (S.uid || 'local'), '1');
@@ -3341,7 +3435,10 @@ document.addEventListener('click', function (e) {
     case 'encmonth': (function () { var base = S.encMonth || ymd(today()).slice(0, 7), md = new Date(Number(base.slice(0, 4)), Number(base.slice(5, 7)) - 1 + Number(b.dataset.d), 1); S.encMonth = md.getFullYear() + '-' + pad(md.getMonth() + 1); render(); })(); break;
     case 'encday': S.encDay = S.encDay === b.dataset.d ? '' : b.dataset.d; render(); break;
     case 'encall': S.encDay = ''; render(); break;
-    case 'friends': friendsSheet(); break;
+    case 'friends': if (!$('#sheet').hidden) closeSheet(); go('friends'); break;
+    case 'frplans': go('encourage'); setTimeout(function () { var fs = $('#feedSec'); if (fs) fs.scrollIntoView({ block: 'start' }); }, 60); break;
+    case 'newsgo': newsDone(); startMini(); break;
+    case 'newsok': newsDone(); render(); break;
     case 'church': churchSheet(); break;
     case 'approvals': approvalsSheet(); break;
     case 'openplan': planSheet(b.dataset.host, id); break;
@@ -3423,7 +3520,7 @@ function delAcctSheet() {
 }
 /* a tapped notification opens the person it was about */
 function openFromLink(id, view, friends) {
-  if (friends && view === 'encourage') { go('encourage'); socLoad(true).then(function () { if (socOn()) friendsSheet(); }); return true; }
+  if (friends) { socLoad(true).then(function () { if (socOn()) go('friends'); }); return true; }
   if (id && S.contacts[id]) { if (!$('#sheet').hidden) closeSheet(); go('contact', id); return true; }
   if (view && /^(today|people|disciples|events|week|encourage|about|settings)$/.test(view)) { go(view); return true; }
   return false;
@@ -3439,7 +3536,7 @@ if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFul
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; SOC.at = 0; if (!openFromLink(q.get('open'), q.get('view'), q.get('friends'))) socLoad(true); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
-window.__shepherd = { render: function () { render(); }, saveEvent: saveEvent, saveProfile: saveProfile, SOC: SOC, socLoad: socLoad, budgetState: budgetState, bandOf: bandOf, bandLabel: bandLabel, myShare: myShare, churchMatches: churchMatches, churchNormC: churchNormC, payLine: payLine, startImport: startImport, sortQueue: sortQueue, sortOne: sortOne, undoSort: undoSort, SORT: SORT, qaPeople: qaPeople, qaRun: qaRun, encList: encList, spendIn: spendIn, money: money, encSheet: encSheet, encTitle: encTitle, knownPeople: knownPeople, evList: evList, tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
+window.__shepherd = { render: function () { render(); }, friendNews: friendNews, tourList: tourList, comingUp: comingUp, capOf: capOf, goingText: goingText, startMini: startMini, saveEvent: saveEvent, saveProfile: saveProfile, SOC: SOC, socLoad: socLoad, budgetState: budgetState, bandOf: bandOf, bandLabel: bandLabel, myShare: myShare, churchMatches: churchMatches, churchNormC: churchNormC, payLine: payLine, startImport: startImport, sortQueue: sortQueue, sortOne: sortOne, undoSort: undoSort, SORT: SORT, qaPeople: qaPeople, qaRun: qaRun, encList: encList, spendIn: spendIn, money: money, encSheet: encSheet, encTitle: encTitle, knownPeople: knownPeople, evList: evList, tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
 
 /* ---------- boot ---------- */
 async function boot() {
