@@ -1,0 +1,161 @@
+1085	Nemokamai
+1086	Mažiau nei {0}
+1087	Mokate jūs
+1088	Moka {0}
+1089	Kaina nenurodyta
+1090	{0} lygiomis dalimis: apie {1} kiekvienam
+1091	{0} lygiomis dalimis: apie {1} kiekvienam, jei prisijungsite
+1092	Apie {0} kiekvienam
+1093	§one={0} dalyvauja|few={0} dalyvauja|many={0} dalyvauja|other={0} dalyvauja
+1094	Su {0}
+1095	Palikti: {0}
+1096	Prisijungti: {0}
+1097	Liko {0}% jūsų biudžeto
+1098	Išleista {0} iš {1}
+1099	Išnaudojote {0}% šio mėnesio biudžeto.
+1100	Jūsų biudžeto bakas šį mėnesį tuščias.
+1101	§one={0} draugas mato planus, kuriais dalijatės|few={0} draugai mato planus, kuriais dalijatės|many={0} draugo mato planus, kuriais dalijatės|other={0} draugų mato planus, kuriais dalijatės
+1102	§one={0} draugas mato planus, kuriais dalijatės|few={0} draugai mato planus, kuriais dalijatės|many={0} draugo mato planus, kuriais dalijatės|other={0} draugų mato planus, kuriais dalijatės
+1103	Pridėkite draugų, kad dalytumėtės planais ir prisijungtumėte prie jų planų
+1104	Dalyvauja: {0}
+1105	Taip viršysite to mėnesio biudžetą {0}.
+1106	Po to to mėnesio biudžete liks {0}.
+1107	Pasirinkite savo bažnyčią
+1108	Pridėti kitą bažnyčią…
+1109	Daugiau niekas iš {0} dar nenaudoja Shepherd. Pasidalykite programėle su jais.
+1110	Parinktys: {0}
+1111	Nėra ryšio. Bandykite dar kartą, kai turėsite ryšį.
+1112	Pranešimas išsiųstas. Ačiū.
+1113	Biudžetas išsaugotas
+1114	Biudžetas pašalintas
+1115	Pasidalyta su draugais. Jie gali prisijungti vienu bakstelėjimu.
+1116	Išsaugota. Pranešime, kai būsite patvirtinti.
+1117	Bažnyčia išsaugota
+1118	Dabar esate draugai
+1119	Jei šis žmogus naudoja Shepherd, jis gaus jūsų kvietimą.
+1120	Bakas pripildytas. Jis tuštėja, kai leidžiate pinigus.
+1121	Kvietimas išsiųstas
+1122	Atblokuota
+1123	Užblokuota
+1124	Įveskite mėnesio biudžetą skaičiumi, pavyzdžiui, 40.
+1125	Brolis ar sesuo (neprivaloma)
+1126	Bakstelėkite dar kartą, kad ištrintumėte. Dalyviams bus pranešta.
+1127	Įveskite savo bažnyčios pavadinimą.
+1128	Įveskite el. paštą arba draugo kodą.
+1129	Pasidalyta su draugais
+1130	Dar nenurodyta
+1131	Taip, eisime pavalgyti
+1132	Maistas neplanuojamas
+1133	Kol kas niekas
+1134	Šis planas jums atsivers, kai prisijungs dar kas nors, kad būtų 3 ar daugiau žmonių.
+1135	Redaguoti planą
+1136	Jūs dalyvaujate. Planas yra jūsų Padrąsinimo kalendoriuje, o Shepherd primins.
+1137	Negalėsiu dalyvauti
+1138	Pranešti apie problemą dėl šio plano
+1139	Jūs dalyvaujate. Shepherd primins.
+1140	Jūs nebedalyvaujate.
+1141	Pranešti apie problemą
+1142	Papasakokite, kas nutiko. Jūsų pranešimas privačiai pasieks žmogų, kuris tvarko Shepherd ir gali šalinti paskyras.
+1143	Kas nutiko?
+1144	Jei kam nors gresia pavojus, pirmiausia skambinkite pagalbos tarnyboms.
+1145	Siųsti pranešimą
+1146	Biudžeto bakas
+1147	Tai matote tik jūs
+1148	Nustatykite mėnesio biudžetą padrąsinimo susitikimams ir susitikimams. Bakas rodo, kiek liko.
+1149	Pripildyti baką
+1150	virš biudžeto šį mėnesį
+1151	liko šį mėnesį
+1152	Jūsų bakas tuščias. Išbandykite ką nors nemokamo, pavyzdžiui, pasivaikščiojimą.
+1153	Keisti biudžetą
+1154	Jūsų biudžetas privatus. Draugai jo niekada nemato.
+1155	Pašalinti biudžetą
+1156	Jūsų paskyra nepatvirtinta
+1157	Laukiama patvirtinimo
+1158	Galite toliau naudoti Shepherd savarankiškai. Jei turite klausimų, parašykite žmogui, kuris tvarko Shepherd.
+1159	Žmogus, kuris tvarko Shepherd, tvirtina kiekvieną jaunesnio nei 18 metų asmens paskyrą. Iki tol galite naudoti Shepherd savarankiškai, bet negalite pridėti draugų ar prisijungti prie planų.
+1160	Draugų planai
+1161	Visi planai
+1162	Tik nemokami
+1163	Šiuo metu nemokamų planų nėra.
+1164	Draugų planų dar nėra. Kai draugas pasidalys planu, jis atsiras čia ir galėsite prisijungti vienu bakstelėjimu.
+1165	Kas gali tai matyti
+1166	Tik aš
+1167	Draugai mato, kas tai, kada, kur, ar bus maisto, kainą ir kas dalyvauja, ir gali prisijungti vienu bakstelėjimu. Daugiau nieko Shepherd jie nemato.
+1168	Kur (neprivaloma)
+1169	Kas moka
+1170	Kiekvienas moka už save
+1171	Lygiomis dalimis
+1172	Moku aš
+1173	Parašykite, koks tai planas, kad draugai žinotų.
+1174	Jūsų bažnyčia
+1175	Pasirinkite savo bažnyčią, kad greitai rastumėte draugų iš jos.
+1176	Jaunesnio nei 18 metų asmens paskyra, patvirtinta.
+1177	Jaunesnio nei 18 metų asmens paskyra, nepatvirtinta.
+1178	Jaunesnio nei 18 metų asmens paskyra, laukia patvirtinimo.
+1179	Keisti bažnyčią
+1180	Bažnyčios pavadinimas
+1181	Man mažiau nei 18 metų
+1182	Būsite rodomi kaip jūsų bažnyčia su prierašu (CAMPUS). Žmogus, kuris tvarko Shepherd, patvirtins jus, prieš jums galint pridėti draugų ar prisijungti prie planų. Jūsų draugų sąrašas iš pradžių tuščias, ir jūsų draugais gali būti tik tie žmonės, kuriuos pridėsite patys, nurodę jų el. paštą arba draugo kodą.
+1183	Galbūt turėjote omenyje:
+1184	Draugai mato tik planus, kuriais dalijatės: kas tai, kada, kur, maistas, kaina ir kas dalyvauja. Jie niekada nemato jūsų Žmonių, Mokinių, maldos sąrašo, pastabų, telefono numerių ar biudžeto.
+1185	Jūsų paskyra nepatvirtinta, todėl negalite pridėti draugų.
+1186	Draugų galėsite pridėti, kai jūsų paskyra bus patvirtinta.
+1187	Kvietimai draugauti
+1188	Pridėti draugą
+1189	Jo el. paštas arba draugo kodas
+1190	Siųsti kvietimą
+1191	Jūsų draugo kodas:
+1192	Kopijuoti mano kodą
+1193	Žmonės iš mano bažnyčios
+1194	Pasirinkite savo bažnyčią, kad čia matytumėte žmones iš jos.
+1195	Pridėti draugą
+1196	Jūsų draugai
+1197	Draugų dar nėra. Pridėkite ką nors nurodę el. paštą arba draugo kodą.
+1198	Draugų dar nėra. Pridėkite ką nors nurodę el. paštą arba draugo kodą, arba iš savo bažnyčios.
+1199	Jūsų išsiųsti kvietimai
+1200	Draugo kodas nukopijuotas
+1201	Pašalinimas ar blokavimas yra privatus. Žmogui apie tai nepranešama.
+1202	Pašalinti draugą
+1203	Atgal į draugus
+1204	Prisijungti
+1205	Kas
+1206	Kada
+1207	Kaina
+1208	Organizatorius
+1209	Dalyvauju
+1210	Blokuoti
+1211	Priimti
+1212	Bažnyčia
+1213	Pranešti
+1214	Atmesti
+1215	Atblokuoti
+1216	Pasirinksiu vėliau
+1217	Man mažiau nei 18 metų.
+1218	Viskas, kas jums kėlė nerimą
+1219	Norint naudoti Shepherd, jums turi būti 13 metų ar daugiau.
+1220	Privatus biudžeto bakas rodo, kiek dar galite išleisti šį mėnesį.
+1221	Jūsų bažnyčia, jūsų draugai, jūsų draugo kodas, planai, prie kurių prisijungiate, ir jūsų mėnesio biudžetas.
+1222	Draugystės, informacija apie tai, kas dalyvauja plane, ir pranešimai ištrinami, kai ištrinate paskyrą.
+1223	Draugų pridėti neprivaloma. Draugai mato tik viena: Padrąsinimo planus, kuriais nusprendžiate pasidalyti.
+1224	Draugai niekada nemato jūsų Žmonių, Mokinių, maldos sąrašo, pastabų, telefono numerių, privačių planų ar biudžeto.
+1225	Jums turi būti 13 metų ar daugiau. Jei jums mažiau nei 18, pasakykite tai: jūsų paskyra bus patvirtinta, prieš jums galint pridėti draugų ar prisijungti prie planų.
+1226	Bendras planas rodo, kas tai, dieną ir laiką, vietą, ar bus maisto, kainą ir kas moka, jūsų vardą ir kas dalyvauja.
+1227	Jaunesnių nei 18 metų asmenų paskyros rodomos kaip jų bažnyčia su prierašu (CAMPUS). Žmogus, kuris tvarko Shepherd, el. paštu gauna jų vardą ir el. pašto adresą ir pirmiausia juos patvirtina. Suaugusieji negali siųsti jiems kvietimų draugauti, o planui tarp suaugusiojo ir jaunesnio nei 18 metų asmens reikia 3 ar daugiau žmonių.
+1228	Mėnesio biudžetas ({0})
+1229	Esate rodomi kaip <b>{0}</b>.
+1230	Draugai ir bendri planai
+1231	Jei pasirinksite bažnyčią, tos bažnyčios suaugusieji galės jus rasti pagal vardą ir pirmąją pavardės raidę, kad atsiųstų kvietimą draugauti. Jaunesni nei 18 metų asmenys niekada nerodomi sąraše.
+1232	Bet kada galite pašalinti ar užblokuoti draugą arba pranešti apie žmogų ar planą. Pranešimas pasiekia žmogų, kuris tvarko Shepherd, kartu su jūsų vardu ir el. pašto adresu.
+1233	Pridėkite tik pažįstamus draugus ir dalykitės tik tais planais, kuriuos jiems galima matyti. Susitikite viešose vietose ir su visais elkitės pagarbiai.
+1234	Planuokite padrąsinimo susitikimus ir susitikimus ir dalykitės jais su draugais, kurie gali prisijungti vienu bakstelėjimu. Privatus biudžeto bakas rodo, kiek dar galite išleisti šį mėnesį. Shepherd primena kiekvieną savaitę, o jūsų savaitės bendravimo statistika taip pat yra čia.
+1235	Savaitinis priminimas, priminimai prieš kiekvieną susitikimą ir naujienos apie draugų planus
+1236	Pridėkite draugų ir pasidalykite su jais planu. Draugai mato tik planus, kuriais dalijatės, ir niekada nemato jūsų Žmonių, Mokinių, maldos sąrašo, pastabų ar biudžeto. Jie prisijungia vienu bakstelėjimu, o visiems dalyviams pranešama.
+1237	Pasirinkite bažnyčią iš sąrašo.
+1238	Šis planas nebeatviras.
+1239	Tai jūsų pačių planas.
+1240	Norėdami tai pakeisti, parašykite adresu {0}.
+1241	Galite prisijungti tik prie savo draugų planų.
+1242	Jūsų paskyra laukia patvirtinimo.
+1243	Įveskite savo bažnyčios pavadinimą
+1244	Pašalinta
+1245	Kas dalyvauja
