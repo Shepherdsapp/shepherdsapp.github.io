@@ -94,6 +94,7 @@ async function phone(who, uaStr, w, h) {
   return { ctx, p, who };
 }
 const overflow = p => p.evaluate(() => document.documentElement.scrollWidth - innerWidth);
+const eshot = async (P, sel, name) => { if (SHOTS) { await P.p.locator(sel).scrollIntoViewIfNeeded(); await wait(150); await P.p.locator(sel).screenshot({ path: path.join(OUT, 'fr-' + name + '.png') }); } };
 const shot = async (P, name) => { if (SHOTS) await P.p.screenshot({ path: path.join(OUT, 'fr-' + name + '.png') }); };
 async function skipTour(p) { for (let i = 0; i < 20; i++) { if (await p.locator('#tourSkip').isVisible().catch(() => false)) { await p.click('#tourSkip'); await wait(300); return true; } await wait(200); } return false; }
 const closeSheet = async p => { await p.evaluate(() => { const s = document.querySelector('#sheet'); if (s && !s.hidden) { const b = s.querySelector('[data-act="closesheet"]'); if (b) b.click(); } }); await wait(400); };
@@ -189,13 +190,14 @@ try {
   /* ============ budget tank ============ */
   current = 'Budget tank';
   await tab(A.p, 'encourage');
+  await eshot(A, '#tankCard', 'tankcard-unset');
   await A.p.fill('#bAmt', '0'); await A.p.$eval('#budgetForm', f => f.requestSubmit()); await wait(200);
   ok(/as a number, like 40/.test(await text(A.p, '#bErr')), 'a budget of 0 is explained, not saved');
-  await A.p.fill('#bAmt', '40'); await A.p.$eval('#budgetForm', f => f.requestSubmit()); await wait(1900);
+  await A.p.fill('#bAmt', '40'); await A.p.$eval('#budgetForm', f => f.requestSubmit()); await wait(450); await eshot(A, '#tankCard', 'tankcard-filling'); await wait(1600);
   { const t = await text(A.p, '#tankCard'); const y = await A.p.$eval('#tankFuel', e => [e.dataset.y, e.style.transform].join('|'));
     ok(/£40\.00|£40/.test(t) && /left this month/.test(t), 'a £40 budget shows £40 left this month');
     ok(y === '0|translateY(0px)', 'and the tank fills to the top (' + y + ')'); }
-  await shot(A, 'tank-full');
+  await eshot(A, '#tankCard', 'tankcard-full');
 
   /* ============ sharing a plan ============ */
   current = 'Sharing a plan';
@@ -236,13 +238,16 @@ try {
     ok(st.spent === 10 && st.left === 30 && Math.abs(st.level - 0.75) < 0.001, 'split between two, Pavi\'s share is £10, so the tank shows £30 left (three-quarters full)');
     await wait(1700);
     ok(await A.p.$eval('#tankFuel', e => e.dataset.y) === '26', 'and the fuel has drained to match'); }
-  await shot(A, 'tank-used');
+  await eshot(A, '#tankCard', 'tankcard-used');
   await tab(B.p, 'encourage');
   await B.p.fill('#bAmt', '12'); await B.p.$eval('#budgetForm', f => f.requestSubmit()); await wait(600);
   if (sameMonth) { const st = await B.p.evaluate(() => window.__shepherd.budgetState());
     ok(st.spent === 10 && st.used === 83, 'Grace\'s own tank counts her £10 share of the plan she joined');
     ok(/used 83% of this month/.test(await text(B.p, '#tankCard')), 'and warns her at 80%: "You\'ve used 83% of this month\'s budget."'); }
-  await shot(B, 'tank-low');
+  await wait(1600); await eshot(B, '#tankCard', 'tankcard-low');
+  await B.p.evaluate(() => { const s = window.__shepherd.S; s.profile.budget = 8; window.__shepherd.render(); }); await wait(1700); await eshot(B, '#tankCard', 'tankcard-over');
+  if (sameMonth) ok(/over budget this month/.test(await text(B.p, '#tankCard')) && /Your tank is empty/.test(await text(B.p, '#tankCard')), 'over budget: the tank is empty and says so kindly');
+  await B.p.evaluate(() => { const s = window.__shepherd.S; s.profile.budget = 12; window.__shepherd.render(); }); await wait(300);
   ok(!/budget/i.test(JSON.stringify(db("SELECT * FROM social"))) && !/"budget"/.test(JSON.stringify((await soc(A.p)).feed)), 'budgets never appear in anything friends can load');
 
   /* ============ a third friend: who gets told ============ */

@@ -1019,6 +1019,90 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     function encDocs() { return [...store.docs.entries()].filter(([k, v]) => k.includes('/events/') && v.kind === 'enc').map(([k, v]) => v); }
   }
 
+  current = 'Budget tank and money on plans';
+  {
+    const W = A.w.__shepherd, S2 = () => A.S(), td = ymd(Date.now()), prof = () => store.docs.get('data/users/u_test/profile');
+    const squash = sel => A.$(sel).textContent.replace(/\s+/g, ' ');
+    A.click('[data-act="tab"][data-v="encourage"]'); await wait();
+    ok(!A.$('#frBar') && !A.$('#feedSec') && !A.$('#socWait'), 'with no server (the Claude copy), friends are simply not shown');
+    ok(A.$('#tankCard') && A.$('#budgetForm') && /Only you see this/.test(squash('#tankCard')) && /Set a monthly budget/.test(squash('#tankCard')) && A.$('#tankCard svg.tank'), 'the budget tank starts empty, marked "Only you see this", asking for a monthly budget');
+    A.setVal('#bAmt', '0'); A.submit('#budgetForm'); await wait();
+    ok(!A.$('#bErr').hidden && /as a number, like 40/.test(A.$('#bErr').textContent) && !prof().budget, 'a budget of 0 is explained and not saved');
+    A.setVal('#bAmt', '-3'); A.submit('#budgetForm'); await wait();
+    ok(!A.$('#bErr').hidden && !prof().budget, 'nor a negative one');
+    A.setVal('#bAmt', '25'); A.submit('#budgetForm'); await wait(200);
+    let st = W.budgetState();
+    ok(prof().budget === 25 && st.budget === 25 && st.spent === 12.5 && st.left === 12.5 && st.level === 0.5 && st.used === 50, 'a £25 budget with £12.50 already spent this month: half the tank is left');
+    ok(/£12\.50 left this month/.test(squash('#tankCard')) && /£12\.50 spent of £25/.test(squash('#tankCard')) && A.$('[data-act="budgetedit"]'), 'the card says "£12.50 left this month" and "£12.50 spent of £25"');
+    ok(A.$('#tankFuel').dataset.y === '52' && /translateY\(52px\)/.test(A.$('#tankFuel').getAttribute('style')) && /50% of your budget left/.test(A.$('#tankCard svg.tank').getAttribute('aria-label')), 'the fuel sits exactly half-way, and screen readers hear "50% of your budget left"');
+    ok(/#C58A17/.test(A.$('#tankCard svg.tank').getAttribute('style')) && A.$('.tk-left').classList.contains('mid'), 'at half it turns amber');
+    ok(/tk-wave/.test(A.$('#tankCard').innerHTML) && /@keyframes slosh/.test(SRC) && /#tankFuel\{transition:transform/.test(SRC), 'the fuel has a moving surface and glides to its new level');
+    ok(/@media \(prefers-reduced-motion:reduce\)\{\*\{animation:none!important;transition:none!important/.test(SRC.replace(/\s*([{};:,])\s*/g, '$1')), 'and it all stays still for people who ask their phone for less motion');
+    // "this leaves…" while planning
+    A.click('[data-act="newenc"][data-t="date"]'); await wait();
+    ok(A.$('#enLeaves').hidden && !A.$('#enShare') && !A.$('#enPay') && A.$('#enPlace'), 'the plan form has a Where box, and no sharing choices without friends');
+    A.setVal('#enCost', '5'); await wait(30);
+    ok(!A.$('#enLeaves').hidden && A.$('#enLeaves').textContent === 'This leaves £7.50 in your budget for that month.', 'typing a cost shows "' + A.$('#enLeaves').textContent + '"');
+    A.setVal('#enCost', '20'); await wait(30);
+    ok(A.$('#enLeaves').textContent === 'This takes you £7.50 over your budget for that month.' && A.$('#enLeaves').classList.contains('over'), 'and a cost that\'s too much says by how much: "' + A.$('#enLeaves').textContent + '"');
+    { const d = new Date(); const nm = ymd(new Date(d.getFullYear(), d.getMonth() + 1, 5).getTime());
+      A.setVal('#enDate', nm); await wait(30);
+      ok(A.$('#enLeaves').textContent === 'This leaves £5 in your budget for that month.' || A.$('#enLeaves').textContent === 'This leaves £5.00 in your budget for that month.', 'a plan next month counts against next month\'s tank: "' + A.$('#enLeaves').textContent + '"');
+      A.setVal('#enDate', td); await wait(30); }
+    A.setVal('#enWho', 'Ruth Budget'); A.setVal('#enCost', '8'); A.submit('#enForm'); await wait(300);
+    st = W.budgetState();
+    ok(st.spent === 20.5 && st.used === 82 && /used 82% of this month's budget/.test(A.$('#toastMsg').textContent), 'at 80% Shepherd gives a heads-up: "' + A.$('#toastMsg').textContent + '"');
+    ok(/used 82% of this month/.test(squash('#tankCard')) && /#B5473C/.test(A.$('#tankCard svg.tank').getAttribute('style')) && A.$('#tankFuel').dataset.y === String(Math.round((1 - 4.5 / 25) * 104)), 'the tank turns red and shows it on the card too');
+    A.click(A.$$('#main .enc').find(b => /Ruth Budget/.test(b.textContent))); await wait();
+    ok(A.$('#enLeaves').textContent === 'This leaves £4.50 in your budget for that month.', 'editing a plan doesn\'t count it twice: "' + A.$('#enLeaves').textContent + '"');
+    A.$('#toastMsg').textContent = ''; A.setVal('#enCost', '9'); A.submit('#enForm'); await wait(300);
+    ok(!/used \d+% of this month/.test(A.$('#toastMsg').textContent) && W.budgetState().spent === 21.5, 'the heads-up comes once a month, not on every save');
+    A.click(A.$$('#main .enc').find(b => /Ruth Budget/.test(b.textContent))); await wait();
+    A.setVal('#enCost', '20'); A.submit('#enForm'); await wait(300);
+    st = W.budgetState();
+    ok(st.left === -7.5 && st.level === 0 && /£7\.50 over budget this month/.test(squash('#tankCard')) && /Your tank is empty\. Try something free, like a walk\./.test(squash('#tankCard')) && A.$('#tankFuel').dataset.y === '104', 'over budget: the tank is empty and gently suggests something free');
+    A.click('[data-act="budgetedit"]'); await wait();
+    ok(A.$('#sheetTitle').textContent === 'Budget tank' && /Your budget is private\. Friends never see it\./.test(A.$('#sheetBody').textContent) && A.$('#bsAmt').value === '25', 'Change budget says the budget is private');
+    A.setVal('#bsAmt', '65'); A.submit('#bsForm'); await wait(200);
+    ok(prof().budget === 65 && W.budgetState().level === 0.5 && /£32\.50 left this month/.test(squash('#tankCard')), 'raising the budget refills the tank to match');
+    A.click('[data-act="budgetedit"]'); await wait(); A.click('#bsOff'); await wait(200);
+    ok(prof().budget === 0 && A.$('#budgetForm'), 'the budget can be removed again');
+    A.click(A.$$('#main .enc').find(b => /Ruth Budget/.test(b.textContent))); await wait(); A.click('#enDel'); A.click('#enDel'); await wait(300);
+    // price tags and shares
+    ok(W.bandOf('', 'own', 1) === '' && W.bandOf(0, 'own', 1) === 'free' && W.bandOf(4.99, 'own', 1) === 'u5' && W.bandOf(5, 'own', 1) === 'm' && W.bandOf(15, 'own', 1) === 'm' && W.bandOf(15.01, 'own', 1) === 'h', 'price tags: Free, Under £5, £5–£15, £15+');
+    ok(W.bandOf(30, 'split', 3) === 'm' && W.bandOf(30, 'split', 1) === 'h' && W.bandOf(99, 'host', 4) === 'free', 'a split cost is tagged by each person\'s share, and "host is paying" is free for everyone else');
+    ok(W.myShare(20, 'split', 1, true) === 10 && W.myShare(20, 'split', 3, false) === 5 && W.myShare(20, 'host', 2, false) === 0 && W.myShare(20, 'host', 2, true) === 20 && W.myShare(20, 'own', 5, false) === 20 && W.myShare('', 'own', 0, true) === 0, 'my share: split equally, nothing when the host pays, everything when I\'m the host paying');
+    const P = o => Object.assign({ cost: 24, pay: 'own', cur: 'GBP', going: [], mine: false, joined: false, hostName: 'Hashir Khan', band: 'h' }, o);
+    ok(W.payLine(P({})) === 'About £24 each' && W.payLine(P({ cost: 0 })) === 'Free' && W.payLine(P({ pay: 'host' })) === 'Hashir is paying' && W.payLine(P({ pay: 'host', mine: true })) === 'You\'re paying', 'the cost line: "About £24 each", "Free", "Hashir is paying"');
+    ok(W.payLine(P({ pay: 'split' })) === '£24 split equally: about £12 each if you join' && W.payLine(P({ pay: 'split', joined: true, going: [{}, {}] })) === '£24 split equally: about £8 each' && W.payLine(P({ pay: 'split', mine: true, going: [{}] })) === '£24 split equally: about £12 each', 'split plans show what you\'d pay if you joined, then the real share once you have');
+    ok(W.payLine(P({ cost: undefined, pay: undefined, band: 'm' })) === '£5–£15' && W.payLine(P({ cost: null, band: '' })) === 'Cost not set', 'an under-18 only ever gets the price tag');
+    // close-match churches
+    const CH = [{ id: 'c_london_icc', name: 'London ICC' }, { id: 'c2', name: 'Grace Community Church Leeds' }, { id: 'c3', name: 'Birmingham ICC' }];
+    const hit = q => W.churchMatches(q, CH).map(c => c.name).join('|');
+    ok(hit('london icc') === 'London ICC' || hit('london icc').startsWith('London ICC'), '"london icc" finds London ICC');
+    ok(hit('Londn ICC').startsWith('London ICC') && hit('ICC London').startsWith('London ICC') && hit('The London International Christian Church').startsWith('London ICC'), 'so do a typo, a different word order and the name written out in full');
+    ok(hit('Grace Comunity Leeds').startsWith('Grace Community Church Leeds') && hit('Hillsong Manchester') === '' && hit('St Mary') === '' && hit('a') === '', 'another church with a typo is matched, and an unrelated name offers nothing');
+    A.click('[data-act="settings"]'); await wait();
+    ok(!A.$('#churchCard') && !A.$('#ownerCard'), 'no church card without a server');
+    A.click('#aboutCard [data-v="about"]'); await wait();
+    ok(/friends/i.test(A.$('#main').textContent) && /budget tank/i.test(A.$('#main').textContent) && /only the plans you choose to share|only see the plans you share/i.test(A.$('#main').textContent), 'About explains friends (only shared plans) and the budget tank');
+    A.click('[data-act="tab"][data-v="encourage"]'); await wait();
+  }
+
+  current = 'Sheets opened quickly one after another';
+  {
+    // a sheet opened just as the last one finishes closing must stay open (the old close timer used to hide it)
+    A.click('[data-act="tab"][data-v="encourage"]'); await wait(400);
+    const realRaf = A.w.requestAnimationFrame; A.w.requestAnimationFrame = f => setTimeout(f, 120);
+    A.click('[data-act="newenc"][data-t="date"]'); await wait(160);
+    A.click('#sheet [data-act="closesheet"]'); await wait(300);
+    A.click('[data-act="newenc"][data-t="hangout"]'); await wait(200);
+    A.w.requestAnimationFrame = realRaf;
+    ok(!A.$('#sheet').hidden && A.$('#sheetTitle').textContent === 'Log a hangout' && A.$('#enForm') && !A.$('#scrim').hidden, 'the second sheet stays open, with its form');
+    A.click('#sheet [data-act="closesheet"]'); await wait(400);
+    ok(A.$('#sheet').hidden && A.$('#sheetBody').innerHTML === '', 'and closing still tidies up afterwards');
+  }
+
   current = 'Key events: countdowns and Encourage reminders';
   {
     const W = A.w.__shepherd, S2 = () => A.S();

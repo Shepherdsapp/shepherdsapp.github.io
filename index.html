@@ -515,10 +515,13 @@ body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
 .badge2{min-width:26px;height:26px;padding:0 8px;border-radius:99px;background:var(--bad);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center}
 .chev{font-size:24px;color:var(--muted);line-height:1}
 .flist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.sheet .sec>.h3{margin:0;font-size:17.5px;font-weight:800;color:var(--fg)}
+.frow .ps,.pcard .ps{white-space:normal;overflow:visible;overflow-wrap:anywhere}
+.frow.tall{grid-template-columns:minmax(0,1fr)} .frow.tall .frbtns{justify-content:flex-start}
 .frow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:56px}
 .frbtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .code{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--fg);font-size:17px}
-.facts{list-style:none;margin:0;padding:0;display:grid;gap:0;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.facts{flex:none;list-style:none;margin:0;padding:0;display:grid;gap:0;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
 .facts li{display:grid;grid-template-columns:84px minmax(0,1fr);gap:10px;padding:11px 14px;border-bottom:1px solid var(--line)} .facts li:last-child{border-bottom:0}
 .facts .k{color:var(--muted);font-weight:600;font-size:14.5px} .facts .v{overflow-wrap:anywhere}
 .chip.priv{background:#E7DDF1;color:#5B3A7A;font-weight:700;font-size:13px;min-height:26px}
@@ -538,7 +541,9 @@ body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
 .tk-marks{stroke:var(--fg);stroke-width:2;stroke-linecap:round;opacity:.45;fill:none}
 .tk-shine{stroke:#fff;stroke-width:5;stroke-linecap:round;opacity:.28;fill:none}
 .tk-left{margin:0;display:grid;gap:0} .tk-left b{font-family:var(--display);font-size:34px;line-height:1.05;color:var(--ok);font-variant-numeric:tabular-nums} .tk-left span{font-weight:600;color:var(--muted)}
-.tk-left.over b{color:var(--bad)}
+.tk-left.over b{color:var(--bad)} .tk-left.mid b{color:var(--warn)}
+.tank{transform-origin:50% 100%} .tank.wob{animation:wob .7s ease}
+@keyframes wob{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}50%{transform:rotate(4deg)}75%{transform:rotate(-2deg)}}
 .tk-warn{margin:0;padding:8px 12px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-weight:600;font-size:14.5px} .tk-warn.bad{background:var(--bad-soft);color:var(--bad)}
 @media (max-width:374px){ .tankrow{grid-template-columns:88px minmax(0,1fr);gap:12px} .tank{width:88px;height:110px} .tk-left b{font-size:28px} .jbtn{min-width:56px;margin-right:8px;padding:6px 10px} .facts li{grid-template-columns:70px minmax(0,1fr)} }
 </style>
@@ -2246,7 +2251,7 @@ function reportSheet(about, plan) {
 }
 
 /* ---------- the budget tank: private, and it drains as you spend ---------- */
-var tankPrev = null;
+var tankPrev = null, tankSeen = null;
 function budgetState() {
   var b = Number(S.profile.budget) || 0, mb = monthBounds(Date.now()), spent = spendIn(mb[0], mb[1]).total;
   var left = b - spent, level = b > 0 ? cl01(left / b) : 0;
@@ -2271,7 +2276,7 @@ function tankCard() {
     '<form class="tankside" id="budgetForm" novalidate><p class="note" style="margin:0">Set a monthly budget for encouragement dates and hangouts. Your tank shows how much is left.</p><label class="field" for="bAmt">Monthly budget (' + esc(curCode()) + ')<input class="inp" id="bAmt" type="number" inputmode="decimal" min="1" step="1" placeholder="40"></label><p class="small" id="bErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" type="submit">Fill the tank</button></form></div></section>';
   var over = st.left < 0;
   return '<section class="card tankcard" id="tankCard"><div class="sec-h"><h2 class="h3">Budget tank</h2><span class="chip priv">Only you see this</span></div><div class="tankrow">' + tankSvg(st.level) +
-    '<div class="tankside"><p class="tk-left' + (over ? ' over' : '') + '"><b data-noi18n>' + esc(money(Math.abs(st.left))) + '</b><span>' + (over ? 'over budget this month' : 'left this month') + '</span></p>' +
+    '<div class="tankside"><p class="tk-left' + (over || st.level <= 0.2 ? ' over' : st.level <= 0.5 ? ' mid' : '') + '"><b data-noi18n>' + esc(money(Math.abs(st.left))) + '</b> <span>' + (over ? 'over budget this month' : 'left this month') + '</span></p>' +
     '<p class="note" style="margin:0" data-noi18n>' + esc(L('{0} spent of {1}', money(st.spent), money(st.budget))) + '</p>' +
     (over ? '<p class="tk-warn bad">Your tank is empty. Try something free, like a walk.</p>' : st.used >= 80 ? '<p class="tk-warn" data-noi18n>' + esc(L('You\'ve used {0}% of this month\'s budget.', st.used)) + '</p>' : '') +
     '<button class="btn small" data-act="budgetedit">Change budget</button></div></div></section>';
@@ -2323,7 +2328,7 @@ function friendsBar() {
   if (!socOn()) return '';
   var m = SOC.me, req = (m.incoming || []).length;
   if (m.minor && !m.approved) return '<section class="card" id="socWait" style="background:var(--gold-soft);border-color:transparent"><h2 class="h3">' + (m.declined ? 'Your account wasn\'t approved' : 'Waiting for approval') + '</h2><p class="note" style="margin:0;color:var(--fg)">' + (m.declined ? 'You can keep using Shepherd on your own. For questions, email the person who runs Shepherd.' : 'The person who runs Shepherd approves every under-18 account. Until then you can use Shepherd on your own, but can\'t add friends or join plans.') + '</p></section>';
-  return '<button class="frbar" id="frBar" data-act="friends"><span class="frav" aria-hidden="true"><svg viewBox="0 0 24 24">' + VICON.people + '</svg></span><span class="pm"><span class="pn">Friends</span><span class="ps" data-noi18n>' + esc((m.friends || []).length ? L('{0} friends see the plans you share', m.friends.length) : L('Add friends to share plans and join theirs')) + '</span></span>' + (req ? '<span class="badge2" data-noi18n>' + req + '</span>' : '<span class="chev" aria-hidden="true">›</span>') + '</button>';
+  return '<button class="frbar" id="frBar" data-act="friends"><span class="frav" aria-hidden="true"><svg viewBox="0 0 24 24">' + VICON.people + '</svg></span><span class="pm"><span class="pn">Friends</span><span class="ps" data-noi18n>' + esc((m.friends || []).length ? L(m.friends.length === 1 ? '{0} friend sees the plans you share' : '{0} friends see the plans you share', m.friends.length) : L('Add friends to share plans and join theirs')) + '</span></span>' + (req ? '<span class="badge2" data-noi18n>' + req + '</span>' : '<span class="chev" aria-hidden="true">›</span>') + '</button>';
 }
 function feedSection() {
   if (!socCan()) return '';
@@ -2550,10 +2555,11 @@ function friendActions(id, name) {
 }
 async function approvalsSheet() {
   var d; try { d = await WEB.api('GET', '/api/social/admin'); } catch (e) { toast((e && e.message) || 'Something went wrong. Try again.'); return; }
-  var opts = d.churches.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.name) + ' (' + c.n + ')</option>'; }).join('');
+  var opt = function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.name) + ' (' + c.n + ')</option>'; };
+  var opts = d.churches.map(opt).join(''), optsFrom = d.churches.filter(function (c) { return c.id !== 'c_london_icc'; }).map(opt).join('');
   openSheet('Approvals',
-    '<section class="sec"><h2 class="h3">Under-18s waiting</h2>' + (d.waiting.length ? '<ul class="flist">' + d.waiting.map(function (w) { return '<li class="frow"><span class="pm"><span class="pn" data-noi18n>' + esc(w.name) + '</span><span class="ps" data-noi18n>' + esc(w.email + (w.church ? ' · ' + w.church + ' (CAMPUS)' : '')) + '</span></span><span class="frbtns"><button class="btn small primary" data-ap="1" data-id="' + esc(w.id) + '">Approve</button><button class="btn small" data-ap="0" data-id="' + esc(w.id) + '">Decline</button></span></li>'; }).join('') + '</ul>' : '<p class="note">Nobody is waiting.</p>') + '</section>' +
-    '<section class="sec"><h2 class="h3">Merge duplicate churches</h2><p class="note" style="margin:0">Everyone in the first church moves to the second, and the first is removed.</p><div class="grid2"><label class="field" for="mgFrom">Remove<select class="inp" id="mgFrom" data-noi18n>' + opts + '</select></label><label class="field" for="mgTo">Keep<select class="inp" id="mgTo" data-noi18n>' + opts + '</select></label></div><button class="btn" id="mgGo">Merge</button></section>' +
+    '<section class="sec"><h2 class="h3">Under-18s waiting</h2>' + (d.waiting.length ? '<ul class="flist">' + d.waiting.map(function (w) { return '<li class="frow tall"><span class="pm"><span class="pn" data-noi18n>' + esc(w.name) + '</span><span class="ps" data-noi18n>' + esc(w.email) + '</span>' + (w.church ? '<span class="ps" data-noi18n>' + esc(w.church + ' (CAMPUS)') + '</span>' : '') + '</span><span class="frbtns"><button class="btn small primary" data-ap="1" data-id="' + esc(w.id) + '">Approve</button><button class="btn small" data-ap="0" data-id="' + esc(w.id) + '">Decline</button></span></li>'; }).join('') + '</ul>' : '<p class="note">Nobody is waiting.</p>') + '</section>' +
+    (d.churches.length > 1 ? '<section class="sec"><h2 class="h3">Merge duplicate churches</h2><p class="note" style="margin:0">Everyone in the first church moves to the second, and the first is removed.</p><label class="field" for="mgFrom">Remove<select class="inp" id="mgFrom" data-noi18n>' + optsFrom + '</select></label><label class="field" for="mgTo">Keep<select class="inp" id="mgTo" data-noi18n>' + opts + '</select></label><p class="small" id="mgErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn" id="mgGo">Merge</button></section>' : '') +
     '<section class="sec"><h2 class="h3">Reports</h2>' + (d.reports.length ? '<ul class="timeline">' + d.reports.map(function (r) { return '<li data-noi18n><time>' + esc(fmtStamp(r.t)) + '</time><span>' + esc((r.who || '?') + ' → ' + (r.about || '?') + (r.aboutEmail ? ' <' + r.aboutEmail + '>' : '') + (r.text ? ': ' + r.text : '')) + '</span></li>'; }).join('') + '</ul>' : '<p class="note">No reports.</p>') + '</section>' +
     '<button class="btn ghost" data-act="closesheet">Done</button>',
     function (root) {
@@ -2561,8 +2567,13 @@ async function approvalsSheet() {
         var b = e.target.closest('[data-ap]'); if (!b) return;
         try { await WEB.api('POST', '/api/social/admin/approve', { id: b.dataset.id, ok: b.dataset.ap === '1' }); toast(b.dataset.ap === '1' ? 'Approved' : 'Declined'); SOC.at = 0; await socLoad(true); approvalsSheet(); } catch (x) { toast(x.message); }
       });
-      $('#mgGo', root).addEventListener('click', async function () {
-        try { await WEB.api('POST', '/api/social/admin/merge', { from: $('#mgFrom', root).value, to: $('#mgTo', root).value }); toast('Churches merged'); approvalsSheet(); } catch (x) { toast(x.message); }
+      var mg = $('#mgGo', root), armed = false;
+      if (mg) mg.addEventListener('click', async function () {
+        var from = $('#mgFrom', root).value, to = $('#mgTo', root).value, er = $('#mgErr', root);
+        if (from === to) { er.hidden = false; er.textContent = 'Choose two different churches.'; return; }
+        er.hidden = true;
+        if (!armed) { armed = true; mg.textContent = 'Tap again to merge. This can\'t be undone.'; if (window.I18N) I18N.apply(mg); return; }
+        try { await WEB.api('POST', '/api/social/admin/merge', { from: from, to: to }); toast('Churches merged'); SOC.at = 0; socLoad(true); approvalsSheet(); } catch (x) { toast(x.message); }
       });
     });
 }
@@ -2852,7 +2863,7 @@ function viewAbout() {
       '<b>Calendar</b> keeps key events like Network Events, EMC and GMC, with weekly or monthly countdowns, invites (sent on WhatsApp) and who came, and links to your phone calendar.']) +
     sec('Encourage one another', vl('And let us consider how we may spur one another on toward love and good deeds', 'Hebrews 10:24'), [
       '<b>Encourage</b> plans encouragement dates and hangouts with brothers and sisters, with a weekly nudge, and shows what you spend each week and month.',
-      'Add friends and share a plan with them. They see the whole plan and join in one tap, and everyone going is told.',
+      'Add friends and share a plan with them. Friends only see the plans you share, never your People, Disciples, prayer list, notes or budget. They join in one tap, and everyone going is told.',
       'A private budget tank shows how much you have left to spend this month.',
       'It also shows how faithfully you followed up each week.']) +
     sec('Every nation and language', vl('…from every nation, tribe, people and language', 'Revelation 7:9'), [
@@ -2976,10 +2987,13 @@ function go(v, id) { if (v === 'week') v = 'encourage'; if (v === 'encourage' ||
 function bindView() {
   bindQuick();
   var fuel = $('#tankFuel');
-  if (fuel) { // the fuel moves from where it was to where it is now
-    var st = budgetState(), y = fuel.getAttribute('data-y');
-    requestAnimationFrame(function () { requestAnimationFrame(function () { var f2 = $('#tankFuel'); if (f2) f2.style.transform = 'translateY(' + y + 'px)'; }); });
-    tankPrev = st.budget ? st.level : null;
+  if (tankSeen) { tankSeen.disconnect(); tankSeen = null; }
+  if (fuel) { // the fuel moves from where it was to where it is now, once the tank is on screen so you see it happen
+    var st = budgetState(), y = fuel.getAttribute('data-y'), lvl = st.budget ? st.level : null, svg = fuel.closest('svg');
+    var pour = function () { requestAnimationFrame(function () { requestAnimationFrame(function () { var f2 = $('#tankFuel'); if (f2) f2.style.transform = 'translateY(' + y + 'px)'; }); }); tankPrev = lvl; };
+    if (window.IntersectionObserver && svg) { tankSeen = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { if (tankSeen) tankSeen.disconnect(); tankSeen = null; pour(); } }, { threshold: 0.3 }); tankSeen.observe(svg); }
+    else pour();
+    if (svg) svg.addEventListener('click', function () { svg.classList.remove('wob'); void svg.getBoundingClientRect(); svg.classList.add('wob'); }); // a tap gives it a little shake
   }
   var bf = $('#budgetForm');
   if (bf) bf.addEventListener('submit', function (e) { e.preventDefault(); if (setBudget($('#bAmt').value, $('#bErr'))) toast('Tank filled. It drains as you spend.'); });
@@ -3026,10 +3040,11 @@ function bindView() {
 var sheetAfter = null;
 var MAXLEN = { cName: 80, cPhone: 30, cSh: 60, cMet: 120, cNotes: 4000, cPrayer: 2000, prName: 80, prNotes: 2000, peName: 80, peNotes: 2000, dName: 80, dPhone: 30, deName: 80, dePhone: 30, deNotes: 2000, eName: 120, ePlace: 120, sTopic: 200, sNotes: 4000, pName: 80, pPhone: 30, pIntro: 500, qPhone: 30, aNote: 500, enWho: 80, enAct: 120, enPlace: 120, qaNum: 30, qaName: 80, chNew: 60, frTo: 200 };
 function capLengths(root) { Object.keys(MAXLEN).forEach(function (id) { var el = root && root.querySelector('#' + id); if (el && !(el.maxLength > 0)) el.maxLength = MAXLEN[id]; }); }
+var sheetGen = 0;
 function openSheet(title, body, mount, after) {
   // opening one sheet over another keeps the first one's "when closed" step (e.g. going back to the tour)
   sheetAfter = after || (!$('#sheet').hidden && $('#sheet').classList.contains('on') ? sheetAfter : null);
-  var sh = $('#sheet'), sc = $('#scrim');
+  var sh = $('#sheet'), sc = $('#scrim'); sheetGen++;
   var old = $('#sheetBody'), nb = old.cloneNode(false); old.parentNode.replaceChild(nb, old); // fresh element: no leftover listeners
   $('#sheetTitle').textContent = title; sh.dataset.title = title; nb.innerHTML = body; capLengths(nb);
   sh.hidden = false; sc.hidden = false; document.body.classList.add('noscroll');
@@ -3041,7 +3056,9 @@ function closeSheet() {
   var sh = $('#sheet'), sc = $('#scrim');
   sh.classList.remove('on'); sc.classList.remove('on'); document.body.classList.remove('noscroll');
   var after = sheetAfter; sheetAfter = null;
-  setTimeout(function () { if (!sh.classList.contains('on')) { sh.hidden = true; sc.hidden = true; $('#sheetBody').innerHTML = ''; } if (after) after(); }, 330);
+  // only tidy away if no other sheet has opened in the meantime (one opened in the last moment has no "on" yet)
+  var gen = sheetGen;
+  setTimeout(function () { if (gen === sheetGen && !sh.classList.contains('on')) { sh.hidden = true; sc.hidden = true; $('#sheetBody').innerHTML = ''; } if (after) after(); }, 330);
 }
 /* Connect Shepherd to the phone's own calendar. Never Google. TimeTree can't share its events with other apps. */
 function calGuide(fromTour) {
@@ -4064,7 +4081,7 @@ if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFul
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; SOC.at = 0; if (!openFromLink(q.get('open'), q.get('view'), q.get('friends'))) socLoad(true); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
-window.__shepherd = { SOC: SOC, socLoad: socLoad, budgetState: budgetState, bandOf: bandOf, myShare: myShare, churchMatches: churchMatches, churchNormC: churchNormC, payLine: payLine, startImport: startImport, sortQueue: sortQueue, sortOne: sortOne, undoSort: undoSort, SORT: SORT, qaPeople: qaPeople, qaRun: qaRun, encList: encList, spendIn: spendIn, money: money, encSheet: encSheet, encTitle: encTitle, knownPeople: knownPeople, evList: evList, tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
+window.__shepherd = { render: function () { render(); }, SOC: SOC, socLoad: socLoad, budgetState: budgetState, bandOf: bandOf, myShare: myShare, churchMatches: churchMatches, churchNormC: churchNormC, payLine: payLine, startImport: startImport, sortQueue: sortQueue, sortOne: sortOne, undoSort: undoSort, SORT: SORT, qaPeople: qaPeople, qaRun: qaRun, encList: encList, spendIn: spendIn, money: money, encSheet: encSheet, encTitle: encTitle, knownPeople: knownPeople, evList: evList, tourResumeAt: tourResumeAt, TOUR: TOUR, saveContact: saveContact, phoneProblem: phoneProblem, homeCountry: homeCountry, COUNTRIES: COUNTRIES, saveLocal: saveLocal, inviteText: inviteText, parseVCF: parseVCF, mergePhoneBook: mergePhoneBook, vcard: vcard, prayerPicks: prayerPicks, buildSchedule: buildSchedule, S: S, digest: digest, parseICS: parseICS, expandEvent: expandEvent, importICS: importICS, importBackup: importBackup, backupText: backupText, waNum: waNum, cleanHandle: cleanHandle, state: state, dueDay: dueDay, weekStats: weekStats, pending: function () { return pending; } };
 
 /* ---------- boot ---------- */
 async function boot() {
