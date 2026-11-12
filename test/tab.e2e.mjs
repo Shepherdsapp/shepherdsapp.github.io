@@ -207,9 +207,7 @@ try {
   current = 'What\'s new';
   ok(!(await A.p.locator('#newsCard').count()), 'someone who has just taken the tour gets no What\'s new card');
   await A.p.evaluate(() => { const W = window.__shepherd; W.S.profile.seenNew = 0; W.saveProfile(); }); await tab(A.p, 'encourage'); await tab(A.p, 'today'); await wait(400);
-  ok(await A.p.locator('#newsCard').isVisible() && /Friends has its own tab/.test(await text(A.p, '#newsCard')) && /budget tank/.test(await text(A.p, '#newsCard')), 'someone who already had an account sees "What\'s new in Shepherd" once');
-  await shot(A, 'tab-whatsnew');
-  await A.p.click('[data-act="newsgo"]'); await wait(700);
+  await wait(1500); // the short tour now starts by itself for someone who already had an account
   ok(await text(A.p, '#tourStep') === '1 of 3' && /Friends has its own tab/.test(await text(A.p, '#tourTitle')) && await A.p.evaluate(() => document.body.dataset.view) === 'friends', '"Show me" starts a short 3-step tour at the Friends tab');
   await A.p.click('#tourNext'); await wait(600);
   ok(/budget tank/i.test(await text(A.p, '#tourTitle')) && await A.p.evaluate(() => document.body.dataset.view) === 'encourage', 'step 2 is the budget tank');

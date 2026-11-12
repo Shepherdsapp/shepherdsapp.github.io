@@ -413,6 +413,12 @@ body.glass .top{background:color-mix(in srgb,var(--bg) 30%,transparent);margin-i
 body.glass .dock{background:color-mix(in srgb,var(--bg) 62%,rgba(255,255,255,.55));-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border-top-color:var(--glass-line)}
 body.glass .card,body.glass .vhead{background:var(--glass);border-color:var(--glass-line);box-shadow:var(--glass-shadow);-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%)}
 body.glass .vhead{background:linear-gradient(135deg,color-mix(in srgb,var(--tint-soft) 70%,rgba(255,255,255,.5)) 0%,rgba(255,255,255,.5) 100%);border:1.5px solid var(--glass-line)}
+/* the heading card on every tab: a bright glass rim and a soft shine across the top */
+.vhead{border:1.5px solid rgba(255,255,255,.9);box-shadow:0 14px 34px -20px color-mix(in srgb,var(--tint) 70%,transparent),inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 color-mix(in srgb,var(--tint) 18%,transparent),0 0 0 1px color-mix(in srgb,var(--tint) 16%,transparent)}
+.vhead::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.22) 22%,rgba(255,255,255,0) 42%,rgba(255,255,255,0) 68%,rgba(255,255,255,.28) 100%);mix-blend-mode:soft-light}
+.vhead>*{position:relative;z-index:1}
+/* Today reads a little smaller, so more of the day fits on one screen */
+@supports (zoom:1){body[data-view="today"] #main{zoom:.9}}
 /* long lists get the glass look without the blur, so scrolling hundreds of people stays fast */
 body.glass .prow,body.glass .ev,body.glass .enc,body.glass .pcard,body.glass .frow,body.glass .stat,body.glass .facts{background:rgba(255,255,255,.66);border-color:var(--glass-line);box-shadow:var(--glass-shadow)}
 body.glass .card .frow,body.glass .card .stat{box-shadow:none}
@@ -2087,6 +2093,12 @@ function newsCard() {
   return '<section class="card newcard" id="newsCard"><div class="sec-h"><h2 class="h3">What\'s new in Shepherd</h2></div><ul><li>Friends has its own tab. Add friends, answer requests and see who has plans.</li><li>Share a plan from Encourage and friends join in one tap. You choose how many can join.</li><li>A private budget tank shows what you have left to spend this month.</li><li>Today shows what\'s coming up and what your friends have planned.</li></ul>' +
     '<div class="row"><button class="btn primary grow" data-act="newsgo">Show me</button><button class="btn grow" data-act="newsok">Got it</button></div></section>';
 }
+var MINI_TRIED = false;
+function maybeMini() {
+  if (MINI_TRIED || !WEB || !socOn() || !S.profile.tourDone || (Number(S.profile.seenNew) || 0) >= NEWS_V || TOUR_I >= 0) return;
+  if (needAgree() || (S.profile.pinHash && !S.unlocked) || !$('#sheet').hidden) return;
+  MINI_TRIED = true; setTimeout(function () { if (TOUR_I < 0 && $('#sheet').hidden && !needAgree()) startMini(); else MINI_TRIED = false; }, 900);
+}
 function newsDone() { if ((Number(S.profile.seenNew) || 0) < NEWS_V) { S.profile.seenNew = NEWS_V; saveProfile(); } }
 function eventsMini(evs) {
   var td = ymd(Date.now()); evs = evs.filter(function (x) { return x.date === td; });
@@ -2416,7 +2428,7 @@ function render() {
   $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events' || S.view === 'about' || S.view === 'encourage' || S.view === 'friends'; // Today has its own Add someone box; About is for reading; Encourage has its own buttons
   if (keep) { var el = document.getElementById(keep); if (el) { el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   bindView();
-  if (TOUR_I >= 0) placeTour();
+  if (TOUR_I >= 0) placeTour(); else maybeMini();
   fitTabs();
   if (WEB) { schedSoon(); try { if (navigator.setAppBadge) { if (owed) navigator.setAppBadge(owed); else navigator.clearAppBadge(); } } catch (e) {} }
   if (WEB && S.view === 'settings') refreshPush();
