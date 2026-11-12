@@ -517,8 +517,9 @@ body[data-view="encourage"]{--tint:#8E3456;--tint-soft:#F6D9E4}
 .flist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .sheet .sec>.h3{margin:0;font-size:17.5px;font-weight:800;color:var(--fg)}
 .frow .ps,.pcard .ps,.frbar .ps{white-space:normal;overflow:visible;overflow-wrap:anywhere}
-.frow.tall{grid-template-columns:minmax(0,1fr)} .frow.tall .frbtns{justify-content:flex-start}
-.frow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:56px}
+.frow.tall .pm{flex-basis:100%} .frow.tall .frbtns{margin-left:0}
+.frow .pn{white-space:normal;overflow:visible;overflow-wrap:anywhere} .frow .pm{flex:1 1 120px;min-width:0} .frow .frbtns{flex:none;margin-left:auto}
+.frow{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:56px}
 .frbtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .code{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--fg);font-size:17px}
 .facts{list-style:none;margin:0;padding:0;display:grid;gap:0;border:1.5px solid var(--line);border-radius:14px;background:var(--surface)}

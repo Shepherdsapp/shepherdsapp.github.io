@@ -161,6 +161,7 @@ try {
     W.S.events.enc2 = { id: 'enc2', kind: 'enc', type: 'hangout', who: 'Joseph Kowalczyk', date: d(3), time: '', activity: 'Football', food: false, cost: 6, name: 'Hangout with Joseph Kowalczyk', createdAt: t };
     W.S.events.enc3 = { id: 'enc3', kind: 'enc', type: 'date', who: 'Grace Owusu', date: d(-5), time: '12:00', activity: 'Lunch', food: true, cost: 22, name: 'Encouragement date with Grace Owusu', createdAt: t };
     W.S.events.gmc = { id: 'gmc', name: 'GMC', date: d(40), time: '10:00', place: 'Central Hall Westminster', invited: [], came: [], notify: true, countdown: 'monthly', createdAt: t };
+    ['enc1', 'enc2', 'enc3', 'gmc'].forEach(k => W.saveEvent(W.S.events[k])); // saved, so they are still there after each language change reloads the page
   });
   await wait(600); await A.p.evaluate(() => { const sh = document.querySelector('#sheet [data-act="closesheet"]'); if (sh) sh.click(); }); await wait(600);
   await A.p.evaluate(() => { const S = window.__shepherd.S; S.profile.prayerOn = true; });
