@@ -1010,7 +1010,7 @@ async function socialAnswer(req, env, me, ctx) {
 }
 async function socialFeed(env, me) {
   const s = await soc(env, me.uid); if (!active(s)) return json({ plans: [] });
-  const fr = await friendIds(env, me.uid); const ids = [me.uid].concat(fr); const cutoff = dayCutoff();
+  const fr = await friendIds(env, me.uid); const ids = [me.uid].concat(fr); const cutoff = dayCutoff(), oldest = new Date(now() - 62 * 864e5).toISOString().slice(0, 10);
   const rows = [], js = [];
   for (let i = 0; i < ids.length; i += 80) {
     const c = ids.slice(i, i + 80), q = c.map(() => '?').join(',');
@@ -1021,14 +1021,17 @@ async function socialFeed(env, me) {
   const P = await people(env, ids.concat(js.map(j => j.uid))); const friendSet = new Set(fr);
   const plans = [];
   for (const r of rows) {
-    const d = sharedPlan(r.data); if (!d || d.date < cutoff) continue;
+    const d = sharedPlan(r.data); if (!d || d.date < oldest) continue;
     const h = P.get(r.uid); if (!h || !active(h)) continue;
     const id = r.path.split('/').pop(), g = (going.get(r.uid + '/' + id) || []).filter(u => P.get(u) && active(P.get(u)));
+    // once the day has passed, a plan stays (for about two months) only for its host and the people who went: their month's spending and "Past" list need it
+    const past = d.date < cutoff; if (past && r.uid !== me.uid && !g.includes(me.uid)) continue;
     const cost = d.cost === '' || d.cost == null || !(Number(d.cost) >= 0) ? null : Math.round(Number(d.cost) * 100) / 100;
     const pay = d.pay === 'split' || d.pay === 'host' ? d.pay : 'own';
     // a split plan's price tag is what it would cost you if you joined
     const p = { host: r.uid, hostName: h.name, mine: r.uid === me.uid, id, type: d.type === 'hangout' ? 'hangout' : 'date', title: planTitle(d), date: d.date, time: /^\d\d:\d\d$/.test(d.time || '') ? d.time : '', place: str(d.place, 120), food: !!d.food,
       band: priceBand(cost, pay, g.length + 1 + (r.uid === me.uid || g.includes(me.uid) ? 0 : 1), h.cur), cur: h.cur, going: g.map(u => ({ id: u, name: u === me.uid || friendSet.has(u) ? P.get(u).name : shortName(P.get(u).name), me: u === me.uid })), joined: g.includes(me.uid) };
+    if (past) p.past = true;
     if (!s.minor) { p.cost = cost; p.pay = pay; } // under-18s see a price tag only (in the host's currency)
     if (!p.mine && !p.joined && !!h.minor !== !!s.minor && g.length < 1) p.needGroup = true;
     plans.push(p);

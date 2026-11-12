@@ -618,6 +618,18 @@ try {
   await call('POST', '/api/social/join', { host: A.id, plan: 'cof' }, B.t);
   await docs(A.t, [{ p: 'profile/events/cof', d: { kind: 'enc', type: 'date', share: 'me', date: day(5), time: '10:00', activity: 'Coffee', cost: 0 }, t: Date.now() + 30 }]);
   r = await call('GET', '/api/social/feed', undefined, B.t); ok(r.data.plans.length === 0 && q("SELECT COUNT(*) FROM joins WHERE plan = 'cof'")[0][0] === 0, 'switching a plan back to Just me takes it away from friends');
+  // once the day has passed: a plan stays for its host and the people who went (so budgets and "Past" stay right), not for anyone else
+  { const pl = (dt, tt) => [{ p: 'profile/events/past1', d: { kind: 'enc', type: 'hangout', share: 'friends', date: day(dt), time: '19:00', activity: 'Curry night', place: 'Brick Lane', food: true, cost: 30, pay: 'split' }, t: Date.now() + tt }];
+    await docs(A.t, pl(3, 40)); await call('POST', '/api/social/join', { host: A.id, plan: 'past1' }, B.t);
+    await docs(A.t, pl(-3, 50));
+    let fb = (await call('GET', '/api/social/feed', undefined, B.t)).data.plans.find(x => x.id === 'past1'), fa = (await call('GET', '/api/social/feed', undefined, A.t)).data.plans.find(x => x.id === 'past1'), fc = (await call('GET', '/api/social/feed', undefined, C.t)).data.plans.find(x => x.id === 'past1');
+    ok(fb && fb.joined === true && fb.past === true && fb.cost === 30 && fb.going.length === 1, 'someone who went still gets the plan after the day, marked as past, with its cost');
+    ok(fa && fa.mine === true && fa.going.length === 1 && fa.going[0].id === B.id, 'the host still gets who went, so their share of a split stays right');
+    ok(!fc, 'a friend who didn\'t join no longer sees a plan that has passed');
+    r = await call('POST', '/api/social/join', { host: A.id, plan: 'past1' }, C.t); ok(r.status === 404, 'and nobody can join it late');
+    await docs(A.t, pl(-70, 60));
+    fb = (await call('GET', '/api/social/feed', undefined, B.t)).data.plans.find(x => x.id === 'past1'); ok(!fb, 'after about two months it drops away');
+    await docs(A.t, [{ p: 'profile/events/past1', d: null, t: Date.now() + 70 }]); }
   // remove, block, report
   await docs(A.t, [{ p: 'profile/events/walk', d: { kind: 'enc', type: 'hangout', share: 'friends', date: day(6), activity: 'Walk', cost: '' }, t: Date.now() }]);
   await call('POST', '/api/social/join', { host: A.id, plan: 'walk' }, C.t);

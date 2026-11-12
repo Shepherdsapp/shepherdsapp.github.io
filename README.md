@@ -53,6 +53,11 @@ No password, key or private address is written anywhere in this folder.
    (Secret): in that Google account turn on 2-Step Verification, then Security → App passwords → make one called Shepherd
    and paste the 16 letters here. With both set, "Forgot password?" emails a 6-digit code to the address the person typed.
 
+   Optional, for friends and shared plans: `OWNER_EMAIL` (Text), the email address **you** sign in to Shepherd with.
+   It makes an **Approvals** card appear in your own Settings, where you approve under-18 (CAMPUS) accounts, read
+   reports and merge duplicate churches. Without it you can still approve from the admin page (see "Friends, churches
+   and shared plans"). New under-18 sign-ups and reports are also emailed to `GMAIL_USER` when that is set.
+
    Optional: `INVITE_CODE` (Text), a church invite code. When it's set, new people must type it to create an account
    (capitals, spaces and dashes don't matter) and the sign-up screen shows the box by itself. Change or remove it any time;
    people who already have an account aren't affected. Without it, anyone with the link can create an account.
@@ -155,6 +160,25 @@ Add services and events on Shepherd's Calendar tab so you can invite people and 
   language; change it in Settings.
 - **Settings → What's saved and who can see it** lists exactly what is kept, where, and what is never collected.
 
+## Friends, churches and shared plans
+
+- **What friends see**: only the Encourage plans you choose to share (what, when, where, food, cost and who pays, your
+  name, who's going). Never your People, Disciples, prayer list, notes, phone numbers, private plans or budget.
+- **Adding friends**: Encourage → **Friends**. Add by email or friend code, or from **People from my church** (adults
+  only, shown as first name and initial). Accept, decline, remove, block or report from the same screen.
+- **Sharing a plan**: in the plan form choose **Friends** under *Who can see this*, and who pays (everyone pays their
+  own, split equally, or you). Friends are told once; they join in one tap; after that only the host and the people
+  going hear about joins, changes and cancellations. Joined plans appear in the joiner's Encourage list with reminders.
+- **Churches**: chosen at sign-up or in Settings. **London ICC** is there from the start; anyone can add another, and
+  close matches are offered first so the same church isn't added twice.
+- **Under-18s**: minimum age 13. Someone who ticks *I'm under 18* shows as their church with **(CAMPUS)** and is held
+  until the person who runs Shepherd approves them (Settings → Approvals, or the admin page at
+  `https://<worker address>/admin` with the email address and `ADMIN_KEY`). They are never listed, adults can't send
+  them requests, they only ever get a price tag (not the exact cost), and a plan between an adult and an under-18 needs
+  3 or more people.
+- **Budget tank** (Encourage): a private monthly budget shown as a fuel tank. Only you see it; it is never sent to friends.
+- An app that is newer than the server simply hides the friends features until the Worker is updated.
+
 ## Languages
 
 Settings → **Language**: English, Español, Français, Português, Nederlands, Polski, Naijá, Yorùbá, Igbo, 中文（简体）,
@@ -209,5 +233,6 @@ changes, paste it into the Worker again and **Deploy**.
 |---|---|
 | `node test/worker.test.mjs` | 87 checks of the server: the QR hello page (adds the person, opens WhatsApp in your language, slows down spam), accounts, saving (newer copies always win), history, deleting, notifications (encrypted and signed exactly as Apple and Google require, then decrypted the way a phone does), the calendar link, password resets, privacy between accounts |
 | `node test/app.test.cjs` | 304 checks of the app: every screen, the 16-card tour, the acceptable use agreement, the privacy page, guides, the journey, the prayer list and its reminders, reading contacts files from iPhone and Android, the notification schedule (names, times, pauses, caps), and the app in Spanish (Bible verses stay English) |
+| `node test/friends.e2e.mjs` | several phones at once against the real server code: church at sign-up, friend requests, sharing a plan, one-tap join, exactly who gets notified, changes and cancellations, the under-18 (CAMPUS) safeguards, adding and matching churches, remove/block/report, the budget tank, no signal, and an app running against a server that hasn't been updated yet |
 | `node test/e2e.mjs` | 76 checks of the built website in Chromium at iPhone and Android sizes (320 to 430px wide), talking to the real server code: sign up (no account without agreeing), privacy.html on its own and in Spanish, two phones in sync, notifications from schedule to delivery, tapping one, the calendar link, password reset, sign out, offline, every tour card fully on screen at four phone sizes, and switching language (a second phone follows, works offline) |
 | `node lang/check.mjs` | every language has every line, with the same `{0}` gaps and bold words |

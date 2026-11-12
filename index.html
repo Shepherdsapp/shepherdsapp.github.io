@@ -2223,7 +2223,7 @@ function planCard(p, isPast) {
   return '<div class="pcard' + (hang ? ' hangout' : '') + (p.joined ? ' joined' : '') + '"><button class="pcard-main" data-act="openplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '"><span class="calbox"><span>' + MON[d.getMonth()] + '</span><b>' + d.getDate() + '</b></span><span class="pm"><span class="pn" data-noi18n>' + esc(p.title) + '</span>' +
     '<span class="ps">' + esc(fmtDate(p.date)) + (p.time ? ', ' + esc(fmtClock(p.time)) : '') + (p.place ? ' · <span data-noi18n>' + esc(p.place) + '</span>' : '') + '</span><span class="ps" data-noi18n>' + esc(L('With {0}', p.hostName)) + '</span>' +
     '<span class="tags"><span class="etag ' + (hang ? 'hangout">Hangout' : 'date">Encouragement date') + '</span>' + (p.food ? '<span class="etag food">Food</span>' : '') + bandTag(p.band, p.cur) + (p.going.length ? '<span class="etag going" data-noi18n>' + esc(L('{0} going', p.going.length)) + '</span>' : '') + '</span></span></button>' +
-    (isPast ? '' : p.joined ? '<button class="jbtn on" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="0" aria-label="' + esc(L('Leave {0}', p.title)) + '">' + ICON.check + '<span>Going</span></button>'
+    (isPast ? '' : p.joined ? '<button class="jbtn on" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="0" aria-pressed="true" aria-label="' + esc(L('Going') + ', ' + p.title) + '">' + ICON.check + '<span>Going</span></button>'
       : '<button class="jbtn" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="1"' + (p.needGroup ? ' disabled' : '') + ' aria-label="' + esc(L('Join {0}', p.title)) + '"><span>Join</span></button>') + '</div>';
 }
 function planSheet(host, id) {
@@ -2325,7 +2325,7 @@ function encMonthHtml(all) {
   for (var i = 0; i < lead; i++) h += '<span></span>';
   for (var dd = 1; dd <= days; dd++) {
     var ds = y + '-' + pad(m + 1) + '-' + pad(dd), n = has[ds] || 0;
-    h += '<button type="button" class="' + (n ? 'has' : '') + (ds === td ? ' today' : '') + '" data-act="encday" data-d="' + ds + '" aria-pressed="' + (S.encDay === ds) + '" aria-label="' + esc(fmtDate(ds)) + (n ? ': ' + plural(n, 'plan') : '') + '">' + dd + '</button>';
+    h += '<button type="button" class="' + (n ? 'has' : '') + (ds === td ? ' today' : '') + '" data-act="encday" data-d="' + ds + '" aria-pressed="' + (S.encDay === ds) + '" aria-label="' + esc((fmtDate(ds).indexOf(String(dd)) < 0 ? dd + ', ' : '') + fmtDate(ds)) + (n ? ': ' + plural(n, 'plan') : '') + '">' + dd + '</button>';
   }
   return h + '</div></section>';
 }
