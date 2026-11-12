@@ -101,6 +101,18 @@ function untranslated(code, texts) {
 }
 const screenText = p => p.evaluate(() => { const out = []; const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) { const el = n.parentElement; if (!el || el.closest('[hidden],script,style,[data-noi18n]') || !el.offsetParent) continue; if (n.nodeValue.trim()) out.push(n.nodeValue); } document.querySelectorAll('#main li, #main p, #main h1, #main h2, #main button, #main label, #sheet li, #sheet p, #sheet button, #sheet label, .tab, #tour p, #tour h2').forEach(e => { if (e.offsetParent && !e.closest('[data-noi18n]')) out.push(e.textContent); }); document.querySelectorAll('[placeholder],[aria-label]').forEach(e => { if (e.offsetParent) out.push(e.getAttribute('placeholder') || e.getAttribute('aria-label')); }); return out; });
 const report = { layout: [], tabs: [], tour: [], axe: {}, big: {}, misses: {}, speed: {}, notes: [] };
+// the friends screens: each opens a sheet (or changes Encourage) on the audit phone
+const enc = async p => { await p.click('.tab[data-v="encourage"]'); await wait(300); };
+const FRIEND_SHEETS = [
+  [async p => { await enc(p); await p.click('#frBar'); }, 'friends sheet'],
+  [async p => { await enc(p); await p.click('#frBar'); await wait(600); await p.locator('#sheet [data-fr="more"]').first().click(); }, 'friend options'],
+  [async p => { await enc(p); await p.locator('#feedSec .pcard-main').first().click(); }, 'plan details'],
+  [async p => { await enc(p); await p.locator('#feedSec .pcard-main').nth(2).click(); await wait(450); await p.click('#sheet [data-act="reportplan"]'); }, 'report sheet'],
+  [async p => { await enc(p); await p.click('[data-act="budgetedit"]'); }, 'budget sheet'],
+  [async p => { await enc(p); await p.click('[data-act="newenc"][data-t="hangout"]'); await wait(400); await p.click('#enShare [data-v="friends"]'); await p.fill('#enCost', '30'); }, 'shared plan form'],
+  [async p => { await p.click('[data-act="settings"]'); await wait(350); await p.click('#churchCard [data-act="church"]'); await wait(600); await p.selectOption('#chSel', '+'); await p.fill('#chNew', 'london icc'); await p.check('#chMinor'); }, 'church sheet'],
+  [async p => { await enc(p); await p.evaluate(() => { const W = window.__shepherd; W.SOC.me.minor = true; W.SOC.me.approved = false; W.SOC.me.declined = false; W.render(); }); }, 'waiting for approval'],
+];
 const addMiss = (code, list) => { if (!list.length) return; report.misses[code] = [...new Set([...(report.misses[code] || []), ...list])]; };
 // everything on screen must sit inside the screen, and no tab label may be cut off
 const layoutProblems = p => p.evaluate(() => {
@@ -152,6 +164,34 @@ try {
   });
   await wait(600); await A.p.evaluate(() => { const sh = document.querySelector('#sheet [data-act="closesheet"]'); if (sh) sh.click(); }); await wait(600);
   await A.p.evaluate(() => { const S = window.__shepherd.S; S.profile.prayerOn = true; });
+  // friends: a friend with shared plans (one joined), a waiting request, a church, a budget and a shared plan of my own
+  {
+    const mk = async (name, email) => { const X = await phone(ANDROID, 390, 844); await X.p.goto(APP); await wait(700); await X.p.fill('#aName', name); await X.p.fill('#aEmail', email); await X.p.fill('#aPw', 'audit password 1'); await X.p.check('#aAgree'); await X.p.click('#aGo'); await wait(2500); await skipTour(X.p); await wait(400); await X.p.evaluate(() => window.SHEPHERD_WEB.api('POST', '/api/social/profile', { church: 'c_london_icc' })); return X; };
+    const B = await mk('Oluwaseun Adeyemi-Okafor', 'friend@church.test'), C = await mk('Maximilian Schmidt-Hoffmann', 'asker@church.test');
+    await A.p.evaluate(() => window.SHEPHERD_WEB.api('POST', '/api/social/profile', { church: 'c_london_icc' }));
+    await B.p.evaluate(() => window.SHEPHERD_WEB.api('POST', '/api/social/friend', { to: 'audit@church.test' }));
+    await A.p.evaluate(async () => { const m = await window.SHEPHERD_WEB.api('GET', '/api/social/me'); await window.SHEPHERD_WEB.api('POST', '/api/social/friend/answer', { id: m.incoming[0].id, accept: true }); });
+    await C.p.evaluate(() => window.SHEPHERD_WEB.api('POST', '/api/social/friend', { to: 'audit@church.test' }));
+    await B.p.evaluate(() => {
+      const W = window.__shepherd, t = Date.now(), d = n => { const x = new Date(t + n * 864e5); return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
+      W.saveEvent({ id: 'fp1', kind: 'enc', type: 'hangout', who: '', share: 'friends', pay: 'split', date: d(2), time: '18:30', activity: 'Five-a-side football and food afterwards', place: 'Powerleague Shoreditch, Braithwaite Street', food: true, cost: 36, name: 'Five-a-side football and food afterwards', createdAt: t });
+      W.saveEvent({ id: 'fp2', kind: 'enc', type: 'date', who: '', share: 'friends', pay: 'own', date: d(4), time: '', activity: 'Walk in Greenwich Park', place: '', food: false, cost: 0, name: 'Walk in Greenwich Park', createdAt: t });
+      W.saveEvent({ id: 'fp3', kind: 'enc', type: 'hangout', who: '', share: 'friends', pay: 'host', date: d(6), time: '12:00', activity: 'Lunch after church', place: 'Nando\'s', food: true, cost: 60, name: 'Lunch after church', createdAt: t });
+    });
+    await wait(3500);
+    const bid = db("SELECT id FROM users WHERE email = 'friend@church.test'")[0][0];
+    await A.p.evaluate(async bid => {
+      const W = window.__shepherd;
+      await window.SHEPHERD_WEB.api('POST', '/api/social/join', { host: bid, plan: 'fp1', on: true });
+      W.S.profile.budget = 40; W.saveProfile();
+      const e = W.S.events.enc2; e.share = 'friends'; e.pay = 'split'; e.place = 'Regent\'s Park'; W.saveEvent(e);
+      await W.socLoad(true);
+    }, bid);
+    await wait(2500); await A.p.evaluate(() => window.__shepherd.socLoad(true)); await wait(600);
+    const sm = await A.p.evaluate(() => { const S = window.__shepherd.SOC; return { friends: S.me.friends.length, incoming: S.me.incoming.length, feed: S.feed.length, church: S.me.church && S.me.church.name }; });
+    report.notes.push('friends data: ' + JSON.stringify(sm));
+    await B.ctx.close(); await C.ctx.close();
+  }
   await wait(1500);
 
   for (const code of LANGS) {
@@ -188,6 +228,15 @@ try {
         if (SHOT_LANGS.includes(code) && (wd === 320 || wd === 390)) await A.p.screenshot({ path: path.join(OUT, code + '-' + wd + '-' + name.replace(/ /g, '-') + '.png') });
         await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c) c.click(); if (document.activeElement) document.activeElement.blur(); }); await wait(350);
       }
+      for (const [open, name] of FRIEND_SHEETS) {
+        await open(A.p); await wait(650);
+        const bad = await layoutProblems(A.p); if (bad.length) report.layout.push(code + ' ' + wd + ' ' + name + ': ' + bad.join(' | '));
+        if (!(await A.p.locator('#sheet').isVisible()) && name !== 'waiting for approval') report.layout.push(code + ' ' + wd + ' ' + name + ': did not open');
+        if (code !== 'en' && wd === 390) addMiss(code, untranslated(code, await screenText(A.p)));
+        if (SHOT_LANGS.includes(code) && (wd === 320 || wd === 390)) await A.p.screenshot({ path: path.join(OUT, code + '-' + wd + '-' + name.replace(/ /g, '-') + '.png') });
+        await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c && !document.querySelector('#sheet').hidden) c.click(); if (document.activeElement) document.activeElement.blur(); }); await wait(380);
+      }
+      await A.p.evaluate(() => window.__shepherd.socLoad(true)); await wait(400);
       await A.p.click('.tab[data-v="events"]'); await wait(250);
       { const b = A.p.locator('[data-act="calguide"]').first(); if (await b.count()) { await b.click(); await wait(400); const bad = await layoutProblems(A.p); if (bad.length) report.layout.push(code + ' ' + wd + ' calendar guide: ' + bad.join(' | ')); await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c) c.click(); }); await wait(300); } }
       await A.p.click('.tab[data-v="today"]'); await wait(200);
@@ -221,6 +270,11 @@ try {
     for (const [open, name] of [[async () => { await A.p.click('.tab[data-v="encourage"]'); await wait(250); await A.p.click('[data-act="newenc"][data-t="date"]'); }, 'encourage form'], [async () => { await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.click('#qaCard [data-act="importguide"]'); }, 'import guide'], [async () => { await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.click('#qaCard [data-act="sortgo"]'); }, 'sort sheet'], [async () => { await A.p.click('.tab[data-v="events"]'); await wait(250); await A.p.click('[data-act="newevent"]'); }, 'event form']]) {
       await open(); await wait(450); report.axe[code + ' ' + name] = await run(); await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c) c.click(); }); await wait(350);
     }
+    for (const [open, name] of FRIEND_SHEETS) {
+      await open(A.p); await wait(650); report.axe[code + ' ' + name] = await run();
+      await A.p.evaluate(() => { const c = document.querySelector('#sheet [data-act="closesheet"]'); if (c && !document.querySelector('#sheet').hidden) c.click(); }); await wait(380);
+    }
+    await A.p.evaluate(() => window.__shepherd.socLoad(true)); await wait(400);
     await A.p.click('[data-act="settings"]'); await wait(350); report.axe[code + ' settings'] = await run();
     await A.p.click('.tab[data-v="people"]'); await wait(250); await A.p.locator('#main [data-act="open"]').first().click(); await wait(350); report.axe[code + ' person'] = await run();
   }
