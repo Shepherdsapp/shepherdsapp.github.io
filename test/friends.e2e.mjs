@@ -215,7 +215,7 @@ try {
   await shot(B, 'feed');
   await B.p.click('#feedSec .pcard-main'); await wait(500);
   { const t = (await text(B.p, '#sheetBody')).replace(/\s+/g, ' ');
-    ok(/What.*Bowling night.*Hangout/.test(t) && /When/.test(t) && /Where.*Hollywood Bowl, O2/.test(t) && /Food.*Yes/.test(t) && /Host.*Pavi Kumar/.test(t) && /Going.*Nobody yet/.test(t), 'tapping it shows the whole plan before joining: what, when, where, food, host and who\'s going');
+    ok(/What.*Bowling night.*Hangout/.test(t) && /When/.test(t) && /Where.*Hollywood Bowl, O2/.test(t) && /Food.*Yes/.test(t) && /Host.*Pavi Kumar/.test(t) && /Who's going.*Nobody yet/.test(t), 'tapping it shows the whole plan before joining: what, when, where, food, host and who\'s going');
     ok(/£20(\.00)? split equally: about £10(\.00)? each if you join/.test(t), 'and the cost with who pays: "' + (t.match(/Cost(.*?)Host/) || [])[1] + '"'); }
   await shot(B, 'plan-detail');
   ok(await overflow(B.p) <= 0, 'the plan screen fits a small phone');
@@ -274,7 +274,7 @@ try {
   await tab(C.p, 'encourage');
   ok(/Bowling night/.test(await text(C.p, '#feedSec')) && /1 going/.test(await text(C.p, '#feedSec')), 'a new friend sees plans that were already shared');
   await C.p.click('#feedSec .pcard-main'); await wait(500);
-  ok(/Going.*Grace O/.test((await text(C.p, '#sheetBody')).replace(/\s+/g, ' ')), 'and who\'s going');
+  ok(/Who's going.*Grace O/.test((await text(C.p, '#sheetBody')).replace(/\s+/g, ' ')), 'and who\'s going');
   delivered.length = 0;
   await C.p.click('#sheetBody [data-act="joinplan"]'); await wait(1300); await settle();
   ok(/You're going/.test(await text(C.p, '#sheetBody')), 'joining from the plan screen works too');
@@ -367,7 +367,7 @@ try {
   await T.p.locator('#feedSec .pcard-main', { hasText: 'Pizza' }).click(); await wait(500);
   ok(/opens to you once someone else has joined, so there are 3 or more people/.test(await text(T.p, '#sheetBody')), 'the plan explains: 3 or more people');
   { const f = await T.p.evaluate(() => { const u = document.querySelector('#sheetBody .facts'), l = u.lastElementChild.getBoundingClientRect(), b = u.getBoundingClientRect(); return { rows: u.children.length, inside: l.bottom <= b.bottom + 1, last: u.lastElementChild.textContent }; });
-    ok(f.rows === 7 && f.inside && /Going/.test(f.last), 'every row of the plan shows on the smallest iPhone, down to who\'s going'); }
+    ok(f.rows === 7 && f.inside && /Who's going/.test(f.last), 'every row of the plan shows on the smallest iPhone, down to who\'s going'); }
   await shot(T, 'campus-plan');
   await closeSheet(T.p);
   await refresh(B.p); await tab(B.p, 'encourage');

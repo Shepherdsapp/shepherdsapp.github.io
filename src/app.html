@@ -1565,7 +1565,7 @@ function planSheet(host, id) {
       row('Food', p.food ? 'Yes, going for food' : 'No food planned') +
       row('Cost', '<span data-noi18n>' + esc(payLine(p)) + '</span>') +
       row('Host', '<span data-noi18n>' + esc(p.mine ? L('You') : p.hostName) + '</span>') +
-      row('Going', p.going.length ? '<span data-noi18n>' + esc(p.going.map(function (g) { return g.me ? L('You') : g.name; }).join(', ')) + '</span>' : 'Nobody yet') + '</ul>' +
+      row('Who\'s going', p.going.length ? '<span data-noi18n>' + esc(p.going.map(function (g) { return g.me ? L('You') : g.name; }).join(', ')) + '</span>' : 'Nobody yet') + '</ul>' +
     (p.needGroup ? '<p class="banner"><span>This plan opens to you once someone else has joined, so there are 3 or more people.</span></p>' : '') +
     (p.mine ? '<button class="btn primary" data-act="openenc" data-id="' + esc(p.id) + '">Edit plan</button>'
       : past ? '' : p.joined ? '<p class="note okline">' + ICON.check + '<span>You\'re going. It\'s in your Encourage calendar, and Shepherd will remind you.</span></p><button class="btn" data-act="joinplan" data-host="' + esc(p.host) + '" data-id="' + esc(p.id) + '" data-on="0">I can\'t make it</button>'

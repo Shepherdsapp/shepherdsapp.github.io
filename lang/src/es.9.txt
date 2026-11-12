@@ -1,0 +1,161 @@
+1085	Gratis
+1086	Menos de {0}
+1087	Pagas tú
+1088	Paga {0}
+1089	Coste sin indicar
+1090	{0} a partes iguales: unos {1} cada uno
+1091	{0} a partes iguales: unos {1} cada uno si te apuntas
+1092	Unos {0} cada uno
+1093	§one={0} va|other={0} van
+1094	Con {0}
+1095	Salir de {0}
+1096	Apuntarse a {0}
+1097	Te queda el {0}% del presupuesto
+1098	{0} gastados de {1}
+1099	Has usado el {0}% del presupuesto de este mes.
+1100	Tu depósito de presupuesto está vacío este mes.
+1101	§one={0} amigo ve los planes que compartes|other={0} amigos ven los planes que compartes
+1102	§one={0} amigo ve los planes que compartes|other={0} amigos ven los planes que compartes
+1103	Añade amigos para compartir planes y apuntarte a los suyos
+1104	Van: {0}
+1105	Con esto te pasas {0} del presupuesto de ese mes.
+1106	Con esto te quedan {0} en el presupuesto de ese mes.
+1107	Elige tu iglesia
+1108	Añadir otra iglesia…
+1109	Nadie más de {0} está en Shepherd todavía. Comparte la app con ellos.
+1110	Opciones de {0}
+1111	Sin conexión. Inténtalo de nuevo cuando tengas señal.
+1112	Informe enviado. Gracias.
+1113	Presupuesto guardado
+1114	Presupuesto eliminado
+1115	Compartido con tus amigos. Pueden apuntarse con un toque.
+1116	Guardado. Te avisaremos cuando te aprueben.
+1117	Iglesia guardada
+1118	Ya sois amigos
+1119	Si usa Shepherd, recibirá tu solicitud.
+1120	Depósito lleno. Se vacía a medida que gastas.
+1121	Solicitud enviada
+1122	Desbloqueado
+1123	Bloqueado
+1124	Escribe tu presupuesto mensual como un número, por ejemplo 40.
+1125	Hermano o hermana (opcional)
+1126	Toca otra vez para eliminar. Se avisará a quienes van.
+1127	Escribe el nombre de tu iglesia.
+1128	Escribe su correo o código de amigo.
+1129	Compartido con amigos
+1130	Aún sin indicar
+1131	Sí, vamos a comer
+1132	Sin comida prevista
+1133	Nadie todavía
+1134	Este plan se abre para ti cuando se apunte alguien más, para que haya 3 personas o más.
+1135	Editar plan
+1136	Vas a ir. Está en tu calendario de Ánimo y Shepherd te lo recordará.
+1137	No puedo ir
+1138	Informar de un problema con este plan
+1139	Vas a ir. Shepherd te lo recordará.
+1140	Ya no vas.
+1141	Informar de un problema
+1142	Cuéntanos qué pasó. Tu informe llega en privado a la persona que gestiona Shepherd, que puede eliminar cuentas.
+1143	¿Qué pasó?
+1144	Si alguien está en peligro, llama primero a emergencias.
+1145	Enviar informe
+1146	Depósito de presupuesto
+1147	Solo lo ves tú
+1148	Pon un presupuesto mensual para citas de ánimo y ratos juntos. Tu depósito muestra cuánto queda.
+1149	Llenar el depósito
+1150	por encima del presupuesto este mes
+1151	quedan este mes
+1152	Tu depósito está vacío. Prueba algo gratis, como un paseo.
+1153	Cambiar presupuesto
+1154	Tu presupuesto es privado. Tus amigos nunca lo ven.
+1155	Quitar presupuesto
+1156	Tu cuenta no fue aprobada
+1157	Esperando aprobación
+1158	Puedes seguir usando Shepherd por tu cuenta. Si tienes preguntas, escribe a la persona que gestiona Shepherd.
+1159	La persona que gestiona Shepherd aprueba cada cuenta de menores de 18. Hasta entonces puedes usar Shepherd por tu cuenta, pero no añadir amigos ni apuntarte a planes.
+1160	Planes de amigos
+1161	Todos los planes
+1162	Solo gratis
+1163	Ahora no hay planes gratis.
+1164	Aún no hay planes de amigos. Cuando un amigo comparta uno, aparecerá aquí y podrás apuntarte con un toque.
+1165	Quién puede verlo
+1166	Solo yo
+1167	Tus amigos ven qué es, cuándo, dónde, si hay comida, el coste y quién va, y pueden apuntarse con un toque. Nunca ven nada más de Shepherd.
+1168	Dónde (opcional)
+1169	Quién paga
+1170	Cada uno paga lo suyo
+1171	A partes iguales
+1172	Pago yo
+1173	Di qué plan es, para que tus amigos lo sepan.
+1174	Tu iglesia
+1175	Elige tu iglesia para encontrar amigos de ella rápidamente.
+1176	Cuenta de menor de 18, aprobada.
+1177	Cuenta de menor de 18, no aprobada.
+1178	Cuenta de menor de 18, esperando aprobación.
+1179	Cambiar de iglesia
+1180	Nombre de la iglesia
+1181	Tengo menos de 18 años
+1182	Aparecerás como tu iglesia seguida de (CAMPUS). La persona que gestiona Shepherd te aprueba antes de que puedas añadir amigos o apuntarte a planes. Tu lista de amigos empieza vacía, y solo pueden ser tus amigos las personas que añadas tú, con su correo o código de amigo.
+1183	Quizá quisiste decir:
+1184	Tus amigos solo ven los planes que compartes: qué es, cuándo, dónde, si hay comida, el coste y quién va. Nunca ven tus Personas, Discípulos, lista de oración, notas, números de teléfono ni presupuesto.
+1185	Tu cuenta no fue aprobada, así que no puedes añadir amigos.
+1186	Podrás añadir amigos cuando aprueben tu cuenta.
+1187	Solicitudes de amistad
+1188	Añadir un amigo
+1189	Su correo o código de amigo
+1190	Enviar solicitud
+1191	Tu código de amigo:
+1192	Copiar mi código
+1193	Personas de mi iglesia
+1194	Elige tu iglesia para ver aquí a las personas de ella.
+1195	Añadir amigo
+1196	Tus amigos
+1197	Aún no tienes amigos. Añade a alguien con su correo o código de amigo.
+1198	Aún no tienes amigos. Añade a alguien con su correo o código de amigo, o desde tu iglesia.
+1199	Solicitudes que enviaste
+1200	Código de amigo copiado
+1201	Eliminar o bloquear es privado. No se les avisa.
+1202	Eliminar amigo
+1203	Volver a amigos
+1204	Apuntarme
+1205	Qué
+1206	Cuándo
+1207	Coste
+1208	Anfitrión
+1209	Voy
+1210	Bloquear
+1211	Aceptar
+1212	Iglesia
+1213	Informar
+1214	Rechazar
+1215	Desbloquear
+1216	Elegir más tarde
+1217	Tengo menos de 18 años.
+1218	Lo que te haya preocupado
+1219	Debes tener 13 años o más para usar Shepherd.
+1220	Un depósito de presupuesto privado muestra cuánto te queda por gastar este mes.
+1221	Tu iglesia, tus amigos, tu código de amigo, los planes a los que te apuntas y tu presupuesto mensual.
+1222	Las amistades, quién va a un plan y los informes se eliminan cuando eliminas tu cuenta.
+1223	Añadir amigos es opcional. Los amigos solo ven una cosa: los planes de Ánimo que decides compartir.
+1224	Los amigos nunca ven tus Personas, Discípulos, lista de oración, notas, números de teléfono, planes privados ni presupuesto.
+1225	Debes tener 13 años o más. Si tienes menos de 18, dilo: tu cuenta se aprueba antes de que puedas añadir amigos o apuntarte a planes.
+1226	Un plan compartido muestra qué es, el día y la hora, el lugar, si hay comida, el coste y quién paga, tu nombre y quién va.
+1227	Las cuentas de menores de 18 aparecen como su iglesia con (CAMPUS). La persona que gestiona Shepherd recibe por correo su nombre y dirección de correo y las aprueba primero. Los adultos no pueden enviarles solicitudes de amistad, y un plan entre un adulto y un menor de 18 necesita 3 personas o más.
+1228	Presupuesto mensual ({0})
+1229	Apareces como <b>{0}</b>.
+1230	Amigos y planes compartidos
+1231	Si eliges una iglesia, los adultos de esa iglesia pueden encontrarte por tu nombre y la inicial de tu apellido para enviarte una solicitud de amistad. Los menores de 18 nunca aparecen.
+1232	Puedes eliminar o bloquear a un amigo, o informar de una persona o un plan, en cualquier momento. El informe llega a la persona que gestiona Shepherd con tu nombre y dirección de correo.
+1233	Añade solo a amigos que conozcas y comparte solo los planes que te parezca bien que vean. Quedad en lugares públicos y tratad a todos con respeto.
+1234	Planea citas de ánimo y ratos juntos, y compártelos con amigos, que pueden apuntarse con un toque. Tu depósito de presupuesto privado muestra cuánto te queda por gastar este mes. Shepherd te avisa cada semana, y aquí están también tus datos semanales de seguimiento.
+1235	Un aviso semanal, recordatorios antes de cada cita y novedades de los planes de tus amigos
+1236	Añade amigos y comparte un plan con ellos. Los amigos solo ven los planes que compartes, nunca tus Personas, Discípulos, lista de oración, notas ni presupuesto. Se apuntan con un toque, y se avisa a todos los que van.
+1237	Elige una iglesia de la lista.
+1238	Ese plan ya no está abierto.
+1239	Este es tu propio plan.
+1240	Para cambiar esto, escribe a {0}.
+1241	Solo puedes apuntarte a planes de tus amigos.
+1242	Tu cuenta está esperando aprobación.
+1243	Escribe el nombre de tu iglesia
+1244	Eliminado
+1245	Quién va

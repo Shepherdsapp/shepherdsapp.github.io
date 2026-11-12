@@ -1294,3 +1294,4 @@ You can only join plans from your friends.
 Your account is waiting for approval.
 Type the name of your church
 Removed
+Who's going

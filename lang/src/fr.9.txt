@@ -1,0 +1,161 @@
+1085	Gratuit
+1086	Moins de {0}
+1087	C'est vous qui payez
+1088	{0} paie
+1089	Coût non indiqué
+1090	{0} à parts égales : environ {1} chacun
+1091	{0} à parts égales : environ {1} chacun si vous participez
+1092	Environ {0} chacun
+1093	§one={0} participant|other={0} participants
+1094	Avec {0}
+1095	Quitter {0}
+1096	Participer à {0}
+1097	Il vous reste {0} % de votre budget
+1098	{0} dépensés sur {1}
+1099	Vous avez utilisé {0} % du budget de ce mois.
+1100	Votre réservoir de budget est vide pour ce mois.
+1101	§one={0} ami voit les projets que vous partagez|other={0} amis voient les projets que vous partagez
+1102	§one={0} ami voit les projets que vous partagez|other={0} amis voient les projets que vous partagez
+1103	Ajoutez des amis pour partager des projets et rejoindre les leurs
+1104	Participants : {0}
+1105	Cela vous fait dépasser de {0} votre budget de ce mois-là.
+1106	Il vous restera {0} dans votre budget de ce mois-là.
+1107	Choisissez votre église
+1108	Ajouter une autre église…
+1109	Personne d'autre de {0} n'est encore sur Shepherd. Partagez l'appli avec eux.
+1110	Options pour {0}
+1111	Pas de connexion. Réessayez quand vous aurez du réseau.
+1112	Signalement envoyé. Merci.
+1113	Budget enregistré
+1114	Budget supprimé
+1115	Partagé avec vos amis. Ils peuvent participer en un geste.
+1116	Enregistré. Vous serez prévenu quand votre compte sera approuvé.
+1117	Église enregistrée
+1118	Vous êtes maintenant amis
+1119	S'il ou elle utilise Shepherd, votre demande lui parviendra.
+1120	Réservoir rempli. Il se vide à mesure que vous dépensez.
+1121	Demande envoyée
+1122	Débloqué
+1123	Bloqué
+1124	Saisissez votre budget mensuel sous forme de nombre, par exemple 40.
+1125	Frère ou sœur (facultatif)
+1126	Touchez encore pour supprimer. Les participants seront prévenus.
+1127	Saisissez le nom de votre église.
+1128	Saisissez son e-mail ou son code ami.
+1129	Partagé avec les amis
+1130	Pas encore indiqué
+1131	Oui, on mange ensemble
+1132	Pas de repas prévu
+1133	Personne pour l'instant
+1134	Ce projet s'ouvre à vous dès qu'une autre personne participe, pour être 3 ou plus.
+1135	Modifier le projet
+1136	Vous participez. C'est dans votre calendrier Encourager, et Shepherd vous le rappellera.
+1137	Je ne peux pas venir
+1138	Signaler un problème avec ce projet
+1139	Vous participez. Shepherd vous le rappellera.
+1140	Vous ne participez plus.
+1141	Signaler un problème
+1142	Dites-nous ce qui s'est passé. Votre signalement est transmis en privé à la personne qui gère Shepherd, qui peut supprimer des comptes.
+1143	Que s'est-il passé ?
+1144	Si quelqu'un est en danger, appelez d'abord les secours.
+1145	Envoyer le signalement
+1146	Réservoir de budget
+1147	Vous seul le voyez
+1148	Fixez un budget mensuel pour les rendez-vous d'encouragement et les moments ensemble. Votre réservoir montre ce qu'il reste.
+1149	Remplir le réservoir
+1150	au-dessus du budget ce mois-ci
+1151	restants ce mois-ci
+1152	Votre réservoir est vide. Essayez quelque chose de gratuit, comme une promenade.
+1153	Modifier le budget
+1154	Votre budget est privé. Vos amis ne le voient jamais.
+1155	Supprimer le budget
+1156	Votre compte n'a pas été approuvé
+1157	En attente d'approbation
+1158	Vous pouvez continuer à utiliser Shepherd seul. Pour toute question, écrivez à la personne qui gère Shepherd.
+1159	La personne qui gère Shepherd approuve chaque compte de moins de 18 ans. En attendant, vous pouvez utiliser Shepherd seul, mais pas ajouter d'amis ni rejoindre des projets.
+1160	Projets des amis
+1161	Tous les projets
+1162	Gratuits seulement
+1163	Aucun projet gratuit pour l'instant.
+1164	Pas encore de projets d'amis. Quand un ami en partagera un, il apparaîtra ici et vous pourrez participer en un geste.
+1165	Qui peut voir ceci
+1166	Moi seulement
+1167	Vos amis voient de quoi il s'agit, quand, où, s'il y a un repas, le coût et qui participe, et peuvent participer en un geste. Ils ne voient jamais rien d'autre dans Shepherd.
+1168	Lieu (facultatif)
+1169	Qui paie
+1170	Chacun paie sa part
+1171	À parts égales
+1172	Je paie
+1173	Dites de quel projet il s'agit, pour que vos amis le sachent.
+1174	Votre église
+1175	Choisissez votre église pour y trouver rapidement des amis.
+1176	Compte de moins de 18 ans, approuvé.
+1177	Compte de moins de 18 ans, non approuvé.
+1178	Compte de moins de 18 ans, en attente d'approbation.
+1179	Changer d'église
+1180	Nom de l'église
+1181	J'ai moins de 18 ans
+1182	Vous apparaîtrez sous le nom de votre église suivi de (CAMPUS). La personne qui gère Shepherd vous approuve avant que vous puissiez ajouter des amis ou rejoindre des projets. Votre liste d'amis commence vide, et seules les personnes que vous ajoutez vous-même, avec leur e-mail ou leur code ami, peuvent être vos amis.
+1183	Vouliez-vous dire :
+1184	Vos amis ne voient que les projets que vous partagez : de quoi il s'agit, quand, où, le repas, le coût et qui participe. Ils ne voient jamais vos Personnes, Disciples, liste de prière, notes, numéros de téléphone ni budget.
+1185	Votre compte n'a pas été approuvé, vous ne pouvez donc pas ajouter d'amis.
+1186	Vous pourrez ajouter des amis une fois votre compte approuvé.
+1187	Demandes d'amis
+1188	Ajouter un ami
+1189	Son e-mail ou son code ami
+1190	Envoyer la demande
+1191	Votre code ami :
+1192	Copier mon code
+1193	Personnes de mon église
+1194	Choisissez votre église pour voir ici les personnes qui en font partie.
+1195	Ajouter comme ami
+1196	Vos amis
+1197	Pas encore d'amis. Ajoutez quelqu'un avec son e-mail ou son code ami.
+1198	Pas encore d'amis. Ajoutez quelqu'un avec son e-mail ou son code ami, ou depuis votre église.
+1199	Demandes que vous avez envoyées
+1200	Code ami copié
+1201	Retirer ou bloquer reste privé. La personne n'est pas prévenue.
+1202	Retirer cet ami
+1203	Retour aux amis
+1204	Participer
+1205	Quoi
+1206	Quand
+1207	Coût
+1208	Organisateur
+1209	Je participe
+1210	Bloquer
+1211	Accepter
+1212	Église
+1213	Signaler
+1214	Refuser
+1215	Débloquer
+1216	Choisir plus tard
+1217	J'ai moins de 18 ans.
+1218	Ce qui vous a inquiété
+1219	Vous devez avoir 13 ans ou plus pour utiliser Shepherd.
+1220	Un réservoir de budget privé montre ce qu'il vous reste à dépenser ce mois-ci.
+1221	Votre église, vos amis, votre code ami, les projets que vous rejoignez et votre budget mensuel.
+1222	Les amitiés, les participations aux projets et les signalements sont supprimés quand vous supprimez votre compte.
+1223	Ajouter des amis est facultatif. Les amis ne voient qu'une chose : les projets Encourager que vous choisissez de partager.
+1224	Les amis ne voient jamais vos Personnes, Disciples, liste de prière, notes, numéros de téléphone, projets privés ni budget.
+1225	Vous devez avoir 13 ans ou plus. Si vous avez moins de 18 ans, dites-le : votre compte est approuvé avant que vous puissiez ajouter des amis ou rejoindre des projets.
+1226	Un projet partagé montre de quoi il s'agit, le jour et l'heure, le lieu, s'il y a un repas, le coût et qui paie, votre nom et qui participe.
+1227	Les comptes de moins de 18 ans apparaissent sous le nom de leur église avec (CAMPUS). La personne qui gère Shepherd reçoit par e-mail leur nom et leur adresse e-mail et les approuve d'abord. Les adultes ne peuvent pas leur envoyer de demandes d'amis, et un projet entre un adulte et un moins de 18 ans nécessite 3 personnes ou plus.
+1228	Budget mensuel ({0})
+1229	Vous apparaissez comme <b>{0}</b>.
+1230	Amis et projets partagés
+1231	Si vous choisissez une église, les adultes de cette église peuvent vous trouver par votre prénom et l'initiale de votre nom, pour vous envoyer une demande d'ami. Les moins de 18 ans ne sont jamais listés.
+1232	Vous pouvez retirer ou bloquer un ami, ou signaler une personne ou un projet, à tout moment. Le signalement est transmis à la personne qui gère Shepherd avec votre nom et votre adresse e-mail.
+1233	N'ajoutez que des amis que vous connaissez, et ne partagez que les projets que vous acceptez qu'ils voient. Retrouvez-vous dans des lieux publics et traitez chacun avec respect.
+1234	Prévoyez des rendez-vous d'encouragement et des moments ensemble, et partagez-les avec vos amis, qui peuvent participer en un geste. Votre réservoir de budget privé montre ce qu'il vous reste à dépenser ce mois-ci. Shepherd vous le rappelle chaque semaine, et vos statistiques hebdomadaires de suivi sont ici aussi.
+1235	Un rappel hebdomadaire, des rappels avant chaque rendez-vous et des nouvelles des projets de vos amis
+1236	Ajoutez des amis et partagez un projet avec eux. Les amis ne voient que les projets que vous partagez, jamais vos Personnes, Disciples, liste de prière, notes ni budget. Ils participent en un geste, et tous les participants sont prévenus.
+1237	Choisissez une église dans la liste.
+1238	Ce projet n'est plus ouvert.
+1239	C'est votre propre projet.
+1240	Pour changer cela, écrivez à {0}.
+1241	Vous ne pouvez rejoindre que les projets de vos amis.
+1242	Votre compte est en attente d'approbation.
+1243	Saisissez le nom de votre église
+1244	Retiré
+1245	Qui participe
