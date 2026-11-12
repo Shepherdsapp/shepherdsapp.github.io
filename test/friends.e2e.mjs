@@ -192,6 +192,15 @@ try {
   current = 'Budget tank';
   await tab(A.p, 'encourage');
   await eshot(A, '#tankCard', 'tankcard-unset');
+  // news arriving from a friend must not wipe what you are half-way through typing
+  await B.p.evaluate(() => { const t = new Date(Date.now() + 2 * 864e5), d = t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0'); window.__shepherd.saveEvent({ id: 'tmpplan', kind: 'enc', type: 'hangout', who: '', share: 'friends', pay: 'own', date: d, time: '', activity: 'Temporary plan', place: '', food: false, cost: '', name: 'Temporary plan', createdAt: Date.now() }); });
+  await wait(2800);
+  await A.p.click('#bAmt'); await A.p.keyboard.type('33'); await refresh(A.p);
+  ok(await A.p.inputValue('#bAmt') === '33' && (await soc(A.p)).feed.some(f => f.title === 'Temporary plan'), 'a friend\'s new plan arriving doesn\'t wipe a half-typed budget');
+  await A.p.evaluate(() => document.activeElement && document.activeElement.blur()); await wait(900);
+  ok(/Temporary plan/.test(await text(A.p, '#main')), 'and it shows as soon as you stop typing');
+  await B.p.evaluate(() => { const W = window.__shepherd; const e = W.S.events.tmpplan; e.share = 'me'; W.saveEvent(e); }); await wait(2800); await refresh(A.p);
+  ok(!/Temporary plan/.test(await text(A.p, '#main')), 'a plan switched back to "Just me" disappears for friends');
   await A.p.fill('#bAmt', '0'); await A.p.$eval('#budgetForm', f => f.requestSubmit()); await wait(200);
   ok(/as a number, like 40/.test(await text(A.p, '#bErr')), 'a budget of 0 is explained, not saved');
   await A.p.fill('#bAmt', '40'); await A.p.$eval('#budgetForm', f => f.requestSubmit()); await wait(450); await eshot(A, '#tankCard', 'tankcard-filling'); await wait(1600);
@@ -419,6 +428,16 @@ try {
   await B.p.click('[data-fr="unblock"]'); await wait(1200);
   ok((await soc(B.p)).me.blocked.length === 0, 'unblocking works');
   await closeSheet(B.p);
+
+  /* ============ no signal ============ */
+  current = 'No signal';
+  await refresh(B.p);
+  await B.p.route('**/api/social/**', r => r.abort());
+  await B.p.reload(); await wait(2800); await tab(B.p, 'encourage'); await wait(400);
+  ok(await B.p.locator('#frBar').isVisible() && /Pizza after church/.test(await text(B.p, '#main')), 'with no signal, friends and their plans still show from the last time');
+  await B.p.locator('#feedSec .pcard', { hasText: 'Walk in Greenwich' }).locator('.jbtn').click(); await wait(1200);
+  ok(/No connection|Couldn't reach|signal/i.test(await text(B.p, '#toastMsg')) && (await soc(B.p)).feed.find(x => /Walk/.test(x.title)).joined === false, 'joining without signal says so plainly and changes nothing: "' + (await text(B.p, '#toastMsg')) + '"');
+  await B.p.unroute('**/api/social/**'); await refresh(B.p);
 
   /* ============ an older server: everything else still works ============ */
   current = 'Before the server is updated';

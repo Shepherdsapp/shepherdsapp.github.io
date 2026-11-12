@@ -1200,10 +1200,32 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
     ok(E.$('#pIntro').value === '¡Hola, encantado de conocerte! Conseguí tu contacto con Shepherd. Espero saber de ti pronto.', 'the QR message is shown in Spanish');
       }
 
+  current = 'Existing accounts and the updated rules';
+  {
+    // someone who agreed to the first rules, with people already saved
+    const st = makeStore();
+    st.docs.set('data/users/u_test/profile', { name: 'Old Hand', agreed: { v: 1, at: 1700000000000 }, tourDone: true, phone: '07700900123' });
+    st.docs.set('data/users/u_test/profile/contacts/k1', { id: 'k1', name: 'Kept Person', phone: '07700 900111', consent: true, status: 'active', stage: 'Interested', everyDays: 3, createdAt: Date.now() - 864e6, lastContact: Date.now() - 864e5, log: [] });
+    st.docs.set('data/users/u_test/profile/events/e1', { id: 'e1', kind: 'enc', type: 'date', who: 'Kept Person', date: ymd(Date.now()), time: '', activity: 'Coffee', food: false, cost: 4, name: 'Encouragement date with Kept Person', createdAt: Date.now() });
+    const X = await open(st); await wait(400);
+    ok(X.$('#agree') && !X.$('#agree').hidden && X.$('#agreeT').textContent === 'Updated rules' && /friends and shared plans/.test(X.$('#agreeNew').textContent), 'someone who agreed before is shown "Updated rules", saying what is new');
+    ok(X.$$('#agree .agree-in > .steps li').length === 8 && X.$('#tour').hidden, 'with all eight rules, and no tour on top');
+    X.click('#agreeGo'); await wait(400);
+    const pr = st.docs.get('data/users/u_test/profile');
+    ok(X.$('#agree').hidden && pr.agreed.v === 2 && pr.agreed.at > 1700000000000 && pr.name === 'Old Hand' && pr.phone === '07700900123', 'agreeing once records the new version and keeps their profile');
+    ok(X.w.__shepherd.S.contacts.k1 && X.w.__shepherd.S.contacts.k1.name === 'Kept Person' && X.w.__shepherd.S.events.e1.cost === 4 && st.docs.get('data/users/u_test/profile/contacts/k1').phone === '07700 900111', 'their people and plans are untouched');
+    X.click('[data-act="tab"][data-v="encourage"]'); await wait();
+    ok(/Kept Person/.test(X.$('#main').textContent) && X.$('#tankCard') && X.w.__shepherd.budgetState().budget === 0 && X.errors.length === 0, 'an older plan (made before sharing existed) still shows, as private, and the tank waits for a budget');
+    X.click(X.$$('#main .enc').find(b => /Kept Person/.test(b.textContent))); await wait();
+    ok(X.$('#enForm') && X.$('#enWho').value === 'Kept Person' && X.$('#enCost').value === '4' && X.$('#enPlace').value === '', 'and opens to edit with the new Where box empty');
+    const X2 = await open(st); await wait(400);
+    ok(!X2.$('#agree') || X2.$('#agree').hidden, 'they are not asked again next time');
+  }
+
   current = 'Launch fixes';
   {
     const st = makeStore();
-    st.docs.set('data/users/u_test/profile', { name: 'Fix Tester', agreed: { v: 1, at: 1 }, tourDone: true, phone: '07700900123' });
+    st.docs.set('data/users/u_test/profile', { name: 'Fix Tester', agreed: { v: 2, at: 1 }, tourDone: true, phone: '07700900123' });
     const X = await open(st); await wait(300);
     const XS = () => X.w.__shepherd.S, W = X.w.__shepherd;
     const appSrc = require('fs').readFileSync(require('path').join(__dirname, '..', 'src', 'app.html'), 'utf8');

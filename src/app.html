@@ -1472,6 +1472,12 @@ function socKey() { return 'shepherd:soc:' + (S.uid || 'local'); }
 function socOn() { return !!(WEB && SOC.me && SOC.me.on); }
 function socCan() { return socOn() && !!SOC.me.approved; }
 function socRestore() { try { var o = JSON.parse(lsGet(socKey()) || 'null'); if (o && o.me) { SOC.me = o.me; SOC.feed = o.feed || []; } } catch (e) {} }
+// news from friends redraws the page, but never while you are typing on it: it waits until you stop
+function socRender() {
+  var a = document.activeElement, main = $('#main');
+  if (a && main && main.contains(a) && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) { a.addEventListener('blur', function () { setTimeout(render, 400); }, { once: true }); return; }
+  render();
+}
 async function socLoad(force) {
   if (!WEB || !WEB.api || S.mode !== 'cloud' || SOC.busy) return;
   if (!force && Date.now() - SOC.at < 60000) return;
@@ -1484,7 +1490,7 @@ async function socLoad(force) {
     var before = JSON.stringify([SOC.me, SOC.feed]);
     SOC.me = me; SOC.feed = feed; SOC.at = Date.now();
     lsSet(socKey(), JSON.stringify({ me: me, feed: feed }));
-    if (JSON.stringify([me, feed]) !== before) { render(); if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Friends') friendsSheet(); }
+    if (JSON.stringify([me, feed]) !== before) { socRender(); if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Friends') friendsSheet(); }
   } catch (e) {
     if (e && (e.status === 404 || e.code === 'not_found')) { SOC.me = null; SOC.feed = []; lsSet(socKey(), ''); } // an older server: friends stay hidden
     if (pend && e && e.status === 400) lsSet('shepherd:pendingSocial', '');
@@ -3232,7 +3238,8 @@ function checkAgree() {
       if (b.id === 'agreeMore') { var m = $('#agreeFull'); m.hidden = !m.hidden; b.textContent = m.hidden ? 'Read the full privacy notice' : 'Hide the full privacy notice'; }
     });
   }
-  el.innerHTML = '<div class="agree-in"><h2 class="h2" id="agreeT">Before you start</h2>' + window.ShepherdPrivacy.agreeHtml() +
+  var again = !!(S.profile.agreed && Number(S.profile.agreed.v) >= 1); // agreed to an earlier version: say what changed
+  el.innerHTML = '<div class="agree-in"><h2 class="h2" id="agreeT">' + (again ? 'Updated rules' : 'Before you start') + '</h2>' + (again ? '<p class="note" id="agreeNew" style="margin:0">Shepherd now has friends and shared plans, so two rules are new. Please read them and agree to carry on. Nothing in your account has changed.</p>' : '') + window.ShepherdPrivacy.agreeHtml() +
     '<button class="linkrow" id="agreeMore" type="button">Read the full privacy notice</button><div class="pvwrap" id="agreeFull" hidden>' + window.ShepherdPrivacy.html() + '</div>' +
     '<button class="btn primary block" id="agreeGo" type="button">I agree</button></div>';
   el.hidden = false; document.body.classList.add('noscroll');
@@ -3462,8 +3469,9 @@ async function boot() {
     S.mode = 'local'; S.profileSeen = true; setSync(Object.keys(pending).length && S.uid !== 'local' ? 'offline' : 'local');
     checkAgree(); maybeTour();
   }
+  if (WEB) socRestore(); // what was last known about friends shows straight away, even with no signal
   checkLock(); render();
-  if (WEB) { socRestore(); socLoad(true); }
+  if (WEB) socLoad(true);
   if (WEB) { handleLaunch(); refreshPush(); schedNow(); if (WEB.newName && !S.profile.name) { S.profile.name = WEB.newName; saveProfile(); } }
 }
 boot();
