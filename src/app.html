@@ -1083,7 +1083,7 @@ function dLastText(d) {
 function dRow(d) {
   var done = checkedThisWeek(d), n = waNum(d.phone);
   return '<li class="prow st-' + (done ? 'ok' : 'due') + '"><button class="prow-main" data-act="opendisciple" data-id="' + d.id + '"><span class="dot" aria-hidden="true"></span><span class="pm"><span class="pn">' + esc(d.name) + '</span><span class="ps"><b>' + esc(dLastText(d)) + '</b></span></span></button>' +
-    (done ? '' : '<button class="rep" data-act="dcheck" data-id="' + d.id + '" aria-label="Checked in with ' + esc(firstName(d.name)) + '">Checked in</button>') +
+    (done ? '' : '<button class="rep" data-act="dcheck" data-id="' + d.id + '" aria-label="' + esc(L('Checked in') + ', ' + firstName(d.name)) + '">Checked in</button>') +
     (n ? '<a class="ch" href="' + esc(waUrl(n)) + '" target="_blank" rel="noopener" data-dmsg="' + d.id + '" aria-label="Message ' + esc(d.name) + ' on WhatsApp">' + ICON.chat + '</a>' : '') + '</li>';
 }
 function viewDisciples() {
@@ -2892,7 +2892,7 @@ var TOUR = [
   { view: 'today', target: '#prayCard', title: 'Pray for people', text: 'Add anyone you want to pray for, with notes if you like. Each day Shepherd shows 1 to 15 of them (you choose how many), taking turns, and can remind you at a time you choose in Settings.' },
   { view: 'events', target: '.tab[data-v="events"]', title: 'Your calendar', text: 'Log key events like Network Events, EMC or GMC, and choose a weekly or monthly countdown. Invite people and tick who came. Connect Shepherd to your phone\'s calendar so your studies and events show there by themselves.',
     doIt: { label: 'Show me how to link my calendar', guide: true, run: function () { calGuide(true); } } },
-  { view: 'encourage', target: '.tab[data-v="encourage"]', title: 'Encourage one another', text: 'Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.' },
+  { view: 'encourage', target: '.tab[data-v="encourage"]', title: 'Encourage one another', text: 'Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.' },
   { view: 'settings', target: '#langCard', title: 'Settings has the rest', text: 'Choose your language (Bible verses stay in English, NIV) and your currency, read About Shepherd, set a PIN, export a backup, and read Privacy and safe use.' },
   { view: 'today', target: '[data-act="settings"]', title: 'You\'re all set', text: 'You are responsible for the people you contact, so only message people who are happy to hear from you, and stop if they ask. Replay this tour from Settings any time.' }
 ];

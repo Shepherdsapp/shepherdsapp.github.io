@@ -86,7 +86,7 @@ async function waitSaved(p) { for (let i = 0; i < 40; i++) { if (/Saved/.test(aw
 
 const LANGS = process.env.LANGS ? process.env.LANGS.split(',') : ['en', 'es', 'fr', 'pt', 'nl', 'pl', 'pcm', 'yo', 'ig', 'zh-Hans', 'zh-Hant', 'ja', 'de', 'ru', 'lt'];
 const SHOT_LANGS = ['en', 'de', 'ru', 'yo', 'ja'];
-const WIDTHS = process.env.ONLY320 ? [[320, 568]] : process.env.QUICK ? [[390, 844]] : [[320, 568], [360, 740], [390, 844], [430, 932]];
+const WIDTHS = process.env.TOUR_ONLY ? [] : process.env.ONLY320 ? [[320, 568]] : process.env.QUICK ? [[390, 844]] : [[320, 568], [360, 740], [390, 844], [430, 932]];
 const VIEWS = ['today', 'people', 'disciples', 'events', 'encourage', 'about'];
 // About is no longer a tab: it opens from the top of Settings
 async function gotoView(p, v) { if (v === 'about') { await p.click('[data-act="settings"]'); await wait(250); await p.click('#aboutCard [data-v="about"]'); } else await p.click('.tab[data-v="' + v + '"]'); }
@@ -260,7 +260,7 @@ try {
   }
   await setLang(A.p, 'en');
 
-  if (process.env.QUICK) throw new Error('quick run done');
+  if (process.env.QUICK || process.env.TOUR_ONLY) throw new Error('quick run done');
   // accessibility, in English and Russian
   const axeSrc = fs.readFileSync(process.env.AXE || '/tmp/axe.min.js', 'utf8');
   for (const code of ['en', 'ru']) {

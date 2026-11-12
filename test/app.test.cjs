@@ -153,7 +153,7 @@ const eventDocs = st => [...st.docs.entries()].filter(([k]) => k.startsWith('dat
   click($$('#sheetBody [data-act="closesheet"]').find(b => /Back to the tour/.test(b.textContent))); await wait(450);
   ok(!$('#tour').hidden && $('#tourTitle').textContent === 'Your calendar', 'closing the guide returns to the tour');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
-  ok(S().view === 'encourage' && /encouragement dates and hangouts/.test($('#tourText').textContent) && /share them with friends/.test($('#tourText').textContent) && /budget tank/.test($('#tourText').textContent), 'shows the Encourage tab');
+  ok(S().view === 'encourage' && /encouragement dates and hangouts/.test($('#tourText').textContent) && /share them with friends/.test($('#tourText').textContent) && /Friends only see the plans you share/.test($('#tourText').textContent) && /budget tank/.test($('#tourText').textContent), 'shows the Encourage tab');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);
   ok(S().view === 'settings' && /language/.test($('#tourText').textContent) && /currency/.test($('#tourText').textContent) && /PIN/.test($('#tourText').textContent) && /Privacy and safe use/.test($('#tourText').textContent), 'points out language, currency, About, PIN, backups and privacy in Settings');
   click('#tourNext'); await wait(30); titles.push($('#tourTitle').textContent);

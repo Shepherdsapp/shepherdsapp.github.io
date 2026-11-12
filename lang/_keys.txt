@@ -1283,7 +1283,6 @@ Friends and shared plans
 If you choose a church, adults from that church can find you by your first name and the first letter of your surname, to send a friend request. Under-18s are never listed.
 You can remove or block a friend, or report a person or plan, at any time. A report goes to the person who runs Shepherd with your name and email address.
 Only add friends you know, and only share plans you are happy for them to see. Meet in public places, and treat everyone with respect.
-Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.
 A weekly nudge, reminders before each date, and news about friends' plans
 Add friends and share a plan with them. Friends only see the plans you share, never your People, Disciples, prayer list, notes or budget. They join in one tap, and everyone going is told.
 Choose a church from the list.
@@ -1297,3 +1296,4 @@ Removed
 Who's going
 Updated rules
 Shepherd now has friends and shared plans, so two rules are new. Please read them and agree to carry on. Nothing in your account has changed.
+Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.
