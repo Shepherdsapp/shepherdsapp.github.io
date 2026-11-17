@@ -1328,3 +1328,16 @@ Share a plan
 Plan a date or a hangout, choose Friends under "Who can see this", and say how many can join. Friends join in one tap, and plans they share appear on this tab and on Today.
 This plan is full.
 Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else, and you choose how many can join. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.
+Request sent. You'll be friends once they accept.
+{0} has your request. You'll be friends once they accept.
+No request was sent. Check the email or friend code and try again. If you already asked them, it is waiting under Requests you sent.
+Add me as a friend on Shepherd: {0}
+Invite copied
+A friend invited you to connect on Shepherd. Send them a friend request?
+No request was sent. The invite may be old, or you already asked them.
+Invite with a link
+Your age
+18 or older
+13 to 17
+Tap again to confirm you are under 18
+If you are 18 or older and chose this by mistake, email {0}.

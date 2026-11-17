@@ -149,7 +149,7 @@ function authHtml(mode, msg) {
     (code ? '<label class="field" for="aCode">6-digit code<input class="inp" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></label>' : '') +
     (forgot ? '' : '<label class="field" for="aPw">' + (code ? 'New password' : 'Password') + '<span class="pwrow"><input class="inp" id="aPw" type="password" autocomplete="' + (create || code ? 'new-password' : 'current-password') + '" minlength="8"><button type="button" class="btn ghost small" id="aShow">Show</button></span></label>') +
     (create ? '<div id="aChurchBox" hidden><label class="field" for="aChurch">Your church<select class="inp" id="aChurch"><option value="">Choose later</option></select></label>' +
-      '<label class="tick1 agreetick" for="aMinor" style="margin-top:8px"><input type="checkbox" id="aMinor"><span>I\'m under 18. <span class="small muted">You must be 13 or older to use Shepherd.</span></span></label></div>' : '') +
+      '<label class="field" for="aAge" style="margin-top:10px">Your age<select class="inp" id="aAge"><option value="adult">18 or older</option><option value="minor">13 to 17</option></select></label><p class="note" style="margin:6px 0 0">You must be 13 or older to use Shepherd.</p></div>' : '') +
     (create ? '<label class="tick1 agreetick" for="aAgree"><input type="checkbox" id="aAgree"><span>I agree to use Shepherd responsibly, as set out in the privacy notice and acceptable use statement.</span></label>' : '') +
     '<p class="small" id="aErr" role="alert" style="margin:0;color:var(--bad)" hidden></p>' +
     '<button class="btn primary block" type="submit" id="aGo">' + (create ? 'Create my account' : forgot ? 'Get a reset code' : code ? 'Save new password' : 'Sign in') + '</button>' +
@@ -214,7 +214,7 @@ function bindAuth() {
       else if (mode === 'code') r = await api('POST', '/api/reset/confirm', { email: email, code: authEl.querySelector('#aCode').value, key: key });
       else r = await api('POST', '/api/login', { email: email, key: key });
       if (mode === 'create') W.agreedAt = Date.now(); // agreed to the acceptable use statement when creating the account
-      if (mode === 'create') { var ach = authEl.querySelector('#aChurch'), ami = authEl.querySelector('#aMinor'); if (ach && (ach.value || (ami && ami.checked))) lsSet('shepherd:pendingSocial', JSON.stringify({ church: ach.value || '', minor: !!(ami && ami.checked) })); }
+      if (mode === 'create') { var ach = authEl.querySelector('#aChurch'), ami = authEl.querySelector('#aAge'), isMinor = !!(ami && ami.value === 'minor'); if (ach && (ach.value || isMinor)) lsSet('shepherd:pendingSocial', JSON.stringify({ church: ach.value || '', minor: isMinor })); }
       finishSignIn(r.token, r.user);
       if (mode === 'create' && r.user.name) W.newName = r.user.name;
     } catch (x) {
@@ -270,7 +270,16 @@ var install = {
   prompt: async function () { if (!deferredInstall) return false; deferredInstall.prompt(); var c = await deferredInstall.userChoice.catch(function () { return {}; }); deferredInstall = null; return c && c.outcome === 'accepted'; }
 };
 if ('serviceWorker' in navigator && location.protocol !== 'file:') window.addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); });
-if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', function (e) { if (e.data && e.data.open && W.onOpen) W.onOpen(e.data.open); if (e.data && e.data.update && W.onUpdate) W.onUpdate(); });
+if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', function (e) { if (e.data && e.data.open && W.onOpen) W.onOpen(e.data.open); if (e.data && e.data.update && W.onUpdate) W.onUpdate(e.data.build || ''); });
+/* look for a newer Shepherd whenever the app comes back to the front, and every half hour while it stays open */
+var lastCheck = 0;
+function checkUpdate() {
+  if (!('serviceWorker' in navigator) || location.protocol === 'file:' || navigator.onLine === false || Date.now() - lastCheck < 5 * 60000) return;
+  lastCheck = Date.now();
+  navigator.serviceWorker.getRegistration().then(function (reg) { if (!reg) return; reg.update().catch(function () {}); var w = reg.active || navigator.serviceWorker.controller; if (w) w.postMessage({ check: true }); }).catch(function () {});
+}
+document.addEventListener('visibilitychange', function () { if (!document.hidden) checkUpdate(); });
+setInterval(function () { if (!document.hidden) checkUpdate(); }, 30 * 60000);
 
 /* ---------- the account ---------- */
 async function signOut() {

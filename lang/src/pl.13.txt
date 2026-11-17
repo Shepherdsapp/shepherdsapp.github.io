@@ -1,0 +1,13 @@
+1281	Zaproszenie wysłane. Będziecie przyjaciółmi, gdy zostanie przyjęte.
+1283	Nie wysłano zaproszenia. Sprawdź e-mail lub kod przyjaciela i spróbuj ponownie. Jeśli zaproszenie było już wysłane, czeka w sekcji Wysłane zaproszenia.
+1284	Dodaj mnie do przyjaciół w Shepherd: {0}
+1285	Skopiowano zaproszenie
+1286	Przyjaciel zaprosił Cię do kontaktu w Shepherd. Wysłać mu zaproszenie do przyjaciół?
+1287	Nie wysłano zaproszenia. Link może być stary albo zaproszenie zostało już wysłane.
+1288	Zaproś przez link
+1289	{0} ma już Twoje zaproszenie. Będziecie przyjaciółmi, gdy zostanie przyjęte.
+1290	Twój wiek
+1291	18 lat lub więcej
+1292	Od 13 do 17 lat
+1293	Dotknij ponownie, aby potwierdzić, że masz mniej niż 18 lat
+1294	Jeśli masz 18 lat lub więcej i wybrano to przez pomyłkę, napisz na {0}.

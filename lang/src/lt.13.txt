@@ -1,0 +1,13 @@
+1281	Kvietimas išsiųstas. Tapsite draugais, kai jis bus priimtas.
+1283	Kvietimas neišsiųstas. Patikrinkite el. paštą arba draugo kodą ir bandykite dar kartą. Jei jau kvietėte, jis laukia skiltyje Jūsų išsiųsti kvietimai.
+1284	Pridėk mane prie draugų programėlėje Shepherd: {0}
+1285	Pakvietimas nukopijuotas
+1286	Draugas pakvietė jus susisiekti per Shepherd. Išsiųsti jam kvietimą draugauti?
+1287	Kvietimas neišsiųstas. Pakvietimas gali būti senas arba jau kvietėte.
+1288	Pakviesti nuoroda
+1289	{0} gavo jūsų kvietimą. Tapsite draugais, kai jis bus priimtas.
+1290	Jūsų amžius
+1291	18 metų ar daugiau
+1292	Nuo 13 iki 17 metų
+1293	Bakstelėkite dar kartą ir patvirtinkite, kad jums mažiau nei 18
+1294	Jei jums 18 ar daugiau ir tai pasirinkote per klaidą, parašykite adresu {0}.

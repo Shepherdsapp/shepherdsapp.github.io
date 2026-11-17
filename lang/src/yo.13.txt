@@ -1,0 +1,13 @@
+1281	A ti fi ìbéèrè ránṣẹ́. Ẹ ó di ọ̀rẹ́ nígbà tí wọ́n bá gbà á.
+1283	A kò fi ìbéèrè kankan ránṣẹ́. Ṣàyẹ̀wò ímeèlì tàbí kóòdù ọ̀rẹ́ náà, kí o sì tún gbìyànjú. Tí o bá ti béèrè tẹ́lẹ̀, ó ń dúró ní Àwọn ìbéèrè tí o fi ránṣẹ́.
+1284	Fi mí kún àwọn ọ̀rẹ́ rẹ lórí Shepherd: {0}
+1285	A ti ṣe ẹ̀dà ìpè
+1286	Ọ̀rẹ́ kan pè ọ́ láti darapọ̀ lórí Shepherd. Ṣé kí a fi ìbéèrè ọ̀rẹ́ ránṣẹ́ sí wọn?
+1287	A kò fi ìbéèrè kankan ránṣẹ́. Ó ṣeé ṣe kí ìpè náà ti pẹ́, tàbí o ti béèrè tẹ́lẹ̀.
+1288	Pè pẹ̀lú ìjápọ̀
+1289	{0} ti gba ìbéèrè rẹ. Ẹ ó di ọ̀rẹ́ nígbà tí wọ́n bá gbà á.
+1290	Ọjọ́ orí rẹ
+1291	Ọdún 18 tàbí jù bẹ́ẹ̀ lọ
+1292	Ọdún 13 sí 17
+1293	Tẹ̀ ẹ́ lẹ́ẹ̀kan sí i láti jẹ́rìí pé o kò tíì pé ọdún 18
+1294	Tí o bá ti pé ọdún 18 tàbí jù bẹ́ẹ̀ lọ tí o sì yan èyí ní àṣìṣe, fi ímeèlì ránṣẹ́ sí {0}.

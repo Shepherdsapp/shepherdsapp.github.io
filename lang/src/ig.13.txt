@@ -1,0 +1,13 @@
+1281	E zigala arịrịọ. Unu ga-abụ ndị enyi ozugbo ha nabatara ya.
+1283	Ọ dịghị arịrịọ e zigara. Lelee email ma ọ bụ koodu enyi ahụ, ma nwaa ọzọ. Ọ bụrụ na ị rịọlarị ha, ọ na-eche na Arịrịọ ndị i zigara.
+1284	Tinye m dị ka enyi na Shepherd: {0}
+1285	E detuola ọkpụkpọ oku
+1286	Otu enyi kpọrọ gị ka unu jikọọ na Shepherd. Ị ga-ezigara ha arịrịọ enyi?
+1287	Ọ dịghị arịrịọ e zigara. Ọkpụkpọ oku ahụ nwere ike ịbụ nke ochie, ma ọ bụ na ị rịọlarị ha.
+1288	Jiri njikọ kpọọ oku
+1289	{0} enwetala arịrịọ gị. Unu ga-abụ ndị enyi ozugbo ha nabatara ya.
+1290	Afọ gị
+1291	Afọ 18 ma ọ bụ karịa
+1292	Afọ 13 ruo 17
+1293	Pịa ọzọ iji kwado na ị erubeghị afọ 18
+1294	Ọ bụrụ na ị dị afọ 18 ma ọ bụ karịa ma họrọ nke a na mmejọ, zigara {0} email.

@@ -1,0 +1,13 @@
+1281	Demande envoyée. Vous serez amis dès qu'elle sera acceptée.
+1283	Aucune demande n'a été envoyée. Vérifiez l'e-mail ou le code ami et réessayez. Si vous avez déjà fait la demande, elle attend dans Demandes que vous avez envoyées.
+1284	Ajoute-moi comme ami sur Shepherd : {0}
+1285	Invitation copiée
+1286	Un ami vous a invité à le rejoindre sur Shepherd. Lui envoyer une demande d'ami ?
+1287	Aucune demande n'a été envoyée. L'invitation est peut-être ancienne, ou vous avez déjà fait la demande.
+1288	Inviter avec un lien
+1289	{0} a reçu votre demande. Vous serez amis dès qu'elle sera acceptée.
+1290	Votre âge
+1291	18 ans ou plus
+1292	De 13 à 17 ans
+1293	Touchez à nouveau pour confirmer que vous avez moins de 18 ans
+1294	Si vous avez 18 ans ou plus et avez choisi cela par erreur, écrivez à {0}.

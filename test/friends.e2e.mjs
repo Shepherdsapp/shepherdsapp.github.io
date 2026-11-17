@@ -109,7 +109,7 @@ async function signUp(P, name, email, opts = {}) {
   await p.goto(APP); await wait(700);
   await p.fill('#aName', name); await p.fill('#aEmail', email); await p.fill('#aPw', 'correct horse 1'); await p.check('#aAgree');
   if (opts.church !== undefined) { await p.waitForSelector('#aChurchBox:not([hidden])', { timeout: 5000 }); await p.selectOption('#aChurch', opts.church); }
-  if (opts.minor) await p.check('#aMinor');
+  if (opts.minor) await p.selectOption('#aAge', 'minor');
   if (opts.before) await opts.before(p);
   await p.click('#aGo'); await wait(2600);
   await skipTour(p); await wait(600);
@@ -144,7 +144,7 @@ try {
   const A = await phone('pavi', IPHONE), B = await phone('grace', ANDROID, 360, 780);
   await A.p.goto(APP); await wait(900);
   ok(await A.p.locator('#aChurchBox').isVisible() && /London ICC/.test(await text(A.p, '#aChurch')), 'sign-up offers a church list, with London ICC in it');
-  ok(/13 or older/.test(await text(A.p, '#aChurchBox')) && await A.p.locator('#aMinor').count() === 1, 'and an "I\'m under 18" tick that says you must be 13 or older');
+  ok(/13 or older/.test(await text(A.p, '#aChurchBox')) && await A.p.locator('#aAge').count() === 1 && await A.p.inputValue('#aAge') === 'adult' && !(await A.p.locator('#aMinor').count()), 'and an age choice (18 or older unless you say otherwise), not a tick, that says you must be 13 or older');
   ok(await overflow(A.p) <= 0, 'the sign-up screen still fits the phone');
   await shot(A, 'signup');
   await signUp(A, 'Pavi Kumar', 'pavi@church.test', { church: 'c_london_icc' });

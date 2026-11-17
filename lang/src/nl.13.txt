@@ -1,0 +1,13 @@
+1281	Verzoek verstuurd. Jullie zijn vrienden zodra het is geaccepteerd.
+1283	Er is geen verzoek verstuurd. Controleer het e-mailadres of de vriendcode en probeer het opnieuw. Als je het al had gevraagd, staat het onder Verzoeken die je hebt verstuurd.
+1284	Voeg mij toe als vriend op Shepherd: {0}
+1285	Uitnodiging gekopieerd
+1286	Een vriend heeft je uitgenodigd op Shepherd. Een vriendschapsverzoek sturen?
+1287	Er is geen verzoek verstuurd. De uitnodiging is misschien oud, of je had het al gevraagd.
+1288	Uitnodigen met een link
+1289	{0} heeft je verzoek. Jullie zijn vrienden zodra het is geaccepteerd.
+1290	Je leeftijd
+1291	18 jaar of ouder
+1292	13 tot en met 17 jaar
+1293	Tik nog een keer om te bevestigen dat je jonger bent dan 18
+1294	Ben je 18 of ouder en heb je dit per ongeluk gekozen? Mail dan naar {0}.

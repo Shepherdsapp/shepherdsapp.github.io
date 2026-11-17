@@ -1,0 +1,13 @@
+1281	Pedido enviado. Vocês serão amigos quando a pessoa aceitar.
+1283	Nenhum pedido foi enviado. Confira o e-mail ou o código de amigo e tente de novo. Se você já pediu, ele está esperando em Pedidos que você enviou.
+1284	Me adicione como amigo no Shepherd: {0}
+1285	Convite copiado
+1286	Um amigo convidou você para se conectar no Shepherd. Enviar um pedido de amizade?
+1287	Nenhum pedido foi enviado. O convite pode ser antigo, ou você já pediu.
+1288	Convidar com um link
+1289	{0} recebeu seu pedido. Vocês serão amigos quando a pessoa aceitar.
+1290	Sua idade
+1291	18 anos ou mais
+1292	De 13 a 17 anos
+1293	Toque de novo para confirmar que você tem menos de 18 anos
+1294	Se você tem 18 anos ou mais e escolheu isso por engano, escreva para {0}.

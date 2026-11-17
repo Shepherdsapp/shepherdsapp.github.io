@@ -1,0 +1,13 @@
+1281	Request don send. Una go be friends once dem accept.
+1283	No request send. Check di email or friend code well, then try again. If you don ask dem before, e dey wait for Requests wey you send.
+1284	Add me as friend for Shepherd: {0}
+1285	Invite don copy
+1286	One friend invite you make una connect for Shepherd. You wan send dem friend request?
+1287	No request send. Di invite fit don old, or you don ask dem before.
+1288	Invite with link
+1289	{0} don get your request. Una go be friends once dem accept.
+1290	Your age
+1291	18 or pass
+1292	13 reach 17
+1293	Tap again to confirm say you never reach 18
+1294	If you don reach 18 or pass and na mistake you take choose am, email {0}.

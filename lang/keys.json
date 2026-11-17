@@ -1278,5 +1278,19 @@
  "1277": "Share a plan",
  "1278": "Plan a date or a hangout, choose Friends under \"Who can see this\", and say how many can join. Friends join in one tap, and plans they share appear on this tab and on Today.",
  "1279": "This plan is full.",
- "1280": "Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else, and you choose how many can join. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too."
+ "1280": "Plan encouragement dates and hangouts, and share them with friends, who can join in one tap. Friends only see the plans you share, nothing else, and you choose how many can join. Your private budget tank shows what you have left to spend this month. Shepherd nudges you each week, and your weekly follow-up stats are here too.",
+ "1281": "Request sent. You'll be friends once they accept.",
+ "1282": "Request sent to {0}. You'll be friends once they accept.",
+ "1283": "No request was sent. Check the email or friend code and try again. If you already asked them, it is waiting under Requests you sent.",
+ "1284": "Add me as a friend on Shepherd: {0}",
+ "1285": "Invite copied",
+ "1286": "A friend invited you to connect on Shepherd. Send them a friend request?",
+ "1287": "No request was sent. The invite may be old, or you already asked them.",
+ "1288": "Invite with a link",
+ "1289": "{0} has your request. You'll be friends once they accept.",
+ "1290": "Your age",
+ "1291": "18 or older",
+ "1292": "13 to 17",
+ "1293": "Tap again to confirm you are under 18",
+ "1294": "If you are 18 or older and chose this by mistake, email {0}."
 }

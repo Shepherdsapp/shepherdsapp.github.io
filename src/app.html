@@ -1520,10 +1520,14 @@ function socRender() {
   if (a && main && main.contains(a) && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) { a.addEventListener('blur', function () { setTimeout(render, 400); }, { once: true }); return; }
   render();
 }
-async function socLoad(force) {
-  if (!WEB || !WEB.api || S.mode !== 'cloud' || SOC.busy) return;
-  if (!force && Date.now() - SOC.at < 60000) return;
-  SOC.busy = true; var pend = null;
+function socLoad(force) {
+  if (!WEB || !WEB.api || S.mode !== 'cloud') return Promise.resolve();
+  if (SOC.busy) return force ? SOC.run.then(function () { return socLoad(true); }) : SOC.run; // never answer with stale news after a change
+  if (!force && Date.now() - SOC.at < 60000) return Promise.resolve();
+  SOC.busy = true; SOC.run = socFetch(); return SOC.run;
+}
+async function socFetch() {
+  var pend = null;
   try {
     try { pend = JSON.parse(lsGet('shepherd:pendingSocial') || 'null'); } catch (e) {}
     var me = pend ? await WEB.api('POST', '/api/social/profile', pend) : await WEB.api('GET', '/api/social/me');
@@ -1533,6 +1537,7 @@ async function socLoad(force) {
     SOC.me = me; SOC.feed = feed; SOC.at = Date.now();
     lsSet(socKey(), JSON.stringify({ me: me, feed: feed }));
     if (JSON.stringify([me, feed]) !== before) { if (S.view === 'friends') loadPeople(true); socRender(); }
+    maybeInvite();
   } catch (e) {
     if (e && (e.status === 404 || e.code === 'not_found')) { SOC.me = null; SOC.feed = []; lsSet(socKey(), ''); } // an older server: friends stay hidden
     if (pend && e && e.status === 400) lsSet('shepherd:pendingSocial', '');
@@ -1727,10 +1732,16 @@ function myPlanItems() {
   return out.sort(evSort);
 }
 function planItemHtml(it, isPast) { return it.enc ? encCard(it.enc, isPast) : planCard(it.plan, isPast); }
+function ownerContact() { var c = window.SHEPHERD_CONFIG; return (c && c.privacy && c.privacy.contact) || 'lostshepherdapp@gmail.com'; }
+/* the person who runs Shepherd: under-18 accounts waiting for an answer, where it can't be missed */
+function ownerToday() {
+  var m = SOC.me; if (!socOn() || !m.owner || !m.waiting) return '';
+  return '<section class="card" id="ownerToday" data-noi18n style="background:var(--gold-soft);border-color:transparent"><h2 class="h3">Approvals</h2><p class="note" style="margin:0;color:var(--fg)">' + esc(L('{0} waiting for approval', m.waiting)) + '</p><button class="btn primary" data-act="approvals">Open approvals</button></section>';
+}
 function friendsBar() {
   if (!socOn()) return '';
   var m = SOC.me, req = (m.incoming || []).length;
-  if (m.minor && !m.approved) return '<section class="card" id="socWait" style="background:var(--gold-soft);border-color:transparent"><h2 class="h3">' + (m.declined ? 'Your account wasn\'t approved' : 'Waiting for approval') + '</h2><p class="note" style="margin:0;color:var(--fg)">' + (m.declined ? 'You can keep using Shepherd on your own. For questions, email the person who runs Shepherd.' : 'The person who runs Shepherd approves every under-18 account. Until then you can use Shepherd on your own, but can\'t add friends or join plans.') + '</p></section>';
+  if (m.minor && !m.approved) return '<section class="card" id="socWait" style="background:var(--gold-soft);border-color:transparent"><h2 class="h3">' + (m.declined ? 'Your account wasn\'t approved' : 'Waiting for approval') + '</h2><p class="note" style="margin:0;color:var(--fg)">' + (m.declined ? 'You can keep using Shepherd on your own. For questions, email the person who runs Shepherd.' : 'The person who runs Shepherd approves every under-18 account. Until then you can use Shepherd on your own, but can\'t add friends or join plans.') + '</p>' + (m.declined ? '' : '<p class="note" style="margin:0;color:var(--fg)" data-noi18n>' + esc(L('If you are 18 or older and chose this by mistake, email {0}.', ownerContact())) + '</p>') + '</section>';
   return '';
 }
 function feedSection() {
@@ -1896,7 +1907,7 @@ async function churchSheet() {
     function (root) {
       var sel = $('#chSel', root), box = $('#chNewBox', root), inp = $('#chNew', root), sug = $('#chSug', root), mn = $('#chMinor', root);
       sel.addEventListener('change', function () { box.hidden = sel.value !== '+'; if (sel.value === '+') inp.focus(); });
-      if (mn) mn.addEventListener('change', function () { $('#chMinorNote', root).hidden = !mn.checked; });
+      if (mn) mn.addEventListener('change', function () { $('#chMinorNote', root).hidden = !mn.checked; var f0 = $('#chForm', root), sb = f0.querySelector('button[type="submit"]'); delete f0.dataset.sure; sb.textContent = 'Save'; if (window.I18N) I18N.apply(sb); });
       inp.addEventListener('input', function () {
         var hits = churchMatches(inp.value, churches);
         sug.innerHTML = hits.length ? '<p class="note" style="margin:6px 0">Did you mean:</p>' + hits.map(function (c) { return '<button type="button" class="btn soft" data-pick="' + esc(c.id) + '" data-noi18n style="margin-bottom:6px">' + esc(c.name) + '</button>'; }).join('') : '';
@@ -1908,7 +1919,9 @@ async function churchSheet() {
         if (sel.value === '+') { if (inp.value.trim().length < 3) { er.hidden = false; er.textContent = 'Type the name of your church.'; return; } body.newChurch = inp.value.trim(); }
         else body.church = sel.value;
         if (mn && mn.checked) body.minor = true;
-        var f = $('#chForm', root); if (f.dataset.busy) return; f.dataset.busy = '1';
+        var f = $('#chForm', root); if (f.dataset.busy) return;
+        if (body.minor && !f.dataset.sure) { f.dataset.sure = '1'; var sb = f.querySelector('button[type="submit"]'); sb.textContent = 'Tap again to confirm you are under 18'; if (window.I18N) I18N.apply(sb); return; }
+        f.dataset.busy = '1';
         var r = await socDo('profile', body); delete f.dataset.busy;
         if (r) { closeSheet(); toast(body.minor ? 'Saved. You\'ll be told when you\'re approved.' : 'Church saved'); }
       });
@@ -1928,7 +1941,7 @@ function viewFriends() {
       return li(f.name, n ? lab : f.church, (n ? '<button class="plnum" data-act="frplans" data-noi18n aria-label="' + esc(n + ', ' + lab + ', ' + f.name) + '">' + n + '</button>' : '') + '<button class="btn small ghost" data-fr="more" data-id="' + esc(f.id) + '" data-name="' + esc(f.name) + '" aria-label="' + esc(L('Options for {0}', f.name)) + '">⋯</button>');
     }).join('') + '</ul>' : '<p class="note">' + (m.minor ? 'No friends yet. Add someone by their email or friend code.' : 'No friends yet. Add someone by their email or friend code, or from your church.') + '</p>') + '</section>';
     h += '<form class="card" id="frForm" novalidate><h2 class="h3">Add a friend</h2><label class="field" for="frTo">Their email or friend code<input class="inp" id="frTo" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200"></label><p class="small" id="frErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" type="submit">Send request</button>' +
-      '<p class="note" style="margin:0">Your friend code: <b class="code" data-noi18n>' + esc(m.code) + '</b></p><button class="btn ghost small" type="button" id="frCopy">' + ICON.copy + 'Copy my code</button></form>';
+      '<p class="note" style="margin:0">Your friend code: <b class="code" data-noi18n>' + esc(m.code) + '</b></p><div class="row"><button class="btn soft small grow" type="button" id="frInvite">Invite with a link</button><button class="btn ghost small grow" type="button" id="frCopy">' + ICON.copy + 'Copy my code</button></div></form>';
     if (!m.minor) h += '<section class="sec"><div class="sec-h"><h2 class="h2">People from my church</h2></div>' + (!m.church ? '<p class="note">Choose your church to see people from it here.</p>'
       : people.length ? '<label class="sr" for="frQ">Search</label><input class="inp" id="frQ" type="search" placeholder="Type a name" autocomplete="off"><ul class="flist" id="frPeople">' + people.map(function (f) { return '<li class="frow" data-n="' + esc(f.name.toLowerCase()) + '"><span class="pm"><span class="pn" data-noi18n>' + esc(f.name) + '</span></span><span class="frbtns">' + (f.state === 'friend' ? '<span class="chip st-ok">Friends</span>' : f.state === 'sent' ? '<span class="chip">Request sent</span>' : f.state === 'asked' ? '<button class="btn small primary" data-fr="accept" data-id="' + esc(f.id) + '">Accept</button>' : '<button class="btn small soft" data-fr="add" data-id="' + esc(f.id) + '">Add friend</button>') + '</span></li>'; }).join('') + '</ul>'
       : '<p class="note" data-noi18n>' + esc(L('Nobody else from {0} is on Shepherd yet. Share the app with them.', m.church.name)) + '</p>') + '</section>';
@@ -1938,8 +1951,39 @@ function viewFriends() {
   h += churchCard();
   return h;
 }
+/* sends a request and says plainly what happened: friends now, waiting for them, or nothing sent */
+async function sendRequest(to) {
+  var had = ((SOC.me && SOC.me.outgoing) || []).map(function (o) { return o.id; });
+  var r = await socDo('friend', { to: to }); if (!r) return null;
+  if (r.state === 'friends') { toast('You\'re now friends'); return 'friends'; }
+  var fresh = ((SOC.me && SOC.me.outgoing) || []).filter(function (o) { return had.indexOf(o.id) < 0; })[0];
+  if (!fresh) return 'none';
+  toast(L('{0} has your request. You\'ll be friends once they accept.', fresh.name), null, null, 6000); return 'sent';
+}
+function inviteLink() { return location.origin + location.pathname + '?friend=' + encodeURIComponent(SOC.me.code); }
+function shareInvite() {
+  var text = L('Add me as a friend on Shepherd: {0}', inviteLink());
+  if (navigator.share) { navigator.share({ text: text }).catch(function (e) { if (!e || e.name !== 'AbortError') copyText(text, 'Invite copied'); }); return; }
+  copyText(text, 'Invite copied');
+}
+/* a friend's invite link was opened: offer to send them a request (kept until you are signed in and can add friends) */
+var INVITE_KEY = 'shepherd:pendingFriend';
+function maybeInvite() {
+  var code = lsGet(INVITE_KEY); if (!code || !socCan()) return;
+  if (code === SOC.me.code) { lsSet(INVITE_KEY, ''); return; }
+  if (!$('#sheet').hidden || TOUR_I >= 0 || needAgree() || (S.profile.pinHash && !S.unlocked)) return;
+  lsSet(INVITE_KEY, '');
+  openSheet('Add a friend', '<p style="margin:0">A friend invited you to connect on Shepherd. Send them a friend request?</p><p class="note" style="margin:0">Friends only see the plans you share. Nothing else.</p><p class="small" id="ivErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn primary" id="ivGo">Send request</button><button class="btn ghost" data-act="closesheet">Not now</button>', function (root) {
+    var go1 = $('#ivGo', root), busy = false;
+    go1.addEventListener('click', async function () {
+      if (busy) return; busy = true; var r = await sendRequest(code); busy = false;
+      if (r === 'none') { var er = $('#ivErr', root); er.hidden = false; er.textContent = 'No request was sent. The invite may be old, or you already asked them.'; return; }
+      if (r) { closeSheet(); go('friends'); }
+    });
+  });
+}
 function bindFriends() {
-  var root = $('#main .view'); if (!root || S.view !== 'friends') return;
+  var root = $('#main .view'); if (!root || (S.view !== 'friends' && S.view !== 'today')) return;
   var busy = false;
   root.addEventListener('click', async function (e) {
     var b = e.target.closest('[data-fr]'); if (!b || busy) return; var id = b.dataset.id, k = b.dataset.fr;
@@ -1947,18 +1991,20 @@ function bindFriends() {
     busy = true; var r = null;
     if (k === 'accept') r = await socDo('friend/answer', { id: id, accept: true }, 'You\'re now friends');
     if (k === 'decline') r = await socDo('friend/answer', { id: id, accept: false });
-    if (k === 'add') r = await socDo('friend', { to: id }, 'Request sent');
+    if (k === 'add') r = await socDo('friend', { to: id }, 'Request sent. You\'ll be friends once they accept.');
     if (k === 'remove') r = await socDo('friend/remove', { id: id });
     if (k === 'unblock') r = await socDo('unblock', { id: id }, 'Unblocked');
-    busy = false; if (r) friendsRefresh();
+    busy = false; if (r) { if (S.view === 'friends') friendsRefresh(); else render(); }
   });
   var f = $('#frForm', root);
   if (f) f.addEventListener('submit', async function (e) {
     e.preventDefault(); var v = $('#frTo', root).value.trim(), er = $('#frErr', root);
     if (!v) { er.hidden = false; er.textContent = 'Type their email or friend code.'; return; }
-    if (busy) return; busy = true; var r = await socDo('friend', { to: v }); busy = false;
-    if (r) { toast(r.state === 'friends' ? 'You\'re now friends' : 'If they use Shepherd, they\'ll get your request.'); var t = $('#frTo'); if (t) { t.value = ''; t.blur(); } friendsRefresh(); }
+    if (busy) return; busy = true; er.hidden = true; var r = await sendRequest(v); busy = false;
+    if (r === 'none') { er = $('#frErr'); if (er) { er.hidden = false; er.textContent = 'No request was sent. Check the email or friend code and try again. If you already asked them, it is waiting under Requests you sent.'; } return; }
+    if (r) { var t = $('#frTo'); if (t) { t.value = ''; t.blur(); } friendsRefresh(); }
   });
+  var iv = $('#frInvite', root); if (iv) iv.addEventListener('click', shareInvite);
   var cp = $('#frCopy', root); if (cp) cp.addEventListener('click', function () { copyText(SOC.me.code, 'Friend code copied'); });
   var q = $('#frQ', root); if (q) q.addEventListener('input', function () { var v = q.value.trim().toLowerCase(); root.querySelectorAll('#frPeople .frow').forEach(function (r) { r.hidden = !!v && r.dataset.n.indexOf(v) < 0; }); });
 }
@@ -1978,12 +2024,14 @@ async function approvalsSheet() {
   var opts = d.churches.map(opt).join(''), optsFrom = d.churches.filter(function (c) { return c.id !== 'c_london_icc'; }).map(opt).join('');
   // only the person who runs Shepherd sees this screen, so it stays in English
   openSheet('Approvals',
-    '<div data-noi18n style="display:grid;gap:14px"><section class="sec"><h2 class="h3">Under-18s waiting</h2>' + (d.waiting.length ? '<ul class="flist">' + d.waiting.map(function (w) { return '<li class="frow tall"><span class="pm"><span class="pn" data-noi18n>' + esc(w.name) + '</span><span class="ps" data-noi18n>' + esc(w.email) + '</span>' + (w.church ? '<span class="ps" data-noi18n>' + esc(w.church + ' (CAMPUS)') + '</span>' : '') + '</span><span class="frbtns"><button class="btn small primary" data-ap="1" data-id="' + esc(w.id) + '">Approve</button><button class="btn small" data-ap="0" data-id="' + esc(w.id) + '">Decline</button></span></li>'; }).join('') + '</ul>' : '<p class="note">Nobody is waiting.</p>') + '</section>' +
+    '<div data-noi18n style="display:grid;gap:14px"><section class="sec"><h2 class="h3">Under-18s waiting</h2>' + (d.waiting.length ? '<ul class="flist">' + d.waiting.map(function (w) { return '<li class="frow tall"><span class="pm"><span class="pn" data-noi18n>' + esc(w.name) + '</span><span class="ps" data-noi18n>' + esc(w.email) + '</span>' + (w.church ? '<span class="ps" data-noi18n>' + esc(w.church + ' (CAMPUS)') + '</span>' : '') + '</span><span class="frbtns"><button class="btn small primary" data-ap="1" data-id="' + esc(w.id) + '">Approve</button><button class="btn small" data-ap="0" data-id="' + esc(w.id) + '">Decline</button><button class="btn small ghost" data-adult="1" data-id="' + esc(w.id) + '">Is 18+</button></span></li>'; }).join('') + '</ul><p class="note" style="margin:0">Approve keeps them as an under-18 (CAMPUS) member. "Is 18+" is for an adult who chose under 18 by mistake: it makes theirs a normal account.</p>' : '<p class="note">Nobody is waiting.</p>') + '</section>' +
     (d.churches.length > 1 ? '<section class="sec"><h2 class="h3">Merge duplicate churches</h2><p class="note" style="margin:0">Everyone in the first church moves to the second, and the first is removed.</p><label class="field" for="mgFrom">Remove<select class="inp" id="mgFrom" data-noi18n>' + optsFrom + '</select></label><label class="field" for="mgTo">Keep<select class="inp" id="mgTo" data-noi18n>' + opts + '</select></label><p class="small" id="mgErr" role="alert" style="margin:0;color:var(--bad)" hidden></p><button class="btn" id="mgGo">Merge</button></section>' : '') +
     '<section class="sec"><h2 class="h3">Reports</h2>' + (d.reports.length ? '<ul class="timeline">' + d.reports.map(function (r) { return '<li data-noi18n><time>' + esc(fmtStamp(r.t)) + '</time><span>' + esc((r.who || '?') + ' → ' + (r.about || '?') + (r.aboutEmail ? ' <' + r.aboutEmail + '>' : '') + (r.text ? ': ' + r.text : '')) + '</span></li>'; }).join('') + '</ul>' : '<p class="note">No reports.</p>') + '</section>' +
     '<button class="btn ghost" data-act="closesheet">Done</button></div>',
     function (root) {
       root.addEventListener('click', async function (e) {
+        var ad = e.target.closest('[data-adult]');
+        if (ad) { try { await WEB.api('POST', '/api/social/admin/adult', { id: ad.dataset.id }); toast('Changed to an adult account'); SOC.at = 0; await socLoad(true); approvalsSheet(); } catch (x) { toast(x.message); } return; }
         var b = e.target.closest('[data-ap]'); if (!b) return;
         try { await WEB.api('POST', '/api/social/admin/approve', { id: b.dataset.id, ok: b.dataset.ap === '1' }); toast(b.dataset.ap === '1' ? 'Approved' : 'Declined'); SOC.at = 0; await socLoad(true); approvalsSheet(); } catch (x) { toast(x.message); }
       });
@@ -2005,7 +2053,7 @@ function viewToday() {
   var h = vhead('today', greeting() + name, '', LOC ? intl(now, { weekday: 'long', day: 'numeric', month: 'long' }) : WD[now.getDay()] + ' ' + now.getDate() + ' ' + MON[now.getMonth()]) + '<div>';
   var L = todayLists();
   if (!all.length) {
-    h += '</div>' + installCard() + newsCard() + emptyState() + disciplesCard() + comingUp() + friendsToday() + prayCard();
+    h += '</div>' + ownerToday() + requestsToday() + installCard() + newsCard() + emptyState() + disciplesCard() + comingUp() + friendsToday() + prayCard();
     return h;
   }
   var td = ymd(Date.now());
@@ -2016,7 +2064,7 @@ function viewToday() {
   if (L.studies.length) h += '<span class="pill okp">' + plural(L.studies.length, 'study', 'studies') + ' today</span>';
   h += '</div></div>';
   if (all.some(function (c) { return c.example; })) h += '<p class="banner"><span>You\'re looking at example contacts. <b>Remove them</b> from Settings whenever you\'re ready.</span></p>';
-  h += installCard(); h += newsCard();
+  h += ownerToday(); h += requestsToday(); h += installCard(); h += newsCard();
   if (S.readonly) h += '<p class="banner"><span>Your changes are kept on this phone but can\'t be saved online. Ask whoever shared Shepherd with you for <b>Contributor</b> access.</span></p>';
   // Today is a quick look: add someone, who to chase, disciples to check on, what's on today, who to pray for
   h += addCard();
@@ -2062,6 +2110,13 @@ function disciplesCard() {
   if (!todo.length) return '<section class="card dsum" id="dSum">' + head + '<p class="note okline">' + ICON.check + '<span>You\'ve checked in with everyone this week.</span></p></section>';
   return '<section class="card dsum" id="dSum">' + head + '<div class="dchips">' + todo.slice(0, 6).map(function (d) { return '<button class="dchip" data-act="tab" data-v="disciples">' + esc(firstName(d.name)) + '</button>'; }).join('') + (todo.length > 6 ? '<span class="dchip more">+' + (todo.length - 6) + '</span>' : '') + '</div>' +
     '<button class="btn soft small" data-act="tab" data-v="disciples">Open Disciples</button></section>';
+}
+/* friend requests waiting for an answer, at the top of Today so they are never missed */
+function requestsToday() {
+  if (!socCan()) return ''; var inc = SOC.me.incoming || []; if (!inc.length) return '';
+  return '<section class="card" id="frReqToday"><div class="sec-h"><h2 class="h3">Friend requests</h2><span class="count">' + inc.length + '</span></div><ul class="flist">' + inc.map(function (f) {
+    return '<li class="frow"><span class="pm"><span class="pn" data-noi18n>' + esc(f.name) + '</span>' + (f.church ? '<span class="ps" data-noi18n>' + esc(f.church) + '</span>' : '') + '</span><span class="frbtns"><button class="btn small primary" data-fr="accept" data-id="' + esc(f.id) + '">Accept</button><button class="btn small" data-fr="decline" data-id="' + esc(f.id) + '">Decline</button></span></li>';
+  }).join('') + '</ul></section>';
 }
 /* up to 5 friends who have a plan coming, soonest first; with none, a nudge to plan something yourself */
 function friendsToday() {
@@ -2428,7 +2483,7 @@ function render() {
   $('#fab').hidden = S.view === 'settings' || S.view === 'today' || S.view === 'events' || S.view === 'about' || S.view === 'encourage' || S.view === 'friends'; // Today has its own Add someone box; About is for reading; Encourage has its own buttons
   if (keep) { var el = document.getElementById(keep); if (el) { el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   bindView();
-  if (TOUR_I >= 0) placeTour(); else maybeMini();
+  if (TOUR_I >= 0) placeTour(); else { if (lsGet(INVITE_KEY)) setTimeout(maybeInvite, 300); maybeMini(); }
   fitTabs();
   if (WEB) { schedSoon(); try { if (navigator.setAppBadge) { if (owed) navigator.setAppBadge(owed); else navigator.clearAppBadge(); } } catch (e) {} }
   if (WEB && S.view === 'settings') refreshPush();
@@ -3290,8 +3345,24 @@ $('#lockForgot').addEventListener('click', function () {
   var go = $('#lockPwGo'); if (go) go.addEventListener('click', async function () { var m = $('#lockPwMsg'); go.disabled = true; m.textContent = ''; try { await WEB.checkPassword($('#lockPw').value); S.profile.pinHash = ''; saveProfile(); lsSet(pinWaitKey(), '{}'); S.unlocked = true; box.hidden = true; checkLock(); toast('PIN removed. You can set a new one in Settings.'); } catch (x) { m.textContent = x.code === 'unavailable' ? 'No connection. Check your signal and try again.' : 'That password isn\'t right.'; } finally { go.disabled = false; } });
   var out = $('#lockOut'); if (out) out.addEventListener('click', function () { WEB.signOut(); });
 });
+/* a newer Shepherd switches over by itself: as the app opens or comes back (before you touch anything), or while it is
+   in the background. Never while a sheet is open, you are typing, or something is still saving. */
+var UPDATE_READY = false, QUIET_SINCE = Date.now(), LAST_TOUCH = 0;
+var MY_BUILD = (function () { var m = document.querySelector('meta[name="shepherd-build"]'); return m ? m.content : ''; })();
+['pointerdown', 'keydown'].forEach(function (ev) { document.addEventListener(ev, function () { LAST_TOUCH = Date.now(); }, { capture: true, passive: true }); });
+function applyUpdate() {
+  if (!UPDATE_READY) return false;
+  var a = document.activeElement, last = 0;
+  try { last = Number(sessionStorage.getItem('shepherd:autoReload')) || 0; } catch (e) {}
+  if (Date.now() - last < 60000) return false; // at most once a minute, so it can never loop
+  if (!$('#sheet').hidden || TOUR_I >= 0 || (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) || Object.keys(pending).length) return false;
+  if (!document.hidden && !(LAST_TOUCH < QUIET_SINCE && Date.now() - QUIET_SINCE < 8000)) return false;
+  try { sessionStorage.setItem('shepherd:autoReload', String(Date.now())); } catch (e) {}
+  location.reload(); return true;
+}
 var hiddenAt = 0;
 document.addEventListener('visibilitychange', function () {
+  if (document.hidden) applyUpdate(); else QUIET_SINCE = Date.now();
   if (document.hidden) hiddenAt = Date.now();
   else if (S.profile.pinHash && hiddenAt && Date.now() - hiddenAt > 5 * 60000) { S.unlocked = false; checkLock(); }
   if (!document.hidden) socLoad(false); // coming back to the app: check for new plans and requests
@@ -3510,6 +3581,7 @@ document.addEventListener('click', function (e) {
 });
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('#sheet').hidden) closeSheet(); });
 window.addEventListener('scroll', function () { $('#top').classList.toggle('scrolled', window.scrollY > 4); }, { passive: true });
+setInterval(function () { if (!document.hidden && (S.view === 'friends' || S.view === 'today') && $('#sheet').hidden) socLoad(true); }, 30000); // requests and answers show up while you watch
 setInterval(function () { if (document.hidden) return; var td = ymd(Date.now()); if (td !== S.lastDay) { S.lastDay = td; render(); } }, 60000);
 
 /* ---------- account (website only) ---------- */
@@ -3553,13 +3625,14 @@ function openFromLink(id, view, friends) {
   return false;
 }
 function handleLaunch() {
-  var q = new URLSearchParams(location.search), id = q.get('open'), v = q.get('view'), fr = q.get('friends');
+  var q = new URLSearchParams(location.search), id = q.get('open'), v = q.get('view'), fr = q.get('friends'), inv = (q.get('friend') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+  if (inv) { lsSet(INVITE_KEY, inv); try { history.replaceState(null, '', location.pathname); } catch (e) {} setTimeout(maybeInvite, 1200); }
   if (!id && !v) return;
   var tries = 0, t = setInterval(function () { if (openFromLink(id, v, fr) || ++tries > 20) { clearInterval(t); try { history.replaceState(null, '', location.pathname); } catch (e) {} } }, 300);
 }
 if (window.I18N && I18N.lang !== 'en') I18N.ready().then(function () { schedSoon(); setTimeout(function () { fitTabs(true); }, 50); }); // notifications (and tab names) in your language once it has loaded
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitTabs(true); }); // measure tab names once the fonts are in
-if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFull = storageFull; WEB.onUpdate = function () { toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); };
+if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFull = storageFull; WEB.onUpdate = function (build) { if (build && build === MY_BUILD) return; UPDATE_READY = true; if (!applyUpdate()) toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); };
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; SOC.at = 0; if (!openFromLink(q.get('open'), q.get('view'), q.get('friends'))) socLoad(true); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */

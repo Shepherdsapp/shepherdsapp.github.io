@@ -45,7 +45,9 @@ const page = '<!doctype html>\n<html lang="en-GB">\n<head>\n<meta charset="utf-8
   bodyPart.replace(/^\s*/, '') + '\n</body>\n</html>\n' + END + '\n';
 if (/claude\.ai\/artifact/.test(page)) throw new Error('The website still points at the Claude artifact');
 if (/googleapis|gstatic|cdnjs/.test(page)) throw new Error('The website still loads something from another site');
-fs.writeFileSync(path.join(ROOT, 'index.html'), page);
+// a stamp of this exact build, so an open app can tell when the stored copy is newer than itself
+const stamp = (await import('crypto')).createHash('sha256').update(page).digest('hex').slice(0, 12);
+fs.writeFileSync(path.join(ROOT, 'index.html'), page.replace('<meta charset="utf-8">\n', '<meta charset="utf-8">\n<meta name="shepherd-build" content="' + stamp + '">\n'));
 fs.mkdirSync(path.join(ROOT, 'hosted'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'hosted', 'shepherd.html'), head + packTag + i18nTag + privacyTag + bodyPart);
 // privacy.html: the privacy notice and acceptable use statement on their own, for anyone to read before signing up

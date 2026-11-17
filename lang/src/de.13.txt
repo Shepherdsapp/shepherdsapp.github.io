@@ -1,0 +1,13 @@
+1281	Anfrage gesendet. Ihr seid Freunde, sobald sie angenommen wird.
+1283	Es wurde keine Anfrage gesendet. Prüfe die E-Mail-Adresse oder den Freundescode und versuche es noch einmal. Wenn du schon angefragt hast, wartet sie unter Anfragen, die du gesendet hast.
+1284	Füge mich bei Shepherd als Freund hinzu: {0}
+1285	Einladung kopiert
+1286	Ein Freund hat dich zu Shepherd eingeladen. Freundschaftsanfrage senden?
+1287	Es wurde keine Anfrage gesendet. Die Einladung ist vielleicht alt, oder du hast schon angefragt.
+1288	Mit einem Link einladen
+1289	{0} hat deine Anfrage. Ihr seid Freunde, sobald sie angenommen wird.
+1290	Dein Alter
+1291	18 oder älter
+1292	13 bis 17
+1293	Tippe noch einmal, um zu bestätigen, dass du unter 18 bist
+1294	Wenn du 18 oder älter bist und das versehentlich gewählt hast, schreibe an {0}.

@@ -1,6 +1,6 @@
 /* Shepherd service worker: opens with no signal, and shows the notifications the Shepherd server sends.
    It never stores anything from the server itself (your list is stored by the app, per person). */
-const VERSION = 'shepherd-v16', MINE = 'shepherd-';
+const VERSION = 'shepherd-v17', MINE = 'shepherd-';
 const PAGE = './index.html', REST = ['./config.js', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './badge-96.png', './vendor/fonts.css', './vendor/qrcode.min.js', './privacy.html'];
 const END = '<!--shepherd:end-->'; // the build writes this as the very last thing in the app page
 const scopePath = () => new URL(self.registration.scope).pathname;
@@ -15,9 +15,18 @@ async function storePage(r, tell) {
   const old = await c.match(PAGE).then(h => (h ? h.text() : null)).catch(() => null);
   await c.put(PAGE, new Response(text, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }));
   // a newer Shepherd has arrived: let the open app offer to switch to it
-  if (tell && old !== null && old !== text) (await self.clients.matchAll({ type: 'window' })).forEach(w => w.postMessage({ update: true }));
+  if (tell && old !== null && old !== text) (await self.clients.matchAll({ type: 'window' })).forEach(w => w.postMessage({ update: true, build: buildOf(text) }));
   return true;
 }
+// each build of the app page carries its own stamp, so an open app can tell whether the stored copy is newer than itself
+const buildOf = text => { const m = /<meta name="shepherd-build" content="([^"]+)"/.exec(text || ''); return m ? m[1] : ''; };
+// the open app asks "is there a newer Shepherd?": fetch the page again, then answer with the stamp of the stored copy
+self.addEventListener('message', e => {
+  if (!e.data || !e.data.check || !e.source) return;
+  e.waitUntil(fetch(direct(PAGE)).then(r => storePage(r, false)).catch(() => false)
+    .then(() => caches.open(VERSION)).then(c => c.match(PAGE)).then(h => (h ? h.text() : ''))
+    .then(text => { const b = buildOf(text); if (b) e.source.postMessage({ update: true, build: b }); }).catch(() => null));
+});
 const direct = u => new Request(u, { cache: 'reload' });
 self.addEventListener('install', e => {
   e.waitUntil(fetch(direct(PAGE)).then(storePage).then(ok => { if (!ok) throw new Error('the app page did not arrive whole'); return caches.open(VERSION); })
