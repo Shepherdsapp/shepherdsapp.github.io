@@ -269,9 +269,10 @@ try {
   await openFriends(C.p);
   ok(/Choose your church to see people from it/.test(await text(C.p, '#main')), 'with no church, the Friends screen offers to choose one');
   await C.p.fill('#frTo', 'PAVI@church.test'); await C.p.$eval('#frForm', f => f.requestSubmit()); await wait(900);
-  ok(/If they use Shepherd/.test(await text(C.p, '#toastMsg')), 'adding by email gives the same answer whether or not the person exists');
+  ok(/has your request/.test(await text(C.p, '#toastMsg')), 'adding by email says who has the request and that they need to accept');
   await C.p.fill('#frTo', 'nobody@nowhere.test'); await C.p.$eval('#frForm', f => f.requestSubmit()); await wait(900);
-  ok(/If they use Shepherd/.test(await text(C.p, '#toastMsg')) && (await soc(C.p)).me.outgoing.length === 1, 'so nobody can use it to check who has an account');
+  ok(/No request was sent/.test(await text(C.p, '#frErr')) && (await soc(C.p)).me.outgoing.length === 1, 'an email nobody uses says no request was sent, so a typing mistake is never mistaken for a sent request');
+  await C.p.fill('#frTo', ''); await C.p.evaluate(() => document.activeElement && document.activeElement.blur());
   await refresh(A.p); await openFriends(A.p);
   await A.p.click('[data-fr="accept"]'); await wait(900);
   // Tobi adds Grace with her friend code
