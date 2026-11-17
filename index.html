@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="shepherd-build" content="6cce1567b543">
+<meta name="shepherd-build" content="6a778bc0e36d">
 <meta name="description" content="Shepherd helps you follow up with the people you share your faith with: who to message, who to reply to, Bible studies and disciples.">
 <meta name="theme-color" content="#FAF3DF">
 <meta name="color-scheme" content="light">
@@ -1184,7 +1184,7 @@ var install = {
   prompt: async function () { if (!deferredInstall) return false; deferredInstall.prompt(); var c = await deferredInstall.userChoice.catch(function () { return {}; }); deferredInstall = null; return c && c.outcome === 'accepted'; }
 };
 if ('serviceWorker' in navigator && location.protocol !== 'file:') window.addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); });
-if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', function (e) { if (e.data && e.data.open && W.onOpen) W.onOpen(e.data.open); if (e.data && e.data.update && W.onUpdate) W.onUpdate(e.data.build || ''); });
+if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', function (e) { if (e.data && e.data.open && W.onOpen) W.onOpen(e.data.open); if (e.data && e.data.update) { if (W.onUpdate) W.onUpdate(e.data.build || ''); else W.updateWaiting = e.data.build || ' '; } }); // news that arrives before the app has finished starting is kept for it
 /* look for a newer Shepherd whenever the app comes back to the front, and every half hour while it stays open */
 var lastCheck = 0;
 function checkUpdate() {
@@ -4307,7 +4307,8 @@ function handleLaunch() {
 }
 if (window.I18N && I18N.lang !== 'en') I18N.ready().then(function () { schedSoon(); setTimeout(function () { fitTabs(true); }, 50); }); // notifications (and tab names) in your language once it has loaded
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitTabs(true); }); // measure tab names once the fonts are in
-if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFull = storageFull; WEB.onUpdate = function (build) { if (build && build === MY_BUILD) return; UPDATE_READY = true; if (!applyUpdate()) toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); };
+if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFull = storageFull; WEB.onUpdate = function (build) { build = String(build || '').trim(); if (build && build === MY_BUILD) return; UPDATE_READY = true; if (applyUpdate()) return; toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); [1500, 3500, 6000].forEach(function (ms) { setTimeout(applyUpdate, ms); }); /* e.g. a save was still finishing */ };
+  if (WEB.updateWaiting) { var uw = WEB.updateWaiting; WEB.updateWaiting = ''; setTimeout(function () { WEB.onUpdate(uw); }, 0); }
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; SOC.at = 0; if (!openFromLink(q.get('open'), q.get('view'), q.get('friends'))) socLoad(true); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */

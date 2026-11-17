@@ -270,7 +270,7 @@ var install = {
   prompt: async function () { if (!deferredInstall) return false; deferredInstall.prompt(); var c = await deferredInstall.userChoice.catch(function () { return {}; }); deferredInstall = null; return c && c.outcome === 'accepted'; }
 };
 if ('serviceWorker' in navigator && location.protocol !== 'file:') window.addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); });
-if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', function (e) { if (e.data && e.data.open && W.onOpen) W.onOpen(e.data.open); if (e.data && e.data.update && W.onUpdate) W.onUpdate(e.data.build || ''); });
+if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', function (e) { if (e.data && e.data.open && W.onOpen) W.onOpen(e.data.open); if (e.data && e.data.update) { if (W.onUpdate) W.onUpdate(e.data.build || ''); else W.updateWaiting = e.data.build || ' '; } }); // news that arrives before the app has finished starting is kept for it
 /* look for a newer Shepherd whenever the app comes back to the front, and every half hour while it stays open */
 var lastCheck = 0;
 function checkUpdate() {

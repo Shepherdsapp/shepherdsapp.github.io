@@ -3632,7 +3632,8 @@ function handleLaunch() {
 }
 if (window.I18N && I18N.lang !== 'en') I18N.ready().then(function () { schedSoon(); setTimeout(function () { fitTabs(true); }, 50); }); // notifications (and tab names) in your language once it has loaded
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitTabs(true); }); // measure tab names once the fonts are in
-if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFull = storageFull; WEB.onUpdate = function (build) { if (build && build === MY_BUILD) return; UPDATE_READY = true; if (!applyUpdate()) toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); };
+if (WEB) { WEB.onNet = function () { if (!flushing) flush(); }; WEB.onStorageFull = storageFull; WEB.onUpdate = function (build) { build = String(build || '').trim(); if (build && build === MY_BUILD) return; UPDATE_READY = true; if (applyUpdate()) return; toast('A new version of Shepherd is ready', 'Update', function () { location.reload(); }, 15000); [1500, 3500, 6000].forEach(function (ms) { setTimeout(applyUpdate, ms); }); /* e.g. a save was still finishing */ };
+  if (WEB.updateWaiting) { var uw = WEB.updateWaiting; WEB.updateWaiting = ''; setTimeout(function () { WEB.onUpdate(uw); }, 0); }
   WEB.onSignedIn = function () { flush(); }; WEB.onOpen = function (u) { try { var q = new URL(u, location.href).searchParams; SOC.at = 0; if (!openFromLink(q.get('open'), q.get('view'), q.get('friends'))) socLoad(true); } catch (e) {} }; WEB.onInstallable = function () { if (!$('#sheet').hidden && $('#sheet').dataset.title === 'Turn on notifications') notifGuide(false); }; }
 
 /* test hook: lets the automated checks reach internal helpers; unused in normal use */
